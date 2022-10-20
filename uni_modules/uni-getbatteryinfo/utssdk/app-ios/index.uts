@@ -1,0 +1,20 @@
+import { UIDevice } from "UIKit";
+
+type GetBatteryInfoOptions = {
+    success?: (res: UTSJSONObject) => void;
+    fail?: (res: UTSJSONObject) => void;
+    complete?: (res: UTSJSONObject) => void;
+};
+
+export default function getBatteryInfo(options: GetBatteryInfoOptions) {
+	
+	UIDevice.current.isBatteryMonitoringEnabled = true
+	
+    const res = {
+        errMsg: "getBatteryInfo:ok",
+        level: Number(UIDevice.current.batteryLevel * 100),
+        isCharging: UIDevice.current.batteryState == UIDevice.BatteryState.charging,
+    };
+    options.success?.(res);
+    options.complete?.(res);
+}
