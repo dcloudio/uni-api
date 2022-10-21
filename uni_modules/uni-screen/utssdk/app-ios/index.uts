@@ -1,0 +1,49 @@
+import { NotificationCenter} from 'Foundation';
+import { UIApplication } from "UIKit"
+
+/**
+ * 定义监听截屏事件工具类
+ */
+class CaptureScreenTool {
+	static listener?: UTSCallback;
+	
+	// 监听截屏
+	static listenCaptureScreen(callback?: UTSCallback) {
+		this.listener = callback
+		
+		// 注册监听截屏事件及回调方法
+		// target-action 回调方法需要通过 Selector("方法名") 构建
+		const method = Selector("userDidTakeScreenshot")
+		NotificationCenter.default.addObserver(this, selector = method, name = UIApplication.userDidTakeScreenshotNotification, object = null)
+	}
+	
+	// 捕获截屏回调的方法
+	// target-action 的方法前需要添加 @objc 前缀
+	@objc static userDidTakeScreenshot() {
+		const obj = new UTSJSONObject()
+		// 回调
+		this.listener?.(obj)
+	}
+	
+	// 移除监听事件
+	static removeListen(callback?: UTSCallback) {
+		this.listener = null
+		NotificationCenter.default.removeObserver(this)
+		const obj = new UTSJSONObject()
+		callback?.(obj)
+	}
+}
+
+/**
+ * 开启截图监听
+ */
+export function onUserCaptureScreen(callback?: UTSCallback) {
+	CaptureScreenTool.listenCaptureScreen(callback)
+}
+
+/**
+ * 关闭截屏监听
+ */
+export function offUserCaptureScreen(callback?: UTSCallback) {
+	CaptureScreenTool.removeListen(callback)
+}
