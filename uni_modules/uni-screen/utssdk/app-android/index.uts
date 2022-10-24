@@ -65,7 +65,7 @@ class ScreenFileObserver extends FileObserver {
 			
 			lastFileObserverTime = System.currentTimeMillis()
 			let ret = {
-				code:1,
+				errCode:1,
 				image:newPath
 			}
 			
@@ -93,7 +93,7 @@ export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
 		
 		// 因权限缺失导致监听失败
 		let ret = {
-			code:-1
+			errCode:-1
 		}
 		callback(ret);
 		return ;
@@ -121,7 +121,7 @@ export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
 
 	// 监听成功
 	let ret = {
-		code:0
+		errCode:0
 	}
 	callback(ret);
 	
@@ -140,10 +140,7 @@ export function offUserCaptureScreen(success: (res: any) => void) {
 	}
 	lastFileObserverTime = 0;
 	
-	let ret = {
-		
-	}
-	success(ret);
+	success({});
 }
 
 
