@@ -33,10 +33,10 @@
 						
 						if (uni.getSystemInfoSync().platform == "android") {
 							// 除android 之外的平台，不需要判断返回状态码
-							if(res.code == -1){
+							if(res.errCode == -1){
 								// 启动失败
 								return ;
-							}else if(res.code == 0){
+							}else if(res.errCode == 0){
 								uni.showToast({
 									icon:"none",
 									title:'截屏监听已开启'
