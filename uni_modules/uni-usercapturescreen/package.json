@@ -1,10 +1,10 @@
 {
-	"id": "uni-screen",
-	"displayName": "uni-screen",
+	"id": "uni-usercapturescreen",
+	"displayName": "uni-usercapturescreen",
 	"version": "1.0.0",
-	"description": "uni-screen",
+	"description": "uni-usercapturescreen",
 	"keywords": [
-		"屏幕"
+		"截屏"
 	],
 	"repository": "",
 	"engines": {
