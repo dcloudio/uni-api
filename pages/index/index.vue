@@ -5,16 +5,16 @@
 			<text class="title">{{title}}</text>
 		</view>
 		<button @tap="testScreenShotListen">开启截屏监听</button>
-		<button  @tap="testScreenShotOff">关闭截屏监听</button>
-		<button  @tap="testGetBatteryInfo">获取电池电量</button>
-
+		<button @tap="testScreenShotOff">关闭截屏监听</button>
+		<button @tap="testGetBatteryInfo">获取电池电量</button>
+		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
+		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
+		<button @tap="testGetConnectedWifi">获取当前wifi信息</button>
 	</view>
 </template>
 
 <script>
 
-	import getBatteryInfo from "@/uni_modules/uni-getbatteryinfo";
-	
 	export default {
 		data() {
 			return {
@@ -25,7 +25,23 @@
 
 		},
 		methods: {
-			
+			testGetConnectedWifi() {
+				uni.getConnectedWifi({
+					success(res) {
+						console.log(res);
+					}
+				})
+			},
+			testonMemoryWarning() {
+				uni.onMemoryWarning(function(res) {
+					console.log(res);
+				})
+			},
+			testoffMemoryWarning(){
+				uni.offMemoryWarning(function(res) {
+					console.log(res);
+				})
+			},
 			testScreenShotListen() {
 				var that = this;
 				uni.onUserCaptureScreen(function(res) {
@@ -67,7 +83,6 @@
 					}
 			},
 			testScreenShotOff() {
-				var that = this;
 				uni.offUserCaptureScreen(function(res) {
 						console.log(res);
 				});
@@ -78,7 +93,6 @@
 				})
 			},
 			testGetBatteryInfo() {
-				var that = this;
 				uni.getBatteryInfo({
 					success(res) {
 						uni.showToast({

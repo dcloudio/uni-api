@@ -1,0 +1,58 @@
+import Context from "android.content.Context";
+import { getAppContext } from "io.dcloud.uts.android";
+import WifiManager from "android.net.wifi.WifiManager";
+
+type GetConnectedWifiOptions = {
+    success?: (res: UTSJSONObject) => void
+    fail?: (res: UTSJSONObject) => void
+    complete?: (res: UTSJSONObject) => void
+}
+
+export function startWifi() { //TODO
+	
+}
+
+export function getConnectedWifi(options: GetConnectedWifiOptions) {
+	let WifiInfo = {
+		SSID : "",
+		BSSID : "",
+		// secure : Boolean,  // TODO 此值是微信的规范，Android原生并没有。不确定其的逻辑，需要在微信环境做各种测试才能验证
+		signalStrength : 0,
+		frequency : 0,
+		// macAddress : ""
+	}
+	let res = {
+	    errMsg: 'getConnectedWifi:fail. please check permission about location or enable wifi or connect wifi',
+	    errCode: -1,
+	    WifiInfo: WifiInfo
+	}
+	// TODO 应该try catch一下，把系统的错误码给返回来，然后和微信的错误码拉齐
+	// 需要先校验权限，没有位置权限无法获取wifi
+	const context = getAppContext();
+	if (context != null) {
+	    const wm = context.getSystemService(
+	        Context.WIFI_SERVICE
+	    ) as WifiManager;
+		const winfo = wm.getConnectionInfo(); // TODO 这个方法在Android12标记为已废弃。替代方法还没找到
+		if (winfo != null) {
+			let s = winfo.getSSID();
+			console.log(s); // TODO 注意此值带着双引号。需要验证微信的值是否带双引号，如微信不带，这里需要去掉
+			// if (s.length() > 2 && s.charAt(0) == '"' && s.charAt(s.length() - 1) == '"') {
+			// 	s = s.substring(1, s.length() - 1);
+			// }
+			// console.log("new s:",s);
+			WifiInfo.SSID = s;
+			WifiInfo.BSSID = winfo.getBSSID();
+			WifiInfo.signalStrength = winfo.getRssi()+100; //Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
+			WifiInfo.frequency = winfo.getFrequency();
+			// WifiInfo.macAddress = winfo.getMacAddress(); //注意此代码涉及隐私，首先需要配置权限，没有权限会返回"02:00:00:00:00:00"；然后需要在隐私协议中声明用途。如不需要，可注释掉本行
+			res.errCode = 0
+			res.errMsg = "getConnectedWifi:ok"
+			options.success?.(res)
+			options.complete?.(res)
+			return
+		}
+	}
+	options.fail?.(res)
+	options.complete?.(res)
+}
