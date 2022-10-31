@@ -8,7 +8,7 @@
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.6.0"
+		"HBuilderX": "^3.6.8"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -46,7 +46,7 @@
 			},
 			"client": {
 				"Vue": {
-					"vue2": "n",
+					"vue2": "y",
 					"vue3": "y"
 				},
 				"App": {
