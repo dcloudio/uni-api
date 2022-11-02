@@ -1,20 +1,41 @@
-import { onAppTrimMemory } from "io.dcloud.uts.android";
+import { onAppTrimMemory, offAppTrimMemory ,onAppActivityDestroy} from "io.dcloud.uts.android"
 
-export function onMemoryWarning(callback: (res:Number) => void) {
-	// console.log("here");
-	onAppTrimMemory((level:Number) => {
-		console.log(level);
-		callback(level);
-	});
-	// return ;
+let listeners: UTSCallback[] = []
+
+const onAppTrimMemoryListener = (res: number) => {
+    listeners.forEach(listener => {
+		console.log("listener  "  + listener);
+        listener(res)
+    })
 }
 
+export function onMemoryWarning(callback: (res: number) => void) {
+	
+    if (listeners.length === 0) {
+		// 仅首次执行底层的实际监听
+        onAppTrimMemory(onAppTrimMemoryListener)
+		onAppActivityDestroy(()=>{
+			// listeners 默认是静态常量周期，activity 销毁时，需要手动清空
+			listeners = []
+		})
+    }
+    listeners.push(callback)
+}
 
-export function offMemoryWarning(success: (res: any) => void) {
-	// TODO 没有实现卸载监听
-	let ret = {
-		code:0
+export function offMemoryWarning(callback: ((res: number) => void) | null) {
+	
+	if(callback == null){
+		// 清除全部回调
+		listeners = []
+		return
 	}
-	success(ret);
+	// 清除指定回调
+    const index = listeners.indexOf(callback)
+    if (index > -1) {
+        listeners.splice(index, 1)
+    }
+    if (listeners.length === 0) {
+        // 当用户不再监听时，移除底层实际监听
+        offAppTrimMemory(onAppTrimMemoryListener)
+    }
 }
-

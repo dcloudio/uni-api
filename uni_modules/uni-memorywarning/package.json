@@ -33,7 +33,8 @@
   "uni_modules": {
 	"uni-ext-api":{
 		"uni": {
-			"onMemoryWarning": "onMemoryWarning"
+			"onMemoryWarning": "onMemoryWarning",
+			"offMemoryWarning":"offMemoryWarning"
 		},
 		"mp-weixin":false,
 		"mp-alipay":false,
