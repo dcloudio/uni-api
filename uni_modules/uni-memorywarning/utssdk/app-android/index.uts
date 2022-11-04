@@ -10,7 +10,6 @@ const onAppTrimMemoryListener = (res: number) => {
 }
 
 export function onMemoryWarning(callback: (res: number) => void) {
-	
     if (listeners.length === 0) {
 		// 仅首次执行底层的实际监听
         onAppTrimMemory(onAppTrimMemoryListener)
@@ -22,13 +21,15 @@ export function onMemoryWarning(callback: (res: number) => void) {
     listeners.push(callback)
 }
 
-export function offMemoryWarning(callback: ((res: number) => void) | null) {
+export function offMemoryWarning(callback: UTSCallback | null = null) {
 	
 	if(callback == null){
 		// 清除全部回调
 		listeners = []
+		offAppTrimMemory(null);
 		return
 	}
+	
 	// 清除指定回调
     const index = listeners.indexOf(callback)
     if (index > -1) {

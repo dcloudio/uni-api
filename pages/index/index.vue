@@ -9,7 +9,10 @@
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		<button @tap="testGetConnectedWifi">获取当前wifi信息</button>
+		<button @tap="testStartWifi">开启wifi功能</button>
+		<button @tap="testStopWifi">关闭wifi功能</button>
+		<button @tap="testGetWifiList">获取当前wifi列表</button>
+		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
 	</view>
 </template>
 
@@ -18,29 +21,66 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
+				memListener:null,
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			testGetConnectedWifi() {
+			onMemoryWarning:function(res){
+				console.log(res);
+			},
+			testGetConnnectWifi(){
 				uni.getConnectedWifi({
-					success(res) {
-						console.log(res);
+					partialInfo:false
+				});
+			},
+			testStartWifi(){
+				uni.startWifi({
+					success:(res)=> {
+						console.log("success: " + JSON.stringify(res));
+						uni.onGetWifiList(function(res){
+							console.log(res);
+						});
+					},fail:(res)=>{
+						console.log("fail: " + JSON.stringify(res));
+					},complete:(res)=>{
+						console.log("complete: " + JSON.stringify(res));
 					}
 				})
 			},
-			testonMemoryWarning() {
-				uni.onMemoryWarning(function(res) {
-					console.log(res);
+			testStopWifi() {
+				uni.stopWifi({
+					success:(res)=> {
+						console.log("success: " + JSON.stringify(res));
+					},fail:(res)=>{
+						console.log("fail: " + JSON.stringify(res));
+					},complete:(res)=>{
+						console.log("complete: " + JSON.stringify(res));
+					}
 				})
+				
+			},
+			testGetWifiList() {
+				uni.getWifiList({
+					success:(res)=> {
+						console.log("success: " + JSON.stringify(res));
+					},fail:(res)=>{
+						console.log("fail: " + JSON.stringify(res));
+					},complete:(res)=>{
+						console.log("complete: " + JSON.stringify(res));
+					}
+				})
+				
+			},
+			testonMemoryWarning() {
+				uni.onMemoryWarning(this.onMemoryWarning)
 			},
 			testoffMemoryWarning(){
-				uni.offMemoryWarning(function(res) {
-					console.log(res);
-				})
+				// uni.offMemoryWarning(this.onMemoryWarning)
+				uni.offMemoryWarning()
 			},
 			testScreenShotListen() {
 				var that = this;

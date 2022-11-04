@@ -34,7 +34,11 @@
 	"uni-ext-api":{
 		"uni": {
 			"getConnectedWifi": "getConnectedWifi",
-			"startWifi": "startWifi"
+			"startWifi": "startWifi",
+			"stopWifi": "stopWifi",
+			"getWifiList":"getWifiList",
+			"onGetWifiList":"onGetWifiList"
+			
 		}
 	},
     "dependencies": [],
