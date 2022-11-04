@@ -249,7 +249,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 	let res = {
 	    errMsg: 'getConnectedWifi:fail. please check permission about location or enable wifi or connect wifi',
 	    errCode: -1,
-	    WifiInfo: WifiInfo
+	    wifi: WifiInfo
 	}
 	
 	
@@ -272,14 +272,13 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 	        Context.WIFI_SERVICE
 	    ) as WifiManager;
 		const winfo = wm.getConnectionInfo(); // TODO 这个方法在Android12标记为已废弃。替代方法还没找到
-		console.log(winfo);
 		if (winfo != null) {
 			let s = winfo.getSSID();
-			console.log(s); // TODO 注意此值带着双引号。需要验证微信的值是否带双引号，如微信不带，这里需要去掉
-			// if (s.length() > 2 && s.charAt(0) == '"' && s.charAt(s.length() - 1) == '"') {
-			// 	s = s.substring(1, s.length() - 1);
-			// }
-			// console.log("new s:",s);
+			
+			// 微信不带，这里需要去掉
+			if (s.length > 2 && s.charAt(0) == '"' && s.charAt(s.length - 1) == '"') {
+				s = s.substring(1, s.length - 1);
+			}
 			WifiInfo.SSID = s;
 			WifiInfo.BSSID = winfo.getBSSID();
 			WifiInfo.signalStrength = winfo.getRssi()+100; //Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
@@ -287,6 +286,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 			// WifiInfo.macAddress = winfo.getMacAddress(); //注意此代码涉及隐私，首先需要配置权限，没有权限会返回"02:00:00:00:00:00"；然后需要在隐私协议中声明用途。如不需要，可注释掉本行
 			res.errCode = 0
 			res.errMsg = "getConnectedWifi:ok"
+			res.wifi = WifiInfo;
 			option.success?.(res)
 			option.complete?.(res)
 			return

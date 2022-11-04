@@ -34,7 +34,10 @@
 			},
 			testGetConnnectWifi(){
 				uni.getConnectedWifi({
-					partialInfo:false
+					partialInfo:false,
+					complete:(res)=>{
+						console.log(res);
+					}
 				});
 			},
 			testStartWifi(){
