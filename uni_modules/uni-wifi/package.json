@@ -37,8 +37,8 @@
 			"startWifi": "startWifi",
 			"stopWifi": "stopWifi",
 			"getWifiList":"getWifiList",
-			"onGetWifiList":"onGetWifiList"
-			
+			"onGetWifiList":"onGetWifiList",
+			"onWifiConnected":"onWifiConnected"
 		}
 	},
     "dependencies": [],

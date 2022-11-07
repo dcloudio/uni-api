@@ -37,6 +37,10 @@
 					partialInfo:false,
 					complete:(res)=>{
 						console.log(res);
+						uni.showToast({
+							icon:'none',
+							title:res.wifi.SSID
+						})
 					}
 				});
 			},
@@ -47,6 +51,11 @@
 						uni.onGetWifiList(function(res){
 							console.log(res);
 						});
+						uni.onWifiConnected(function(res){
+							console.log("11199");
+							console.log("onWifiConnected = " + JSON.stringify(res));
+						});
+						
 					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));
 					},complete:(res)=>{
