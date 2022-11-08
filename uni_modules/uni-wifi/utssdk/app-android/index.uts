@@ -1,9 +1,7 @@
 import Context from "android.content.Context";
-import { getAppContext,getUniActivity } from "io.dcloud.uts.android";
+import { getAppContext, getUniActivity } from "io.dcloud.uts.android";
 import WifiManager from "android.net.wifi.WifiManager";
 import WifiInfo from "android.net.wifi.WifiInfo";
-
-import ConnectivityManager from "android.net.ConnectivityManager";
 import Manifest from "android.Manifest";
 import PackageManager from "android.content.pm.PackageManager";
 import ScanResult from "android.net.wifi.ScanResult";
@@ -24,49 +22,62 @@ type WifiOption = {
 	complete?: (res: object) => void;
 };
 
+/**
+ * Wifi 链接参数封装
+ */
+type WifiConnectOption = {
+	SSID:string;
+	BSSID:string;
+	password:string;
+	maunal:boolean;
+	partialInfo:boolean;
+	success?: (res: object) => void;
+	fail?: (res: object) => void;
+	complete?: (res: object) => void;
+}
 
 /**
  * Wifi信息统一数据结构
  */
 class UniWifiInfo {
-	
-	SSID:String = "";
-	BSSID:String = "";
-	secure:boolean = false;
-	signalStrength:Number = 0;
-	frequency:Number = 0;
-	
-	constructor(scanResult?:ScanResult){
-		if(scanResult != null){
+
+	SSID: String = "";
+	BSSID: String = "";
+	secure: boolean = false;
+	signalStrength: Number = 0;
+	frequency: Number = 0;
+
+	constructor(scanResult?: ScanResult) {
+		if (scanResult != null) {
 			// 如果是通过扫描列表得到的数据，进行封装
 			this.BSSID = scanResult.BSSID;
 			this.SSID = scanResult.SSID;
-				
+
 			this.signalStrength = scanResult.level;
 			this.frequency = scanResult.frequency;
-				
+
 			// 是否安全，微信的标准是是否需要密码。 来源:https://developers.weixin.qq.com/community/develop/doc/00064cf1790458db19cddf9925ac00?highLine=WifiInfo
 			this.secure = false;
 			let capabilities = scanResult.capabilities.trim();
 			if (capabilities != null && (capabilities.equals(Global.WIFI_AUTH_OPEN) || capabilities.equals(Global.WIFI_AUTH_ROAM))) {
 				this.secure = false;
-			}else{
+			} else {
 				this.secure = true;
 			}
 		}
 	}
-	
+
 	/**
 	 * 根据connectInfo 链接信息对wifi数据结构进行初始化
 	 */
-	wrapConnectInfo(connectInfo:WifiInfo):void{
+	wrapConnectInfo(connectInfo: WifiInfo): void {
 		console.log(connectInfo.getSSID());
 		console.log(connectInfo.getBSSID());
-		if(connectInfo.getBSSID() == null){
-			return 
+		if (connectInfo.getBSSID() == null) {
+			return
 		}
 		if (connectInfo != null) {
-			if(connectInfo.getSSID() != null){
+			if (connectInfo.getSSID() != null) {
 				let s = connectInfo.getSSID();
 				// 微信不带，这里需要去掉引号
 				if (s.length > 2 && s.charAt(0) == '"' && s.charAt(s.length - 1) == '"') {
@@ -74,26 +85,26 @@ class UniWifiInfo {
 				}
 				this.SSID = s;
 			}
-			
+
 			this.BSSID = connectInfo.getBSSID();
-			this.signalStrength = connectInfo.getRssi()+100; //Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
+			//Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
+			this.signalStrength = connectInfo.getRssi() + 100; 
 			this.frequency = connectInfo.getFrequency();
-			// WifiInfo.macAddress = winfo.getMacAddress(); //注意此代码涉及隐私，首先需要配置权限，没有权限会返回"02:00:00:00:00:00"；然后需要在隐私协议中声明用途。如不需要，可注释掉本行
-			
+
 		}
 	}
-	
-	
+
+
 }
 
 /**
  * 获取当前链接的wifi信息
  */
 type GetConnectedWifiOptions = {
-	partialInfo?:boolean
-    success?: (res: UTSJSONObject) => void
-    fail?: (res: UTSJSONObject) => void
-    complete?: (res: UTSJSONObject) => void
+	partialInfo?: boolean
+	success?: (res: UTSJSONObject) => void
+	fail?: (res: UTSJSONObject) => void
+	complete?: (res: UTSJSONObject) => void
 }
 
 
@@ -101,87 +112,93 @@ type GetConnectedWifiOptions = {
 /**
  * 全局数据储存
  */
-class Global{
-	static mReceiver?:CustomBroadcastReceiver = null;
-	static scanList:UniWifiInfo[] =  []
-	static WIFI_AUTH_OPEN:String  = "";
-	static WIFI_AUTH_ROAM:String  = "[ESS]";
-	static getWifiListCallbackList:UTSCallback[] = []
-	static onWifiConnectCallbackList:UTSCallback[] = []
+class Global {
+	static mReceiver?: CustomBroadcastReceiver = null;
+	static scanList: UniWifiInfo[] = []
+	static WIFI_AUTH_OPEN: String = "";
+	static WIFI_AUTH_ROAM: String = "[ESS]";
+	static getWifiListCallbackList: UTSCallback[] = []
+	static onWifiConnectCallbackList: UTSCallback[] = []
 }
 
 
 /**
  * 自定义wifi变化广播监听器
  */
-class CustomBroadcastReceiver extends BroadcastReceiver{
-	
-	mWifiManager?:WifiManager = null;
+class CustomBroadcastReceiver extends BroadcastReceiver {
 
-	constructor(wifiManager: WifiManager){
+	mWifiManager?: WifiManager = null;
+
+	constructor(wifiManager: WifiManager) {
 		super();
 		this.mWifiManager = wifiManager;
 	}
-	
-	override onReceive(context: Context, intent: Intent) :void {
-		
-		
+
+	override onReceive(_context: Context, intent: Intent): void {
+
+
 		if (intent.action == WifiManager.WIFI_STATE_CHANGED_ACTION) {
 			let state =
 				intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN)
 			if (state == WifiManager.WIFI_STATE_ENABLED) {
 				// 获取当前的connectInfo 并且进行数据封装
 				let uniWifiInfo = new UniWifiInfo(null)
-				let winfo = this.mWifiManager!.getConnectionInfo(); 
-				while(winfo.bssid == null){
-					Thread.sleep(1000)
-					winfo = this.mWifiManager!!.getConnectionInfo();
-				}
-				
-				console.log(winfo)
-				// 封装成数据对象
-				uniWifiInfo.wrapConnectInfo(winfo)
-				let res = {
-				    errMsg: 'onWifiConnected:ok',
-				    errCode: 0,
-				    wifi: uniWifiInfo
-				}
-				console.log("Global.onWifiConnectCallbackList  == " + Global.onWifiConnectCallbackList.length);
-				// wifi状态可用了，分发当前的链接状态给已注册的监听集合
-				for(let perCallback in Global.onWifiConnectCallbackList){
-					perCallback(res);
-				}
-			} 
+				//做一些异步操作
+				setTimeout(function() {
+					// BroadcastReceiver 中不能执行耗时任务，需要使用setTimeout
+					console.log(Thread.currentThread().getName())
+					let winfo = this.mWifiManager!.getConnectionInfo();
+					while (winfo.bssid == null) {
+						Thread.sleep(1000)
+						winfo = this.mWifiManager!!.getConnectionInfo();
+					}
+
+					// 封装成数据对象
+					uniWifiInfo.wrapConnectInfo(winfo)
+					let res = {
+						errMsg: 'onWifiConnected:ok',
+						errCode: 0,
+						wifi: uniWifiInfo
+					}
+					console.log("Global.onWifiConnectCallbackList  == " + Global.onWifiConnectCallbackList.length);
+					// wifi状态可用了，分发当前的链接状态给已注册的监听集合
+					for (let perCallback in Global.onWifiConnectCallbackList) {
+						perCallback(res);
+					}
+
+				}, 100);
+			}
+
 		}
-		
-		
+
+
 		if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
 			// wifi 扫描结果回调
 			let results = this.mWifiManager!.scanResults;
-			
+
 			if (results != null) {
 				Global.scanList = []
-				for(let scanResult in results){
-					if(scanResult.SSID == null){
-					    continue;
+				for (let scanResult in results) {
+					if (scanResult.SSID == null) {
+						continue;
 					}
 					Global.scanList.push(new UniWifiInfo(scanResult));
 				}
-				
+
 				// 挨个通知，所有的监听器
-				for(let perCallback in Global.getWifiListCallbackList){
-					
+				for (let perCallback in Global.getWifiListCallbackList) {
+
 					const data = new JSONObject();
 					let mainJsonStr = Gson().toJson(Global.scanList);
 					data["wifiList"] = mainJsonStr
 					perCallback(data);
 				}
-				
+
 			}
-			
+
 		}
 	}
-	
+
 }
 
 /************************* 下面是对外提供的函数 *************************/
@@ -189,169 +206,173 @@ class CustomBroadcastReceiver extends BroadcastReceiver{
 /**
  * 获取wifi列表
  */
-export function getWifiList(option:WifiOption) { 
+export function getWifiList(option: WifiOption) {
 	let wifiManager: WifiManager =
-	                getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
-	wifiManager.startScan()		
-		
+		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+	wifiManager.startScan()
+
 	let ret = {
-		errNo:0,
-		errCode:0,
-		errMsg:"getWifiList:ok"
+		errNo: 0,
+		errCode: 0,
+		errMsg: "getWifiList:ok"
 	}
 	option?.success?.(ret)
 	option?.complete?.(ret)
-	
+
 }
 
 
 /**
  * wifi 链接成功的回调注册
  */
-export function onWifiConnected(callback: UTSCallback) { 
+export function onWifiConnected(callback: UTSCallback) {
 	Global.onWifiConnectCallbackList.push(callback)
 }
 
 /**
  * wifi 链接成功的回调取消注册
  */
-export function offWifiConnected(callback: UTSCallback) { 
+export function offWifiConnected(callback: UTSCallback) {
 	let callbackIndex = Global.onWifiConnectCallbackList.indexOf(callback)
-	if(callbackIndex > 0){
-		Global.onWifiConnectCallbackList.splice(callbackIndex, 1);   
+	if (callbackIndex > 0) {
+		Global.onWifiConnectCallbackList.splice(callbackIndex, 1);
 	}
 }
 
 /**
  * 注册Wifi列表的监听事件
  */
-export function onGetWifiList(callback: UTSCallback) { 
-	
+export function onGetWifiList(callback: UTSCallback) {
+
 	Global.getWifiListCallbackList.push(callback)
 }
 /**
  * 取消注册Wifi列表的监听事件
  */
-export function offGetWifiList(callback: UTSCallback) { 
+export function offGetWifiList(callback: UTSCallback) {
 	let callbackIndex = Global.getWifiListCallbackList.indexOf(callback)
-	if(callbackIndex > 0){
-		Global.getWifiListCallbackList.splice(callbackIndex, 1);   
+	if (callbackIndex > 0) {
+		Global.getWifiListCallbackList.splice(callbackIndex, 1);
 	}
+}
+
+export function connectWifi(option: WifiOption) {
+	
 }
 
 /**
  * 开启wifi
  */
-export function startWifi(option:WifiOption) { 
+export function startWifi(option: WifiOption) {
 	// 需要先开启wifi,才能使用后续的功能
 	let requestCode = 1001;
 	let permissionWifi = arrayOf("android.permission.ACCESS_FINE_LOCATION");
-	
+
 	// 检查权限
-	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
-		
+	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
 		ActivityCompat.requestPermissions(getUniActivity()!, permissionWifi, requestCode)
 		// 尚不具备权限，返回错误
 		var result = {
-			errNo:0,
-			errCode:0,
-			errMsg:"startWifi:premission loss"
+			errNo: 0,
+			errCode: 0,
+			errMsg: "startWifi:premission loss"
 		}
 		option.fail?.(result)
 		option.complete?.(result)
-		
+
 		return;
-	} 
-	
+	}
+
 	// 具备了权限，继续前进
 	let wifiManager: WifiManager =
-	                getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
-					
+		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+
 	if (Global.mReceiver == null) {
 		Global.mReceiver = new CustomBroadcastReceiver(wifiManager)
 	}
-	
+
 	let filter = new IntentFilter()
 	filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
 	filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION)
 	filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
-	
+
 	getUniActivity()!.registerReceiver(Global.mReceiver, filter)
-	wifiManager.startScan()	
+	wifiManager.startScan()
 	var result = {
-		errNo:0,
-		errCode:0,
-		errMsg:"startWifi:ok"
+		errNo: 0,
+		errCode: 0,
+		errMsg: "startWifi:ok"
 	}
 	option.success?.(result)
 	option.complete?.(result)
-	
+
 }
 
 
 /**
  * 关闭wifi
  */
-export function stopWifi(option:WifiOption) {
+export function stopWifi(option: WifiOption) {
 	// 需要先开启wifi,才能使用后续的功能
 	if (Global.mReceiver == null) {
 		var result = {
-			errNo:12000,
-			errCode:12000,
-			errMsg:"stopWifi:not init"
+			errNo: 12000,
+			errCode: 12000,
+			errMsg: "stopWifi:not init"
 		}
 		option.fail?.(result)
 		option.complete?.(result)
-		
-		return 
+
+		return
 	}
-	
+
 	getUniActivity()!.unregisterReceiver(Global.mReceiver)
 	var result = {
-		errNo:0,
-		errCode:0,
-		errMsg:"stopWifi:ok"
+		errNo: 0,
+		errCode: 0,
+		errMsg: "stopWifi:ok"
 	}
 	option.success?.(result)
 	option.complete?.(result)
-	
+
 }
 
 /**
  * 获取当前连接中的wifi信息
  */
 export function getConnectedWifi(option: GetConnectedWifiOptions) {
-	
+
 	console.log(option);
-	
+
 	let WifiInfo = new UniWifiInfo(null)
-	
+
 	let res = {
-	    errMsg: 'getConnectedWifi:fail. please check permission about location or enable wifi or connect wifi',
-	    errCode: -1,
-	    wifi: WifiInfo
+		errMsg: 'getConnectedWifi:fail. please check permission about location or enable wifi or connect wifi',
+		errCode: -1,
+		wifi: WifiInfo
 	}
-	
-	
-	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+
+
+	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 		// 尚不具备权限，返回错误
 		option.fail?.(res)
 		option.complete?.(res)
 		return;
-	} 
-	
+	}
+
 	// TODO 应该try catch一下，把系统的错误码给返回来，然后和微信的错误码拉齐
 	// 需要先校验权限，没有位置权限无法获取wifi
 	const context = getAppContext();
 	if (context != null) {
-	    const wm = context.getSystemService(
-	        Context.WIFI_SERVICE
-	    ) as WifiManager;
+		const wm = context.getSystemService(
+			Context.WIFI_SERVICE
+		) as WifiManager;
 		// 测试android 12上可以使用
-		const winfo = wm.getConnectionInfo(); 
+		const winfo = wm.getConnectionInfo();
 		// 封装成数据对象
 		WifiInfo.wrapConnectInfo(winfo);
-		
+
 		res.errCode = 0
 		res.errMsg = "getConnectedWifi:ok"
 		res.wifi = WifiInfo;
