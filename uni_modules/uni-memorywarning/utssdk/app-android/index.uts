@@ -4,7 +4,6 @@ let listeners: UTSCallback[] = []
 
 const onAppTrimMemoryListener = (res: number) => {
     listeners.forEach(listener => {
-		console.log("listener  "  + listener);
         listener(res)
     })
 }

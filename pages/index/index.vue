@@ -89,10 +89,17 @@
 			},
 			testonMemoryWarning() {
 				uni.onMemoryWarning(this.onMemoryWarning)
+				uni.showToast({
+					icon:'none',
+					title:'已监听，注意控制台输出'
+				})
 			},
 			testoffMemoryWarning(){
-				// uni.offMemoryWarning(this.onMemoryWarning)
-				uni.offMemoryWarning()
+				uni.offMemoryWarning(this.onMemoryWarning)
+				uni.showToast({
+					icon:'none',
+					title:'监听已移除'
+				})
 			},
 			testScreenShotListen() {
 				var that = this;
