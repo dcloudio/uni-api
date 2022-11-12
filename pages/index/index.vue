@@ -9,11 +9,11 @@
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		<button @tap="testStartWifi">startWifi</button>
 		
+		<button @tap="testStartWifi">初始化wifi模块</button>
 		<button @tap="testGetWifiList">获取当前wifi列表</button>
 		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
-		<button @tap="testStopWifi">stopWifi</button>
+		<button @tap="testStopWifi">关闭wifi模块</button>
 	</view>
 </template>
 
