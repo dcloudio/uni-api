@@ -9,10 +9,11 @@
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		<button @tap="testStartWifi">开启wifi功能</button>
-		<button @tap="testStopWifi">关闭wifi功能</button>
+		<button @tap="testStartWifi">startWifi</button>
+		
 		<button @tap="testGetWifiList">获取当前wifi列表</button>
 		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
+		<button @tap="testStopWifi">stopWifi</button>
 	</view>
 </template>
 
@@ -48,12 +49,14 @@
 				uni.startWifi({
 					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
+						// wifi 开启成功后，注册wifi链接状态监听和wifi列表获取监听
 						uni.onGetWifiList(function(res){
+							console.log("onGetWifiList");
 							console.log(res);
 						});
 						uni.onWifiConnected(function(res){
-							console.log("11199");
-							console.log("onWifiConnected = " + JSON.stringify(res));
+							console.log("onWifiConnected");
+							console.log(res);
 						});
 						
 					},fail:(res)=>{

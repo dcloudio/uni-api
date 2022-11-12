@@ -201,18 +201,34 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 
 }
 
+
+
 /************************* 下面是对外提供的函数 *************************/
 
 /**
  * 获取wifi列表
  */
 export function getWifiList(option: WifiOption) {
+	
+	
+	
+	if (Global.mReceiver == null) {
+		// 还没调用startWifi 提示报错
+		var result = {
+			errCode: 12000,
+			errMsg: "getWifiList:fail fail:not init,you shall call startWifi first"
+		}
+		option.fail?.(result)
+		option.complete?.(result)
+	
+		return
+	}
+	
 	let wifiManager: WifiManager =
 		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	wifiManager.startScan()
 
 	let ret = {
-		errNo: 0,
 		errCode: 0,
 		errMsg: "getWifiList:ok"
 	}
@@ -264,6 +280,7 @@ export function connectWifi(option: WifiOption) {
  * 开启wifi
  */
 export function startWifi(option: WifiOption) {
+	
 	// 需要先开启wifi,才能使用后续的功能
 	let requestCode = 1001;
 	let permissionWifi = arrayOf("android.permission.ACCESS_FINE_LOCATION");
@@ -343,7 +360,18 @@ export function stopWifi(option: WifiOption) {
  */
 export function getConnectedWifi(option: GetConnectedWifiOptions) {
 
-	console.log(option);
+	if (Global.mReceiver == null) {
+		var result = {
+			errNo: 12000,
+			errCode: 12000,
+			errMsg: "startWifi:not init"
+		}
+		option.fail?.(result)
+		option.complete?.(result)
+	
+		return
+	}
+	
 
 	let WifiInfo = new UniWifiInfo(null)
 
