@@ -214,7 +214,8 @@ export function getWifiList(option: WifiOption) {
 		// 还没调用startWifi 提示报错
 		var result = {
 			errCode: 12000,
-			errMsg: "getWifiList:fail:not invoke startWifi"
+			errMsg: "getWifiList:fail:not invoke startWifi",
+			errSubject:"uni-wifi"
 		}
 		option.fail?.(result)
 		option.complete?.(result)
@@ -234,6 +235,7 @@ export function getWifiList(option: WifiOption) {
 	option.complete?.(ret)
 
 }
+
 
 
 /**
@@ -270,9 +272,15 @@ export function offGetWifiList(callback: UTSCallback) {
 	}
 }
 
-export function connectWifi(_option: WifiOption) {
+export function connectWifi(_option: WifiConnectOption) {
 	// todo
 	console.log(_option)
+	if(_option.maunal == true){
+		// 指定了手动模式
+		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+		getUniActivity()!!.startActivity(manunalIntent);
+	}
+	
 }
 
 /**
@@ -374,9 +382,6 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 	
 		return
 	}
-	
-
-	
 	
 	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 		// 尚不具备权限，返回错误

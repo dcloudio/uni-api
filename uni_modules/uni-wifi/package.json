@@ -38,7 +38,8 @@
 			"stopWifi": "stopWifi",
 			"getWifiList":"getWifiList",
 			"onGetWifiList":"onGetWifiList",
-			"onWifiConnected":"onWifiConnected"
+			"onWifiConnected":"onWifiConnected",
+			"connectWifi":"connectWifi"
 		}
 	},
     "dependencies": [],
