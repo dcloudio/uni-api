@@ -1,18 +1,28 @@
+// 引用 iOS 原生平台 api
 import { UIDevice } from "UIKit";
+import { Int } from 'Swift';
 
+/**
+ * 定义 接口参数
+ */
 type GetBatteryInfoOptions = {
-    success?: (res: UTSJSONObject) => void;
-    fail?: (res: UTSJSONObject) => void;
-    complete?: (res: UTSJSONObject) => void;
+    success?: (res: object) => void;
+    fail?: (res: object) => void;
+    complete?: (res: object) => void;
 };
 
+/**
+ * 导出 获取电量方法 
+ */
 export default function getBatteryInfo(options: GetBatteryInfoOptions) {
 	
+	// 开启电量检测
 	UIDevice.current.isBatteryMonitoringEnabled = true
 	
+	// 返回数据
     const res = {
         errMsg: "getBatteryInfo:ok",
-        level: Number(UIDevice.current.batteryLevel * 100),
+        level: new Int(UIDevice.current.batteryLevel * 100),
         isCharging: UIDevice.current.batteryState == UIDevice.BatteryState.charging,
     };
     options.success?.(res);

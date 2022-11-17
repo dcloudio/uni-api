@@ -2,14 +2,16 @@
 
 ### uni.onMemoryWarning(function listener)
 
-监听内存不足告警事件(目前仅Android)
+监听内存不足告警事件
 
 
-当 Android 向小程序进程发出内存警告时，触发该事件。
+当系统应用进程发出内存警告时，触发该事件。
 
 触发该事件不意味应用被杀，大部分情况下仅仅是告警，开发者可在收到通知后回收一些不必要资源。
 
-返回值说明:
+返回值说明: 
+
+**注意平台差异：仅Android平台有返回值，iOS平台无返回值**
 
 ```kotlin
 
@@ -65,7 +67,7 @@ int TRIM_MEMORY_COMPLETE = 80;
 
 ### uni.offMemoryWarning(function listener)
 
-移除内存不足告警事件的监听函数(目前仅Android)
+移除内存不足告警事件的监听函数
 
 onMemoryWarning 传入的监听函数。不传此参数则移除所有监听函数。
 
