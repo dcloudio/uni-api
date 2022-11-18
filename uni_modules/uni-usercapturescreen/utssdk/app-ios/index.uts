@@ -11,7 +11,7 @@ class CaptureScreenTool {
 	static listenCaptureScreen(callback: UTSCallback | null) {
 		this.listener = callback
 		
-		// 注册监听截屏事件及回调方法
+		// 注册监听截屏通知事件及设置回调方法
 		// target-action 回调方法需要通过 Selector("方法名") 构建
 		const method = Selector("userDidTakeScreenshot")
 		NotificationCenter.default.addObserver(this, selector = method, name = UIApplication.userDidTakeScreenshotNotification, object = null)
@@ -20,7 +20,7 @@ class CaptureScreenTool {
 	// 捕获截屏回调的方法
 	// target-action 的方法前需要添加 @objc 前缀
 	@objc static userDidTakeScreenshot() {
-		// 回调
+		// 触发回调
 		this.listener?.({})
 	}
 	
