@@ -35,7 +35,15 @@
 				console.log(res);
 			},
 			testConnnectWifi(){
-				uni.connectWifi({});
+
+				uni.connectWifi({
+					partialInfo:false,
+					SSID:"Xiaomi_20D0",
+					password:"BBBB",
+					complete:(res)=>{
+						console.log(res);
+					}
+				});
 			},
 			testGetConnnectWifi(){
 				uni.getConnectedWifi({

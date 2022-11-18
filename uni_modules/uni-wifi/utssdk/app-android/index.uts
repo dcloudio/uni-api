@@ -12,6 +12,7 @@ import Gson from "com.google.gson.Gson";
 import JSONObject from "com.alibaba.fastjson.JSONObject";
 import Intent from "android.content.Intent";
 import Thread from "java.lang.Thread";
+import WifiConfiguration from 'android.net.wifi.WifiConfiguration';
 
 /**
  * Wifi 函数通用入参封装
@@ -34,8 +35,26 @@ type WifiConnectOption = {
 	success?: (res: object) => void;
 	fail?: (res: object) => void;
 	complete?: (res: object) => void;
+	
+	
+	
+	
 }
 
+
+function wrapWifiConfiguration(SSID:string ,password:string):WifiConfiguration {
+		
+	let config = new WifiConfiguration();
+	
+	config.allowedAuthAlgorithms.clear();
+	config.allowedGroupCiphers.clear();
+	config.allowedKeyManagement.clear();
+	config.allowedPairwiseCiphers.clear();
+	config.allowedProtocols.clear();
+	config.SSID = "\"" + SSID + "\"";
+	
+	return config;
+}
 /**
  * Wifi信息统一数据结构
  */
@@ -46,6 +65,9 @@ class UniWifiInfo {
 	secure: boolean = false;
 	signalStrength: Number = 0;
 	frequency: Number = 0;
+	
+	/*下面的字段属于扩展字段*/
+	securityType:string = ""
 
 	constructor(scanResult?: ScanResult) {
 		if (scanResult != null) {
@@ -64,6 +86,9 @@ class UniWifiInfo {
 			} else {
 				this.secure = true;
 			}
+			
+			/*扩展字段*/
+			this.securityType = getSecurityType(scanResult);
 		}
 	}
 
@@ -117,6 +142,18 @@ class Global {
 	static WIFI_AUTH_ROAM: String = "[ESS]";
 	static getWifiListCallbackList: UTSCallback[] = []
 	static onWifiConnectCallbackList: UTSCallback[] = []
+}
+
+
+function getSecurityType(result:ScanResult):string {
+    if (result.capabilities.contains("WEP")) {
+        return "WEP";
+    } else if (result.capabilities.contains("PSK")) {
+        return "WPA";
+    } else if (result.capabilities.contains("EAP")) {
+        return "EAP";
+    }
+    return "NONE";
 }
 
 
@@ -208,14 +245,12 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
  */
 export function getWifiList(option: WifiOption) {
 	
-	
-	
 	if (Global.mReceiver == null) {
 		// 还没调用startWifi 提示报错
 		var result = {
 			errCode: 12000,
 			errMsg: "getWifiList:fail:not invoke startWifi",
-			errSubject:"uni-wifi"
+			errSubject:"uni-getWifiList"
 		}
 		option.fail?.(result)
 		option.complete?.(result)
@@ -259,7 +294,6 @@ export function offWifiConnected(callback: UTSCallback) {
  * 注册Wifi列表的监听事件
  */
 export function onGetWifiList(callback: UTSCallback) {
-
 	Global.getWifiListCallbackList.push(callback)
 }
 /**
@@ -272,14 +306,86 @@ export function offGetWifiList(callback: UTSCallback) {
 	}
 }
 
-export function connectWifi(_option: WifiConnectOption) {
-	// todo
-	console.log(_option)
-	if(_option.maunal == true){
-		// 指定了手动模式
-		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
-		getUniActivity()!!.startActivity(manunalIntent);
+
+/**
+ * 链接指定wifi
+ */
+export function connectWifi(option: WifiConnectOption) {
+	
+	
+	
+	var result = {
+		errCode: 12000,
+		errMsg: "connectWifi:fail:not invoke startWifi",
+		errSubject:"uni-connectWifi"
 	}
+	
+	if (Global.mReceiver == null || Global.scanList.length < 1) {
+		// 还没调用startWifi 提示报错
+		option.fail?.(result)
+		option.complete?.(result)
+	
+		return
+	}
+	
+	// if(option.maunal == true){
+	// 	// 指定了手动模式
+	// 	let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+	// 	getUniActivity()!!.startActivity(manunalIntent);
+		
+	// 	result.errCode = 0
+	// 	result.errMsg = "connectWifi:ok"
+		
+	// 	option.success
+		
+	// 	?.(result)
+	// 	option.complete?.(result)
+	// 	return 
+	// }
+	
+	// 执行后续的逻辑
+	let scanWifiInfo:UniWifiInfo|null = null
+	for (let scanResult in Global.scanList) {
+		
+		if (scanResult.SSID.equals(option.SSID)) {
+			scanWifiInfo = scanResult
+		}
+	}
+	
+	if(scanWifiInfo == null){
+		// 不在扫描列表中返回错误
+		option.fail?.(result)
+		option.complete?.(result)
+		
+		return
+	}
+	
+	console.log(scanWifiInfo);
+	
+	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password);
+	
+	let wifiManager: WifiManager =
+		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+	
+	let targetExistConfig:WifiConfiguration|null = null
+	let existingConfigs = wifiManager.getConfiguredNetworks();
+	for (let existingConfig in existingConfigs) {
+		if (existingConfig.SSID.equals("\"" + option.SSID + "\"")) {
+			targetExistConfig = existingConfig
+		}
+	}
+	
+	if (targetExistConfig != null) {
+		wifiManager.removeNetwork(targetExistConfig.networkId);
+	}
+	
+	let netID = wifiManager.addNetwork(wifiConfigration);
+	let enabled = wifiManager.enableNetwork(netID, true);
+	let connected = wifiManager.reconnect();
+	
+	console.log(connected);
+	
+	
 	
 }
 

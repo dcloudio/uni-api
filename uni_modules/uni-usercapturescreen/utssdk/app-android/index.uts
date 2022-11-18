@@ -45,7 +45,7 @@ class ScreenFileObserver extends FileObserver {
 
 	
 	constructor(screenFile: string) {
-		super(File(allScreen))
+		super(new File(screenFile))
 		this.allScreen = new File(screenFile);
 		
 	}
