@@ -1,5 +1,6 @@
 import { NotificationCenter } from 'Foundation';
 import { UIApplication } from "UIKit"
+import { Selector } from "ObjectiveC"
 
 /**
  * 定义监听截屏事件工具类

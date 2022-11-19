@@ -1,5 +1,6 @@
 import { NotificationCenter } from 'Foundation';
 import { UIApplication } from "UIKit"
+import { Selector } from "ObjectiveC"
 
 class MemoryWarningTool {
 	static listener: UTSCallback | null;
