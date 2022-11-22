@@ -13,6 +13,9 @@ import JSONObject from "com.alibaba.fastjson.JSONObject";
 import Intent from "android.content.Intent";
 import Thread from "java.lang.Thread";
 import WifiConfiguration from 'android.net.wifi.WifiConfiguration';
+import AuthAlgorithm from 'android.net.wifi.WifiConfiguration.AuthAlgorithm';
+import KeyMgmt from 'android.net.wifi.WifiConfiguration.KeyMgmt';
+import TextUtils from 'android.text.TextUtils';
 
 /**
  * Wifi 函数通用入参封装
@@ -37,12 +40,36 @@ type WifiConnectOption = {
 	complete?: (res: object) => void;
 	
 	
-	
-	
 }
 
 
-function wrapWifiConfiguration(SSID:string ,password:string):WifiConfiguration {
+function isHex(key:string):boolean {
+	for (var i = key.length - 1; i >= 0; i--) {
+		let c = key.charAt(i);
+		if (!(c >= '0' && c <= '9' || c >= 'A' && c <= 'F' || c >= 'a'
+				&& c <= 'f')) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * 判断是否是wep格式的key
+ */
+function isHexWepKey(wepKey:string):boolean {
+	let len = wepKey.length;
+
+	// WEP-40, WEP-104, and some vendors using 256-bit WEP (WEP-232?)
+	if (len != 10 && len != 26 && len != 58) {
+		return false;
+	}
+
+	return isHex(wepKey);
+}
+
+function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string):WifiConfiguration {
 		
 	let config = new WifiConfiguration();
 	
@@ -52,6 +79,43 @@ function wrapWifiConfiguration(SSID:string ,password:string):WifiConfiguration {
 	config.allowedPairwiseCiphers.clear();
 	config.allowedProtocols.clear();
 	config.SSID = "\"" + SSID + "\"";
+	
+	
+	// nopass
+	if ("NONE".equals(passwordType)) {
+		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+	}
+	// // wep
+	if ("WEP".equals(passwordType)) {
+		if (!TextUtils.isEmpty(password)) {
+			if (isHexWepKey(password)) {
+				config.wepKeys[0] = password;
+			} else {
+				config.wepKeys[0] = "\"" + password + "\"";
+			}
+		}
+		config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
+		config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+		config.allowedKeyManagement.set(KeyMgmt.NONE);
+		config.wepTxKeyIndex = 0;
+	}
+	// wpa
+	if ("WPA".equals(passwordType)) {
+		config.preSharedKey = "\"" + password + "\"";
+		config.hiddenSSID = true;
+		config.allowedAuthAlgorithms
+				.set(WifiConfiguration.AuthAlgorithm.OPEN);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+		config.allowedPairwiseCiphers
+				.set(WifiConfiguration.PairwiseCipher.TKIP);
+		// 此处需要修改否则不能自动重联
+		config.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+		config.allowedPairwiseCiphers
+				.set(WifiConfiguration.PairwiseCipher.CCMP);
+		config.status = WifiConfiguration.Status.ENABLED;
+	}
 	
 	return config;
 }
@@ -312,8 +376,7 @@ export function offGetWifiList(callback: UTSCallback) {
  */
 export function connectWifi(option: WifiConnectOption) {
 	
-	
-	
+
 	var result = {
 		errCode: 12000,
 		errMsg: "connectWifi:fail:not invoke startWifi",
@@ -328,20 +391,18 @@ export function connectWifi(option: WifiConnectOption) {
 		return
 	}
 	
-	// if(option.maunal == true){
-	// 	// 指定了手动模式
-	// 	let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
-	// 	getUniActivity()!!.startActivity(manunalIntent);
+	if(option.maunal == true){
+		// 指定了手动模式
+		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+		getUniActivity()!!.startActivity(manunalIntent);
 		
-	// 	result.errCode = 0
-	// 	result.errMsg = "connectWifi:ok"
+		result.errCode = 0
+		result.errMsg = "connectWifi:ok"
 		
-	// 	option.success
-		
-	// 	?.(result)
-	// 	option.complete?.(result)
-	// 	return 
-	// }
+		option.success?.(result)
+		option.complete?.(result)
+		return 
+	}
 	
 	// 执行后续的逻辑
 	let scanWifiInfo:UniWifiInfo|null = null
@@ -360,13 +421,14 @@ export function connectWifi(option: WifiConnectOption) {
 		return
 	}
 	
-	console.log(scanWifiInfo);
+	console.log(JSON.stringify(scanWifiInfo.securityType));
 	
-	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password);
+	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password,scanWifiInfo.securityType);
 	
 	let wifiManager: WifiManager =
 		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	
+	// 如果已经存在了指定wifi 配置，移除之
 	let targetExistConfig:WifiConfiguration|null = null
 	let existingConfigs = wifiManager.getConfiguredNetworks();
 	for (let existingConfig in existingConfigs) {
@@ -379,12 +441,23 @@ export function connectWifi(option: WifiConnectOption) {
 		wifiManager.removeNetwork(targetExistConfig.networkId);
 	}
 	
-	let netID = wifiManager.addNetwork(wifiConfigration);
-	let enabled = wifiManager.enableNetwork(netID, true);
-	let connected = wifiManager.reconnect();
+	try {
+		let netID = wifiManager.addNetwork(wifiConfigration);
+		let enabled = wifiManager.enableNetwork(netID, true);
+		let connected = wifiManager.reconnect();
+		console.log(connected);
+	} catch (e) {
+		// TODO: handle exception
+		console.log(e);
+		// e.printStackTrace();
+		
+	}
 	
-	console.log(connected);
+	result.errCode = 0
+	result.errMsg = "connectWifi:ok"
 	
+	option.success?.(result)
+	option.complete?.(result)
 	
 	
 }
