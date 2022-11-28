@@ -1,6 +1,6 @@
 import { CLLocationManager, CLAuthorizationStatus, CLLocationManagerDelegate } from 'CoreLocation'
 import { CaptiveNetwork, kCNNetworkInfoKeySSID, kCNNetworkInfoKeyBSSID } from 'SystemConfiguration.CaptiveNetwork';
-import { JSONEncoder, NSArray, NSDictionary } from 'Foundation';
+import { NSArray, NSDictionary } from 'Foundation';
 import { CFString } from 'CoreFoundation';
 import { UIDevice } from 'UIKit';
 
@@ -37,10 +37,9 @@ type GetConnectedWifiOptions = {
 	complete?: (res: UTSJSONObject) => void
 }
 
-type GetLocationPromiseOptions = {
-	complete?: (res: boolean) => void
-}
-
+/* 
+ * 对外暴露的wifi信息
+ */
 type UniWifiInfo = {
 	SSID: string;
 	BSSID: string;
@@ -51,26 +50,8 @@ type UniWifiInfo = {
 
 
 /* 
- * 对外暴露的wifi信息类
+ * 系统定位权限获取类
  */
-// class UniWifiInfo {
-
-// 	SSID: string;
-// 	BSSID: string;
-// 	secure: boolean;
-// 	signalStrength: number;
-// 	frequency: number;
-	
-// 	constructor(SSID: string, BSSID: string, secure: boolean, signalStrength: number, frequency: number) {
-// 		this.SSID = SSID
-// 		this.BSSID = BSSID
-// 		this.secure = secure
-// 		this.signalStrength = signalStrength
-// 		this.frequency = frequency
-// 	}
-// }
-
-
 class LocationPromiseService implements CLLocationManagerDelegate  {
 	static promiseCompletionHandler: ((res: boolean)=>void)[] = []
 	
