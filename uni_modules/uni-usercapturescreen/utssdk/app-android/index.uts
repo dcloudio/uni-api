@@ -1,8 +1,8 @@
 
 
 import {
-	getUniActivity
-} from "io.dcloud.uts.android";
+	UTSAndroid
+} from "io.dcloud.uts";
 
 
 import ActivityCompat from "androidx.core.app.ActivityCompat";
@@ -35,7 +35,7 @@ let imageChange: UTSCallback | null = null;
 /**
  * android 文件监听实现
  */
-
+@Suppress("DEPRECATION")
 class ScreenFileObserver extends FileObserver {
 
 	/**
@@ -85,12 +85,13 @@ class ScreenFileObserver extends FileObserver {
 /**
  * 开启截图监听
  */
+@Suppress("DEPRECATION")
 export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
 	
 	// 检查相关权限是否已经具备
-	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 		// 不具备权限，申请权限，并且告知用户监听失败
-		ActivityCompat.requestPermissions(getUniActivity()!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1001)
+		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1001)
 		
 		// 因权限缺失导致监听失败
 		let ret = {
