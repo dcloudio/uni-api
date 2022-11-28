@@ -294,8 +294,8 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 				for (let perCallback in Global.getWifiListCallbackList) {
 
 					const data = new JSONObject();
-					let mainJsonStr = Gson().toJson(Global.scanList);
-					data["wifiList"] = mainJsonStr
+					// let mainJsonStr = Gson().toJson(Global.scanList);
+					data["wifiList"] = Global.scanList
 					perCallback(data);
 				}
 
