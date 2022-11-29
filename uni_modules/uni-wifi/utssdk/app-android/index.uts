@@ -128,8 +128,8 @@ function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string)
  */
 class UniWifiInfo {
 
-	SSID: String = "";
-	BSSID: String = "";
+	SSID: string = "";
+	BSSID: string = "";
 	secure: boolean = false;
 	signalStrength: Number = 0;
 	frequency: Number = 0;
@@ -204,8 +204,8 @@ type GetConnectedWifiOptions = {
  * 全局数据储存
  */
 class Global {
-	static mReceiver?: CustomBroadcastReceiver = null;
-	static WIFI_AUTH_OPEN: String = "";
+	static mReceiver: CustomBroadcastReceiver|null = null;
+	static WIFI_AUTH_OPEN: string = "";
 	static WIFI_AUTH_ROAM: String = "[ESS]";
 	
 	static scanList: UniWifiInfo[] = []
@@ -232,7 +232,7 @@ function getSecurityType(result:ScanResult):string {
 @Suppress("UNUSED_PARAMETER","DEPRECATION")
 class CustomBroadcastReceiver extends BroadcastReceiver {
 
-	mWifiManager?: WifiManager = null;
+	mWifiManager: WifiManager|null = null;
 
 	constructor(wifiManager: WifiManager) {
 		super();

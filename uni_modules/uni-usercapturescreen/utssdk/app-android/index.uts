@@ -108,7 +108,7 @@ export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
 	let directory_pictures = new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_PICTURES);
 	let directory_dcim = new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DCIM);
 	
-	if (Build.MANUFACTURER.lowercase() === "xiaomi") {
+	if (Build.MANUFACTURER.toLowerCase() === "xiaomi") {
 		directory_screenshot = new File(directory_dcim, "Screenshots");
 	} else {
 		directory_screenshot = new File(directory_pictures, "Screenshots");
