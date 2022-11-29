@@ -1,5 +1,5 @@
 import Context from "android.content.Context";
-import { getAppContext, getUniActivity } from "io.dcloud.uts.android";
+import { UTSAndroid } from "io.dcloud.uts";
 import WifiManager from "android.net.wifi.WifiManager";
 import WifiInfo from "android.net.wifi.WifiInfo";
 import Manifest from "android.Manifest";
@@ -12,7 +12,11 @@ import Gson from "com.google.gson.Gson";
 import JSONObject from "com.alibaba.fastjson.JSONObject";
 import Intent from "android.content.Intent";
 import Thread from "java.lang.Thread";
+
 import WifiConfiguration from 'android.net.wifi.WifiConfiguration';
+import AuthAlgorithm from 'android.net.wifi.WifiConfiguration.AuthAlgorithm';
+import KeyMgmt from 'android.net.wifi.WifiConfiguration.KeyMgmt';
+import TextUtils from 'android.text.TextUtils';
 
 /**
  * Wifi 函数通用入参封装
@@ -22,6 +26,8 @@ type WifiOption = {
 	fail?: (res: object) => void;
 	complete?: (res: object) => void;
 };
+
+
 
 /**
  * Wifi 链接参数封装
@@ -35,14 +41,39 @@ type WifiConnectOption = {
 	success?: (res: object) => void;
 	fail?: (res: object) => void;
 	complete?: (res: object) => void;
-	
-	
-	
-	
 }
 
+/**
+ * 是否是标准的16进制字符
+ */
+function isHex(key:string):boolean {
+	for (var i = key.length - 1; i >= 0; i--) {
+		let c = key.charAt(i);
+		if (!(c >= '0' && c <= '9' || c >= 'A' && c <= 'F' || c >= 'a'
+				&& c <= 'f')) {
+			return false;
+		}
+	}
 
-function wrapWifiConfiguration(SSID:string ,password:string):WifiConfiguration {
+	return true;
+}
+
+/**
+ * 判断是否是wep格式的key
+ */
+function isHexWepKey(wepKey:string):boolean {
+	let len = wepKey.length;
+
+	// WEP-40, WEP-104, and some vendors using 256-bit WEP (WEP-232?)
+	if (len != 10 && len != 26 && len != 58) {
+		return false;
+	}
+
+	return isHex(wepKey);
+}
+
+@Suppress("DEPRECATION")
+function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string):WifiConfiguration {
 		
 	let config = new WifiConfiguration();
 	
@@ -52,6 +83,43 @@ function wrapWifiConfiguration(SSID:string ,password:string):WifiConfiguration {
 	config.allowedPairwiseCiphers.clear();
 	config.allowedProtocols.clear();
 	config.SSID = "\"" + SSID + "\"";
+	
+	
+	// nopass
+	if ("NONE".equals(passwordType)) {
+		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+	}
+	// // wep
+	if ("WEP".equals(passwordType)) {
+		if (!TextUtils.isEmpty(password)) {
+			if (isHexWepKey(password)) {
+				config.wepKeys[0] = password;
+			} else {
+				config.wepKeys[0] = "\"" + password + "\"";
+			}
+		}
+		config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
+		config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+		config.allowedKeyManagement.set(KeyMgmt.NONE);
+		config.wepTxKeyIndex = 0;
+	}
+	// wpa
+	if ("WPA".equals(passwordType)) {
+		config.preSharedKey = "\"" + password + "\"";
+		config.hiddenSSID = true;
+		config.allowedAuthAlgorithms
+				.set(WifiConfiguration.AuthAlgorithm.OPEN);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+		config.allowedPairwiseCiphers
+				.set(WifiConfiguration.PairwiseCipher.TKIP);
+		// 此处需要修改否则不能自动重联
+		config.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+		config.allowedPairwiseCiphers
+				.set(WifiConfiguration.PairwiseCipher.CCMP);
+		config.status = WifiConfiguration.Status.ENABLED;
+	}
 	
 	return config;
 }
@@ -137,9 +205,10 @@ type GetConnectedWifiOptions = {
  */
 class Global {
 	static mReceiver?: CustomBroadcastReceiver = null;
-	static scanList: UniWifiInfo[] = []
 	static WIFI_AUTH_OPEN: String = "";
 	static WIFI_AUTH_ROAM: String = "[ESS]";
+	
+	static scanList: UniWifiInfo[] = []
 	static getWifiListCallbackList: UTSCallback[] = []
 	static onWifiConnectCallbackList: UTSCallback[] = []
 }
@@ -160,6 +229,7 @@ function getSecurityType(result:ScanResult):string {
 /**
  * 自定义wifi变化广播监听器
  */
+@Suppress("UNUSED_PARAMETER","DEPRECATION")
 class CustomBroadcastReceiver extends BroadcastReceiver {
 
 	mWifiManager?: WifiManager = null;
@@ -224,8 +294,8 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 				for (let perCallback in Global.getWifiListCallbackList) {
 
 					const data = new JSONObject();
-					let mainJsonStr = Gson().toJson(Global.scanList);
-					data["wifiList"] = mainJsonStr
+					// let mainJsonStr = Gson().toJson(Global.scanList);
+					data["wifiList"] = Global.scanList
 					perCallback(data);
 				}
 
@@ -243,6 +313,7 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 /**
  * 获取wifi列表
  */
+@Suppress("DEPRECATION")
 export function getWifiList(option: WifiOption) {
 	
 	if (Global.mReceiver == null) {
@@ -259,7 +330,7 @@ export function getWifiList(option: WifiOption) {
 	}
 	
 	let wifiManager: WifiManager =
-		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	wifiManager.startScan()
 
 	let ret = {
@@ -310,10 +381,10 @@ export function offGetWifiList(callback: UTSCallback) {
 /**
  * 链接指定wifi
  */
+@Suppress("UNUSED_PARAMETER","DEPRECATION")
 export function connectWifi(option: WifiConnectOption) {
 	
-	
-	
+
 	var result = {
 		errCode: 12000,
 		errMsg: "connectWifi:fail:not invoke startWifi",
@@ -328,20 +399,18 @@ export function connectWifi(option: WifiConnectOption) {
 		return
 	}
 	
-	// if(option.maunal == true){
-	// 	// 指定了手动模式
-	// 	let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
-	// 	getUniActivity()!!.startActivity(manunalIntent);
+	if(option.maunal == true){
+		// 指定了手动模式
+		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 		
-	// 	result.errCode = 0
-	// 	result.errMsg = "connectWifi:ok"
+		result.errCode = 0
+		result.errMsg = "connectWifi:ok"
 		
-	// 	option.success
-		
-	// 	?.(result)
-	// 	option.complete?.(result)
-	// 	return 
-	// }
+		option.success?.(result)
+		option.complete?.(result)
+		return 
+	}
 	
 	// 执行后续的逻辑
 	let scanWifiInfo:UniWifiInfo|null = null
@@ -360,13 +429,14 @@ export function connectWifi(option: WifiConnectOption) {
 		return
 	}
 	
-	console.log(scanWifiInfo);
+	console.log(JSON.stringify(scanWifiInfo.securityType));
 	
-	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password);
+	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password,scanWifiInfo.securityType);
 	
 	let wifiManager: WifiManager =
-		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	
+	// 如果已经存在了指定wifi 配置，移除之
 	let targetExistConfig:WifiConfiguration|null = null
 	let existingConfigs = wifiManager.getConfiguredNetworks();
 	for (let existingConfig in existingConfigs) {
@@ -379,12 +449,24 @@ export function connectWifi(option: WifiConnectOption) {
 		wifiManager.removeNetwork(targetExistConfig.networkId);
 	}
 	
-	let netID = wifiManager.addNetwork(wifiConfigration);
-	let enabled = wifiManager.enableNetwork(netID, true);
-	let connected = wifiManager.reconnect();
+	try {
+		let netID = wifiManager.addNetwork(wifiConfigration);
+		let enabled = wifiManager.enableNetwork(netID, true);
+		let connected = wifiManager.reconnect();
+		console.log(enabled);
+		console.log(connected);
+	} catch (e) {
+		// TODO: handle exception
+		console.log(e);
+		// e.printStackTrace();
+		
+	}
 	
-	console.log(connected);
+	result.errCode = 0
+	result.errMsg = "connectWifi:ok"
 	
+	option.success?.(result)
+	option.complete?.(result)
 	
 	
 }
@@ -392,21 +474,21 @@ export function connectWifi(option: WifiConnectOption) {
 /**
  * 开启wifi
  */
+@Suppress("DEPRECATION")
 export function startWifi(option: WifiOption) {
-	
-	
 	
 	// 需要先开启wifi,才能使用后续的功能
 	let requestCode = 1001;
 	let permissionWifi = arrayOf("android.permission.ACCESS_FINE_LOCATION");
 	var result = {
 		errCode: 12001,
-		errMsg: "startWifi:premission loss"
+		errMsg: "startWifi:premission loss",
+		errSubject:"uni-startWifi"
 	}
 	// 检查权限
-	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-		ActivityCompat.requestPermissions(getUniActivity()!, permissionWifi, requestCode)
+		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, permissionWifi, requestCode)
 		// 尚不具备权限，返回错误
 		option.fail?.(result)
 		option.complete?.(result)
@@ -416,7 +498,7 @@ export function startWifi(option: WifiOption) {
 
 	// 具备了权限，继续前进
 	let wifiManager: WifiManager =
-		getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
+		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
 	if (Global.mReceiver == null) {
 		Global.mReceiver = new CustomBroadcastReceiver(wifiManager)
@@ -429,7 +511,27 @@ export function startWifi(option: WifiOption) {
 	// @ts-ignore
 	filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
 
-	getUniActivity()!.registerReceiver(Global.mReceiver, filter)
+	UTSAndroid.getUniActivity()!.registerReceiver(Global.mReceiver, filter)
+	
+	/**
+	 * activity 被销毁时，取消注册
+	 */
+	UTSAndroid.onAppActivityDestroy(function(){
+		
+		
+		if(Global.mReceiver!= null){
+			UTSAndroid.getUniActivity()!.unregisterReceiver(Global.mReceiver)
+			Global.mReceiver = null
+			
+			Global.scanList = []
+			Global.getWifiListCallbackList = []
+			Global.onWifiConnectCallbackList = []
+			console.log("UTSAndroid.getUniActivity()  ==  " + UTSAndroid.getUniActivity());
+			console.log("Global.mReceiver  ==  " + Global.mReceiver);
+		}
+		
+	});
+	
 	wifiManager.startScan()
 	result.errCode = 0
 	result.errMsg = "startWifi:ok"
@@ -456,8 +558,13 @@ export function stopWifi(option: WifiOption) {
 
 		return
 	}
-
-	getUniActivity()!.unregisterReceiver(Global.mReceiver)
+	try{
+		UTSAndroid.getUniActivity()!.unregisterReceiver(Global.mReceiver)
+	}catch(e){
+		// 多次调用
+		//TODO handle the exception
+	}
+	
 	var result = {
 		errNo: 0,
 		errCode: 0,
@@ -471,6 +578,7 @@ export function stopWifi(option: WifiOption) {
 /**
  * 获取当前连接中的wifi信息
  */
+@Suppress("DEPRECATION")
 export function getConnectedWifi(option: GetConnectedWifiOptions) {
 
 	let wifiInfo = new UniWifiInfo(null)
@@ -478,6 +586,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 	var res = {
 		errCode: 12000,
 		errMsg: "getConnectedWifi:fail:not invoke startWifi",
+		errSubject:"uni-getConnectedWifi",
 		wifi:wifiInfo
 	}
 
@@ -489,7 +598,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 		return
 	}
 	
-	if (ActivityCompat.checkSelfPermission(getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 		// 尚不具备权限，返回错误
 		res.errCode = 12001
 		res.errMsg = "getConnectedWifi:permission loss"
@@ -501,7 +610,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 
 	// TODO 应该try catch一下，把系统的错误码给返回来，然后和微信的错误码拉齐
 	// 需要先校验权限，没有位置权限无法获取wifi
-	const context = getAppContext();
+	const context = UTSAndroid.getAppContext();
 	if (context != null) {
 		const wm = context.getSystemService(
 			Context.WIFI_SERVICE

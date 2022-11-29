@@ -37,7 +37,7 @@
 			testConnnectWifi(){
 
 				uni.connectWifi({
-					partialInfo:false,
+					maunal:false,
 					SSID:"Xiaomi_20D0",
 					password:"BBBB",
 					complete:(res)=>{

@@ -1,4 +1,4 @@
-import { onAppTrimMemory, offAppTrimMemory ,onAppActivityDestroy} from "io.dcloud.uts.android"
+import { UTSAndroid } from "io.dcloud.uts"
 
 let listeners: UTSCallback[] = []
 
@@ -8,11 +8,13 @@ const onAppTrimMemoryListener = (res: number) => {
     })
 }
 
+
+@Suppress("DEPRECATION")
 export function onMemoryWarning(callback: (res: number) => void) {
-    if (listeners.length === 0) {
+    if (listeners.length == 0) {
 		// 仅首次执行底层的实际监听
-        onAppTrimMemory(onAppTrimMemoryListener)
-		onAppActivityDestroy(()=>{
+        UTSAndroid.onAppTrimMemory(onAppTrimMemoryListener)
+		UTSAndroid.onAppActivityDestroy(()=>{
 			// listeners 默认是静态常量周期，activity 销毁时，需要手动清空
 			listeners = []
 		})
@@ -20,12 +22,13 @@ export function onMemoryWarning(callback: (res: number) => void) {
     listeners.push(callback)
 }
 
+@Suppress("DEPRECATION")
 export function offMemoryWarning(callback: UTSCallback | null = null) {
 	
 	if(callback == null){
 		// 清除全部回调
 		listeners = []
-		offAppTrimMemory(null);
+		UTSAndroid.offAppTrimMemory(null);
 		return
 	}
 	
@@ -34,8 +37,8 @@ export function offMemoryWarning(callback: UTSCallback | null = null) {
     if (index > -1) {
         listeners.splice(index, 1)
     }
-    if (listeners.length === 0) {
+    if (listeners.length == 0) {
         // 当用户不再监听时，移除底层实际监听
-        offAppTrimMemory(onAppTrimMemoryListener)
+        UTSAndroid.offAppTrimMemory(onAppTrimMemoryListener)
     }
 }
