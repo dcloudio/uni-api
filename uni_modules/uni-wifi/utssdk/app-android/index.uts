@@ -137,7 +137,7 @@ class UniWifiInfo {
 	/*下面的字段属于扩展字段*/
 	securityType:string = ""
 
-	constructor(scanResult?: ScanResult) {
+	constructor(scanResult: ScanResult|null = null) {
 		if (scanResult != null) {
 			// 如果是通过扫描列表得到的数据，进行封装
 			this.BSSID = scanResult.BSSID;
