@@ -149,6 +149,7 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 					let bssid = BSSID! as string
 					wifiInfo.SSID = ssid
 					wifiInfo.BSSID = bssid
+					wifiInfo.secure = false
 					wifiInfo.signalStrength = 0
 					wifiInfo.frequency = 0
 					break;
@@ -177,7 +178,12 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 
 
 
-
+/* 
+ * 保存全局数据信息
+ */
+class GloabInfo {
+	static alreadyStartWifi: boolean
+}
 
 /* =================================== 对外暴露的接口 ==============================================*/
 
@@ -187,11 +193,12 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
  * 初始化wifi模块 
  */
 export function startWifi(option: WifiOption) {
+	GloabInfo.alreadyStartWifi = true
 	let res = {
-		errCode: 12001, 
-		errMsg: "system not support"
+		errCode: 0, 
+		errMsg: "startWifi: ok"
 	}
-	option.fail?.(res)
+	option.success?.(res)
 	option.complete?.(res)
 }
 
@@ -199,6 +206,7 @@ export function startWifi(option: WifiOption) {
  * 停止wifi模块 
  */
 export function stopWifi() {
+	GloabInfo.alreadyStartWifi = false
 	LocationPromiseService.promiseCompletionHandler = []	
 }
 
@@ -233,21 +241,39 @@ export function offGetWifiList(callback: UTSCallback) {
  * 获取当前连接的wifi信息
  */
 export function getConnectedWifi(option: GetConnectedWifiOptions) {
-	if (UIDevice.current.systemVersion >= "13.0") {
-		requestLocationPromise((success) => {
-			if (success == true) {
-				fetchConnectedWifiWithLocationPromise(option)
-			}else {
-				let res = {
-					errCode: 12010, 
-					errMsg: "have no location promise"
-				}
-				option.fail?.(res)
-				option.complete?.(res)
-			}
-		})
+	let wifiInfo = new UniWifiInfo()
+	wifiInfo.SSID = ""
+	wifiInfo.BSSID = ""
+	wifiInfo.secure = false
+	wifiInfo.signalStrength = 0
+	wifiInfo.frequency = 0
+	
+	if (GloabInfo.alreadyStartWifi == false) {
+		let res = {
+			errCode: 12000, 
+			errMsg: "not invoke startWifi",
+			wifi: wifiInfo
+		}
+		option.fail?.(res)
+		option.complete?.(res)
 	} else{
-		fetchConnectedWifiWithLocationPromise(option)
+		if (UIDevice.current.systemVersion >= "13.0") {
+			requestLocationPromise((success) => {
+				if (success == true) {
+					fetchConnectedWifiWithLocationPromise(option)
+				}else {
+					let res = {
+						errCode: 12010, 
+						errMsg: "have no location promise",
+						wifi: wifiInfo
+					}
+					option.fail?.(res)
+					option.complete?.(res)
+				}
+			})
+		} else{
+			fetchConnectedWifiWithLocationPromise(option)
+		}
 	}
 }
 
