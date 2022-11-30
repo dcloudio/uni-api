@@ -1,14 +1,14 @@
 {
   "id": "uni-memorywarning",
   "displayName": "uni-MemoryWarning",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "UTS 实现内存警告监听",
   "keywords": [
     "onMemoryWarning"
 ],
   "repository": "",
   "engines": {
-    "HBuilderX": "^3.6.9"
+    "HBuilderX": "^3.6.11"
   },
   "dcloudext": {
     "type": "uts",

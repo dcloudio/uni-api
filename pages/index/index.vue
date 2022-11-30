@@ -50,10 +50,18 @@
 					partialInfo:false,
 					complete:(res)=>{
 						console.log(res);
-						uni.showToast({
-							icon:'none',
-							title:res.wifi.SSID
-						})
+						if (res.errCode == 0) {
+							uni.showToast({
+								icon:'none',
+								title:res.wifi.SSID
+							})
+						} else{
+							uni.showToast({
+								icon:'none',
+								title:res.errMsg
+							})
+						}
+						
 					}
 				});
 			},
