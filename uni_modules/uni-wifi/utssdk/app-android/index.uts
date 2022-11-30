@@ -8,7 +8,6 @@ import ScanResult from "android.net.wifi.ScanResult";
 import BroadcastReceiver from "android.content.BroadcastReceiver";
 import ActivityCompat from "androidx.core.app.ActivityCompat";
 import IntentFilter from "android.content.IntentFilter";
-import Gson from "com.google.gson.Gson";
 import JSONObject from "com.alibaba.fastjson.JSONObject";
 import Intent from "android.content.Intent";
 import Thread from "java.lang.Thread";
@@ -89,13 +88,13 @@ function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string)
 	if ("NONE".equals(passwordType)) {
 		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
 	}
-	// // wep
+	// wep
 	if ("WEP".equals(passwordType)) {
 		if (!TextUtils.isEmpty(password)) {
 			if (isHexWepKey(password)) {
 				config.wepKeys[0] = password;
 			} else {
-				config.wepKeys[0] = "\"" + password + "\"";
+				config.wepKeys[0] = "\"".concat(password).concat("\"");
 			}
 		}
 		config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
@@ -105,20 +104,16 @@ function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string)
 	}
 	// wpa
 	if ("WPA".equals(passwordType)) {
-		config.preSharedKey = "\"" + password + "\"";
-		config.hiddenSSID = true;
-		config.allowedAuthAlgorithms
-				.set(WifiConfiguration.AuthAlgorithm.OPEN);
-		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
-		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
-		config.allowedPairwiseCiphers
-				.set(WifiConfiguration.PairwiseCipher.TKIP);
-		// 此处需要修改否则不能自动重联
+		config.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
 		config.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
+		config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+		config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+		config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
 		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
-		config.allowedPairwiseCiphers
-				.set(WifiConfiguration.PairwiseCipher.CCMP);
-		config.status = WifiConfiguration.Status.ENABLED;
+		config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+		config.preSharedKey = "\"".concat(password).concat("\"");
 	}
 	
 	return config;
@@ -443,6 +438,7 @@ export function connectWifi(option: WifiConnectOption) {
 		if (existingConfig.SSID.equals("\"" + option.SSID + "\"")) {
 			targetExistConfig = existingConfig
 		}
+		
 	}
 	
 	if (targetExistConfig != null) {
@@ -450,11 +446,14 @@ export function connectWifi(option: WifiConnectOption) {
 	}
 	
 	try {
+		console.log(wifiConfigration);
 		let netID = wifiManager.addNetwork(wifiConfigration);
+		console.log("netID  === " + netID);
 		let enabled = wifiManager.enableNetwork(netID, true);
+		console.log("enabled  === " + enabled);
 		let connected = wifiManager.reconnect();
-		console.log(enabled);
-		console.log(connected);
+		console.log("connected  === " + connected);
+	
 	} catch (e) {
 		// TODO: handle exception
 		console.log(e);
