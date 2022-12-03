@@ -86,6 +86,10 @@
 							console.log("onWifiConnected");
 							console.log(res);
 						});
+						uni.onWifiConnectedWithPartialInfo(function(res){
+							console.log("onWifiConnectedWithPartialInfo");
+							console.log(res);
+						});
 						
 					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));

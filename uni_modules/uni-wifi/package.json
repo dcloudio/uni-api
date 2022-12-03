@@ -39,7 +39,9 @@
 			"getWifiList":"getWifiList",
 			"onGetWifiList":"onGetWifiList",
 			"onWifiConnected":"onWifiConnected",
-			"connectWifi":"connectWifi"
+			"connectWifi":"connectWifi",
+			"onWifiConnectedWithPartialInfo":"onWifiConnectedWithPartialInfo",
+			"offWifiConnectedWithPartialInfo":"offWifiConnectedWithPartialInfo"
 		}
 	},
     "dependencies": [],
