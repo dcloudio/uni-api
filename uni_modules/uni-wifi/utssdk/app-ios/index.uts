@@ -181,7 +181,7 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 /* 
  * 保存全局数据信息
  */
-class GloabInfo {
+class UniWiFiModuleGloabInfo {
 	static alreadyStartWifi: boolean
 }
 
@@ -193,7 +193,7 @@ class GloabInfo {
  * 初始化wifi模块 
  */
 export function startWifi(option: WifiOption) {
-	GloabInfo.alreadyStartWifi = true
+	UniWiFiModuleGloabInfo.alreadyStartWifi = true
 	let res = {
 		errCode: 0, 
 		errMsg: "startWifi: ok"
@@ -206,7 +206,7 @@ export function startWifi(option: WifiOption) {
  * 停止wifi模块 
  */
 export function stopWifi() {
-	GloabInfo.alreadyStartWifi = false
+	UniWiFiModuleGloabInfo.alreadyStartWifi = false
 	LocationPromiseService.promiseCompletionHandler = []	
 }
 
@@ -248,7 +248,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 	wifiInfo.signalStrength = 0
 	wifiInfo.frequency = 0
 	
-	if (GloabInfo.alreadyStartWifi == false) {
+	if (UniWiFiModuleGloabInfo.alreadyStartWifi == false) {
 		let res = {
 			errCode: 12000, 
 			errMsg: "not invoke startWifi",
