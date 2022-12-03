@@ -45,6 +45,7 @@ type WifiConnectOption = {
 	BSSID:string;
 	password:string;
 	maunal:boolean;
+	// 只返回ssid
 	partialInfo:boolean;
 	success?: (res: object) => void;
 	fail?: (res: object) => void;
@@ -157,9 +158,27 @@ class UniWifiInfo {
 		//Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
 		this.signalStrength = connectInfo.getRssi() + 100; 
 		this.frequency = connectInfo.getFrequency();
-
 	}
 	
+	
+	// toUTSJSON(partialInfo:boolean):UTSJSONObject{
+	// 	if(partialInfo){
+			
+	// 		var retWifi = {
+	// 			SSID:this.SSID
+	// 		}
+	// 		return retWifi
+	// 	}else{
+	// 		var retWifi = {
+	// 			SSID:this.SSID,
+	// 			BSSID:this.BSSID,
+	// 			secure:this.secure,
+	// 			signalStrength:this.signalStrength,
+	// 			frequency:this.frequency
+	// 		}
+	// 		return retWifi
+	// 	}
+	// }
 	
 }
 
@@ -170,13 +189,13 @@ class UniWifiInfo {
 function wrapWifiConfiguration(SSID:string ,password:string,passwordType:string):WifiConfiguration {
 		
 	let config = new WifiConfiguration();
-	
+	config.status = WifiConfiguration.Status.ENABLED;
 	config.allowedAuthAlgorithms.clear();
 	config.allowedGroupCiphers.clear();
 	config.allowedKeyManagement.clear();
 	config.allowedPairwiseCiphers.clear();
 	config.allowedProtocols.clear();
-	config.SSID = "\"" + SSID + "\"";
+	config.SSID = "\"".concat(SSID).concat("\"");
 	
 	
 	// nopass
@@ -503,7 +522,7 @@ export function connectWifi(option: WifiConnectOption) {
 	var result = {
 		errCode: 12000,
 		errMsg: "connectWifi:fail:not invoke startWifi",
-		errSubject:"uni-connectWifi"
+		errSubject:"uni-connectWifi",
 	}
 	
 	if (Global.mReceiver == null || Global.scanList.length < 1) {
@@ -540,15 +559,13 @@ export function connectWifi(option: WifiConnectOption) {
 		// 不在扫描列表中返回错误
 		option.fail?.(result)
 		option.complete?.(result)
-		
 		return
 	}
 	
-	console.log(JSON.stringify(scanWifiInfo.securityType));
-	
-	let wifiConfigration = wrapWifiConfiguration(option.SSID,option.password,scanWifiInfo.securityType);
-	
-	console.log("wifiConfigration  == " + wifiConfigration);
+	let wifiConfigration = wrapWifiConfiguration(scanWifiInfo.SSID,option.password,scanWifiInfo.securityType);
+	wifiConfigration.BSSID = scanWifiInfo.BSSID
+	console.log("option.password === " + option.password);
+	console.log("wifiConfigration.BSSID === " + wifiConfigration.BSSID);
 	let wifiManager: WifiManager =
 		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	
@@ -556,35 +573,45 @@ export function connectWifi(option: WifiConnectOption) {
 	let targetExistConfig:WifiConfiguration|null = null
 	let existingConfigs = wifiManager.getConfiguredNetworks();
 	for (let existingConfig in existingConfigs) {
-		
 		if (existingConfig.SSID.equals("\"" + option.SSID + "\"")) {
 			targetExistConfig = existingConfig
 		}
 	}
 	// 如果wifi已经保存了当前ssid的配置，可能是别的应用添加的。android系统要求，需要删除掉重新添加
-	console.log("targetExistConfig  == " + targetExistConfig);
 	if (targetExistConfig != null) {
-		wifiManager.removeNetwork(targetExistConfig.networkId);
+		console.log("targetExistConfig.networkId  === " + targetExistConfig.networkId);
+		let removeRet = wifiManager.removeNetwork(targetExistConfig.networkId);
+		
+		if(!removeRet){
+			// 移除之前的配置失败了，返回错误，需要用户手动取消保存一下
+			result.errCode = 12013
+			result.errMsg = "connectWifi:wifi config may be expired"
+			
+			option.fail?.(result)
+			option.complete?.(result)
+			
+			return
+		}
+		
 	}
+	
+	let currentConnect = wifiManager.getConnectionInfo()
+	if(currentConnect.networkId >= 0){
+	    wifiManager.disableNetwork(currentConnect.networkId)
+	}else{
+		wifiManager.removeNetwork(currentConnect.networkId)
+	}
+	wifiManager.disconnect()
 	
 	let connected = false;
 	try {
 		
-		let currentConnect =  wifiManager.getConnectionInfo()
-		
-		if(currentConnect.networkId >= 0){
-		    wifiManager.disableNetwork(currentConnect.networkId)
-		}
-		wifiManager.disconnect()
-		
-		console.log("wifiConfigration" + wifiConfigration);
 		let netID = wifiManager.addNetwork(wifiConfigration);
 		// 如果-1 说明没添加上，报错即可
-		console.log("netID  === " + netID);
 		if(netID < 0){
 			result.errCode = 12002
 			result.errMsg = "connectWifi:password error Wi-Fi"
-			
+
 			option.fail?.(result)
 			option.complete?.(result)
 			
@@ -593,15 +620,22 @@ export function connectWifi(option: WifiConnectOption) {
 		
 	
 		let enabled = wifiManager.enableNetwork(netID, true);
-		console.log("enabled  === " + enabled);
+		if(!enabled){
+		
+			result.errCode = 12007
+			result.errMsg = "connectWifi:user denied"
+			
+			option.fail?.(result)
+			option.complete?.(result)
+			
+			return
+		}
 		connected = wifiManager.reconnect();
-		console.log("connected  === " + connected);
 		
 	} catch (e) {
 		connected = false;
 		console.log(e);
 	}
-	
 	
 	if(!connected){
 		// 出错了，返回错误
@@ -614,12 +648,22 @@ export function connectWifi(option: WifiConnectOption) {
 		return 
 	}
 	
+	wifiManager.saveConfiguration()
+	//scanWifiInfo 根据 partialInfo 填充给返回字段
+	if(option.partialInfo){
+		result['wifi'] = {
+			SSID:scanWifiInfo.SSID
+		}
+	}else{
+		result['wifi'] = scanWifiInfo
+	}
+	
+	// result.wifi = scanWifiInfo.toUTSJSON(option.partialInfo)
 	result.errCode = 0
 	result.errMsg = "connectWifi:ok"
 	
 	option.success?.(result)
 	option.complete?.(result)
-	
 	
 }
 
@@ -700,9 +744,20 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 		// 测试android 12上可以使用
 		//@ts-ignore
 		const winfo = wm.getConnectionInfo();
+		
+		
+		// 判断一下是否wifi 关闭了
 		// 封装成数据对象
 		wifiInfo.wrapConnectInfo(winfo);
 
+		if(wifiInfo.BSSID == null || zeroCountNum(wifiInfo.BSSID) > 3){
+			res.errCode = 12005
+			res.errMsg = "getConnectedWifi:fail:wifi is disable"
+			res.wifi = wifiInfo;
+			option.fail?.(res)
+			option.complete?.(res)
+			return
+		}
 		res.errCode = 0
 		res.errMsg = "getConnectedWifi:ok"
 		res.wifi = wifiInfo;

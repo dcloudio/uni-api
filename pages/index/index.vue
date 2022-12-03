@@ -46,6 +46,7 @@
 				// });
 				uni.connectWifi({
 					maunal:false,
+					partialInfo:false,
 					SSID:"Xiaomi_20D0",
 					password:"streamApp!2016",
 					complete:(res)=>{
