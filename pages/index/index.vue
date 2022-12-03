@@ -36,10 +36,18 @@
 			},
 			testConnnectWifi(){
 
+				// uni.connectWifi({
+				// 	maunal:false,
+				// 	SSID:"Xiaomi_20D0",
+				// 	password:"BBBB",
+				// 	complete:(res)=>{
+				// 		console.log(res);
+				// 	}
+				// });
 				uni.connectWifi({
 					maunal:false,
 					SSID:"Xiaomi_20D0",
-					password:"BBBB",
+					password:"streamApp!2016",
 					complete:(res)=>{
 						console.log(res);
 					}
