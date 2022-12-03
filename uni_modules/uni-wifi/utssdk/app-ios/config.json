@@ -3,7 +3,6 @@
 		"CoreLocation",
 		"SystemConfiguration"
 	],
-	"deploymentTarget": "9.0",
-	"validArchitectures": [   
-		"arm64", "armv7" ]   
+	"validArchitectures": [
+		"arm64", "armv7" ]
 }
