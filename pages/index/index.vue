@@ -36,23 +36,15 @@
 			},
 			testConnnectWifi(){
 
-				// uni.connectWifi({
-				// 	maunal:false,
-				// 	SSID:"Xiaomi_20D0",
-				// 	password:"BBBB",
-				// 	complete:(res)=>{
-				// 		console.log(res);
-				// 	}
-				// });
 				uni.connectWifi({
 					maunal:false,
-					partialInfo:false,
 					SSID:"Xiaomi_20D0",
-					password:"streamApp!2016",
+					password:"BBBB",
 					complete:(res)=>{
 						console.log(res);
 					}
 				});
+				
 			},
 			testGetConnnectWifi(){
 				uni.getConnectedWifi({
@@ -190,6 +182,7 @@
 			testGetBatteryInfo() {
 				uni.getBatteryInfo({
 					success(res) {
+						console.log(res);
 						uni.showToast({
 							title: "当前电量：" + res.level + '%',
 							icon: 'none'

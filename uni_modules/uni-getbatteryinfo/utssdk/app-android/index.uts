@@ -19,6 +19,8 @@ export default function getBatteryInfo(options: GetBatteryInfoOptions) {
             BatteryManager.BATTERY_PROPERTY_CAPACITY
         );
         const res = {
+			errSubject: "uni-getBatteryInfo",
+			errCode: 0, 
             errMsg: 'getBatteryInfo:ok',
             level,
             isCharging: manager.isCharging()
@@ -27,6 +29,8 @@ export default function getBatteryInfo(options: GetBatteryInfoOptions) {
         options.complete?.(res)
     } else {
         const res = {
+			errSubject: "uni-getBatteryInfo",
+			errCode: 1001, 
             errMsg: 'getBatteryInfo:fail getAppContext is null'
         }
         options.fail?.(res)
