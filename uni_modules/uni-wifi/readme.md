@@ -73,6 +73,27 @@ Object object
 
 获取已连接的 Wi-Fi 信息。
 
+#### 参数
+
+Object object
+
+|属性		|类型		|默认值	|必填												|说明						|
+|---		|----		|------	|----												|---						|
+|partialInfo|boolean	|false	|否													|是否需要返回部分 Wi-Fi 信息|
+|success	|function	|		|否													|接口调用成功的回调函数		|
+|fail		|function	|		|否													|接口调用失败的回调函数		|
+|complete	|function	|		|否													|接口调用结束的回调函数（调用成功、失败都会执行）|
+
+
+
+
+### uni.getWifiList
+
+请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
+
+
+
+#### 参数
 
 Object object
 
@@ -85,10 +106,6 @@ Object object
 
 
 
-### uni.getWifiList
-
-请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
-
 **平台差异说明**
 
 |App-Android|App-iOS|
@@ -99,6 +116,23 @@ Object object
 ### uni.onGetWifiList
 
 监听获取到 Wi-Fi 列表数据事件。
+
+#### 参数
+
+function listener
+
+获取到 Wi-Fi 列表数据事件的监听函数
+
+
+#### 参数
+
+Object res
+
+|属性		|类型				|说明			|
+|--			|---				|--				|
+|wifiList	|Array.<WifiInfo>	|Wi-Fi 列表数据	|
+
+
 
 **平台差异说明**
 
@@ -111,6 +145,13 @@ Object object
 
 移除获取到 Wi-Fi 列表数据事件的监听函数。
 
+#### 参数
+
+function listener
+
+onGetWifiList 传入的监听函数。不传此参数则移除所有监听函数。
+
+
 **平台差异说明**
 
 |App-Android|App-iOS|
@@ -122,6 +163,21 @@ Object object
 
 连接 Wi-Fi。若已知 Wi-Fi 信息，可以直接利用该接口连接。
 
+#### 参数
+
+Object object
+
+|属性	|类型		|默认值		|必填	|说明	|最低版本											|
+|---	|---		|---		|---	|---	|-----												|
+|SSID	|string		|			|是		|Wi-Fi 设备 SSID|													|
+|BSSID	|string		|			|否		|Wi-Fi 设备 BSSID|													|
+|password	|string		|			|是		|Wi-Fi 设备密码|													|
+|maunal	|boolean	|false		|否		|跳转到系统设置页进行连接|2.12.0												|
+|partialInfo	|boolean	|false		|否		|是否需要返回部分 Wi-Fi 信息，仅安卓生效|2.22.0												|
+|success	|function	|			|否		|接口调用成功的回调函数|													|
+|fail	|function	|			|否		|接口调用失败的回调函数|													|
+|complete	|function	|		|否		|接口调用结束的回调函数（调用成功、失败都会执行）	|
+
 **平台差异说明**
 
 |App-Android|App-iOS|
@@ -131,7 +187,24 @@ Object object
 
 ### uni.onWifiConnected
 
+
 监听连接上 Wi-Fi 的事件。
+
+#### 参数
+
+function listener
+
+连接上 Wi-Fi 的事件的监听函数
+
+#### 参数
+
+Object res
+
+
+|属性	|类型		|说明		|
+|---	|---		|---		|
+|wifi	|WifiInfo	|Wi-Fi 信息	|
+
 
 **平台差异说明**
 
@@ -144,6 +217,14 @@ Object object
 
 移除连接上wifi的事件的监听函数，不传此参数则移除所有监听函数。
 
+
+#### 参数
+
+function listener
+
+onWifiConnected 传入的监听函数。不传此参数则移除所有监听函数。
+
+
 **平台差异说明**
 
 |App-Android|App-iOS|
@@ -155,21 +236,19 @@ Object object
 
 监听连接上 Wi-Fi 的事件， wifiInfo仅包含SSID。
 
-**平台差异说明**
+#### 参数
 
-|App-Android|App-iOS|
-|:-:|:-:|
-|√|x|
+function listener
 
+onWifiConnectedWithPartialInfo 传入的监听函数。不传此参数则移除所有监听函数。
 
-### uni.onOffWifiConnectedWithPartialInfo
-
-移除连接上 Wi-Fi 的事件的监听函数，不传参数则移除所有监听函数。
 
 **平台差异说明**
 
 |App-Android|App-iOS|
 |:-:|:-:|
 |√|x|
+
+
 
 
