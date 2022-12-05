@@ -12,12 +12,10 @@ Wi-Fi功能模块
 - 如果是自定义基座，需要具备下面的权限
 
 ```
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
- 
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 ```
 
 
@@ -101,9 +99,9 @@ Object object
 
 |属性|类型|默认值|必填|说明|
 |---|----|------|----|---|
-|success|function|否|接口调用成功的回调函数|
-|fail|function|否|接口调用失败的回调函数|
-|complete|function|否|接口调用结束的回调函数（调用成功、失败都会执行）|
+|success|function||否|接口调用成功的回调函数|
+|fail|function||否|接口调用失败的回调函数|
+|complete|function||否|接口调用结束的回调函数（调用成功、失败都会执行）|
 
 
 
@@ -132,7 +130,7 @@ Object res
 
 |属性		|类型				|说明			|
 |--			|---				|--				|
-|wifiList	|Array.<WifiInfo>	|Wi-Fi 列表数据	|
+|wifiList	|Array<WifiInfo>	|Wi-Fi 列表数据	|
 
 
 

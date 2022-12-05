@@ -59,7 +59,9 @@
           "app-android": {
             "minVersion": "19"
         },
-          "app-ios": "n"
+          "app-ios": {
+            "minVersion": "9"
+        }
         },
         "H5-mobile": {
           "Safari": "n",
