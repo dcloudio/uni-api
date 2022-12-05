@@ -142,6 +142,7 @@ class UniWifiInfo {
 	 * 根据connectInfo 链接信息对wifi数据结构进行初始化
 	 */
 	wrapConnectInfo(connectInfo: WifiInfo): void {
+		
 		if (connectInfo.getBSSID() == null) {
 			return
 		}
@@ -153,32 +154,14 @@ class UniWifiInfo {
 			}
 			this.SSID = s;
 		}
-
-		this.BSSID = connectInfo.getBSSID();
-		//Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
-		this.signalStrength = connectInfo.getRssi() + 100; 
-		this.frequency = connectInfo.getFrequency();
+			
+			this.BSSID = connectInfo.getBSSID();
+			//Android返回的值是-100~0，而微信API规范是0~100，值越大信号越好，需要+100拉齐
+			this.signalStrength = connectInfo.getRssi() + 100; 
+			this.frequency = connectInfo.getFrequency();
+		
 	}
 	
-	
-	// toUTSJSON(partialInfo:boolean):UTSJSONObject{
-	// 	if(partialInfo){
-			
-	// 		var retWifi = {
-	// 			SSID:this.SSID
-	// 		}
-	// 		return retWifi
-	// 	}else{
-	// 		var retWifi = {
-	// 			SSID:this.SSID,
-	// 			BSSID:this.BSSID,
-	// 			secure:this.secure,
-	// 			signalStrength:this.signalStrength,
-	// 			frequency:this.frequency
-	// 		}
-	// 		return retWifi
-	// 	}
-	// }
 	
 }
 
@@ -564,8 +547,6 @@ export function connectWifi(option: WifiConnectOption) {
 	
 	let wifiConfigration = wrapWifiConfiguration(scanWifiInfo.SSID,option.password,scanWifiInfo.securityType);
 	wifiConfigration.BSSID = scanWifiInfo.BSSID
-	console.log("option.password === " + option.password);
-	console.log("wifiConfigration.BSSID === " + wifiConfigration.BSSID);
 	let wifiManager: WifiManager =
 		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 	
@@ -713,7 +694,6 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 		errCode: 12000,
 		errMsg: "getConnectedWifi:fail:not invoke startWifi",
 		errSubject:"uni-getConnectedWifi",
-		wifi:wifiInfo
 	}
 
 	if (Global.mReceiver == null) {
@@ -746,21 +726,29 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 		const winfo = wm.getConnectionInfo();
 		
 		
-		// 判断一下是否wifi 关闭了
-		// 封装成数据对象
+		console.log("option.partialInfo  === " + option.partialInfo);
 		wifiInfo.wrapConnectInfo(winfo);
-
-		if(wifiInfo.BSSID == null || zeroCountNum(wifiInfo.BSSID) > 3){
-			res.errCode = 12005
-			res.errMsg = "getConnectedWifi:fail:wifi is disable"
-			res.wifi = wifiInfo;
-			option.fail?.(res)
-			option.complete?.(res)
-			return
+		// 判断一下是否wifi 关闭了
+		if(option.partialInfo!){
+			let ret = {
+				SSID : wifiInfo.SSID
+			}
+			res['wifi'] = ret;
+		}else{
+			if(wifiInfo.BSSID == null || zeroCountNum(wifiInfo.BSSID) > 3){
+				res.errCode = 12005
+				res.errMsg = "getConnectedWifi:fail:wifi is disable"
+				
+				option.fail?.(res)
+				option.complete?.(res)
+				return
+			}
+			res['wifi'] = wifiInfo;
 		}
+		
 		res.errCode = 0
 		res.errMsg = "getConnectedWifi:ok"
-		res.wifi = wifiInfo;
+		
 		option.success?.(res)
 		option.complete?.(res)
 		return
