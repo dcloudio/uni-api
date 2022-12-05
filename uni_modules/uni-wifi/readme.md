@@ -251,4 +251,32 @@ onWifiConnectedWithPartialInfo 传入的监听函数。不传此参数则移除�
 
 
 
+### WifiInfo
+
+Wifi 信息
+
+#### 属性
+
++ string SSID
+
+Wi-Fi 的 SSID
+
++ string BSSID
+
+Wi-Fi 的 BSSID
+
++ boolean secure
+
+Wi-Fi 是否安全
+
++ number signalStrength
+
+Wi-Fi 信号强度, 安卓取值 0 ～ 100 
+
++ number frequency
+
+Wi-Fi 频段单位 MHz
+
+
+
 
