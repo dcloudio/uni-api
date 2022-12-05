@@ -27,9 +27,11 @@ Wi-Fi功能模块
 |错误码	|错误信息					|说明																|
 |---	|----						|------																|
 |0		|ok							|正常																|
-|12000	|not init					|未先调用 startWifi 接口											    |
+|12000	|not init					|未先调用 startWifi 接口											|
+|12001	|system not support			|当前系统不支持相关能力												|
 |12002	|password error Wi-Fi		|密码错误															|
-|12013	|wifi config may be expired	|系统保存的 Wi-Fi 配置过期，建议忘记 Wi-Fi 后重试，仅 Android 支持	    |
+|12005	|wifi not turned on			|Android 特有，未打开 Wi-Fi 开关									|
+|12013	|wifi config may be expired	|系统保存的 Wi-Fi 配置过期，建议忘记 Wi-Fi 后重试，仅 Android 支持	|
 
 
 
