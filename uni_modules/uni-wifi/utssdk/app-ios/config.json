@@ -1,0 +1,8 @@
+{
+	"frameworks": [
+		"CoreLocation",
+		"SystemConfiguration"
+	],
+	"validArchitectures": [
+		"arm64", "armv7" ]
+}

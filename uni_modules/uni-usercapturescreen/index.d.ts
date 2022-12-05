@@ -1,6 +1,6 @@
 type OnUserCaptureScreenCallback = (res?: { errMsg: string }) => void
 
-declare class Uni {
+declare interface Uni {
   /**
    * 监听用户主动截屏事件，用户使用系统截屏按键截屏时触发此事件。
    *

@@ -1,0 +1,56 @@
+import { NotificationCenter } from 'Foundation';
+import { UIApplication } from "UIKit"
+import { Selector } from "ObjectiveC"
+
+class MemoryWarningTool {
+	static listeners: UTSCallback[] = []
+	
+	// 监听内存警告
+	static listenMemoryWarning(callback: UTSCallback) {
+		
+		// 只有首次才需要注册监听事件
+		if (this.listeners.length == 0) {
+			// 注册监听内存警告通知事件及设置回调方法
+			// target-action 回调方法需要通过 Selector("方法名") 构建
+			const method = Selector("receiveMemoryWarning")
+			NotificationCenter.default.addObserver(this, selector = method, name = UIApplication.didReceiveMemoryWarningNotification, object = null)
+		}
+		this.listeners.push(callback)
+	}
+	
+	// 内存警告回调的方法
+	// target-action 的方法前需要添加 @objc 前缀
+	@objc static receiveMemoryWarning() {
+		// 触发回调
+		this.listeners.forEach(listener => {
+			listener({})
+		})
+	}
+	
+	// 移除监听事件
+	static removeListen(callback: UTSCallback | null) {
+		// 移除所有监听
+		if (callback == null) {
+			this.listeners = []
+			// 移除监听事件
+			NotificationCenter.default.removeObserver(this)
+			return
+		}
+		
+		// 清除指定回调
+		const index = this.listeners.indexOf(callback!)
+		if (index > -1) {
+		    this.listeners.splice(index, 1)
+		}
+	}
+}
+
+// 开启监听内存警告
+export function onMemoryWarning(callback: UTSCallback) {
+	MemoryWarningTool.listenMemoryWarning(callback)
+}
+
+// 关闭监听内存警告
+export function offMemoryWarning(callback: UTSCallback | null) {
+	MemoryWarningTool.removeListen(callback)
+}
