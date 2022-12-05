@@ -25,7 +25,7 @@ interface GetBatteryInfoOption {
   success?: (result: GetBatteryInfoSuccessCallbackResult) => void
 }
 
-declare class Uni {
+declare interface Uni {
   /**
    * 获取设备电量
    *
