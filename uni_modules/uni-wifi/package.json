@@ -24,9 +24,9 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "Android平台：\n<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>\n<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>\n<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>\n<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>\niOS平台：\niOS13及以上平台获取Wifi信息需要定位权限"
     },
     "npmurl": ""
   },
@@ -50,45 +50,49 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "y",
+        "aliyun": "y"
       },
       "client": {
         "Vue": {
-          "vue2": "u",
-          "vue3": "u"
+          "vue2": "y",
+          "vue3": "y"
         },
         "App": {
-          "app-android": "u",
-          "app-ios": "u"
+          "app-android": {
+            "minVersion": "19"
+        },
+          "app-ios": {
+            "minVersion": "9"
+        }
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "n",
+          "Android Browser": "n",
+          "微信浏览器(Android)": "n",
+          "QQ浏览器(Android)": "n"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "n",
+          "IE": "n",
+          "Edge": "n",
+          "Firefox": "n",
+          "Safari": "n"
         },
         "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u",
-          "钉钉": "u",
-          "快手": "u",
-          "飞书": "u",
-          "京东": "u"
+          "微信": "n",
+          "阿里": "n",
+          "百度": "n",
+          "字节跳动": "n",
+          "QQ": "n",
+          "钉钉": "n",
+          "快手": "n",
+          "飞书": "n",
+          "京东": "n"
         },
         "快应用": {
-          "华为": "u",
-          "联盟": "u"
+          "华为": "n",
+          "联盟": "n"
         }
       }
     }

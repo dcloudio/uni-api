@@ -19,92 +19,32 @@ Wi-Fi功能模块
 ```
 
 
-### 公共错误代码
-
-
-|错误码	|错误信息					|说明																|
-|---	|----						|------																|
-|0		|ok							|正常																|
-|12000	|not init					|未先调用 startWifi 接口											|
-|12001	|system not support			|当前系统不支持相关能力												|
-|12002	|password error Wi-Fi		|密码错误															|
-|12005	|wifi not turned on			|Android 特有，未打开 Wi-Fi 开关									|
-|12013	|wifi config may be expired	|系统保存的 Wi-Fi 配置过期，建议忘记 Wi-Fi 后重试，仅 Android 支持	|
-
-
-
-
-### uni.startWifi
+###uni.startWifi(OBJECT)
 
 初始化Wi-Fi模块。
 
-
-#### 参数
-
-Object object
-
-|属性|类型|默认值|必填|说明|
-|---|----|------|----|---|
-|success|function|否|接口调用成功的回调函数|
-|fail|function|否|接口调用失败的回调函数|
-|complete|function|否|接口调用结束的回调函数（调用成功、失败都会执行）|
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi](https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi)
 
 
-
-
-### uni.stopWifi
+### uni.stopWifi(OBJECT)
 
 关闭 Wi-Fi 模块。
 
-
-#### 参数
-
-Object object
-
-|属性|类型|默认值|必填|说明|
-|---|----|------|----|---|
-|success|function|否|接口调用成功的回调函数|
-|fail|function|否|接口调用失败的回调函数|
-|complete|function|否|接口调用结束的回调函数（调用成功、失败都会执行）|
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi](https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi)
 
 
+### uni.getConnectedWifi(OBJECT)
 
-### uni.getConnectedWifi
+获取已连接的 Wi-Fi 信息
 
-获取已连接的 Wi-Fi 信息。
-
-#### 参数
-
-Object object
-
-|属性		|类型		|默认值	|必填												|说明						|
-|---		|----		|------	|----												|---						|
-|partialInfo|boolean	|false	|否													|是否需要返回部分 Wi-Fi 信息|
-|success	|function	|		|否													|接口调用成功的回调函数		|
-|fail		|function	|		|否													|接口调用失败的回调函数		|
-|complete	|function	|		|否													|接口调用结束的回调函数（调用成功、失败都会执行）|
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#getconnectedwifi](https://uniapp.dcloud.net.cn/api/system/wifi.html#getconnectedwifi)
 
 
-
-
-### uni.getWifiList
+### uni.getWifiList(OBJECT)
 
 请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
 
-
-
-#### 参数
-
-Object object
-
-|属性|类型|默认值|必填|说明|
-|---|----|------|----|---|
-|success|function||否|接口调用成功的回调函数|
-|fail|function||否|接口调用失败的回调函数|
-|complete|function||否|接口调用结束的回调函数（调用成功、失败都会执行）|
-
-
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#getWifiList](https://uniapp.dcloud.net.cn/api/system/wifi.html#getWifiList)
 
 **平台差异说明**
 
@@ -113,26 +53,11 @@ Object object
 |√|x|
 
 
-### uni.onGetWifiList
+### uni.onGetWifiList(CALLBACK)
 
 监听获取到 Wi-Fi 列表数据事件。
 
-#### 参数
-
-function listener
-
-获取到 Wi-Fi 列表数据事件的监听函数
-
-
-#### 参数
-
-Object res
-
-|属性		|类型				|说明			|
-|--			|---				|--				|
-|wifiList	|Array<WifiInfo>	|Wi-Fi 列表数据	|
-
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList](https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList)
 
 **平台差异说明**
 
@@ -141,16 +66,11 @@ Object res
 |√|x|
 
 
-### uni.offGetWifiList
+### uni.offGetWifiList(CALLBACK)
 
 移除获取到 Wi-Fi 列表数据事件的监听函数。
 
-#### 参数
-
-function listener
-
-onGetWifiList 传入的监听函数。不传此参数则移除所有监听函数。
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList](https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList)
 
 **平台差异说明**
 
@@ -159,24 +79,11 @@ onGetWifiList 传入的监听函数。不传此参数则移除所有监听函数
 |√|x|
 
 
-### uni.connectWifi
+### uni.connectWifi(OBJECT)
 
 连接 Wi-Fi。若已知 Wi-Fi 信息，可以直接利用该接口连接。
 
-#### 参数
-
-Object object
-
-|属性	|类型		|默认值		|必填	|说明	|最低版本											|
-|---	|---		|---		|---	|---	|-----												|
-|SSID	|string		|			|是		|Wi-Fi 设备 SSID|													|
-|BSSID	|string		|			|否		|Wi-Fi 设备 BSSID|													|
-|password	|string		|			|是		|Wi-Fi 设备密码|													|
-|maunal	|boolean	|false		|否		|跳转到系统设置页进行连接|2.12.0												|
-|partialInfo	|boolean	|false		|否		|是否需要返回部分 Wi-Fi 信息，仅安卓生效|2.22.0												|
-|success	|function	|			|否		|接口调用成功的回调函数|													|
-|fail	|function	|			|否		|接口调用失败的回调函数|													|
-|complete	|function	|		|否		|接口调用结束的回调函数（调用成功、失败都会执行）	|
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi](https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi)
 
 **平台差异说明**
 
@@ -185,26 +92,11 @@ Object object
 |√|x|
 
 
-### uni.onWifiConnected
-
+### uni.onWifiConnected(CALLBACK)
 
 监听连接上 Wi-Fi 的事件。
 
-#### 参数
-
-function listener
-
-连接上 Wi-Fi 的事件的监听函数
-
-#### 参数
-
-Object res
-
-
-|属性	|类型		|说明		|
-|---	|---		|---		|
-|wifi	|WifiInfo	|Wi-Fi 信息	|
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected](https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected)
 
 **平台差异说明**
 
@@ -213,17 +105,11 @@ Object res
 |√|x|
 
 
-### uni.offWifiConnected
+### uni.offWifiConnected(CALLBACK)
 
-移除连接上wifi的事件的监听函数，不传此参数则移除所有监听函数。
+移除连接上 Wi-Fi 的事件的监听函数。
 
-
-#### 参数
-
-function listener
-
-onWifiConnected 传入的监听函数。不传此参数则移除所有监听函数。
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected](https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected)
 
 **平台差异说明**
 
@@ -232,16 +118,11 @@ onWifiConnected 传入的监听函数。不传此参数则移除所有监听函�
 |√|x|
 
 
-### uni.onWifiConnectedWithPartialInfo
+### uni.onWifiConnectedWithPartialInfo(CALLBACK)
 
-监听连接上 Wi-Fi 的事件， wifiInfo仅包含SSID。
+监听连接上 Wi-Fi 的事件。
 
-#### 参数
-
-function listener
-
-onWifiConnectedWithPartialInfo 传入的监听函数。不传此参数则移除所有监听函数。
-
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo](https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo)
 
 **平台差异说明**
 
@@ -250,33 +131,15 @@ onWifiConnectedWithPartialInfo 传入的监听函数。不传此参数则移除�
 |√|x|
 
 
+### uni.offWifiConnectedWithPartialInfo(CALLBACK)
 
-### WifiInfo
+移除连接上 Wi-Fi 的事件的监听函数。
 
-Wifi 信息
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnectedWithPartialInfo](https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnectedWithPartialInfo)
 
-#### 属性
+**平台差异说明**
 
-+ string SSID
-
-Wi-Fi 的 SSID
-
-+ string BSSID
-
-Wi-Fi 的 BSSID
-
-+ boolean secure
-
-Wi-Fi 是否安全
-
-+ number signalStrength
-
-Wi-Fi 信号强度, 安卓取值 0 ～ 100 
-
-+ number frequency
-
-Wi-Fi 频段单位 MHz
-
-
-
+|App-Android|App-iOS|
+|:-:|:-:|
+|√|x|
 
