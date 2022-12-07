@@ -1,4 +1,6 @@
-type OnUserCaptureScreenCallback = (res?: { errMsg: string }) => void
+declare namespace UniNamespace {
+  type OnUserCaptureScreenCallback = (res?: { errMsg: string }) => void
+}
 
 declare interface Uni {
   /**
@@ -6,11 +8,11 @@ declare interface Uni {
    *
    * 文档: [https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen](https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen)
    */
-  onUserCaptureScreen(callback: OnUserCaptureScreenCallback): void;
+  onUserCaptureScreen(callback: UniNamespace.OnUserCaptureScreenCallback): void;
   /**
    * 用户主动截屏事件。取消事件监听。
    *
    * 文档: [https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen](https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen)
    */
-  offUserCaptureScreen(callback: OnUserCaptureScreenCallback): void;
+  offUserCaptureScreen(callback: UniNamespace.OnUserCaptureScreenCallback): void;
 }
