@@ -21,6 +21,8 @@ export default function getBatteryInfo(options: GetBatteryInfoOptions) {
 	
 	// 返回数据
     const res = {
+		errCode: 0,
+		errSubject: "uni-getBatteryInfo",
         errMsg: "getBatteryInfo:ok",
         level: new Int(UIDevice.current.batteryLevel * 100),
         isCharging: UIDevice.current.batteryState == UIDevice.BatteryState.charging,
