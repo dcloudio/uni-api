@@ -6,6 +6,8 @@
 		</view>
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
+		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
+		
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
@@ -25,6 +27,8 @@
 			return {
 				title: 'Hello',
 				memListener:null,
+				setUserCaptureScreenFlag: true,
+				setUserCaptureScreenText: '禁止截屏'
 			}
 		},
 		onLoad() {
@@ -189,6 +193,31 @@
 						});
 					}
 				})
+			},
+			testSetUserCaptureScreen() {
+				let flag = this.setUserCaptureScreenFlag;
+				uni.setUserCaptureScreen({
+					open: flag,
+					success: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " success: " + JSON.stringify(res));
+					},
+					fail: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " fail: " + JSON.stringify(res));
+					},
+					complete: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " complete: " + JSON.stringify(res));
+					}
+				});
+				uni.showToast({
+					icon:"none",
+					title: this.setUserCaptureScreenText
+				});
+				this.setUserCaptureScreenFlag = !this.setUserCaptureScreenFlag;
+				if (this.setUserCaptureScreenFlag) {
+					this.setUserCaptureScreenText = '禁止截屏';
+				} else {
+					this.setUserCaptureScreenText = '允许截屏';
+				}
 			},
 		}
 	}
