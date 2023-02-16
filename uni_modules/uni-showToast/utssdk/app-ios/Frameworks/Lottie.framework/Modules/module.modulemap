@@ -1,0 +1,11 @@
+framework module Lottie {
+  umbrella header "lottie-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module Lottie.Swift {
+  header "Lottie-Swift.h"
+  requires objc
+}

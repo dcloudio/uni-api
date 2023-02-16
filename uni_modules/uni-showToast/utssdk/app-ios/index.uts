@@ -1,0 +1,76 @@
+import { UTSiOS } from "DCloudUTSFoundation"
+import { MCToast, MCToastConfig } from "MCToast"
+import { UIScreen, UIImage } from 'UIKit'
+
+type ToastResultObject = {
+	errMsg: string,
+}
+
+type ToastOptions = {
+	title: string,
+	icon?: string,
+	image?: string,
+	mask?: boolean,
+	duration?: number, //毫秒
+	position?: string,
+	success?: (res: ToastResultObject) => void,
+	fail?: (res: ToastResultObject) => void,
+	complete?: (res: ToastResultObject) => void
+}
+
+export default function showToast(options: ToastOptions) {
+	if (options.title == null || options.title.length == 0) {
+		options.fail?.({ errMsg: 'showToast:title is null' })
+		options.complete?.({ errMsg: 'showToast:title is null' })
+	} else {
+		//duration
+		let duration = 3.0
+		if (options.duration != null) {
+			duration = Double(options.duration! / 1000)
+		}
+
+		//mask
+		let mask = MCToast.MCToastRespond.default
+		if (options.mask == true) {
+			mask = MCToast.MCToastRespond.noRespond
+		}
+
+		//position
+		if (options.position != null) {
+			const interval = UIScreen.main.bounds.height * 0.25
+			let centerPoint = 0.0 //正下 负上 
+			if (options.position == "top") {
+				centerPoint = 0 - interval
+			} else if (options.position == "center") {
+				centerPoint = 0.0
+			} else {
+				centerPoint = interval
+			}
+			MCToast.mc_text(options.title, offset = centerPoint, duration = duration, respond = mask)
+		} else {
+			MCToastConfig.shared.icon.successImage = new UIImage(named = "uni_uts_toast_success.png")
+			MCToastConfig.shared.icon.failureImage = new UIImage(named = "uni_uts_toast_error.png")
+			if (options.image != null) {
+				const imagePath = UTSiOS.getResourcePath(options.image!)
+				const image = new UIImage(contentsOfFile = imagePath)
+				MCToast.showStatus(MCToast.MCToastType.success, text = options.title, iconImage = image, duration = duration, respond = mask)
+
+			} else if (options.icon != null) {
+				if (options.icon == "success") {
+					MCToast.mc_success(options.title, duration = duration, respond = mask)
+				} else if (options.icon == "error") {
+					MCToast.mc_failure(options.title, duration = duration, respond = mask)
+				} else if (options.icon == "loading") {
+					MCToast.mc_loading(text = options.title, duration = duration, respond = mask)
+				} else {
+					MCToast.mc_text(options.title, offset = 0, duration = duration, respond = mask)
+				}
+			} else {
+				MCToast.mc_text(options.title, offset = 0, duration = duration, respond = mask)
+			}
+		}
+		options.success?.({ errMsg: 'showToast::ok' })
+		options.complete?.({ errMsg: 'showToast::ok' })
+	}
+
+}
