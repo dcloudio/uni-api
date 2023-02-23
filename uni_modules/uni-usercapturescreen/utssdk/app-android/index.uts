@@ -13,7 +13,17 @@ import FileObserver from "android.os.FileObserver";
 import File from "java.io.File";
 import Environment from "android.os.Environment";
 import System from 'java.lang.System';
+import WindowManager from 'android.view.WindowManager';
 
+/**
+ * setUserCaptureScreen 参数定义
+ */
+type SetUserCaptureScreenOption = {
+	open: boolean;
+	success?: (res: UTSJSONObject) => void;
+	fail?: (res: UTSJSONObject) => void;
+	complete?: (res: UTSJSONObject) => void;
+}
 
 
 /**
@@ -143,6 +153,42 @@ export function offUserCaptureScreen(success: (res: any) => void) {
 	lastFileObserverTime = 0;
 	
 	success({});
+}
+
+/**
+ * 设置是否禁止截屏
+ */
+export function setUserCaptureScreen(option: SetUserCaptureScreenOption) {
+	const res = {
+		errCode: 0,
+		errMsg: "setUserCaptureScreen:ok",
+		errSubject: "uni-setUserCaptureScreen"
+	};
+	UTSAndroid.getUniActivity()?.runOnUiThread(new SetUserCaptureScreenRunnable(option.open));
+	option.success?.(res);
+	option.complete?.(res);
+}
+
+class SetUserCaptureScreenRunnable extends Runnable {
+	
+	/**
+	 * true 表示禁止截屏
+	 * false 表示允许截屏
+	 */
+	private open: boolean = false;
+
+	constructor(open: boolean) {
+		super();
+		this.open = open;
+	}
+
+	override run(): void {
+		if (this.open) {
+			UTSAndroid.getUniActivity()?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+		} else {
+			UTSAndroid.getUniActivity()?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+		}
+	}
 }
 
 

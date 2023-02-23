@@ -6,12 +6,12 @@
 		</view>
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
+		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
+		
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		<button @tap="testShowModal">模态弹窗</button>
-		<button @tap="testShowModalWithTF">模态弹窗带输入框</button>
-
+		
 		<button @tap="testStartWifi">初始化wifi模块</button>
 		<button @tap="testGetWifiList">获取当前wifi列表</button>
 		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
@@ -21,194 +21,166 @@
 </template>
 
 <script>
-	import showModal from '@/uni_modules/uni-showmodal';
+
 	export default {
 		data() {
 			return {
 				title: 'Hello',
-				memListener: null,
+				memListener:null,
+				setUserCaptureScreenFlag: true,
+				setUserCaptureScreenText: '禁止截屏'
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			onMemoryWarning: function(res) {
+			onMemoryWarning:function(res){
 				console.log(res);
 			},
-			testShowModal() {
-				showModal({
-					title: "温馨提示",
-					content: "这是一个模态弹窗",
-					cancelColor: "#ff0000",
-					confirmColor: "#00ff00",
-					showCancel: true,
-					success: function(res) {
-						console.log(res)
-					}
-				})
-			},
-			testShowModalWithTF() {
-				showModal({
-					title: "提示",
-					content: "带输入框的弹窗",
-					showCancel: false,
-					editable: true,
-					placeholderText: "请输入内容",
-					success: function(res) {
-						console.log(res)
-					}
-				})
-			},
-			testConnnectWifi() {
+			testConnnectWifi(){
 
 				uni.connectWifi({
-					maunal: false,
-					SSID: "Xiaomi_20D0",
-					password: "BBBB",
-					complete: (res) => {
+					maunal:false,
+					SSID:"Xiaomi_20D0",
+					password:"BBBB",
+					complete:(res)=>{
 						console.log(res);
 					}
 				});
-
+				
 			},
-			testGetConnnectWifi() {
+			testGetConnnectWifi(){
 				uni.getConnectedWifi({
-					partialInfo: false,
-					complete: (res) => {
+					partialInfo:false,
+					complete:(res)=>{
 						console.log(res);
 						if (res.errCode == 0) {
 							uni.showToast({
-								icon: 'none',
-								title: res.wifi.SSID
+								icon:'none',
+								title:res.wifi.SSID
 							})
-						} else {
+						} else{
 							uni.showToast({
-								icon: 'none',
-								title: res.errMsg
+								icon:'none',
+								title:res.errMsg
 							})
 						}
-
+						
 					}
 				});
 			},
-			testStartWifi() {
+			testStartWifi(){
 				uni.startWifi({
-					success: (res) => {
+					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
 						// wifi 开启成功后，注册wifi链接状态监听和wifi列表获取监听
-						uni.onGetWifiList(function(res) {
+						uni.onGetWifiList(function(res){
 							console.log("onGetWifiList");
 							console.log(res);
 						});
-						uni.onWifiConnected(function(res) {
+						uni.onWifiConnected(function(res){
 							console.log("onWifiConnected");
 							console.log(res);
 						});
-						uni.onWifiConnectedWithPartialInfo(function(res) {
+						uni.onWifiConnectedWithPartialInfo(function(res){
 							console.log("onWifiConnectedWithPartialInfo");
 							console.log(res);
 						});
-
-					},
-					fail: (res) => {
+						
+					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));
-					},
-					complete: (res) => {
+					},complete:(res)=>{
 						console.log("complete: " + JSON.stringify(res));
 					}
 				})
 			},
 			testStopWifi() {
 				uni.stopWifi({
-					success: (res) => {
+					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
-					},
-					fail: (res) => {
+					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));
-					},
-					complete: (res) => {
+					},complete:(res)=>{
 						console.log("complete: " + JSON.stringify(res));
 					}
 				})
-
+				
 			},
 			testGetWifiList() {
 				uni.getWifiList({
-					success: (res) => {
+					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
-					},
-					fail: (res) => {
+					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));
-					},
-					complete: (res) => {
+					},complete:(res)=>{
 						console.log("complete: " + JSON.stringify(res));
 					}
 				})
-
+				
 			},
 			testonMemoryWarning() {
 				uni.onMemoryWarning(this.onMemoryWarning)
 				uni.showToast({
-					icon: 'none',
-					title: '已监听，注意控制台输出'
+					icon:'none',
+					title:'已监听，注意控制台输出'
 				})
 			},
-			testoffMemoryWarning() {
+			testoffMemoryWarning(){
 				uni.offMemoryWarning(this.onMemoryWarning)
 				uni.showToast({
-					icon: 'none',
-					title: '监听已移除'
+					icon:'none',
+					title:'监听已移除'
 				})
 			},
 			testScreenShotListen() {
 				var that = this;
 				uni.onUserCaptureScreen(function(res) {
-					console.log(res);
-
-					if (uni.getSystemInfoSync().platform == "android") {
-						// 除android 之外的平台，不需要判断返回状态码
-						if (res.errCode == -1) {
-							// 启动失败
-							return;
-						} else if (res.errCode == 0) {
+						console.log(res);
+						
+						if (uni.getSystemInfoSync().platform == "android") {
+							// 除android 之外的平台，不需要判断返回状态码
+							if(res.errCode == -1){
+								// 启动失败
+								return ;
+							}else if(res.errCode == 0){
+								uni.showToast({
+									icon:"none",
+									title:'截屏监听已开启'
+								})
+							}else {
+								uni.showToast({
+									icon:"none",
+									title:'捕获截屏事件'
+								})
+								that.screenImage = res.image
+							}
+						}else{
+							// 除android 之外的平台，不需要判断返回状态码
 							uni.showToast({
-								icon: "none",
-								title: '截屏监听已开启'
+								icon:"none",
+								title:'捕获截屏事件'
 							})
-						} else {
-							uni.showToast({
-								icon: "none",
-								title: '捕获截屏事件'
-							})
-							that.screenImage = res.image
 						}
-					} else {
-						// 除android 之外的平台，不需要判断返回状态码
+						
+					});
+					
+					if (uni.getSystemInfoSync().platform != "android") {
+						// 除android 之外的平台，直接提示监听已开启
 						uni.showToast({
-							icon: "none",
-							title: '捕获截屏事件'
+							icon:"none",
+							title:'截屏监听已开启'
 						})
 					}
-
-				});
-
-				if (uni.getSystemInfoSync().platform != "android") {
-					// 除android 之外的平台，直接提示监听已开启
-					uni.showToast({
-						icon: "none",
-						title: '截屏监听已开启'
-					})
-				}
 			},
 			testScreenShotOff() {
 				uni.offUserCaptureScreen(function(res) {
-					console.log(res);
+						console.log(res);
 				});
 				// 提示已经开始监听,注意观察
 				uni.showToast({
-					icon: "none",
-					title: '截屏监听已关闭'
+					icon:"none",
+					title:'截屏监听已关闭'
 				})
 			},
 			testGetBatteryInfo() {
@@ -221,6 +193,31 @@
 						});
 					}
 				})
+			},
+			testSetUserCaptureScreen() {
+				let flag = this.setUserCaptureScreenFlag;
+				uni.setUserCaptureScreen({
+					open: flag,
+					success: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " success: " + JSON.stringify(res));
+					},
+					fail: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " fail: " + JSON.stringify(res));
+					},
+					complete: (res) => {
+						console.log("setUserCaptureScreen open: " + flag + " complete: " + JSON.stringify(res));
+					}
+				});
+				uni.showToast({
+					icon:"none",
+					title: this.setUserCaptureScreenText
+				});
+				this.setUserCaptureScreenFlag = !this.setUserCaptureScreenFlag;
+				if (this.setUserCaptureScreenFlag) {
+					this.setUserCaptureScreenText = '禁止截屏';
+				} else {
+					this.setUserCaptureScreenText = '允许截屏';
+				}
 			},
 		}
 	}
