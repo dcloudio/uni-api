@@ -1,48 +1,165 @@
 import { NotificationCenter } from 'Foundation';
-import { UIApplication } from "UIKit"
-import { Selector } from "ObjectiveC"
+import { UIApplication, UIView, UITextField, UIScreen, UIDevice } from "UIKit"
+import { UTSiOS } from "DCloudUTSFoundation"
+import { DispatchQueue } from 'Dispatch';
+
+
+
+/**
+ * 设置防截屏options
+ */
+type SetUserCaptureScreenOption = {
+	open: boolean;
+	success?: (res: UTSJSONObject) => void;
+	fail?: (res: UTSJSONObject) => void;
+	complete?: (res: UTSJSONObject) => void;
+}
+
 
 /**
  * 定义监听截屏事件工具类
  */
 class CaptureScreenTool {
-	static listener: UTSCallback | null;
-	
+	static listener?: UTSCallback;
+	static secureView?: UIView;
+
 	// 监听截屏
-	static listenCaptureScreen(callback: UTSCallback | null) {
+	static listenCaptureScreen(callback?: UTSCallback) {
 		this.listener = callback
-		
-		// 注册监听截屏通知事件及设置回调方法
+
+		// 注册监听截屏事件及回调方法
 		// target-action 回调方法需要通过 Selector("方法名") 构建
 		const method = Selector("userDidTakeScreenshot")
 		NotificationCenter.default.addObserver(this, selector = method, name = UIApplication.userDidTakeScreenshotNotification, object = null)
 	}
-	
+
 	// 捕获截屏回调的方法
 	// target-action 的方法前需要添加 @objc 前缀
 	@objc static userDidTakeScreenshot() {
-		// 触发回调
+		// 回调
 		this.listener?.({})
 	}
-	
+
 	// 移除监听事件
-	static removeListen(callback: UTSCallback | null) {
+	static removeListen(callback?: UTSCallback) {
 		this.listener = null
 		NotificationCenter.default.removeObserver(this)
 		callback?.({})
 	}
+
+	static createSecureView(): UIView | null {
+		let field = UITextField()
+		field.isSecureTextEntry = true
+		if (field.subviews.count > 0 && UIDevice.current.systemVersion != '15.1') {
+			let view = field.subviews.first
+			if (view != null) {
+				view!.subviews.forEach((item) => {
+					item.removeFromSuperview()
+				})
+				view!.isUserInteractionEnabled = true
+				return view
+			}
+		}
+		return null
+	}
+
+	// 开启防截屏
+	static onAntiScreenshot(option: SetUserCaptureScreenOption) {
+		// uts方法默认会在子线程中执行，涉及 UI 操作必须在主线程中运行，通过 DispatchQueue.main.async 方法可将代码在主线程中运行
+		DispatchQueue.main.async(execute = (): void => {
+			let secureView = this.createSecureView()
+			let window = UTSiOS.getKeyWindow()
+			let rootView = window.rootViewController == null ? null : window.rootViewController!.view
+			if (secureView != null && rootView != null) {
+				let rootSuperview = rootView!.superview
+				if (rootSuperview != null) {
+					this.secureView = secureView
+					rootSuperview!.addSubview(secureView!)
+					rootView!.removeFromSuperview()
+					secureView!.addSubview(rootView!)
+					let rect = rootView!.frame
+					secureView!.frame = UIScreen.main.bounds
+					rootView!.frame = rect
+				}
+			}
+			let res = {
+				errSubject: "uts-screenshot-listener",
+				errCode: 0,
+				errMsg: "setUserCaptureScreen:ok",
+			}
+			option.success?.(res)
+			option.complete?.(res)
+		})
+	}
+
+	// 关闭防截屏
+	static offAntiScreenshot(option: SetUserCaptureScreenOption) {
+		DispatchQueue.main.async(execute = (): void => {
+			if (this.secureView != null) {
+				let window = UTSiOS.getKeyWindow()
+				let rootView = window.rootViewController == null ? null : window.rootViewController!.view
+				if (rootView != null && this.secureView!.superview != null) {
+					let rootSuperview = this.secureView!.superview
+					if (rootSuperview != null) {
+						rootSuperview!.addSubview(rootView!)
+						this.secureView!.removeFromSuperview()
+					}
+				}
+				this.secureView = null
+			}
+
+			let res = {
+				errSubject: "uts-screenshot-listener",
+				errCode: 0,
+				errMsg: "setUserCaptureScreen:ok",
+			}
+			option.success?.(res)
+			option.complete?.(res)
+		})
+	}
 }
+
 
 /**
  * 开启截图监听
  */
-export function onUserCaptureScreen(callback: UTSCallback | null) {
+export function onUserCaptureScreen(callback?: UTSCallback) {
 	CaptureScreenTool.listenCaptureScreen(callback)
 }
 
 /**
  * 关闭截屏监听
  */
-export function offUserCaptureScreen(callback: UTSCallback | null) {
+export function offUserCaptureScreen(callback?: UTSCallback) {
 	CaptureScreenTool.removeListen(callback)
+}
+
+/**
+ * 开启/关闭防截屏
+ */
+export function setUserCaptureScreen(option: SetUserCaptureScreenOption) {
+	if (UIDevice.current.systemVersion < "13.0") {
+		let res = {
+			errSubject: "uts-screenshot-listener",
+			errCode: 12001,
+			errMsg: "setUserCaptureScreen:system not support"
+		}
+		option.fail?.(res);
+		option.complete?.(res);
+
+	} else if (UIDevice.current.systemVersion == "15.1") {
+		let res = {
+			errSubject: "uts-screenshot-listener",
+			errCode: 12010,
+			errMsg: "setUserCaptureScreen:system internal error"
+		}
+		option.fail?.(res);
+		option.complete?.(res);
+	} else {
+		if (option.open == true) {
+			CaptureScreenTool.onAntiScreenshot(option)
+		} else {
+			CaptureScreenTool.offAntiScreenshot(option)
+		}
+	}
 }
