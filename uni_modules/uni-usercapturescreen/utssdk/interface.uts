@@ -1,0 +1,73 @@
+export type UserCaptureScreenResult = {
+	/**
+		* 错误码
+		* 0:成功
+		* 12001:system not support
+		* 12010:system internal error
+		*/
+	errCode : number,
+	/**
+		* 调用API的名称
+		*/
+	errSubject : string,
+	/**
+		* 错误的详细信息
+		*/
+	errMsg : string,
+}
+
+export type SetUserCaptureScreenOption = {
+	/**
+		* true: 开启防截屏 false: 关闭防截屏
+		*/
+	open : boolean;
+	/**
+		* 接口调用成功的回调函数
+		*/
+	success ?: (res : UserCaptureScreenResult) => void,
+	/**
+		* 接口调用失败的回调函数
+		*/
+	fail ?: (res : UserCaptureScreenResult) => void,
+	/**
+		* 接口调用结束的回调函数（调用成功、失败都会执行）
+		*/
+	complete ?: (res : UserCaptureScreenResult) => void
+}
+
+/**
+	* 开启截屏监听 
+	* 
+	* @param {UTSCallback} callback 
+	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
+	* @since 3.6.8
+	*/
+export type OnUserCaptureScreen = (callback ?: UTSCallback) => void
+
+/**
+	* 关闭截屏监听  
+	* 
+	* @param {UTSCallback} callback 
+	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
+	* @since 3.6.8
+	*/
+export type OffUserCaptureScreen = (callback ?: UTSCallback) => void
+
+/**
+	* 设置防截屏  
+	* 
+	* @param {SetUserCaptureScreenOption} options 
+	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
+	* @since 3.7.3
+	*/
+export type SetUserCaptureScreen = (options : SetUserCaptureScreenOption) => void
+
+interface uni {
+	onUserCaptureScreen : OnUserCaptureScreen,
+	offUserCaptureScreen : OffUserCaptureScreen,
+	setUserCaptureScreen : SetUserCaptureScreen
+}
+
