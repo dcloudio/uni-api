@@ -27,7 +27,7 @@
 			return {
 				title: 'Hello',
 				memListener:null,
-				setUserCaptureScreenFlag: true,
+				setUserCaptureScreenFlag: false,
 				setUserCaptureScreenText: '禁止截屏'
 			}
 		},
@@ -162,16 +162,15 @@
 								title:'捕获截屏事件'
 							})
 						}
-						
-					});
+				});
 					
-					if (uni.getSystemInfoSync().platform != "android") {
-						// 除android 之外的平台，直接提示监听已开启
-						uni.showToast({
-							icon:"none",
-							title:'截屏监听已开启'
-						})
-					}
+				if (uni.getSystemInfoSync().platform != "android") {
+					// 除android 之外的平台，直接提示监听已开启
+					uni.showToast({
+						icon:"none",
+						title:'截屏监听已开启'
+					})
+				}
 			},
 			testScreenShotOff() {
 				uni.offUserCaptureScreen(function(res) {
@@ -197,7 +196,7 @@
 			testSetUserCaptureScreen() {
 				let flag = this.setUserCaptureScreenFlag;
 				uni.setUserCaptureScreen({
-					open: flag,
+					enable: flag,
 					success: (res) => {
 						console.log("setUserCaptureScreen open: " + flag + " success: " + JSON.stringify(res));
 					},
@@ -214,9 +213,9 @@
 				});
 				this.setUserCaptureScreenFlag = !this.setUserCaptureScreenFlag;
 				if (this.setUserCaptureScreenFlag) {
-					this.setUserCaptureScreenText = '禁止截屏';
-				} else {
 					this.setUserCaptureScreenText = '允许截屏';
+				} else {
+					this.setUserCaptureScreenText = '禁止截屏';
 				}
 			},
 		}

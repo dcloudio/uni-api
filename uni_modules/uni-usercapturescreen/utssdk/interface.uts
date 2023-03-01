@@ -18,9 +18,9 @@ export type UserCaptureScreenResult = {
 
 export type SetUserCaptureScreenOption = {
 	/**
-		* true: 开启防截屏 false: 关闭防截屏
+		* true: 允许用户截屏 false: 不允许用户截屏，防止用户截屏到应用页面内容
 		*/
-	open : boolean;
+	enable : boolean;
 	/**
 		* 接口调用成功的回调函数
 		*/
