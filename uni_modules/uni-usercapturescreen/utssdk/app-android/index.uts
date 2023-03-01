@@ -14,16 +14,8 @@ import File from "java.io.File";
 import Environment from "android.os.Environment";
 import System from 'java.lang.System';
 import WindowManager from 'android.view.WindowManager';
+import { SetUserCaptureScreenOption, UserCaptureScreenResult, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen } from "../interface.uts";
 
-/**
- * setUserCaptureScreen 参数定义
- */
-type SetUserCaptureScreenOption = {
-	open: boolean;
-	success?: (res: UTSJSONObject) => void;
-	fail?: (res: UTSJSONObject) => void;
-	complete?: (res: UTSJSONObject) => void;
-}
 
 
 /**
@@ -96,7 +88,7 @@ class ScreenFileObserver extends FileObserver {
  * 开启截图监听
  */
 @Suppress("DEPRECATION")
-export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
+export const onUserCaptureScreen : OnUserCaptureScreen = function (callback: (res:UTSJSONObject) => void) {
 	
 	// 检查相关权限是否已经具备
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -143,7 +135,7 @@ export function onUserCaptureScreen(callback: (res:UTSJSONObject) => void) {
 /**
  * 关闭截屏监听
  */
-export function offUserCaptureScreen(success: (res: any) => void) {
+export const offUserCaptureScreen : OffUserCaptureScreen = function (success: (res: any) => void) {
 
 	// android 10以上，关闭监听通过移除文件监听器实现
 	if (screenOB != null) {
@@ -158,13 +150,13 @@ export function offUserCaptureScreen(success: (res: any) => void) {
 /**
  * 设置是否禁止截屏
  */
-export function setUserCaptureScreen(option: SetUserCaptureScreenOption) {
-	const res = {
-		errCode: 0,
-		errMsg: "setUserCaptureScreen:ok",
-		errSubject: "uni-setUserCaptureScreen"
-	};
+export const setUserCaptureScreen : SetUserCaptureScreen = function (option: SetUserCaptureScreenOption) {
+	// 切换到UI线程
 	UTSAndroid.getUniActivity()?.runOnUiThread(new SetUserCaptureScreenRunnable(option.open));
+	const res = new UserCaptureScreenResult();
+	res.errCode = 0;
+	res.errMsg = "setUserCaptureScreen:ok";
+	res.errSubject = "uni-setUserCaptureScreen";
 	option.success?.(res);
 	option.complete?.(res);
 }
