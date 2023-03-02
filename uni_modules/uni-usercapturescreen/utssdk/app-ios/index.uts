@@ -1,4 +1,5 @@
 import { NotificationCenter } from 'Foundation';
+import { CGRect } from "CoreFoundation";
 import { UIApplication, UIView, UITextField, UIScreen, UIDevice } from "UIKit"
 import { UTSiOS, UTSCallback } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
@@ -36,7 +37,7 @@ class CaptureScreenTool {
 	}
 
 	static createSecureView() : UIView | null {
-		let field = UITextField()
+		let field = new UITextField(frame = CGRect.zero)
 		field.isSecureTextEntry = true
 		if (field.subviews.count > 0 && UIDevice.current.systemVersion != '15.1') {
 			let view = field.subviews.first
