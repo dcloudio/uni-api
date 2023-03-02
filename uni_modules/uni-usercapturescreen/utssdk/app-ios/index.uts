@@ -138,10 +138,10 @@ export const setUserCaptureScreen : SetUserCaptureScreen = function (options : S
 		options.fail?.(res);
 		options.complete?.(res);
 	} else {
-		if (options.open == true) {
-			CaptureScreenTool.onAntiScreenshot(options)
-		} else {
+		if (options.enable == true) {
 			CaptureScreenTool.offAntiScreenshot(options)
+		} else {
+			CaptureScreenTool.onAntiScreenshot(options)
 		}
 	}
 }
