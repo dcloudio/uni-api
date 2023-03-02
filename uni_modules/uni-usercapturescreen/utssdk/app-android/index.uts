@@ -88,7 +88,7 @@ class ScreenFileObserver extends FileObserver {
  * 开启截图监听
  */
 @Suppress("DEPRECATION")
-export const onUserCaptureScreen : OnUserCaptureScreen = function (callback: (res:UTSJSONObject) => void) {
+export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UTSCallback) {
 	
 	// 检查相关权限是否已经具备
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -135,7 +135,7 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback: (re
 /**
  * 关闭截屏监听
  */
-export const offUserCaptureScreen : OffUserCaptureScreen = function (success: (res: any) => void) {
+export const offUserCaptureScreen : OffUserCaptureScreen = function (callback : UTSCallback) {
 
 	// android 10以上，关闭监听通过移除文件监听器实现
 	if (screenOB != null) {
@@ -144,7 +144,7 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (success: (r
 	}
 	lastFileObserverTime = 0;
 	
-	success({});
+	callback({});
 }
 
 /**
@@ -152,7 +152,7 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (success: (r
  */
 export const setUserCaptureScreen : SetUserCaptureScreen = function (option: SetUserCaptureScreenOption) {
 	// 切换到UI线程
-	UTSAndroid.getUniActivity()?.runOnUiThread(new SetUserCaptureScreenRunnable(option.open));
+	UTSAndroid.getUniActivity()?.runOnUiThread(new SetUserCaptureScreenRunnable(option.enable));
 	const res = new UserCaptureScreenResult();
 	res.errCode = 0;
 	res.errMsg = "setUserCaptureScreen:ok";
@@ -164,21 +164,21 @@ export const setUserCaptureScreen : SetUserCaptureScreen = function (option: Set
 class SetUserCaptureScreenRunnable extends Runnable {
 	
 	/**
-	 * true 表示禁止截屏
-	 * false 表示允许截屏
+	 * ture: 允许用户截屏
+	 * false: 不允许用户截屏，防止用户截屏到应用页面内容
 	 */
-	private open: boolean = false;
+	private enable: boolean;
 
-	constructor(open: boolean) {
+	constructor(enable: boolean) {
 		super();
-		this.open = open;
+		this.enable = enable;
 	}
 
 	override run(): void {
-		if (this.open) {
-			UTSAndroid.getUniActivity()?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-		} else {
+		if (this.enable) {
 			UTSAndroid.getUniActivity()?.getWindow()?.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+		} else {
+			UTSAndroid.getUniActivity()?.getWindow()?.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 		}
 	}
 }
