@@ -88,7 +88,7 @@ class ScreenFileObserver extends FileObserver {
  * 开启截图监听
  */
 @Suppress("DEPRECATION")
-export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UTSCallback) {
+export const onUserCaptureScreen : OnUserCaptureScreen = function (callback ?: UTSCallback) {
 	
 	// 检查相关权限是否已经具备
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -99,7 +99,7 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UT
 		let ret = {
 			errCode:-1
 		}
-		callback(ret);
+		callback?.(ret);
 		return ;
 	}
 	
@@ -120,14 +120,14 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UT
 		screenOB!.stopWatching()
 	}
 	//开始监听
-	screenOB = new ScreenFileObserver(directory_screenshot.path)
+	screenOB = new ScreenFileObserver(directory_screenshot.getPath())
 	screenOB!.startWatching()
 
 	// 监听成功
 	let ret = {
 		errCode:0
 	}
-	callback(ret);
+	callback?.(ret);
 	
 }
 
@@ -135,7 +135,7 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UT
 /**
  * 关闭截屏监听
  */
-export const offUserCaptureScreen : OffUserCaptureScreen = function (callback : UTSCallback) {
+export const offUserCaptureScreen : OffUserCaptureScreen = function (callback ?: UTSCallback) {
 
 	// android 10以上，关闭监听通过移除文件监听器实现
 	if (screenOB != null) {
@@ -144,7 +144,7 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (callback : 
 	}
 	lastFileObserverTime = 0;
 	
-	callback({});
+	callback?.({});
 }
 
 /**
