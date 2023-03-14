@@ -1,26 +1,12 @@
 export type GetBatteryInfoSuccess = {
-    /**
-        * 错误码
-        * 0:成功
-        * 1001:getAppContext is null
-        * 1002:navigator.getBattery is unsupported
-        */
-    errCode : number,
-    /**
-        * 调用API的名称
-        */
-    errSubject : string,
-    /**
-        * 错误的详细信息
-        */
     errMsg : string,
     /**
-        * 设备电量，范围1 - 100
-        */
+    * 设备电量，范围1 - 100
+    */
     level : number,
     /**
-        * 是否正在充电中
-        */
+    * 是否正在充电中
+    */
     isCharging : boolean
 }
 
