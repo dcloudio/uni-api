@@ -1,0 +1,6 @@
+export type OnMemoryWarningCallbackResult = {
+	level : number | null
+}
+export type OnMemoryWarningCallback = (res : OnMemoryWarningCallbackResult) => void
+export type OnMemoryWarning = (callback : OnMemoryWarningCallback) => void
+export type OffMemoryWarning = (callback : OnMemoryWarningCallback | null) => void
