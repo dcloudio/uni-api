@@ -2,6 +2,7 @@ export type UserCaptureScreenResult = {
 	/**
 		* 错误码
 		* 0:成功
+		* -1:permission denied
 		* 12001:system not support
 		* 12010:system internal error
 		*/
@@ -81,7 +82,7 @@ export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null)
 /**
 	* 设置防截屏  
 	* 
-	* @param {SetUserCaptureScreenOption} options 
+	* @param {SetUserCaptureScreenOptions} options 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
 	* @since 3.7.3
@@ -93,3 +94,4 @@ interface uni {
 	offUserCaptureScreen : OffUserCaptureScreen,
 	setUserCaptureScreen : SetUserCaptureScreen
 }
+
