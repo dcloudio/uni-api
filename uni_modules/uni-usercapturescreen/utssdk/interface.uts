@@ -2,6 +2,7 @@ export type UserCaptureScreenResult = {
 	/**
 		* 错误码
 		* 0:成功
+		* -1:permission denied
 		* 12001:system not support
 		* 12010:system internal error
 		*/
@@ -16,7 +17,28 @@ export type UserCaptureScreenResult = {
 	errMsg : string,
 }
 
-export type SetUserCaptureScreenOption = {
+export type OnUserCaptureScreenResult = {
+	/**
+		* 错误码
+		* 0:成功
+		* -1:permission denied（仅Android返回）
+		*/
+	errCode : number,
+	/**
+		* 调用API的名称
+		*/
+	errSubject : string,
+	/**
+		* 错误的详细信息
+		*/
+	errMsg : string,
+	/**
+		* 截屏文件路径（仅Android返回）
+		*/
+	path : string | null
+}
+
+export type SetUserCaptureScreenOptions = {
 	/**
 		* true: 允许用户截屏 false: 不允许用户截屏，防止用户截屏到应用页面内容
 		*/
@@ -35,35 +57,37 @@ export type SetUserCaptureScreenOption = {
 	complete ?: (res : UserCaptureScreenResult) => void
 }
 
+export type UserCaptureScreenCallback = (res : OnUserCaptureScreenResult) => void
+
 /**
 	* 开启截屏监听 
 	* 
-	* @param {UTSCallback} callback 
+	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
 	* @since 3.6.8
 	*/
-export type OnUserCaptureScreen = (callback ?: UTSCallback) => void
+export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
 /**
 	* 关闭截屏监听  
 	* 
-	* @param {UTSCallback} callback 
+	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
 	* @since 3.6.8
 	*/
-export type OffUserCaptureScreen = (callback ?: UTSCallback) => void
+export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
 /**
 	* 设置防截屏  
 	* 
-	* @param {SetUserCaptureScreenOption} options 
+	* @param {SetUserCaptureScreenOptions} options 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^22
 	* @since 3.7.3
 	*/
-export type SetUserCaptureScreen = (options : SetUserCaptureScreenOption) => void
+export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
 
 interface uni {
 	onUserCaptureScreen : OnUserCaptureScreen,
