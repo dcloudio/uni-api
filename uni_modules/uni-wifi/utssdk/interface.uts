@@ -11,11 +11,11 @@
  * Wifi 链接参数封装 
  */
 export type WifiConnectOption = {
-	SSID: string;
-	BSSID: string;
-	password: string;
-	maunal: boolean;
-	partialInfo: boolean; //ios不生效
+	SSID?: string;
+	BSSID?: string;
+	password?: string;
+	maunal?: boolean;
+	partialInfo?: boolean; //ios不生效
 	success?: (res: UniWifiResult) => void;
 	fail?: (res: UniWifiResult) => void;
 	complete?: (res: UniWifiResult) => void;
