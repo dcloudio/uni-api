@@ -8,7 +8,7 @@ import File from "java.io.File";
 import Environment from "android.os.Environment";
 import System from 'java.lang.System';
 import WindowManager from 'android.view.WindowManager';
-import { UserCaptureScreenResult, OnUserCaptureScreenResult, SetUserCaptureScreenOptions, UserCaptureScreenCallback, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen } from "../interface.uts";
+import { OnUserCaptureScreenCallbackResult, UserCaptureScreenCallback, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreenSuccess, SetUserCaptureScreenOptions, SetUserCaptureScreen } from "../interface.uts";
 
 /**
 	* 文件监听器
@@ -50,10 +50,7 @@ class ScreenFileObserver extends FileObserver {
 				lastObserverTime = currentTime;
 
 				const screenShotPath = new File(this.screenFile, path).getPath();
-				const res : OnUserCaptureScreenResult = {
-					errCode: 0,
-					errMsg: "onUserCaptureScreen:ok",
-					errSubject: "uni-onUserCaptureScreen",
+				const res : OnUserCaptureScreenCallbackResult = {
 					path: screenShotPath
 				}
 				listener?.(res);
@@ -68,23 +65,15 @@ class ScreenFileObserver extends FileObserver {
 export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : UserCaptureScreenCallback | null) {
 	// 检查相关权限是否已授予
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getAppContext()!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-		// 无权限，申请权限，并且告知用户监听失败
+		// 无权限，申请权限
 		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1001);
-		// 因权限缺失导致监听失败
-		const res : OnUserCaptureScreenResult = {
-			errCode: -1,
-			errMsg: "onUserCaptureScreen:permission denied",
-			errSubject: "uni-onUserCaptureScreen"
-		}
-		callback?.(res);
 		return;
 	}
-
 	// 更新监听
 	listener = callback;
 
 	let directory_screenshot : File;
-	if (Build.MANUFACTURER.toLowerCase() === "xiaomi") {
+	if (Build.MANUFACTURER.toLowerCase() == "xiaomi") {
 		// @Suppress("DEPRECATION")
 		directory_screenshot = new File(new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_DCIM), "Screenshots");
 	} else {
@@ -113,11 +102,7 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (_ : UserCap
 export const setUserCaptureScreen : SetUserCaptureScreen = function (option : SetUserCaptureScreenOptions) {
 	// 切换到UI线程
 	UTSAndroid.getUniActivity()?.runOnUiThread(new SetUserCaptureScreenRunnable(option.enable));
-	const res : UserCaptureScreenResult = {
-		errCode: 0,
-		errMsg: "setUserCaptureScreen:ok",
-		errSubject: "uni-setUserCaptureScreen"
-	}
+	const res : SetUserCaptureScreenSuccess = {}
 	option.success?.(res);
 	option.complete?.(res);
 }
