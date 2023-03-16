@@ -1,16 +1,6 @@
 
 export type OnUserCaptureScreenCallbackResult = {
 	/**
-		* 错误码
-		* 0:成功
-		* -1:permission denied（仅Android返回）
-		*/
-	errCode ?: number,
-	/**
-		* 错误的详细信息
-		*/
-	errMsg ?: string,
-	/**
 		* 截屏文件路径（仅Android返回）
 		*/
 	path ?: string
@@ -19,7 +9,7 @@ export type OnUserCaptureScreenCallbackResult = {
 /**
 	* uni.onUserCaptureScreen/uni.offUserCaptureScreen回调函数定义
 	*/
-export type UserCaptureScreenCallback = (res : OnUserCaptureScreenResult) => void
+export type UserCaptureScreenCallback = (res : OnUserCaptureScreenCallbackResult) => void
 
 
 /**
