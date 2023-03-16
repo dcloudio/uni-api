@@ -2,13 +2,11 @@ import { NotificationCenter } from 'Foundation';
 import { UIApplication } from "UIKit"
 import { Selector } from "ObjectiveC"
 
-import { OffMemoryWarning, OnMemoryWarning, OnMemoryWarningCallback, OnMemoryWarningCallbackResult } from "../interface.uts"
-
 class MemoryWarningTool {
-	static listeners: OnMemoryWarningCallback[] = []
+	static listeners: UTSCallback[] = []
 	
 	// 监听内存警告
-	static listenMemoryWarning(callback: OnMemoryWarningCallback) {
+	static listenMemoryWarning(callback: UTSCallback) {
 		
 		// 只有首次才需要注册监听事件
 		if (this.listeners.length == 0) {
@@ -25,13 +23,12 @@ class MemoryWarningTool {
 	@objc static receiveMemoryWarning() {
 		// 触发回调
 		this.listeners.forEach(listener => {
-			const ret: OnMemoryWarningCallbackResult = {}
-			listener(ret)
+			listener({})
 		})
 	}
 	
 	// 移除监听事件
-	static removeListen(callback: OnMemoryWarningCallback | null) {
+	static removeListen(callback: UTSCallback | null) {
 		// 移除所有监听
 		if (callback == null) {
 			this.listeners = []
@@ -49,11 +46,11 @@ class MemoryWarningTool {
 }
 
 // 开启监听内存警告
-export const onMemoryWarning : OnMemoryWarning = function (callback: OnMemoryWarningCallback) {
+export function onMemoryWarning(callback: UTSCallback) {
 	MemoryWarningTool.listenMemoryWarning(callback)
 }
 
 // 关闭监听内存警告
-export const offMemoryWarning : OffMemoryWarning = function (callback: OnMemoryWarningCallback | null) {
+export function offMemoryWarning(callback: UTSCallback | null) {
 	MemoryWarningTool.removeListen(callback)
 }
