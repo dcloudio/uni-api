@@ -26,8 +26,9 @@ export function onMemoryWarning(callback: UTSCallback) {
     listeners.push(callback)
 }
 
+
 @Suppress("DEPRECATION")
-export function offMemoryWarning(callback: UTSCallback | null = null) {
+export function offMemoryWarning(callback: UTSCallback | null) {
 	
 	if(callback == null){
 		// 清除全部回调
@@ -46,3 +47,4 @@ export function offMemoryWarning(callback: UTSCallback | null = null) {
         UTSAndroid.offAppTrimMemory(onAppTrimMemoryListener)
     }
 }
+
