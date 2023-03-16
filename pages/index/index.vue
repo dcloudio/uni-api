@@ -44,6 +44,7 @@
 				uni.connectWifi({
 					maunal:false,
 					SSID:"Xiaomi_20D0",
+					BSSID:"",
 					password:"BBBB",
 					complete:(res)=>{
 						console.log(res);
@@ -138,27 +139,11 @@
 				var that = this;
 				uni.onUserCaptureScreen(function(res) {
 						console.log(res);
-						
-						if (uni.getSystemInfoSync().platform == "android") {
-							// 除android 之外的平台，不需要判断返回状态码
-							if(res.errCode == -1){
-								// 启动失败
-								that.permissionGranted = true;
-								return ;
-							}else if(res.errCode == 0){
-								uni.showToast({
-									icon:"none",
-									title:'捕获截屏事件'
-								})
-								that.screenImage = res.image
-							}
-						}else{
-							// 除android 之外的平台，不需要判断返回状态码
-							uni.showToast({
-								icon:"none",
-								title:'捕获截屏事件'
-							})
-						}
+						uni.showToast({
+							icon:"none",
+							title:'捕获截屏事件'
+						})
+						that.screenImage = res.path
 				});
 					
 				if (uni.getSystemInfoSync().platform != "android" || that.permissionGranted) {

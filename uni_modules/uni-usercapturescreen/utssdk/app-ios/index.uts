@@ -3,7 +3,7 @@ import { CGRect } from "CoreFoundation";
 import { UIApplication, UIView, UITextField, UIScreen, UIDevice } from "UIKit"
 import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
-import { SetUserCaptureScreenOptions, UserCaptureScreenResult, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen, UserCaptureScreenCallback, OnUserCaptureScreenResult } from "../interface.uts"
+import { SetUserCaptureScreenOptions, OnUserCaptureScreenCallbackResult, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen, UserCaptureScreenCallback, SetUserCaptureScreenSuccess, SetUserCaptureScreenFail  } from "../interface.uts"
 
 /**
 	* 定义监听截屏事件工具类
@@ -26,11 +26,7 @@ class CaptureScreenTool {
 	// target-action 的方法前需要添加 @objc 前缀
 	@objc static userDidTakeScreenshot() {
 		// 回调
-		const res: OnUserCaptureScreenResult = {
-			errCode: 0,
-			errSubject: "uni-usercapturescreen",
-			errMsg: "onUserCaptureScreen: ok",
-			path: null
+		const res: OnUserCaptureScreenCallbackResult = {
 		}
 		this.listener?.(res)
 	}
@@ -39,13 +35,6 @@ class CaptureScreenTool {
 	static removeListen(callback : UserCaptureScreenCallback | null) {
 		this.listener = null
 		NotificationCenter.default.removeObserver(this)
-		const res: OnUserCaptureScreenResult = {
-			errCode: 0,
-			errSubject: "uni-usercapturescreen",
-			errMsg: "offUserCaptureScreen: ok",
-			path: null
-		}
-		callback?.(res)
 	}
 
 	static createSecureView() : UIView | null {
@@ -81,10 +70,7 @@ class CaptureScreenTool {
 					rootView!.frame = rect
 				}
 			}
-			let res: UserCaptureScreenResult = {
-				errCode: 0,
-				errSubject: "uni-usercapturescreen",
-				errMsg: "setUserCaptureScreen:ok"
+			let res: SetUserCaptureScreenSuccess = {
 			}
 			option.success?.(res)
 			option.complete?.(res)
@@ -106,10 +92,7 @@ class CaptureScreenTool {
 				}
 				this.secureView = null
 			}
-			let res: UserCaptureScreenResult = {
-				errCode: 0,
-				errSubject: "uni-usercapturescreen",
-				errMsg: "setUserCaptureScreen:ok"
+			let res: SetUserCaptureScreenSuccess = {
 			}
 			option.success?.(res)
 			option.complete?.(res)
@@ -136,7 +119,7 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (callback : 
 	*/
 export const setUserCaptureScreen : SetUserCaptureScreen = function (options : SetUserCaptureScreenOptions) {
 	if (UIDevice.current.systemVersion < "13.0") {
-		let res: UserCaptureScreenResult = {
+		let res: SetUserCaptureScreenFail = {
 			errCode: 12001,
 			errSubject: "uni-usercapturescreen",
 			errMsg: "setUserCaptureScreen:system not support"
@@ -145,7 +128,7 @@ export const setUserCaptureScreen : SetUserCaptureScreen = function (options : S
 		options.complete?.(res);
 
 	} else if (UIDevice.current.systemVersion == "15.1") {
-		let res: UserCaptureScreenResult = {
+		let res: SetUserCaptureScreenFail = {
 			errCode: 12010,
 			errSubject: "uni-usercapturescreen",
 			errMsg: "setUserCaptureScreen:system internal error"
