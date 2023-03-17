@@ -84,6 +84,14 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : Us
 	observer?.stopWatching();
 	observer = new ScreenFileObserver(directory_screenshot);
 	observer?.startWatching();
+	
+	
+	UTSAndroid.onAppActivityDestroy(function(){
+		observer?.stopWatching()
+		observer = null
+	})
+	
+	
 }
 
 /**
