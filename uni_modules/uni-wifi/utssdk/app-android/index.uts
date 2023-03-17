@@ -42,7 +42,7 @@ type GetConnectedWifiOptions = {
  */
 type WifiConnectOption = {
 	SSID:string;
-	BSSID:string;
+	BSSID?:string;
 	password:string;
 	maunal:boolean;
 	// 只返回ssid
