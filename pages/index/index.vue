@@ -43,7 +43,6 @@
 				uni.connectWifi({
 					maunal:false,
 					SSID:"Xiaomi_20D0",
-					BSSID:"",
 					password:"BBBB",
 					complete:(res)=>{
 						console.log(res);
