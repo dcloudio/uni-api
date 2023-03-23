@@ -6,6 +6,8 @@
 		</view>
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
+		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
+		
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
@@ -25,6 +27,9 @@
 			return {
 				title: 'Hello',
 				memListener:null,
+				setUserCaptureScreenFlag: false,
+				setUserCaptureScreenText: '禁止截屏',
+				permissionGranted: false
 			}
 		},
 		onLoad() {
@@ -133,41 +138,20 @@
 				var that = this;
 				uni.onUserCaptureScreen(function(res) {
 						console.log(res);
-						
-						if (uni.getSystemInfoSync().platform == "android") {
-							// 除android 之外的平台，不需要判断返回状态码
-							if(res.errCode == -1){
-								// 启动失败
-								return ;
-							}else if(res.errCode == 0){
-								uni.showToast({
-									icon:"none",
-									title:'截屏监听已开启'
-								})
-							}else {
-								uni.showToast({
-									icon:"none",
-									title:'捕获截屏事件'
-								})
-								that.screenImage = res.image
-							}
-						}else{
-							// 除android 之外的平台，不需要判断返回状态码
-							uni.showToast({
-								icon:"none",
-								title:'捕获截屏事件'
-							})
-						}
-						
-					});
-					
-					if (uni.getSystemInfoSync().platform != "android") {
-						// 除android 之外的平台，直接提示监听已开启
 						uni.showToast({
 							icon:"none",
-							title:'截屏监听已开启'
+							title:'捕获截屏事件'
 						})
-					}
+						that.screenImage = res.path
+				});
+					
+				if (uni.getSystemInfoSync().platform != "android" || that.permissionGranted) {
+					// 除android 之外的平台，直接提示监听已开启
+					uni.showToast({
+						icon:"none",
+						title:'截屏监听已开启'
+					})
+				}
 			},
 			testScreenShotOff() {
 				uni.offUserCaptureScreen(function(res) {
@@ -189,6 +173,31 @@
 						});
 					}
 				})
+			},
+			testSetUserCaptureScreen() {
+				let flag = this.setUserCaptureScreenFlag;
+				uni.setUserCaptureScreen({
+					enable: flag,
+					success: (res) => {
+						console.log("setUserCaptureScreen enable: " + flag + " success: " + JSON.stringify(res));
+					},
+					fail: (res) => {
+						console.log("setUserCaptureScreen enable: " + flag + " fail: " + JSON.stringify(res));
+					},
+					complete: (res) => {
+						console.log("setUserCaptureScreen enable: " + flag + " complete: " + JSON.stringify(res));
+					}
+				});
+				uni.showToast({
+					icon:"none",
+					title: this.setUserCaptureScreenText
+				});
+				this.setUserCaptureScreenFlag = !this.setUserCaptureScreenFlag;
+				if (this.setUserCaptureScreenFlag) {
+					this.setUserCaptureScreenText = '允许截屏';
+				} else {
+					this.setUserCaptureScreenText = '禁止截屏';
+				}
 			},
 		}
 	}

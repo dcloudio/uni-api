@@ -1,4 +1,4 @@
-export default function getBatteryInfo(options) {
+export function getBatteryInfo(options) {
     if (navigator.getBattery) {
         navigator.getBattery().then(battery => {
             const res = {

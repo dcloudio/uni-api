@@ -34,7 +34,8 @@
 		"uni-ext-api":{
 			"uni": {
 				"onUserCaptureScreen": "onUserCaptureScreen",
-				"offUserCaptureScreen": "offUserCaptureScreen"
+				"offUserCaptureScreen": "offUserCaptureScreen",
+				"setUserCaptureScreen": "setUserCaptureScreen"
 			}
 		},
 		"dependencies": [],
