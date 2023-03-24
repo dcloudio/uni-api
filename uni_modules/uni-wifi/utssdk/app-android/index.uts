@@ -598,6 +598,19 @@ export function offGetWifiList(callback : UTSCallback) {
 export function connectWifi(option : WifiConnectOption) {
 
 
+	if (option.maunal == true) {
+		// 指定了手动模式
+		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
+
+		result.errCode = 0
+		result.errMsg = "connectWifi:ok"
+
+		option.success?.(result)
+		option.complete?.(result)
+		return
+	}
+
 	var result : UniWifiResult = {
 		errCode: 12000,
 		errMsg: "connectWifi:fail:not invoke startWifi",
@@ -612,18 +625,7 @@ export function connectWifi(option : WifiConnectOption) {
 		return
 	}
 
-	if (option.maunal == true) {
-		// 指定了手动模式
-		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
-		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 
-		result.errCode = 0
-		result.errMsg = "connectWifi:ok"
-
-		option.success?.(result)
-		option.complete?.(result)
-		return
-	}
 
 	// 执行后续的逻辑
 	let scanWifiInfo : AndroidUniWifiInfo | null = null
