@@ -80,6 +80,34 @@ export type SetWifiList = (option: WifiOption) => void
 interface Uni {
 	startWifi : StartWifi,
 	stopWifi : StopWifi,
+	/**
+	 * @autotest {
+		generated: false,
+		cases:[
+			{
+				before: 'startWifi',
+				after: 'stopWifi',
+				input: [{
+					maunal:false,
+					SSID:"Xiaomi_20D0",
+					password:"BBB111"
+				}]
+			}
+		]
+	}
+	*/
+	connectWifi: ConnectWifi,
+	/**
+	 * @autotest {
+		generated: false,
+		cases:[
+			{
+				before: 'startWifi',
+				after: 'stopWifi'
+			}
+		]
+	}
+	*/
 	getWifiList : GetWifiList,
 	onGetWifiList : OnGetWifiList,
 	offGetWifiList : OffGetWifiList,
