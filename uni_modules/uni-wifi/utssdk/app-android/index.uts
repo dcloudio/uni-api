@@ -17,7 +17,7 @@ import AuthAlgorithm from 'android.net.wifi.WifiConfiguration.AuthAlgorithm';
 import KeyMgmt from 'android.net.wifi.WifiConfiguration.KeyMgmt';
 import TextUtils from 'android.text.TextUtils';
 
-import { UniWifiResult, GetConnectedWifiOptions, WifiConnectOption, WifiOption, UniWifiInfo,UniWifiPartialInfo, UniWifiCallback, StartWifi, StopWifi, GetWifiList, GetConnectedWifi, OnGetWifiList, OnWifiConnectedWithPartialInfo, OnOffWifiConnectedWithPartialInfo, OnWifiConnected, ConnectWifi, OffGetWifiList, OffWifiConnected, SetWifiList } from "../interface.uts"
+import { UniWifiResult, GetConnectedWifiOptions, WifiConnectOption, WifiOption, UniWifiInfo, UniWifiPartialInfo, UniWifiCallback, StartWifi, StopWifi, GetWifiList, GetConnectedWifi, OnGetWifiList, OnWifiConnectedWithPartialInfo, OnOffWifiConnectedWithPartialInfo, OnWifiConnected, ConnectWifi, OffGetWifiList, OffWifiConnected, SetWifiList } from "../interface.uts"
 
 
 
@@ -113,7 +113,7 @@ export type AndroidUniWifiInfo = {
 	securityType : string;
 }
 
-function wrapUniWifiInfoFromAndroid(androidInfo:AndroidUniWifiInfo): UniWifiInfo{
+function wrapUniWifiInfoFromAndroid(androidInfo : AndroidUniWifiInfo) : UniWifiInfo {
 	let ret : UniWifiInfo = {
 		SSID: androidInfo.SSID,
 		BSSID: androidInfo.BSSID,
@@ -131,7 +131,7 @@ function wrapUniWifiInfoFromScan(scanResult : ScanResult) : AndroidUniWifiInfo {
 		secure: false,
 		signalStrength: 0,
 		frequency: 0,
-		securityType:"NONE"
+		securityType: "NONE"
 	}
 	if (scanResult != null) {
 		// 如果是通过扫描列表得到的数据，进行封装
@@ -164,8 +164,8 @@ function wrapUniWifiInfoFromConnectInfo(connectInfo : WifiInfo) : UniWifiInfo {
 		signalStrength: 0,
 		frequency: 0,
 	}
-	
-	
+
+
 	if (connectInfo.getSSID() != null) {
 		let s = connectInfo.getSSID();
 		// 微信不带，这里需要去掉引号
@@ -316,8 +316,8 @@ function getSecurityType(result : ScanResult) : string {
 }
 
 
-function zeroCountNum(source? : string) : number {
-	if(source == null){
+function zeroCountNum(source ?: string) : number {
+	if (source == null) {
 		return 0
 	}
 	var splitted = source.split(":")
@@ -329,6 +329,8 @@ function zeroCountNum(source? : string) : number {
 	}
 	return countNum
 }
+
+
 /**
 	* 自定义wifi变化广播监听器
 	*/
@@ -596,6 +598,19 @@ export function offGetWifiList(callback : UTSCallback) {
 export function connectWifi(option : WifiConnectOption) {
 
 
+	if (option.maunal == true) {
+		// 指定了手动模式
+		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
+
+		result.errCode = 0
+		result.errMsg = "connectWifi:ok"
+
+		option.success?.(result)
+		option.complete?.(result)
+		return
+	}
+
 	var result : UniWifiResult = {
 		errCode: 12000,
 		errMsg: "connectWifi:fail:not invoke startWifi",
@@ -610,18 +625,7 @@ export function connectWifi(option : WifiConnectOption) {
 		return
 	}
 
-	if (option.maunal == true) {
-		// 指定了手动模式
-		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
-		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 
-		result.errCode = 0
-		result.errMsg = "connectWifi:ok"
-
-		option.success?.(result)
-		option.complete?.(result)
-		return
-	}
 
 	// 执行后续的逻辑
 	let scanWifiInfo : AndroidUniWifiInfo | null = null
@@ -724,10 +728,10 @@ export function connectWifi(option : WifiConnectOption) {
 	wifiManager.saveConfiguration()
 	//scanWifiInfo 根据 partialInfo 填充给返回字段
 	if (option.partialInfo != null && option.partialInfo == true) {
-		let wifiPartialInfo:UniWifiInfo = {
+		let wifiPartialInfo : UniWifiInfo = {
 			SSID: scanWifiInfo.SSID
 		}
-		result.wifi =wifiPartialInfo
+		result.wifi = wifiPartialInfo
 	} else {
 		result.wifi = wrapUniWifiInfoFromAndroid(scanWifiInfo)
 	}
@@ -748,9 +752,9 @@ export function connectWifi(option : WifiConnectOption) {
 export function stopWifi(option : WifiOption) {
 	// 需要先开启wifi,才能使用后续的功能
 	if (Global.mReceiver == null) {
-		var result:UniWifiResult = {
+		var result : UniWifiResult = {
 			errCode: 12000,
-			errSubject:"uni-stopWifi",
+			errSubject: "uni-stopWifi",
 			errMsg: "stopWifi:not init"
 		}
 		option.fail?.(result)
@@ -765,9 +769,9 @@ export function stopWifi(option : WifiOption) {
 		//TODO handle the exception
 	}
 
-	var result:UniWifiResult = {
+	var result : UniWifiResult = {
 		errCode: 0,
-		errSubject:"uni-stopWifi",
+		errSubject: "uni-stopWifi",
 		errMsg: "stopWifi:ok"
 	}
 	option.success?.(result)
@@ -781,11 +785,11 @@ export function stopWifi(option : WifiOption) {
 @Suppress("DEPRECATION")
 export function getConnectedWifi(option : GetConnectedWifiOptions) {
 
-	let wifiInfo:UniWifiInfo = {
-		SSID:""
+	let wifiInfo : UniWifiInfo = {
+		SSID: ""
 	}
 
-	var res:UniWifiResult = {
+	var res : UniWifiResult = {
 		errCode: 12000,
 		errMsg: "getConnectedWifi:fail:not invoke startWifi",
 		errSubject: "uni-getConnectedWifi",
@@ -823,7 +827,7 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 		wifiInfo = wrapUniWifiInfoFromConnectInfo(winfo);
 		// 判断一下是否wifi 关闭了
 		if (option.partialInfo!) {
-			let ret:UniWifiInfo = {
+			let ret : UniWifiInfo = {
 				SSID: wifiInfo.SSID
 			}
 			res.wifi = ret;
