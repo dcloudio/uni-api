@@ -20,7 +20,7 @@ export type UserCaptureScreenCallback = (res : OnUserCaptureScreenCallbackResult
 	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
-	* @since 3.6.8
+	* @since 3.7.7
 	*/
 export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
@@ -31,7 +31,7 @@ export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) 
 	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
-	* @since 3.6.8
+	* @since 3.7.7
 	*/
 export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
