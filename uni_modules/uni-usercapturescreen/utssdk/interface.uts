@@ -47,7 +47,6 @@ export type SetUserCaptureScreenSuccess = {
 export type SetUserCaptureScreenFail = {
 	/**
 		* 错误码
-		* 0:成功
 		* 12001:system not support
 		* 12010:system internal error
 		*/
@@ -109,7 +108,7 @@ export type SetUserCaptureScreenOptions = {
 	* @param {SetUserCaptureScreenOptions} options 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
 	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
-	* @since 3.7.3
+	* @since 3.7.7
 	*/
 export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
 

@@ -1,14 +1,14 @@
 {
 	"id": "uni-usercapturescreen",
 	"displayName": "uni-usercapturescreen",
-	"version": "1.0.1",
+	"version": "1.0.4",
 	"description": "用户主动截屏事件监听",
 	"keywords": [
         "截屏"
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.6.0"
+		"HBuilderX": "^3.6.8"
 	},
 	"dcloudext": {
 		"type": "uts",
