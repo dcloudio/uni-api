@@ -107,7 +107,7 @@ export type SetUserCaptureScreenOptions = {
 	* 
 	* @param {SetUserCaptureScreenOptions} options 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
+	* @platforms APP-IOS = ^13.0,APP-ANDROID = ^4.4
 	* @since 3.7.7
 	*/
 export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
