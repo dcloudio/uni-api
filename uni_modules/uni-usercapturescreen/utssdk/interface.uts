@@ -19,7 +19,7 @@ export type UserCaptureScreenCallback = (res : OnUserCaptureScreenCallbackResult
 	* 
 	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^19
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
 	* @since 3.6.8
 	*/
 export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
@@ -30,7 +30,7 @@ export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) 
 	* 
 	* @param {UserCaptureScreenCallback} callback 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^19
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
 	* @since 3.6.8
 	*/
 export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
@@ -108,12 +108,12 @@ export type SetUserCaptureScreenOptions = {
 	* 
 	* @param {SetUserCaptureScreenOptions} options 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^19
+	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
 	* @since 3.7.3
 	*/
 export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
 
-interface uni {
+export interface Uni {
 	onUserCaptureScreen : OnUserCaptureScreen,
 	offUserCaptureScreen : OffUserCaptureScreen,
 	setUserCaptureScreen : SetUserCaptureScreen
