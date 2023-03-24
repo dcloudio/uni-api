@@ -41,9 +41,9 @@
 			testConnnectWifi(){
 
 				uni.connectWifi({
-					maunal:false,
+					maunal:true,
 					SSID:"Xiaomi_20D0",
-					password:"BBBB",
+					password:"BBB111",
 					complete:(res)=>{
 						console.log(res);
 					}
