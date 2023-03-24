@@ -3,60 +3,7 @@ import { CaptiveNetwork, kCNNetworkInfoKeySSID, kCNNetworkInfoKeyBSSID } from 'S
 import { NSArray, NSDictionary } from 'Foundation';
 import { CFString } from 'CoreFoundation';
 import { UIDevice } from 'UIKit';
-
-/**
- * Wifi 函数通用入参封装
- */
-type WifiOption = {
-	success?: (res: UniWifiResult) => void;
-	fail?: (res: UniWifiResult) => void;
-	complete?: (res: UniWifiResult) => void;
-};
-
-/**
- * Wifi 链接参数封装 
- */
-type WifiConnectOption = {
-	SSID?: string;
-	BSSID?: string;
-	password?: string;
-	maunal?: boolean;
-	partialInfo?: boolean; //ios不生效
-	success?: (res: UniWifiResult) => void;
-	fail?: (res: UniWifiResult) => void;
-	complete?: (res: UniWifiResult) => void;
-}
-
-/**
- * 获取当前链接的wifi信息
- */
-type GetConnectedWifiOptions = {
-	partialInfo?: boolean
-	success?: (res: UniWifiResult) => void
-	fail?: (res: UniWifiResult) => void
-	complete?: (res: UniWifiResult) => void
-}
-
-/* 
- * 对外暴露的wifi信息
- */
-type UniWifiInfo = {
-	SSID: string;
-	BSSID: string;
-	secure: boolean;
-	signalStrength: number;
-	frequency: number;
-}
-
-type UniWifiResult = {
-	errCode : number,
-	errSubject : string,
-	errMsg : string,
-	wifi: UniWifiInfo | null
-}
-
-type UniWifiCallback = () => void
-
+import { WifiOption, WifiConnectOption, GetConnectedWifiOptions, UniWifiInfo, UniWifiResult, UniWifiCallback, StartWifi, StopWifi, GetWifiList, OnGetWifiList, OffGetWifiList, GetConnectedWifi, ConnectWifi, OnWifiConnected, OnWifiConnectedWithPartialInfo, OffWifiConnected, OnOffWifiConnectedWithPartialInfo, SetWifiList } from "../interface.uts"
 
 /* 
  * 系统定位权限获取类
@@ -135,7 +82,7 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 		let list = arr! as NSArray
 		let index = 0
 		while (index < list.count) { 
-			let item = list[index]
+			let item = list[index] 
 			let interfaceName = item as string
 			let dic = CNCopyCurrentNetworkInfo(interfaceName as CFString)
 			if (dic != null) {
@@ -157,7 +104,7 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 			index++
 		}
 		
-		if (wifiInfo.BSSID.length > 0 && wifiInfo.SSID.length > 0) {
+		if (wifiInfo.BSSID!.length > 0 && wifiInfo.SSID.length > 0) {
 			let res: UniWifiResult = {
 				errSubject: "uni-getConnectedWifi",
 				errCode: 0,
@@ -204,7 +151,7 @@ class UniWiFiModuleGloabInfo {
 /* 
  * 初始化wifi模块 
  */
-export function startWifi(option: WifiOption) {
+export const startWifi: StartWifi = function (option: WifiOption) {
 	UniWiFiModuleGloabInfo.alreadyStartWifi = true
 	let res: UniWifiResult = {
 		errSubject: "uni-startWifi",
@@ -219,7 +166,7 @@ export function startWifi(option: WifiOption) {
 /* 
  * 停止wifi模块 
  */
-export function stopWifi(option: WifiOption) {
+export const stopWifi: StopWifi = function (option: WifiOption) {
 	UniWiFiModuleGloabInfo.alreadyStartWifi = false
 	LocationPromiseService.promiseCompletionHandler = []	
 	let res: UniWifiResult = {
@@ -235,7 +182,7 @@ export function stopWifi(option: WifiOption) {
 /* 
  * 获取wifi列表, 在调用之前需要引导用户跳转到系统设置-WIFI设置页面，系统搜索周边wifi后app才能接收到回调
  */
-export function getWifiList(option: WifiOption) {
+export const getWifiList: GetWifiList = function (option: WifiOption) {
 	let res: UniWifiResult = {
 		errSubject: "uni-getWifiList",
 		errCode: 12001, 
@@ -249,14 +196,14 @@ export function getWifiList(option: WifiOption) {
 /* 获取wifi列表的回调
  * note: 请在getWifiList方法的回调里调用该方法
  */
-export function onGetWifiList(callback: UniWifiCallback) {
+export const onGetWifiList: OnGetWifiList = function (callback: UniWifiCallback) {
 	
 }
 
 /* 
  *	注销获取wifi列表的回调
  */
-export function offGetWifiList(callback: UniWifiCallback) {
+export const offGetWifiList: OffGetWifiList = function (callback: UniWifiCallback) {
 
 }
 
@@ -264,7 +211,7 @@ export function offGetWifiList(callback: UniWifiCallback) {
 /* 
  * 获取当前连接的wifi信息
  */
-export function getConnectedWifi(option: GetConnectedWifiOptions) {
+export const getConnectedWifi: GetConnectedWifi = function (option: GetConnectedWifiOptions) {
 	if (UniWiFiModuleGloabInfo.alreadyStartWifi == false) {
 		let res: UniWifiResult = {
 			errSubject: "uni-getConnectedWifi",
@@ -299,7 +246,7 @@ export function getConnectedWifi(option: GetConnectedWifiOptions) {
 /* 
  * 连接wifi
  */
-export function connectWifi(option: WifiConnectOption) {
+export const connectWifi: ConnectWifi = function (option: WifiConnectOption) {
 	let res: UniWifiResult = {
 		errSubject: "uni-connectWifi",
 		errCode: 12001, 
@@ -314,35 +261,35 @@ export function connectWifi(option: WifiConnectOption) {
 /* 
  * 连上wifi事件的监听函数
  */
-export function onWifiConnected(callback: UniWifiCallback) {
+export const onWifiConnected: OnWifiConnected = function (callback: UniWifiCallback) {
 	
 }
 
 /* 
  * 连上wifi事件的监听函数， wifiInfo仅包含ssid
  */
-export function onWifiConnectedWithPartialInfo(callback: UniWifiCallback) {
+export const onWifiConnectedWithPartialInfo: OnWifiConnectedWithPartialInfo = function (callback: UniWifiCallback) {
 	
 }
 
 /* 
  *	移除连接上wifi的事件的监听函数，不传此参数则移除所有监听函数。
  */
-export function offWifiConnected(callback: UniWifiCallback | null) {
+export const offWifiConnected: OffWifiConnected = function (callback: UniWifiCallback | null) {
 
 }
 
 /* 
  *	移除连接上wifi的事件的监听函数，不传此参数则移除所有监听函数。
  */
-export function onOffWifiConnectedWithPartialInfo(callback: UniWifiCallback | null) {
+export const onOffWifiConnectedWithPartialInfo: OnOffWifiConnectedWithPartialInfo = function (callback: UniWifiCallback | null) {
 
 }
 
 /* 
  * 设置 wifiList 中 AP 的相关信息。在 onGetWifiList 回调后调用，iOS特有接口。
  */
-export function setWifiList(option: WifiOption) {
+export const setWifiList: SetWifiList = function (option: WifiOption) {
 	let res: UniWifiResult = {
 		errSubject: "uni-setWifiList",
 		errCode: 12001, 
