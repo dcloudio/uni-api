@@ -32,7 +32,9 @@ class Global {
 	// 扫描wifi结果
 	static scanList : AndroidUniWifiInfo[] = []
 	// 获取wifi列表监听
-	static getWifiListCallbackList : UTSCallback[] = []
+	static onGetWifiListCallback : UTSCallback | null = null
+	static supendGetWifiSuccess : ((res: UniWifiResult) => void) | null = null
+	static supendGetWifiComplete : ((res: UniWifiResult) => void) | null = null
 	// wifi链接监听
 	static onWifiConnectCallbackList : UTSCallback[] = []
 	static onWifiConnectWithPartialInfoCallbackList : UTSCallback[] = []
@@ -303,9 +305,23 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 
 		if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
 			startWifiScaning = false;
+			
+			let ret : UniWifiResult = {
+				errCode: 0,
+				errSubject: "uni-getWifiList",
+				errMsg: "getWifiList:ok"
+			}
+			if(Global.supendGetWifiSuccess != null){
+				Global.supendGetWifiSuccess?.(ret)
+			}
+			if(Global.supendGetWifiComplete != null){
+				Global.supendGetWifiComplete?.(ret)
+			}
+			
 			// wifi 扫描结果回调
 			let results = this.mWifiManager!.scanResults;
 
+			
 			if (results != null) {
 				Global.scanList = []
 				for (let scanResult in results) {
@@ -316,13 +332,16 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 				}
 
 				// 挨个通知，所有的监听器
-				for (let perCallback in Global.getWifiListCallbackList) {
-
+				if(Global.onGetWifiListCallback != null){
 					const data = new JSONObject();
-					// let mainJsonStr = Gson().toJson(Global.scanList);
 					data["wifiList"] = Global.scanList
-					perCallback(data);
+					Global.onGetWifiListCallback?.(data);
 				}
+				// for (let perCallback in Global.onGetWifiListCallback) {
+				// 	const data = new JSONObject();
+				// 	data["wifiList"] = Global.scanList
+				// 	perCallback(data);
+				// }
 
 			}
 
@@ -378,9 +397,18 @@ export function startWifi(option : WifiOption) {
 		return;
 	}
 	// 初始化wifi 状态广播监听，后续所有的api，均基于此
-	if (Global.mReceiver == null) {
-		Global.mReceiver = new CustomBroadcastReceiver(wifiManager)
+	if(Global.mReceiver != null){
+		// 说明已经注册过了
+		result.errCode = 0
+		result.errMsg = "startWifi:ok"
+		
+		option.success?.(result)
+		option.complete?.(result)
+		return 
 	}
+	
+	
+	Global.mReceiver = new CustomBroadcastReceiver(wifiManager)
 
 	let filter = new IntentFilter()
 	filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
@@ -401,7 +429,7 @@ export function startWifi(option : WifiOption) {
 			Global.mReceiver = null
 
 			Global.scanList = []
-			Global.getWifiListCallbackList = []
+			Global.onGetWifiListCallback = null
 			Global.onWifiConnectCallbackList = []
 			Global.onWifiConnectWithPartialInfoCallbackList = []
 		}
@@ -442,15 +470,13 @@ export function getWifiList(option : WifiOption) {
 	let wifiManager : WifiManager =
 		UTSAndroid.getAppContext()!.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
-	wifiManager.startScan()
 
-	let ret : UniWifiResult = {
-		errCode: 0,
-		errSubject: "uni-getWifiList",
-		errMsg: "getWifiList:ok"
-	}
-	option.success?.(ret)
-	option.complete?.(ret)
+
+	Global.supendGetWifiSuccess = option.success
+	Global.supendGetWifiComplete = option.complete
+	
+	wifiManager.startScan()
+	
 
 }
 
@@ -505,21 +531,14 @@ export function offWifiConnectedWithPartialInfo(callback? : UTSCallback) {
 	* 注册Wifi列表的监听事件
 	*/
 export function onGetWifiList(callback : UTSCallback) {
-	Global.getWifiListCallbackList.push(callback)
+	Global.onGetWifiListCallback = callback
 }
 
 /**
  * 取消注册Wifi列表的监听事件
  */
 export function offGetWifiList(callback? : UTSCallback) {
-	if(callback == null){
-		Global.getWifiListCallbackList = []
-		return
-	}
-	let callbackIndex = Global.getWifiListCallbackList.indexOf(callback)
-	if (callbackIndex >= 0) {
-		Global.getWifiListCallbackList.splice(callbackIndex, 1);
-	}
+	Global.onGetWifiListCallback = null
 }
 
 
@@ -737,10 +756,11 @@ export function stopWifi(option : WifiOption) {
 		//TODO handle the exception
 	}
 	
-	Global.getWifiListCallbackList = []
+	Global.onGetWifiListCallback = null
 	Global.onWifiConnectWithPartialInfoCallbackList = []
 	Global.onWifiConnectCallbackList = []
-
+	Global.mReceiver = null
+	
 	let result : UniWifiResult = {
 		errCode: 0,
 		errSubject: "uni-stopWifi",
