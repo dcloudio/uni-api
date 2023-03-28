@@ -83,6 +83,7 @@ interface Uni {
 	/**
 	 * @autotest {
 		generated: false,
+		pollution: false,
 		cases:[
 			{
 				before: 'startWifi',
@@ -90,8 +91,12 @@ interface Uni {
 				input: [{
 					maunal:false,
 					SSID:"Xiaomi_20D0",
-					password:"BBB111"
-				}]
+					password:"streamApp!2016",
+				}],
+				output:{
+				    	callbackType: 'success',
+				        value: { errCode: 12013 ,errMsg: "connectWifi:wifi config may be expired",errSubject: "uni-connectWifi"}
+				    }
 			}
 		]
 	}
