@@ -5,13 +5,6 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
-        },
-        {
-            "path": "pages/autotest/uni-wifi/uni-wifi",
-            "style": {
-                "navigationBarTitleText": "uni-wifi",
-                "enablePullDownRefresh": false
-            }
         }
 	],
 	"globalStyle": {

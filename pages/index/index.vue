@@ -1,9 +1,14 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+
+		
+		<button @tap="testStartWifi" style="width: 100%;">初始化wifi模块</button>
+		<button @tap="testGetWifiList" style="width: 100%;">获取当前wifi列表</button>
+		<button @tap="testOffGetWifiList" style="width: 100%;">移除wifi列表监听</button>
+		<button @tap="testGetConnnectWifi" style="width: 100%;">获取当前连接的wifi</button>
+		<button @tap="testConnnectWifi" style="width: 100%;">链接wifi</button>
+		<button @tap="testStopWifi" style="width: 100%;">关闭wifi模块</button>
+		
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
 		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
@@ -12,12 +17,7 @@
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
 		
-		<button @tap="testStartWifi">初始化wifi模块</button>
-		<button @tap="testGetWifiList">获取当前wifi列表</button>
-		<button @tap="testOffGetWifiList">移除wifi列表监听</button>
-		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
-		<button @tap="testConnnectWifi">链接wifi</button>
-		<button @tap="testStopWifi">关闭wifi模块</button>
+		
 	</view>
 </template>
 
@@ -26,7 +26,6 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
 				memListener:null,
 				setUserCaptureScreenFlag: false,
 				setUserCaptureScreenText: '禁止截屏'
