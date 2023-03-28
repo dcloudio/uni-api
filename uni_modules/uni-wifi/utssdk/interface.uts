@@ -1,0 +1,125 @@
+/**
+ * Wifi 函数通用入参封装
+ */
+ export type WifiOption = {
+	success?: (res: UniWifiResult) => void;
+	fail?: (res: UniWifiResult) => void;
+	complete?: (res: UniWifiResult) => void;
+};
+
+/**
+ * Wifi 链接参数封装 
+ */
+export type WifiConnectOption = {
+	SSID?: string;
+	BSSID?: string;
+	password?: string;
+	maunal?: boolean;
+	partialInfo?: boolean; //ios不生效
+	success?: (res: UniWifiResult) => void;
+	fail?: (res: UniWifiResult) => void;
+	complete?: (res: UniWifiResult) => void;
+}
+
+/**
+ * 获取当前链接的wifi信息
+ */
+export type GetConnectedWifiOptions = {
+	partialInfo?: boolean
+	success?: (res: UniWifiResult) => void
+	fail?: (res: UniWifiResult) => void
+	complete?: (res: UniWifiResult) => void
+}
+
+/* 
+ * 对外暴露的wifi信息
+ */
+export type UniWifiInfo = {
+	SSID: string;
+	BSSID?: string;
+	secure?: boolean;
+	signalStrength?: number;
+	frequency?: number;
+}
+
+
+export type UniWifiResult = {
+	errCode : number,
+	errSubject : string,
+	errMsg : string,
+	wifi: UniWifiInfo | null
+}
+
+export type UniWifiCallback = () => void
+
+
+export type StartWifi = (option: WifiOption) => void
+
+export type StopWifi = (option: WifiOption) => void
+
+export type GetWifiList = (option: WifiOption) => void
+
+export type OnGetWifiList = (callback: UniWifiCallback) => void
+
+export type OffGetWifiList = (callback: UniWifiCallback) => void
+
+export type GetConnectedWifi = (option: GetConnectedWifiOptions) => void
+
+export type ConnectWifi = (option: WifiConnectOption) => void
+
+export type OnWifiConnected = (callback: UniWifiCallback) => void
+
+export type OnWifiConnectedWithPartialInfo = (callback: UniWifiCallback) => void
+
+export type OffWifiConnected = (callback: UniWifiCallback | null) => void
+
+export type OnOffWifiConnectedWithPartialInfo = (callback: UniWifiCallback | null) => void
+
+export type SetWifiList = (option: WifiOption) => void
+
+interface Uni {
+	startWifi : StartWifi,
+	stopWifi : StopWifi,
+	/**
+	 * @autotest {
+		generated: false,
+		pollution: false,
+		cases:[
+			{
+				before: 'startWifi',
+				after: 'stopWifi',
+				input: [{
+					maunal:false,
+					SSID:"Xiaomi_20D0",
+					password:"streamApp!2016",
+				}],
+				output:{
+				    	callbackType: 'success',
+				        value: { errCode: 12013 ,errMsg: "connectWifi:wifi config may be expired",errSubject: "uni-connectWifi"}
+				    }
+			}
+		]
+	}
+	*/
+	connectWifi: ConnectWifi,
+	/**
+	 * @autotest {
+		generated: false,
+		cases:[
+			{
+				before: 'startWifi',
+				after: 'stopWifi'
+			}
+		]
+	}
+	*/
+	getWifiList : GetWifiList,
+	onGetWifiList : OnGetWifiList,
+	offGetWifiList : OffGetWifiList,
+	getConnectedWifi : GetConnectedWifi,
+	onWifiConnected : OnWifiConnected,
+	onWifiConnectedWithPartialInfo : OnWifiConnectedWithPartialInfo,
+	offWifiConnected : OffWifiConnected,
+	onOffWifiConnectedWithPartialInfo : OnOffWifiConnectedWithPartialInfo,
+	setWifiList : SetWifiList,
+}
