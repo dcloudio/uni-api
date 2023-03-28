@@ -14,6 +14,7 @@
 		
 		<button @tap="testStartWifi">初始化wifi模块</button>
 		<button @tap="testGetWifiList">获取当前wifi列表</button>
+		<button @tap="testOffGetWifiList">移除wifi列表监听</button>
 		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
 		<button @tap="testConnnectWifi">链接wifi</button>
 		<button @tap="testStopWifi">关闭wifi模块</button>
@@ -39,15 +40,26 @@
 				console.log(res);
 			},
 			testConnnectWifi(){
-
-				uni.connectWifi({
-					maunal:false,
-					SSID:"Xiaomi_20D0",
-					password:"BBBB",
-					complete:(res)=>{
-						console.log(res);
+				
+				uni.startWifi({
+					success:(res)=> {
+						console.log("success: " + JSON.stringify(res));
+						uni.connectWifi({
+							maunal:false,
+							SSID:"Xiaomi_20D0",
+							password:"BBB111",
+							complete:(res)=>{
+								console.log(res);
+							}
+						});
+					},fail:(res)=>{
+						console.log("fail: " + JSON.stringify(res));
+					},complete:(res)=>{
+						console.log("complete: " + JSON.stringify(res));
 					}
-				});
+				})
+
+				
 				
 			},
 			testGetConnnectWifi(){
@@ -96,6 +108,9 @@
 				})
 			},
 			testStopWifi() {
+				uni.offWifiConnected()
+				uni.offWifiConnectedWithPartialInfo()
+				
 				uni.stopWifi({
 					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
@@ -119,6 +134,13 @@
 				})
 				
 			},
+			
+			testOffGetWifiList(){
+				uni.offGetWifiList()
+			},
+			
+	
+			
 			testonMemoryWarning() {
 				uni.onMemoryWarning(this.onMemoryWarning)
 				uni.showToast({
