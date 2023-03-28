@@ -44,14 +44,14 @@
 				uni.startWifi({
 					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
-						uni.connectWifi({
-							maunal:false,
-							SSID:"Xiaomi_20D0",
-							password:"BBB111",
-							complete:(res)=>{
-								console.log(res);
-							}
-						});
+						// uni.connectWifi({
+						// 	maunal:false,
+						// 	SSID:"Xiaomi_20D0",
+						// 	password:"BBB111",
+						// 	complete:(res)=>{
+						// 		console.log(res);
+						// 	}
+						// });
 					},fail:(res)=>{
 						console.log("fail: " + JSON.stringify(res));
 					},complete:(res)=>{
