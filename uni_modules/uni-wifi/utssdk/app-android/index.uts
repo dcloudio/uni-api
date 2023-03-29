@@ -539,6 +539,8 @@ export function onGetWifiList(callback : UTSCallback) {
  */
 export function offGetWifiList(callback? : UTSCallback) {
 	Global.onGetWifiListCallback = null
+	Global.supendGetWifiComplete = null
+	Global.supendGetWifiSuccess = null
 }
 
 

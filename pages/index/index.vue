@@ -9,6 +9,8 @@
 		<button @tap="testConnnectWifi" style="width: 100%;">链接wifi</button>
 		<button @tap="testStopWifi" style="width: 100%;">关闭wifi模块</button>
 		
+		<button @tap="onGetWifiList2_assert0" style="width: 100%;">onGetWifiList2_assert0</button>
+		
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
 		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
@@ -39,6 +41,28 @@
 			onMemoryWarning:function(res){
 				console.log(res);
 			},
+			fn:function(res){
+				console.log(res)
+			},
+			onGetWifiList2_assert0() {
+							const fn = res => console.log('onGetWifiList res', res)
+							uni.startWifi({success(){
+								uni.onGetWifiList(fn)
+								uni.getWifiList({
+									success() {
+										console.log('getWifiList success');
+										uni.offGetWifiList(fn)
+										uni.stopWifi({
+											success() {},
+											fail(e) {
+												console.log("stopWifi fail: ",e);
+											}
+										})
+									}
+								})
+							}})
+						},
+						
 			testConnnectWifi(){
 				
 				uni.startWifi({
