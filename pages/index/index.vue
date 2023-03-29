@@ -31,7 +31,8 @@
 				memListener:null,
 				setUserCaptureScreenFlag: false,
 				setUserCaptureScreenText: '禁止截屏',
-				permissionGranted: false
+				permissionGranted: false,
+				id:0
 			}
 		},
 		onLoad() {
@@ -45,23 +46,25 @@
 				console.log(res)
 			},
 			onGetWifiList2_assert0() {
-							const fn = res => console.log('onGetWifiList res', res)
-							uni.startWifi({success(){
-								uni.onGetWifiList(fn)
-								uni.getWifiList({
-									success() {
-										console.log('getWifiList success');
-										uni.offGetWifiList(fn)
-										uni.stopWifi({
-											success() {},
-											fail(e) {
-												console.log("stopWifi fail: ",e);
-											}
-										})
-									}
-								})
-							}})
-						},
+				console.log(" ------- onGetWifiList2_assert0: ",this.id);
+				const fn = res => console.log('onGetWifiList res', res)
+				uni.startWifi({success(){
+					uni.onGetWifiList(fn)
+					uni.getWifiList({
+						success() {
+							console.log('getWifiList success');
+							uni.offGetWifiList(fn)
+							uni.stopWifi({
+								success() {},
+								fail(e) {
+									console.log("stopWifi fail: ",e);
+								}
+							})
+						}
+					})
+				}})
+				this.id++
+			},
 						
 			testConnnectWifi(){
 				

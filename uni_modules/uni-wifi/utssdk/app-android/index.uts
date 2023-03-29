@@ -306,17 +306,8 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 		if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
 			startWifiScaning = false;
 			
-			let ret : UniWifiResult = {
-				errCode: 0,
-				errSubject: "uni-getWifiList",
-				errMsg: "getWifiList:ok"
-			}
-			if(Global.supendGetWifiSuccess != null){
-				Global.supendGetWifiSuccess?.(ret)
-			}
-			if(Global.supendGetWifiComplete != null){
-				Global.supendGetWifiComplete?.(ret)
-			}
+			
+			
 			
 			// wifi 扫描结果回调
 			let results = this.mWifiManager!.scanResults;
@@ -336,15 +327,27 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 					const data = new JSONObject();
 					data["wifiList"] = Global.scanList
 					Global.onGetWifiListCallback?.(data);
+					/**
+					 * 确保onGetWifiList 只会被执行一次
+					 */
+					Global.onGetWifiListCallback = null
 				}
-				// for (let perCallback in Global.onGetWifiListCallback) {
-				// 	const data = new JSONObject();
-				// 	data["wifiList"] = Global.scanList
-				// 	perCallback(data);
-				// }
 
 			}
 
+			let ret : UniWifiResult = {
+				errCode: 0,
+				errSubject: "uni-getWifiList",
+				errMsg: "getWifiList:ok"
+			}
+			if(Global.supendGetWifiSuccess != null){
+				Global.supendGetWifiSuccess?.(ret)
+				Global.supendGetWifiSuccess = null
+			}
+			if(Global.supendGetWifiComplete != null){
+				Global.supendGetWifiComplete?.(ret)
+				Global.supendGetWifiComplete = null
+			}
 		}
 	}
 
@@ -846,3 +849,4 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 	option.fail?.(res)
 	option.complete?.(res)
 }
+
