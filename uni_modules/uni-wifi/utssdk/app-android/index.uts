@@ -819,7 +819,7 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 
 		wifiInfo = wrapUniWifiInfoFromConnectInfo(winfo);
 		// 判断一下是否wifi 关闭了
-		if (option.partialInfo!= null) {
+		if (option.partialInfo != null && option.partialInfo == true) {
 			let ret : UniWifiInfo = {
 				SSID: wifiInfo.SSID
 			}
