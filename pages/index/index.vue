@@ -1,9 +1,16 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+
+		
+		<button @tap="testStartWifi" style="width: 100%;">初始化wifi模块</button>
+		<button @tap="testGetWifiList" style="width: 100%;">获取当前wifi列表</button>
+		<button @tap="testOffGetWifiList" style="width: 100%;">移除wifi列表监听</button>
+		<button @tap="testGetConnnectWifi" style="width: 100%;">获取当前连接的wifi</button>
+		<button @tap="testConnnectWifi" style="width: 100%;">链接wifi</button>
+		<button @tap="testStopWifi" style="width: 100%;">关闭wifi模块</button>
+		
+		<button @tap="onGetWifiList2_assert0" style="width: 100%;">onGetWifiList2_assert0</button>
+		
 		<button @tap="testScreenShotListen">开启截屏监听</button>
 		<button @tap="testScreenShotOff">关闭截屏监听</button>
 		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
@@ -12,11 +19,7 @@
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
 		
-		<button @tap="testStartWifi">初始化wifi模块</button>
-		<button @tap="testGetWifiList">获取当前wifi列表</button>
-		<button @tap="testGetConnnectWifi">获取当前连接的wifi</button>
-		<button @tap="testConnnectWifi">链接wifi</button>
-		<button @tap="testStopWifi">关闭wifi模块</button>
+		
 	</view>
 </template>
 
@@ -25,7 +28,6 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
 				memListener:null,
 				setUserCaptureScreenFlag: false,
 				setUserCaptureScreenText: '禁止截屏',
@@ -39,16 +41,49 @@
 			onMemoryWarning:function(res){
 				console.log(res);
 			},
+			fn:function(res){
+				console.log(res)
+			},
+			onGetWifiList2_assert0() {
+							const fn = res => console.log('onGetWifiList res', res)
+							uni.startWifi({success(){
+								uni.onGetWifiList(fn)
+								uni.getWifiList({
+									success() {
+										console.log('getWifiList success');
+										uni.offGetWifiList(fn)
+										uni.stopWifi({
+											success() {},
+											fail(e) {
+												console.log("stopWifi fail: ",e);
+											}
+										})
+									}
+								})
+							}})
+						},
+						
 			testConnnectWifi(){
-
-				uni.connectWifi({
-					maunal:false,
-					SSID:"Xiaomi_20D0",
-					password:"BBBB",
-					complete:(res)=>{
-						console.log(res);
+				
+				uni.startWifi({
+					success:(res)=> {
+						console.log("success: " + JSON.stringify(res));
+						// uni.connectWifi({
+						// 	maunal:false,
+						// 	SSID:"Xiaomi_20D0",
+						// 	password:"BBB111",
+						// 	complete:(res)=>{
+						// 		console.log(res);
+						// 	}
+						// });
+					},fail:(res)=>{
+						console.log("fail: " + JSON.stringify(res));
+					},complete:(res)=>{
+						console.log("complete: " + JSON.stringify(res));
 					}
-				});
+				})
+
+				
 				
 			},
 			testGetConnnectWifi(){
@@ -97,6 +132,9 @@
 				})
 			},
 			testStopWifi() {
+				uni.offWifiConnected()
+				uni.offWifiConnectedWithPartialInfo()
+				
 				uni.stopWifi({
 					success:(res)=> {
 						console.log("success: " + JSON.stringify(res));
@@ -120,6 +158,13 @@
 				})
 				
 			},
+			
+			testOffGetWifiList(){
+				uni.offGetWifiList()
+			},
+			
+	
+			
 			testonMemoryWarning() {
 				uni.onMemoryWarning(this.onMemoryWarning)
 				uni.showToast({

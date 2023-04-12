@@ -13,3 +13,9 @@
 用户主动截屏事件。取消事件监听。
 
 > 使用文档：[https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen](https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen)
+
+### uni.setUserCaptureScreen
+
+开启/关闭防截屏。
+
+> 使用文档：[https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen](https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen)
