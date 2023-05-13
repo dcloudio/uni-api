@@ -78,9 +78,50 @@ export type OnOffWifiConnectedWithPartialInfo = (callback: UniWifiCallback | nul
 export type SetWifiList = (option: WifiOption) => void
 
 interface Uni {
+	/**
+	 * 初始化Wi-Fi模块
+	 * 
+	 * @param {WifiOption} option 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	startWifi : StartWifi,
+	/**
+	 * 关闭 Wi-Fi 模块
+	 * 
+	 * @param {WifiOption} option 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	stopWifi : StopWifi,
 	/**
+	 * @param {WifiConnectOption} option 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest {
 		generated: false,
 		pollution: false,
@@ -103,6 +144,18 @@ interface Uni {
 	*/
 	connectWifi: ConnectWifi,
 	/**
+	 * 请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
+	 * @param {WifiOption} option
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getWifiList
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest {
 		generated: false,
 		cases:[
@@ -114,12 +167,117 @@ interface Uni {
 	}
 	*/
 	getWifiList : GetWifiList,
+	/**
+	 * 监听获取到 Wi-Fi 列表数据事件。
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	onGetWifiList : OnGetWifiList,
+	/**
+	 * 移除获取到 Wi-Fi 列表数据事件的监听函数。
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	offGetWifiList : OffGetWifiList,
+	/**
+	 * 获取已连接的 Wi-Fi 信息
+	 * 
+	 * @param {GetConnectedWifiOptions} option 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getConnectedWifi
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	getConnectedWifi : GetConnectedWifi,
+	/**
+	 * 监听连接上 Wi-Fi 的事件
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	onWifiConnected : OnWifiConnected,
+	/**
+	 * 监听连接上 Wi-Fi 的事件。
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	onWifiConnectedWithPartialInfo : OnWifiConnectedWithPartialInfo,
+	/**
+	 * 移除连接上 Wi-Fi 的事件的监听函数。
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	offWifiConnected : OffWifiConnected,
+	/**
+	 * 移除连接上 Wi-Fi 的事件的监听函数。
+	 * 
+	 * @param {UniWifiCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
+	 * @uniPlatform {
+	 * 	app: {
+	 * 		android: "4.4.4",
+	 * 		ios: "9.0",
+	 * 		page: ['vue','uvue','nvue']
+	 * 	}
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	onOffWifiConnectedWithPartialInfo : OnOffWifiConnectedWithPartialInfo,
 	setWifiList : SetWifiList,
 }
