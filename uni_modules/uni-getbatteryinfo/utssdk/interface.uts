@@ -59,3 +59,8 @@ export type GetBatteryInfoOptions = {
 * @assert () => fail({errCode: 1001, errSubject: "uni-getBatteryInfo", errMsg: "getBatteryInfo:fail getAppContext is null" })
 */
 export type GetBatteryInfo = (options : GetBatteryInfoOptions) => void
+
+
+interface Uni {
+	getBatteryInfo : GetBatteryInfo
+}
