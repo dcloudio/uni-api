@@ -1,45 +1,45 @@
 /**
  * Wifi 函数通用入参封装
  */
- export type WifiOption = {
-	success?: (res: UniWifiResult) => void;
-	fail?: (res: UniWifiResult) => void;
-	complete?: (res: UniWifiResult) => void;
+export type WifiOption = {
+	success ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniWifiResult) => void;
+	complete ?: (res : UniWifiResult) => void;
 };
 
 /**
  * Wifi 链接参数封装 
  */
 export type WifiConnectOption = {
-	SSID?: string;
-	BSSID?: string;
-	password?: string;
-	maunal?: boolean;
-	partialInfo?: boolean; //ios不生效
-	success?: (res: UniWifiResult) => void;
-	fail?: (res: UniWifiResult) => void;
-	complete?: (res: UniWifiResult) => void;
+	SSID ?: string;
+	BSSID ?: string;
+	password ?: string;
+	maunal ?: boolean;
+	partialInfo ?: boolean; //ios不生效
+	success ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniWifiResult) => void;
+	complete ?: (res : UniWifiResult) => void;
 }
 
 /**
  * 获取当前链接的wifi信息
  */
 export type GetConnectedWifiOptions = {
-	partialInfo?: boolean
-	success?: (res: UniWifiResult) => void
-	fail?: (res: UniWifiResult) => void
-	complete?: (res: UniWifiResult) => void
+	partialInfo ?: boolean
+	success ?: (res : UniWifiResult) => void
+	fail ?: (res : UniWifiResult) => void
+	complete ?: (res : UniWifiResult) => void
 }
 
 /* 
  * 对外暴露的wifi信息
  */
 export type UniWifiInfo = {
-	SSID: string;
-	BSSID?: string;
-	secure?: boolean;
-	signalStrength?: number;
-	frequency?: number;
+	SSID : string;
+	BSSID ?: string;
+	secure ?: boolean;
+	signalStrength ?: number;
+	frequency ?: number;
 }
 
 
@@ -47,35 +47,35 @@ export type UniWifiResult = {
 	errCode : number,
 	errSubject : string,
 	errMsg : string,
-	wifi: UniWifiInfo | null
+	wifi : UniWifiInfo | null
 }
 
 export type UniWifiCallback = () => void
 
 
-export type StartWifi = (option: WifiOption) => void
+export type StartWifi = (option : WifiOption) => void
 
-export type StopWifi = (option: WifiOption) => void
+export type StopWifi = (option : WifiOption) => void
 
-export type GetWifiList = (option: WifiOption) => void
+export type GetWifiList = (option : WifiOption) => void
 
-export type OnGetWifiList = (callback: UniWifiCallback) => void
+export type OnGetWifiList = (callback : UniWifiCallback) => void
 
-export type OffGetWifiList = (callback: UniWifiCallback) => void
+export type OffGetWifiList = (callback : UniWifiCallback) => void
 
-export type GetConnectedWifi = (option: GetConnectedWifiOptions) => void
+export type GetConnectedWifi = (option : GetConnectedWifiOptions) => void
 
-export type ConnectWifi = (option: WifiConnectOption) => void
+export type ConnectWifi = (option : WifiConnectOption) => void
 
-export type OnWifiConnected = (callback: UniWifiCallback) => void
+export type OnWifiConnected = (callback : UniWifiCallback) => void
 
-export type OnWifiConnectedWithPartialInfo = (callback: UniWifiCallback) => void
+export type OnWifiConnectedWithPartialInfo = (callback : UniWifiCallback) => void
 
-export type OffWifiConnected = (callback: UniWifiCallback | null) => void
+export type OffWifiConnected = (callback : UniWifiCallback | null) => void
 
-export type OnOffWifiConnectedWithPartialInfo = (callback: UniWifiCallback | null) => void
+export type OnOffWifiConnectedWithPartialInfo = (callback : UniWifiCallback | null) => void
 
-export type SetWifiList = (option: WifiOption) => void
+export type SetWifiList = (option : WifiOption) => void
 
 interface Uni {
 	/**
@@ -84,11 +84,18 @@ interface Uni {
 	 * @param {WifiOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -100,11 +107,18 @@ interface Uni {
 	 * @param {WifiOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -114,11 +128,18 @@ interface Uni {
 	 * @param {WifiConnectOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -135,24 +156,31 @@ interface Uni {
 					password:"streamApp!2016",
 				}],
 				output:{
-				    	callbackType: 'success',
-				        value: { errCode: 12013 ,errMsg: "connectWifi:wifi config may be expired",errSubject: "uni-connectWifi"}
-				    }
+						callbackType: 'success',
+						value: { errCode: 12013 ,errMsg: "connectWifi:wifi config may be expired",errSubject: "uni-connectWifi"}
+					}
 			}
 		]
 	}
 	*/
-	connectWifi: ConnectWifi,
+	connectWifi : ConnectWifi,
 	/**
 	 * 请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
 	 * @param {WifiOption} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getWifiList
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -173,11 +201,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -189,11 +224,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -205,11 +247,18 @@ interface Uni {
 	 * @param {GetConnectedWifiOptions} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getConnectedWifi
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -221,11 +270,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -237,11 +293,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -253,11 +316,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -269,11 +339,18 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
 	 * @uniPlatform {
-	 * 	app: {
-	 * 		android: "4.4.4",
-	 * 		ios: "9.0",
-	 * 		page: ['vue','uvue','nvue']
-	 * 	}
+	 *    app: {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.0",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
