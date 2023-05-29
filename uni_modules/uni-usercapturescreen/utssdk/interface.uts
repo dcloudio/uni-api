@@ -93,7 +93,7 @@ export interface Uni {
 	 * @param {UserCaptureScreenCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.7",
@@ -116,7 +116,7 @@ export interface Uni {
 	 * @param {UserCaptureScreenCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.7",
@@ -139,7 +139,7 @@ export interface Uni {
 	 * @param {SetUserCaptureScreenOptions} options 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.7",

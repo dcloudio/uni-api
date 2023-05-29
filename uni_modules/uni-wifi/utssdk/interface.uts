@@ -84,7 +84,7 @@ interface Uni {
 	 * @param {WifiOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -107,7 +107,7 @@ interface Uni {
 	 * @param {WifiOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -128,7 +128,7 @@ interface Uni {
 	 * @param {WifiConnectOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -169,7 +169,7 @@ interface Uni {
 	 * @param {WifiOption} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getWifiList
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -201,7 +201,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -224,7 +224,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -247,7 +247,7 @@ interface Uni {
 	 * @param {GetConnectedWifiOptions} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getConnectedWifi
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -270,7 +270,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -293,7 +293,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -316,7 +316,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
@@ -339,7 +339,7 @@ interface Uni {
 	 * @param {UniWifiCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
