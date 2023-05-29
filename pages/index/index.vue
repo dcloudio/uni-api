@@ -16,6 +16,7 @@
 		<button @tap="testSetUserCaptureScreen">{{setUserCaptureScreenText}}</button>
 		
 		<button @tap="testGetBatteryInfo">获取电池电量</button>
+		<button @tap="testGetBatteryInfoSync">同步获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
 		
@@ -222,6 +223,12 @@
 					}
 				})
 			},
+			
+			testGetBatteryInfoSync() {
+				let ret = uni.getBatteryInfoSync()
+				console.log(ret)
+			},
+			
 			testSetUserCaptureScreen() {
 				let flag = this.setUserCaptureScreenFlag;
 				uni.setUserCaptureScreen({

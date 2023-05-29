@@ -5,13 +5,6 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
-        },
-        {
-            "path": "pages/autotest/uni-getbatteryinfo/uni-getbatteryinfo",
-            "style": {
-                "navigationBarTitleText": "uni-getbatteryinfo",
-                "enablePullDownRefresh": false
-            }
         }
 	],
 	"globalStyle": {
