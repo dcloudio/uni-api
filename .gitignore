@@ -7,3 +7,4 @@ env.js
 pages/autotest/
 autotest.reporter.js
 autotest.utils.js
+jest.config.js
