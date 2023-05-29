@@ -4,7 +4,9 @@
 .DS_Store
 
 env.js
-pages/autotest/
+jest.config.js
 autotest.reporter.js
 autotest.utils.js
-jest.config.js
+pages/autotest/
+node_modules/
+vite.config.js
