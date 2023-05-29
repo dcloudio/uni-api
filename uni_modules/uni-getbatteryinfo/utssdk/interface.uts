@@ -46,6 +46,17 @@ export type GetBatteryInfoOptions = {
 	complete ?: (res : any) => void
 }
 
+export type GetBatteryInfoResult = {
+	/**
+	* 设备电量，范围1 - 100
+	*/
+	level : number,
+	/**
+	* 是否正在充电中
+	*/
+	isCharging : boolean
+}
+
 /**
 * 获取电量信息
 * @param {GetBatteryInfoOptions} options
@@ -60,6 +71,8 @@ export type GetBatteryInfoOptions = {
 */
 export type GetBatteryInfo = (options : GetBatteryInfoOptions) => void
 
+
+export type GetBatteryInfoSync = () => GetBatteryInfoResult
 
 interface Uni {
 
@@ -85,7 +98,7 @@ interface Uni {
 	 *            "unixVer": "3.9.0"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "8.0",
+	 *            "osVer": "9.0",
 	 *            "uniVer": "3.6.11",
 	 *            "unixVer": "3.9.0"
 	 *        }
@@ -94,6 +107,33 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 *
 	 */
-	getBatteryInfo : GetBatteryInfo
+	getBatteryInfo : GetBatteryInfo,
+	/**
+	 * 同步获取电池电量信息
+	 * @description 获取电池电量信息
+	 * @example
+	 * ```typescript
+	 * uni.getBatteryInfo()
+	 * ```
+	 * @remark
+	 * - 该接口需要同步调用
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.6.11",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.6.11",
+	 *            "unixVer": "3.9.0"
+	 *        }
+	 *    }
+	 * }
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 *
+	 */
+	getBatteryInfoSync: GetBatteryInfoSync
 
 }
