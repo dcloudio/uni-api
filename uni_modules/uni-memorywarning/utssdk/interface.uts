@@ -10,7 +10,7 @@ export interface Uni {
 	 * @param {UTSCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/memory.html#onmemorywarning
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.7",
@@ -33,7 +33,7 @@ export interface Uni {
 	 * @param {UTSCallback} callback 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/memory.html#offmemorywarning
 	 * @uniPlatform {
-	 *    app: {
+	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.7",
