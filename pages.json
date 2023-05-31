@@ -5,6 +5,27 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+        },
+        {
+            "path": "pages/autotest/uni-getbatteryinfo/uni-getbatteryinfo",
+            "style": {
+                "navigationBarTitleText": "uni-getbatteryinfo",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/autotest/uni-memorywarning/uni-memorywarning",
+            "style": {
+                "navigationBarTitleText": "uni-memorywarning",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/autotest/uni-usercapturescreen/uni-usercapturescreen",
+            "style": {
+                "navigationBarTitleText": "uni-usercapturescreen",
+                "enablePullDownRefresh": false
+            }
         }
 	],
 	"globalStyle": {

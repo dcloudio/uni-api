@@ -130,7 +130,7 @@ interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "4.4.4",
+	 *            "osVer": "<=10.0",
 	 *            "uniVer": "3.7.0",
 	 *            "unixVer": "3.9.0"
 	 *        },
