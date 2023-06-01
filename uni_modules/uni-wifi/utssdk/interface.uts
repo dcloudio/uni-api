@@ -99,6 +99,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { after: 'stopWifi' }
 	 */
 	startWifi : StartWifi,
 	/**
@@ -122,6 +123,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { before: 'startWifi' }
 	 */
 	stopWifi : StopWifi,
 	/**
@@ -130,7 +132,7 @@ interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "<=10.0",
+	 *            "osVer": ">=4.4 && <10.0",
 	 *            "uniVer": "3.7.0",
 	 *            "unixVer": "3.9.0"
 	 *        },
@@ -184,15 +186,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
-	 * @autotest {
-		generated: false,
-		cases:[
-			{
-				before: 'startWifi',
-				after: 'stopWifi'
-			}
-		]
-	}
+	 * @autotest { before: 'startWifi', after: 'stopWifi' }
 	*/
 	getWifiList : GetWifiList,
 	/**
@@ -216,6 +210,23 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest  { expectCallback: true }
+	 * @autotest {
+		 generated: false,
+		 pollution: false,
+		 expectCallback: true,
+		 before: 'startWifi',
+		 after: 'onGetWifiListAfter',
+		 cases: [
+			 {
+				 output: {
+					 value: 0,
+					 returnKey: '.wifiList.length',
+					 jestExpectSyntax: 'toBeGreaterThan'
+				 },
+			 }
+		 ]
+	}
 	 */
 	onGetWifiList : OnGetWifiList,
 	/**

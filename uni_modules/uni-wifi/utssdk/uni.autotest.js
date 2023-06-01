@@ -21,8 +21,22 @@ export function stopWifi() {
 				resolve()
 			},
 			fail: () => {
-				console.log('stopWifi success');
-				fail()
+				console.log('stopWifi fail');
+				reject()
+			}
+		})
+	})
+}
+
+export function onGetWifiListAfter() {
+	return new Promise((resolve, reject) => {
+		uni.getWifiList({
+			success() {
+				setTimeout(resolve, 500)
+			},
+			fail: reject,
+			complete() {
+				stopWifi()
 			}
 		})
 	})
