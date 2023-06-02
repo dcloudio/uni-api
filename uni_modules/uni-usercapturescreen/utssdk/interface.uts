@@ -108,6 +108,7 @@ export interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	onUserCaptureScreen : OnUserCaptureScreen,
 	/**
@@ -131,6 +132,7 @@ export interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	offUserCaptureScreen : OffUserCaptureScreen,
 	/**

@@ -250,6 +250,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	offGetWifiList : OffGetWifiList,
 	/**
@@ -273,6 +274,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { before: 'startWifi', after: 'stopWifi' }
 	 */
 	getConnectedWifi : GetConnectedWifi,
 	/**
@@ -296,6 +298,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	onWifiConnected : OnWifiConnected,
 	/**
@@ -319,6 +322,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	onWifiConnectedWithPartialInfo : OnWifiConnectedWithPartialInfo,
 	/**
@@ -342,6 +346,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	offWifiConnected : OffWifiConnected,
 	/**
@@ -365,6 +370,7 @@ interface Uni {
 	 * }
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
 	 */
 	onOffWifiConnectedWithPartialInfo : OnOffWifiConnectedWithPartialInfo,
 	/**
