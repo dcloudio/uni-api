@@ -5,9 +5,9 @@ export function startWifi() {
 				console.log('startWifi success');
 				resolve()
 			},
-			fail: () => {
+			complete: () => {
 				console.log('startWifi fail');
-				reject()
+				resolve()
 			}
 		})
 	})
@@ -16,14 +16,7 @@ export function startWifi() {
 export function stopWifi() {
 	return new Promise((resolve, reject) => {
 		uni.stopWifi({
-			success: () => {
-				console.log('stopWifi success');
-				resolve()
-			},
-			fail: () => {
-				console.log('stopWifi fail');
-				reject()
-			}
+			complete: resolve
 		})
 	})
 }
@@ -34,9 +27,8 @@ export function onGetWifiListAfter() {
 			success() {
 				setTimeout(resolve, 500)
 			},
-			fail: reject,
 			complete() {
-				stopWifi()
+				stopWifi().finally(resolve)
 			}
 		})
 	})
