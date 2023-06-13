@@ -32,7 +32,12 @@
   },
   "uni_modules": {
     "uni-ext-api": {
-      "uni": ["getBatteryInfo", "getBatteryInfoSync"]
+      "uni":  {
+        "getBatteryInfo": "getBatteryInfo",
+        "getBatteryInfoSync": {
+          "web": false
+        }
+      }
     },
     "dependencies": [],
     "encrypt": [],
