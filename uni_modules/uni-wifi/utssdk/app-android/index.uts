@@ -378,7 +378,7 @@ export function startWifi(option : WifiOption) {
 	// 检查权限
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, permissionWifi, requestCode)
+		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, permissionWifi, requestCode.toInt())
 		// 尚不具备权限，返回错误
 		option.fail?.(result)
 		option.complete?.(result)
