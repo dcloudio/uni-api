@@ -13,26 +13,8 @@ export type OnUserCaptureScreenCallbackResult = {
 	*/
 export type UserCaptureScreenCallback = (res : OnUserCaptureScreenCallbackResult) => void
 
-/**
-	* uni.onUserCaptureScreen函数定义
-	* 开启截屏监听 
-	* 
-	* @param {UserCaptureScreenCallback} callback 
-	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
-	* @since 3.7.7
-	*/
 export type OnUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
-/**
-	* uni.offUserCaptureScreen函数定义
-	* 关闭截屏监听  
-	* 
-	* @param {UserCaptureScreenCallback} callback 
-	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
-	* @platforms APP-IOS = ^9.0,APP-ANDROID = ^4.4
-	* @since 3.7.7
-	*/
 export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null) => void
 
 /**
@@ -102,21 +84,78 @@ export type SetUserCaptureScreenOptions = {
 	complete ?: SetUserCaptureScreenCompleteCallback
 }
 
-
-/**
- * * uni.setUserCaptureScreen函数定义
-
-	* 设置防截屏  
-	* 
-	* @param {SetUserCaptureScreenOptions} options 
-	* @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
-	* @platforms APP-IOS = ^13.0,APP-ANDROID = ^4.4
-	* @since 3.7.7
-	*/
 export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
 
 export interface Uni {
+	/**
+	 * 开启截屏监听 
+	 * 
+	 * @param {UserCaptureScreenCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
+	 */
 	onUserCaptureScreen : OnUserCaptureScreen,
+	/**
+	 * 关闭截屏监听 
+	 * 
+	 * @param {UserCaptureScreenCallback} callback 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 * @autotest { expectCallback: true }
+	 */
 	offUserCaptureScreen : OffUserCaptureScreen,
+	/**
+	 * 设置防截屏  
+	 * 
+	 * @param {SetUserCaptureScreenOptions} options 
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "4.4.4",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "13.0",
+	 *            "uniVer": "3.7.7",
+	 *            "unixVer": "3.9.0"
+	 *   	  }
+	 *    }
+	 * }
+	 * @uniVersion 3.7.7
+	 * @uniVueVersion 2,3  //支持的vue版本
+	 */
 	setUserCaptureScreen : SetUserCaptureScreen
 }

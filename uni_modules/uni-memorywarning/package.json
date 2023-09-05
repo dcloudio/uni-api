@@ -5,7 +5,7 @@
   "description": "UTS 实现内存警告监听",
   "keywords": [
     "onMemoryWarning"
-],
+  ],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.6.11"
@@ -31,18 +31,16 @@
     "npmurl": ""
   },
   "uni_modules": {
-	"uni-ext-api":{
-		"uni": {
-			"onMemoryWarning": "onMemoryWarning",
-			"offMemoryWarning":"offMemoryWarning"
-		},
-		"mp-weixin":false,
-		"mp-alipay":false,
-		"mp-baidu":false,
-		"mp-qq":false,
-		"mp-kuaishou":false,
-		"mp-jd":false
-	},
+    "uni-ext-api": {
+      "uni": {
+        "onMemoryWarning": {
+          "web": false
+        },
+        "offMemoryWarning": {
+          "web": false
+        }
+      }
+    },
     "dependencies": [],
     "encrypt": [],
     "platforms": {
@@ -58,10 +56,10 @@
         "App": {
           "app-android": {
             "minVersion": "19"
-        },
+          },
           "app-ios": {
             "minVersion": "9"
-        }
+          }
         },
         "H5-mobile": {
           "Safari": "n",
