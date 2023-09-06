@@ -3,8 +3,8 @@
  */
 export type WifiOption = {
 	success ?: (res : UniWifiResult) => void;
-	fail ?: (res : UniWifiResult) => void;
-	complete ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniError) => void;
+	complete ?: (res : any) => void;
 };
 
 /**
@@ -17,8 +17,8 @@ export type WifiConnectOption = {
 	maunal ?: boolean;
 	partialInfo ?: boolean; //ios不生效
 	success ?: (res : UniWifiResult) => void;
-	fail ?: (res : UniWifiResult) => void;
-	complete ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniError) => void;
+	complete ?: (res : any) => void;
 }
 
 /**
@@ -27,8 +27,8 @@ export type WifiConnectOption = {
 export type GetConnectedWifiOptions = {
 	partialInfo ?: boolean
 	success ?: (res : UniWifiResult) => void
-	fail ?: (res : UniWifiResult) => void
-	complete ?: (res : UniWifiResult) => void
+	fail ?: (res : UniError) => void
+	complete ?: (res : any) => void
 }
 
 /* 

@@ -43,15 +43,7 @@ export type GetLocationSuccess = {
   address: any | null
 };
 type GetLocationSuccessCallback = (result: GetLocationSuccess) => void;
-export type GetLocationFail = UniError;
-type UniError = {
-  errSubject: string,
-  errCode: number,
-  errMsg: string,
-  data: object | null,
-  cause: any | null
-};
-type GetLocationFailCallback = (result: GetLocationFail) => void;
+type GetLocationFailCallback = (result: UniError) => void;
 type GetLocationComplete = any;
 type GetLocationCompleteCallback = (result: GetLocationComplete) => void;
 export type GetLocationOptions = {

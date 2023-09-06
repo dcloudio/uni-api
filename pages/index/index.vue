@@ -19,7 +19,7 @@
 		<button @tap="testGetBatteryInfoSync">同步获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		
+		<button @tap="getLocationTest" style="width: 100%;">获取定位</button>
 		
 	</view>
 </template>
@@ -45,6 +45,17 @@
 			},
 			fn:function(res){
 				console.log(res)
+			},
+			getLocationTest() {
+				console.log(" ------- getLocationTest: ");
+				uni.getLocation({
+				 type: 'gcj02 ',
+				 success (res) {
+					console.log(" success ",res);
+				 },fail (res) {
+					console.log(" fail ",res);
+				 }
+				})
 			},
 			onGetWifiList2_assert0() {
 				console.log(" ------- onGetWifiList2_assert0: ",this.id);
