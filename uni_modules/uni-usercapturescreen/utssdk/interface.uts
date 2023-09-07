@@ -23,25 +23,6 @@ export type OffUserCaptureScreen = (callback : UserCaptureScreenCallback | null)
 export type SetUserCaptureScreenSuccess = {
 }
 
-/**
-	* uni.setUserCaptureScreen失败回调参数
-	*/
-export type SetUserCaptureScreenFail = {
-	/**
-		* 错误码
-		* 12001:system not support
-		* 12010:system internal error
-		*/
-	errCode : number,
-	/**
-		* 调用API的名称
-		*/
-	errSubject : string,
-	/**
-		* 错误的详细信息
-		*/
-	errMsg : string,
-}
 
 /**
 	* uni.setUserCaptureScreen成功回调函数定义
@@ -51,7 +32,7 @@ export type SetUserCaptureScreenSuccessCallback = (res : SetUserCaptureScreenSuc
 /**
 	* uni.setUserCaptureScreen失败回调函数定义
 	*/
-export type SetUserCaptureScreenFailCallback = (res : SetUserCaptureScreenFail) => void
+export type SetUserCaptureScreenFailCallback = (res : UniError) => void
 
 /**
 	* uni.setUserCaptureScreen完成回调函数定义
