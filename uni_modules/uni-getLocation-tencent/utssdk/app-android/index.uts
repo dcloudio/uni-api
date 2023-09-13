@@ -37,7 +37,7 @@ export const getLocation : GetLocation = function (options : GetLocationOptions)
 	/**
 	 * 准备权限
 	 */
-	let permissionNeed : string[] = utsArrayOf("android.permission.ACCESS_FINE_LOCATION");
+	let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"];
 	UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight:boolean,_grantedList:string[]) {
 		if (allRight) {
 			// 交给目前的location 引擎，真实执行
