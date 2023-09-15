@@ -80,7 +80,7 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 	
 	if (arr != null) {
 		let list = arr! as NSArray
-		let index = 0
+		let index: Int = 0
 		while (index < list.count) { 
 			let item = list[index] 
 			let interfaceName = item as string
