@@ -5,9 +5,8 @@ import { UTSAndroid } from "io.dcloud.uts";
 import { GetBatteryInfo, GetBatteryInfoSuccess, GetBatteryInfoResult,GetBatteryInfoSync } from '../interface.uts'
 /**
  * 异步获取电量
- * @param {Object} options
  */
-export const getBatteryInfo : GetBatteryInfo = function (options) {
+export const getBatteryInfo : GetBatteryInfo = function (options : GetBatteryInfoOptions) {
     const context = UTSAndroid.getAppContext();
     if (context != null) {
         const manager = context.getSystemService(
