@@ -91,7 +91,7 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onUserCaptureScreen : OnUserCaptureScreen,
+	onUserCaptureScreen(callback : UserCaptureScreenCallback | null) : void,
 	/**
 	 * 关闭截屏监听 
 	 * 
@@ -115,7 +115,7 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	offUserCaptureScreen : OffUserCaptureScreen,
+	offUserCaptureScreen(callback : UserCaptureScreenCallback | null) : void,
 	/**
 	 * 设置防截屏  
 	 * 
@@ -138,5 +138,5 @@ export interface Uni {
 	 * @uniVersion 3.7.7
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 */
-	setUserCaptureScreen : SetUserCaptureScreen
+	setUserCaptureScreen(options : SetUserCaptureScreenOptions) : void
 }

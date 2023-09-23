@@ -27,7 +27,7 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onMemoryWarning : OnMemoryWarning,
+	onMemoryWarning(callback: UTSCallback) : void,
 	/**
 	 * 取消监听内存不足告警事件
 	 * 
@@ -51,5 +51,5 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	offMemoryWarning : OffMemoryWarning
+	offMemoryWarning(callback : UTSCallback | null) : void
 }

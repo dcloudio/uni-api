@@ -4,7 +4,7 @@ export interface Uni {
    *
    * @tutorial http://uniapp.dcloud.io/api/location/location?id=getlocation
    */
-  getLocation: GetLocation;
+  getLocation(options: GetLocationOptions) : void;
 }
 
 export type GetLocation = (options: GetLocationOptions) => void;
