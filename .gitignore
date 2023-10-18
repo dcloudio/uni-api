@@ -2,7 +2,10 @@
 /.hbuilderx
 /.vite
 .DS_Store
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 env.js
 jest.config.js
 autotest.reporter.js

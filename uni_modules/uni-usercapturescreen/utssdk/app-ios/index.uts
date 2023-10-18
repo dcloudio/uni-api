@@ -3,7 +3,7 @@ import { CGRect } from "CoreFoundation";
 import { UIApplication, UIView, UITextField, UIScreen, UIDevice } from "UIKit"
 import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
-import { SetUserCaptureScreenOptions, OnUserCaptureScreenCallbackResult, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen, UserCaptureScreenCallback, SetUserCaptureScreenSuccess, SetUserCaptureScreenFail  } from "../interface.uts"
+import { SetUserCaptureScreenOptions, OnUserCaptureScreenCallbackResult, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreen, UserCaptureScreenCallback, SetUserCaptureScreenSuccess  } from "../interface.uts"
 
 /**
 	* 定义监听截屏事件工具类
@@ -119,20 +119,12 @@ export const offUserCaptureScreen : OffUserCaptureScreen = function (callback : 
 	*/
 export const setUserCaptureScreen : SetUserCaptureScreen = function (options : SetUserCaptureScreenOptions) {
 	if (UIDevice.current.systemVersion < "13.0") {
-		let res: SetUserCaptureScreenFail = {
-			errCode: 12001,
-			errSubject: "uni-usercapturescreen",
-			errMsg: "setUserCaptureScreen:system not support"
-		}
+		let res = new UniError("uni-usercapturescreen", 12001, "setUserCaptureScreen:system not support")
 		options.fail?.(res);
 		options.complete?.(res);
 
 	} else if (UIDevice.current.systemVersion == "15.1") {
-		let res: SetUserCaptureScreenFail = {
-			errCode: 12010,
-			errSubject: "uni-usercapturescreen",
-			errMsg: "setUserCaptureScreen:system internal error"
-		}
+		let res = new UniError("uni-usercapturescreen", 12010, "setUserCaptureScreen:system internal error")
 		options.fail?.(res);
 		options.complete?.(res);
 	} else {

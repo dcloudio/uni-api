@@ -210,8 +210,8 @@ function wrapWifiConfiguration(SSID : string, password ?: string, passwordType :
 
 
 /**
-	* 判断当前wifi的加密类型
-	*/
+ * 判断当前wifi的加密类型
+ */
 function getSecurityType(result : ScanResult) : string {
 	if (result.capabilities.contains("WEP")) {
 		return "WEP";
@@ -306,17 +306,8 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 		if (intent.action == WifiManager.SCAN_RESULTS_AVAILABLE_ACTION) {
 			startWifiScaning = false;
 			
-			let ret : UniWifiResult = {
-				errCode: 0,
-				errSubject: "uni-getWifiList",
-				errMsg: "getWifiList:ok"
-			}
-			if(Global.supendGetWifiSuccess != null){
-				Global.supendGetWifiSuccess?.(ret)
-			}
-			if(Global.supendGetWifiComplete != null){
-				Global.supendGetWifiComplete?.(ret)
-			}
+			
+			
 			
 			// wifi 扫描结果回调
 			let results = this.mWifiManager!.scanResults;
@@ -336,15 +327,27 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 					const data = new JSONObject();
 					data["wifiList"] = Global.scanList
 					Global.onGetWifiListCallback?.(data);
+					/**
+					 * 确保onGetWifiList 只会被执行一次
+					 */
+					Global.onGetWifiListCallback = null
 				}
-				// for (let perCallback in Global.onGetWifiListCallback) {
-				// 	const data = new JSONObject();
-				// 	data["wifiList"] = Global.scanList
-				// 	perCallback(data);
-				// }
 
 			}
 
+			let ret : UniWifiResult = {
+				errCode: 0,
+				errSubject: "uni-getWifiList",
+				errMsg: "getWifiList:ok"
+			}
+			if(Global.supendGetWifiSuccess != null){
+				Global.supendGetWifiSuccess?.(ret)
+				Global.supendGetWifiSuccess = null
+			}
+			if(Global.supendGetWifiComplete != null){
+				Global.supendGetWifiComplete?.(ret)
+				Global.supendGetWifiComplete = null
+			}
 		}
 	}
 
@@ -367,18 +370,21 @@ export function startWifi(option : WifiOption) {
 	// 需要先开启wifi,才能使用后续的功能
 	let requestCode = 1001;
 	let permissionWifi = arrayOf("android.permission.ACCESS_FINE_LOCATION");
-	var result : UniWifiResult = {
+	
+	let result : UniWifiResult = {
 		errCode: 12001,
 		errMsg: "startWifi:premission loss",
 		errSubject: "uni-startWifi"
 	}
+
 	// 检查权限
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
 		ActivityCompat.requestPermissions(UTSAndroid.getUniActivity()!, permissionWifi, requestCode.toInt())
 		// 尚不具备权限，返回错误
-		option.fail?.(result)
-		option.complete?.(result)
+		let err = new UniError("uni-startWifi",12001,"startWifi:premission loss");
+		option.fail?.(err)
+		option.complete?.(err)
 
 		return;
 	}
@@ -389,11 +395,9 @@ export function startWifi(option : WifiOption) {
 	// 用户没有开启wifi 总开关
 	if (!wifiManager.isWifiEnabled()) {
 		// wifi 没开启
-		result.errCode = 12005;
-		result.errMsg = "wifi not turned on";
-
-		option.fail?.(result);
-		option.complete?.(result);
+		let err = new UniError("uni-startWifi",12005,"wifi not turned on");
+		option.fail?.(err);
+		option.complete?.(err);
 		return;
 	}
 	// 初始化wifi 状态广播监听，后续所有的api，均基于此
@@ -453,16 +457,13 @@ export function startWifi(option : WifiOption) {
 @Suppress("DEPRECATION")
 export function getWifiList(option : WifiOption) {
 
-	var result : UniWifiResult = {
-		errCode: 12000,
-		errMsg: "getWifiList:fail:not invoke startWifi",
-		errSubject: "uni-getWifiList"
-	}
 
 	if (Global.mReceiver == null) {
 		// 还没调用startWifi 提示报错
-		option.fail?.(result)
-		option.complete?.(result)
+		let err = new UniError("uni-getWifiList",12000,"getWifiList:fail:not invoke startWifi");
+		
+		option.fail?.(err)
+		option.complete?.(err)
 
 		return
 	}
@@ -547,11 +548,13 @@ export function offGetWifiList(callback? : UTSCallback) {
 /**
  * 真正执行wifi链接逻辑
  */
-function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
+function realWifiConnect(option : WifiConnectOption){
 	
 	if (Global.mReceiver == null || Global.scanList.length < 1) {
-		option.fail?.(result)
-		option.complete?.(result)
+		
+		let err = new UniError("uni-connectWifi",12000,"connectWifi:fail:not invoke startWifi");
+		option.fail?.(err)
+		option.complete?.(err)
 		
 		return
 	}
@@ -566,8 +569,9 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 	
 	if (scanWifiInfo == null) {
 		// 不在扫描列表中返回错误
-		option.fail?.(result)
-		option.complete?.(result)
+		let err = new UniError("uni-connectWifi",12000,"connectWifi:fail:not invoke startWifi");
+		option.fail?.(err)
+		option.complete?.(err)
 		return
 	}
 	
@@ -593,16 +597,16 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 			// add since 2023-03-28，如果当前系统大于等于android10， 则明确当前系统不支持
 			if(Build.VERSION.SDK_INT > 28){
 				// 系统大于android 9
-				result.errCode = 12001
-				result.errMsg = "connectWifi:system not support"
+				let err = new UniError("uni-connectWifi",12001,"connectWifi:system not support");
+				option.fail?.(err)
+				option.complete?.(err)
 			}else{
 				// 移除之前的配置失败了，返回错误，需要用户手动取消保存一下
-				result.errCode = 12013
-				result.errMsg = "connectWifi:wifi config may be expired"
+				let err = new UniError("uni-connectWifi",12013,"connectWifi:wifi config may be expired");
+				option.fail?.(err)
+				option.complete?.(err)
 			}
 			
-			option.fail?.(result)
-			option.complete?.(result)
 	
 			return
 		}
@@ -623,11 +627,11 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 		let netID = wifiManager.addNetwork(wifiConfigration);
 		// 如果-1 说明没添加上，报错即可
 		if (netID < 0) {
-			result.errCode = 12002
-			result.errMsg = "connectWifi:password error Wi-Fi"
+			
+			let err = new UniError("uni-connectWifi",12002,"connectWifi:password error Wi-Fi");
 	
-			option.fail?.(result)
-			option.complete?.(result)
+			option.fail?.(err)
+			option.complete?.(err)
 	
 			return
 		}
@@ -636,11 +640,10 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 		let enabled = wifiManager.enableNetwork(netID, true);
 		if (!enabled) {
 	
-			result.errCode = 12007
-			result.errMsg = "connectWifi:user denied"
-	
-			option.fail?.(result)
-			option.complete?.(result)
+			let err = new UniError("uni-connectWifi",12007,"connectWifi:user denied");
+				
+			option.fail?.(err)
+			option.complete?.(err)
 	
 			return
 		}
@@ -654,12 +657,16 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 	if (!connected) {
 		// 出错了，返回错误
 		// 兜底的报错
-		result.errCode = 12010
-		result.errMsg = "connectWifi:fail:unknown error"
-	
-		option.fail?.(result)
-		option.complete?.(result)
+		let err = new UniError("uni-connectWifi",12010,"connectWifi:fail:unknown error");
+		option.fail?.(err)
+		option.complete?.(err)
 		return
+	}
+	
+	let result : UniWifiResult = {
+		errCode: 0,
+		errMsg: "connectWifi:ok",
+		errSubject: "uni-connectWifi",
 	}
 	
 	wifiManager.saveConfiguration()
@@ -673,9 +680,6 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 		result.wifi = wrapUniWifiInfoFromAndroid(scanWifiInfo)
 	}
 	
-	// result.wifi = scanWifiInfo.toUTSJSON(option.partialInfo)
-	result.errCode = 0
-	result.errMsg = "connectWifi:ok"
 	
 	option.success?.(result)
 	option.complete?.(result)
@@ -687,20 +691,16 @@ function realWifiConnect(option : WifiConnectOption,result : UniWifiResult){
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
 export function connectWifi(option : WifiConnectOption) {
 
-
-	var result : UniWifiResult = {
-		errCode: 12000,
-		errMsg: "connectWifi:fail:not invoke startWifi",
-		errSubject: "uni-connectWifi",
-	}
-
 	if (option.maunal == true) {
 		// 指定了手动模式
 		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
 		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 
-		result.errCode = 0
-		result.errMsg = "connectWifi:ok"
+		let result : UniWifiResult = {
+			errCode: 0,
+			errMsg: "connectWifi:ok",
+			errSubject: "uni-connectWifi",
+		}
 
 		option.success?.(result)
 		option.complete?.(result)
@@ -719,7 +719,7 @@ export function connectWifi(option : WifiConnectOption) {
 			if(taskCount >= 5 || startWifiScaning == false){
 				// 超过10s了。或者扫描过程结束了
 				clearInterval(taskId)
-				realWifiConnect(option,result)
+				realWifiConnect(option)
 			}
 		},2000)
 		
@@ -727,7 +727,7 @@ export function connectWifi(option : WifiConnectOption) {
 			clearInterval(taskId)
 		});
 	}else{
-		realWifiConnect(option,result)
+		realWifiConnect(option)
 	}
 
 	
@@ -741,13 +741,9 @@ export function connectWifi(option : WifiConnectOption) {
 export function stopWifi(option : WifiOption) {
 	// 需要先开启wifi,才能使用后续的功能
 	if (Global.mReceiver == null) {
-		var result : UniWifiResult = {
-			errCode: 12000,
-			errSubject: "uni-stopWifi",
-			errMsg: "stopWifi:not init"
-		}
-		option.fail?.(result)
-		option.complete?.(result)
+		let err = new UniError("uni-stopWifi",12000,"stopWifi:not init");
+		option.fail?.(err)
+		option.complete?.(err)
 
 		return
 	}
@@ -768,6 +764,7 @@ export function stopWifi(option : WifiOption) {
 		errSubject: "uni-stopWifi",
 		errMsg: "stopWifi:ok"
 	}
+
 	option.success?.(result)
 	option.complete?.(result)
 
@@ -783,16 +780,12 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 		SSID: ""
 	}
 
-	var res : UniWifiResult = {
-		errCode: 12000,
-		errMsg: "getConnectedWifi:fail:not invoke startWifi",
-		errSubject: "uni-getConnectedWifi",
-	}
-
+	
 	if (Global.mReceiver == null) {
 		// 还没调用startWifi 提示报错
-		option.fail?.(res)
-		option.complete?.(res)
+		let err = new UniError("uni-getConnectedWifi",12000,"getConnectedWifi:fail:not invoke startWifi");
+		option.fail?.(err)
+		option.complete?.(err)
 
 		return
 	}
@@ -800,14 +793,14 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 	// 需要先校验权限，没有位置权限无法获取wifi
 	if (ActivityCompat.checkSelfPermission(UTSAndroid.getUniActivity()!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 		// 尚不具备权限，返回错误
-		res.errCode = 12001
-		res.errMsg = "getConnectedWifi:permission loss"
-
-		option.fail?.(res)
-		option.complete?.(res)
+		let err = new UniError("uni-getConnectedWifi",12001,"getConnectedWifi:permission loss");
+		option.fail?.(err)
+		option.complete?.(err)
 		return;
 	}
 
+	
+	
 	const context = UTSAndroid.getAppContext();
 	if (context != null) {
 		const wm = context.getSystemService(
@@ -818,31 +811,37 @@ export function getConnectedWifi(option : GetConnectedWifiOptions) {
 		const winfo = wm.getConnectionInfo();
 
 		wifiInfo = wrapUniWifiInfoFromConnectInfo(winfo);
+		
+		let res : UniWifiResult = {
+			errCode: 0,
+			errMsg: "getConnectedWifi:ok",
+			errSubject: "uni-getConnectedWifi",
+		}
+
 		// 判断一下是否wifi 关闭了
-		if (option.partialInfo != null && option.partialInfo == true) {
+		if (option.partialInfo!= null) {
 			let ret : UniWifiInfo = {
 				SSID: wifiInfo.SSID
 			}
 			res.wifi = ret;
 		} else {
 			if (wifiInfo.BSSID == null || zeroCountNum(wifiInfo.BSSID) > 3) {
-				res.errCode = 12005
-				res.errMsg = "getConnectedWifi:fail:wifi is disable"
-
-				option.fail?.(res)
-				option.complete?.(res)
+				let err = new UniError("uni-getConnectedWifi",12005,"getConnectedWifi:fail:wifi is disable");
+				option.fail?.(err)
+				option.complete?.(err)
 				return
 			}
 			res.wifi = wifiInfo;
 		}
 
-		res.errCode = 0
-		res.errMsg = "getConnectedWifi:ok"
 
 		option.success?.(res)
 		option.complete?.(res)
 		return
 	}
-	option.fail?.(res)
-	option.complete?.(res)
+	
+	let err = new UniError("uni-getConnectedWifi",12000,"getConnectedWifi:fail:not invoke startWifi");
+	option.fail?.(err)
+	option.complete?.(err)
 }
+

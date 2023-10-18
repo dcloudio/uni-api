@@ -46,6 +46,7 @@ class MemoryWarningTool {
 	}
 }
 
+
 // 开启监听内存警告
 export const onMemoryWarning : OnMemoryWarning =  function (callback: UTSCallback) {
 	MemoryWarningTool.listenMemoryWarning(callback)

@@ -5,7 +5,7 @@
   "description": "wifi管理",
   "keywords": [
     "wifi"
-],
+  ],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.6.11"
@@ -31,21 +31,43 @@
     "npmurl": ""
   },
   "uni_modules": {
-	"uni-ext-api":{
-		"uni": {
-			"startWifi": "startWifi",
-			"stopWifi": "stopWifi",
-			"connectWifi":"connectWifi",
-			"getConnectedWifi": "getConnectedWifi",
-			"getWifiList":"getWifiList",
-			"onGetWifiList":"onGetWifiList",
-			"offGetWifiList":"offGetWifiList",
-			"onWifiConnected":"onWifiConnected",
-			"offWifiConnected":"offWifiConnected",
-			"onWifiConnectedWithPartialInfo":"onWifiConnectedWithPartialInfo",
-			"offWifiConnectedWithPartialInfo":"offWifiConnectedWithPartialInfo"
-		}
-	},
+    "uni-ext-api": {
+      "uni": {
+        "startWifi": {
+          "web": false
+        },
+        "stopWifi": {
+          "web": false
+        },
+        "connectWifi": {
+          "web": false
+        },
+        "getConnectedWifi": {
+          "web": false
+        },
+        "getWifiList": {
+          "web": false
+        },
+        "onGetWifiList": {
+          "web": false
+        },
+        "offGetWifiList": {
+          "web": false
+        },
+        "onWifiConnected": {
+          "web": false
+        },
+        "offWifiConnected": {
+          "web": false
+        },
+        "onWifiConnectedWithPartialInfo": {
+          "web": false
+        },
+        "offWifiConnectedWithPartialInfo": {
+          "web": false
+        }
+      }
+    },
     "dependencies": [],
     "encrypt": [],
     "platforms": {
@@ -61,10 +83,10 @@
         "App": {
           "app-android": {
             "minVersion": "19"
-        },
+          },
           "app-ios": {
             "minVersion": "9"
-        }
+          }
         },
         "H5-mobile": {
           "Safari": "n",

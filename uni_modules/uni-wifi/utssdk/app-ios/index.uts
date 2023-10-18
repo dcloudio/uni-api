@@ -114,24 +114,14 @@ function fetchConnectedWifiWithLocationPromise(option: GetConnectedWifiOptions) 
 			option.success?.(res)
 			option.complete?.(res)
 		}else {
-			const res: UniWifiResult = { 
-				errSubject: "uni-getConnectedWifi", 
-				errCode: 12010, 
-				errMsg: "getConnectedWifi:system internal error",
-				wifi: null
-			}
-			option.fail?.(res)
-			option.complete?.(res)
+			let err = new UniError("uni-getConnectedWifi",12010,"getConnectedWifi:system internal error");
+			option.fail?.(err)
+			option.complete?.(err)
 		}
 	}else {
-		const res: UniWifiResult = {
-			errSubject: "uni-getConnectedWifi", 
-			errCode: 12010, 
-			errMsg: "getConnectedWifi:system internal error",
-			wifi: null
-		}
-		option.fail?.(res)
-		option.complete?.(res)
+		let err = new UniError("uni-getConnectedWifi",12010,"getConnectedWifi:system internal error");
+		option.fail?.(err)
+		option.complete?.(err)
 	}
 }
 
@@ -183,14 +173,9 @@ export const stopWifi: StopWifi = function (option: WifiOption) {
  * 获取wifi列表, 在调用之前需要引导用户跳转到系统设置-WIFI设置页面，系统搜索周边wifi后app才能接收到回调
  */
 export const getWifiList: GetWifiList = function (option: WifiOption) {
-	let res: UniWifiResult = {
-		errSubject: "uni-getWifiList",
-		errCode: 12001, 
-		errMsg: "getWifiList:system not support",
-		wifi: null
-	}
-	option.fail?.(res)
-	option.complete?.(res)
+	let err = new UniError("uni-getWifiList",12001,"getWifiList:system not support");
+	option.fail?.(err)
+	option.complete?.(err)
 }
 
 /* 获取wifi列表的回调
@@ -213,28 +198,18 @@ export const offGetWifiList: OffGetWifiList = function (callback: UniWifiCallbac
  */
 export const getConnectedWifi: GetConnectedWifi = function (option: GetConnectedWifiOptions) {
 	if (UniWiFiModuleGloabInfo.alreadyStartWifi == false) {
-		let res: UniWifiResult = {
-			errSubject: "uni-getConnectedWifi",
-			errCode: 12000, 
-			errMsg: "getConnectedWifi:not init",
-			wifi: null
-		}
-		option.fail?.(res)
-		option.complete?.(res)
+		let err = new UniError("uni-getConnectedWifi",12000,"getConnectedWifi:not init");
+		option.fail?.(err)
+		option.complete?.(err)
 	} else{
 		if (UIDevice.current.systemVersion >= "13.0") {
 			requestLocationPromise((success) => {
 				if (success == true) {
 					fetchConnectedWifiWithLocationPromise(option)
 				}else {
-					let res: UniWifiResult = {
-						errSubject: "uni-getConnectedWifi",
-						errCode: 12007, 
-						errMsg: "getConnectedWifi:user denied",
-						wifi: null
-					}
-					option.fail?.(res)
-					option.complete?.(res)
+					let err = new UniError("uni-getConnectedWifi",12007,"getConnectedWifi:user denied");
+					option.fail?.(err)
+					option.complete?.(err)
 				}
 			})
 		} else{
@@ -247,14 +222,10 @@ export const getConnectedWifi: GetConnectedWifi = function (option: GetConnected
  * 连接wifi
  */
 export const connectWifi: ConnectWifi = function (option: WifiConnectOption) {
-	let res: UniWifiResult = {
-		errSubject: "uni-connectWifi",
-		errCode: 12001, 
-		errMsg: "connectWifi:system not support",
-		wifi: null
-	}
-	option.fail?.(res)
-	option.complete?.(res)
+	
+	let err = new UniError("uni-connectWifi",12001,"connectWifi:system not support");
+	option.fail?.(err)
+	option.complete?.(err)
 }
 
 
@@ -290,12 +261,7 @@ export const onOffWifiConnectedWithPartialInfo: OnOffWifiConnectedWithPartialInf
  * 设置 wifiList 中 AP 的相关信息。在 onGetWifiList 回调后调用，iOS特有接口。
  */
 export const setWifiList: SetWifiList = function (option: WifiOption) {
-	let res: UniWifiResult = {
-		errSubject: "uni-setWifiList",
-		errCode: 12001, 
-		errMsg: "setWifiList:system not support",
-		wifi: null
-	}
-	option.fail?.(res)
-	option.complete?.(res)
+	let err = new UniError("uni-setWifiList",12001,"setWifiList:system not support");
+	option.fail?.(err)
+	option.complete?.(err)
 }

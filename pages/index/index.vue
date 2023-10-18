@@ -19,7 +19,7 @@
 		<button @tap="testGetBatteryInfoSync">同步获取电池电量</button>
 		<button @tap="testonMemoryWarning">开启内存不足告警监听</button>
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
-		
+		<button @tap="getLocationTest" style="width: 100%;">获取定位</button>
 		
 	</view>
 </template>
@@ -32,7 +32,8 @@
 				memListener:null,
 				setUserCaptureScreenFlag: false,
 				setUserCaptureScreenText: '禁止截屏',
-				permissionGranted: false
+				permissionGranted: false,
+				id:0
 			}
 		},
 		onLoad() {
@@ -45,24 +46,37 @@
 			fn:function(res){
 				console.log(res)
 			},
+			getLocationTest() {
+				console.log(" ------- getLocationTest: ");
+				uni.getLocation({
+				 type: 'gcj02 ',
+				 success (res) {
+					console.log(" success ",res);
+				 },fail (res) {
+					console.log(" fail ",res);
+				 }
+				})
+			},
 			onGetWifiList2_assert0() {
-							const fn = res => console.log('onGetWifiList res', res)
-							uni.startWifi({success(){
-								uni.onGetWifiList(fn)
-								uni.getWifiList({
-									success() {
-										console.log('getWifiList success');
-										uni.offGetWifiList(fn)
-										uni.stopWifi({
-											success() {},
-											fail(e) {
-												console.log("stopWifi fail: ",e);
-											}
-										})
-									}
-								})
-							}})
-						},
+				console.log(" ------- onGetWifiList2_assert0: ",this.id);
+				const fn = res => console.log('onGetWifiList res', res)
+				uni.startWifi({success(){
+					uni.onGetWifiList(fn)
+					uni.getWifiList({
+						success() {
+							console.log('getWifiList success');
+							uni.offGetWifiList(fn)
+							uni.stopWifi({
+								success() {},
+								fail(e) {
+									console.log("stopWifi fail: ",e);
+								}
+							})
+						}
+					})
+				}})
+				this.id++
+			},
 						
 			testConnnectWifi(){
 				
