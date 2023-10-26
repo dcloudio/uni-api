@@ -1,14 +1,14 @@
 {
 	"id": "uni-getLocation-tencent",
 	"displayName": "uni-getLocation-tencent",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "基于腾讯定位服务，实现uni.getLocation 获取定位功能",
 	"keywords": [
         "uni-getLocation-tencent"
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.9.0"
+		"HBuilderX": "^3.8.12"
 	},
 	"dcloudext": {
 		"type": "uts",
