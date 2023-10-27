@@ -37,7 +37,7 @@
 				"installApk": {
 					"name": "installApk",
 					"app": {
-						"js": false,
+						"js": true,
 						"kotlin": true,
 						"swift": false
 					}
