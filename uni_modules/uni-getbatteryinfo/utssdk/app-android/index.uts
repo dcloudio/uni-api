@@ -5,6 +5,7 @@ import { GetBatteryInfo, GetBatteryInfoOptions, GetBatteryInfoSuccess, GetBatter
 import IntentFilter from 'android.content.IntentFilter';
 import Intent from 'android.content.Intent';
 
+import { GetBatteryInfoFailImpl } from '../unierror';
 
 /**
  * 异步获取电量
@@ -34,7 +35,7 @@ export const getBatteryInfo : GetBatteryInfo = function (options : GetBatteryInf
         options.success?.(res)
         options.complete?.(res)
     } else {
-		const res = new UniError("uni-getBatteryInfo", 1001, "getBatteryInfo:fail getAppContext is null")
+		let res = new GetBatteryInfoFailImpl(1001);
         options.fail?.(res)
         options.complete?.(res)
     }
