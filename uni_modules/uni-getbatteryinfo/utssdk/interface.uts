@@ -10,27 +10,6 @@ export type GetBatteryInfoSuccess = {
 	isCharging : boolean
 }
 
-// export type GetBatteryInfoFail = {
-// 	/**
-// 	* 错误码
-// 	*/
-// 	errCode : number,
-// 	/**
-// 	* 调用API的名称
-// 	*/
-// 	errSubject : string,
-// 	/**
-// 	* 错误的详细信息
-// 	*/
-// 	errMsg : string,
-// 	/**
-// 	* 错误来源
-// 	*/
-// 	cause : any | null
-// }
-
-
-
 export type GetBatteryInfoOptions = {
 	/**
 		* 接口调用结束的回调函数（调用成功、失败都会执行）
@@ -63,7 +42,7 @@ export type GetBatteryInfoResult = {
  */
 export type GetBatteryInfoErrorCode = 1001 ;
 /**
- * myApi 的错误回调参数
+ * GetBatteryInfo 的错误回调参数
  */
 export interface GetBatteryInfoFail extends IUniError {
   errCode : GetBatteryInfoErrorCode
