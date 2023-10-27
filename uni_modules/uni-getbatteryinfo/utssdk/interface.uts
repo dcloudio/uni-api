@@ -58,6 +58,18 @@ export type GetBatteryInfoResult = {
 }
 
 /**
+ * 错误码
+ * - 1001 getAppContext is null
+ */
+export type GetBatteryInfoErrorCode = 1001 ;
+/**
+ * myApi 的错误回调参数
+ */
+export interface GetBatteryInfoFail extends IUniError {
+  errCode : GetBatteryInfoErrorCode
+};
+
+/**
 * 获取电量信息
 * @param {GetBatteryInfoOptions} options
 *
