@@ -1,6 +1,45 @@
 # uni-installApk
-### 开发文档
-[UTS 语法](https://uniapp.dcloud.net.cn/tutorial/syntax-uts.html)
-[UTS API插件](https://uniapp.dcloud.net.cn/plugin/uts-plugin.html)
-[UTS 组件插件](https://uniapp.dcloud.net.cn/plugin/uts-component.html)
-[Hello UTS](https://gitcode.net/dcloud/hello-uts)
+
+## 使用说明  
+
+Android平台安装Apk
+
+
+
+### App-Android平台注意事项  
+- 需要自定义基座，并且需要具备下面的权限
+
+```
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+```
+
+
+### uni.installApk(options : InstallApkOptions):void
+
+安装apk
+
+参数说明
+
+```
+type InstallApkOptions = {
+	/**
+	 * apk文件地址
+	 */
+	filePath : string,
+	/**
+	 * 接口调用成功的回调函数
+	 * @defaultValue null
+	 */
+	success ?: (res : any) => void,
+	/**
+	 * 接口调用失败的回调函数
+	 * @defaultValue null
+	 */
+	fail ?: (err : any) => void,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 * @defaultValue null
+	 */
+	complete ?: (res : any) => void,
+}
+```
