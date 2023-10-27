@@ -4,15 +4,7 @@
 
 Android平台安装Apk
 
-
-
-### App-Android平台注意事项  
-- 需要自定义基座，并且需要具备下面的权限
-
-```
-<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-```
-
+**注意: 3.95以下需要自定义基座**
 
 ### uni.installApk(options : InstallApkOptions):void
 
