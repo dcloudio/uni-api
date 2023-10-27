@@ -284,8 +284,8 @@
 			},
 			handleInstallApk() {
 				installApk({
-					filePath: "/sdcard/Android/data/io.dcloud.HBuilder/apps/HBuilder/doc/ddd.apk",
-					// filePath:"/static/ddd.apk",
+					// filePath: "/sdcard/Android/data/io.dcloud.HBuilder/apps/HBuilder/doc/ddd.apk",
+					filePath:"/static/test.apk",
 					complete(res) {
 						console.log(res);
 					}

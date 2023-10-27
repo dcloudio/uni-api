@@ -35,7 +35,7 @@ export type InstallApkSuccess = {
 	/**
 	 * 安装成功消息
 	 */
-	message : string
+	errMsg : string
 }
 export type InstallApkComplete = any
 export type InstallApkSuccessCallback = (res : InstallApkSuccess) => void

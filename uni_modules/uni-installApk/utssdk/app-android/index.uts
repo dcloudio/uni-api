@@ -31,7 +31,7 @@ export function installApk(options : InstallApkOptions) : void {
 		
 	context.startActivity(intent)
 	const success : InstallApkSuccess = {
-		message: "success"
+		errMsg: "success"
 	}
 	options.success?.(success)
 	options.complete?.(success)
