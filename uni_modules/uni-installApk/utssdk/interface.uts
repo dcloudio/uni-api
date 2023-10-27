@@ -9,8 +9,8 @@ export interface Uni {
 	  *    "app": {
 	  *        "android": {
 	  *            "osVer": "4.4",
-	  *  		  	 "uniVer": "3.96+",
-	  * 			 "unixVer": "3.96+"
+	  *  		  	 "uniVer": "3.94+",
+	  * 			 "unixVer": "3.94+"
 	  *        },
 	  *        "ios": {
 	  *            "osVer": "x",

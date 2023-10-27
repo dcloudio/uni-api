@@ -4,11 +4,11 @@
 	"version": "1.0.0",
 	"description": "uni-installApk",
 	"keywords": [
-		"uni-installApk"
-	],
+        "uni-installApk"
+    ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.6.8"
+		"HBuilderX": "^3.94"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -24,9 +24,9 @@
 			"qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "无",
+			"permissions": "android.permission.REQUEST_INSTALL_PACKAGES"
 		},
 		"npmurl": ""
 	},
@@ -47,8 +47,8 @@
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "u",
-				"aliyun": "u"
+				"tcb": "y",
+				"aliyun": "y"
 			},
 			"client": {
 				"Vue": {
@@ -57,35 +57,35 @@
 				},
 				"App": {
 					"app-android": "u",
-					"app-ios": "u"
+					"app-ios": "n"
 				},
 				"H5-mobile": {
-					"Safari": "u",
-					"Android Browser": "u",
-					"微信浏览器(Android)": "u",
-					"QQ浏览器(Android)": "u"
+					"Safari": "n",
+					"Android Browser": "n",
+					"微信浏览器(Android)": "n",
+					"QQ浏览器(Android)": "n"
 				},
 				"H5-pc": {
-					"Chrome": "u",
-					"IE": "u",
-					"Edge": "u",
-					"Firefox": "u",
-					"Safari": "u"
+					"Chrome": "n",
+					"IE": "n",
+					"Edge": "n",
+					"Firefox": "n",
+					"Safari": "n"
 				},
 				"小程序": {
-					"微信": "u",
-					"阿里": "u",
-					"百度": "u",
-					"字节跳动": "u",
-					"QQ": "u",
-					"钉钉": "u",
-					"快手": "u",
-					"飞书": "u",
-					"京东": "u"
+					"微信": "n",
+					"阿里": "n",
+					"百度": "n",
+					"字节跳动": "n",
+					"QQ": "n",
+					"钉钉": "n",
+					"快手": "n",
+					"飞书": "n",
+					"京东": "n"
 				},
 				"快应用": {
-					"华为": "u",
-					"联盟": "u"
+					"华为": "n",
+					"联盟": "n"
 				}
 			}
 		}
