@@ -1,0 +1,613 @@
+import { getUniActivity } from "io.dcloud.uts.android";
+import {
+	ChooseImageOptions, ChooseImage, ChooseImageSuccessCallback,
+	PreviewImageOptions, PreviewImage, LongPressActionsOptions, PreviewImageSuccessCallback, LongPressActionsSuccessData,
+	ClosePreviewImage, ClosePreviewImageSuccessCallback, ClosePreviewImageOptions,
+	GetImageInfo, GetImageInfoOptions, GetImageInfoSuccessCallback,
+	SaveImageToPhotosAlbum, SaveImageToPhotosAlbumOptions, SaveImageToPhotosAlbumSuccessCallback,
+	CompressImage, CompressImageSuccessCallback, CompressImageFailCallback, CompressImageOptions,
+	ChooseVideo, ChooseVideoOptions, ChooseVideoFailCallback, ChooseVideoSuccessCallback,
+	GetVideoInfo, GetVideoInfoOptions, GetVideoInfoSuccessCallback,
+	SaveVideoToPhotosAlbum, SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccessCallback,
+	CompressVideo, CompressVideoOptions, CompressVideoFailCallback, CompressVideoSuccessCallback
+} from "../interface.uts"
+import {
+	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
+	UniErrors
+} from "../unierror.uts"
+import { CODE_CAMERA_ERROR, CODE_GALLERY_ERROR, CODE_GET_IMAGE_INFO_CODE } from "../ChooseImageUtils.uts"
+import { chooseMediaImage, chooseMediaVideo } from "./utils/ChooseMediaUtils.uts"
+import { transcodeImage, transcodeVideo } from './utils/CompressUtils.uts'
+import { getVideoMetadata } from "./utils/MediaUtils.uts"
+import Intent from 'android.content.Intent';
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import Manifest from 'android.Manifest';
+import Build from 'android.os.Build';
+import File from 'java.io.File';
+import Uri from 'android.net.Uri';
+import ArrayList from 'java.util.ArrayList';
+
+import Glide from 'com.bumptech.glide.Glide';
+import CustomTarget from 'com.bumptech.glide.request.target.CustomTarget';
+import Drawable from 'android.graphics.drawable.Drawable';
+import Transition from 'com.bumptech.glide.request.transition.Transition';
+import ExifInterface from 'android.media.ExifInterface';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import TextUtils from 'android.text.TextUtils';
+import FileInputStream from 'java.io.FileInputStream';
+import FileOutputStream from 'java.io.FileOutputStream';
+import Environment from 'android.os.Environment';
+import LongClickEventManager from 'io.dcloud.uts.nativeObj.photoview.LongClickEventManager';
+import JSONObject from 'org.json.JSONObject';
+import ActivityManager from 'io.dcloud.uts.nativeObj.photoview.ActivityManager';
+import MediaMetadataRetriever from 'android.media.MediaMetadataRetriever';
+import MediaStore from 'android.provider.MediaStore';
+import ContentValues from 'android.content.ContentValues';
+import Exception from 'java.lang.Exception';
+import BufferedOutputStream from 'java.io.BufferedOutputStream';
+import ByteArrayInputStream from 'java.io.ByteArrayInputStream';
+// import { actionSheetImpl, ShowActionSheetOptions, closeActionSheet } from "./showActionSheet.uts";
+
+
+/**
+ * 图片压缩目前采用原java代码压缩方式
+ */
+
+
+export const chooseImage : ChooseImage = function (option : ChooseImageOptions) {
+	chooseMediaImage(option)
+}
+
+export const previewImage : PreviewImage = function (options : PreviewImageOptions) {
+	if (options.urls.length > 0) {
+		let values : ArrayList<String> = new ArrayList()
+		let oroginalValues : ArrayList<String> = new ArrayList()
+		options.urls.forEach((original) => {
+			let localPath = original
+			if (!localPath.startsWith("data:image") && !isNetPath(localPath)) {
+				localPath = UTSAndroid.convert2AbsFullPath(localPath)
+			}
+			values.add(localPath)
+			oroginalValues.add(original)
+		})
+		let intent = new Intent()
+		intent.setClassName(getUniActivity()!, "io.dcloud.uts.nativeObj.photoview.PhotoActivity");
+		intent.putExtra("image_urlList", values);
+		intent.putExtra("original_image_urlArray", oroginalValues)
+		var current = 0;
+		if (options.current != null) {
+			try {
+				current = (options.current!.toString()).toInt()
+				if (current < 0) {
+					current = 0
+				}
+			} catch (e) {
+
+			}
+		}
+		intent.putExtra("image_current_index", current)
+		intent.putExtra("image_loop", options.loop != null ? options.loop! : false);
+		if (options.indicator != null) {
+			intent.putExtra("image_indicator", options.indicator!);
+		}
+		intent.putExtra("image_photo", true);
+		var callbackId = System.currentTimeMillis() + ":"
+		intent.putExtra("preview_callback", callbackId);
+		// uts目前无法支持嵌套方法，长按事件暂时不支持
+		// LongClickEventManager.getInstance().addOnlongClickListener(callbackId, new LongClick(options))
+		getUniActivity()!.startActivity(intent)
+		let success : PreviewImageSuccessCallback = { errMsg: 'ok', "errSubject": UniError_PreviewImage }
+		options.success?.(success)
+		options.complete?.(success)
+	} else {
+		let error : UniError = { "errCode": 1101002, "errMsg": UniErrors[1101002]!, "errSubject": UniError_PreviewImage }
+		options.fail?.(error)
+		options.complete?.(error)
+	}
+}
+
+class LongClick implements LongClickEventManager.OnLongClickListener {
+	options : PreviewImageOptions
+	constructor(options : PreviewImageOptions) {
+		this.options = options
+	}
+	override onLongClickListener(values : JSONObject) {
+		var itemList : Array<string> | null = null
+		var itemColor : string | null = null
+		var hasLongPressAction = false;
+		if (this.options.longPressActions != null && this.options.longPressActions!.itemList != null && this.options.longPressActions!.itemList!.length > 0) {
+			itemList = this.options.longPressActions!.itemList!
+			hasLongPressAction = true
+		} else {
+			itemList = ["保存"]
+		}
+		if (this.options.longPressActions != null && this.options.longPressActions!.itemColor != null) {
+			itemColor = this.options.longPressActions!.itemColor!
+		}
+		// let actionOption : ShowActionSheetOptions = {
+		// 	"itemList": itemList!,
+		// 	"itemColor": itemColor == null ? "" : itemColor!,
+		// 	success: (e) => {
+		// 		if (hasLongPressAction) {
+		// 			let success : LongPressActionsSuccessData = {
+		// 				"index": values.optInt("index"),
+		// 				"tapIndex": e.tapIndex!
+		// 			}
+		// 			this.options.longPressActions?.success?.(success)
+		// 			this.options.longPressActions?.complete?.(success)
+		// 			return
+		// 		}
+		// 		let saveOption : SaveImageToPhotosAlbumOptions = {
+		// 			"filePath": values.optString("url"),
+		// 			success: (e) => {
+		// 				uni.showToast({
+		// 					title: "uni.previewImage.save.success",
+		// 					position: "bottom"
+		// 				})
+		// 			},
+		// 			fail: (e) => {
+		// 				uni.showToast({
+		// 					title: "uni.previewImage.save.fail",
+		// 					position: "bottom"
+		// 				})
+		// 			},
+		// 			complete: (e) => {
+		// 			}
+		// 		}
+		// 		loadFile(saveOption, false)
+		// 	},
+		// 	fail: (e) => {
+		// 		if (hasLongPressAction) {
+		// 			let fail = {
+		// 				"errMsg": "user cancel"
+		// 			}
+		// 			this.options.longPressActions?.fail?.(fail)
+		// 			this.options.longPressActions?.complete?.(fail)
+		// 		}
+		// 	}
+		// }
+		// let activity = ActivityManager.getInstance().getRunningActivity("io.dcloud.uts.nativeObj.photoview.PhotoActivity")
+		// actionSheetImpl(activity, actionOption)
+		// uni.showActionSheet()
+	}
+}
+
+function isNetPath(url : string) : boolean {
+	if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("rtmp://") || url.startsWith("rtsp://")) {
+		return true;
+	}
+	return false;
+}
+
+export const closePreviewImage : ClosePreviewImage = function (options : ClosePreviewImageOptions) {
+	// 可能存在执行关闭的时候 action sheet 正在显示
+	// closeActionSheet()
+	let activity = ActivityManager.getInstance().getRunningActivity("io.dcloud.uts.nativeObj.photoview.PhotoActivity")
+	if (activity != null) {
+		activity.onBackPressed()
+	}
+	let callback : ClosePreviewImageSuccessCallback = {
+		errMsg: "ok"
+	}
+	options.success?.(callback)
+	options.complete?.(callback)
+}
+
+export const getImageInfo : GetImageInfo = function (options : GetImageInfoOptions) {
+	if (isNetPath(options.src)) {
+		Glide.with(getUniActivity()!).asFile().load(options.src).into(new ImageInfoTarget(options))
+	} else {
+		var path = ""
+		if (options.src.length > 0) {
+			path = UTSAndroid.convert2AbsFullPath(options.src)
+			getExif(path, options, null)
+		} else {
+			let imageInfoCallback : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_GetImageInfo }
+			options.fail?.(imageInfoCallback)
+			options.complete?.(imageInfoCallback)
+		}
+	}
+}
+
+class ImageInfoTarget extends CustomTarget<File> {
+	options : GetImageInfoOptions
+
+	constructor(options : GetImageInfoOptions) {
+		super();
+		this.options = options
+	}
+
+	override onResourceReady(resource : File, transition : Transition<KotlinVarianceAnnotationIn<File>> | null) {
+		let bitmapOption = new BitmapFactory.Options();
+		bitmapOption.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(resource.getPath(), bitmapOption)
+		let mimeType : string = bitmapOption.outMimeType
+		if (!TextUtils.isEmpty(mimeType) && mimeType.contains("/")) {
+			mimeType = mimeType.substring(mimeType.indexOf("/") + 1)
+		}
+		// 拼接保存路径
+		let path = UTSAndroid.getAppTempPath()! + "imageInfo/" + System.currentTimeMillis()
+		if (!TextUtils.isEmpty(mimeType)) {
+			path += "." + mimeType
+		} else {
+			path += ".jpg"
+		}
+		if (copyFile(resource.getPath(), path)) {
+			getExif(path, this.options, bitmapOption)
+		} else {
+			let imageInfoCallback : UniError = { "errCode": 1101004, "errMsg": UniErrors[1101004]!, "errSubject": UniError_GetImageInfo }
+			this.options.fail?.(imageInfoCallback)
+			this.options.complete?.(imageInfoCallback)
+		}
+	}
+
+	override onLoadCleared(placeholder : Drawable | null) {
+	}
+
+	override onLoadFailed(errorDrawable : Drawable | null) {
+		let imageInfoCallback : UniError = { "errCode": 1101004, "errMsg": UniErrors[1101004]!, "errSubject": UniError_GetImageInfo }
+		this.options.fail?.(imageInfoCallback)
+		this.options.complete?.(imageInfoCallback)
+	}
+}
+
+function getExif(src : string, options : GetImageInfoOptions, bitmapOption : BitmapFactory.Options | null) {
+	if (!new File(src).exists()) {
+		let imageInfoCallback : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_GetImageInfo }
+		options.fail?.(imageInfoCallback)
+		options.complete?.(imageInfoCallback)
+		return
+	}
+	try {
+		let exifInfo = new ExifInterface(src);
+		if (bitmapOption == null) {
+			bitmapOption = new BitmapFactory.Options();
+			bitmapOption.inJustDecodeBounds = true;
+			BitmapFactory.decodeFile(src, bitmapOption)
+		}
+		let width = bitmapOption!.outWidth
+		let height = bitmapOption!.outHeight
+		let mimeType : string = bitmapOption!.outMimeType
+		if (!TextUtils.isEmpty(mimeType) && mimeType.contains("/")) {
+			mimeType = mimeType.substring(mimeType.indexOf("/") + 1)
+		}
+		let orientation = exifInfo.getAttribute(ExifInterface.TAG_ORIENTATION);
+		let orientationStr = ""
+		switch (orientation) {
+			case "2":
+				orientationStr = "up-mirrored";
+				break;
+			case "3":
+				orientationStr = "down";
+				break;
+			case "4":
+				orientationStr = "down-mirrored";
+				break;
+			case "5":
+				orientationStr = "left-mirrored";
+				break;
+			case "6":
+				orientationStr = "right";
+				break;
+			case "7":
+				orientationStr = "right-mirrored";
+				break;
+			case "8":
+				orientationStr = "left";
+				break;
+			case "0":
+			case "1":
+			default:
+				orientationStr = "up";
+				break;
+		}
+		let imageInfoCallback : GetImageInfoSuccessCallback = {
+			"width": width,
+			"height": height,
+			"path": "file://" + src,
+			"orientation": orientationStr,
+			"type": TextUtils.isEmpty(mimeType) ? "unknown" : mimeType
+		}
+		options.success?.(imageInfoCallback)
+		options.complete?.(imageInfoCallback)
+	} catch (e:Exception) {
+		let imageInfoCallback : UniError = { "errCode": 1101010, "errMsg": UniErrors[1101010]!+e.toString(), "errSubject": UniError_GetImageInfo }
+		options.fail?.(imageInfoCallback)
+		options.complete?.(imageInfoCallback)
+	}
+}
+
+
+function copyFile(fromFilePath : string, toFilePath : string) : boolean {
+	let fromFile = new File(fromFilePath)
+	if (!fromFile.exists()) {
+		return false;
+	}
+	if (!fromFile.isFile()) {
+		return false
+	}
+	if (!fromFile.canRead()) {
+		return false;
+	}
+	let toFile = new File(toFilePath)
+	if (!toFile.getParentFile().exists()) {
+		toFile.getParentFile().mkdirs()
+	}
+	if (!toFile.exists()) {
+		toFile.createNewFile()
+	}
+	try {
+		let fis = new FileInputStream(fromFile)
+		let fos = new FileOutputStream(toFile)
+		let byteArrays = ByteArray(1024)
+		var c = fis.read(byteArrays)
+		while (c > 0) {
+			fos.write(byteArrays, 0, c)
+			c = fis.read(byteArrays)
+		}
+		fis.close()
+		fos.close()
+		return true
+	} catch (e) {
+		return false;
+	}
+}
+export const saveImageToPhotosAlbum : SaveImageToPhotosAlbum = function (options : SaveImageToPhotosAlbumOptions) {
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+		let requestPermissionList : Array<string> = [Manifest.permission.WRITE_EXTERNAL_STORAGE]
+		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
+			loadFile(options, true)
+		}, (a : boolean, b : string[]) => {
+			let error : UniError = {
+				"errCode": 1101005,
+				"errMsg": UniErrors[1101005]!,
+				"errSubject": UniError_SaveImageToPhotosAlbum
+			}
+			options.fail?.(error)
+			options.complete?.(error)
+		})
+	} else {
+		loadFile(options, true)
+	}
+}
+
+function loadFile(options : SaveImageToPhotosAlbumOptions, saveToAlbum : boolean) {
+	if (isNetPath(options.filePath)) {
+		Glide.with(getUniActivity()!).asFile().load(options.filePath).into(new SaveToAlbumTarget(options, saveToAlbum))
+	} else {
+		if (TextUtils.isEmpty(options.filePath)) {
+			let error : UniError = {
+				"errCode": 1101003,
+				"errMsg": UniErrors[1101003]!,
+				"errSubject": UniError_SaveImageToPhotosAlbum
+			}
+			options.fail?.(error)
+			options.complete?.(error)
+			return
+		}
+		let originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
+		if (!new File(originalPath).exists()) {
+			let error : UniError = {
+				"errCode": 1101003,
+				"errMsg": UniErrors[1101003]!,
+				"errSubject": UniError_SaveImageToPhotosAlbum
+			}
+			options.fail?.(error)
+			options.complete?.(error)
+			return
+		}
+		let path = DCIM_PATH + originalPath.substring(originalPath.lastIndexOf("/") + 1)
+		if (copyFileToPublicPath(originalPath, path, false)) {
+			if (saveToAlbum) {
+				sendSaveToAlbumBroad(path)
+			}
+			let success : SaveImageToPhotosAlbumSuccessCallback = {
+				"path": path
+			}
+			options.success?.(success)
+			options.complete?.(success)
+		} else {
+			let error : UniError = {
+				"errCode": 1101006,
+				"errMsg": UniErrors[1101006]!,
+				"errSubject": UniError_SaveImageToPhotosAlbum
+			}
+			options.fail?.(error)
+			options.complete?.(error)
+		}
+	}
+}
+
+function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVideo : boolean) : boolean {
+	if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+		try {
+			return copyFile(fromFilePath, toFilePath)
+		} catch (e) {
+			return false
+		}
+	}
+	if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && UTSAndroid.getUniActivity()!.getApplicationInfo().targetSdkVersion >= 29) || (Build.VERSION.SDK_INT >= 30)) {
+		try {
+			var fis = new FileInputStream(fromFilePath)
+			if (fis == null) {
+				return false
+			}
+			var mimeType : string | null = null
+			if (isVideo) {
+				var retriever = new MediaMetadataRetriever()
+				retriever.setDataSource(fromFilePath)
+				mimeType = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
+			} else {
+				let opt = new BitmapFactory.Options();
+				opt.inJustDecodeBounds = true;
+				BitmapFactory.decodeFile(fromFilePath, opt)
+				mimeType = opt.outMimeType;
+			}
+			if (mimeType == null) {
+				return false
+			}
+			var uri = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL)
+			if (mimeType!.startsWith("image/")) {
+				uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+			} else if (mimeType!.startsWith("video/")) {
+				uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+			} else if (mimeType!.startsWith("audio/")) {
+				uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+			}
+			var resolver = UTSAndroid.getUniActivity()!.getContentResolver()
+			var contentValue = new ContentValues()
+			let fileName = fromFilePath.substring(fromFilePath.lastIndexOf("/") + 1)
+			contentValue.put(MediaStore.Files.FileColumns.DISPLAY_NAME, fileName)
+			contentValue.put(MediaStore.Files.FileColumns.MIME_TYPE, mimeType!)
+			contentValue.put(MediaStore.Files.FileColumns.TITLE, fileName)
+			contentValue.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/Camera/")
+			let insertUri = resolver.insert(uri, contentValue)
+			if (insertUri == null) {
+				return false
+			}
+			let fos = resolver.openOutputStream(insertUri)
+			if (fos == null) {
+				return false
+			}
+			var byteArrays = ByteArray(102400 * 2)
+			var c = fis.read(byteArrays)
+			while (c > 0) {
+				fos!.write(byteArrays, 0, c)
+				c = fis.read(byteArrays)
+			}
+			fos!.close()
+			fis.close()
+			return true
+		} catch (e : Exception) {
+			e.printStackTrace();
+			return false
+		}
+	} else {
+		try {
+			return copyFile(fromFilePath, toFilePath)
+		} catch (e) {
+			return false
+		}
+	}
+}
+
+function sendSaveToAlbumBroad(src : string) {
+	let intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + src))
+	getUniActivity()!.sendBroadcast(intent)
+}
+
+let DCIM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/"
+class SaveToAlbumTarget extends CustomTarget<File> {
+	options : SaveImageToPhotosAlbumOptions
+	saveToAlbum : boolean
+	constructor(options : SaveImageToPhotosAlbumOptions, saveToAlbum : boolean) {
+		super();
+		this.options = options
+		this.saveToAlbum = saveToAlbum
+	}
+
+	override onResourceReady(resource : File, transition : Transition<KotlinVarianceAnnotationIn<File>> | null) {
+		let bitmapOption = new BitmapFactory.Options();
+		bitmapOption.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(resource.getPath(), bitmapOption)
+		let mimeType : string | null = bitmapOption.outMimeType
+		if (!TextUtils.isEmpty(mimeType) && mimeType!.contains("/")) {
+			mimeType = mimeType!.substring(mimeType!.indexOf("/") + 1)
+		}
+
+		// 拼接保存路径
+		let path = DCIM_PATH + System.currentTimeMillis()
+		if (!TextUtils.isEmpty(mimeType)) {
+			path += "." + mimeType
+		} else {
+			path += ".jpg"
+		}
+		if (copyFileToPublicPath(resource.getPath(), path, false)) {
+			if (this.saveToAlbum) {
+				sendSaveToAlbumBroad(path)
+			}
+			let success : SaveImageToPhotosAlbumSuccessCallback = {
+				"path": path
+			}
+			this.options.success?.(success)
+			this.options.complete?.(success)
+		} else {
+			let imageInfoCallback : UniError = { "errCode": 1101004, "errMsg": UniErrors[1101004]!, "errSubject": UniError_SaveImageToPhotosAlbum }
+			this.options.fail?.(imageInfoCallback)
+			this.options.complete?.(imageInfoCallback)
+		}
+	}
+
+	override onLoadCleared(placeholder : Drawable | null) {
+	}
+
+	override onLoadFailed(errorDrawable : Drawable | null) {
+		let imageInfoCallback : UniError = { "errCode": 1101004, "errMsg": UniErrors[1101004]!, "errSubject": UniError_SaveImageToPhotosAlbum }
+		this.options.fail?.(imageInfoCallback)
+		this.options.complete?.(imageInfoCallback)
+	}
+}
+
+export const compressImage : CompressImage = function (options : CompressImageOptions) {
+	transcodeImage(options)
+}
+
+export const chooseVideo : ChooseVideo = function (options : ChooseVideoOptions) {
+	chooseMediaVideo(options)
+}
+
+
+export const getVideoInfo : GetVideoInfo = function (options : GetVideoInfoOptions) {
+	let result = getVideoMetadata(options.src)
+	if (result instanceof GetVideoInfoSuccessCallback) {
+		options.success?.(result as GetVideoInfoSuccessCallback)
+	} else if (result instanceof UniError)
+		options.fail?.(result as UniError)
+	options.complete?.(result)
+}
+
+
+export const saveVideoToPhotosAlbum : SaveVideoToPhotosAlbum = function (options : SaveVideoToPhotosAlbumOptions) {
+	if (TextUtils.isEmpty(options.filePath)) {
+		let error : UniError = {
+			"errCode": 1101003,
+			"errMsg": UniErrors[1101003]!,
+			"errSubject": UniError_SaveVideoToPhotosAlbum
+		}
+		options.fail?.(error)
+		options.complete?.(error)
+		return
+	}
+	let originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
+	if (!new File(originalPath).exists()) {
+		let error : UniError = {
+			"errCode": 1101003,
+			"errMsg": UniErrors[1101003]!,
+			"errSubject": UniError_SaveVideoToPhotosAlbum
+		}
+		options.fail?.(error)
+		options.complete?.(error)
+		return
+	}
+	let path = DCIM_PATH + originalPath.substring(originalPath.lastIndexOf("/") + 1)
+	if (copyFileToPublicPath(originalPath, path, true)) {
+		sendSaveToAlbumBroad(path)
+		let success : SaveVideoToPhotosAlbumSuccessCallback = {
+			// "path": path
+		}
+		options.success?.(success)
+		options.complete?.(success)
+	} else {
+		let error : UniError = {
+			"errCode": 1101006,
+			"errMsg": UniErrors[1101006]!,
+			"errSubject": UniError_SaveVideoToPhotosAlbum
+		}
+		options.fail?.(error)
+		options.complete?.(error)
+	}
+}
+
+export const compressVideo : CompressVideo = function (options : CompressVideoOptions) {
+	transcodeVideo(options)
+}

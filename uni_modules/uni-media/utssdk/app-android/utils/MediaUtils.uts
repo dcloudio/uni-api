@@ -1,0 +1,104 @@
+import {
+	ChooseImageOptions, ChooseImageSuccessCallback,
+	ChooseVideoOptions, ChooseVideoSuccessCallback,
+	GetVideoInfoOptions, GetVideoInfoSuccessCallback,
+} from "../../interface.uts"
+import {
+	UniError_GetVideoInfo,
+	UniErrors
+} from "../../unierror.uts"
+import { uniChooseImage, CODE_CAMERA_ERROR, CODE_GALLERY_ERROR, CODE_GET_IMAGE_INFO_CODE, uniChooseVideo } from "../../ChooseImageUtils.uts"
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import File from 'java.io.File';
+import MediaMetadataRetriever from 'android.media.MediaMetadataRetriever';
+import BigDecimal from 'java.math.BigDecimal';
+import MediaExtractor from 'android.media.MediaExtractor';
+import MediaFormat from 'android.media.MediaFormat';
+import TextUtils from 'android.text.TextUtils';
+
+export function getVideoMetadata(src : string) : any {
+	let videoInfo : GetVideoInfoSuccessCallback = {
+		duration: 0,
+		size: 0,
+		height: 0,
+		width: 0
+	}
+	let path = UTSAndroid.convert2AbsFullPath(src)
+	let videoFile = new File(path)
+	if (!videoFile.exists()) {
+		let error : UniError = { "errSubject": UniError_GetVideoInfo, "errCode": 1101003, "errMsg": UniErrors[1101003]! }
+		return error
+	}
+	videoInfo.size = videoFile.length()
+	try {
+		let retriever = new MediaMetadataRetriever()
+		retriever.setDataSource(path)
+		let durationStr : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+		let width : number | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toFloat()
+		let height : number | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toFloat()
+		let rotation : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION)
+		if ("90" == rotation || "270" == rotation) {
+			videoInfo.width = height != null ? height! : 0
+			videoInfo.height = width != null ? width : 0
+		} else {
+			videoInfo.width = width != null ? width : 0
+			videoInfo.height = height != null ? height : 0
+		}
+		switch (rotation) {
+			case "90":
+				rotation = "right";
+				break;
+			case "270":
+				rotation = "left";
+				break;
+			case "180":
+				rotation = "down";
+				break;
+			default:
+				rotation = "up";
+				break;
+		}
+		var duration : number = 0
+		if (durationStr != null) {
+			try {
+				duration = durationStr.toFloat()
+			} catch (e) {
+			}
+		}
+		let big : BigDecimal = BigDecimal.valueOf(duration.toDouble() / 1000).setScale(2, BigDecimal.ROUND_HALF_UP)
+		videoInfo.duration = big.toFloat()
+		videoInfo.orientation = rotation!
+		let mimeType : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
+		videoInfo.type = mimeType
+		let bitrateStr = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE);
+		var bitrate : number | null = null
+		try {
+			if (bitrateStr != null) {
+				bitrate = (bitrateStr.toFloat() / 1000).toInt()
+			}
+		} catch (e) { }
+		videoInfo.bitrate = bitrate
+		var fpsNum : number | null = null
+		let fps : string | null = retriever.extractMetadata(32);
+		if (TextUtils.isEmpty(fps)) {
+			let extractor = new MediaExtractor()
+			extractor.setDataSource(path)
+			let trackCount = extractor.getTrackCount();
+			for (var i = 0; i < trackCount; i++) {
+				let mediaFormat = extractor.getTrackFormat(i.toInt());
+				let mimeType = mediaFormat.getString(MediaFormat.KEY_MIME);
+				if (!TextUtils.isEmpty(mimeType) && mimeType!!.startsWith("video/")) {
+					let frame = mediaFormat.getInteger(MediaFormat.KEY_FRAME_RATE);
+					fpsNum = frame
+				}
+			}
+		} else {
+			try { fpsNum = Math.ceil(((fps!!).toFloat() / (duration)) * 1000) } catch (e) { } // 沿用1.0设计，向上取整
+		}
+		videoInfo.fps = fpsNum
+		return videoInfo
+	} catch (e) {
+		let error : UniError = { "errSubject": UniError_GetVideoInfo, "errCode": 1101010, "errMsg": UniErrors[1101010]! + e.toString() }
+		return error
+	}
+}
