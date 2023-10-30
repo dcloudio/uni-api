@@ -1,0 +1,63 @@
+export interface Uni {
+  /**
+    * getNetworkType()
+    * @description 
+    * 获取网络类型
+    * @param {GetNetworkTypeOptions} options
+    * @return {void}
+    * @tutorial http://uniapp.dcloud.io/api/system/network?id=getnetworktype
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+       uni.getNetworkType({
+          success(res){
+            console.log(res);
+          }
+       });
+     ```
+    */
+  getNetworkType(options: GetNetworkTypeOptions): void;
+}
+
+export type GetNetworkType = (options: GetNetworkTypeOptions) => void;
+export type GetNetworkTypeSuccess = {
+  /**
+   * 网络类型
+   */
+  networkType: string
+};
+export type GetNetworkTypeSuccessCallback = (result: GetNetworkTypeSuccess) => void;
+export type GetNetworkTypeFail = UniError;
+export type GetNetworkTypeFailCallback = (result: GetNetworkTypeFail) => void;
+export type GetNetworkTypeComplete = any;
+export type GetNetworkTypeCompleteCallback = (result: GetNetworkTypeComplete) => void;
+export type GetNetworkTypeOptions = {
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: GetNetworkTypeSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: GetNetworkTypeFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: GetNetworkTypeCompleteCallback | null
+};
