@@ -1,6 +1,7 @@
 import { NotificationCenter } from 'Foundation';
 import { UIApplication } from "UIKit"
 import { Selector } from "ObjectiveC"
+import { OnMemoryWarning, OffMemoryWarning } from "../interface.uts"
 
 class MemoryWarningTool {
 	static listeners: UTSCallback[] = []
@@ -45,12 +46,13 @@ class MemoryWarningTool {
 	}
 }
 
+
 // 开启监听内存警告
-export function onMemoryWarning(callback: UTSCallback) {
+export const onMemoryWarning : OnMemoryWarning =  function (callback: UTSCallback) {
 	MemoryWarningTool.listenMemoryWarning(callback)
 }
 
 // 关闭监听内存警告
-export function offMemoryWarning(callback: UTSCallback | null) {
+export const offMemoryWarning : OffMemoryWarning = function (callback: UTSCallback | null) {
 	MemoryWarningTool.removeListen(callback)
 }

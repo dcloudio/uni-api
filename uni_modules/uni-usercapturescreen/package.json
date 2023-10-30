@@ -1,14 +1,14 @@
 {
 	"id": "uni-usercapturescreen",
 	"displayName": "uni-usercapturescreen",
-	"version": "1.0.1",
+	"version": "1.0.4",
 	"description": "用户主动截屏事件监听",
 	"keywords": [
         "截屏"
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.6.8"
+		"HBuilderX": "^3.7.7"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -33,9 +33,16 @@
 	"uni_modules": {
 		"uni-ext-api":{
 			"uni": {
-				"onUserCaptureScreen": "onUserCaptureScreen",
-				"offUserCaptureScreen": "offUserCaptureScreen",
-				"setUserCaptureScreen": "setUserCaptureScreen"
+				"onUserCaptureScreen": {
+          "web": false
+        },
+				"offUserCaptureScreen": {
+          "web": false
+        },
+				"setUserCaptureScreen": {
+          "web": false,
+          "mp-weixin": false
+        }
 			}
 		},
 		"dependencies": [],
@@ -47,7 +54,7 @@
 			},
 			"client": {
 				"Vue": {
-					"vue2": "y",
+					"vue2": "n",
 					"vue3": "y"
 				},
 				"App": {

@@ -1,0 +1,82 @@
+import { UIDevice, UIApplication, UIInterfaceOrientation, UIScreen } from 'UIKit';
+import { NSLocale, URL, FileManager } from 'Foundation';
+import { ATTrackingManager } from 'AppTrackingTransparency';
+import { ASIdentifierManager } from 'AdSupport';
+import { DispatchSemaphore, DispatchQueue } from 'Dispatch';
+
+
+
+export class DeviceUtil {
+
+	public static isPad(): boolean {
+		return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
+	}
+
+	public static getOSVersion(): string {
+		return UIDevice.current.systemVersion;
+	}
+
+	public static getLan(): string {
+		let currentLanguage = NSLocale.preferredLanguages[0];
+		return currentLanguage == null ? "" : currentLanguage
+	}
+
+	public static getOrientation(): string {
+		let orientation = "portrait";
+		DispatchQueue.main.sync(execute = () => {
+			const orient = UIApplication.shared.statusBarOrientation;
+			if (orient == UIInterfaceOrientation.landscapeLeft || orient == UIInterfaceOrientation.landscapeRight) {
+				orientation = "landscape";
+			}
+		})
+		return orientation;
+	}
+
+	public static getScreenScale(): string {
+		return UIScreen.main.scale.description;
+	}
+
+
+	public static getIdfa(): string {
+		if (UTSiOS.available("iOS 14, *")) {
+			if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManager.AuthorizationStatus.notDetermined) {
+				ATTrackingManager.requestTrackingAuthorization(completionHandler = (status) => { });
+			} else if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManager.AuthorizationStatus.authorized) {
+				return ASIdentifierManager.shared().advertisingIdentifier.uuidString;
+			}
+			return "";
+		}
+
+		return ASIdentifierManager.shared().advertisingIdentifier.uuidString;
+	}
+
+	public static hasRootPrivilege(): boolean {
+		let url = new URL(string = "cydia://");
+		let canOpenUrl = false;
+		DispatchQueue.main.sync(execute = () => {
+			canOpenUrl = UIApplication.shared.canOpenURL(url!)
+		})
+		if (canOpenUrl) {
+			return true;
+		}
+
+		let jailbreakToolPaths = [
+			"/Applications/Cydia.app",
+			"/Library/MobileSubstrate/MobileSubstrate.dylib",
+			"/bin/bash",
+			"/usr/sbin/sshd",
+			"/etc/apt"
+		];
+
+		let i = 0;
+		while (i < jailbreakToolPaths.length) {
+			if (FileManager.default.fileExists(atPath = jailbreakToolPaths[i])) {
+				return true;
+			}
+			i++;
+		}
+
+
+		return false;
+	}
+}

@@ -1,0 +1,175 @@
+import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask } from './interface';
+import { NetworkManager, NetworkRequestListener } from './network/NetworkManager.uts'
+import { Data, HTTPURLResponse, NSError, NSNumber , ComparisonResult } from 'Foundation';
+import { StatusCode } from './network/StatusCode.uts';
+
+class SimpleNetworkListener extends NetworkRequestListener {
+	private param : RequestOptions | null = null;
+	private headers : Map<string, any> | null = null;
+	private received : number = 0;
+	private data : Data = new Data();
+	constructor(param : RequestOptions) {
+		this.param = param;
+		super();
+	}
+
+	public override onStart() : void {
+	}
+
+	public override onHeadersReceived(statusCode : number, headers : Map<string, any>) : void {
+		this.headers = headers;
+	}
+	public override onDataReceived(data : Data) : void {
+		this.received += data.count;
+		this.data.append(data);
+	}
+
+	public override onFinished(response : HTTPURLResponse) : void {
+		try {
+			let headers = response.allHeaderFields as Map<string, any>;
+			let kParam = this.param;
+			let result = {};
+			result['statusCode'] = response.statusCode;
+			result['statusText'] = StatusCode.getStatus(new String(response.statusCode));
+			if (headers != null) {
+				result['header'] = headers;
+			}
+			let strData = this.readStringFromData(this.data, response.textEncodingName);
+
+
+			let type = kParam?.responseType != null ? kParam?.responseType : kParam?.dataType;
+
+			if (type == null && headers != null) {
+				
+				for (entry in headers){
+					let key = entry.key;
+					if (key.caseInsensitiveCompare("Content-Type") == ComparisonResult.orderedSame) {
+						type = headers[key] as string;
+					}
+				}
+			}
+			
+
+			result['data'] = this.parseData(this.data, strData, type);
+
+			let tmp : RequestSuccess = {
+				data: result['data']!,
+				statusCode: (new NSNumber(value = response.statusCode)),
+				header: result['header'] ?? "",
+				cookies: []
+			};
+			let success = kParam?.success;
+			let complete = kParam?.complete;
+			success?.(tmp);
+			complete?.(tmp);
+
+		} catch (e) {
+		}
+	}
+
+	public override onFail(error : NSError) : void {
+
+		let kParam = this.param;
+		let result = {};
+		let code = (error as NSError).code;
+		// result['data'] = error.localizedDescription + "(" + new String(code) + ")";
+		// result['errorMsg'] = error.localizedDescription + "(" + new String(code) + ")";
+		// result['statusText'] = StatusCode.getStatus(new String(code) + "");
+		// if (this.headers != null) {
+		// 	result['header'] = this.headers;
+		// }
+
+		let errCode = code;
+		let errMsg = error.localizedDescription;
+		if (code == -1001) {
+			errCode = 5;
+		} else if (code == -1004) {
+			errCode = 1000;
+		} else if (code == -1009) {
+			errCode = 600003;
+		} else if (code == -1000 || code == -1002 || code == -1003) {
+			errMsg = 'ERR_INVALID_REQUEST';
+		}
+
+
+		// let failResult : RequestFail = {
+		// 	errSubject: "uni-request",
+		// 	errMsg: errMsg,
+		// 	errCode: errCode,
+		// };
+		let failResult : RequestFail = new UniError("uni-request", Number.from(errCode), errMsg);
+
+		let fail = kParam?.fail;
+		let complete = kParam?.complete;
+		fail?.(failResult);
+		complete?.(failResult);
+	}
+
+
+	private readStringFromData(data : Data, type : string | null) : string | null {
+		let result : string | null = null;
+		let finalType = type;
+		if (finalType == null || finalType!.length == 0) {
+			finalType = "utf-8";
+		}
+
+		let cfEncoding = CFStringConvertIANACharSetNameToEncoding(finalType as CFString);
+		if (cfEncoding != kCFStringEncodingInvalidId) {
+			let stringEncoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
+			let encode = new String.Encoding(rawValue = stringEncoding);
+			result = new String(data = data, encoding = encode);
+		}
+		return result;
+	}
+
+	private parseData(data : Data | null, dataStr : string | null, type : string | null) : any | null {
+		if (type != null && type!.contains("json")) {
+			if (dataStr == null || dataStr!.length == 0) {
+				return {};
+			}
+			return this.parseJson(dataStr!);
+		} else if (type == 'jsonp') {
+			if (dataStr == null || dataStr!.length == 0) {
+				return {};
+			}
+			let start = dataStr!.indexOf('(');
+			let end = dataStr!.indexOf(')');
+			if (start == 0 || start >= end) {
+				return {};
+			}
+			start += 1;
+			let tmp = dataStr!.slice(start, end);
+			return this.parseJson(tmp);
+		} else {
+			//dataStr如果解码失败是空的时候，还需要继续尝试解码。极端情况，服务器不是utf8的，所以字符解码会出现乱码，所以特殊处理一下非utf8的字符。
+			if (data == null) {
+				return data;
+			}
+
+			let currentStr : string | null = dataStr;
+			//todo 等uts支持swift文件混编的时候，再进行处理。
+			// if (currentStr == null) {
+			// 	let data = cleanUTF8(data);
+			// 	if (data != null) {
+			// 		currentStr = new String(data = data, encoding = String.Encoding.utf8);
+			// 	}
+			// }
+
+			if (currentStr == null) {
+				currentStr = new String(data = data!, encoding = String.Encoding.ascii);
+			}
+
+			return currentStr;
+		}
+	}
+
+
+	private parseJson(str : string) : any | null{
+		return JSON.parse(str);
+	}
+}
+
+
+export const request : Request = (param : RequestOptions) : RequestTask | null => {
+	return NetworkManager.getInstance().request(param, new SimpleNetworkListener(param));
+}

@@ -1,0 +1,378 @@
+import { UploadFileOptions, UploadTask, UploadFileProgressUpdateCallback, UploadFileOptionFiles, OnProgressUpdateResult } from '../../../interface.uts';
+import { NetworkUploadFileListener } from '../NetworkManager.uts'
+import OkHttpClient from 'okhttp3.OkHttpClient';
+import TimeUnit from 'java.util.concurrent.TimeUnit';
+import ExecutorService from 'java.util.concurrent.ExecutorService';
+import Executors from 'java.util.concurrent.Executors';
+import RequestBody from 'okhttp3.RequestBody';
+import MediaType from 'okhttp3.MediaType';
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import MultipartBody from 'okhttp3.MultipartBody';
+import Call from 'okhttp3.Call';
+import Dispatcher from 'okhttp3.Dispatcher';
+import Request from 'okhttp3.Request';
+import MimeTypeMap from 'android.webkit.MimeTypeMap';
+import TextUtils from 'android.text.TextUtils';
+import File from 'java.io.File';
+import Uri from 'android.net.Uri';
+import InputStream from 'java.io.InputStream';
+import MediaStore from 'android.provider.MediaStore';
+import FileInputStream from 'java.io.FileInputStream';
+import { InputStreamRequestBody } from './InputStreamRequestBody.uts';
+import { UploadProgressListener, ProgressRequestBody } from './ProgressRequestBody.uts'
+import Callback from 'okhttp3.Callback';
+import Response from 'okhttp3.Response';
+import IOException from 'java.io.IOException';
+import Retention from 'java.lang.annotation.Retention';
+import URI from 'java.net.URI';
+import Build from 'android.os.Build';
+import Environment from 'android.os.Environment';
+import UUID from 'java.util.UUID';
+
+
+class FileInformation {
+	public inputStream : InputStream | null = null;
+	public size : Long = -1;
+	public mime : string | null = null;
+	public name : string | null = null;
+}
+
+class NetworkUploadTaskImpl implements UploadTask {
+	private call : Call | null = null;
+	private listener : NetworkUploadFileListener | null = null;
+	constructor(call : Call, listener : NetworkUploadFileListener) {
+		this.call = call;
+		this.listener = listener;
+	}
+
+	public abort() {
+		if (this.call != null) {
+			this.call?.cancel();
+		}
+	}
+
+	public onProgressUpdate(option : UploadFileProgressUpdateCallback) {
+		const kListener = this.listener;
+		if (kListener != null) {
+			kListener.progressListeners.add(option);
+		}
+	}
+}
+
+class NetworkUploadProgressListener implements UploadProgressListener {
+	private listener : NetworkUploadFileListener | null = null;
+	constructor(listener : NetworkUploadFileListener) {
+		this.listener = listener;
+	}
+
+	onProgress(bytesWritten : number, contentLength : number) {
+		const progress = (bytesWritten.toFloat() / contentLength) * 100
+		const progressUpdate : OnProgressUpdateResult = {
+			progress: progress.toInt(),
+			totalBytesSent: bytesWritten,
+			totalBytesExpectedToSend: contentLength
+		}
+
+		this.listener?.onProgress(progressUpdate);
+	}
+}
+
+class UploadController {
+	private static instance : UploadController | null = null
+
+	/**
+	 * 上传的线程池
+	 */
+	private uploadExecutorService : ExecutorService | null = null;
+
+	public static getInstance() : UploadController {
+		if (this.instance == null) {
+			this.instance = new UploadController();
+		}
+		return this.instance!;
+	}
+
+	public uploadFile(options : UploadFileOptions, listener : NetworkUploadFileListener) : UploadTask | null {
+		const client = this.createUploadClient(options);
+
+		let request = this.createUploadRequest(options, listener);
+		if (request == null) {
+			return null;
+		}
+		let call : Call = client.newCall(request);
+		call.enqueue(new SimpleUploadCallback(listener));
+
+		let task = new NetworkUploadTaskImpl(call, listener);
+
+		return task;
+	}
+
+	private createUploadClient(option : UploadFileOptions) : OkHttpClient {
+
+		let clientBuilder = OkHttpClient.Builder();
+		const timeout : Long = option.timeout != null ? option.timeout!.toLong() : 120000;
+		clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
+		clientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
+		clientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
+		clientBuilder.callTimeout(timeout, TimeUnit.MILLISECONDS);
+
+		if (this.uploadExecutorService == null) {
+			this.uploadExecutorService = Executors.newFixedThreadPool(10);
+		}
+
+		clientBuilder.dispatcher(new Dispatcher(this.uploadExecutorService));
+
+		return clientBuilder.build();
+	}
+
+
+	private createUploadRequest(options : UploadFileOptions, listener : NetworkUploadFileListener) : Request | null {
+		let requestBilder = new Request.Builder();
+		try {
+			requestBilder.url(options.url);
+		} catch (e : Exception) {
+			let option = {};
+			option['statusCode'] = '-1';
+			option['errorCode'] = '-1';
+			option['errorMsg'] = "invalid URL";
+			option['cause'] = "invalid URL";
+			if (listener != null) {
+				listener.onComplete(option);
+			}
+			return null;
+		}
+
+		let multiPartBody = (new MultipartBody.Builder("----" + UUID.randomUUID().toString())).setType(MultipartBody.FORM);
+		
+		const formData = options.formData?.toMap();
+		if (formData != null) {
+			for (entry in formData) {
+				const key = entry.key;
+				const value = entry.value;
+				if (value != null) {
+					multiPartBody.addFormDataPart(key, "" + value);
+				} else {
+					continue;
+				}
+			}
+		}
+
+		const tempFiles = options.files;
+		if (tempFiles != null && tempFiles!.length > 0) {
+			const files : UploadFileOptionFiles[] = tempFiles;
+			for (let i = 0; i < files.length; i++) {
+				const file = files[i];
+				const path = file.uri;
+				const fileInformation = this.getFileInformation(path)
+				const name = file.name ?? "file";
+
+				const inputStream = fileInformation?.inputStream;
+				if (fileInformation != null && inputStream != null) {
+					let requestBody = new InputStreamRequestBody(MediaType.parse(fileInformation.mime ?? "*/*")!, fileInformation.size, inputStream);
+					multiPartBody.addFormDataPart(name, fileInformation.name, requestBody);
+				} else {
+					let option = {};
+					option['statusCode'] = '-1';
+					option['errorCode'] = '-1';
+					option['errorMsg'] = "Illegal file";
+					option['cause'] = "Illegal file";
+					if (listener != null) {
+						listener.onComplete(option);
+					}
+					return null;
+				}
+			}
+		} else {
+			const filePath = options.filePath;
+			if (filePath == null) {
+				let option = {};
+				option['statusCode'] = '-1';
+				option['errorCode'] = '-1';
+				option['errorMsg'] = "filePath is null";
+				option['cause'] = "filePath is null";
+				if (listener != null) {
+					listener.onComplete(option);
+				}
+				return null;
+			}
+
+			const fileInformation = this.getFileInformation(filePath);
+			const name = options.name ?? "file";
+
+			const inputStream = fileInformation?.inputStream;
+			if (fileInformation != null && inputStream != null) {
+				let requestBody = new InputStreamRequestBody(MediaType.parse(fileInformation.mime ?? "*/*")!, fileInformation.size, inputStream);
+				multiPartBody.addFormDataPart(name, fileInformation.name, requestBody);
+			} else {
+				let option = {};
+				option['statusCode'] = '-1';
+				option['errorCode'] = '-1';
+				option['errorMsg'] = "Illegal file";
+				option['cause'] = "Illegal file";
+				if (listener != null) {
+					listener.onComplete(option);
+				}
+				return null;
+			}
+		}
+
+
+		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+		requestBilder.header("User-Agent", ua);
+
+		const headers = options.header?.toMap();
+		if (headers != null) {
+			for (entry in headers) {
+				const key = entry.key;
+				const value = entry.value;
+
+				if (value != null) {
+					requestBilder.addHeader(key, "" + value);
+				} else {
+					continue;
+				}
+			}
+		}
+
+		requestBilder.post(new ProgressRequestBody(multiPartBody.build(), new NetworkUploadProgressListener(listener)));
+
+		return requestBilder.build();
+	}
+
+
+	/**
+	 * 获取文件信息对象
+	 */
+	private getFileInformation(uri : string) : FileInformation | null {
+		let result : FileInformation | null = null;
+		if (uri.startsWith("content://")) {
+			const contentUri = Uri.parse(uri);
+			const context = UTSAndroid.getAppContext();
+			let cursor = context!.getContentResolver().query(contentUri, null, null, null, null);
+			if (cursor != null) {
+				cursor.moveToFirst();
+				let fileInformation = new FileInformation();
+				fileInformation.inputStream = context.getContentResolver().openInputStream(contentUri);
+				fileInformation.size = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media.SIZE)).toLong();
+				fileInformation.name = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
+				fileInformation.mime = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.MIME_TYPE))
+				result = fileInformation;
+				cursor.close()
+			}
+		} else {
+			if (!uri.startsWith("file://")) {
+				// 如果不是file://开头的，就说明是相对路径。
+				uri = UTSAndroid.convert2AbsFullPath(uri)
+			} else {
+				uri = uri.substring("file://".length)
+			}
+
+			let file = new File(uri);
+			let fileInputStream = new FileInputStream(file);
+			let size = file.length();
+			let name = file.getName();
+			let mime = this.getMimeType(name);
+
+			let fileInformation = new FileInformation();
+			fileInformation.inputStream = fileInputStream;
+			fileInformation.size = size;
+			fileInformation.name = name;
+			fileInformation.mime = mime;
+			result = fileInformation;
+		}
+
+		return result;
+	}
+
+	private checkPrivatePath(path : string) : boolean {
+		if (Build.VERSION.SDK_INT > 29 && Environment.isExternalStorageManager()) {
+			return true;
+		}
+
+		if (path.startsWith("file://")) {
+			path = path.replace("file://", "");
+		}
+		const context = UTSAndroid.getAppContext()!;
+		let cache = context.getExternalCacheDir();
+		let sPrivateExternalDir = ""
+		if (cache == null) {
+			sPrivateExternalDir = Environment.getExternalStorageDirectory().getPath() + "/Android/data/" + context.getPackageName();
+		} else {
+			sPrivateExternalDir = cache.getParent();
+		}
+		const sPrivateDir = context.getFilesDir().getParent();
+
+		if (sPrivateExternalDir.startsWith("/") && !path.startsWith("/")) {
+			path = "/" + path;
+		}
+
+		if ((path.contains(sPrivateDir) || path.contains(sPrivateExternalDir))//表示应用私有路径
+			|| this.isAssetFile(path) //表示apk的assets路径文件
+			|| Build.VERSION.SDK_INT < Build.VERSION_CODES.Q//表示当前手机属于可正常访问路径系统
+		) {
+			//文件路径在私有路径下或手机系统版符合非分区存储逻辑
+			return true;
+		}
+
+		return false;
+	}
+
+	private isAssetFile(filePath : string) : boolean {
+		let isAsset = false;
+		if (filePath.startsWith("apps/")) {
+			isAsset = true;
+		} else if (filePath.startsWith("/android_asset/") || filePath.startsWith("android_asset/")) {
+			isAsset = true;
+		}
+		return isAsset;
+	}
+
+
+	/**
+	 * 获取文件mime
+	 */
+	private getMimeType(filename : string) : string {
+		let map = MimeTypeMap.getSingleton()
+		var extType = MimeTypeMap.getFileExtensionFromUrl(filename)
+		if (extType == null && filename.lastIndexOf(".") >= 0) {
+			extType = filename.substring(filename.lastIndexOf(".") + 1)
+		}
+		let ret = map.getMimeTypeFromExtension(extType);
+		if (TextUtils.isEmpty(ret)) {
+			if (TextUtils.isEmpty(extType)) {
+				ret = "*/*"
+			} else {
+				ret = "application/" + extType
+			}
+		}
+
+		return ret!;
+	}
+}
+
+class SimpleUploadCallback implements Callback {
+	private listener : NetworkUploadFileListener | null = null;
+	constructor(listener : NetworkUploadFileListener) {
+		this.listener = listener;
+	}
+
+
+	override onFailure(call : Call, exception : IOException) {
+		let option = {};
+		option['statusCode'] = '-1';
+		option['errorCode'] = '-1';
+		option['errorMsg'] = exception.message;
+		option['cause'] = exception.message;
+		this.listener?.onComplete(option);
+	}
+	override onResponse(call : Call, response : Response) {
+		const result = {};
+		result["statusCode"] = response.code() + "";
+		result["data"] = response.body()?.string();
+		this.listener?.onComplete(result);
+	}
+}
+
+export {
+	UploadController
+}

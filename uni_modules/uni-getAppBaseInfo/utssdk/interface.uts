@@ -1,0 +1,233 @@
+export type GetAppBaseInfoOptions = {
+  /**
+   * @description 过滤字段的字符串数组，假如要获取指定字段，传入此数组。
+   */
+  filter: Array<string>
+};
+
+export type GetAppBaseInfoResult = {
+  /**
+   * manifest.json 中应用appid，即DCloud appid。	
+   */
+  appId?: string,
+  /**
+   * `manifest.json` 中应用名称。
+   */
+  appName?: string,
+  /**
+   * `manifest.json` 中应用版本名称。
+   */
+  appVersion?: string,
+  /**
+   * `manifest.json` 中应用版本名号。
+   */
+  appVersionCode?: string,
+  /**
+   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es	
+   */
+  appLanguage?: string,
+  /**
+   * 应用设置的语言	
+   */
+  language?: string,
+  /**
+   * 引擎版本号。已废弃，仅为了向下兼容保留
+   * @deprecated 已废弃，仅为了向下兼容保留
+   */
+  version?: string,
+  /**
+   * 应用资源（wgt）的版本名称。	
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  appWgtVersion?: string,
+  /**
+   * 小程序宿主语言	
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostLanguage?: string,
+  /**
+   * App、小程序宿主版本。
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostVersion?: string,
+  /**
+   * 小程序宿主名称	
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostName?: string,
+  /**
+   * 小程序宿主包名	
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostPackageName?: string,
+  /**
+   * uni小程序SDK版本、小程序客户端基础库版本	
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostSDKVersion?: string,
+  /**
+   * 系统当前主题，取值为light或dark。微信小程序全局配置"darkmode":true时才能获取，否则为 undefined （不支持小游戏）
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  hostTheme?: string,
+  /**
+   * 是否uni-app x
+   */
+  isUniAppX ?: boolean,
+  /**
+   * uni 编译器版本
+   */
+  uniCompileVersion ?: string,
+  /**
+   * uni-app 运行平台。如：`app`、`mp-weixin`、`web`
+   */
+  uniPlatform ?: string,
+  /**
+   * uni 运行时版本
+   */
+  uniRuntimeVersion ?: string,
+  /**
+   * uni 编译器版本号
+   */
+  uniCompileVersionCode?: number,
+  /**
+   * uni 运行时版本号
+   */
+  uniRuntimeVersionCode?: number,
+}
+
+/**
+ * @param{GetAppBaseInfoOptions} [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
+ */
+export type GetAppBaseInfo = (options?: GetAppBaseInfoOptions | null) => GetAppBaseInfoResult;
+
+
+export interface Uni {
+  /**
+    * GetAppBaseInfo(Object object)
+    * @description 
+    * 获取app基本信息
+    * @param {GetAppBaseInfoOptions} options [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
+    * @return {object}
+    * @tutorial https://uniapp.dcloud.net.cn/api/system/getAppBaseInfo.html
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.getAppBaseInfo({
+        filter:[]
+      })
+     ```
+    */
+  getAppBaseInfo(options?: GetAppBaseInfoOptions | null): GetAppBaseInfoResult;
+}

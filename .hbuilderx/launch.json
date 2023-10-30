@@ -14,8 +14,9 @@
         },
         {
             "bundleId" : "io.dcloud.test123456",
-            "certificateFile" : "/Users/lizhongyi/Desktop/文件/证书/dev_123.p12",
-            "certificateProfileFile" : "/Users/lizhongyi/Desktop/文件/证书/io_dcloud_test123456.mobileprovision",
+            "certificateFile" : "/Users/lizhongyi/Desktop/newProfiles/dev_123.p12",
+            "certificateProfileFile" : "/Users/lizhongyi/Desktop/newProfiles/wildcard.mobileprovision",
+            "runSignStatus" : 1,
             "type" : "uni-app:app-ios"
         }
     ]
