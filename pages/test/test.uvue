@@ -1,0 +1,28 @@
+<template>
+  <!-- #ifdef APP -->
+  <scroll-view class="content">
+  <!-- #endif -->
+  <!-- #ifdef APP -->
+  </scroll-view>
+  <!-- #endif -->
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+      }
+    },
+    methods: {
+    }
+  }
+</script>
+
+<style>
+  .content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+</style>
