@@ -1,0 +1,167 @@
+{
+	"id": "uni-media",
+	"displayName": "uni-media",
+	"version": "1.0.0",
+	"description": "uni-media",
+	"keywords": [
+		"uni-media"
+	],
+	"repository": "",
+	"engines": {
+		"HBuilderX": "^3.6.8"
+	},
+	"dcloudext": {
+		"type": "uts",
+		"sale": {
+			"regular": {
+				"price": "0.00"
+			},
+			"sourcecode": {
+				"price": "0.00"
+			}
+		},
+		"contact": {
+			"qq": ""
+		},
+		"declaration": {
+			"ads": "",
+			"data": "",
+			"permissions": ""
+		},
+		"npmurl": ""
+	},
+	"uni_modules": {
+		"uni-ext-api": {
+			"uni": {
+				"chooseImage": {
+					"name": "chooseImage",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"previewImage": {
+					"name": "previewImage",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"closePreviewImage": {
+					"name": "closePreviewImage",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"getImageInfo": {
+					"name": "getImageInfo",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"saveImageToPhotosAlbum": {
+					"name": "saveImageToPhotosAlbum",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"compressImage": {
+					"name": "compressImage",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"chooseVideo": {
+					"name": "chooseVideo",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"saveVideoToPhotosAlbum": {
+					"name": "saveVideoToPhotosAlbum",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"getVideoInfo": {
+					"name": "getVideoInfo",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				},
+				"compressVideo": {
+					"name": "compressVideo",
+					"app": {
+						"js": false,
+						"kotlin": true,
+						"swift": false
+					}
+				}
+			}
+		},
+		"dependencies": [
+			"uni-prompt"
+		],
+		"encrypt": [],
+		"platforms": {
+			"cloud": {
+				"tcb": "u",
+				"aliyun": "u"
+			},
+			"client": {
+				"Vue": {
+					"vue2": "u",
+					"vue3": "u"
+				},
+				"App": {
+					"app-android": "u",
+					"app-ios": "u"
+				},
+				"H5-mobile": {
+					"Safari": "u",
+					"Android Browser": "u",
+					"微信浏览器(Android)": "u",
+					"QQ浏览器(Android)": "u"
+				},
+				"H5-pc": {
+					"Chrome": "u",
+					"IE": "u",
+					"Edge": "u",
+					"Firefox": "u",
+					"Safari": "u"
+				},
+				"小程序": {
+					"微信": "u",
+					"阿里": "u",
+					"百度": "u",
+					"字节跳动": "u",
+					"QQ": "u",
+					"钉钉": "u",
+					"快手": "u",
+					"飞书": "u",
+					"京东": "u"
+				},
+				"快应用": {
+					"华为": "u",
+					"联盟": "u"
+				}
+			}
+		}
+	}
+}

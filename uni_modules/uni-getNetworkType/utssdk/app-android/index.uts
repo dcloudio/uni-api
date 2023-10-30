@@ -1,0 +1,102 @@
+import { GetNetworkTypeOptions, GetNetworkType, GetNetworkTypeSuccess } from "../interface.uts";
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import Context from 'android.content.Context';
+import ConnectivityManager from 'android.net.ConnectivityManager';
+import TelephonyManager from 'android.telephony.TelephonyManager';
+import Build from 'android.os.Build';
+
+
+export const getNetworkType : GetNetworkType = function (options : GetNetworkTypeOptions) {
+	const context = UTSAndroid.getUniActivity()!!;
+	const connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager;
+
+	if (connectivityManager != null) {
+		if (Build.VERSION.SDK_INT >= 23) {
+			const permissions = ["android.permission.ACCESS_NETWORK_STATE"];
+			if (!UTSAndroid.checkSystemPermissionGranted(context, permissions)) {
+				const result : GetNetworkTypeSuccess = {
+					networkType: "none"
+				}
+				options?.success?.(result);
+				options?.complete?.(result);
+				return
+			}
+		}
+		const activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		
+		if (activeNetworkInfo != null) {
+			if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+				const result : GetNetworkTypeSuccess = {
+					networkType: "wifi"
+				}
+				options?.success?.(result);
+				options?.complete?.(result);
+			} else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+				let type = "unknown";
+				const subtype = activeNetworkInfo.getSubtype();
+				switch (subtype) {
+					case TelephonyManager.NETWORK_TYPE_CDMA:
+					case TelephonyManager.NETWORK_TYPE_EDGE:
+					case TelephonyManager.NETWORK_TYPE_GPRS:
+					case 7://电信2g 努比亚
+						type = "2g";
+						break;
+					case TelephonyManager.NETWORK_TYPE_EVDO_0:
+					case TelephonyManager.NETWORK_TYPE_EVDO_A:
+					case 12://level9以上支持 TelephonyManager.NETWORK_TYPE_EVDO_B = 12
+					case 14://电信 努比亚
+						//3G 电信
+						type = "3g";
+						break;
+					case TelephonyManager.NETWORK_TYPE_HSDPA:
+					case TelephonyManager.NETWORK_TYPE_UMTS:
+						//3G 联通
+						type = "3g";
+						break;
+					case 17:
+					case 18:
+						//3G 移动(目前华为系统切换到3g时候为此值)
+						type = "3g";
+						break;
+					case 13: //level11 以上支持TelephonyManager.NETWORK_TYPE_LTE = 13
+					case 11: //level8以上支持TelephonyManager.NETWORK_TYPE_IDEN=11
+					case TelephonyManager.NETWORK_TYPE_HSUPA:
+					case TelephonyManager.NETWORK_TYPE_HSPA:
+					case 15://stype == TelephonyManager.NETWORK_TYPE_HSPAP
+						type = "4g";
+						break;
+					case TelephonyManager.NETWORK_TYPE_NR: {
+						type = "5g";
+						break;
+					}
+					default://对于case之外的反馈到js，js层收集之后回馈5+进行填补完善
+						type = "" + subtype;
+						break;
+				}
+				const result : GetNetworkTypeSuccess = {
+					networkType: type
+				}
+				options?.success?.(result);
+				options?.complete?.(result);
+			} else {
+				const result : GetNetworkTypeSuccess = {
+					networkType: "unknown"
+				}
+				options?.success?.(result);
+				options?.complete?.(result);
+			}
+		}else{
+			const result : GetNetworkTypeSuccess = {
+				networkType: "none"
+			}
+			options?.success?.(result);
+			options?.complete?.(result);
+		}
+	} else {
+		const result : GetNetworkTypeSuccess = {
+			networkType: "none"
+		}
+		options?.success?.(result);
+		options?.complete?.(result);
+	}
+};

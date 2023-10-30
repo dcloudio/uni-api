@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    
+	<string name="placement">Configuration</string>
+	<string name="cancel">Cancel</string>
+	<string name="prompt_model_sure">Sure</string>
+	<string name="prompt_model_cancel">Cancel</string>
+</resources>

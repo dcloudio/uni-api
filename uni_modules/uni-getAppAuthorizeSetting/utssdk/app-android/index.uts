@@ -1,0 +1,76 @@
+import { GetAppAuthorizeSetting, GetAppAuthorizeSettingResult } from "../interface.uts";
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import PackageManager from 'android.content.pm.PackageManager';
+import Manifest from 'android.Manifest';
+import NotificationManagerCompat from 'androidx.core.app.NotificationManagerCompat';
+
+export const getAppAuthorizeSetting : GetAppAuthorizeSetting = function () : GetAppAuthorizeSettingResult {
+	const context = UTSAndroid.getUniActivity()!!;
+
+	const cameraPermission = [Manifest.permission.CAMERA];
+	const cameraGranted = UTSAndroid.checkSystemPermissionGranted(context, cameraPermission);
+	let cameraResult = cameraGranted ? "authorized" : "denied";
+	if (!cameraGranted && !hasDefinedInManifest(Manifest.permission.CAMERA)) {
+		cameraResult = "config error";
+	}
+
+	const locationPermission = [Manifest.permission.ACCESS_COARSE_LOCATION];
+	const coarseLocationGranted = UTSAndroid.checkSystemPermissionGranted(context, locationPermission);
+	let coarseLocationResult = coarseLocationGranted ? "authorized" : "denied";
+	if (!coarseLocationGranted && !hasDefinedInManifest(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+		coarseLocationResult = "config error";
+	}
+
+	const fineLocationPermission = [Manifest.permission.ACCESS_FINE_LOCATION];
+	const fineLocationGranted = UTSAndroid.checkSystemPermissionGranted(context, fineLocationPermission);
+	let accuracy = coarseLocationGranted ? "reduced" : "unsupported";
+	if (coarseLocationGranted && fineLocationGranted) {
+		accuracy = "full";
+	}
+
+	const recordAudioPermission = [Manifest.permission.RECORD_AUDIO];
+
+	const recordAudioGranted = UTSAndroid.checkSystemPermissionGranted(context, recordAudioPermission);
+	let recordAudioResult = recordAudioGranted ? "authorized" : "denied";
+	if (!recordAudioGranted && !hasDefinedInManifest(Manifest.permission.RECORD_AUDIO)) {
+		recordAudioResult = "config error";
+	}
+
+	const compat = NotificationManagerCompat.from(context);
+	const notificationResult = compat.areNotificationsEnabled() ? "authorized": "denied"
+
+	let result : GetAppAuthorizeSettingResult = {
+		cameraAuthorized: cameraResult,
+		locationAuthorized: coarseLocationResult,
+		locationAccuracy: accuracy,
+		microphoneAuthorized: recordAudioResult,
+		notificationAuthorized: notificationResult,
+		albumAuthorized: null,
+		bluetoothAuthorized: null,
+		locationReducedAccuracy: null,
+		notificationAlertAuthorized: null,
+		notificationBadgeAuthorized: null,
+		notificationSoundAuthorized: null,
+		phoneCalendarAuthorized: null
+	}
+
+	return result
+};
+
+const hasDefinedInManifest = function (permission : string) : boolean {
+	try {
+		const context = UTSAndroid.getAppContext()!!;
+		const packageInfo = context.getPackageManager().getPackageInfo(context.getApplicationInfo().packageName, PackageManager.GET_PERMISSIONS);
+		if (packageInfo != null) {
+			for (const requestPermission in packageInfo.requestedPermissions) {
+				if (permission == requestPermission) {
+					return true;
+				}
+			}
+		}
+	} catch (e : Exception) {
+		return false
+	}
+
+	return false;
+}

@@ -1,0 +1,76 @@
+
+import { UTSAndroid as Device} from "io.dcloud.uts";
+import PackageManager from 'android.content.pm.PackageManager';
+import Context from 'android.content.Context';
+import PackageInfo from 'android.content.pm.PackageInfo';
+import UiModeManager from 'android.app.UiModeManager';
+import Activity from 'android.app.Activity';
+export class AppBaseInfoDeviceUtil{
+	
+	public static getAppID(): string {
+		return Device.getAppId();
+	}
+	
+	public static getAppName(context: Context): string {
+		let packageManager = context.getPackageManager();
+		return packageManager.getApplicationLabel(context.getApplicationInfo()).toString()
+	}
+	
+	public static getPackageName(context: Context): string {
+		return context.getPackageName();
+	}
+	
+	public static getAppVersionName(): string {
+		return Device.getAppVersion()["name"].toString();
+	}
+	
+	public static getAppVersionCode(): string {
+		return Device.getAppVersion()["code"].toString();
+	}
+	
+	public static getHostVersion(context: Context): string {
+		let packageManager = context.getPackageManager();
+		let applicationInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+		return applicationInfo.versionName;
+	}
+	
+	public static getHostCode(context: Context): string {
+		let packageManager = context.getPackageManager();
+		let applicationInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+		return applicationInfo.versionCode+"";
+	}
+	
+	public static isSystemNightMode(activity: Activity): boolean {
+		let uiModeManager = activity.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager;
+		return uiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES;
+	}
+	
+	public static getOsLanguage(context: Context): string {
+		return Device.getLanguageInfo(context)["osLanguage"].toString();
+	}
+	
+	public static getOsLanguageNormal(context: Context): string {
+		const LOCALE_ZH_HANS = 'zh-Hans'
+		const LOCALE_ZH_HANT = 'zh-Hant'
+		let locale = Device.getLanguageInfo(context)["appLanguage"].toString();
+		if (locale.indexOf('zh') === 0) {
+			if (locale.indexOf('-hans') > -1) {
+				return LOCALE_ZH_HANS;
+			}
+			if (locale.indexOf('-hant') > -1) {
+				return LOCALE_ZH_HANT;
+			}
+			if (locale.includes("-tw") || locale.includes("-hk") || locale.includes("-mo") || locale.includes("-cht")) {
+				return LOCALE_ZH_HANT;
+			}
+	
+			return LOCALE_ZH_HANS;
+		} else {
+			return locale;
+		}
+	}
+	
+	public static getAppInnerVersion(): string {
+		return Device.getInnerVersion();
+	}
+}

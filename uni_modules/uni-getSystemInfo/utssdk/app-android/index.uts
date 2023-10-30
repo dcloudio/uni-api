@@ -1,0 +1,249 @@
+import { GetSystemInfoOptions, GetSystemInfo, GetSystemInfoResult, SafeArea, SafeAreaInsets, GetSystemInfoSync, GetWindowInfo, GetWindowInfoResult } from "../interface.uts";
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import PackageManager from 'android.content.pm.PackageManager';
+import Build from 'android.os.Build';
+import { DeviceUtil } from './device/SystemInfoDeviceUtil.uts'
+import CountDownLatch from 'java.util.concurrent.CountDownLatch';
+import Looper from 'android.os.Looper';
+import Handler from 'android.os.Handler';
+
+export const getSystemInfo : GetSystemInfo = function (options : GetSystemInfoOptions) {
+	const result = getSystemInfoSync();
+	const success = options.success;
+	const complete = options.complete;
+	success?.(result);
+	complete?.(result);
+}
+
+
+export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfoResult {
+	const runnable = function(): GetSystemInfoResult | null{
+		try {
+			const activity = UTSAndroid.getUniActivity()!!;
+		
+			const appId = UTSAndroid.getAppId();
+			const appLanguage = DeviceUtil.getOsLanguageNormal(activity);
+			const appName = UTSAndroid.getAppName();
+			const appVersion = UTSAndroid.getAppVersion()["name"].toString();
+			const appVersionCode = UTSAndroid.getAppVersion()["code"].toString();
+			const appWgtVersion = !UTSAndroid.isUniAppX()? UTSAndroid.getAppVersion()["name"].toString() : null;
+			const brand = Build.MANUFACTURER.toLowerCase();
+			const browserName = UTSAndroid.getWebViewInfo(activity)["kernel"].toString();
+			const browserVersion = UTSAndroid.getWebViewInfo(activity)["version"].toString();
+			const deviceId = UTSAndroid.getDeviceID(activity);
+			const deviceModel = Build.MODEL;
+			const deviceType = DeviceUtil.getSystemUIModeType(activity);
+			const devicePixelRatio = DeviceUtil.getScaledDensity(activity);
+			const deviceOrientation = DeviceUtil.getOrientation(activity);
+			const language = UTSAndroid.getLanguageInfo(activity)["osLanguage"].toString();
+			const osName = "android";
+			const osVersion = Build.VERSION.RELEASE;
+			const osLanguage = UTSAndroid.getLanguageInfo(activity)["osLanguage"].toString();
+			const osTheme = UTSAndroid.getOsTheme();
+			const pixelRatio = DeviceUtil.getScaledDensity(activity)
+			const screenWidth = DeviceUtil.getScreenWidth();
+			const screenHeight = DeviceUtil.getScreenHeight();
+			const statusBarHeight = DeviceUtil.getStatusBarHeight();
+			const system = "Android " + Build.VERSION.RELEASE;
+			const ua = UTSAndroid.getWebViewInfo(activity)["ua"].toString();
+			const uniCompileVersion = UTSAndroid.getUniCompileVersion();
+			const uniPlatform = "app";
+			const uniRuntimeVersion = UTSAndroid.getUniRuntimeVersion();
+			const uniCompileVersionCode = convertVersionCode(uniCompileVersion);
+			const uniRuntimeVersionCode = convertVersionCode(uniRuntimeVersion);
+			const version = UTSAndroid.getInnerVersion();
+			const romName = DeviceUtil.getRomName();
+			const romVersion = DeviceUtil.getRomVersion();
+			const windowWidth = screenWidth;
+			const windowHeight = UTSAndroid.getWindowHeight();
+			const windowTop = 0;
+			const windowBottom = 0;
+			const safeAreaInsetsTop = UTSAndroid.getSafeAreaInsets()["top"].toString().toInt();
+			const safeAreaInsets : SafeAreaInsets = {
+				left: 0,
+				top: safeAreaInsetsTop,
+				right: 0,
+				bottom: 0
+			}
+			
+			const safeArea : SafeArea = {
+				left: safeAreaInsets.left,
+				right: windowWidth - safeAreaInsets.right,
+				top: safeAreaInsets.top,
+				bottom: windowHeight - safeAreaInsets.bottom,
+				width: windowWidth - safeAreaInsets.left - safeAreaInsets.right,
+				height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
+			}
+			const osAndroidAPILevel = Build.VERSION.SDK_INT;
+			const oaid = UTSAndroid.getOAID();
+		
+			const result = {
+				SDKVersion: "",
+				appId: appId,
+				appLanguage: appLanguage,
+				appName: appName,
+				appVersion: appVersion,
+				appVersionCode: appVersionCode,
+				appWgtVersion: appWgtVersion,
+				brand: brand,
+				browserName: browserName,
+				browserVersion: browserVersion,
+				deviceId: deviceId,
+				deviceBrand: brand,
+				deviceModel: deviceModel,
+				deviceType: deviceType,
+				devicePixelRatio: devicePixelRatio,
+				deviceOrientation: deviceOrientation,
+				language: language,
+				model: deviceModel,
+				osName: osName,
+				osVersion: osVersion,
+				osLanguage: osLanguage,
+				osTheme: osTheme,
+				pixelRatio: pixelRatio,
+				platform: osName,
+				screenWidth: screenWidth,
+				screenHeight: screenHeight,
+				statusBarHeight: statusBarHeight,
+				system: system,
+				ua: ua,
+				uniCompileVersion: uniCompileVersion,
+				uniPlatform: uniPlatform,
+				uniRuntimeVersion: uniRuntimeVersion,
+				uniCompileVersionCode: uniCompileVersionCode,
+				uniRuntimeVersionCode: uniRuntimeVersionCode,
+				version: version,
+				romName: romName,
+				romVersion: romVersion,
+				windowWidth: windowWidth,
+				windowHeight: windowHeight,
+				windowTop: windowTop,
+				windowBottom: windowBottom,
+				safeAreaInsets: safeAreaInsets,
+				safeArea: safeArea,
+				oaid: oaid,
+				osAndroidAPILevel: osAndroidAPILevel,
+			} as GetSystemInfoResult;
+			return result;
+		} catch (e : Exception) {
+			return null;
+		}
+	}
+	
+	let result : GetSystemInfoResult | null = null;
+	if(Looper.myLooper() == Looper.getMainLooper()){
+		result = runnable();
+	}else{
+		const latch = new CountDownLatch(1);
+		new RunnableTask(Looper.getMainLooper(), () => {
+			result = runnable();
+			latch.countDown();
+		}).execute();
+		latch.await();
+	}
+
+	return result!!;
+};
+
+
+export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
+	const activity = UTSAndroid.getUniActivity()!!;
+	const pixelRatio = DeviceUtil.getScaledDensity(activity)
+	const screenWidth = DeviceUtil.getScreenWidth();
+	const screenHeight = DeviceUtil.getScreenHeight();
+	const statusBarHeight = DeviceUtil.getStatusBarHeight();
+	const windowWidth = screenWidth;
+	const windowHeight = UTSAndroid.getWindowHeight();
+	const windowTop = 0;
+	const windowBottom = 0;
+	const safeAreaInsetsTop = UTSAndroid.getSafeAreaInsets()["top"] as Int;
+	const safeAreaInsets : SafeAreaInsets = {
+		left: 0,
+		top: safeAreaInsetsTop,
+		right: 0,
+		bottom: 0
+	}
+	const safeArea : SafeArea = {
+		left: safeAreaInsets.left,
+		right: windowWidth - safeAreaInsets.right,
+		top: safeAreaInsets.top,
+		bottom: windowHeight - safeAreaInsets.bottom,
+		width: windowWidth - safeAreaInsets.left - safeAreaInsets.right,
+		height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
+	}
+	const screenTop = windowTop;
+	
+    let result = {
+		pixelRatio: pixelRatio,
+		screenWidth: screenWidth,
+		screenHeight: screenHeight,
+		windowWidth: windowWidth,
+		windowHeight: windowHeight,
+		statusBarHeight: statusBarHeight,
+		windowTop: windowTop,
+		windowBottom: windowBottom,
+		safeArea: safeArea,
+		safeAreaInsets: safeAreaInsets,
+		screenTop: screenTop
+	} as GetWindowInfoResult;
+	return result;
+};
+
+const convertVersionCode = function(version: string): number {
+	let str = "";
+	let radixLength = 2;
+	let findDot = false;
+	const dotChar = ".".get(0);
+	for (let i = 0; i < version.length; i++) {
+		const char = version.get(i);
+		if(findDot){
+			if(char.isDigit()){
+				str += char;
+			}
+			radixLength --;
+			if(radixLength == 0){
+				break;
+			}
+		}else{
+			if(char.isDigit()){
+				str += char;
+			}else{
+				if(char == dotChar){
+					findDot = true;
+					str += char;
+				}
+			}
+		}
+	}
+	
+	return parseFloat(str);
+}
+
+const getHostVersion = function () : string {
+	const context = UTSAndroid.getAppContext()!!;
+	let packageManager = context.getPackageManager();
+	let applicationInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
+	return applicationInfo.versionName;
+}
+
+class RunnableTask extends Runnable {
+	private callback : () => void | null;
+	private looper : Looper | null = null;
+	constructor(looper : Looper | null, callback : () => void) {
+		super();
+		this.looper = looper;
+		this.callback = callback
+	}
+
+	override run() {
+		this.callback?.()
+	}
+
+	public execute() {
+		if (this.looper == null) {
+			this.run();
+		} else {
+			new Handler(this.looper!!).post(this);
+		}
+	}
+}

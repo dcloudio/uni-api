@@ -65,6 +65,19 @@ export type SetUserCaptureScreenOptions = {
 	complete ?: SetUserCaptureScreenCompleteCallback
 }
 
+/**
+ * 错误码
+ * - 12001 "setUserCaptureScreen:system not support"
+ * - 12010 "setUserCaptureScreen:system internal error"
+ */
+export type SetUserCaptureScreenErrorCode = 12001 | 12010;
+/**
+ * SetUserCaptureScreen 的错误回调参数
+ */
+export interface SetUserCaptureScreenFail extends IUniError {
+  errCode : SetUserCaptureScreenErrorCode
+};
+
 export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => void
 
 export interface Uni {
