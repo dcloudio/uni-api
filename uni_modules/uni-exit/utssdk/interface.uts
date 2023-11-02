@@ -6,13 +6,28 @@ export type ExitSuccess = {
 }
 
 /**
+ * 错误码
+ * - 12001: 系统不支持
+ * - 12002: 未知错误
+ */
+export type ExitErrorCode = 12001 | 12002
+
+/**
+ * uni.exit失败回调参数
+ */
+export interface IExitError extends IUniError {
+	errCode: ExitErrorCode
+}
+export type ExitFail = IExitError
+
+/**
  * uni.exit成功回调函数定义
  */
 export type ExitSuccessCallback = (res: ExitSuccess) => void
 /**
  * uni.exit失败回调函数定义
  */
-export type ExitFailCallback = (res: UniError) => void
+export type ExitFailCallback = (res: ExitFail) => void
 /**
  * uni.exit完成回调函数定义
  */

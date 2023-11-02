@@ -1,3 +1,5 @@
+import { ExitErrorCode, IExitError } from "./interface.uts"
+
 /**
  * 错误主题
  */
@@ -18,3 +20,17 @@ export const UniErrors:Map<number, string> = new Map([
    */
   [12002, 'unknown error']
 ]);
+
+/**
+ * ExitFail的实现
+ */
+export class ExitFailImpl extends UniError implements IExitError {
+  constructor (
+    errCode: ExitErrorCode
+  ) {
+    super()
+    this.errSubject = UniErrorSubject
+    this.errCode = errCode
+    this.errMsg = UniErrors[errCode] ?? "";
+  }
+}
