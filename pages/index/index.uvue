@@ -1,0 +1,62 @@
+<template>
+  <!-- #ifdef APP -->
+  <scroll-view class="content">
+  <!-- #endif -->
+    <image class="logo" src="/static/logo.png"></image>
+    <view class="text-area">
+      <text class="title">{{title}}</text>
+    </view>
+    <view class="buttons">
+      <button class="button" @tap="openTest" type="primary">测试示例</button>
+    </view>
+  <!-- #ifdef APP -->
+  </scroll-view>
+  <!-- #endif -->
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        title: 'Hello'
+      }
+    },
+    methods: {
+      openTest() {
+        uni.navigateTo({
+          url: '/pages/test/test'
+        })
+      }
+    }
+  }
+</script>
+
+<style>
+  .content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .logo {
+    height: 200rpx;
+    width: 200rpx;
+    margin-top: 200rpx;
+    margin-bottom: 50rpx;
+  }
+
+  .title {
+    font-size: 36rpx;
+    color: #8f8f94;
+  }
+
+  .buttons {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .button {
+    width: 640rpx;
+    margin: 10px;
+  }
+</style>

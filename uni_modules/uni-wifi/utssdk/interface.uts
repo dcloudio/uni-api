@@ -3,8 +3,8 @@
  */
 export type WifiOption = {
 	success ?: (res : UniWifiResult) => void;
-	fail ?: (res : UniWifiResult) => void;
-	complete ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniError) => void;
+	complete ?: (res : any) => void;
 };
 
 /**
@@ -17,8 +17,8 @@ export type WifiConnectOption = {
 	maunal ?: boolean;
 	partialInfo ?: boolean; //ios不生效
 	success ?: (res : UniWifiResult) => void;
-	fail ?: (res : UniWifiResult) => void;
-	complete ?: (res : UniWifiResult) => void;
+	fail ?: (res : UniError) => void;
+	complete ?: (res : any) => void;
 }
 
 /**
@@ -27,8 +27,8 @@ export type WifiConnectOption = {
 export type GetConnectedWifiOptions = {
 	partialInfo ?: boolean
 	success ?: (res : UniWifiResult) => void
-	fail ?: (res : UniWifiResult) => void
-	complete ?: (res : UniWifiResult) => void
+	fail ?: (res : UniError) => void
+	complete ?: (res : any) => void
 }
 
 /* 
@@ -101,7 +101,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { after: 'stopWifi' }
 	 */
-	startWifi : StartWifi,
+	startWifi(option : WifiOption): void,
 	/**
 	 * 关闭 Wi-Fi 模块
 	 * 
@@ -125,7 +125,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { before: 'startWifi' }
 	 */
-	stopWifi : StopWifi,
+	stopWifi(option : WifiOption) : void,
 	/**
 	 * @param {WifiConnectOption} option 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi
@@ -165,7 +165,7 @@ interface Uni {
 		]
 	}
 	*/
-	connectWifi : ConnectWifi,
+	connectWifi(option : WifiConnectOption) : void,
 	/**
 	 * 请求获取 Wi-Fi 列表。wifiList 数据会在 onGetWifiList 注册的回调中返回。
 	 * @param {WifiOption} option
@@ -188,7 +188,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { before: 'startWifi', after: 'stopWifi' }
 	*/
-	getWifiList : GetWifiList,
+	getWifiList(option : WifiOption) : void,
 	/**
 	 * 监听获取到 Wi-Fi 列表数据事件。
 	 * 
@@ -228,7 +228,7 @@ interface Uni {
 		 ]
 	}
 	 */
-	onGetWifiList : OnGetWifiList,
+	onGetWifiList(callback : UniWifiCallback) : void,
 	/**
 	 * 移除获取到 Wi-Fi 列表数据事件的监听函数。
 	 * 
@@ -252,7 +252,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	offGetWifiList : OffGetWifiList,
+	offGetWifiList(callback : UniWifiCallback) : void,
 	/**
 	 * 获取已连接的 Wi-Fi 信息
 	 * 
@@ -276,7 +276,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { before: 'startWifi', after: 'stopWifi' }
 	 */
-	getConnectedWifi : GetConnectedWifi,
+	getConnectedWifi(option : GetConnectedWifiOptions) : void,
 	/**
 	 * 监听连接上 Wi-Fi 的事件
 	 * 
@@ -300,7 +300,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onWifiConnected : OnWifiConnected,
+	onWifiConnected(callback : UniWifiCallback) : void,
 	/**
 	 * 监听连接上 Wi-Fi 的事件。
 	 * 
@@ -324,7 +324,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onWifiConnectedWithPartialInfo : OnWifiConnectedWithPartialInfo,
+	onWifiConnectedWithPartialInfo(callback : UniWifiCallback) : void,
 	/**
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
 	 * 
@@ -348,7 +348,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	offWifiConnected : OffWifiConnected,
+	offWifiConnected(callback : UniWifiCallback | null) : void,
 	/**
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
 	 * 
@@ -372,7 +372,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onOffWifiConnectedWithPartialInfo : OnOffWifiConnectedWithPartialInfo,
+	onOffWifiConnectedWithPartialInfo(callback : UniWifiCallback | null) : void,
 	/**
 	 * SetWifiList  暂未实现
 	 * 
@@ -391,5 +391,5 @@ interface Uni {
 	 *    }
 	 * }
 	 */
-	setWifiList : SetWifiList,
+	setWifiList(option : WifiOption) : void,
 }

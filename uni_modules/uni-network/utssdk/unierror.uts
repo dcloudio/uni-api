@@ -1,0 +1,86 @@
+import { RequestErrorCode, RequestFail, UploadFileFail, DownloadFileFail } from "./interface.uts"
+
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-request';
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors : Map<RequestErrorCode, string> = new Map([
+
+	/**
+	 * 接口超时
+	 */
+	[5, 'time out'],
+	/**
+	 * 服务端系统错误
+	 */
+	[1000, 'server system error'],
+	/**
+	 * json数据解析错误
+	 */
+	[100001, 'invalid json'],
+	/**
+	 * 错误信息json解析失败
+	 */
+	[100002, 'error message invalid json'],
+	/**
+	 * 未知的网络错误
+	 */
+	[600000, 'unknown network error'],
+	/**
+	 * 网络中断
+	 */
+	[600003, 'network interrupted error'],
+	/**
+	 * URL 格式不合法
+	 */
+	[600009, 'invalid URL'],
+	/**
+	 * 请求的 data 序列化失败
+	 */
+	[600010, 'invalid request data'],
+
+	/**
+	 * request系统错误
+	 */
+	[602001, 'request system error']
+]);
+
+
+export function getErrcode(errCode : number) : RequestErrorCode {
+	const res = UniErrors[errCode];
+	return res == null ? 602001 : errCode;
+}
+
+
+export class RequestFailImpl extends UniError implements RequestFail {
+	constructor(errCode : RequestErrorCode) {
+		super();
+		this.errSubject = UniErrorSubject;
+		this.errCode = errCode;
+		this.errMsg = UniErrors[errCode] ?? "";
+	}
+}
+
+
+export class UploadFileFailImpl extends UniError implements UploadFileFail {
+	constructor(errCode : RequestErrorCode) {
+		super();
+		this.errSubject = "uni-uploadFile";
+		this.errCode = errCode;
+		this.errMsg = UniErrors[errCode] ?? "";
+	}
+}
+
+
+export class DownloadFileFailImpl extends UniError implements DownloadFileFail {
+	constructor(errCode : RequestErrorCode) {
+		super();
+		this.errSubject = "uni-downloadFile";
+		this.errCode = errCode;
+		this.errMsg = UniErrors[errCode] ?? "";
+	}
+}

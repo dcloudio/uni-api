@@ -1,0 +1,794 @@
+
+
+export type ChooseImageSuccessCallback = {
+	/**
+	 * 调用API的名称
+	 */
+	errSubject : string,
+	errMsg : string,
+	tempFilePaths : Array<string>,
+	tempFiles : any
+}
+
+export type ChooseImageCropOptions = {
+	/**
+	 * 裁剪的宽度，单位为px，用于计算裁剪宽高比。
+	 */
+	width : number;
+	/**
+	 * 裁剪的高度，单位为px，用于计算裁剪宽高比。
+	 */
+	height : number;
+	/**
+	 * 取值范围为1-100，数值越小，质量越低（仅对jpg格式有效）。默认值为80。
+	 * @defaultValue 80
+	 */
+	quality : (number) | null;
+	/**
+	 * 是否将width和height作为裁剪保存图片真实的像素值。默认值为true。注：设置为false时在裁剪编辑界面显示图片的像素值，设置为true时不显示。
+	 * @type boolean
+	 */
+	resize : (boolean) | null;
+}
+
+export type ChooseImageOptions = {
+	/**
+	 * 最多可以选择的图片张数，app端不限制，微信小程序最多可支持20个。
+	 * @defaultValue 9
+	 */
+	count ?: (number) | null,
+	/**
+	 * original 原图，compressed 压缩图，默认二者都有
+	 * @type string | string []
+	 * @defaultValue ['original','compressed']
+	 */
+	sizeType ?: (string[]) | null,
+	/**
+	 * album 从相册选图，camera 使用相机，默认二者都有
+	 * @defaultValue ['album','camera']
+	 */
+	sourceType ?: (string[]) | null,
+	/**
+	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。仅H5支持
+	 */
+	extension ?: (string[]) | null,
+	/**
+	 * 图像裁剪参数，设置后 sizeType 失效。
+	 */
+	crop ?: (ChooseImageCropOptions) | null,
+	/**
+	 * 成功则返回图片的本地文件路径列表 tempFilePaths
+	 */
+	success ?: ((callback : ChooseImageSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((callback : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((callback : any) => void) | null
+}
+
+export type ChooseImage = (options : ChooseImageOptions) => void
+
+export type PreviewImageSuccessCallback = {
+	errSubject : string,
+	errMsg : string
+}
+
+export type LongPressActionsSuccessData = {
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	tapIndex : number,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	index : number
+};
+export type LongPressActionsOptions = {
+	/**
+	 * 按钮的文字数组
+	 */
+	itemList : string[],
+	/**
+	 * 按钮的文字颜色，字符串格式，默认为"#000000"
+	 */
+	itemColor : string | null,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success : ((result : LongPressActionsSuccessData) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail : ((result : any) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete : ((result : any) => void) | null
+};
+
+export type PreviewImageOptions = {
+	/**
+	 * 当前显示图片的链接，不填则默认为 urls 的第一张
+	 */
+	count ?: string | null,
+	/**
+	 * current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张。App平台在 1.9.5至1.9.8之间，current为必填。不填会报错
+	 * @type string | number
+	 */
+	current ?: any | null,
+	/**
+	 * 需要预览的图片链接列表
+	 */
+	urls : string[],
+	/**
+	 * 图片指示器样式
+	 * - default: 底部圆点指示器
+	 * - number: 顶部数字指示器
+	 * - none: 不显示指示器
+	 * @type 'default' | 'number' | 'none'
+	 */
+	indicator ?: string | null,
+	/**
+	 * 是否可循环预览
+	 * @type boolean
+	 */
+	loop ?: boolean | null,
+	/**
+	 * 长按图片显示操作菜单，如不填默认为保存相册，1.9.5 起支持。
+	 */
+	longPressActions ?: LongPressActionsOptions | null,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : PreviewImageSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type PreviewImage = (options : PreviewImageOptions) => void;
+
+export type ClosePreviewImage = (options : ClosePreviewImageOptions) => void;
+export type ClosePreviewImageSuccessCallback = {
+	/**
+	 * 错误信息
+	 */
+	errMsg : string
+};
+
+export type ClosePreviewImageOptions = {
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : ClosePreviewImageSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type GetImageInfo = (options : GetImageInfoOptions) => void;
+export type GetImageInfoSuccessCallback = {
+	/**
+	 * 图片宽度，单位px
+	 */
+	width : number,
+	/**
+	 * 图片高度，单位px
+	 */
+	height : number,
+	/**
+	 * 返回图片的本地路径
+	 */
+	path : string,
+	/**
+	 * 返回图片的方向
+	 */
+	orientation : string | null,
+	/**
+	 * 返回图片的格式
+	 */
+	type : string | null
+};
+
+export type GetImageInfoOptions = {
+	/**
+	 * 图片的路径，可以是相对路径，临时文件路径，存储文件路径，网络图片路径
+	 */
+	src : string,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : GetImageInfoSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type SaveImageToPhotosAlbum = (options : SaveImageToPhotosAlbumOptions) => void;
+
+export type SaveImageToPhotosAlbumSuccessCallback = {
+	/**
+	 * 保存到相册的图片路径
+	 */
+	path : string
+};
+
+export type SaveImageToPhotosAlbumOptions = {
+	/**
+	 * 图片文件路径，可以是临时文件路径也可以是永久文件路径，不支持网络图片路径
+	 */
+	filePath : string,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : SaveImageToPhotosAlbumSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+export type CompressImage = (options : CompressImageOptions) => void;
+export type CompressImageSuccessCallback = {
+	/**
+	 * 压缩后图片的临时文件路径
+	 */
+	tempFilePath : string
+};
+export type CompressImageOptions = {
+	/**
+	 * 图片路径，图片的路径，可以是相对路径、临时文件路径、存储文件路径
+	 */
+	src : string,
+	/**
+	 * 压缩质量，范围0～100，数值越小，质量越低，压缩率越高（仅对jpg有效）
+	 */
+	quality ?: number | null,
+	/**
+	 * 旋转度数，范围0～360
+	 */
+	rotate ?: number | null,
+	/**
+	 * 缩放图片的宽度
+	 */
+	width ?: string | null,
+	/**
+	 * 缩放图片的高度
+	 */
+	height ?: string | null,
+	/**
+	 * 压缩后图片的高度，单位为px，若不填写则默认以compressedWidth为准等比缩放
+	 */
+	compressedHeight ?: number | null,
+	/**
+	 * 压缩后图片的宽度，单位为px，若不填写则默认以compressedHeight为准等比缩放。
+	 */
+	compressedWidth ?: number | null,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : CompressImageSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type ChooseVideoSuccessCallback = {
+	/**
+	 * 选定视频的临时文件路径
+	 */
+	tempFilePath : string,
+	/**
+	 * 选定的视频文件，仅H5支持
+	 */
+	// tempFile: File|null,
+	/**
+	 * 选定视频的时间长度
+	 */
+	duration : number,
+	/**
+	 * 选定视频的数据量大小
+	 */
+	size : number,
+	/**
+	 * 返回选定视频的长
+	 */
+	height : number,
+	/**
+	 * 返回选定视频的宽
+	 */
+	width : number,
+	/**
+	 * 包含扩展名的文件名称（仅H5支持）
+	 */
+	// name: string | null
+};
+
+export type ChooseVideoOptions = {
+	/**
+	 * album 从相册选视频，camera 使用相机拍摄，默认为：['album', 'camera']
+	 */
+	sourceType ?: (string[]) | null,
+	/**
+	 * 是否压缩所选的视频源文件，默认值为true，需要压缩
+	 * @type boolean
+	 */
+	compressed ?: boolean | null,
+	/**
+	 * 拍摄视频最长拍摄时间，单位秒。最长支持 60 秒
+	 */
+	maxDuration ?: number | null,
+	/**
+	 * 摄像切换
+	 * - front: 前置摄像头
+	 * - back: 后置摄像头
+	 * @type 'front' | 'back'
+	 */
+	camera ?: string | null,
+	/**
+	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。
+	 */
+	extension ?: (string[]) | null,
+	/**
+	 * 接口调用成功，返回视频文件的临时文件路径，详见返回参数说明
+	 */
+	success ?: ((result : ChooseVideoSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type ChooseVideo = (options : ChooseVideoOptions) => void;
+
+export type GetVideoInfoSuccessCallback = {
+	/**
+	 * 画面方向
+	 */
+	orientation : string | null,
+	/**
+	 * 视频格式
+	 */
+	type : string | null,
+	/**
+	 * 视频长度
+	 */
+	duration : number,
+	/**
+	 * 视频大小，单位 kB
+	 */
+	size : number,
+	/**
+	 * 视频的长，单位 px
+	 */
+	height : number,
+	/**
+	 * 视频的宽，单位 px
+	 */
+	width : number,
+	/**
+	 * 视频帧率
+	 */
+	fps : number | null,
+	/**
+	 * 视频码率，单位 kbps
+	 */
+	bitrate : number | null
+};
+
+export type GetVideoInfoOptions = {
+	/**
+	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
+	 */
+	src : string,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : GetVideoInfoSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type GetVideoInfo = (options : GetVideoInfoOptions) => void;
+
+export type SaveVideoToPhotosAlbumSuccessCallback = {};
+
+export type SaveVideoToPhotosAlbumOptions = {
+	/**
+	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
+	 */
+	filePath : string,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : SaveVideoToPhotosAlbumSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type SaveVideoToPhotosAlbum = (options : SaveVideoToPhotosAlbumOptions) => void;
+
+export type CompressVideoSuccessCallback = {
+	/**
+	 * 压缩后的临时文件地址
+	 */
+	tempFilePath : string,
+	/**
+	 * 压缩后的大小，单位 kB
+	 */
+	size : number
+};
+
+export type CompressVideoOptions = {
+	/**
+	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
+	 */
+	src : string,
+	/**
+	 * 压缩质量
+	 * - low: 低
+	 * - medium: 中
+	 * - high: 高
+	 * @type 'low' | 'medium' | 'high'
+	 */
+	quality ?: string | null,
+	/**
+	 * 码率，单位 kbps
+	 */
+	bitrate ?: number | null,
+	/**
+	 * 帧率
+	 */
+	fps ?: number | null,
+	/**
+	 * 相对于原视频的分辨率比例，取值范围(0, 1]
+	 */
+	resolution ?: number | null,
+	/**
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ((result : CompressVideoSuccessCallback) => void) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ((result : UniError) => void) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ((result : any) => void) | null
+};
+
+export type CompressVideo = (options : CompressVideoOptions) => void;
+
+export interface Uni {
+	/**
+	 * 从本地相册选择图片或使用相机拍照
+	 * @description 从本地相册选择图片或使用相机拍照
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.chooseImage({
+	 *	count:3,
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	}
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=chooseimage
+	 * @autotest {
+	   generated:false
+	 }
+	 */
+	chooseImage(options : ChooseImageOptions) : void;
+	/**
+	 * 预览图片
+	 * @description 预览图片
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.previewImage({
+	 *	urls:['/static/a.jpg','/static/b.jpg'],
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	}
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=previewimage
+	 * @autotest {
+	   generated:false
+	 }
+	 */
+	previewImage(options : PreviewImageOptions) : void;
+	/**
+	 * 关闭图片预览
+	 * @description 关闭图片预览
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.closePreviewImage({
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	}
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=closepreviewimage
+	 * @autotest {
+	   generated:false
+	 }
+	 */
+	closePreviewImage(options : ClosePreviewImageOptions) : void;
+	/**
+	 * 获取图片信息
+	 * @description 获取图片信息
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.getImageInfo({
+	 *	src:'/static/a.jpg',
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=getimageinfo
+	 * @autotest {
+	   generated:false,
+	   case:[
+		 {
+		   input:[{"src":"/static/a.jpg"}]
+		 }
+	   ]
+	 }
+	 */
+	getImageInfo(options : GetImageInfoOptions) : void;
+	/**
+	 * 保存图片到系统相册
+	 * @description 保存图片到系统相册
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.saveImageToPhotosAlbum({
+	 *	filePath:'/static/a.jpg',
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=saveimagetophotosalbum
+	 * @autotest {
+	   generated:false,
+	   case:[
+		 {
+		   input:[{"filePath":"/static/a.jpg"}]
+		 }
+	   ]
+	 }
+	 */
+	saveImageToPhotosAlbum(options : SaveImageToPhotosAlbumOptions) : void;
+	/**
+	 * 压缩图片
+	 * @description 压缩图片
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.compressImage({
+	 *	src:'/static/a.jpg',
+	 * 	quality:80,
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=compressimage
+	 * @autotest {
+	   generated:false,
+	   case:[
+		 {
+		   input:[{"src":"/static/d.jpg"},{"rotate","30"}]
+		 }
+	   ]
+	 }
+	 */
+	compressImage(options : CompressImageOptions) : void;
+	/**
+	 * 拍摄视频或从手机相册中选视频，返回视频的临时文件路径。
+	 * @description 拍摄视频或从手机相册中选视频，返回视频的临时文件路径。
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.chooseVideo({
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=choosevideo
+	 * 
+	 */
+	chooseVideo(options : ChooseVideoOptions) : void;
+	/**
+	 * 获取视频详细信息
+	 * @description 获取视频详细信息
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.GetVideoInfo({
+	 *  src:"/static/a.mp4",
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=getvideoinfo
+	 *
+	 */
+	getVideoInfo(options : GetVideoInfoOptions) : void;
+	/**
+	 * 保存视频到系统相册
+	 * @description 保存视频到系统相册
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.saveVideoToPhotosAlbum({
+	 *  filePath:"/static/a.mp4",
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=savevideotophotosalbum
+	 *
+	 */
+	saveVideoToPhotosAlbum(options : SaveVideoToPhotosAlbumOptions) : void;
+	/**
+	 * 压缩视频
+	 * @description 压缩视频
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9+"
+	 *		}
+	 *	}
+	 * }
+	 * @uniVueVersion 2,3
+	 * @example
+	 * ```typescript
+	 * uni.compressVideo({
+	 *  src:"/static/a.mp4",
+	 *  quality:"low",
+	 *	success(e){
+	 *		console.log(JSON.stringify(e))	 
+	 * 	},
+	 * })
+	 * ```
+	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=compressvideo
+	 *
+	 */
+	compressVideo(options : CompressVideoOptions) : void;
+}

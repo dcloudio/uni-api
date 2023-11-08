@@ -1,0 +1,174 @@
+import { RequestOptions, RequestTask } from '../interface.uts'
+import { UTSiOS } from "DCloudUTSFoundation";
+import { URLSessionDataDelegate, URL, CharacterSet,  URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
+
+class NetworkRequestListener {
+	public onStart() : void { }
+
+	public onHeadersReceived(statusCode : number, headers : Map<string, any>) : void { }
+
+	public onDataReceived(data : Data) : void { }
+
+	public onFinished(response : HTTPURLResponse) : void { }
+
+	public onFail(error : NSError) : void { }
+}
+
+class NetworkRequestTaskImpl implements RequestTask {
+	private task : URLSessionDataTask | null = null;
+	constructor(task : URLSessionDataTask | null) {
+		this.task = task;
+		super();
+	}
+
+	public abort() {
+		this.task?.cancel()
+	}
+}
+
+class NetworkManager implements URLSessionDataDelegate {
+	private static instance : NetworkManager | null = null;
+
+	private session : URLSession | null = null;
+
+	private taskMap : Map<URLSessionTask, NetworkRequestListener> = new Map<URLSessionDataTask, NetworkRequestListener>();
+
+	public static getInstance() : NetworkManager {
+		if (this.instance == null) {
+			this.instance = new NetworkManager();
+		}
+		return this.instance!;
+	}
+
+
+	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask | null {
+		let request = this.createRequest(param);
+		if (request == null) {
+			let error = new NSError(domain = "invalid URL", code = 600009);
+			listener.onFail(error);
+			return null;
+		}
+
+		if (this.session == null) {
+			let urlSessionConfig = URLSessionConfiguration.default;
+
+			this.session = new URLSession(configuration = urlSessionConfig, delegate = this, delegateQueue = OperationQueue.main);
+		}
+		let task = this.session?.dataTask(with = request!);
+		task?.resume();
+		if (task != null) {
+			this.taskMap.set(task!, listener);
+		}
+		let requestTask = new NetworkRequestTaskImpl(task);
+		return requestTask;
+	}
+
+
+	public createRequest(param : RequestOptions) : URLRequest | null {
+		let url = new URL(string = param.url);
+		if (url == null) {
+			return null
+		}
+
+
+		let timeout = param.timeout == null ? 60000 : param.timeout;
+		let timeoutInterval = new Double(timeout!) / 1000;
+
+		let request = new URLRequest(url = url!, cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval = timeoutInterval);
+		request.httpShouldHandleCookies = true;
+		let method = param.method;
+		if (method == null || method!.trimmingCharacters(in = CharacterSet.whitespacesAndNewlines).count == 0) {
+			method = "GET";
+		}
+		request.httpMethod = method!;
+
+		let ua = UTSiOS.getUserAgent();
+		request.setValue(ua, forHTTPHeaderField = "User-Agent");
+
+		if (param.header == null) {
+			param.header = {}
+		}
+
+
+		let headers = param.header?.toMap() as Map<string, any>;
+		let hasContentType = false;
+		if (headers != null) {
+			for (entry in headers) {
+				let key = entry.key;
+				if (key.caseInsensitiveCompare("Content-Type") == ComparisonResult.orderedSame) {
+					hasContentType = true;
+				}
+				if (typeof(entry.value) == 'string') {
+					request.setValue((entry.value) as string, forHTTPHeaderField = key);
+				}
+			}
+		}
+
+		if (!hasContentType) {
+			if ("GET" != param.method) {
+				request.setValue("application/json", forHTTPHeaderField = "Content-Type");
+			}
+		}
+
+
+		if (param.data != null) {
+			let body : Data | null = null;
+			if (typeof(param.data) == 'string') {
+				body = (param.data as string).data(using = String.Encoding.utf8);
+			} else {
+				body = JSON.stringify(param.data)?.data(using = String.Encoding.utf8);
+			}
+			if (body == null) {
+				return null;
+			}
+
+			request.httpBody = body;
+		}
+
+		return request;
+	}
+
+
+	//mark --- URLSessionDataDelegate
+
+	urlSession(session : URLSession, @argumentLabel("") task : URLSessionTask, @argumentLabel("didSendBodyData") bytesSent : Int64, @argumentLabel("") totalBytesSent : Int64, @argumentLabel("") totalBytesExpectedToSend : Int64) {
+		//todo 原生的onDataSent貌似没实现 ，考虑删掉这个回调。
+	}
+	urlSession(session : URLSession, @argumentLabel("") dataTask : URLSessionDataTask, @argumentLabel("didReceive") response : URLResponse, @argumentLabel("") @escaping completionHandler : (dis : URLSession.ResponseDisposition) => void) {
+		// response开始的时候的header回调
+		let listener = this.taskMap.get(dataTask);
+		if (listener != null) {
+			let httpResponse : HTTPURLResponse = response as HTTPURLResponse;
+			let statusCode = new NSNumber(value = httpResponse.statusCode);
+			listener?.onHeadersReceived(statusCode, httpResponse.allHeaderFields as Map<string, any>);
+		}
+
+		completionHandler(URLSession.ResponseDisposition.allow);
+	}
+
+	urlSession(session : URLSession, @argumentLabel("") dataTask : URLSessionDataTask, @argumentLabel("didReceive") data : Data) {
+		let listener = this.taskMap.get(dataTask);
+		listener?.onDataReceived(data);
+	}
+
+	urlSession(session : URLSession, @argumentLabel("") task : URLSessionTask, @argumentLabel("didCompleteWithError") error : NSError | null) {
+		let listener = this.taskMap.get(task);
+
+		if (error != null) {
+			listener?.onFail(error as NSError);
+		} else {
+			listener?.onFinished(task.response as HTTPURLResponse);
+		}
+		this.taskMap.delete(task);
+	}
+	//todo 暂时证书验证先不实现。
+	// urlSession( session: URLSession, @argumentLabel("didReceive") challenge: URLAuthenticationChallenge, @escaping completionHandler:(dis:URLSession.AuthChallengeDisposition, credentiual:URLCredential)=>void) {
+	// 	 console.log("didReceivechallenge");
+	// }
+}
+
+
+export {
+	NetworkManager,
+	NetworkRequestListener
+}

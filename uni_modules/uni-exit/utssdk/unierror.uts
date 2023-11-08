@@ -1,0 +1,37 @@
+import { ExitErrorCode, IExitError } from "./interface.uts"
+
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-exit';
+
+
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors:Map<number, string> = new Map([
+  /**
+   * 系统不支持
+   */
+  [12001, 'system not support'],
+  /**
+   * 未知错误
+   */
+  [12002, 'unknown error']
+]);
+
+/**
+ * ExitFail的实现
+ */
+export class ExitFailImpl extends UniError implements IExitError {
+  override errCode: ExitErrorCode
+  constructor (
+    errCode: ExitErrorCode
+  ) {
+    super()
+    this.errSubject = UniErrorSubject
+    this.errCode = errCode
+    this.errMsg = UniErrors[errCode] ?? "";
+  }
+}
