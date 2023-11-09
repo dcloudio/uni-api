@@ -1,4 +1,4 @@
-import { ExitOptions, ExitSuccess, ExitCompleteCallback, Exit } from "../interface.uts"
+import { ExitOptions, ExitSuccess, Exit } from "../interface.uts"
 
 
 /**
