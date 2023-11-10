@@ -69,7 +69,7 @@ export type StopWifi = (option : WifiOption) => void
 
 export type GetWifiList = (option : WifiOption) => void
 
-export type OnGetWifiList = (callback : UniWifiCallback) => void
+export type OnGetWifiList = (callback : UniGetWifiListCallback) => void
 
 export type OffGetWifiList = (callback : UniWifiCallback) => void
 
@@ -77,9 +77,9 @@ export type GetConnectedWifi = (option : GetConnectedWifiOptions) => void
 
 export type ConnectWifi = (option : WifiConnectOption) => void
 
-export type OnWifiConnected = (callback : UniWifiCallback) => void
+export type OnWifiConnected = (callback : UniWifiResultCallback) => void
 
-export type OnWifiConnectedWithPartialInfo = (callback : UniWifiCallback) => void
+export type OnWifiConnectedWithPartialInfo = (callback : UniWifiResultCallbackWithPartialInfo) => void
 
 export type OffWifiConnected = (callback : UniWifiCallback | null) => void
 
