@@ -257,7 +257,7 @@ interface Uni {
 		 ]
 	}
 	 */
-	onGetWifiList(callback : UniWifiCallback) : void,
+	onGetWifiList(callback : UniGetWifiListCallback) : void,
 	/**
 	 * 移除获取到 Wi-Fi 列表数据事件的监听函数。
 	 *
@@ -329,7 +329,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onWifiConnected(callback : UniWifiCallback) : void,
+	onWifiConnected(callback : UniWifiResultCallback) : void,
 	/**
 	 * 监听连接上 Wi-Fi 的事件。
 	 *
@@ -353,7 +353,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onWifiConnectedWithPartialInfo(callback : UniWifiCallback) : void,
+	onWifiConnectedWithPartialInfo(callback : UniWifiResultCallbackWithPartialInfo) : void,
 	/**
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
 	 *
