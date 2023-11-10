@@ -6,6 +6,7 @@ declare namespace UniNamespace {
   type WifiCompleteCallback = (res : UniWifiComplete) => void
   type UniWifiCallback = () => void
 
+
   type WifiErrorCode = 1300002
 
   interface UniWifiInfo {
@@ -27,30 +28,40 @@ declare namespace UniNamespace {
     errCode : WifiErrorCode
   }
 
-  interface WifiConnectOption{
+  interface WifiConnectOption {
     SSID : string | null;
     BSSID : string | null;
     password : string | null;
     maunal : boolean | null;
     partialInfo : boolean | null; //ios不生效
-    success ?: WifiSuccessCallback | null;
-    fail ?: WifiFailCallback | null;
-    complete ?: WifiCompleteCallback | null;
+    success : WifiSuccessCallback | null;
+    fail : WifiFailCallback | null;
+    complete : WifiCompleteCallback | null;
   }
 
   interface GetConnectedWifiOptions {
     partialInfo : boolean | null;
-    success ?: WifiSuccessCallback | null;
-    fail ?: WifiFailCallback | null;
+    success : WifiSuccessCallback | null;
+    fail : WifiFailCallback | null;
     complete ?: WifiCompleteCallback | null;
   }
 
 
   interface WifiOption {
-    success ?: WifiSuccessCallback | null,
-    fail ?: WifiFailCallback | null,
-    complete ?: InstallApkCompleteCallback | null
+    success : WifiSuccessCallback | null,
+    fail : WifiFailCallback | null,
+    complete : InstallApkCompleteCallback | null
   }
+
+  interface UniWifiInfoWithPartialInfo  {
+  	SSID : string;
+  }
+
+  type UniGetWifiListCallback = (wifiInfo:UTSJSONObject) => void
+
+  type UniWifiResultCallback = (wifiInfo:UniWifiResult) => void
+
+  type UniWifiResultCallbackWithPartialInfo = (wifiInfo:UniWifiInfoWithPartialInfo) => void
 
 }
 
@@ -207,7 +218,7 @@ declare interface Uni {
   	 ]
   }
    */
-  onGetWifiList(callback : UniNamespace.UniWifiCallback) : void,
+  onGetWifiList(callback : UniNamespace.UniGetWifiListCallback) : void,
   /**
    * 移除获取到 Wi-Fi 列表数据事件的监听函数。
    *
@@ -279,7 +290,7 @@ declare interface Uni {
    * @uniVueVersion 2,3  //支持的vue版本
    * @autotest { expectCallback: true }
    */
-  onWifiConnected(callback : UniNamespace.UniWifiCallback) : void,
+  onWifiConnected(callback : UniNamespace.UniWifiResultCallback) : void,
   /**
    * 监听连接上 Wi-Fi 的事件。
    *
@@ -303,7 +314,7 @@ declare interface Uni {
    * @uniVueVersion 2,3  //支持的vue版本
    * @autotest { expectCallback: true }
    */
-  onWifiConnectedWithPartialInfo(callback : UniNamespace.UniWifiCallback) : void,
+  onWifiConnectedWithPartialInfo(callback : UniNamespace.UniWifiResultCallbackWithPartialInfo) : void,
   /**
    * 移除连接上 Wi-Fi 的事件的监听函数。
    *
@@ -333,7 +344,7 @@ declare interface Uni {
    * 移除连接上 Wi-Fi 的事件的监听函数。
    *
    * @param {UniWifiCallback} callback
-   * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnectedWithPartialInfo
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -352,7 +363,7 @@ declare interface Uni {
    * @uniVueVersion 2,3  //支持的vue版本
    * @autotest { expectCallback: true }
    */
-  onOffWifiConnectedWithPartialInfo(callback ?: UniNamespace.UniWifiCallback) : void,
+  offWifiConnectedWithPartialInfo(callback ?: UniNamespace.UniWifiResultCallbackWithPartialInfo) : void,
   /**
    * SetWifiList  暂未实现
    *

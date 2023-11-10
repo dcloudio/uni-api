@@ -83,7 +83,7 @@ export type OnWifiConnectedWithPartialInfo = (callback : UniWifiResultCallbackWi
 
 export type OffWifiConnected = (callback : UniWifiCallback | null) => void
 
-export type OnOffWifiConnectedWithPartialInfo = (callback : UniWifiCallback | null) => void
+export type OffWifiConnectedWithPartialInfo = (callback : UniWifiResultCallbackWithPartialInfo | null) => void
 
 export type SetWifiList = (option : WifiOption) => void
 
@@ -382,7 +382,7 @@ interface Uni {
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
 	 *
 	 * @param {UniWifiCallback} callback
-	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
+	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnectedWithPartialInfo
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -401,7 +401,7 @@ interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onOffWifiConnectedWithPartialInfo(callback : UniWifiCallback | null) : void,
+	offWifiConnectedWithPartialInfo(callback : UniWifiResultCallbackWithPartialInfo | null) : void,
 	/**
 	 * SetWifiList  暂未实现
 	 *
