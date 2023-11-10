@@ -8,7 +8,7 @@ export type WifiOption = {
 };
 
 /**
- * Wifi 链接参数封装 
+ * Wifi 链接参数封装
  */
 export type WifiConnectOption = {
 	SSID ?: string;
@@ -31,7 +31,7 @@ export type GetConnectedWifiOptions = {
 	complete ?: (res : any) => void
 }
 
-/* 
+/*
  * 对外暴露的wifi信息
  */
 export type UniWifiInfo = {
@@ -40,6 +40,10 @@ export type UniWifiInfo = {
 	secure ?: boolean;
 	signalStrength ?: number;
 	frequency ?: number;
+}
+
+export type UniWifiInfoWithPartialInfo = {
+	SSID : string;
 }
 
 
@@ -51,6 +55,12 @@ export type UniWifiResult = {
 }
 
 export type UniWifiCallback = () => void
+
+export type UniGetWifiListCallback = (wifiInfo:UTSJSONObject) => void
+
+export type UniWifiResultCallback = (wifiInfo:UniWifiResult) => void
+
+export type UniWifiResultCallbackWithPartialInfo = (wifiInfo:UniWifiInfoWithPartialInfo) => void
 
 
 export type StartWifi = (option : WifiOption) => void
@@ -77,11 +87,30 @@ export type OnOffWifiConnectedWithPartialInfo = (callback : UniWifiCallback | nu
 
 export type SetWifiList = (option : WifiOption) => void
 
+
+/**
+ * 错误码
+ * - 12000 尚未初始化
+ * - 12001 当前系统不支持相关能力
+ * - 12002 密码错误
+ * - 12005 Android 特有，未打开 Wi-Fi 开关
+ * - 12007 用户拒绝授权链接 Wi-Fi
+ * - 12010 系统其他错误
+ * - 12013 系统保存的 Wi-Fi 配置过期，建议忘记 Wi-Fi 后重试，仅 Android 支持
+ */
+export type WifiErrorCode = 12000 |12001 | 12002 |  12005 | 12007 | 12010 | 12013;
+
+export interface WifiFail extends IUniError{
+	errCode: WifiErrorCode
+};
+
+
+
 interface Uni {
 	/**
 	 * 初始化Wi-Fi模块
-	 * 
-	 * @param {WifiOption} option 
+	 *
+	 * @param {WifiOption} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#startwifi
 	 * @uniPlatform {
 	 *    "app": {
@@ -104,8 +133,8 @@ interface Uni {
 	startWifi(option : WifiOption): void,
 	/**
 	 * 关闭 Wi-Fi 模块
-	 * 
-	 * @param {WifiOption} option 
+	 *
+	 * @param {WifiOption} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#stopwifi
 	 * @uniPlatform {
 	 *    "app": {
@@ -127,7 +156,7 @@ interface Uni {
 	 */
 	stopWifi(option : WifiOption) : void,
 	/**
-	 * @param {WifiConnectOption} option 
+	 * @param {WifiConnectOption} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#connectWifi
 	 * @uniPlatform {
 	 *    "app": {
@@ -191,8 +220,8 @@ interface Uni {
 	getWifiList(option : WifiOption) : void,
 	/**
 	 * 监听获取到 Wi-Fi 列表数据事件。
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onGetWifiList
 	 * @uniPlatform {
 	 *    "app": {
@@ -231,8 +260,8 @@ interface Uni {
 	onGetWifiList(callback : UniWifiCallback) : void,
 	/**
 	 * 移除获取到 Wi-Fi 列表数据事件的监听函数。
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offGetWifiList
 	 * @uniPlatform {
 	 *    "app": {
@@ -255,8 +284,8 @@ interface Uni {
 	offGetWifiList(callback : UniWifiCallback) : void,
 	/**
 	 * 获取已连接的 Wi-Fi 信息
-	 * 
-	 * @param {GetConnectedWifiOptions} option 
+	 *
+	 * @param {GetConnectedWifiOptions} option
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#getConnectedWifi
 	 * @uniPlatform {
 	 *    "app": {
@@ -279,8 +308,8 @@ interface Uni {
 	getConnectedWifi(option : GetConnectedWifiOptions) : void,
 	/**
 	 * 监听连接上 Wi-Fi 的事件
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnected
 	 * @uniPlatform {
 	 *    "app": {
@@ -303,8 +332,8 @@ interface Uni {
 	onWifiConnected(callback : UniWifiCallback) : void,
 	/**
 	 * 监听连接上 Wi-Fi 的事件。
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onWifiConnectedWithPartialInfo
 	 * @uniPlatform {
 	 *    "app": {
@@ -327,8 +356,8 @@ interface Uni {
 	onWifiConnectedWithPartialInfo(callback : UniWifiCallback) : void,
 	/**
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#offWifiConnected
 	 * @uniPlatform {
 	 *    "app": {
@@ -351,8 +380,8 @@ interface Uni {
 	offWifiConnected(callback : UniWifiCallback | null) : void,
 	/**
 	 * 移除连接上 Wi-Fi 的事件的监听函数。
-	 * 
-	 * @param {UniWifiCallback} callback 
+	 *
+	 * @param {UniWifiCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/wifi.html#onOffWifiConnectedWithPartialInfo
 	 * @uniPlatform {
 	 *    "app": {
@@ -375,7 +404,7 @@ interface Uni {
 	onOffWifiConnectedWithPartialInfo(callback : UniWifiCallback | null) : void,
 	/**
 	 * SetWifiList  暂未实现
-	 * 
+	 *
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
