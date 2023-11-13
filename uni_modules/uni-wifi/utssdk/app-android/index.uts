@@ -253,43 +253,37 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 
 
 		if (intent.action == WifiManager.WIFI_STATE_CHANGED_ACTION) {
+
 			let state =
 				intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN)
+
 			if (state == WifiManager.WIFI_STATE_ENABLED) {
 				// 获取当前的connectInfo 并且进行数据封装
-				// let uniWifiInfo = new UniWifiInfo(null)
-				let uniWifiInfo : UniWifiInfo = {
-					SSID: "",
-					secure: false,
-					signalStrength: 0,
-					frequency: 0,
-				}
+				let uniWifiInfo = new UniWifiInfo("","",false,0,0)
 				//做一些异步操作
 				setTimeout(function () {
 					// BroadcastReceiver 中不能执行耗时任务，需要使用setTimeout
 					// @ts-ignore
 					let winfo = this.mWifiManager!.getConnectionInfo();
 
-					while (winfo.bssid == null || zeroCountNum(winfo.bssid) > 4) {
-						Thread.sleep(1000)
-						winfo = this.mWifiManager!.getConnectionInfo();
-					}
+          if(winfo != null && winfo.bssid != null && zeroCountNum(winfo.bssid) < 3){
+              //  当前设备链接到了某个具体的wifi.封装成数据对象
+              uniWifiInfo = wrapUniWifiInfoFromConnectInfo(winfo)
+              let res = new UniWifiResult(0,UniErrorSubject,'onWifiConnected:ok',uniWifiInfo)
 
-					// 封装成数据对象
-					uniWifiInfo = wrapUniWifiInfoFromConnectInfo(winfo)
+              // wifi状态可用了，分发当前的链接状态给已注册的监听集合
+              for (let perCallback in Global.onWifiConnectCallbackList) {
+                perCallback(res);
+              }
+              // 封装仅SSID 数据对象
+              let connectedWithPartialInfo = new UniWifiInfoWithPartialInfo(uniWifiInfo.SSID)
 
-          let res = new UniWifiResult(0,UniErrorSubject,'onWifiConnected:ok',uniWifiInfo)
-
-					// wifi状态可用了，分发当前的链接状态给已注册的监听集合
-					for (let perCallback in Global.onWifiConnectCallbackList) {
-						perCallback(res);
-					}
-					// 封装仅SSID 数据对象
-          let connectedWithPartialInfo = new UniWifiInfoWithPartialInfo(uniWifiInfo.SSID)
-
-					for (let perCallback in Global.onWifiConnectWithPartialInfoCallbackList) {
-						perCallback(connectedWithPartialInfo);
-					}
+              for (let perCallback in Global.onWifiConnectWithPartialInfoCallbackList) {
+                perCallback(connectedWithPartialInfo);
+              }
+          } else {
+            // 开启了wifi 开关，但是尚未链接到某个具体的wifi
+          }
 
 				}, 100);
 			}
@@ -351,6 +345,7 @@ var startWifiScaning = false
  */
 @Suppress("DEPRECATION")
 export function startWifiImpl(option : WifiOption) {
+
 
   // 具备了权限，继续前进
   let wifiManager : WifiManager =
@@ -668,11 +663,8 @@ export function connectWifi(option : WifiConnectOption) {
 		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
 		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 
-		let result : UniWifiResult = {
-			errCode: 0,
-			errMsg: "connectWifi:ok",
-			errSubject: "uni-connectWifi",
-		}
+    
+     let result = new UniWifiResult(0,UniErrorSubject,"connectWifi:ok",null)
 
 		option.success?.(result)
 		option.complete?.(result)
