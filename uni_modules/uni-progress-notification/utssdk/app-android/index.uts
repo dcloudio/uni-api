@@ -7,7 +7,7 @@ import Intent from 'android.content.Intent';
 import ComponentName from 'android.content.ComponentName';
 import PendingIntent from 'android.app.PendingIntent';
 import { CreateNotificationProgressOptions, FinishNotificationProgressOptions } from '../interface.uts';
-import { ACTION_DOWNLOAD_FINISH, ACTION_DOWNLOAD_PROGRESS} from "./constant.uts"
+import { ACTION_DOWNLOAD_FINISH, ACTION_DOWNLOAD_PROGRESS } from "./constant.uts"
 
 
 export { TransparentActivity } from './TransparentActivity.uts';
@@ -26,11 +26,17 @@ let histroyProgress = 0
 
 let isProgress = false
 
+export let globalNotificationProgressCallBack : (() => void) | null = () => { }
 export let globalNotificationProgressFinishCallBack = () => { }
 
 export function createNotificationProgress(options : CreateNotificationProgressOptions) : void {
-	const { content, progress } = options
+	const { content, progress, onClick } = options
+
 	if (progress == 100) {
+		clearTimeout(timeId)
+		const context = UTSAndroid.getAppContext() as Context
+		realCreateNotificationProgress(options.title ?? getAppName(context), content, progress, onClick)
+		reset()
 		return
 	}
 
@@ -41,11 +47,11 @@ export function createNotificationProgress(options : CreateNotificationProgressO
 
 	const context = UTSAndroid.getAppContext() as Context
 	if (!isProgress) {
-		realCreateNotificationProgress(options.title ?? getAppName(context), content, histroyProgress)
+		realCreateNotificationProgress(options.title ?? getAppName(context), content, histroyProgress, onClick)
 		isProgress = true
 	} else {
 		timeId = setTimeout(() => {
-			realCreateNotificationProgress(options.title ?? getAppName(context), content, histroyProgress)
+			realCreateNotificationProgress(options.title ?? getAppName(context), content, histroyProgress, onClick)
 			timeId = -1
 		}, 1000)
 	}
@@ -60,7 +66,8 @@ export function cancelNotificationProgress() : void {
 }
 
 
-function realCreateNotificationProgress(title : string, content : string, progress : number) : void {
+function realCreateNotificationProgress(title : string, content : string, progress : number, cb : (() => void) | null) : void {
+	globalNotificationProgressCallBack = cb
 	const context = UTSAndroid.getAppContext() as Context
 	const notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 	createDownloadChannel(notificationManager)
@@ -74,7 +81,7 @@ function realCreateNotificationProgress(title : string, content : string, progre
 
 
 export function finishNotificationProgress(options : FinishNotificationProgressOptions) {
-	globalNotificationProgressFinishCallBack = options.callback
+	globalNotificationProgressFinishCallBack = options.onClick
 	const context = UTSAndroid.getAppContext() as Context
 	const notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 	createDownloadChannel(notificationManager)
@@ -82,7 +89,8 @@ export function finishNotificationProgress(options : FinishNotificationProgressO
 	builder.setProgress(0, 0, false)
 	builder.setContentTitle(options.title ?? getAppName(context))
 	builder.setContentText(options.content)
-	builder.setOngoing(false)
+	//小米rom setOngoing未false的时候，会被通知管理器归为不重要通知
+	// builder.setOngoing(false)
 	builder.setAutoCancel(true);
 	builder.setContentIntent(createPendingIntent(context, ACTION_DOWNLOAD_FINISH));
 	notificationManager.notify(DOWNLOAD_PROGRESS_NOTIFICATION_ID, builder.build())
@@ -122,7 +130,7 @@ function createDownloadChannel(notificationManager : NotificationManager) {
 		notificationManager.createNotificationChannel(channel)
 	}
 }
-
+@Suppress("DEPRECATION")
 function createNotificationBuilder(context : Context) : Notification.Builder {
 	if (notificationBuilder == null) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -130,13 +138,14 @@ function createNotificationBuilder(context : Context) : Notification.Builder {
 		} else {
 			notificationBuilder = new Notification.Builder(context)
 		}
-		notificationBuilder!!.setSmallIcon(context.getApplicationInfo().icon)
-		notificationBuilder!!.setOngoing(true)
-		notificationBuilder!!.setSound(null)
+		notificationBuilder!.setSmallIcon(context.getApplicationInfo().icon)
+		notificationBuilder!.setOngoing(true)
+		notificationBuilder!.setSound(null)
 	}
-	return notificationBuilder!!
+	return notificationBuilder!
 }
 
+@Suppress("DEPRECATION")
 function getAppName(context : Context) : string {
 	let appName = ""
 	try {

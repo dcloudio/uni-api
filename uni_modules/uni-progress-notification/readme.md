@@ -26,7 +26,12 @@ export type CreateNotificationProgressOptions = {
 	/**
 	 * 进度
 	 */
-	progress : number
+	progress : number,
+	/**
+	 * 点击通知消息回调
+	 * @defaultValue null
+	 */
+	onClick? : (() => void) | null
 }
 ```
 
@@ -51,7 +56,7 @@ export type FinishNotificationProgressOptions = {
 	/**
 	 * 点击通知消息回调
 	 */
-	callback : () => void
+	onClick : () => void
 }
 ```
 

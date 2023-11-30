@@ -24,7 +24,10 @@ export type uni = {
 		uni.createNotificationProgress({
 			title: "正在下载升级包",
 			content: "进度 50%",
-			progress: 50
+			progress: 50,
+			onClick:()=>{
+				console.log("正在下载");
+			}
 		}
 	   ```
 	  */
@@ -54,7 +57,7 @@ export type uni = {
 		uni.finishNotificationProgress({
 			title: "安装升级包",
 			content: "下载完成。",
-			callback: () => {
+			onClick: () => {
 				uni.installApk({
 					filePath: e.tempFilePath,
 					complete(res) {
@@ -107,7 +110,12 @@ export type CreateNotificationProgressOptions = {
 	/**
 	 * 进度
 	 */
-	progress : number
+	progress : number,
+	/**
+	 * 点击通知消息回调
+	 * @defaultValue null
+	 */
+	onClick? : (() => void) | null
 }
 
 
@@ -124,7 +132,7 @@ export type FinishNotificationProgressOptions = {
 	/**
 	 * 点击通知消息回调
 	 */
-	callback : () => void
+	onClick : () => void
 }
 
 
