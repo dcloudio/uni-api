@@ -1,0 +1,364 @@
+
+import { GetPushClientIdOptions, GetPushClientIdSuccess, GetPushClientIdFail, OnPushMessageCallback, OnPushMessageCallbackResult, OnPushMessageType, CreatePushMessageOptions, ChannelManager } from '../interface.uts'
+
+import { gtInit, GTPushActionOptions, UserPushAction, setPushAction } from './gt-sdk/GTPush.uts'
+import Context from 'android.content.Context';
+import { PushMessage } from './push/PushMessage.uts';
+import PackageManager from 'android.content.pm.PackageManager';
+import ApplicationInfo from 'android.content.pm.ApplicationInfo';
+import Activity from 'android.app.Activity';
+import TextUtils from 'android.text.TextUtils';
+import { PushState } from './push/PushState.uts';
+import { PushManager } from './push/PushManager.uts';
+import { StringUtil } from './push/utils/StringUtil.uts';
+import SharedPreferences from 'android.content.SharedPreferences';
+import Handler from 'android.os.Handler';
+import { PushChannelManager } from './push/PushChannelManager.uts';
+import Bundle from 'android.os.Bundle';
+import Intent from 'android.content.Intent';
+import Uri from 'android.net.Uri';
+import { globalPushMessageCallbacks, sendEvent } from './push/PushManager.uts'
+export { PushActionService } from './push/PushActionService.uts';
+
+const SP_NAME = "clientid_unipush";
+const SP_KEY_CLIENT_ID = "clientid";
+
+
+let gtCallBack : UserPushAction | null = null;
+let gtPushInitialize = false
+
+/**
+ * 个推推送sdk初始化
+ */
+function initPush() {
+	const ctx = UTSAndroid.getAppContext();
+	if (ctx != null && !gtPushInitialize) {
+		gtPushInitialize = true;
+		gtInit(ctx);
+		setPushAction(getGTCallBack());
+	}
+}
+
+/**
+ * 获取客户端唯一的推送标识（注意：这是一个异步的方法）
+ */
+export function getPushClientId(options : GetPushClientIdOptions) {
+	initPush()
+	const ctx = UTSAndroid.getAppContext() as Context;
+	const sp = ctx.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE) as SharedPreferences;
+	const clientId = sp.getString(SP_KEY_CLIENT_ID, "")
+	if (TextUtils.isEmpty(clientId)) {
+		const handler = new Handler()
+		const changeListener = new (class implements SharedPreferences.OnSharedPreferenceChangeListener {
+			override onSharedPreferenceChanged(sharedPreferences : SharedPreferences, key : string) : void {
+				if (key != SP_KEY_CLIENT_ID) {
+					return
+				}
+				handler.removeCallbacksAndMessages(null)
+				sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+				const cid = sharedPreferences.getString(SP_KEY_CLIENT_ID, "")
+				const res : GetPushClientIdSuccess = { errMsg: "success", cid: cid!! }
+				options.success?.(res)
+				options.complete?.(res)
+			}
+		})
+		sp.registerOnSharedPreferenceChangeListener(changeListener)
+
+		const runnable = new (class implements Runnable {
+			override run() {
+				const clientId = sp.getString(SP_KEY_CLIENT_ID, "")
+				if (!TextUtils.isEmpty(clientId)) {
+					const res : GetPushClientIdSuccess = { errMsg: "success", cid: clientId!! }
+					options.success?.(res)
+					options.complete?.(res)
+				} else {
+					const res : GetPushClientIdFail = {
+						errSubject: "uni-push",
+						errCode: -1,
+						errMsg: "failed,check appkey or appid",
+					}
+					options.fail?.(res)
+					options.complete?.(res)
+				}
+			}
+		})
+		handler.postDelayed(runnable, 15000)
+	} else {
+		const res : GetPushClientIdSuccess = { errMsg: "success", cid: clientId!! }
+		options.success?.(res)
+		options.complete?.(res)
+	}
+}
+
+/**
+ * 增加监听推送消息事件（应用在线的时候没有通知栏消息，全部是透传。）, 注意: 使用时,开发者需要注册写到第一个activity的周期内 , 即首页.
+ */
+export function onPushMessage(callback : OnPushMessageCallback | null) {
+	initPush()
+	if (callback == null) {
+		return;
+	}
+	if (globalPushMessageCallbacks.indexOf(callback) == -1) {
+		globalPushMessageCallbacks.push(callback)
+	}
+
+	processOfflineMessage()
+	// 处理没有注册监听时,已经接到的消息,此时从缓存里取
+	PushManager.getInstance().comsumeMessages("click", (msgs : PushMessage[]) => {
+		msgs.forEach((msg) => {
+			sendEvent("click", msg)
+		})
+	})
+	PushManager.getInstance().comsumeMessages("receive", (msgs : PushMessage[]) => {
+		msgs.forEach((msg) => {
+			sendEvent("receive", msg)
+		})
+	})
+}
+
+/**
+ * 移除推送消息监听事件（没有传入参数，则移除App级别的所有事件监听器。）
+ */
+export function offPushMessage(callback : OnPushMessageCallback | null) {
+	if (callback == null) {
+		const len = globalPushMessageCallbacks.length;
+		globalPushMessageCallbacks.splice(0, len)
+		return;
+	}
+
+	let index = globalPushMessageCallbacks.indexOf(callback)
+	if (index == -1) {
+		return;
+	}
+	globalPushMessageCallbacks.splice(index, 1)
+}
+
+export function getChannelManager() : ChannelManager {
+	return PushChannelManager.getInstance()
+}
+
+export function createPushMessage(options : CreatePushMessageOptions) : void {
+	const context = UTSAndroid.getAppContext() as Context
+	const appId = UTSAndroid.getAppId()
+	const pushMessage = new PushMessage(JSON.stringify(options), getApplicationName(), false)
+
+	const min = 0
+	if (pushMessage.mDelay == min.toLong()) {
+		PushManager.getInstance().addPushMessage(appId, pushMessage)
+		PushManager.getInstance().createNotification(context, pushMessage)
+	} else {
+		new Handler().postDelayed(new (class implements Runnable {
+			override run() {
+				PushManager.getInstance().addPushMessage(appId, pushMessage)
+				PushManager.getInstance().createNotification(context, pushMessage)
+			}
+		}), pushMessage.mDelay * 1000)
+	}
+}
+
+
+function getGTCallBack() : UserPushAction {
+	if (gtCallBack == null) {
+		const options = {
+			onReceiveClientId(cid : string) {
+				const context = UTSAndroid.getAppContext() as Context;
+				const sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+				const editor = sp.edit();
+				editor.putString(SP_KEY_CLIENT_ID, cid);
+				editor.commit();
+			},
+			onNotificationMessageClicked(res : string) {
+				const pushMessage = new PushMessage(res, getApplicationName(), false)
+				if (!sendEvent("click", pushMessage)) {
+					PushManager.getInstance().addNeedExecClickMessage(pushMessage)
+				}
+			},
+			onReceiveMessageData(res : string) {
+				if (!TextUtils.isEmpty(res)) {
+					let isUniPush2 = false
+					const jsonObject = JSON.parseObject(res)
+					const unipushVersionStr = jsonObject?.getString("unipush_version")
+					if (!TextUtils.isEmpty(unipushVersionStr)) {
+						const unipushVersion = parseFloat(unipushVersionStr!!)
+						if (unipushVersion == 2.0) {
+							isUniPush2 = true;
+						}
+					}
+					if (isUniPush2) {
+						processForUniPush2(res);
+					} else {
+						processForUniPush(res);
+					}
+				}
+			},
+		} as GTPushActionOptions;
+		gtCallBack = new UserPushAction(options);
+	}
+
+	return gtCallBack!!;
+}
+
+/**
+ * 处理离线消息
+ */
+function processOfflineMessage() {
+	const activity = UTSAndroid.getUniActivity() as Activity
+	const intent = activity.getIntent()
+
+	// const testStr = "intent://io.dcloud.unipush/?#Intent;scheme=unipush;launchFlags=0x4000000;package=uni.UNI8CD4C4C;component=uni.UNI8CD4C4C/io.dcloud.uniapp.UniAppActivity;S.UP-OL-SU=true;S.unipush_version=2.0;S.payload={\"cccccforceNotification\":\"xxx\",\"path\":\"XXX\"};S.title=xxx;S.content=xxx;S.unipush_data={\"forceNotification\":\"xxx\",\"path\":\"XXX\"};end"
+	// const intent = Intent.parseUri(testStr , 0)
+
+	if (intent.hasExtra("UP-OL-SU")) {
+		let isUniPush2 = false;
+		const unipushVersionStr = intent.getStringExtra("unipush_version");
+		if (!TextUtils.isEmpty(unipushVersionStr)) {
+			const unipushVersion = parseFloat(unipushVersionStr!!)
+			if (unipushVersion == 2.0) {
+				isUniPush2 = true;
+			}
+		}
+
+		const params = {}
+
+		if (isUniPush2) {
+			try {
+				params["title"] = intent.getStringExtra("title")
+				params["content"] = intent.getStringExtra("content")
+				params["unipush_version"] = intent.getStringExtra("unipush_version")
+
+				const channelId = intent.getStringExtra("channelId");
+				const category = intent.getStringExtra("category");
+				if (!TextUtils.isEmpty(channelId)) {
+					params["channelId"] = channelId
+				}
+				if (!TextUtils.isEmpty(category)) {
+					params["category"] = category
+				}
+
+				let payload = intent.getStringExtra("payload");
+				const payloadJsonObject = JSON.parseObject(payload ?? "")
+				if (payloadJsonObject == null) {
+					if (payload != null) {
+						//如果后端传的不是json,而是纯字符串,就需要单独处理,去掉多余的引号,并且枚举一下类型.
+						//双引号套双引号,就说明是传的字符串.
+						if (payload.startsWith("\"")) {
+							payload = StringUtil.trimString(payload, '"');
+							params["payload"] = payload
+						} else {
+							const payloadInt = StringUtil.getInt(payload);
+							const payloadDouble = StringUtil.getDouble(payload);
+							if (payloadInt != null) {
+								params["payload"] = payloadInt
+							} else if (payloadDouble != null) {
+								params["payload"] = payloadDouble
+							} else if (payload == "true" || payload == "false") {
+								params["payload"] = payload.toBoolean()
+							} else {
+								params["payload"] = payload
+							}
+						}
+					}
+				} else {
+					params["payload"] = payloadJsonObject
+				}
+
+				const unipush_data = intent.getStringExtra("unipush_data");
+				const unipushDataJsonObject = JSON.parseObject(unipush_data ?? "");
+				if (unipushDataJsonObject != null) {
+					unipushDataJsonObject.toMap().forEach((value, key) => {
+						params[key] = value
+					})
+				}
+
+				intent.removeExtra("UP-OL-SU");
+				intent.removeExtra("title");
+				intent.removeExtra("content");
+				intent.removeExtra("payload");
+				intent.removeExtra("unipush_version");
+				intent.removeExtra("unipush_data");
+				intent.removeExtra("channelId");
+				intent.removeExtra("category");
+
+				const data = JSON.stringify(params)
+				const pushMessage = new PushMessage(data, getApplicationName(), true);
+				if (!sendEvent("click", pushMessage)) {
+					PushManager.getInstance().addNeedExecClickMessage(pushMessage)
+				}
+			} catch (e : Exception) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				params["title"] = intent.getStringExtra("title")
+				params["content"] = intent.getStringExtra("content")
+				params["payload"] = intent.getStringExtra("payload")
+				const channelId = intent.getStringExtra("channelId");
+				const category = intent.getStringExtra("category");
+				if (!TextUtils.isEmpty(channelId)) {
+					params["channelId"] = channelId
+				}
+				if (!TextUtils.isEmpty(category)) {
+					params["category"] = category
+				}
+				intent.removeExtra("UP-OL-SU");
+				intent.removeExtra("title");
+				intent.removeExtra("content");
+				intent.removeExtra("payload");
+				intent.removeExtra("channelId");
+				intent.removeExtra("category");
+				const data = JSON.stringify(params)
+				const pushMessage = new PushMessage(data, getApplicationName(), true);
+				if (!sendEvent("click", pushMessage)) {
+					PushManager.getInstance().addNeedExecClickMessage(pushMessage)
+				}
+			} catch (e : Exception) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+function processForUniPush(data : string) : void {
+	const context = UTSAndroid.getAppContext() as Context
+	const pushMessage = new PushMessage(data, getApplicationName(), false)
+	const needPush = PushState.getAutoNotification()
+	if (needPush && pushMessage.getNeedCreateNotification()) {
+		PushManager.getInstance().createNotification(context, pushMessage)
+	} else if (!sendEvent("receive", pushMessage)) {
+		PushManager.getInstance().addNeedExecReceiveMessage(pushMessage);
+
+	}
+	PushManager.getInstance().addPushMessage(UTSAndroid.getAppId(), pushMessage);
+}
+
+function processForUniPush2(data : string) : void {
+	const context = UTSAndroid.getAppContext() as Context
+	const jsonObject = JSON.parseObject(data)
+	if (jsonObject != null) {
+		const forceNotification = jsonObject.getBoolean("force_notification")
+		const pushMessage = new PushMessage(data, getApplicationName(), true)
+		if (forceNotification != null && forceNotification) {
+			PushManager.getInstance().createNotification(context, pushMessage)
+		} else if (!sendEvent("receive", pushMessage)) {
+			PushManager.getInstance().addNeedExecReceiveMessage(pushMessage);
+		}
+		PushManager.getInstance().addPushMessage(UTSAndroid.getAppId(), pushMessage);
+	}
+}
+
+function getApplicationName() : string {
+	let packageManager : PackageManager | null = null
+	let applicationInfo : ApplicationInfo | null = null
+	const context = UTSAndroid.getAppContext() as Context;
+	try {
+		packageManager = context.getApplicationContext().getPackageManager()
+		applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0)
+	} catch (_ : Exception) {
+	}
+	if (applicationInfo == null) {
+		return ""
+	}
+
+	return packageManager?.getApplicationLabel(applicationInfo).toString() ?? ""
+}

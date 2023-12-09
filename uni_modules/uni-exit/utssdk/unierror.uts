@@ -25,6 +25,7 @@ export const UniErrors:Map<number, string> = new Map([
  * ExitFail的实现
  */
 export class ExitFailImpl extends UniError implements IExitError {
+  override errCode: ExitErrorCode
   constructor (
     errCode: ExitErrorCode
   ) {

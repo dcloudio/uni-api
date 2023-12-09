@@ -1,20 +1,20 @@
 import { UTSAndroid } from "io.dcloud.uts"
-import { OnMemoryWarning, OffMemoryWarning } from "../interface.uts"
+import { OnMemoryWarning, OffMemoryWarning, MemoryWarningCallback, MemoryWarningCallbackResult } from "../interface.uts"
 
-let listeners: UTSCallback[] = []
+let listeners: MemoryWarningCallback[] = []
 
 const onAppTrimMemoryListener = (ret: number) => {
     listeners.forEach(listener => {
-		let res = {
-			level:ret
-		}
-        listener(res)
+      let res: MemoryWarningCallbackResult = {
+        level:ret
+      }
+      listener(res)
     })
 }
 
 
 @Suppress("DEPRECATION")
-export const onMemoryWarning : OnMemoryWarning =  function (callback: UTSCallback) {
+export const onMemoryWarning : OnMemoryWarning =  function (callback: MemoryWarningCallback) {
     if (listeners.length == 0) {
 		// 仅首次执行底层的实际监听
         UTSAndroid.onAppTrimMemory(onAppTrimMemoryListener)
@@ -28,7 +28,7 @@ export const onMemoryWarning : OnMemoryWarning =  function (callback: UTSCallbac
 
 
 @Suppress("DEPRECATION")
-export const offMemoryWarning : OffMemoryWarning = function (callback: UTSCallback | null) {
+export const offMemoryWarning : OffMemoryWarning = function (callback: MemoryWarningCallback | null) {
 	
 	if(callback == null){
 		// 清除全部回调

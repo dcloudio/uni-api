@@ -1,13 +1,27 @@
+/**
+ * uni.onMemoryWarning/uni.offMemoryWarning回调参数
+ */
+export type MemoryWarningCallbackResult = {
+  /**
+   * 内存警告等级(仅安卓平台有效，iOS始终是0)
+   */
+  level: number
+}
 
-export type OnMemoryWarning = (callback: UTSCallback) => void
+/**
+ * uni.onMemoryWarning/uni.offMemoryWarning回调函数定义
+ */
+export type MemoryWarningCallback = (res: MemoryWarningCallbackResult) => void
 
-export type OffMemoryWarning = (callback : UTSCallback | null) => void
+export type OnMemoryWarning = (callback: MemoryWarningCallback) => void
+
+export type OffMemoryWarning = (callback : MemoryWarningCallback | null) => void
 
 export interface Uni {
 	/**
 	 * 开启监听内存警告
-	 * 
-	 * @param {UTSCallback} callback 
+	 *
+	 * @param {MemoryWarningCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/memory.html#onmemorywarning
 	 * @uniPlatform {
 	 *    "app": {
@@ -27,11 +41,11 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	onMemoryWarning(callback: UTSCallback) : void,
+	onMemoryWarning(callback: MemoryWarningCallback) : void,
 	/**
 	 * 取消监听内存不足告警事件
-	 * 
-	 * @param {UTSCallback} callback 
+	 *
+	 * @param {MemoryWarningCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/memory.html#offmemorywarning
 	 * @uniPlatform {
 	 *    "app": {
@@ -51,5 +65,5 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 * @autotest { expectCallback: true }
 	 */
-	offMemoryWarning(callback : UTSCallback | null) : void
+	offMemoryWarning(callback : MemoryWarningCallback | null) : void
 }
