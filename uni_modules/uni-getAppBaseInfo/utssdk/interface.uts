@@ -7,7 +7,7 @@ export type GetAppBaseInfoOptions = {
 
 export type GetAppBaseInfoResult = {
   /**
-   * manifest.json 中应用appid，即DCloud appid。	
+   * manifest.json 中应用appid，即DCloud appid。
    */
   appId?: string,
   /**
@@ -23,11 +23,11 @@ export type GetAppBaseInfoResult = {
    */
   appVersionCode?: string,
   /**
-   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es	
+   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es
    */
   appLanguage?: string,
   /**
-   * 应用设置的语言	
+   * 应用设置的语言
    */
   language?: string,
   /**
@@ -36,8 +36,8 @@ export type GetAppBaseInfoResult = {
    */
   version?: string,
   /**
-   * 应用资源（wgt）的版本名称。	
-   * 
+   * 应用资源（wgt）的版本名称。
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -55,8 +55,8 @@ export type GetAppBaseInfoResult = {
    */
   appWgtVersion?: string,
   /**
-   * 小程序宿主语言	
-   * 
+   * 小程序宿主语言
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -75,7 +75,7 @@ export type GetAppBaseInfoResult = {
   hostLanguage?: string,
   /**
    * App、小程序宿主版本。
-   * 
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -93,8 +93,8 @@ export type GetAppBaseInfoResult = {
    */
   hostVersion?: string,
   /**
-   * 小程序宿主名称	
-   * 
+   * 小程序宿主名称
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -112,8 +112,8 @@ export type GetAppBaseInfoResult = {
    */
   hostName?: string,
   /**
-   * 小程序宿主包名	
-   * 
+   * 小程序宿主包名
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -131,8 +131,8 @@ export type GetAppBaseInfoResult = {
    */
   hostPackageName?: string,
   /**
-   * uni小程序SDK版本、小程序客户端基础库版本	
-   * 
+   * uni小程序SDK版本、小程序客户端基础库版本
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -151,7 +151,7 @@ export type GetAppBaseInfoResult = {
   hostSDKVersion?: string,
   /**
    * 系统当前主题，取值为light或dark。微信小程序全局配置"darkmode":true时才能获取，否则为 undefined （不支持小游戏）
-   * 
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -203,7 +203,7 @@ export type GetAppBaseInfo = (options?: GetAppBaseInfoOptions | null) => GetAppB
 export interface Uni {
   /**
     * GetAppBaseInfo(Object object)
-    * @description 
+    * @description
     * 获取app基本信息
     * @param {GetAppBaseInfoOptions} options [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
@@ -218,7 +218,7 @@ export interface Uni {
     *        "ios": {
     *            "osVer": "9.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "x"
     *        }
     *    }
     * }

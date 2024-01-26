@@ -98,7 +98,7 @@ declare interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *   	  }
    *    }
    * }
@@ -122,7 +122,7 @@ declare interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *   	  }
    *    }
    * }
@@ -146,7 +146,7 @@ declare interface Uni {
    *        "ios": {
    *            "osVer": "13.0",
    *            "uniVer": "3.7.7",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *   	  }
    *    }
    * }

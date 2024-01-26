@@ -122,7 +122,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -141,12 +141,12 @@ interface Uni {
 	 *        "android": {
 	 *            "osVer": "4.4.4",
 	 *            "uniVer": "3.7.0",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *        },
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -168,7 +168,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -209,7 +209,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -233,7 +233,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -273,7 +273,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -297,7 +297,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -321,7 +321,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -345,7 +345,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
@@ -369,7 +369,7 @@ interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "x"
 	 *   	  }
 	 *    }
 	 * }
