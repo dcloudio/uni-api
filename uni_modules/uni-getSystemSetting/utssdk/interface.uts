@@ -34,7 +34,7 @@ export type GetSystemSetting = () => GetSystemSettingResult
 export interface Uni {
   /**
     * GetSystemSetting()
-    * @description 
+    * @description
     * 获取系统设置
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
@@ -48,7 +48,7 @@ export interface Uni {
     *        "ios": {
     *            "osVer": "9.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "x"
     *        }
     *    }
     * }

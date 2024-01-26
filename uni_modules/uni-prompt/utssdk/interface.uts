@@ -63,9 +63,9 @@ export type ShowToastOptions = {
 
 /**
  * uni.showToast函数定义
- * 弹出toast  
- * 
- * @param {ShowToastOptions} options 
+ * 弹出toast
+ *
+ * @param {ShowToastOptions} options
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
  * @uniPlatform {
  *    "app": {
@@ -77,7 +77,7 @@ export type ShowToastOptions = {
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
@@ -87,7 +87,7 @@ export type ShowToast = (options: ShowToastOptions) => void
 /**
  * uni.hideToast函数定义
  * 隐藏toast
- * 
+ *
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
  * @uniPlatform {
  *    "app": {
@@ -99,7 +99,7 @@ export type ShowToast = (options: ShowToastOptions) => void
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
@@ -155,8 +155,8 @@ export type ShowLoadingOptions = {
 /**
  * uni.showLoading函数定义
  * 弹出loading
- * 
- * @param {ShowLoadingOptions} options 
+ *
+ * @param {ShowLoadingOptions} options
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
  * @uniPlatform {
  *    "app": {
@@ -168,7 +168,7 @@ export type ShowLoadingOptions = {
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
@@ -178,7 +178,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
 /**
  * uni.hideLoading函数定义
  * 隐藏loading
- * 
+ *
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
  * @uniPlatform {
  *    "app": {
@@ -190,11 +190,11 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
- * 
+ *
  */
 export type HideLoading = () => void
 
@@ -286,10 +286,10 @@ export type ShowModalOptions = {
 
 /**
  * uni.showModal 函数定义
- * 
+ *
  * 弹出modal
- * 
- * @param {ShowModalOptions} options 
+ *
+ * @param {ShowModalOptions} options
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
  * @uniPlatform {
  *    "app": {
@@ -301,7 +301,7 @@ export type ShowModalOptions = {
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
@@ -390,10 +390,10 @@ export type ShowActionSheetOptions = {
 
 /**
  * uni.showActionSheet函数定义
- * 
+ *
  * 弹出actionSheet
- * 
- * @param {ShowActionSheetOptions} options 
+ *
+ * @param {ShowActionSheetOptions} options
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
  * @uniPlatform {
  *    "app": {
@@ -405,7 +405,7 @@ export type ShowActionSheetOptions = {
  *        "ios": {
  *            "osVer": "9.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "x"
  *   	  }
  *    }
  * }
@@ -438,7 +438,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
@@ -461,7 +461,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
@@ -490,7 +490,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
@@ -520,7 +520,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
@@ -556,7 +556,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
@@ -588,7 +588,7 @@ export interface Uni {
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "x"
    *        }
    *    }
    * }
