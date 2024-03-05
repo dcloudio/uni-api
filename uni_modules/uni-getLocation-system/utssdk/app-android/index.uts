@@ -1,4 +1,4 @@
-import { GetLocation, GetLocationOptions, GetLocationSuccess,GetLocationFail } from "../interface.uts"
+import { GetLocation, GetLocationOptions, GetLocationSuccess } from "../interface.uts"
 import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import Context from 'android.content.Context';
 import LocationManager from 'android.location.LocationManager';
@@ -12,7 +12,7 @@ import LocationListener from 'android.location.LocationListener';
  * 对外的函数接口
  */
 export const getLocation : GetLocation = function (options : GetLocationOptions) {
-	
+
 	/**
 	 * 准备权限
 	 */
@@ -57,7 +57,7 @@ class CustomSystemLocationListener extends LocationListener {
  * 真实的执行位置定位
  */
 function getLocationImpl(options : GetLocationOptions) {
-	
+
 	/**
 	 * add since 2023-09-14 增加默认值兼容逻辑
 	 */
@@ -67,8 +67,8 @@ function getLocationImpl(options : GetLocationOptions) {
 	if(options.highAccuracyExpireTime == null){
 		options.highAccuracyExpireTime = 3000
 	}
-	
-	
+
+
 	if(options.type != 'wgs84'){
 		// 系统定位只支持wgs84，如果不是则报错
 		let err = new UniError("uni-getLocation-system",-1,"system location support wgs84 only.");
@@ -76,7 +76,7 @@ function getLocationImpl(options : GetLocationOptions) {
 		options.complete?.(err)
 		return
 	}
-	
+
 	if(options.geocode != null && options.geocode == true){
 		// 系统定位不支持逆地理编码
 		let err = new UniError("uni-getLocation-system",-2,"system location not support geocode.");
@@ -84,12 +84,12 @@ function getLocationImpl(options : GetLocationOptions) {
 		options.complete?.(err)
 		return
 	}
-	
 
-	
+
+
 	let locationManager = UTSAndroid.getAppContext()!.getSystemService(Context.LOCATION_SERVICE) as LocationManager;
 	let criteria = new Criteria()
-	
+
 	// 用户明确开启了高度
 	if (options.altitude != null && options.altitude == true) {
 		criteria.setAltitudeRequired(true)
@@ -100,10 +100,10 @@ function getLocationImpl(options : GetLocationOptions) {
 	} else{
 		criteria.setAccuracy(Criteria.ACCURACY_COARSE)
 	}
-	
+
 	criteria.setPowerRequirement(Criteria.POWER_LOW)
 	criteria.setSpeedRequired(true)
-	
+
 	/**
 	 * 如果存在gps，那么优先gps，这样才有高度信息
 	 */
@@ -111,7 +111,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	if(!locationManager.getProviders(criteria, true).contains("gps")){
 		providerName = locationManager.getBestProvider(criteria, true)
 	}
-	
+
 	if (providerName == null) {
 		// 没有找到合法的系统定位能力提供者，错误的逻辑 todo
 		let err = new UniError("uni-getLocation-system",-3,"Provider is not find,Please ensure that the device location function is turned on");
@@ -134,17 +134,17 @@ function getLocationImpl(options : GetLocationOptions) {
 	if(options.highAccuracyExpireTime != null && options.highAccuracyExpireTime! >= 3000){
 		timeoutMill = options.highAccuracyExpireTime!
 	}
-	
+
 	let taskId = 0
 	let startTimeMill = (new Date()).getTime()
 	// 不管返回结果如何，延迟2s 返回数据
 	taskId = setInterval(function () {
 		if (Global.lastLocation == null) {
 			// 没有得到想要的位置,统计错误计数+1
-			
+
 			let currentTimeMill = (new Date()).getTime()
 			let diffTimeNum = currentTimeMill - startTimeMill
-			
+
 			if (diffTimeNum > timeoutMill) {
 				locationManager.removeUpdates(systemListener)
 				// 超过6s了，返回错误
