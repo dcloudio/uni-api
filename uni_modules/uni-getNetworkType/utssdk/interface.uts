@@ -6,20 +6,25 @@ export interface Uni {
     * @param {GetNetworkTypeOptions} options
     * @return {void}
     * @tutorial http://uniapp.dcloud.io/api/system/network?id=getnetworktype
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
        uni.getNetworkType({

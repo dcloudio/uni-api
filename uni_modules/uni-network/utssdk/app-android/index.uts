@@ -11,7 +11,6 @@ import ArrayList from 'java.util.ArrayList';
 import ProgressListener from 'android.os.RecoverySystem.ProgressListener';
 import Handler from 'android.os.Handler';
 import Looper from 'android.os.Looper';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import Class from 'java.lang.Class';
 import Type from 'java.lang.reflect.Type';
 
@@ -90,8 +89,6 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 		let result = {};
 		if (kParam != null) {
 			if (option == null || '-1' == option['statusCode']) {
-				// result['statusText'] = 'ERR_CONNECT_FAILED';
-				// result['errMsg'] = option['errorMsg'];
 				if (this.headers != null) {
 					result['header'] = this.headers;
 				}
@@ -99,7 +96,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				let cause = exception.cause.toString();
 				let errMsg = option['errorMsg']! as string;
 				let errCode = (option['errorCode']! as string).toInt();
-				if (errMsg.contains("timeout")) {
+				if (errMsg.indexOf("timeout") != -1) {
 					errCode = 5;
 					errMsg = "time out";
 				} else if (cause.contains("Connection refused")) {
@@ -117,7 +114,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				}
 
 				let failResult = new RequestFailImpl(getErrcode(errCode));
-				failResult.cause = new Error(cause);
+				failResult.cause = new SourceError(cause);
 				new RunnableTask(this.looper, () => {
 					if (kParam != null) {
 						let fail = kParam.fail;
@@ -220,7 +217,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 					data: result['data'] as T,
 					statusCode: (result['statusCode'] as string).toInt(),
 					header: result['header']!,
-					cookies: []
+					cookies: this.parseCookie(this.headers)
 				};
 				new RunnableTask(this.looper, () => {
 					if (kParam != null) {
@@ -257,7 +254,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 
 	private parseData(data : string, type : string) : any | null {
 		if ("java.lang.Object".equals(this.clzName, true)) {
-			if (type.contains("json")) {
+			if (type.indexOf("json") != -1) {
 				return JSON.parse(data);
 			} else if (type == 'jsonp') {
 				if (TextUtils.isEmpty(data)) {
@@ -277,6 +274,36 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 			return JSON.parse<T>(data, this.type);
 		}
 	}
+
+	private parseCookie(header : UTSJSONObject | null) : string[] {
+		if (header == null) {
+			return []
+		}
+		let cookiesStr = header.getString('Set-Cookie')
+		if (cookiesStr == null) {
+			cookiesStr = header.getString('set-cookie')
+		}
+		if (cookiesStr == null) {
+			return []
+		}
+		let cookiesArr = new Array<string>()
+		if (cookiesStr.charAt(0) == "[" && cookiesStr.charAt(cookiesStr.length - 1) == "]") {
+			cookiesStr = cookiesStr.slice(1, -1)
+		}
+
+		const handleCookiesArr = cookiesStr.split(';')
+		for (let i = 0; i < handleCookiesArr.length; i++) {
+			if (handleCookiesArr[i].indexOf('Expires=') != -1 || handleCookiesArr[i].indexOf('expires=') != -1) {
+				cookiesArr.push(handleCookiesArr[i].replace(',', ''))
+			} else {
+				cookiesArr.push(handleCookiesArr[i])
+			}
+		}
+		cookiesArr = cookiesArr.join(';').split(',')
+
+		return cookiesArr
+	}
+
 }
 
 
@@ -307,6 +334,10 @@ class UploadNetworkListener implements NetworkUploadFileListener {
 			let errCode = (option['statusCode']! as string).toInt();
 			if (errorMsg != null) {
 				let failResult = new UploadFileFailImpl(getErrcode(errCode));
+				let cause = option['cause'];
+				if (cause != null) {
+					failResult.cause = cause as SourceError;
+				}
 
 				new RunnableTask(this.looper, () => {
 					if (kParam != null) {
@@ -376,10 +407,9 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 				let errCode = (option['errorCode']! as string).toInt();
 				let failResult = new DownloadFileFailImpl(getErrcode(errCode));
 				failResult.errMsg = errMsg as string;
-				let exception = option['cause'];
-				if(exception != null){
-					let cause = (exception as Exception).cause.toString();
-					failResult.cause = new Error(cause);
+				let cause = option['cause'];
+				if (cause != null) {
+					failResult.cause = cause as SourceError;
 				}
 
 				new RunnableTask(this.looper, () => {
@@ -425,16 +455,16 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 
 @UTSAndroid.keyword("inline")
 @UTSAndroid.keyword('reified')
-export function request<T>(options : RequestOptions<T>) : RequestTask | null {
+export function request<T>(options : RequestOptions<T>) : RequestTask {
 	const type = UTSAndroid.getGenericType<T>();
 	const clzName = UTSAndroid.getGenericClassName<T>();
 	return NetworkManager.getInstance().request<T>(options, new RequestNetworkListener<T>(options, type, clzName));
 }
 
-export const uploadFile : UploadFile = (options : UploadFileOptions) : UploadTask | null => {
+export const uploadFile : UploadFile = (options : UploadFileOptions) : UploadTask => {
 	return NetworkManager.getInstance().uploadFile(options, new UploadNetworkListener(options));
 }
 
-export const downloadFile : DownloadFile = (options : DownloadFileOptions) : DownloadTask | null => {
+export const downloadFile : DownloadFile = (options : DownloadFileOptions) : DownloadTask => {
 	return NetworkManager.getInstance().downloadFile(options, new DownloadNetworkListener(options));
 }

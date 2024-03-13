@@ -28,6 +28,14 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"hostPackageName",
 			"hostSDKVersion",
 			"hostTheme",
+			"bundleId",
+			"signature",
+			"isUniAppX",
+			"uniCompilerVersion",
+			"uniPlatform",
+			"uniRuntimeVersion",
+			"uniCompilerVersionCode",
+			"uniRuntimeVersionCode"
 		];
 		filter = defaultFilter;
 	}
@@ -79,6 +87,47 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	if (filterArray.indexOf("appWgtVersion") != -1) {
 		result.appWgtVersion = AppBaseInfoDeviceUtil.getAppWgtVersion();
 	}
+	if (filterArray.indexOf("bundleId") != -1) {
+		result.bundleId = AppBaseInfoDeviceUtil.getBundleId();
+	}
+	if (filterArray.indexOf("signature") != -1) {
+		result.signature = AppBaseInfoDeviceUtil.getSignature();
+	}
+	if (filterArray.indexOf("isUniAppX") != -1) {
+		result.isUniAppX = UTSiOS.isUniAppX();
+	}
+	
+	if (filterArray.indexOf("uniCompilerVersion") != -1) {
+		result.uniCompilerVersion = UTSiOS.getCompileVersion();
+	}
+	
+	if (filterArray.indexOf("uniPlatform") != -1) {
+		result.uniPlatform = "app";
+	}
+	
+	if (filterArray.indexOf("uniRuntimeVersion") != -1) {
+		result.uniRuntimeVersion = UTSiOS.getRuntimeVersion();
+	}
+	
+	if (filterArray.indexOf("uniCompilerVersionCode") != -1) {
+		result.uniCompilerVersionCode = AppBaseInfoConvertVersionCode(UTSiOS.getCompileVersion());
+	}
+	
+	if (filterArray.indexOf("uniRuntimeVersionCode") != -1) {
+		result.uniRuntimeVersionCode = AppBaseInfoConvertVersionCode(UTSiOS.getRuntimeVersion());
+	}
 
 	return result;
+}
+
+const AppBaseInfoConvertVersionCode = function(version: string): number {
+	if (version.length > 0){
+		const components = version.components(separatedBy= '.')
+		var resultString = ""
+		for (let i = 0; i < components.length; i++) {
+		    resultString = (i == 0) ? (resultString + components[i] + '.') : (resultString + components[i])
+		}
+		return parseFloat(resultString)
+	}
+	return 0
 }

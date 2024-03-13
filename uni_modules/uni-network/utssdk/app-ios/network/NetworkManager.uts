@@ -1,6 +1,6 @@
 import { RequestOptions, RequestTask } from '../interface.uts'
 import { UTSiOS } from "DCloudUTSFoundation";
-import { URLSessionDataDelegate, URL, CharacterSet,  URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
+import { URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
 
 class NetworkRequestListener {
 	public onStart() : void { }
@@ -41,18 +41,18 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask | null {
+	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask {
 		let request = this.createRequest(param);
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
 			listener.onFail(error);
-			return null;
+			return new NetworkRequestTaskImpl(null);
 		}
 
 		if (this.session == null) {
 			let urlSessionConfig = URLSessionConfiguration.default;
 
-			this.session = new URLSession(configuration = urlSessionConfig, delegate = this, delegateQueue = OperationQueue.main);
+			this.session = new URLSession(configuration = urlSessionConfig, delegate = this, delegateQueue = OperationQueue.current);
 		}
 		let task = this.session?.dataTask(with = request!);
 		task?.resume();
@@ -73,7 +73,6 @@ class NetworkManager implements URLSessionDataDelegate {
 
 		let timeout = param.timeout == null ? 60000 : param.timeout;
 		let timeoutInterval = new Double(timeout!) / 1000;
-
 		let request = new URLRequest(url = url!, cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval = timeoutInterval);
 		request.httpShouldHandleCookies = true;
 		let method = param.method;
@@ -98,7 +97,7 @@ class NetworkManager implements URLSessionDataDelegate {
 				if (key.caseInsensitiveCompare("Content-Type") == ComparisonResult.orderedSame) {
 					hasContentType = true;
 				}
-				if (typeof(entry.value) == 'string') {
+				if (typeof (entry.value) == 'string') {
 					request.setValue((entry.value) as string, forHTTPHeaderField = key);
 				}
 			}
@@ -109,23 +108,103 @@ class NetworkManager implements URLSessionDataDelegate {
 				request.setValue("application/json", forHTTPHeaderField = "Content-Type");
 			}
 		}
-
-
-		if (param.data != null) {
-			let body : Data | null = null;
-			if (typeof(param.data) == 'string') {
-				body = (param.data as string).data(using = String.Encoding.utf8);
-			} else {
-				body = JSON.stringify(param.data)?.data(using = String.Encoding.utf8);
+		if ("GET" == param.method) {
+			const data = param.data;
+			if (data != null) {
+				let json : UTSJSONObject | null = null;
+				if (typeof (data) == 'string') {
+					json = JSON.parseObject(data as string);
+				} else if (data instanceof UTSJSONObject) {
+					json = data as UTSJSONObject;
+				}
+				if (json != null) {
+					let urlStr = param.url;
+					let url = new URL(string = this.stringifyQuery(urlStr!, json!));
+					request.url = url;
+				}
 			}
-			if (body == null) {
+		} else if (param.data != null) {
+			let bodyData : Data | null = null;
+			if (typeof (param.data) == 'string') {
+				bodyData = (param.data as string).data(using = String.Encoding.utf8);
+			} else if (param.data instanceof UTSJSONObject) {
+				let body : string | null = "";
+				const contentType = request.value(forHTTPHeaderField = "Content-Type")
+				if (contentType != null) {
+					if (contentType!.indexOf("application/x-www-form-urlencoded") == 0) {
+						const data = param.data as UTSJSONObject;
+						const map : Map<string, any | null> = data.toMap();
+						const bodyArray = new Array<string>();
+						map.forEach((value, key) => {
+							bodyArray.push(key + "=" + `${value ?? "null"}`);
+						})
+						body = bodyArray.join("&");
+					} else {
+						body = JSON.stringify(param.data);
+					}
+					bodyData = body?.data(using = String.Encoding.utf8);
+				}
+			}
+			if (bodyData == null) {
 				return null;
 			}
 
-			request.httpBody = body;
+			request.httpBody = bodyData;
 		}
 
 		return request;
+	}
+
+	/**
+	 * data拼接到url上
+	 */
+	private stringifyQuery(url : string, data : UTSJSONObject) : string {
+		let newUrl = url;
+		//http:xxx/xxx?a=b&c=d#123
+		let str = url.split('#')
+		let hash = ''
+		if (str.length > 1) {
+			hash = str[1] //123
+		}
+		str = str[0].split('?')
+		let query = ''
+		if (str.length > 1) {
+			query = str[1] //a=b&c=d
+		}
+		newUrl = str[0]   // http:xxx/xxx
+		const pairs = query.split('&')
+		const queryMap = new Map<string, string>();
+		pairs.forEach((item: string, index: number) => {
+			const temp = item.split('=')
+			if (temp.length > 1) {
+				queryMap[temp[0]] = temp[1]
+			}
+		});
+		const dataMap : Map<string, any | null> = data.toMap();
+		dataMap.forEach((value, key) => {
+			if(value == null){
+				value = "";
+			}
+			let encodeKey = encodeURIComponent(key)!
+			if (value instanceof UTSJSONObject || value instanceof Array<any|null>){
+				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(value)!)!
+			}else{
+				queryMap[encodeKey] = encodeURIComponent(`${value!}`)!;
+			}
+		})
+		let queryStr = "";
+		queryMap.forEach((value, key) => {
+			queryStr += key + "=" + value + "&"
+		});
+		
+		queryStr = queryStr.slice(0, -1);
+		if (queryStr.length > 0) {
+			newUrl += "?" + queryStr;
+		}
+		if (hash.length > 0) {
+			newUrl += "#" + hash;
+		}
+		return newUrl;
 	}
 
 

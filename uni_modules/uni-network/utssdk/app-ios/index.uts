@@ -1,6 +1,6 @@
 import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask } from './interface';
 import { NetworkManager, NetworkRequestListener } from './network/NetworkManager.uts'
-import { Data, HTTPURLResponse, NSError, NSNumber , ComparisonResult } from 'Foundation';
+import { Data, HTTPURLResponse, NSError, NSNumber , ComparisonResult , RunLoop , Thread } from 'Foundation';
 import { StatusCode } from './network/StatusCode.uts';
 
 class SimpleNetworkListener extends NetworkRequestListener {
@@ -20,7 +20,7 @@ class SimpleNetworkListener extends NetworkRequestListener {
 		this.headers = headers;
 	}
 	public override onDataReceived(data : Data) : void {
-		this.received += data.count;
+		this.received += Number.from(data.count);
 		this.data.append(data);
 	}
 
@@ -56,13 +56,12 @@ class SimpleNetworkListener extends NetworkRequestListener {
 				data: result['data']!,
 				statusCode: (new NSNumber(value = response.statusCode)),
 				header: result['header'] ?? "",
-				cookies: []
+				cookies: this.parseCookie(this.headers)
 			};
 			let success = kParam?.success;
 			let complete = kParam?.complete;
 			success?.(tmp);
 			complete?.(tmp);
-
 		} catch (e) {
 		}
 	}
@@ -167,9 +166,37 @@ class SimpleNetworkListener extends NetworkRequestListener {
 	private parseJson(str : string) : any | null{
 		return JSON.parse(str);
 	}
+	
+	private parseCookie(header : Map<string, any> | null) : string[] {
+		if (header == null) {
+			return []
+		}
+		let cookiesStr = header!.get('Set-Cookie') as string | null
+		if (cookiesStr == null) {
+			cookiesStr = header!.get('set-cookie') as string | null
+		}
+		if (cookiesStr == null) {
+			return []
+		}
+		let cookiesArr = new Array<string>()
+		if (cookiesStr!.charAt(0) == "[" && cookiesStr!.charAt(cookiesStr!.length - 1) == "]") {
+			cookiesStr = cookiesStr!.slice(1, -1)
+		}
+	
+		const handleCookiesArr = cookiesStr!.split(';')
+		for (let i = 0; i < handleCookiesArr.length; i++) {
+			if (handleCookiesArr[i].indexOf('Expires=') != -1 || handleCookiesArr[i].indexOf('expires=') != -1) {
+				cookiesArr.push(handleCookiesArr[i].replace(',', ''))
+			} else {
+				cookiesArr.push(handleCookiesArr[i])
+			}
+		}
+		cookiesArr = cookiesArr.join(';').split(',')
+	
+		return cookiesArr
+	}
 }
 
-
-export const request : Request = (param : RequestOptions) : RequestTask | null => {
+export const request : Request = (param : RequestOptions) : RequestTask => {
 	return NetworkManager.getInstance().request(param, new SimpleNetworkListener(param));
 }

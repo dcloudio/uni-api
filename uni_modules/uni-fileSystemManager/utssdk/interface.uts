@@ -1,0 +1,423 @@
+
+export type ReadFileSuccessResult = {
+  data: string
+}
+
+
+/**
+ *  通用的正确返回结果
+ */
+export type FileManagerSuccessResult = {
+  errMsg: string,
+}
+/**
+ * 通用的正确返回结果回调
+ */
+export type FileManagerSuccessCallback = (res: FileManagerSuccessResult) => void
+/**
+ * 通用的错误返回结果回调
+ */
+export type FileManagerFailCallback = (res: UniError) => void
+/**
+ * 通用的结束返回结果回调
+ */
+export type FileManagerCompleteCallback = (res: any) => void
+
+
+
+export type ReadFileSuccessCallback = (res: ReadFileSuccessResult) => void
+
+
+
+export type ReadFileOptions = {
+  /**
+   * base64 / utf-8
+   */
+  encoding: "base64" | "utf-8",
+  /**
+   * 文件路径，支持相对地址和绝对地址
+   */
+  filePath: string.URIString,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: ReadFileSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+
+
+
+export type WriteFileOptions = {
+  /**
+   * 文件路径，只支持绝对地址
+   */
+  filePath: string.URIString,
+  /**
+   * 指定写入文件的字符编码
+   * 支持:ascii base64 utf-8
+   */
+  encoding: "ascii" | "base64" | "utf-8",
+  /**
+   * 写入的文本内容
+   */
+  data: string,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: FileManagerSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+
+export type UnLinkSuccessCallback = (res: FileManagerSuccessResult) => void
+
+
+
+export type UnLinkOptions = {
+  /**
+   * 文件路径，只支持绝对地址
+   */
+  filePath: string.URIString,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: UnLinkSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+export type MkDirSuccessCallback = (res: FileManagerSuccessResult) => void
+
+
+
+
+export type MkDirOptions = {
+  /**
+   * 创建的目录路径 (本地路径)
+   */
+  dirPath: string.URIString,
+  /**
+   *是否在递归创建该目录的上级目录后再创建该目录。如果对应的上级目录已经存在，则不创建该上级目录。如 dirPath 为 a/b/c/d 且 recursive 为 true，将创建 a 目录，再在 a 目录下创建 b 目录，以此类推直至创建 a/b/c 目录下的 d 目录。
+   */
+  recursive: boolean,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: MkDirSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+export type RmDirSuccessCallback = (res: FileManagerSuccessResult) => void
+
+
+
+
+export type RmDirOptions = {
+  /**
+   * 要删除的目录路径 (本地路径)
+   */
+  dirPath: string.URIString,
+  /**
+   *是否递归删除目录。如果为 true，则删除该目录和该目录下的所有子目录以及文件。
+   */
+  recursive: boolean,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: MkDirSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+export type ReadDirSuccessResult = {
+  files: string[],
+}
+
+export type ReadDirSuccessCallback = (res: ReadDirSuccessResult) => void
+
+
+export type ReadDirOptions = {
+  /**
+   * 要读取的目录路径 (本地路径)
+   */
+  dirPath: string.URIString,
+
+  /**
+   * 接口调用的回调函数
+   */
+  success?: ReadDirSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+
+
+export type AccessOptions = {
+  /**
+   * 要删除的目录路径 (本地路径)
+   */
+  path: string.URIString,
+
+  /**
+   * 接口调用的回调函数
+   */
+  success?: FileManagerSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+export type RenameOptions = {
+  /**
+   * 源文件路径，支持本地路径
+   */
+  oldPath: string.URIString,
+  /**
+   * 新文件路径，支持本地路径
+   */
+  newPath: string.URIString,
+
+  /**
+   * 接口调用的回调函数
+   */
+  success?: FileManagerSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+export type CopyFileOptions = {
+  /**
+   * 源文件路径，支持本地路径
+   */
+  srcPath: string.URIString,
+  /**
+   * 新文件路径，支持本地路径
+   */
+  destPath: string.URIString,
+
+  /**
+   * 接口调用的回调函数
+   */
+  success?: FileManagerSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+export type GetFileInfoSuccessResult = {
+  digest: string,
+  size:number,
+  errMsg:string
+}
+
+export type GetFileInfoSuccessCallback = (res: GetFileInfoSuccessResult) => void
+
+export type GetFileInfoOptions = {
+  /**
+   * 要读取的文件路径 (本地路径)
+   */
+  filePath: string.URIString,
+  /**
+   * md5 / sha1
+   */
+  digestAlgorithm: "md5" | "sha1" | null,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: GetFileInfoSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+export class Stats implements io.dcloud.uts.log.LogSelf,io.dcloud.uts.json.IJsonStringify{
+	mode: number = 0;
+	size: number = 0;
+	lastAccessedTime: number = 0;
+	lastModifiedTime: number = 0;
+	
+	mIsFile:boolean = false
+	constructor(){
+	}
+	
+	isDirectory():boolean{
+		return !this.mIsFile
+	}
+	
+	isFile():boolean{
+		return this.mIsFile
+	}
+	
+	override toLog():any|null{
+		return this.toJSON()
+	}
+	override toJSON():any|null{
+		let jsonRet = new UTSJSONObject()
+		jsonRet.set("mode",this.mode)
+		jsonRet.set("size",this.size)
+		jsonRet.set("lastAccessedTime",this.lastAccessedTime)
+		jsonRet.set("lastModifiedTime",this.lastModifiedTime)
+		return jsonRet
+	}
+}
+
+
+export type FileStats = {
+	path: string,
+	stats:Stats,
+}
+
+export type StatSuccessResult = {
+  errMsg: string,
+  stats:FileStats[]
+}
+
+
+export type StatSuccessCallback = (res: StatSuccessResult) => void
+
+
+export type StatOptions = {
+  /**
+   * 文件/目录路径 (本地路径)
+   */
+  path: string.URIString,
+  /**
+   * 是否递归获取目录下的每个文件的 Stats 信息
+   */
+  recursive: boolean,
+  /**
+   * 接口调用的回调函数
+   */
+  success?: StatSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   */
+  fail?: FileManagerFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: FileManagerCompleteCallback | null
+}
+
+
+export interface FileSystemManager {
+  readFile(options: ReadFileOptions): void;
+  // readFileSync(filePath: string,encoding:string): string|null;
+  writeFile(options: WriteFileOptions): void;
+  // writeFileSync(filePath: string,data:string): number;
+  unlink(options: UnLinkOptions): void;
+  // unlinkSync(filePath: string): number;
+  mkdir(options: MkDirOptions): void;
+  // mkdirSync(dirPath: string,recursive:boolean): number;
+  rmdir(options: RmDirOptions): void;
+  // rmdirSync(dirPath: string,recursive:boolean): number;
+  readdir(options: ReadDirOptions): void;
+  // readdirSync(dirPath: string): string[] | null;
+  access(options: AccessOptions): void;
+  // accessSync(path: string): number;
+  rename(options: RenameOptions): void;
+  // renameSync(oldPath:string,newPath:string): number;
+  copyFile(options: CopyFileOptions): void;
+  // copyFileSync(srcPath:string,destPath:string): number;
+  getFileInfo(options: GetFileInfoOptions): void;
+  //获取文件 Stats 对象
+  stat(options: StatOptions): void;
+}
+
+
+export type GetFileSystemManager = () => FileSystemManager;
+
+
+export interface Uni {
+  /**
+   * 获取文件管理器
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "5.0",
+   *            "uniVer": "x",
+   *            "unixVer": "3.9.0"
+   *        },
+   *        "ios": {
+   *            "osVer": "x",
+   *            "uniVer": "x",
+   *            "unixVer": "x"
+   *   	  }
+   *    },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
+   * }
+   * @uniVueVersion 2,3  //支持的vue版本
+   */
+   getFileSystemManager():FileSystemManager
+}

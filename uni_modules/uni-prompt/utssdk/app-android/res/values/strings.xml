@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string name="placement">Configuration</string>
-	<string name="cancel">Cancel</string>
-	<string name="prompt_model_sure">OK</string>
-	<string name="prompt_model_cancel">Cancel</string>
+<resources>    
+	<string name="uni_prompt_placement">Configuration</string>
+	<string name="uni_prompt_cancel">Cancel</string>
+	<string name="uni_prompt_model_sure">OK</string>
+	<string name="uni_prompt_model_cancel">Cancel</string>
 </resources>

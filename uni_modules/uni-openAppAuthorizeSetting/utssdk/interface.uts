@@ -1,0 +1,71 @@
+export interface Uni {
+
+  /**
+    * openAppAuthorizeSetting()
+    * @description 
+    * 跳转系统授权管理页
+    * @param {OpenAppAuthorizeSettingOptions}  options
+    * @return {void}
+    * @tutorial http://uniapp.dcloud.io/api/system/openappauthorizesetting
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	}
+	* }
+    * @example
+     ```typescript
+      uni.openAppAuthorizeSetting({});
+     ```
+    */
+  openAppAuthorizeSetting(options: OpenAppAuthorizeSettingOptions): void;
+}
+
+export type OpenAppAuthorizeSetting = (options: OpenAppAuthorizeSettingOptions) => void;
+export type OpenAppAuthorizeSettingSuccess = {
+  /**
+   * 错误信息
+   */
+  errMsg: string
+};
+export type OpenAppAuthorizeSettingSuccessCallback = (result: OpenAppAuthorizeSettingSuccess) => void;
+export type OpenAppAuthorizeSettingFail = {
+  /**
+   * 错误信息
+   */
+  errMsg: string
+};
+export type OpenAppAuthorizeSettingFailCallback = (result: OpenAppAuthorizeSettingFail) => void;
+export type OpenAppAuthorizeSettingComplete = {
+  /**
+   * 错误信息
+   */
+  errMsg: string
+};
+export type OpenAppAuthorizeSettingCompleteCallback = (result: OpenAppAuthorizeSettingComplete) => void;
+export type OpenAppAuthorizeSettingOptions = {
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: OpenAppAuthorizeSettingSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: OpenAppAuthorizeSettingFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: OpenAppAuthorizeSettingCompleteCallback | null
+};

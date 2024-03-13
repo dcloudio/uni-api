@@ -1,0 +1,64 @@
+import { LocationErrorCode, IGetLocationFail } from "./interface.uts"
+
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-location';
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors : Map<LocationErrorCode, string> = new Map([
+
+	/**
+	 * 缺失权限
+	 */
+	[1505004, 'maybe not obtain GPS Permission.'],
+	/**
+	 * iOS特有的缺失高精度权限
+	 */
+	[1505004, 'Unauthorized access to high-accuracy location services.'],
+	/**
+	 * 超时
+	 */
+	[1505021, 'location fail: timeout'],
+	/**
+	 * 不支持的定位类型
+	 */
+	[1505022, 'system location support wgs84 only.'],
+	/**
+	 * 不支持逆地理编码
+	 */
+	[1505023, 'system location not support geocode.'],
+	/**
+	 * 没有找到具体的定位引擎，请定位开关是否已打开
+	 */
+	[1505024, 'Provider is not find,Please ensure that the device location function is turned on'],
+	/**
+	 * 逆地理编码捕获失败
+	 */
+	[1505025, 'The system failed to retrieve geocode for the location.'],
+	/**
+	 * 定位捕获失败
+	 */
+	[1505026, 'location fail: request error'],
+	
+]);
+
+
+export function getErrcode(errCode : number) : LocationErrorCode {
+	const res = UniErrors[errCode];
+	return res == null ? 1505021 : errCode;
+}
+
+
+export class GetLocationFailImpl extends UniError implements IGetLocationFail {
+	constructor(errCode : LocationErrorCode) {
+		super();
+		this.errSubject = UniErrorSubject;
+		this.errCode = errCode;
+		this.errMsg = UniErrors[errCode] ?? "";
+	}
+}
+
+

@@ -1,4 +1,7 @@
 import { UTSiOS } from "DCloudUTSFoundation";
+import { Bundle, FileManager } from 'Foundation';
+import { } from 'CommonCrypto';
+import { UnsafeBufferPointer, UnsafeRawBufferPointer } from 'Swift';
 
 export class AppBaseInfoDeviceUtil {
 
@@ -71,4 +74,50 @@ export class AppBaseInfoDeviceUtil {
 		return UTSiOS.getInnerVersion();
 	}
 
+	public static getBundleId() : string {
+		return Bundle.main.bundleIdentifier!
+	}
+
+	public static getSignature() : string {
+		let bundleId = AppBaseInfoDeviceUtil.getBundleId()
+		const embeddedPath = Bundle.main.path(forResource = "embedded", ofType = "mobileprovision")
+		if (embeddedPath != null) {
+			if (FileManager.default.fileExists(atPath = embeddedPath!)) {
+				const embeddedProvisioning : string | null = UTSiOS.try(new String(contentsOfFile = embeddedPath!, encoding = String.Encoding.ascii), "?")
+				const embeddedProvisioningLines = embeddedProvisioning?.split("\n")
+				let target = ""
+				embeddedProvisioningLines?.forEach((line : string, index : number) => {
+					if (line.indexOf("application-identifier") != -1) {
+						if (index + 1 < embeddedProvisioningLines!.length) {
+							target = embeddedProvisioningLines![index + 1]
+						}
+					}
+				})
+				const leftStr = "<string>"
+				const rightStr = "</string>"
+				if (target != "") {
+					const start = target.indexOf(leftStr) + leftStr.length;
+					const end = target.indexOf(rightStr)
+					const fullIdentifier = target.slice(start, end)
+					const idStart = fullIdentifier.indexOf(".") + 1
+					const id = fullIdentifier.slice(idStart)
+					if(id.length > 0){
+						bundleId = id
+					}
+				}
+			}
+		}
+		
+		const strData = bundleId.data(using = String.Encoding.utf8)!
+		let digest = new Array<UInt8>(repeating = 0, count = new Int(CC_MD5_DIGEST_LENGTH))
+		strData.withUnsafeBytes((body : UnsafeRawBufferPointer) => {
+			CC_MD5(body.baseAddress, new UInt32(strData.count), UTSiOS.getPointer(digest))
+		})
+		let md5String = ""
+		digest.forEach((byte : UInt8) => {
+			md5String += new String(format = "%02x", new UInt8(byte))
+		})
+
+		return md5String
+	}
 }

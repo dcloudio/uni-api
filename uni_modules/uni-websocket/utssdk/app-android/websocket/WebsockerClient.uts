@@ -1,6 +1,6 @@
 import { WebSocketManagerListener } from "./WebSocketManager";
 import { ConnectSocketOptions, SendSocketMessageOptions, CloseSocketOptions, GeneralCallbackResult } from "../../interface";
-import { ConnectSocketFailImpl } from "../../unierror.uts";
+import { ConnectSocketFailImpl, SendSocketMessageFailImpl } from "../../unierror.uts";
 import OkHttpClient from 'okhttp3.OkHttpClient';
 import TimeUnit from 'java.util.concurrent.TimeUnit';
 import ConnectionPool from 'okhttp3.ConnectionPool';
@@ -10,7 +10,6 @@ import WebSocket from 'okhttp3.WebSocket';
 import Response from 'okhttp3.Response';
 import Okio from 'okio.Okio';
 import ByteString from 'okio.ByteString';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import Base64 from 'android.util.Base64';
 import JSONObject from 'com.alibaba.fastjson.JSONObject';
 import Handler from 'android.os.Handler';
@@ -53,25 +52,31 @@ export class WebsockerClient {
 		const fail = options.fail;
 		const complete = options.complete;
 		if (this.websocketDelegate.websocket == null) {
-			let result : GeneralCallbackResult = {
-				errMsg: "sendSocketMessage:fail WebSocket is not connected"
-			}
+			let result = new SendSocketMessageFailImpl(10002);
 			fail?.(result);
 			complete?.(result);
 			return
 		}
 
 		try {
-			this.websocketDelegate.websocket?.send(options.data as string);
+			const sendResult = this.websocketDelegate.websocket?.send(options.data as string);
+			if(sendResult != null && !sendResult){
+				let result = new SendSocketMessageFailImpl(10001);
+				fail?.(result);
+				complete?.(result);
+				this.listener?.onError(this, "The queue memory exceeds 16 MiB and the connection will be closed");
+				return
+			}
+			
 			let result : GeneralCallbackResult = {
 				errMsg: "sendSocketMessage:ok"
 			}
 			success?.(result);
 			complete?.(result);
 		} catch (e : Exception) {
-			let result : GeneralCallbackResult = {
-				errMsg: e.message ?? ""
-			}
+			let result = new SendSocketMessageFailImpl(602001);
+			const utsError = new UTSError(e.message ?? "")
+			result.cause = utsError
 			fail?.(result);
 			complete?.(result);
 			this.listener?.onError(this, e.message ?? "");
@@ -175,7 +180,7 @@ class WebsocketDelegate {
 }
 
 class RunnableTask extends Runnable {
-	private callback : () => void | null;
+	private callback : (() => void) | null;
 	private looper : Looper | null = null;
 	constructor(looper : Looper | null, callback : () => void) {
 		super();

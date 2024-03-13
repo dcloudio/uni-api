@@ -1,17 +1,16 @@
 import {
-	ChooseImageOptions, ChooseImageSuccessCallback, ChooseImageCropOptions,
-	ChooseVideoOptions, ChooseVideoSuccessCallback,
-	GetVideoInfoSuccessCallback,
+	ChooseImageOptions, ChooseImageSuccess, ChooseImageCropOptions,
+	ChooseVideoOptions, ChooseVideoSuccess,
+	GetVideoInfoSuccess,
 } from "../../interface.uts"
 import {
 	UniError_ChooseImage, UniError_ChooseVideo,
-	UniErrors
+	MediaErrorImpl
 } from "../../unierror.uts"
 import { getVideoMetadata } from "./MediaUtils.uts"
-import { uniChooseImage, CODE_CAMERA_ERROR, CODE_GALLERY_ERROR, CODE_GET_IMAGE_INFO_CODE, uniChooseVideo } from "../../ChooseImageUtils.uts"
+import { uniChooseImage, uniChooseVideo } from "../../ChooseImageUtils.uts"
 import { getUniActivity } from "io.dcloud.uts.android";
 import Intent from 'android.content.Intent';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import File from 'java.io.File';
 import MediaStore from 'android.provider.MediaStore';
 import IMGEditActivity from "io.dcloud.uts.gallery.imageedit.IMGEditActivity";
@@ -27,6 +26,8 @@ import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.M
 import CompressUtil from 'io.dcloud.uts.util.CompressUtil';
 
 const GALLERY_MEDIA_PICKER_RESULT = 1004;
+
+const mediaCachePath = UTSAndroid.getAppCachePath()+"uni-media/"
 
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
@@ -46,7 +47,7 @@ export function chooseMediaImage(option : ChooseImageOptions) {
 				}
 			}, (a : boolean, b : string[]) => {
 				// 失败回调
-				let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101005, "errMsg": UniErrors[1101005]! }
+				let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
 				option.fail?.(error)
 				option.complete?.(error)
 			})
@@ -72,7 +73,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 	if (takeCameraFunction != null) {
 		UTSAndroid.offAppActivityResult(takeCameraFunction!)
 	}
-	let cameraPath = (UTSAndroid.getAppTempPath()! + "camera/" + System.currentTimeMillis() + ".jpg") // .jpg为默认配置
+	let cameraPath = (mediaCachePath + System.currentTimeMillis() + ".jpg") // .jpg为默认配置
 	try {
 		let picFile = new File(cameraPath);
 		if (!picFile.getParentFile().exists()) {
@@ -83,7 +84,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 			if (requestCode == IMAGE_CAPTURE_EDIT) {
 				UTSAndroid.offAppActivityResult(cropFunction!)
 				if (resultCode == -1) {
-					let success : ChooseImageSuccessCallback = {
+					let success : ChooseImageSuccess = {
 						"errSubject": "uni-chooseImage",
 						"tempFilePaths": ["file://" + cameraPath],
 						"errMsg": "chooseImage:ok",
@@ -92,7 +93,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 					option.success?.(success)
 					option.complete?.(success)
 				} else {
-					let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101007, "errMsg": UniErrors[1101007]! }
+					let error = new MediaErrorImpl(1101007, UniError_ChooseImage);
 					option.fail?.(error)
 					option.complete?.(error)
 				}
@@ -128,7 +129,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 								cameraPath = CompressUtil.compressImage(cameraPath, cameraPath, false, getUniActivity()!!)
 								picFile = new File(cameraPath)
 							}
-							let success : ChooseImageSuccessCallback = {
+							let success : ChooseImageSuccess = {
 								"errSubject": "uni-chooseImage",
 								"tempFilePaths": ["file://" + cameraPath],
 								"errMsg": "chooseImage:ok",
@@ -138,12 +139,12 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 							option.complete?.(success)
 						}
 					} else {
-						let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101008, "errMsg": UniErrors[1101008]! }
+						let error = new MediaErrorImpl(1101008, UniError_ChooseImage);
 						option.fail?.(error)
 						option.complete?.(error)
 					}
 				} else {
-					let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101008, "errMsg": UniErrors[1101008]! }
+					let error = new MediaErrorImpl(1101008, UniError_ChooseImage);
 					option.fail?.(error)
 					option.complete?.(error)
 				}
@@ -190,7 +191,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 				}
 			}
 			if (picPaths.length > 0) {
-				let success : ChooseImageSuccessCallback = {
+				let success : ChooseImageSuccess = {
 					"errSubject": "uni-chooseImage",
 					"tempFilePaths": picPaths,
 					"errMsg": "chooseImage:ok",
@@ -199,7 +200,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 				option.success?.(success)
 				option.complete?.(success)
 			} else {
-				let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101001, "errMsg": UniErrors[1101001]! }
+				let error = new MediaErrorImpl(1101001, UniError_ChooseImage);
 				option.fail?.(error)
 				option.complete?.(error)
 			}
@@ -228,11 +229,11 @@ export function chooseMediaVideo(options : ChooseVideoOptions) {
 			}, (a : boolean, b : string[]) => {
 				// 失败回调
 				if (index == 0) {
-					let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101005, "errMsg": UniErrors[1101005]! }
+					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
 					options.fail?.(error)
 					options.complete?.(error)
 				} else {
-					let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101005, "errMsg": UniErrors[1101005]! }
+					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
 					options.fail?.(error)
 					options.complete?.(error)
 				}
@@ -255,7 +256,7 @@ function openCameraForVideo(option : ChooseVideoOptions, compressed : boolean) {
 	if (takeVideoFunction != null) {
 		UTSAndroid.offAppActivityResult(takeVideoFunction!)
 	}
-	let cameraPath = (UTSAndroid.getAppTempPath()! + "camera/" + System.currentTimeMillis() + ".mp4") // .mp4为默认配置
+	let cameraPath = (mediaCachePath + System.currentTimeMillis() + ".mp4") // .mp4为默认配置
 	try {
 		let picFile = new File(cameraPath);
 		if (!picFile.getParentFile().exists()) {
@@ -269,15 +270,15 @@ function openCameraForVideo(option : ChooseVideoOptions, compressed : boolean) {
 						if (compressed) {
 							// cameraPath = CompressUtil.compressImage(cameraPath, cameraPath, false, getUniActivity()!!)
 							// picFile = new File(cameraPath)
-							let outPath = (UTSAndroid.getAppTempPath()! + "camera/" + System.currentTimeMillis() + ".mp4")
+							let outPath = (mediaCachePath + System.currentTimeMillis() + ".mp4")
 							MediaTranscoder.getInstance().transcodeVideo(cameraPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(2, 1.0), new MediaTranscoderListener(option, cameraPath, outPath))
 						} else {
-							var metadata : GetVideoInfoSuccessCallback | null = null
+							var metadata : GetVideoInfoSuccess | null = null
 							let result = getVideoMetadata(cameraPath)
-							if (result instanceof GetVideoInfoSuccessCallback) {
-								metadata = result as GetVideoInfoSuccessCallback
+							if (result instanceof GetVideoInfoSuccess) {
+								metadata = result as GetVideoInfoSuccess
 							}
-							let success : ChooseVideoSuccessCallback = {
+							let success : ChooseVideoSuccess = {
 								tempFilePath: "file://" + cameraPath,
 								width: metadata == null ? 0 : metadata!.width,
 								height: metadata == null ? 0 : metadata!.height,
@@ -288,12 +289,12 @@ function openCameraForVideo(option : ChooseVideoOptions, compressed : boolean) {
 							option.complete?.(success)
 						}
 					} else {
-						let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101008, "errMsg": UniErrors[1101008]! }
+						let error = new MediaErrorImpl(1101008, UniError_ChooseVideo);
 						option.fail?.(error)
 						option.complete?.(error)
 					}
 				} else {
-					let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101008, "errMsg": UniErrors[1101008]! }
+					let error = new MediaErrorImpl(1101008, UniError_ChooseVideo);
 					option.fail?.(error)
 					option.complete?.(error)
 				}
@@ -330,12 +331,12 @@ class MediaTranscoderListener implements Listener {
 
 	override onTranscodeCompleted() {
 		this.deleteInPath()
-		var metadata : GetVideoInfoSuccessCallback | null = null
+		var metadata : GetVideoInfoSuccess | null = null
 		let result = getVideoMetadata(this.outPath)
-		if (result instanceof GetVideoInfoSuccessCallback) {
-			metadata = result as GetVideoInfoSuccessCallback
+		if (result instanceof GetVideoInfoSuccess) {
+			metadata = result as GetVideoInfoSuccess
 		}
-		let success : ChooseVideoSuccessCallback = {
+		let success : ChooseVideoSuccess = {
 			tempFilePath: "file://" + this.outPath,
 			width: metadata == null ? 0 : metadata!.width,
 			height: metadata == null ? 0 : metadata!.height,
@@ -348,14 +349,14 @@ class MediaTranscoderListener implements Listener {
 
 	override onTranscodeCanceled() {
 		this.deleteInPath()
-		let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101004, "errMsg": UniErrors[1101004]! }
+		let error = new MediaErrorImpl(1101004, UniError_ChooseVideo);
 		this.option.fail?.(error)
 		this.option.complete?.(error)
 	}
 
 	override onTranscodeFailed(exception : Exception) {
 		this.deleteInPath()
-		let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101010, "errMsg": UniErrors[1101010]! + exception.toString() }
+		let error = new MediaErrorImpl(1101010, UniError_ChooseVideo);
 		this.option.fail?.(error)
 		this.option.complete?.(error)
 	}
@@ -385,16 +386,16 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 				}
 			}
 			if (picPaths.isEmpty()) {
-				let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101001, "errMsg": UniErrors[1101001]! }
+				let error = new MediaErrorImpl(1101001, UniError_ChooseVideo);
 				option.fail?.(error)
 				option.complete?.(error)
 			} else {
-				var metadata : GetVideoInfoSuccessCallback | null = null
+				var metadata : GetVideoInfoSuccess | null = null
 				let result = getVideoMetadata(picPaths)
-				if (result instanceof GetVideoInfoSuccessCallback) {
-					metadata = result as GetVideoInfoSuccessCallback
+				if (result instanceof GetVideoInfoSuccess) {
+					metadata = result as GetVideoInfoSuccess
 				}
-				let success : ChooseVideoSuccessCallback = {
+				let success : ChooseVideoSuccess = {
 					tempFilePath: "file://" + picPaths,
 					width: metadata == null ? 0 : metadata!.width,
 					height: metadata == null ? 0 : metadata!.height,
@@ -410,7 +411,7 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 	openGalleryActivity(count, type, compressed, null, null);
 }
 
-function openGalleryActivity(count : number, type : number, compressed : boolean, sizeType : (string[]) | null, crop : ChooseImageCropOptions | null) {
+function openGalleryActivity(count : number, type : number, compressed : boolean, sizeType ?: (string[]) | null, crop ?: ChooseImageCropOptions | null) {
 	let selected : Array<string> = [];// 已选中的图片
 	let maximum = -1;
 	let editable = true; // 是否可编辑，对应editable
@@ -429,7 +430,7 @@ function openGalleryActivity(count : number, type : number, compressed : boolean
 	if (sizeType != null) {
 		albumIntent.putExtra(/* PickerConfig.SIZE_TYPE */"size_type", JSON.stringify(sizeType!))
 	}
-	albumIntent.putExtra(/* DOC_PATH = */"doc_path", UTSAndroid.getAppTempPath()! + "gallery/")
+	albumIntent.putExtra(/* DOC_PATH = */"doc_path", mediaCachePath)
 	albumIntent.putExtra(/* IMAGE_EDITABLE = */"image_editable", true);
 	if (crop != null && crop!.height != null && crop!.width != null && crop!.height! > 0 && crop!.width > 0) {
 		albumIntent.putExtra(/* IMAGE_CROP = */"image_crop", JSON.stringify(crop))

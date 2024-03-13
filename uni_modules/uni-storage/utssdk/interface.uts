@@ -244,22 +244,26 @@ export type ClearStorageSync = () => void
 export interface Uni {
   /**
    * uni.setStorage函数定义
-   * 将数据存储在本地storage存储中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口。
-   *
-   * @param {SetStorageOptions} options
+   * 将数据存储在本地storage存储中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口。  
+   * 
+   * @param {SetStorageOptions} options 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#setstorage
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -269,22 +273,26 @@ export interface Uni {
   /**
    * uni.setStorageSync函数定义
    * 将 data 存储在本地storage存储中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
-   *
+   * 
    * @param {string} key  本地storage存储中的指定的 key
    * @param {any} data  需要存储的内容，只支持原生类型、及能够通过 JSON.stringify 序列化的对象
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#setstoragesync
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -294,21 +302,25 @@ export interface Uni {
   /**
    * uni.getStorage函数定义
    * 从本地存储中异步获取指定 key 对应的内容。
-   *
-   * @param {GetStorageOptions} options
+   * 
+   * @param {GetStorageOptions} options 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#getstorage
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -318,21 +330,25 @@ export interface Uni {
   /**
    * uni.getStorageSync函数定义
    * 从本地存储中同步获取指定 key 对应的内容。
-   *
+   * 
    * @param {string} key  本地存储中的指定的 key
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#getstoragesync
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -342,21 +358,25 @@ export interface Uni {
   /**
    * uni.getStorageInfo函数定义
    * 异步获取当前 storage 的相关信息。
-   *
-   * @param {GetStorageInfoOptions} options
+   * 
+   * @param {GetStorageInfoOptions} options 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#getstorageinfo
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -366,22 +386,26 @@ export interface Uni {
   /**
    * uni.getStorageInfoSync函数定义
    * 同步获取当前 storage 的相关信息。
-   *
-   *
+   * 
+   * 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#getstorageinfosync
-   *
+   * 
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -391,23 +415,27 @@ export interface Uni {
   /**
    * uni.removeStorage函数定义
    * 从本地存储中异步移除指定 key。
-   *
-   * @param {RemoveStorageOptions} options
-   *
+   * 
+   * @param {RemoveStorageOptions} options 
+   * 
    * @tutorial hhttps://uniapp.dcloud.net.cn/api/storage/storage.html#removestorage
-   *
+   * 
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -417,23 +445,27 @@ export interface Uni {
   /**
    * uni.removeStorageSync函数定义
    * 从本地存储中同步移除指定 key。
-   *
+   * 
    * @param {string} key  本地存储中的指定的 key
-   *
+   * 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#removestoragesync
-   *
+   * 
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -443,21 +475,25 @@ export interface Uni {
   /**
    * uni.clearStorage函数定义
    * 清除本地数据存储。
-   *
+   * 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#clearstorage
-   *
+   * 
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
+   *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -467,21 +503,25 @@ export interface Uni {
   /**
    * uni.clearStorageSync函数定义
    * 清除本地数据存储。
-   *
+   * 
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#clearstoragesync
-   *
+   * 
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
-   *            "unixVer": "x"
-   *   	  }
+   *            "unixVer": "3.9.0"
+   *   	    }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3

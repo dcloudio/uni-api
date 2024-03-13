@@ -1,4 +1,3 @@
-// import Context from 'android.content.Context';
 import LayoutInflater from 'android.view.LayoutInflater';
 import R from 'io.dcloud.uts.prompt.R';
 import ViewGroup from 'android.view.ViewGroup';
@@ -20,7 +19,6 @@ import BitmapFactory from 'android.graphics.BitmapFactory';
 import bool from 'android.R.bool';
 import Bitmap from 'android.graphics.Bitmap';
 import ImageView from 'android.widget.ImageView';
-import { UTSAndroid } from "io.dcloud.uts";
 import FileInputStream from 'java.io.FileInputStream';
 import File from 'java.io.File';
 import ByteArrayOutputStream from 'java.io.ByteArrayOutputStream';
@@ -28,7 +26,8 @@ import InputStream from 'java.io.InputStream';
 import array from 'android.R.array';
 import Dialog from 'android.app.Dialog';
 
-export class WaitingView extends Dialog{
+
+export class WaitingView{
 
 	private context?: Activity
 	private style: JSONObject
@@ -58,18 +57,23 @@ export class WaitingView extends Dialog{
 	private loadingHeight = 0
 	private LoadingIcon: string = ""
 	private mBitmap: Bitmap | null = null;
+	
+	
+	private mpopWindow?: PopupWindow = null
+	
+	private currentHandler: Handler
+	
+		//{"back":"transmit","height":"112px","loading":{"display":"block","height":"55px","icon":"__uniapperror.png","jSONArray":false},"padding":"10px","size":"16px","width":"140px"}
 
 
 	constructor(context?: Activity, style: UTSJSONObject) {
-		
-		super(context!,R.style.loadingDialog);
 		
 		this.context = context;
 		this.style = style.toJSONObject() as JSONObject
 		this.screenWidth = context?.getResources()?.getDisplayMetrics()!.widthPixels
 		this.ScreenHeight = context?.getResources()?.getDisplayMetrics()!.heightPixels
 		this.density = context?.getResources()?.getDisplayMetrics()!.density
-		this.waitingView = LayoutInflater.from(context).inflate(R.layout.dcloud_loadingview, null, false) as ViewGroup
+		this.waitingView = LayoutInflater.from(context).inflate(R.layout.uni_prompt_loadingview, null, false) as ViewGroup
 		this.waitingRootView = this.waitingView.findViewById<LinearLayout>(R.id.dcloud_pd_root)
 		this.mProgressBar = this.waitingView.findViewById<ProgressBar>(R.id.dcloud_pb_loading)
 		this.textView = this.waitingView.findViewById<TextView>(R.id.dcloud_tv_loading)
@@ -85,10 +89,10 @@ export class WaitingView extends Dialog{
 		llp.height = -2
 		this.waitingRootView.setLayoutParams(llp)
 
+		this.currentHandler = new Handler(Looper.getMainLooper())
 		this.initView()
 		this.makeBitmap()
 		
-		setContentView(waitingView)
 	}
 
 	handlerArguments() {
@@ -139,7 +143,7 @@ export class WaitingView extends Dialog{
 			this.waitingRootView.setPadding((10 * this.density).toInt(), (20 * this.density).toInt(), (10 * this.density).toInt(), (20 * this.density).toInt())
 		}
 
-		let drawable = this.context?.getResources()!!.getDrawable(R.drawable.uts_dcloud_circle_white_progress)
+		let drawable = this.context?.getResources()!!.getDrawable(R.drawable.uni_prompt_circle_white_progress)
 		if (this.loadingHeight > 0) {
 			this.mProgressBar.setLayoutParams(new LinearLayout.LayoutParams((this.loadingHeight * this.density).toInt(), (this.loadingHeight * this.density).toInt()))
 		} else {
@@ -153,20 +157,6 @@ export class WaitingView extends Dialog{
 	}
 
 
-	override onTouchEvent(ev: MotionEvent): Boolean{
-		if(this.mask){
-			/**
-			 * 明确说明了要遮罩 拦截
-			 */
-			return super.onTouchEvent(ev)
-		}
-		 
-		let event=MotionEvent.obtain(ev.downTime, ev.eventTime, ev.action,
-			ev.rawX, ev.rawY,
-			ev.pressure, ev.size, ev.metaState, ev.xPrecision, ev.yPrecision, ev.deviceId, ev.edgeFlags)
-
-		return passThrough(event)
-	}
 	/**
 	 * 决定是否要透传点击事件
 	 */
@@ -179,12 +169,27 @@ export class WaitingView extends Dialog{
 	
 	
 	showWaiting() {
-		this.setCanceledOnTouchOutside(false)
-		this.show()
+		if(this.context != null && !this.context!.isFinishing()){
+			let width = -2;
+			let height = -2
+			if (Build.VERSION.SDK_INT >= 23 && this.mask) {
+				this.mask = false
+				width = -1
+				height = -1
+			}
+			let mpop = new PopupWindow(this.waitingView, width.toInt(), height.toInt(), this.mask)
+			this.mpopWindow = mpop
+			mpop.showAtLocation((this.context?.findViewById<ViewGroup>(android.R.id.content))?.getChildAt(0), Gravity.CENTER, 0, 0)
+			mpop.setOutsideTouchable(true)
+			mpop.setOnDismissListener(new WaitingDismissListener())
+			mpop.setTouchInterceptor(new TouchInterceptorListener(this.mask))
+		}
 	}
 
 	close() {
-		this.dismiss()
+		if (this.mpopWindow != null && (this.mpopWindow as PopupWindow).isShowing()) {
+			this.currentHandler.post(new MainThreadRunnable((this.mpopWindow as PopupWindow)))
+		}
 		if (this.mBitmap != null) {
 			this.mBitmap = null;
 		}
@@ -195,9 +200,9 @@ export class WaitingView extends Dialog{
 			// let mBitmap: Bitmap | null = null;
 			let imageBytes: ByteArray | null = null
 			if (this.LoadingIcon == "successIcon") {
-				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uniappsuccess_icon.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/toast_success.png"))
 			} else if (this.LoadingIcon == "errorIcon") {
-				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uniapperror_icon.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/toast_error.png"))
 			} else if (this.LoadingIcon.length > 0) {
 				let path: string = ""
 				if (this.LoadingIcon.startsWith("file://")) {

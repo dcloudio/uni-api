@@ -1,5 +1,4 @@
 import { GetAppAuthorizeSetting, GetAppAuthorizeSettingResult } from "../interface.uts";
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import PackageManager from 'android.content.pm.PackageManager';
 import Manifest from 'android.Manifest';
 import NotificationManagerCompat from 'androidx.core.app.NotificationManagerCompat';

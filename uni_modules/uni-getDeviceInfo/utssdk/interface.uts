@@ -19,52 +19,33 @@ export type GetDeviceInfoResult = {
    */
   deviceId?: string,
   /**
-   * 设备型号
+   * 设备型号	
    */
   model?: string,
   /**
-   * 设备型号
+   * 设备型号	
    */
   deviceModel?: string,
   /**
-   * 设备类型phone、pad、pc
+   * 设备类型phone、pad、pc	
    */
   deviceType?: string,
   /**
-   * 设备方向 竖屏 portrait、横屏 landscape
+   * 设备方向 竖屏 portrait、横屏 landscape	
    */
   deviceOrientation?: string,
   /**
-   * 设备像素比
+   * 设备像素比	
    */
   devicePixelRatio?: string,
   /**
-   * 操作系统及版本
+   * 操作系统及版本	
    */
   system?: string,
   /**
-   * 客户端平台
+   * 客户端平台	
    */
   platform?: string,
-  /**
-   * oaid标识 Android专有
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
-   * }
-   */
-  oaid?: string,
   /**
    * 是否root
    */
@@ -75,45 +56,24 @@ export type GetDeviceInfoResult = {
   isSimulator?: boolean,
   /**
    * adb是否开启
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "√"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   isUSBDebugging?: boolean,
-  /**
-   * idfa标识 iOS专有
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
-   * }
-   */
-  idfa?: string,
-  /**
-   * 应用平台
-   */
 }
 
 
@@ -126,26 +86,31 @@ export type GetDeviceInfo = (options?: GetDeviceInfoOptions | null) => GetDevice
 export interface Uni {
   /**
     * GetDeviceInfo(Object object)
-    * @description
+    * @description 
     * 获取设备信息
     * @param {GetDeviceInfoOptions} options [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getDeviceInfo.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
-    * @example
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
+  * @example
      ```typescript
       uni.getDeviceInfo({
         filter:[]

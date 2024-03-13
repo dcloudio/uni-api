@@ -1,0 +1,6 @@
+
+import { GetAccessibilityInfo } from '../interface.uts'
+
+export const getAccessibilityInfo : GetAccessibilityInfo = () : UTSJSONObject => {
+	return {};
+}

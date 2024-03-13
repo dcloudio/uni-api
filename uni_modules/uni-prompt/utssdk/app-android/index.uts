@@ -7,7 +7,6 @@ import * as ToastModule from "./showToast.uts"
 import * as ModalModule from "./showModal.uts"
 import * as ActionSheetModule from "./showActionSheet.uts"
 
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 
 export const showToast : ShowToast = function (options : ShowToastOptions) {
 	

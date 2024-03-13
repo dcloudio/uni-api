@@ -10,7 +10,6 @@ import File from 'java.io.File';
 import { EmulatorCheckUtil } from './EmulatorCheckUtil.uts'
 import TextUtils from 'android.text.TextUtils';
 
-import { UTSAndroid as Device } from "io.dcloud.uts";
 import BufferedReader from 'java.io.BufferedReader';
 import InputStreamReader from 'java.io.InputStreamReader';
 import Exception from 'java.lang.Exception';
@@ -180,18 +179,18 @@ export class DeviceUtil {
 
 
 	public static getDeviceID(context: Context): string {
-		return Device.getDeviceID(context);
+		return UTSAndroid.getDeviceID(context);
 	}
 
 
 	public static getOsLanguage(context: Context): string {
-		return Device.getLanguageInfo(context)["osLanguage"].toString();
+		return UTSAndroid.getLanguageInfo(context)["osLanguage"].toString();
 	}
 
 	public static getOsLanguageNormal(context: Context): string {
 		const LOCALE_ZH_HANS = 'zh-Hans'
 		const LOCALE_ZH_HANT = 'zh-Hant'
-		let locale = Device.getLanguageInfo(context)["appLanguage"].toString();
+		let locale = UTSAndroid.getLanguageInfo(context)["appLanguage"].toString();
 		if (locale.indexOf('zh') === 0) {
 			if (locale.indexOf('-hans') > -1) {
 				return LOCALE_ZH_HANS;
@@ -210,11 +209,11 @@ export class DeviceUtil {
 	}
 
 	public static getAppInnerVersion(): string {
-		return Device.getInnerVersion();
+		return UTSAndroid.getInnerVersion();
 	}
 
 	public static getOaid(): string {
-		return Device.getOAID();
+		return UTSAndroid.getOAID();
 	}
 
 

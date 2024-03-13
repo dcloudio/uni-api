@@ -27,10 +27,6 @@ export const UniErrors : Map<RequestErrorCode, string> = new Map([
 	 */
 	[100002, 'error message invalid json'],
 	/**
-	 * 未知的网络错误
-	 */
-	[600000, 'unknown network error'],
-	/**
 	 * 网络中断
 	 */
 	[600003, 'network interrupted error'],
@@ -38,11 +34,6 @@ export const UniErrors : Map<RequestErrorCode, string> = new Map([
 	 * URL 格式不合法
 	 */
 	[600009, 'invalid URL'],
-	/**
-	 * 请求的 data 序列化失败
-	 */
-	[600010, 'invalid request data'],
-
 	/**
 	 * request系统错误
 	 */
@@ -57,6 +48,9 @@ export function getErrcode(errCode : number) : RequestErrorCode {
 
 
 export class RequestFailImpl extends UniError implements RequestFail {
+// #ifdef APP-ANDROID
+	override errCode: RequestErrorCode
+// #endif
 	constructor(errCode : RequestErrorCode) {
 		super();
 		this.errSubject = UniErrorSubject;
@@ -67,6 +61,9 @@ export class RequestFailImpl extends UniError implements RequestFail {
 
 
 export class UploadFileFailImpl extends UniError implements UploadFileFail {
+// #ifdef APP-ANDROID
+	override errCode: RequestErrorCode
+// #endif
 	constructor(errCode : RequestErrorCode) {
 		super();
 		this.errSubject = "uni-uploadFile";
@@ -77,6 +74,9 @@ export class UploadFileFailImpl extends UniError implements UploadFileFail {
 
 
 export class DownloadFileFailImpl extends UniError implements DownloadFileFail {
+// #ifdef APP-ANDROID
+	override errCode: RequestErrorCode
+// #endif
 	constructor(errCode : RequestErrorCode) {
 		super();
 		this.errSubject = "uni-downloadFile";
