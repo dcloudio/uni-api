@@ -40,21 +40,21 @@ export type RequestOptions<T> = {
   dataType?: string | null,
   /**
    * 设置响应的数据类型。
-   * 
+   *
    * @deprecated 不支持
    * @autodoc false
    */
   responseType?: string | null,
   /**
    * 验证 ssl 证书
-   * 
+   *
    * @deprecated 不支持
    * @autodoc false
    */
   sslVerify?: boolean | null,
   /**
    * 跨域请求时是否携带凭证（cookies）
-   * 
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -69,7 +69,7 @@ export type RequestOptions<T> = {
    *        }
    *    }
    * }
-   * 
+   *
    */
   withCredentials?: boolean | null,
   /**
@@ -121,7 +121,7 @@ export type RequestSuccess<T> = {
  * - PUT  PUT方法用有效载荷请求替换目标资源的所有当前表示。
  * - PATCH  PATCH方法用于对资源应用部分修改。
  * - DELETE  DELETE方法删除指定的资源。
- * - HEAD  HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。 
+ * - HEAD  HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。
  * - OPTIONS  OPTIONS 方法用于描述目标资源的通信选项。
  */
 export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
@@ -153,9 +153,9 @@ export type RequestCompleteCallback = (option: any) => void;
 export interface RequestTask {
   /**
     * abort()
-    * @description 
+    * @description
     * 中断网络请求。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#request
     * @uniPlatform {
@@ -168,7 +168,7 @@ export interface RequestTask {
     *        "ios": {
     *            "osVer": "9.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "x"
     *        }
     *    }
     * }
@@ -307,9 +307,9 @@ export type UploadFileProgressUpdateCallback = (result: OnProgressUpdateResult) 
 export interface UploadTask {
   /**
     * abort()
-    * @description 
+    * @description
     * 中断上传任务。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
     * @uniPlatform {
@@ -338,7 +338,7 @@ export interface UploadTask {
   abort(): void,
   /**
     * onProgressUpdate()
-    * @description 
+    * @description
     * 监听上传进度变化。
     * @param {UploadFileProgressUpdateCallback}  callback
     * @return {void}
@@ -450,9 +450,9 @@ export type DownloadFileProgressUpdateCallback = (result: OnProgressDownloadResu
 export interface DownloadTask {
   /**
     * abort()
-    * @description 
+    * @description
     * 中断下载任务。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
     * @uniPlatform {
@@ -481,7 +481,7 @@ export interface DownloadTask {
   abort(): void,
   /**
     * onProgressUpdate()
-    * @description 
+    * @description
     * 监听下载进度变化。
     * @param {DownloadFileProgressUpdateCallback}  callback
     * @return {void}
@@ -516,10 +516,10 @@ export interface DownloadTask {
 export interface Uni {
   /**
     * Request()
-    * @description 
+    * @description
     * 发起网络请求。
     * @param {RequestOptions} options
-    * @return {RequestTask | null} 
+    * @return {RequestTask | null}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html
     * @uniPlatform {
     *    "app": {
@@ -531,7 +531,7 @@ export interface Uni {
     *        "ios": {
     *            "osVer": "9.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "x"
     *        }
     *    }
     * }
@@ -567,7 +567,7 @@ export interface Uni {
   request<T>(param: RequestOptions<T>): RequestTask | null;
   /**
     * UploadFile()
-    * @description 
+    * @description
     * 将本地资源上传到开发者服务器。
     * @param {UploadFileOptions} options
     * @return {UploadTask | null}
@@ -604,7 +604,7 @@ export interface Uni {
   uploadFile(options: UploadFileOptions): UploadTask | null;
   /**
     * DownloadFile()
-    * @description 
+    * @description
     * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
     * @param {DownloadFileOptions} options
     * @return {DownloadTask | null}

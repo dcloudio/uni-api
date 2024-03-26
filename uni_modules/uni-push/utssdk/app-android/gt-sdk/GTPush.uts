@@ -1,0 +1,144 @@
+import Context from "android.content.Context";
+import GTPlugin from "com.getui.sdk.GTPlugin";
+import IPushAction from "com.getui.sdk.IPushAction";
+import GTCmdMessage from "com.igexin.sdk.message.GTCmdMessage";
+import GTNotificationMessage from "com.igexin.sdk.message.GTNotificationMessage";
+import GTTransmitMessage from "com.igexin.sdk.message.GTTransmitMessage";
+import IUserLoggerInterface from "com.igexin.sdk.IUserLoggerInterface";
+
+export function gtInit(context : Context) : void {
+	GTPlugin.initialize(context);
+}
+
+export function getClientId(context : Context) : string {
+	return GTPlugin.getClientId(context);
+}
+
+export function setPushAction(action : UserPushAction) : void {
+	GTPlugin.setPushAction(action);
+}
+
+
+export type GTPushActionOptions = {
+
+	onReceiveServicePid ?: (res : number) => void
+
+	/**
+	 * 接收clientId（cid）
+	 */
+	onReceiveClientId ?: (res : string) => void
+
+	/**
+	* 此方法用于接收和处理透传消息。透传消息个推只传递数据，不做任何处理，客户端接收到透传消息后需要自己去做后续动作处理，如通知栏展示、弹框等。
+	* 如果开发者在客户端将透传消息创建了通知栏展示，建议将展示和点击回执上报给个推。
+	*/
+	onReceiveMessageData ?: (res : string) => void
+
+	/**
+	 * cid 离线上线通知
+	 */
+	onReceiveOnlineState ?: (res : boolean) => void
+
+	/**
+	 * 各种事件处理回执
+	 */
+	onReceiveCommandResult ?: (res : GTCmdMessage) => void
+
+	/**
+	 * 通知点击，只有个推通道下发的通知会回调此方法
+	 */
+	onNotificationMessageClicked ?: (res : string) => void
+
+	/**
+	 * 通知到达，只有个推通道下发的通知会回调此方法
+	 */
+	onNotificationMessageArrived ?: (res : GTNotificationMessage) => void
+}
+
+
+
+export class UserPushAction implements IPushAction {
+
+	constructor(
+		private options : GTPushActionOptions) {
+	}
+
+	override onReceiveServicePid(ctx : Context, pid : Int) {
+		this.options.onReceiveServicePid?.(pid)
+	}
+
+	/**
+	 * 接收clientId（cid）
+	 */
+	override onReceiveClientId(ctx : Context, cid : string) {
+		this.options.onReceiveClientId?.(cid)
+	}
+
+	/**
+	* 此方法用于接收和处理透传消息。透传消息个推只传递数据，不做任何处理，客户端接收到透传消息后需要自己去做后续动作处理，如通知栏展示、弹框等。
+	* 如果开发者在客户端将透传消息创建了通知栏展示，建议将展示和点击回执上报给个推。
+	* 
+	* class GTTransmitMessage {
+	* 	private String taskId;
+	* 	private String messageId;
+	* 	private String payloadId;
+	* 	private byte[] payload;
+	* }
+	*/
+	override onReceiveMessageData(ctx : Context, message : GTTransmitMessage) {
+		this.options.onReceiveMessageData?.(new String(message.getPayload()))
+	}
+
+	/**
+	 * cid 离线/上线通知
+	 */
+	override onReceiveOnlineState(ctx : Context, state : boolean) {
+		this.options.onReceiveOnlineState?.(state)
+	}
+
+	/**
+	 * 各种事件处理回执
+	 */
+	override onReceiveCommandResult(ctx : Context, message : GTCmdMessage) {
+		this.options.onReceiveCommandResult?.(message)
+	}
+
+	/**
+	 * 通知点击，只有个推通道下发的通知会回调此方法
+	 */
+	override onNotificationMessageClicked(ctx : Context, message : GTNotificationMessage) {
+		const params = {
+			"title": message.getTitle(),
+			"content": message.getContent()
+		};
+		this.options.onNotificationMessageClicked?.(JSON.stringify(params))
+	}
+
+	/**
+	 * 通知到达，只有个推通道下发的通知会回调此方法
+	 */
+	override onNotificationMessageArrived(ctx : Context, message : GTNotificationMessage) {
+		this.options.onNotificationMessageArrived?.(message)
+	}
+}
+
+
+class UserLoggerInterface implements IUserLoggerInterface {
+	constructor(private callback : (log : string) => void) {
+	}
+
+	override log(s : string) {
+		this.callback?.(s)
+	}
+}
+
+/**
+ * 个推推送sdk调试日志信息
+ * setDebugLogger 接口仅限调试的时候使用，切勿发布到线上版本，重复调用仅以第一次为准。
+ */
+export function setDebugLogger(callback : (log : string) => void) {
+	const ctx = UTSAndroid.getAppContext();
+	if (ctx != null) {
+		GTPlugin.setDebugLogger(ctx, new UserLoggerInterface(callback))
+	}
+}

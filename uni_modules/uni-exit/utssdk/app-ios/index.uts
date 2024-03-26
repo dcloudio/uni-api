@@ -1,4 +1,4 @@
-import { ExitOptions, ExitFailCallback, ExitCompleteCallback, Exit} from "../interface.uts"
+import { ExitOptions, Exit} from "../interface.uts"
 import { ExitFailImpl } from "../unierror.uts"
 
 

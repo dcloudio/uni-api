@@ -21,6 +21,7 @@
 		<button @tap="testoffMemoryWarning">关闭内存不足告警监听</button>
 		<button @tap="getLocationTest" style="width: 100%;">获取定位</button>
 		<button type="default" @click="handleInstallApk">安装apk</button>
+    <button type="default" @click="handleShowNotificationProgress">显示通知栏下载进度</button>
 
 	</view>
 </template>
@@ -29,6 +30,12 @@
 	import {
 		installApk
 	} from "@/uni_modules/uni-installApk"
+
+
+	let pre = 0
+	let speed = 1
+	let preTime = 0
+	let isBegin = false
 
 	export default {
 		data() {
@@ -291,6 +298,63 @@
 					}
 				})
 			},
+      handleShowNotificationProgress(){
+        const task = uni.downloadFile({
+        	url: "http://192.168.213.108:8080/test.apk",
+        	success(e) {
+        		console.log("success111 :", e);
+        		uni.finishNotificationProgress({
+        			title: "安装升级包",
+        			content: "下载完成。",
+        			callback: () => {
+        				uni.installApk({
+        					filePath: e.tempFilePath,
+        					complete(res) {
+        						console.log(res);
+        					}
+        				})
+        			}
+        		})
+        	},
+        	fail(e) {
+        		console.log("fail : ", e);
+        	}
+        });
+
+        task.onProgressUpdate((res) => {
+        	const sd = this.calculateSpeed(res.totalBytesWritten)
+        	const remian = ((res.totalBytesExpectedToWrite - res.totalBytesWritten) / sd).toFixed(0)
+        	const remianStr = sd != 1 ? "剩余时间 " + remian + "秒" : "正在计算"
+
+        	uni.createNotificationProgress({
+        		title: "正在下载升级包",
+        		content: remianStr,
+        		progress: res.progress
+        	})
+
+        	if (res.progress == 100) {
+        		pre = 0
+        		speed = 1
+        		preTime = Date.now()
+        		isBegin = false
+        	}
+        })
+      },
+      calculateSpeed(current) {
+      	//简略的计算下载速度
+      	if (!isBegin) {
+      		preTime = Date.now()
+      		isBegin = true
+      		return speed
+      	}
+      	const currentTime = Date.now()
+      	if (currentTime - preTime > 1000) {
+      		speed = current - pre
+      		pre = current
+      		preTime = currentTime
+      	}
+      	return speed
+      }
 		}
 	}
 </script>
