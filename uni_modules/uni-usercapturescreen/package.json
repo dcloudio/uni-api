@@ -33,9 +33,16 @@
 	"uni_modules": {
 		"uni-ext-api":{
 			"uni": {
-				"onUserCaptureScreen": "onUserCaptureScreen",
-				"offUserCaptureScreen": "offUserCaptureScreen",
-				"setUserCaptureScreen": "setUserCaptureScreen"
+				"onUserCaptureScreen": {
+          "web": false
+        },
+				"offUserCaptureScreen": {
+          "web": false
+        },
+				"setUserCaptureScreen": {
+          "web": false,
+          "mp-weixin": false
+        }
 			}
 		},
 		"dependencies": [],
@@ -47,7 +54,7 @@
 			},
 			"client": {
 				"Vue": {
-					"vue2": "n",
+					"vue2": "y",
 					"vue3": "y"
 				},
 				"App": {

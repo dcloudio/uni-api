@@ -1,0 +1,529 @@
+export interface Uni {
+  /**
+    * ConnectSocket()
+    * @description 
+    * 创建一个 WebSocket 连接。
+    * @param {ConnectSocketOptions} options
+    * @return {SocketTask}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+        uni.connectSocket({
+            url: "ws://192.168.12.106:8080/ws",
+            complete: (e) => {
+              console.log("socket :", e);
+            }
+          });
+     ```
+    */
+  connectSocket(options: ConnectSocketOptions): SocketTask;
+  /**
+    * OnSocketOpen()
+    * @description 
+    * 监听WebSocket连接打开事件。
+    * @param {OnSocketOpenCallback} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.onSocketOpen(function (res) {
+        console.log('WebSocket连接已打开！');
+      });
+     ```
+    */
+  onSocketOpen(options: OnSocketOpenCallback): void;
+
+  /**
+    * OnSocketError()
+    * @description 
+    * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
+    * @param {OnSocketErrorCallback} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.onSocketError(function (res) {
+        console.log('WebSocket连接打开失败，请检查！');
+      });
+     ```
+    */
+  onSocketError(callback: OnSocketErrorCallback): void;
+
+  /**
+    * SendSocketMessage()
+    * @description 
+    * 通过 WebSocket 连接发送数据，需要先 uni.connectSocket，并在 uni.onSocketOpen 回调之后才能发送。
+    * @param {SendSocketMessageOptions} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.sendSocketMessage({
+        data: msg
+      });
+     ```
+    */
+  sendSocketMessage(options: SendSocketMessageOptions): void;
+  /**
+    * OnSocketMessage()
+    * @description 
+    * 监听WebSocket接受到服务器的消息事件。
+    * @param {OnSocketMessageCallback} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.onSocketMessage(function (res) {
+        console.log('收到服务器内容：' + res.data);
+      });
+     ```
+    */
+  onSocketMessage(callback: OnSocketMessageCallback): void;
+  /**
+    * CloseSocket()
+    * @description 
+    * 关闭 WebSocket 连接。
+    * @param {CloseSocketOptions} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.closeSocket();
+     ```
+    */
+  closeSocket(options: CloseSocketOptions): void;
+  /**
+    * OnSocketClose()
+    * @description 
+    * 监听WebSocket关闭。
+    * @param {OnSocketCloseCallback} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.onSocketClose(function (res) {
+        console.log('WebSocket 已关闭！');
+      });
+     ```
+    */
+  onSocketClose(callback: OnSocketCloseCallback): void;
+}
+
+export type ConnectSocket = (options: ConnectSocketOptions) => SocketTask;
+export type ConnectSocketSuccess = {
+  errMsg: string
+};
+type ConnectSocketSuccessCallback = (result: ConnectSocketSuccess) => void;
+/**
+ * 错误码
+ * - 600009 URL格式不合法
+ */
+export type ConnectSocketErrorCode = 600009;
+
+/**
+ * 连接调用失败的错误回调参数
+ */
+export interface ConnectSocketFail extends IUniError { 
+	errCode: ConnectSocketErrorCode;
+};
+
+type ConnectSocketFailCallback = (result: ConnectSocketFail) => void;
+type ConnectSocketComplete = any;
+type ConnectSocketCompleteCallback = (result: ConnectSocketComplete) => void;
+export type ConnectSocketOptions = {
+  /**
+   * 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
+   */
+  url: string,
+  /**
+   * HTTP 请求 Header，header 中不能设置 Referer
+   * @defaultValue null
+   */
+  header: UTSJSONObject | null,
+  /**
+   * 子协议数组
+   * @defaultValue null
+   */
+  protocols: (string[]) | null,
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: ConnectSocketSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: ConnectSocketFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: ConnectSocketCompleteCallback | null
+};
+export type GeneralCallbackResult = {
+  /**
+   * 错误信息
+   */
+  errMsg: string
+};
+export type SendSocketMessageOptions = {
+  /**
+   * 需要发送的内容
+   * @type string | ArrayBuffer
+   * @type {SocketDataOptions}
+   */
+  data: any,
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: ((result: GeneralCallbackResult) => void) | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: ((result: GeneralCallbackResult) => void) | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: ((result: GeneralCallbackResult) => void) | null
+};
+export type CloseSocketOptions = {
+  /**
+   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。如果这个参数没有被指定，默认的取值是1000 （表示正常连接关闭）
+   * @defaultValue 1000
+   */
+  code?: number | null,
+  /**
+   * 一个可读的字符串，表示连接被关闭的原因。这个字符串必须是不长于123字节的UTF-8 文本（不是字符）
+   * @defaultValue ""
+   */
+  reason?: string | null,
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: ((result: GeneralCallbackResult) => void) | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: ((result: GeneralCallbackResult) => void) | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: ((result: GeneralCallbackResult) => void) | null
+};
+export type OnSocketOpenCallbackResult = {
+  /**
+   * 连接成功的 HTTP 响应 Header
+   */
+  header: any
+};
+export type OnSocketMessageCallbackResult = {
+  /**
+   * 服务器返回的消息
+   * @type {SocketDataOptions}
+   */
+  data: any
+};
+export interface SocketTask {
+  /**
+    * send()
+    * @description 
+    * 通过 WebSocket 连接发送数据
+    * @param {SendSocketMessageOptions} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.send({data:"halo"});
+     ```
+    */
+  send(options: SendSocketMessageOptions): void;
+  /**
+    * close()
+    * @description 
+    * 关闭 WebSocket 连接
+    * @param {CloseSocketOptions} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.close();
+     ```
+    */
+  close(options: CloseSocketOptions): void;
+  /**
+    * onOpen()
+    * @description 
+    * 监听 WebSocket 连接打开事件
+    * @param {OnSocketOpenCallbackResult} options
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.onOpen((res) => {})
+     ```
+    */
+  onOpen(callback: (result: OnSocketOpenCallbackResult) => void): void;
+  /**
+    * onClose()
+    * @description 
+    * 监听 WebSocket 连接关闭事件
+    * @param {(result : any) => void} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.onClose((res) => {
+      })
+     ```
+    */
+  onClose(callback: (result: any) => void): void;
+  /**
+    * onError()
+    * @description 
+    * 监听 WebSocket 错误
+    * @param {(result : GeneralCallbackResult) => void} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.onError((res) => {
+      })
+     ```
+    */
+  onError(callback: (result: GeneralCallbackResult) => void): void;
+  /**
+    * onMessage()
+    * @description 
+    * 监听 WebSocket 接受到服务器的消息事件
+    * @param {(result : OnSocketMessageCallbackResult) => void} callback
+    * @return {void}
+    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      task.onMessage((res) => {
+      })
+     ```
+    */
+  onMessage(callback: (result: OnSocketMessageCallbackResult) => void): void;
+};
+export type OnSocketOpenCallback = (result: OnSocketOpenCallbackResult) => void;
+
+export type OnSocketOpen = (options: OnSocketOpenCallback) => void;
+export type OnSocketErrorCallbackResult = {
+  /**
+   * 错误信息
+   */
+  errMsg: string
+};
+export type OnSocketErrorCallback = (result: OnSocketErrorCallbackResult) => void;
+
+export type OnSocketError = (callback: OnSocketErrorCallback) => void;
+
+export type SendSocketMessage = (options: SendSocketMessageOptions) => void;
+export type OnSocketMessageCallback = (result: OnSocketMessageCallbackResult) => void;
+
+export type OnSocketMessage = (callback: OnSocketMessageCallback) => void;
+
+export type CloseSocket = (options: CloseSocketOptions) => void;
+export type OnSocketCloseCallbackResult = {
+  /**
+   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。	
+   */
+  code: number,
+  /**
+   * 一个可读的字符串，表示连接被关闭的原因。	
+   */
+  reason: string
+};
+export type OnSocketCloseCallback = (result: OnSocketCloseCallbackResult) => void;
+
+export type OnSocketClose = (callback: OnSocketCloseCallback) => void;

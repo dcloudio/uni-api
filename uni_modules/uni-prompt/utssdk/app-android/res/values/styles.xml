@@ -1,0 +1,23 @@
+<resources>
+    <style name="DialogAnimations" />
+    <style name="DialogAnimations.utsSmileWindow">
+        <item name="android:windowEnterAnimation">@anim/uts_as_slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/uts_as_slide_out_top</item>
+    </style>
+	<style name="actionsheetDialog" parent="android:style/Theme.Dialog">
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:backgroundDimEnabled">true</item>
+	</style>
+	<style name="loadingDialog" parent="android:style/Theme.Dialog">
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFrame">@null</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:backgroundDimEnabled">false</item>
+	</style>
+		
+</resources>

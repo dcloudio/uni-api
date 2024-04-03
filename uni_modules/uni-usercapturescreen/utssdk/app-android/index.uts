@@ -9,6 +9,7 @@ import Environment from "android.os.Environment";
 import System from 'java.lang.System';
 import WindowManager from 'android.view.WindowManager';
 import { OnUserCaptureScreenCallbackResult, UserCaptureScreenCallback, OnUserCaptureScreen, OffUserCaptureScreen, SetUserCaptureScreenSuccess, SetUserCaptureScreenOptions, SetUserCaptureScreen } from "../interface.uts";
+import string from 'android.R.string';
 
 
 /**
@@ -34,9 +35,9 @@ class ScreenFileObserver extends FileObserver {
 		*/
 	private screenFile : File;
 
-	constructor(screenFile : File) {
-		super(screenFile);
-		this.screenFile = screenFile;
+	constructor(screenFileStr : string) {
+		super(screenFileStr);
+		this.screenFile = new File(screenFileStr);
 	}
 
 	override onEvent(event : Int, path : string | null) : void {
@@ -83,7 +84,7 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : Us
 	}
 	// 先结束监听 再开启监听
 	observer?.stopWatching();
-	observer = new ScreenFileObserver(directory_screenshot);
+	observer = new ScreenFileObserver(directory_screenshot.getPath());
 	observer?.startWatching();
 	
 	
@@ -91,7 +92,6 @@ export const onUserCaptureScreen : OnUserCaptureScreen = function (callback : Us
 		observer?.stopWatching()
 		observer = null
 	})
-	
 	
 }
 

@@ -1,0 +1,26 @@
+import {ConnectSocketFail ,ConnectSocketErrorCode} from "./interface.uts"
+
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-websocket';
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors : Map<ConnectSocketErrorCode, string> = new Map([
+	/**
+	 * URL 格式不合法
+	 */
+	[600009, 'invalid URL'],
+]);
+
+
+export class ConnectSocketFailImpl extends UniError implements ConnectSocketFail {
+	constructor(errCode : ConnectSocketErrorCode) {
+		super();
+		this.errSubject = UniErrorSubject;
+		this.errCode = errCode;
+		this.errMsg = UniErrors[errCode] ?? ""
+	}
+}

@@ -1,0 +1,13 @@
+import { ExitOptions, Exit} from "../interface.uts"
+import { ExitFailImpl } from "../unierror.uts"
+
+
+/**
+ * 实现uni.exit
+ * iOS平台不支持，触发错误回调
+ */
+export const exit : Exit = function (options: ExitOptions | null) {
+	let err = new ExitFailImpl(12001);
+	options?.fail?.(err)
+	options?.complete?.(err)
+}

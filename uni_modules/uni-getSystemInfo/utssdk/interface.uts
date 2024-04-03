@@ -1,0 +1,455 @@
+export interface Uni {
+  /**
+    * getSystemInfo()
+    * @description 
+    * 异步获取系统信息
+    * @param {GetSystemInfoOptions}  options
+    * @return {void}
+    * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfo
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.getSystemInfo({
+        success(e) {
+          console.log("success :",e);
+        },
+        complete(e) {
+          console.log("complete :",e);
+        }
+      })
+     ```
+    */
+  getSystemInfo(options: GetSystemInfoOptions): void;
+
+  /**
+    * getSystemInfoSync()
+    * @description 
+    * 同步获取系统信息
+    * @param {void}  
+    * @return {GetSystemInfoResult}
+    * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.getSystemInfoSync()
+     ```
+    */
+  getSystemInfoSync(): GetSystemInfoResult;
+
+  /**
+    * getWindowInfo()
+    * @description 
+    * 同步获取窗口信息
+    * @param {void}  
+    * @return {GetWindowInfoResult} result
+    * @tutorial http://uniapp.dcloud.io/api/system/getWindowInfo.html
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.getWindowInfo()
+     ```
+    */
+  getWindowInfo(): GetWindowInfoResult;
+}
+
+export type GetSystemInfo = (options: GetSystemInfoOptions) => void;
+export type GetSystemInfoSync = () => GetSystemInfoResult;
+export type GetWindowInfo = () => GetWindowInfoResult;
+export type SafeArea = {
+  /**
+   * 安全区域左上角横坐标
+   */
+  left: number,
+  /**
+   * 安全区域右下角横坐标
+   */
+  right: number,
+  /**
+   * 安全区域左上角纵坐标
+   */
+  top: number,
+  /**
+   * 安全区域右下角纵坐标
+   */
+  bottom: number,
+  /**
+   * 安全区域的宽度，单位逻辑像素
+   */
+  width: number,
+  /**
+   * 安全区域的高度，单位逻辑像素
+   */
+  height: number
+};
+export type SafeAreaInsets = {
+  /**
+   * 安全区域左侧插入位置
+   */
+  left: number,
+  /**
+   * 安全区域右侧插入位置
+   */
+  right: number,
+  /**
+   * 安全区顶部插入位置
+   */
+  top: number,
+  /**
+   * 安全区域底部插入位置
+   */
+  bottom: number
+};
+export type GetSystemInfoResult = {
+  /**
+   * 客户端基础库版本
+   */
+  SDKVersion: string,
+  /**
+   * `manifest.json` 中应用appid。
+   */
+  appId: string,
+  /**
+   * 应用设置的语言。
+   */
+  appLanguage: string,
+  /**
+   * `manifest.json` 中应用名称。
+   */
+  appName: string,
+  /**
+   * `manifest.json` 中应用版本名称。
+   */
+  appVersion: string,
+  /**
+   * `manifest.json` 中应用版本名号。
+   */
+  appVersionCode: string,
+  /**
+   * 应用资源（wgt）的版本名称。
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "4.4",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  appWgtVersion: string | null,
+  /**
+   * 手机品牌。
+   */
+  brand: string,
+  /**
+   * 浏览器名称。`App` 端是系统 webview 的名字，比如 wkwebview、chrome。小程序端为空
+   */
+  browserName: string,
+  /**
+   * 浏览器版本、webview 版本。
+   */
+  browserVersion: string,
+  /**
+   * 设备 ID
+   */
+  deviceId: string,
+  /**
+   * 设备品牌。如：`apple`、`huawei`。
+   */
+  deviceBrand: string,
+  /**
+   * 设备型号
+   */
+  deviceModel: string,
+  /**
+   * 设备类型。`phone`、`pad`、`pc`
+   */
+  deviceType: string,
+  /**
+   * 设备像素比
+   */
+  devicePixelRatio: number,
+  /**
+   * 设备方向。如：`竖屏 portrait`、`横屏 landscape`
+   * - portrait: 竖屏
+   * - landscape: 横屏
+   * @type 'portrait' | 'landscape'
+   */
+  deviceOrientation: string,
+  /**
+   * 程序设置的语言
+   */
+  language: string,
+  /**
+   * 手机型号
+   */
+  model: string,
+  /**
+   * ios、android、windows、mac、linux
+   */
+  osName: string,
+  /**
+   * 操作系统版本。如 ios 版本，andriod 版本
+   */
+  osVersion: string,
+  /**
+   * 操作系统语言
+   */
+  osLanguage: string,
+  /**
+   * 操作系统主题 light、dark。
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "4.4",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        },
+   *        "ios": {
+   *            "osVer": "9.0",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  osTheme: string | null,
+  /**
+   * 设备像素比
+   */
+  pixelRatio: number,
+  /**
+   * 客户端平台
+   */
+  platform: string,
+  /**
+   * 屏幕宽度
+   */
+  screenWidth: number,
+  /**
+   * 屏幕高度
+   */
+  screenHeight: number,
+  /**
+   * 状态栏的高度
+   */
+  statusBarHeight: number,
+  /**
+   * 操作系统版本
+   */
+  system: string,
+  /**
+   * 在竖屏正方向下的安全区域
+   */
+  safeArea: SafeArea,
+  /**
+   * 在竖屏正方向下的安全区域插入位置
+   */
+  safeAreaInsets: SafeAreaInsets,
+  /**
+   * 用户标识。小程序端为空
+   */
+  ua: string,
+  /**
+   * uni 编译器版本
+   */
+  uniCompileVersion: string,
+  /**
+   * uni-app 运行平台。如：`app`、`mp-weixin`、`web`
+   */
+  uniPlatform: string,
+  /**
+   * uni 运行时版本
+   */
+  uniRuntimeVersion: string,
+  /**
+   * uni 编译器版本号
+   */
+  uniCompileVersionCode: number,
+  /**
+   * uni 运行时版本号
+   */
+  uniRuntimeVersionCode: number,
+  /**
+   * 引擎版本号。已废弃，仅为了向下兼容保留 
+   * @deprecated 已废弃，仅为了向下兼容保留
+   */
+  version: string,
+  /**
+   * rom 名称。Android 部分机型获取不到值。iOS 恒为 `ios`
+   */
+  romName: string,
+  /**
+   * rom 版本号。Android 部分机型获取不到值。iOS 恒为 `ios 版本号`
+   */
+  romVersion: string,
+  /**
+   * 可使用窗口宽度
+   */
+  windowWidth: number,
+  /**
+   * 可使用窗口高度
+   */
+  windowHeight: number,
+  /**
+   * 可使用窗口的顶部位置
+   */
+  windowTop: number,
+  /**
+   * 可使用窗口的底部位置
+   */
+  windowBottom: number,
+  /**
+   * oaid
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "4.4",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "√"
+   *        },
+   *        "ios": {
+   *            "osVer": "x",
+   *  		  	 "uniVer": "x",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  oaid: string | null
+  /**
+   * Android 系统API库的版本。
+   * 
+   * @uniPlatform {
+   *    "app": {
+   *        "android": {
+   *            "osVer": "4.4",
+   *  		  	 "uniVer": "√",
+   * 			 "unixVer": "√"
+   *        },
+   *        "ios": {
+   *            "osVer": "x",
+   *  		  	 "uniVer": "x",
+   * 			 "unixVer": "x"
+   *        }
+   *    }
+   * }
+   */
+  osAndroidAPILevel: number | null
+};
+export type GetSystemInfoSuccessCallback = (result: GetSystemInfoResult) => void;
+type GetSystemInfoFail = UniError;
+type GetSystemInfoFailCallback = (result: GetSystemInfoFail) => void;
+export type GetSystemInfoComplete = any;
+export type GetSystemInfoCompleteCallback = (result: GetSystemInfoComplete) => void;
+export type GetSystemInfoOptions = {
+  /**
+   * 接口调用成功的回调函数
+   * @defaultValue null
+   */
+  success?: GetSystemInfoSuccessCallback | null,
+  /**
+   * 接口调用失败的回调函数
+   * @defaultValue null
+   */
+  fail?: GetSystemInfoFailCallback | null,
+  /**
+   * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
+   */
+  complete?: GetSystemInfoCompleteCallback | null
+};
+
+export type GetWindowInfoResult = {
+  /**
+   * 设备像素比
+   */
+  pixelRatio: number,
+  /**
+   * 屏幕宽度
+   */
+  screenWidth: number,
+  /**
+   * 屏幕高度
+   */
+  screenHeight: number,
+  /**
+   * 可使用窗口宽度
+   */
+  windowWidth: number,
+  /**
+   * 可使用窗口高度
+   */
+  windowHeight: number,
+  /**
+   * 状态栏的高度
+   */
+  statusBarHeight: number,
+  /**
+   * 可使用窗口的顶部位置
+   */
+  windowTop: number,
+  /**
+   * 可使用窗口的底部位置
+   */
+  windowBottom: number,
+  /**
+   * 在竖屏正方向下的安全区域
+   */
+  safeArea: SafeArea,
+  /**
+   * 在竖屏正方向下的安全区域插入位置
+   */
+  safeAreaInsets: SafeAreaInsets,
+  /**
+   * 窗口上边缘的 y 值
+   */
+  screenTop: number
+};

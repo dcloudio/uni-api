@@ -1,0 +1,21 @@
+import Service from 'android.app.Service';
+import Intent from 'android.content.Intent';
+import IBinder from 'android.os.IBinder';
+import { PushManager } from './PushManager.uts';
+export class PushActionService extends Service {
+	
+	constructor(){
+		super();
+	}
+	
+	override onBind(intent : Intent) : IBinder | null {
+		return null
+	}
+
+	override onStartCommand(intent : Intent | null, flag : Int, startId : Int) : Int {
+		if (intent != null) {
+			PushManager.getInstance().processAction(this.getBaseContext(), intent)
+		}
+		return super.onStartCommand(intent, flag, startId)
+	}
+}

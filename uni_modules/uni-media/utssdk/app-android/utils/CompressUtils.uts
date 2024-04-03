@@ -1,0 +1,299 @@
+import {
+	CompressImageSuccessCallback, CompressImageOptions,
+	CompressVideoOptions, CompressVideoSuccessCallback
+} from "../../interface.uts"
+import {
+	UniError_ChooseImage, UniError_ChooseVideo, UniError_CompressVideo,UniError_CompressImage,
+	UniErrors
+} from "../../unierror.uts"
+import { uniChooseImage, CODE_CAMERA_ERROR, CODE_GALLERY_ERROR, CODE_GET_IMAGE_INFO_CODE } from "../../ChooseImageUtils.uts"
+import TextUtils from 'android.text.TextUtils';
+import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import File from 'java.io.File';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import Bitmap from 'android.graphics.Bitmap';
+import Matrix from 'android.graphics.Matrix';
+import FileOutputStream from 'java.io.FileOutputStream';
+import ExifInterface from 'io.dcloud.uts.util.ExifInterface';
+import Field from 'java.lang.reflect.Field';
+import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
+import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
+import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
+
+// export function threadCompress() {
+// }
+export function transcodeImage(options : CompressImageOptions) {
+	if (options.src.length == 0) {
+		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressImage }
+		options.fail?.(fail)
+		options.complete?.(fail)
+		return
+	}
+	let compressOption = new CompressOptions()
+	compressOption.src = UTSAndroid.convert2AbsFullPath(options.src)
+	let srcFile = new File(compressOption.src)
+	if (!srcFile.exists()) {
+		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressImage }
+		options.fail?.(fail)
+		options.complete?.(fail)
+		return
+	}
+	if (options.quality != null && options.quality! > 0) {
+		compressOption.quality = options.quality!
+	}
+	if (options.rotate != null && options.rotate! >= 0) {
+		compressOption.rotate = options.rotate!
+	}
+	var widthStr = ""
+	var heightStr = ""
+	if (options.compressedWidth != null) {
+		compressOption.width = options.compressedWidth!
+	} else {
+		widthStr = TextUtils.isEmpty(options.width) ? "auto" : options.width!
+	}
+	if (options.compressedHeight != null) {
+		compressOption.height = options.compressedHeight!
+	} else {
+		heightStr = TextUtils.isEmpty(options.height) ? "auto" : options.height!
+	}
+	if (compressOption.width <= 0 || compressOption.height <= 0) {
+		getHeightAndWidth(compressOption, widthStr, heightStr)
+	}
+	let bitmapOptions = new BitmapFactory.Options()
+	bitmapOptions.inJustDecodeBounds = false;
+	if (srcFile.length() > 1500000) {
+		bitmapOptions.inSampleSize = 2
+	} else {
+		bitmapOptions.inSampleSize = 1
+	}
+	var srcBitmap : Bitmap | null = null
+	try {
+		srcBitmap = BitmapFactory.decodeFile(compressOption.src, bitmapOptions)
+	} catch (e) {
+	}
+	if (srcBitmap == null) {
+		let fail : UniError = { "errCode": 1101009, "errMsg": UniErrors[1101009]!, "errSubject": UniError_CompressImage }
+		options.fail?.(fail)
+		options.complete?.(fail)
+		return
+	}
+
+	if (compressOption.isZoom && compressOption.width > 0 && compressOption.height > 0) {
+		let matrix = new Matrix()
+		let scaleW = compressOption.width / srcBitmap.getWidth()
+		let scaleH = compressOption.height / srcBitmap.getHeight()
+		matrix.setScale(scaleW.toFloat(), scaleH.toFloat())
+		srcBitmap = Bitmap.createBitmap(srcBitmap!, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), matrix, false)
+	}
+	if (compressOption.rotate > 0) {
+		let matrix = new Matrix()
+		matrix.postRotate(compressOption.rotate.toFloat())
+		srcBitmap = Bitmap.createBitmap(srcBitmap!, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), matrix, false)
+	}
+	// 保存
+	let destPath = UTSAndroid.getAppTempPath()! + "compress/" + System.currentTimeMillis() + ".jpg"
+	let destFile = new File(destPath)
+	if (!destFile.getParentFile().exists()) {
+		destFile.getParentFile().mkdirs()
+	}
+	try {
+		let fos = new FileOutputStream(destFile)
+		srcBitmap!.compress(Bitmap.CompressFormat.JPEG, compressOption.quality.toInt(), fos);
+		fos.close()
+		if (!srcBitmap!.isRecycled()) {
+			srcBitmap!.recycle()
+		}
+		saveExif(options.src, destPath)
+		let success : CompressImageSuccessCallback = { "tempFilePath": "file://" + destPath }
+		options.success?.(success)
+		options.complete?.(success)
+	} catch (ex) {
+		let fail : UniError = { "errCode": 1101009, "errMsg": UniErrors[1101009]!, "errSubject": UniError_CompressImage }
+		options.fail?.(fail)
+		options.complete?.(fail)
+	}
+}
+
+function saveExif(oldFilePath : string, newFilePath : string) {
+	try {
+		let oldExif = new ExifInterface(oldFilePath);
+		let newExif = new ExifInterface(newFilePath);
+		let cls = oldExif.javaClass;
+		let fields = cls.getFields();
+		fields.forEach((field : Field) => {
+			let fieldName = field.getName();
+			if (!TextUtils.isEmpty(fieldName) && fieldName.startsWith("TAG")) {
+				var o = field.get(cls);
+				if (o != null) {
+					var fieldValue = o.toString();
+					var attribute = oldExif.getAttribute(fieldValue);
+					if (attribute != null) {
+						newExif.setAttribute(fieldValue, attribute);
+					}
+				}
+			}
+		})
+		// for (Field field : fields) {
+
+		// }
+		newExif.saveAttributes();
+	} catch (e) {
+
+	}
+}
+
+function getHeightAndWidth(compressOption : CompressOptions, widthStr : string, heightStr : string) {
+	let bopt = new BitmapFactory.Options()
+	bopt.inJustDecodeBounds = true
+	BitmapFactory.decodeFile(compressOption.src, bopt)
+	let bitmapWidth = bopt.outWidth
+	let bitmapHeight = bopt.outHeight
+	if (bitmapHeight <= 0 || bitmapWidth <= 0) {
+		return
+	}
+	if (widthStr.toLowerCase() == "auto" && heightStr.toLowerCase() == "auto") {
+		compressOption.isZoom = false
+		compressOption.width = bitmapWidth
+		compressOption.height = bitmapHeight
+	} else if (widthStr.toLowerCase() == "auto") {
+		compressOption.isZoom = true
+		compressOption.height = str2Float(heightStr, bitmapHeight, bitmapHeight)
+		compressOption.width = bitmapWidth * compressOption.height / bitmapHeight
+	} else if (heightStr.toLowerCase() == "auto") {
+		compressOption.isZoom = true
+		compressOption.width = str2Float(widthStr, bitmapWidth, bitmapWidth)
+		compressOption.height = bitmapHeight * compressOption.width / bitmapWidth
+	} else {
+		compressOption.isZoom = true
+		compressOption.width = str2Float(widthStr, bitmapWidth, bitmapWidth)
+		compressOption.height = str2Float(heightStr, bitmapHeight, bitmapHeight)
+	}
+}
+
+function str2Float(valuestr : string, realValue : number, defValue : number) : number {
+	if (TextUtils.isEmpty(valuestr)) {
+		return defValue
+	}
+	valuestr = valuestr.toLowerCase()
+	if (valuestr.endsWith("px")) {
+		valuestr == valuestr.substring(0, valuestr.length - 2);
+	}
+	try {
+		return Integer.parseInt(valuestr)
+	} catch (e) {
+		if (valuestr.endsWith("%")) {
+			valuestr = valuestr.substring(0, valuestr.length - 1)
+		}
+		try {
+			return realValue * Integer.parseInt(valuestr) / 100
+		} catch (e) {
+			return defValue
+		}
+	}
+}
+
+class CompressOptions {
+	src : string = ""
+	dst : string = ""
+	format : string = ""
+	quality : number = 80
+	width : number = 0
+	height : number = 0
+	rotate : number = 0
+	isZoom : boolean = false
+}
+
+export function transcodeVideo(options : CompressVideoOptions) {
+	let inPath = UTSAndroid.convert2AbsFullPath(options.src)
+	let inFile = new File(inPath)
+	if (!inFile.exists()) {
+		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressVideo }
+		options.fail?.(fail)
+		options.complete?.(fail)
+		return
+	}
+	var compressLevel = 1
+	switch (options.quality) {
+		case "low":
+			compressLevel = 3
+			break
+		case "medium":
+			compressLevel = 2
+			break
+		default:
+			compressLevel = 1
+			break
+	}
+
+	var resolution = options.resolution?.toDouble();
+
+	if (resolution == null) {
+		resolution = 1.0
+	} else if (resolution! > 1 || resolution! <= 0) {
+		resolution = 1.0
+	}
+	let fileName = getFileName(inPath);
+	let outPath = UTSAndroid.getAppTempPath()! + "compress/" + (fileName == "" ? (System.currentTimeMillis() + ".mp4") : fileName)
+	let outFile = new File(outPath)
+	if (!outFile.getParentFile().exists()) {
+		outFile.getParentFile().mkdirs()
+	}
+
+	MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
+}
+
+function getFileName(path : string) : string {
+	const array = path.split("/")
+	if (array.length > 0) {
+		return array[array.length - 1]
+	}
+	return ""
+}
+
+class MediaTranscoderListener implements Listener {
+	inPath : string
+	outPath : string
+	options : CompressVideoOptions
+	constructor(inPath : string, outPath : string, options : CompressVideoOptions) {
+		this.inPath = inPath
+		this.outPath = outPath;
+		this.options = options
+	}
+	override onTranscodeProgress(progress : Double) {
+
+	}
+
+	override onTranscodeCompleted() {
+		let outFile = new File(this.outPath)
+		if (outFile.exists()) {
+			let success : CompressVideoSuccessCallback = {
+				tempFilePath: "file://" + this.outPath,
+				size: outFile.length()
+			}
+			this.options.success?.(success)
+			this.options.complete?.(success)
+		} else {
+			let error : UniError = {
+				"errSubject": UniError_CompressVideo, "errCode": 1101004, "errMsg": UniErrors[1101004]!
+			}
+			this.options.fail?.(error)
+			this.options.complete?.(error)
+		}
+	}
+
+	override onTranscodeCanceled() {
+		let error : UniError = {
+			"errSubject": UniError_CompressVideo, "errCode": 1101004, "errMsg": UniErrors[1101004]!
+		}
+		this.options.fail?.(error)
+		this.options.complete?.(error)
+	}
+
+	override onTranscodeFailed(exception : Exception) {
+		let error : UniError = {
+			"errSubject": UniError_CompressVideo, "errCode": 1101010, "errMsg": UniErrors[1101010]! + exception.toString()
+		}
+		this.options.fail?.(error)
+		this.options.complete?.(error)
+	}
+}

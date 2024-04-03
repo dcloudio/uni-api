@@ -1,0 +1,61 @@
+
+
+export type GetSystemSettingResult = {
+  /**
+   * 蓝牙是否开启
+   */
+  bluetoothEnabled?: boolean,
+  /**
+   * 蓝牙的报错信息
+   */
+  bluetoothError?: string,
+  /**
+   * 位置是否开启
+   */
+  locationEnabled : boolean,
+  /**
+   * wifi是否开启
+   */
+  wifiEnabled?: boolean,
+  /**
+   * wifi的报错信息
+   */
+  wifiError?: string,
+  /**
+   * 设备方向
+   */
+  deviceOrientation : string
+}
+
+
+export type GetSystemSetting = () => GetSystemSettingResult
+
+
+export interface Uni {
+  /**
+    * GetSystemSetting()
+    * @description
+    * 获取系统设置
+    * @return {object}
+    * @tutorial https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
+    * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "4.4",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "3.9+"
+    *        },
+    *        "ios": {
+    *            "osVer": "9.0",
+    *  		  	 "uniVer": "√",
+    * 			 "unixVer": "x"
+    *        }
+    *    }
+    * }
+    * @example
+     ```typescript
+      uni.getSystemSetting()
+     ```
+    */
+  getSystemSetting(): GetSystemSettingResult;
+}
