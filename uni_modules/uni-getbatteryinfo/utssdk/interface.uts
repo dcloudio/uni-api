@@ -89,9 +89,9 @@ interface Uni {
 	 *            "unixVer": "3.9.0"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "9.0",
+	 *            "osVer": "12.0",
 	 *            "uniVer": "3.6.11",
-	 *            "unixVer": "x"
+	 *            "unixVer": "4.11"
 	 *        }
 	 *    }
 	 * }
@@ -116,9 +116,9 @@ interface Uni {
 	 *            "unixVer": "3.9.0"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "9.0",
+	 *            "osVer": "12.0",
 	 *            "uniVer": "3.6.11",
-	 *            "unixVer": "x"
+	 *            "unixVer": "4.11"
 	 *        }
 	 *    }
 	 * }
