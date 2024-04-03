@@ -1,0 +1,320 @@
+import Context from 'android.content.Context';
+import Intent from 'android.content.Intent';
+import { PushChannelManager } from './PushChannelManager.uts';
+import { PushMessage } from './PushMessage.uts';
+import NotificationManager from 'android.app.NotificationManager';
+import ComponentName from 'android.content.ComponentName';
+import PendingIntent from 'android.app.PendingIntent';
+import Build from 'android.os.Build';
+import TextUtils from 'android.text.TextUtils';
+import Notification from 'android.app.Notification';
+import Bitmap from 'android.graphics.Bitmap';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import File from 'java.io.File';
+import { OnPushMessageCallback, OnPushMessageType, OnPushMessageCallbackResult } from '../../interface.uts'
+
+export const globalPushMessageCallbacks : OnPushMessageCallback[] = []
+
+export function sendEvent(type : OnPushMessageType, pushMessage : PushMessage) : boolean {
+	const data = pushMessage.getJsonObject()
+	const result : OnPushMessageCallbackResult = {
+		type: type,
+		data: data
+	}
+	if (globalPushMessageCallbacks.length == 0) {
+		return false
+	} else {
+		globalPushMessageCallbacks.forEach((cb : OnPushMessageCallback) => {
+			cb(result)
+		})
+		return true
+	}
+}
+
+export class PushManager {
+	private static INSTANCE : PushManager | null = null
+
+	private ACTION_TYPE_CREATE = "ACTION_TYPE_CREATE"
+	private ACTION_TYPE_REMOVE = "ACTION_TYPE_REMOVE"
+	private ACTION_TYPE_CLEAR = "ACTION_TYPE_CLEAR"
+	private ACTION_TYPE_CLICK = "ACTION_TYPE_CLICK"
+
+	private mAppMessages : Map<string, Array<PushMessage>> = new Map()
+	private mNeedExecClickMessages : PushMessage[] = []
+	private mNeedExecReceiveMessages : PushMessage[] = []
+
+	static getInstance() : PushManager {
+		if (this.INSTANCE == null) {
+			this.INSTANCE = new PushManager()
+		}
+		return this.INSTANCE!!
+	}
+
+
+
+
+
+	createNotification(context : Context, message : PushMessage) {
+		PushChannelManager.getInstance().createDefaultChannel(context)
+		const intent = new Intent(this.ACTION_TYPE_CREATE)
+		intent.putExtras(message.toBundle())
+		this.processAction(context, intent)
+	}
+
+	addPushMessage(pAppid : string, pMsg : PushMessage) {
+		let _arr = this.mAppMessages.get(pAppid);
+		if (_arr == null) {
+			_arr = new Array<PushMessage>();
+			this.mAppMessages.set(pAppid, _arr);
+		}
+		_arr.push(pMsg);
+	}
+
+
+	addNeedExecClickMessage(pushMessage : PushMessage) {
+		if (this.mNeedExecClickMessages.length > 0) {
+			this.mNeedExecClickMessages = []
+		}
+		this.mNeedExecClickMessages.push(pushMessage)
+	}
+
+	addNeedExecReceiveMessage(pushMessage : PushMessage) {
+		this.mNeedExecReceiveMessages.push(pushMessage)
+	}
+
+	removePushMessage(pAppid : String, pPushMsg : PushMessage) {
+		const _arr = this.mAppMessages.get(pAppid);
+		if (_arr != null && _arr.indexOf(pPushMsg) > 0) {
+			_arr.splice(_arr.indexOf(pPushMsg), 1);
+		}
+	}
+
+	/**
+	 * 消费缓存的消息
+	 */
+	comsumeMessages(type : string, cb : (msgs : PushMessage[]) => void) {
+		if (type == "click") {
+			cb(this.mNeedExecClickMessages)
+			this.mNeedExecClickMessages.splice(0)
+		} else if (type == "receive") {
+			cb(this.mNeedExecReceiveMessages)
+			this.mNeedExecReceiveMessages.splice(0)
+		}
+	}
+
+
+	processAction(context : Context, intent : Intent) {
+		const notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+		const action = intent.getAction()
+		switch (action) {
+			case this.ACTION_TYPE_CREATE:
+				{
+					const title = intent.getStringExtra("title");
+					const message = intent.getStringExtra("content");
+					const nId = intent.getIntExtra("nId", 0);
+					const when = intent.getLongExtra("when", 0);
+					const appid = intent.getStringExtra("appid");
+					const icon = intent.getStringExtra("icon");
+					const sound = intent.getStringExtra("sound");
+					const category = intent.getStringExtra("category");
+					let channelId = intent.getStringExtra("channelId");
+					const i = new Intent(this.ACTION_TYPE_CLICK);
+					i.setComponent(new ComponentName(context.getPackageName(), "uts.sdk.modules.DCloudUniPush.PushActionService"));
+					i.putExtras(intent.getExtras()!!);
+					let flags = PendingIntent.FLAG_ONE_SHOT;
+					if (Build.VERSION.SDK_INT >= 23) {
+						flags = PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE;
+					}
+					const contentIntent = PendingIntent.getService(context, nId, i, flags);
+
+					let builder : Notification.Builder | null = null;
+					if (Build.VERSION.SDK_INT >= 26) {
+						if (TextUtils.isEmpty(channelId)) {
+							channelId = PushChannelManager.LOCAL_PUSH_CHANNEL_ID;
+						}
+						builder = new Notification.Builder(context, channelId);
+					} else {
+						builder = new Notification.Builder(context);
+					}
+
+					let bitmap : Bitmap | null = null;
+					try {
+						if (!TextUtils.isEmpty(icon) && this.fileIsExist(icon!!)) {
+							bitmap = BitmapFactory.decodeFile(icon!!);
+						}
+					} catch (e : Exception) {
+						e.printStackTrace();
+					}
+					if (bitmap != null) {
+						builder.setLargeIcon(bitmap);
+					}
+
+					const id_small = context.getResources().getIdentifier("push_small", "drawable", context.getPackageName())
+					if (id_small <= 0) {
+						builder.setSmallIcon(context.getApplicationInfo().icon); //设置图标
+					} else {
+						builder.setSmallIcon(id_small); //设置图标
+					}
+
+					const id = context.getResources().getIdentifier("push", "drawable", context.getPackageName())
+					if (bitmap == null) {
+						let largeBitmap : Bitmap | null = null;
+						if (id <= 0) {
+							largeBitmap = BitmapFactory.decodeResource(context.getResources(), context.getApplicationInfo().icon);
+						} else {
+							largeBitmap = BitmapFactory.decodeResource(context.getResources(), id);
+						}
+						if (null != largeBitmap) {
+							builder.setLargeIcon(largeBitmap);
+						}
+					}
+					builder.setContentTitle(title); //设置标题
+					builder.setContentText(message); //消息内容
+					if (Build.VERSION.SDK_INT >= 24) {
+						builder.setShowWhen(true);
+					}
+					builder.setWhen(when); //发送时间
+
+					// 添加声音提示
+					if ("system" == sound) {
+						builder.setDefaults(Notification.DEFAULT_SOUND); //设置默认的提示音，振动方式，灯光
+					}
+					builder.setAutoCancel(true);//打开程序后图标消失
+					builder.setContentIntent(contentIntent);
+					builder.setCategory(category);
+					const notification = builder.build();
+					try {
+						notificationManager.notify(nId, notification);
+					} catch (e : Exception) {
+						e.printStackTrace();
+					}
+				}
+
+				break;
+			case this.ACTION_TYPE_REMOVE:
+				{
+					const _id = intent.getIntExtra("id", 0);
+					if (_id != null) {
+						notificationManager.cancel(_id);
+					}
+				}
+				break;
+			case this.ACTION_TYPE_CLEAR:
+				{
+					notificationManager.cancelAll();
+					const _appid = intent.getStringExtra("_appId");
+					if (_appid != null) {
+						const appMsg = PushManager.getInstance().mAppMessages;
+						appMsg.delete(_appid);
+					}
+				}
+				break;
+			case this.ACTION_TYPE_CLICK:
+				{
+					this.clickHandle(intent, notificationManager);
+					const packagename = context.getPackageName();// 启动类所在包名
+					const pm = context.getPackageManager();
+					const _intent = pm.getLaunchIntentForPackage(packagename);
+					const appid = intent.getStringExtra("appid");
+					_intent?.putExtra("appid", appid);
+					const isStartWeb = intent?.getBooleanExtra("__start_first_web__", false) ?? false;
+					if (isStartWeb) {
+						_intent?.putExtra("__start_first_web__", isStartWeb);
+						_intent?.putExtra("__first_web_url__", intent?.getStringExtra("__first_web_url__"));
+					}
+					_intent?.putExtra("__start_from__", 3);
+					_intent?.putExtra("__payload__", intent?.getStringExtra("payload"));
+					_intent?.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+					context.startActivity(_intent);
+				}
+				break;
+		}
+
+	}
+
+	clickHandle(intent : Intent, _notificationManager : NotificationManager) {
+		const _bundle = intent.getExtras()!!;
+		const appid = _bundle.getString("appid");
+		const uuid = _bundle.getString("uuid");
+		if (_notificationManager != null) {//作为插件时，手助负责创建通知栏消息
+			const _id = intent.getIntExtra("id", 0);
+			_notificationManager.cancel(_id);
+		}
+		let _pushMessage : PushMessage | null = null
+		if (appid != null && uuid != null) {
+			_pushMessage = this.findPushMessage(appid!!, uuid!!);
+		}
+		if (_pushMessage != null) {
+			let isStartWeb = false;
+			if (!TextUtils.isEmpty(_pushMessage.mPayload)) {
+				try {
+					const payLoadJson = JSON.parseObject(_pushMessage.mPayload ?? "")
+					const url = payLoadJson?.getString("__adurl")
+					if (!TextUtils.isEmpty(url)) {
+						intent.putExtra("__start_first_web__", true);
+						intent.putExtra("__first_web_url__", url);
+						isStartWeb = true;
+					}
+				} catch (e : Exception) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!isStartWeb && !sendEvent("click", _pushMessage)) {
+				this.addNeedExecClickMessage(_pushMessage);
+			}
+			// 点击后的消息，需要移除消息记录，避免getAllMessage时不正确
+			if (appid != null) {
+				this.removePushMessage(appid, _pushMessage);
+			}
+		} else {
+			_pushMessage = new PushMessage(_bundle);
+			if (!TextUtils.isEmpty(_pushMessage.mPayload)) {
+				try {
+					const payLoadJson = JSON.parseObject(_pushMessage.mPayload!!)
+					const url = payLoadJson?.getString("__adurl")
+					if (!TextUtils.isEmpty(url)) {
+						intent.putExtra("__start_first_web__", true);
+						intent.putExtra("__first_web_url__", url);
+					}
+				} catch (e : Exception) {
+					e.printStackTrace();
+				}
+			}
+			this.addNeedExecClickMessage(_pushMessage);
+		}
+		_bundle.clear();
+	}
+
+
+
+	findPushMessage(pAppid : String, pUuid : String) : PushMessage | null {
+		let _ret : PushMessage | null = null;
+		const _arr = this.mAppMessages.get(pAppid);
+		if (_arr == null) {//若没有通过appid获取到消息集合，则通过uuid遍历所有消息
+			this.mAppMessages.forEach((value : PushMessage[], key : string) => {
+				if (value != null) {
+					value.forEach((value : PushMessage) => {
+						if (pUuid == value.getMessageUUID()) {
+							_ret = value
+						}
+					})
+				}
+			})
+		} else if (_arr != null) {
+			_arr.forEach((value : PushMessage) => {
+				if (pUuid == value.getMessageUUID()) {
+					_ret = value
+				}
+			})
+		}
+		return _ret;
+	}
+
+
+	fileIsExist(path : string) : boolean {
+		const realPath = UTSAndroid.convert2AbsFullPath(path)
+		const file = new File(realPath)
+		return file.exists()
+	}
+}

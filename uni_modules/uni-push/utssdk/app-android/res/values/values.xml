@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dcloud_feature_aps_notification_channel" >unipush</string>
+    <string name="dcloud_feature_aps_notification_group" >message push</string>
+
+</resources>

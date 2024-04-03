@@ -251,7 +251,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -260,6 +260,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -276,7 +280,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -285,6 +289,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -300,7 +308,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -309,6 +317,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -324,7 +336,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -333,6 +345,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -348,7 +364,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -357,6 +373,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -373,7 +393,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -382,6 +402,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -399,7 +423,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -408,6 +432,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -425,7 +453,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -434,6 +462,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -449,7 +481,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -458,6 +490,10 @@ export interface Uni {
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *   	  }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3
@@ -473,7 +509,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
    *        },
@@ -481,7 +517,11 @@ export interface Uni {
    *            "osVer": "9.0",
    *            "uniVer": "2.0.3",
    *            "unixVer": "3.9.0"
-   *   	  }
+   *   	    }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    * @uniVersion 2.0.3

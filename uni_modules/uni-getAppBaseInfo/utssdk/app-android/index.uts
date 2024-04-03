@@ -1,4 +1,3 @@
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import { AppBaseInfoDeviceUtil } from './device/AppBaseInfoDeviceUtil.uts';
 
 import {
@@ -33,10 +32,14 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"hostTheme",
 			"isUniAppX",
 			"uniCompileVersion",
+			"uniCompilerVersion",
 			"uniPlatform",
 			"uniRuntimeVersion",
 			"uniCompileVersionCode",
-			"uniRuntimeVersionCode"
+			"uniCompilerVersionCode",
+			"uniRuntimeVersionCode",
+			"packageName",
+			"signature"
 		];
 		filter = defaultFilter;
 	}
@@ -101,6 +104,10 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	if (filterArray.indexOf("uniCompileVersion") != -1) {
 		result.uniCompileVersion = UTSAndroid.getUniCompileVersion();
 	}
+	if (filterArray.indexOf("uniCompilerVersion") != -1) {
+		result.uniCompilerVersion = UTSAndroid.getUniCompileVersion();
+	}
+	
 	
 	if (filterArray.indexOf("uniPlatform") != -1) {
 		result.uniPlatform = "app";
@@ -113,9 +120,20 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	if (filterArray.indexOf("uniCompileVersionCode") != -1) {
 		result.uniCompileVersionCode = convertVersionCode(UTSAndroid.getUniCompileVersion());
 	}
+	if (filterArray.indexOf("uniCompilerVersionCode") != -1) {
+		result.uniCompilerVersionCode = convertVersionCode(UTSAndroid.getUniCompileVersion());
+	}
 	
 	if (filterArray.indexOf("uniRuntimeVersionCode") != -1) {
 		result.uniRuntimeVersionCode = convertVersionCode(UTSAndroid.getUniRuntimeVersion());
+	}
+	
+	if (filterArray.indexOf("packageName") != -1) {
+		result.packageName =  AppBaseInfoDeviceUtil.getPackageName(activity);
+	}
+	
+	if (filterArray.indexOf("signature") != -1) {
+		result.signature = AppBaseInfoDeviceUtil.getAppSignatureSHA1(activity);
 	}
 
 	return result;

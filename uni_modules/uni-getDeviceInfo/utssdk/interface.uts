@@ -47,25 +47,6 @@ export type GetDeviceInfoResult = {
    */
   platform?: string,
   /**
-   * oaid标识 Android专有
-   * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
-   * }
-   */
-  oaid?: string,
-  /**
    * 是否root
    */
   isRoot?: boolean,
@@ -76,44 +57,23 @@ export type GetDeviceInfoResult = {
   /**
    * adb是否开启
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "√"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   isUSBDebugging?: boolean,
-  /**
-   * idfa标识 iOS专有
-   * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        }
-   *    }
-   * }
-   */
-  idfa?: string,
-  /**
-   * 应用平台
-   */
 }
 
 
@@ -131,21 +91,26 @@ export interface Uni {
     * @param {GetDeviceInfoOptions} options [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getDeviceInfo.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        }
-    *    }
-    * }
-    * @example
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
+  * @example
      ```typescript
       uni.getDeviceInfo({
         filter:[]

@@ -1,5 +1,4 @@
 import Build from 'android.os.Build';
-import { UTSAndroid } from "io.dcloud.uts";
 import { DeviceUtil } from './device/DeviceUtil.uts';
 
 import { GetDeviceInfo, GetDeviceInfoOptions, GetDeviceInfoResult } from '../interface.uts'
@@ -23,7 +22,6 @@ export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | nu
 			"devicePixelRatio",
 			"system",
 			"platform",
-			"oaid",
 			"isRoot",
 			"isSimulator",
 			"isUSBDebugging"
@@ -65,9 +63,6 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 	}
 	if (filterArray.indexOf("platform") != -1) {
 		result.platform = "android";
-	}
-	if (filterArray.indexOf("oaid") != -1) {
-		result.oaid = DeviceUtil.getOaid();
 	}
 	if (filterArray.indexOf("isRoot") != -1) {
 		result.isRoot = DeviceUtil.hasRootPrivilege();

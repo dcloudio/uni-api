@@ -1,7 +1,5 @@
 import { UIDevice, UIApplication, UIInterfaceOrientation, UIScreen } from 'UIKit';
 import { NSLocale, URL, FileManager } from 'Foundation';
-import { ATTrackingManager } from 'AppTrackingTransparency';
-import { ASIdentifierManager } from 'AdSupport';
 import { DispatchSemaphore, DispatchQueue } from 'Dispatch';
 
 
@@ -23,12 +21,10 @@ export class DeviceUtil {
 
 	public static getOrientation(): string {
 		let orientation = "portrait";
-		DispatchQueue.main.sync(execute = () => {
-			const orient = UIApplication.shared.statusBarOrientation;
-			if (orient == UIInterfaceOrientation.landscapeLeft || orient == UIInterfaceOrientation.landscapeRight) {
-				orientation = "landscape";
-			}
-		})
+		const orient = UIApplication.shared.statusBarOrientation;
+		if (orient == UIInterfaceOrientation.landscapeLeft || orient == UIInterfaceOrientation.landscapeRight) {
+			orientation = "landscape";
+		}
 		return orientation;
 	}
 
@@ -38,45 +34,10 @@ export class DeviceUtil {
 
 
 	public static getIdfa(): string {
-		if (UTSiOS.available("iOS 14, *")) {
-			if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManager.AuthorizationStatus.notDetermined) {
-				ATTrackingManager.requestTrackingAuthorization(completionHandler = (status) => { });
-			} else if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManager.AuthorizationStatus.authorized) {
-				return ASIdentifierManager.shared().advertisingIdentifier.uuidString;
-			}
-			return "";
-		}
-
-		return ASIdentifierManager.shared().advertisingIdentifier.uuidString;
+		return UTSiOS.getGgbs()
 	}
 
 	public static hasRootPrivilege(): boolean {
-		let url = new URL(string = "cydia://");
-		let canOpenUrl = false;
-		DispatchQueue.main.sync(execute = () => {
-			canOpenUrl = UIApplication.shared.canOpenURL(url!)
-		})
-		if (canOpenUrl) {
-			return true;
-		}
-
-		let jailbreakToolPaths = [
-			"/Applications/Cydia.app",
-			"/Library/MobileSubstrate/MobileSubstrate.dylib",
-			"/bin/bash",
-			"/usr/sbin/sshd",
-			"/etc/apt"
-		];
-
-		let i = 0;
-		while (i < jailbreakToolPaths.length) {
-			if (FileManager.default.fileExists(atPath = jailbreakToolPaths[i])) {
-				return true;
-			}
-			i++;
-		}
-
-
-		return false;
+		return UTSiOS.isRoot()
 	}
 }

@@ -38,133 +38,140 @@ export type GetAppBaseInfoResult = {
   /**
    * 应用资源（wgt）的版本名称。	
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   appWgtVersion?: string,
   /**
    * 小程序宿主语言	
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostLanguage?: string,
   /**
    * App、小程序宿主版本。
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostVersion?: string,
   /**
    * 小程序宿主名称	
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostName?: string,
   /**
    * 小程序宿主包名	
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostPackageName?: string,
   /**
    * uni小程序SDK版本、小程序客户端基础库版本	
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostSDKVersion?: string,
   /**
    * 系统当前主题，取值为light或dark。微信小程序全局配置"darkmode":true时才能获取，否则为 undefined （不支持小游戏）
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
   hostTheme?: string,
@@ -172,26 +179,131 @@ export type GetAppBaseInfoResult = {
    * 是否uni-app x
    */
   isUniAppX ?: boolean,
+  
   /**
    * uni 编译器版本
+   * @deprecated 已废弃，仅为了向下兼容保留
    */
   uniCompileVersion ?: string,
   /**
-   * uni-app 运行平台。如：`app`、`mp-weixin`、`web`
+   * uni 编译器版本
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.0"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
    */
-  uniPlatform ?: string,
+  uniCompilerVersion ?: string,
+  /**
+   * uni-app 运行平台。
+   */
+  uniPlatform ?: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
    * uni 运行时版本
    */
   uniRuntimeVersion ?: string,
   /**
    * uni 编译器版本号
+   * @deprecated 已废弃，仅为了向下兼容保留
    */
   uniCompileVersionCode?: number,
+  /**
+   * uni 编译器版本号
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.0"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
+   */
+  uniCompilerVersionCode?: number,
   /**
    * uni 运行时版本号
    */
   uniRuntimeVersionCode?: number,
+  /**
+   * Android的包名
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.97"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
+   */
+  packageName?: string,
+  /**
+   * iOS的bundleId
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
+   * @autodoc false
+   */
+  bundleId?: string,
+  /**
+   * Android: 应用签名证书的SHA1值（全部为小写，中间不包含“:”）。 为了保证应用的安全性，请使用自己生成的证书（不要使用公共测试证书）。
+   * iOS: 应用签名证书中绑定的Bundle ID（AppleID）的md5值（全部为小写）。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.97"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
+   */
+  signature?: string,
 }
 
 /**
@@ -208,20 +320,25 @@ export interface Uni {
     * @param {GetAppBaseInfoOptions} options [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getAppBaseInfo.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *      "uniVer": "√",
+  *      "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.getAppBaseInfo({

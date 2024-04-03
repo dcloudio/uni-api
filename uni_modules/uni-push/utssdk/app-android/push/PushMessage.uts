@@ -1,0 +1,275 @@
+import TextUtils from 'android.text.TextUtils'
+import Bundle from 'android.os.Bundle';
+
+export class PushMessage {
+	private mTitle : string | null = null
+	private contentJson : string | null = null
+	private mContent : string | null = null
+
+	mPayloadJSON : UTSJSONObject | null = null
+	mPayload : string | null = null
+
+	private mWhen : Long = 0
+	mDelay : Long = 0
+	private mPath : string | null = null
+	private mForceNotification : string | null = null
+	private channelId = ""
+	private category = ""
+	private mMessageAppid : string | null = null
+	private mIconPath : string | null = null
+
+	private mUUID : string | null = null
+	private nID : number = 0
+	private isCover = false
+	private sound = "system"
+	private static mNotificationId = 1
+	private needCreateNotification = true
+
+	private pushVersion : Float = 1.0.toFloat()
+	private extJSON : UTSJSONObject | null = null
+
+	constructor(data : string, defaultTitle : string, isUniPush2 : boolean) {
+		if (!isUniPush2) {
+			this.contentJson = data
+			this.parseJson(data, UTSAndroid.getAppId(), defaultTitle)
+		} else {
+			this.extJSON = JSON.parseObject(data)
+			this.mMessageAppid = UTSAndroid.getAppId()
+			this.pushVersion = 2.0.toFloat()
+			if (this.extJSON != null) {
+				this.channelId = this.extJSON!!.getString("channelId") ?? ""
+				this.category = this.extJSON!!.getString("category") ?? ""
+			}
+		}
+		this.setMessageUUID()
+		this.setNotificationID()
+	}
+
+	$constructor(b : Bundle) {
+		this.mTitle = b.getString("title");
+		this.mContent = b.getString("content");
+		this.nID = b.getInt("nId");
+		this.mWhen = b.getLong("when");
+		this.sound = b.getString("sound") ?? "system";
+		this.mMessageAppid = b.getString("appid");
+		this.mUUID = b.getString("uuid");
+		this.mPayload = b.getString("payload");
+		this.mIconPath = b.getString("icon");
+		this.channelId = b.getString("channelId", "");
+		this.category = b.getString("category", "");
+	}
+
+
+
+	getNeedCreateNotification() : boolean {
+		return this.needCreateNotification;//payload为空串时需要创建
+	}
+
+	getMessageUUID() : string | null {
+		return this.mUUID
+	}
+
+	getJsonObject() : UTSJSONObject {
+		if (this.extJSON != null) {
+			if (this.pushVersion == (2.0.toFloat())) {
+				try {
+					this.extJSON!!["__UUID__"] = this.mUUID
+					this.extJSON!!["appid"] = this.mMessageAppid
+				} catch (e : Exception) {
+					e.printStackTrace()
+					return {};
+				}
+			}
+			return this.extJSON!!
+		} else {
+			const result = {} as UTSJSONObject;
+			result["__UUID__"] = this.mUUID
+			result["title"] = this.mTitle
+			result["appid"] = this.mMessageAppid
+			result["content"] = this.mContent
+			if (this.mPayloadJSON != null) {
+				result["payload"] = this.cleanNullValue(this.mPayloadJSON!!)
+			} else {
+				let payLoadObj : UTSJSONObject | null = null
+				if (this.mPayload != null) {
+					payLoadObj = JSON.parseObject(this.mPayload!!)
+				}
+
+				if (payLoadObj != null) {
+					result["payload"] = this.cleanNullValue(payLoadObj)
+				} else {
+					result["payload"] = this.mPayload
+				}
+			}
+			if (!TextUtils.isEmpty(this.mPath)) {
+				result["path"] = this.mPath
+			}
+			if (!TextUtils.isEmpty(this.mForceNotification)) {
+				result["force_notification"] = this.mForceNotification
+			}
+			if (!TextUtils.isEmpty(this.channelId)) {
+				result["channelId"] = this.channelId
+			}
+			if (!TextUtils.isEmpty(this.category)) {
+				result["category"] = this.category
+			}
+			return result
+		}
+	}
+
+	cleanNullValue(json : UTSJSONObject) : UTSJSONObject {
+		const result = {}
+		json.toMap().forEach((value, key) => {
+			if (value != null) {
+				result[key] = value
+			}
+		})
+		return result
+	}
+
+
+	toBundle() : Bundle {
+		const bundle = new Bundle()
+		if (this.extJSON != null && this.pushVersion == (2.0.toFloat())) {
+			bundle.putInt("nId", this.nID.toInt());
+			bundle.putLong("when", this.mWhen);
+			bundle.putString("sound", this.sound);
+			bundle.putString("appid", this.mMessageAppid);
+			bundle.putString("uuid", this.mUUID);
+			bundle.putString("icon", this.mIconPath);
+
+			const map = this.extJSON!!.toMap()
+			map.forEach((value, key) => {
+				if (value != null) {
+					if (typeof value == 'string') {
+						bundle.putString(key, value as string);
+					} else if (value instanceof Integer) {
+						bundle.putInt(key, value as Int);
+					} else if (value instanceof Double) {
+						bundle.putDouble(key, value);
+					} else if (typeof value == 'boolean') {
+						bundle.putBoolean(key, value as boolean);
+					} else if (value instanceof UTSJSONObject) {
+						bundle.putString(key, (value as UTSJSONObject).toJSONString());
+					}
+				}
+			})
+			return bundle
+		}
+
+		bundle.putString("title", this.mTitle);
+		bundle.putString("content", this.mContent);
+		bundle.putInt("nId", this.nID.toInt());
+		bundle.putLong("when", this.mWhen);
+		bundle.putString("sound", this.sound);
+		bundle.putString("appid", this.mMessageAppid);
+		bundle.putString("uuid", this.mUUID);
+		if (this.mPayloadJSON != null) {
+			bundle.putString("payload", this.mPayloadJSON!!.toJSONString());
+		} else {
+			bundle.putString("payload", this.mPayload);
+		}
+		bundle.putString("icon", this.mIconPath);
+		bundle.putString("channelId", this.channelId);
+		bundle.putString("category", this.category);
+
+		return bundle
+	}
+
+
+
+	private setMessageUUID() : void {
+		this.mUUID = "androidPushMsg" + this.hashCode()
+	}
+
+	private setNotificationID() : void {
+		if (!this.isCover) {
+			PushMessage.mNotificationId++
+		}
+		this.nID = PushMessage.mNotificationId
+	}
+
+
+	/**
+	 * 解析消息的数据
+	 * @param defaultAppid 通过appid 查询到icon资源 , 1.0强需求, 2.0 不需求
+	 */
+	private parseJson(data : string, defaultAppid : string, defaultTitle : string) : void {
+		const json = JSON.parseObject(data)
+		if (json != null) {
+			let t_appid = json.getString("appid")
+			const content = json.getString("content")
+			if (content != null) {
+				this.mContent = content
+			} else {
+				const message = json.getString("message")
+				if (message != null) {
+					this.mContent = message
+				} else {
+					this.needCreateNotification = true
+					this.mContent = data
+				}
+			}
+
+			if (this.hasOwnProperty(json, "payload")) {
+				const payloadJson = json.getJSON("payload")
+				if (payloadJson != null) {
+					this.mPayloadJSON = payloadJson
+				} else {
+					this.mPayload = json.getString("payload")
+				}
+			} else {
+				if (this.hasOwnProperty(json, "Payload")) {
+					const payloadJson = json.getJSON("Payload")
+					if (payloadJson != null) {
+						this.mPayloadJSON = payloadJson
+					} else {
+						this.mPayload = json.getString("Payload")
+					}
+				} else {
+					this.needCreateNotification = false
+					this.mPayload = data
+				}
+			}
+
+			if (this.hasOwnProperty(json, "title")) {
+				this.mTitle = json.getString("title")
+			} else {
+				this.needCreateNotification = false
+				this.mTitle = defaultTitle
+			}
+
+			this.isCover = json.getBoolean("cover") ?? false
+			if ("none" == json.getString("sound")) {
+				this.sound = "none"
+			}
+			this.mWhen = (json.getNumber("when") ?? 0).toLong()
+			this.mDelay = (json.getNumber("delay") ?? 0).toLong()
+
+			this.mPath = json.getString("path")
+			this.mForceNotification = json.getString("force_notification")
+			this.channelId = json.getString("channelId") ?? ""
+			this.category = json.getString("category") ?? ""
+
+			if (TextUtils.isEmpty(t_appid)) {
+				t_appid = defaultAppid
+			}
+			this.mMessageAppid = t_appid
+			const iconPath = json.getString("icon") ?? ""
+			this.mIconPath = UTSAndroid.convert2AbsFullPath(iconPath)
+		} else {
+			this.needCreateNotification = false
+			this.mContent = data
+			this.mPayload = data
+			this.mTitle = defaultTitle
+		}
+	}
+
+
+	private hasOwnProperty(jsonObject : UTSJSONObject, key : string) : boolean {
+		return jsonObject.getAny(key) != null
+	}
+
+
+
+}

@@ -14,18 +14,18 @@ export const closeSocket : CloseSocket = (options : CloseSocketOptions) : void =
 	return WebSocketManager.getInstance().closeSocket(options);
 }
 
-export const onSocketOpen : OnSocketOpen = (callback : OnSocketOpenCallback) : void => {
+export function onSocketOpen(callback : OnSocketOpenCallback) : void {
 	return WebSocketManager.getInstance().onSocketOpen(callback);
 }
 
-export const onSocketMessage : OnSocketMessage = (callback : OnSocketMessageCallback) : void => {
+export function onSocketMessage(callback : OnSocketMessageCallback) : void {
 	return WebSocketManager.getInstance().onSocketMessage(callback);
 }
 
-export const onSocketClose : OnSocketClose = (callback : OnSocketCloseCallback) : void => {
+export function onSocketClose(callback : OnSocketCloseCallback) : void {
 	return WebSocketManager.getInstance().onSocketClose(callback);
 }
 
-export const onSocketError : OnSocketError = (callback : OnSocketErrorCallback) : void => {
+export function onSocketError(callback : OnSocketErrorCallback) : void {
 	return WebSocketManager.getInstance().onSocketError(callback);
 }

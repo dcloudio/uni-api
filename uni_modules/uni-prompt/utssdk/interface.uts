@@ -29,11 +29,11 @@ export type ShowToastOptions = {
    * 图标，有效值详见下方说明，默认：success。
    * @description icon值说明 success: 显示成功图标，error: 显示错误图标； fail: 显示错误图标，此时title文本无长度显示； exception: 显示异常图标，此时title文本无长度显示； loading: 显示加载图标；none: 不显示图标。
    */
-  icon?: string | null,
+  icon?: "success" | "error" | "fail" | "exception" | "loading" | "none" | null,
   /**
    * 自定义图标的本地路径（app端暂不支持gif）
    */
-  image?: string | null,
+  image?: string.ImageURIString | null,
   /**
    * 是否显示透明蒙层，防止触摸穿透，默认：false
    */
@@ -46,7 +46,7 @@ export type ShowToastOptions = {
    * 纯文本轻提示显示位置，填写有效值后只有 title 属性生效，且不支持通过 uni.hideToast 隐藏。
    * @description position值说明（仅App生效） top: 居上显示； center: 居中显示；bottom： 居底显示
    */
-  position?: string | null,
+  position?: "top" | "center" | "bottom" | null,
   /**
    * 接口调用成功的回调函数
    */
@@ -70,7 +70,7 @@ export type ShowToastOptions = {
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -79,6 +79,10 @@ export type ShowToastOptions = {
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -92,7 +96,7 @@ export type ShowToast = (options: ShowToastOptions) => void
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -101,6 +105,10 @@ export type ShowToast = (options: ShowToastOptions) => void
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -161,7 +169,7 @@ export type ShowLoadingOptions = {
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -170,6 +178,10 @@ export type ShowLoadingOptions = {
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -183,7 +195,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -192,6 +204,10 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  * 
@@ -252,7 +268,7 @@ export type ShowModalOptions = {
   /**
    * 取消按钮的文字颜色，默认为"#000000"
    */
-  cancelColor?: string | null,
+  cancelColor?: string.ColorString | null,
   /**
    * 确定按钮的文字，默认为"确定"
    */
@@ -260,7 +276,7 @@ export type ShowModalOptions = {
   /**
    * 确定按钮的文字颜色
    */
-  confirmColor?: string | null,
+  confirmColor?: string.ColorString | null,
   /**
    * @default false
    * 是否显示输入框
@@ -294,7 +310,7 @@ export type ShowModalOptions = {
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -303,6 +319,10 @@ export type ShowModalOptions = {
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -369,7 +389,7 @@ export type ShowActionSheetOptions = {
   /**
    * 按钮的文字颜色，字符串格式（iOS默认为系统控件颜色）
    */
-  itemColor?: string | null,
+  itemColor?: string.ColorString | null,
   /**
    * 大屏设备弹出原生选择按钮框的指示区域，默认居中显示
    */
@@ -398,7 +418,7 @@ export type ShowActionSheetOptions = {
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
@@ -407,6 +427,10 @@ export type ShowActionSheetOptions = {
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *   	  }
+ *    },
+*    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -431,7 +455,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -440,6 +464,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -454,7 +482,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -463,6 +491,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -483,7 +515,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -492,6 +524,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -513,7 +549,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -522,6 +558,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -549,7 +589,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -558,6 +598,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -581,7 +625,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -590,6 +634,10 @@ export interface Uni {
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */

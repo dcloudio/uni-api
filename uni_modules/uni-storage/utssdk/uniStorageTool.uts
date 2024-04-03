@@ -68,7 +68,7 @@ function praseGetStorage(type: string, value: string): any | null {
 		const result = parseValue(object)
 		if (result != null) {
 			data = result
-		} else if (type != null){
+		} else if (type != null && type != ""){
 			// 兼容App端历史格式
 			data = object
 			if (typeof object == 'string') {

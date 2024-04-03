@@ -8,7 +8,7 @@ export interface Uni {
 	  * @uniPlatform {
 	  *    "app": {
 	  *        "android": {
-	  *            "osVer": "4.4",
+	  *            "osVer": "5.0",
 	  *  		  	 "uniVer": "3.94+",
 	  * 			 "unixVer": "3.94+"
 	  *        },
@@ -17,7 +17,11 @@ export interface Uni {
 	  *  		  	 "uniVer": "x",
 	  * 			 "unixVer": "x"
 	  *        }
-	  *    }
+	  *    },
+	  *  "web": {
+      *    "uniVer": "x",
+      *    "unixVer": "x"
+      *  }
 	  * }
 	  * @example
 	   ```typescript

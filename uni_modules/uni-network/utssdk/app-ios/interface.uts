@@ -1,5 +1,5 @@
 
-export type Request = (param: RequestOptions) => RequestTask | null;
+export type Request = (param: RequestOptions) => RequestTask;
 
 /**
  * 网络请求参数
@@ -157,7 +157,7 @@ export interface RequestTask {
 //===============================上传==================================
 
 
-export type UploadFile = (options: UploadFileOptions) => UploadTask | null;
+export type UploadFile = (options: UploadFileOptions) => UploadTask;
 export type UploadFileOptionFiles = {
   /**
    * multipart 提交时，表单的项目名，默认为 file，如果 name 不填或填的值相同，可能导致服务端读取文件时只能读取到一个文件。
@@ -327,7 +327,7 @@ export interface UploadTask {
 
 //===============================下载==================================
 
-export type DownloadFile = (options: DownloadFileOptions) => DownloadTask | null;
+export type DownloadFile = (options: DownloadFileOptions) => DownloadTask;
 export type DownloadFileSuccess = {
   /**
    * 临时文件路径，下载后的文件会存储到一个临时文件
@@ -456,7 +456,7 @@ export interface Uni {
     * @description 
     * 发起网络请求。
     * @param {RequestOptions} options
-    * @return {RequestTask | null} 
+    * @return {RequestTask} 
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html
     * @uniPlatform {
     *    "app": {
@@ -507,7 +507,7 @@ export interface Uni {
     * @description 
     * 将本地资源上传到开发者服务器。
     * @param {UploadFileOptions} options
-    * @return {UploadTask | null}
+    * @return {UploadTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
     * @uniPlatform {
     *    "app": {
@@ -544,7 +544,7 @@ export interface Uni {
     * @description 
     * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
     * @param {DownloadFileOptions} options
-    * @return {DownloadTask | null}
+    * @return {DownloadTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
     * @uniPlatform {
     *    "app": {

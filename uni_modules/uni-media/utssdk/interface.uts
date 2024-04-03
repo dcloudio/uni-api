@@ -1,14 +1,52 @@
 
+/**
+ * 错误码
+ * - 1101001 用户取消
+ * - 1101002 urls至少包含一张图片地址
+ * - 1101003 文件不存在
+ * - 1101004 图片加载失败
+ * - 1101005 未获取权限
+ * - 1101006 图片或视频保存失败
+ * - 1101007 图片裁剪失败
+ * - 1101008 拍照或录像失败
+ * - 1101009 图片压缩失败
+ * - 1101010 其他错误
+ */
 
-export type ChooseImageSuccessCallback = {
+export type MediaErrorCode = 1101001 | 1101002 | 1101003 | 1101004 | 1101005 | 1101006 | 1101007 | 1101008 | 1101009 | 1101010;
+
+/**
+ * 图片或视频操作失败的错误回调
+ */
+export interface IMediaError extends IUniError {
+	errCode : MediaErrorCode
+};
+
+
+export type ChooseImageSuccess = {
 	/**
 	 * 调用API的名称
 	 */
 	errSubject : string,
+	/**
+	 * 描述信息
+	 */
 	errMsg : string,
+	/**
+	 * 图片的本地文件路径列表
+	 * @type string | string []
+	 */
 	tempFilePaths : Array<string>,
+	/**
+	 * 图片的本地文件列表
+	 */
 	tempFiles : any
 }
+
+export type ChooseImageFail = IMediaError;
+export type ChooseImageSuccessCallback = (callback : ChooseImageSuccess) => void
+export type ChooseImageFailCallback = (callback : ChooseImageFail) => void
+export type ChooseImageCompleteCallback = (callback : any) => void
 
 export type ChooseImageCropOptions = {
 	/**
@@ -50,6 +88,15 @@ export type ChooseImageOptions = {
 	sourceType ?: (string[]) | null,
 	/**
 	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。仅H5支持
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		}
+	 *	}
+	 * }
 	 */
 	extension ?: (string[]) | null,
 	/**
@@ -59,21 +106,27 @@ export type ChooseImageOptions = {
 	/**
 	 * 成功则返回图片的本地文件路径列表 tempFilePaths
 	 */
-	success ?: ((callback : ChooseImageSuccessCallback) => void) | null,
+	success ?: (ChooseImageSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((callback : UniError) => void) | null,
+	fail ?: (ChooseImageFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((callback : any) => void) | null
+	complete ?: (ChooseImageCompleteCallback) | null
 }
 
 export type ChooseImage = (options : ChooseImageOptions) => void
 
-export type PreviewImageSuccessCallback = {
+export type PreviewImageSuccess = {
+	/**
+	 * 调用API的名称
+	 */
 	errSubject : string,
+	/**
+	 * 描述信息
+	 */
 	errMsg : string
 }
 
@@ -110,20 +163,22 @@ export type LongPressActionsOptions = {
 	complete : ((result : any) => void) | null
 };
 
+
+export type PreviewImageFail = IMediaError;
+export type PreviewImageSuccessCallback = (callback : PreviewImageSuccess) => void
+export type PreviewImageFailCallback = (callback : PreviewImageFail) => void
+export type PreviewImageCompleteCallback = ChooseImageCompleteCallback
+
 export type PreviewImageOptions = {
 	/**
-	 * 当前显示图片的链接，不填则默认为 urls 的第一张
-	 */
-	count ?: string | null,
-	/**
-	 * current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张。App平台在 1.9.5至1.9.8之间，current为必填。不填会报错
+	 * current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张。
 	 * @type string | number
 	 */
 	current ?: any | null,
 	/**
 	 * 需要预览的图片链接列表
 	 */
-	urls : string[],
+	urls : Array<string.ImageURIString>,
 	/**
 	 * 图片指示器样式
 	 * - default: 底部圆点指示器
@@ -138,50 +193,64 @@ export type PreviewImageOptions = {
 	 */
 	loop ?: boolean | null,
 	/**
-	 * 长按图片显示操作菜单，如不填默认为保存相册，1.9.5 起支持。
+	 * 长按图片显示操作菜单，如不填默认为保存相册。
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "4.4",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		}
+	 *	}
+	 * }
 	 */
 	longPressActions ?: LongPressActionsOptions | null,
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : PreviewImageSuccessCallback) => void) | null,
+	success ?: (PreviewImageSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (PreviewImageFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (PreviewImageCompleteCallback) | null
 };
 
 export type PreviewImage = (options : PreviewImageOptions) => void;
 
 export type ClosePreviewImage = (options : ClosePreviewImageOptions) => void;
-export type ClosePreviewImageSuccessCallback = {
+export type ClosePreviewImageSuccess = {
 	/**
 	 * 错误信息
 	 */
 	errMsg : string
 };
 
+export type ClosePreviewImageFail = IMediaError;
+export type ClosePreviewImageSuccessCallback = (callback : ClosePreviewImageSuccess) => void
+export type ClosePreviewImageFailCallback = (callback : ClosePreviewImageFail) => void
+export type ClosePreviewImageCompleteCallback = ChooseImageCompleteCallback
+
 export type ClosePreviewImageOptions = {
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : ClosePreviewImageSuccessCallback) => void) | null,
+	success ?: (ClosePreviewImageSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (ClosePreviewImageFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (ClosePreviewImageCompleteCallback) | null
 };
 
 export type GetImageInfo = (options : GetImageInfoOptions) => void;
-export type GetImageInfoSuccessCallback = {
+export type GetImageInfoSuccess = {
 	/**
 	 * 图片宽度，单位px
 	 */
@@ -204,64 +273,80 @@ export type GetImageInfoSuccessCallback = {
 	type : string | null
 };
 
+export type GetImageInfoFail = IMediaError;
+export type GetImageInfoSuccessCallback = (callback : GetImageInfoSuccess) => void
+export type GetImageInfoFailCallback = (callback : GetImageInfoFail) => void
+export type GetImageInfoCompleteCallback = ChooseImageCompleteCallback
+
 export type GetImageInfoOptions = {
 	/**
 	 * 图片的路径，可以是相对路径，临时文件路径，存储文件路径，网络图片路径
 	 */
-	src : string,
+	src : string.ImageURIString,
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : GetImageInfoSuccessCallback) => void) | null,
+	success ?: (GetImageInfoSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (GetImageInfoFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (GetImageInfoCompleteCallback) | null
 };
 
 export type SaveImageToPhotosAlbum = (options : SaveImageToPhotosAlbumOptions) => void;
 
-export type SaveImageToPhotosAlbumSuccessCallback = {
+export type SaveImageToPhotosAlbumSuccess = {
 	/**
 	 * 保存到相册的图片路径
 	 */
 	path : string
 };
 
+export type SaveImageToPhotosAlbumFail = IMediaError;
+export type SaveImageToPhotosAlbumSuccessCallback = (callback : SaveImageToPhotosAlbumSuccess) => void
+export type SaveImageToPhotosAlbumFailCallback = (callback : SaveImageToPhotosAlbumFail) => void
+export type SaveImageToPhotosAlbumCompleteCallback = ChooseImageCompleteCallback
+
 export type SaveImageToPhotosAlbumOptions = {
 	/**
 	 * 图片文件路径，可以是临时文件路径也可以是永久文件路径，不支持网络图片路径
 	 */
-	filePath : string,
+	filePath : string.ImageURIString,
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : SaveImageToPhotosAlbumSuccessCallback) => void) | null,
+	success ?: (SaveImageToPhotosAlbumSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (SaveImageToPhotosAlbumFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (SaveImageToPhotosAlbumCompleteCallback) | null
 };
 export type CompressImage = (options : CompressImageOptions) => void;
-export type CompressImageSuccessCallback = {
+export type CompressImageSuccess = {
 	/**
 	 * 压缩后图片的临时文件路径
 	 */
 	tempFilePath : string
 };
+
+export type CompressImageFail = IMediaError;
+export type CompressImageSuccessCallback = (callback : CompressImageSuccess) => void
+export type CompressImageFailCallback = (callback : CompressImageFail) => void
+export type CompressImageCompleteCallback = ChooseImageCompleteCallback
+
 export type CompressImageOptions = {
 	/**
 	 * 图片路径，图片的路径，可以是相对路径、临时文件路径、存储文件路径
 	 */
-	src : string,
+	src : string.ImageURIString,
 	/**
 	 * 压缩质量，范围0～100，数值越小，质量越低，压缩率越高（仅对jpg有效）
 	 */
@@ -289,18 +374,18 @@ export type CompressImageOptions = {
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : CompressImageSuccessCallback) => void) | null,
+	success ?: (CompressImageSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (CompressImageFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (CompressImageCompleteCallback) | null
 };
 
-export type ChooseVideoSuccessCallback = {
+export type ChooseVideoSuccess = {
 	/**
 	 * 选定视频的临时文件路径
 	 */
@@ -331,6 +416,11 @@ export type ChooseVideoSuccessCallback = {
 	// name: string | null
 };
 
+export type ChooseVideoFail = IMediaError;
+export type ChooseVideoSuccessCallback = (callback : ChooseVideoSuccess) => void
+export type ChooseVideoFailCallback = (callback : ChooseVideoFail) => void
+export type ChooseVideoCompleteCallback = ChooseImageCompleteCallback
+
 export type ChooseVideoOptions = {
 	/**
 	 * album 从相册选视频，camera 使用相机拍摄，默认为：['album', 'camera']
@@ -359,20 +449,20 @@ export type ChooseVideoOptions = {
 	/**
 	 * 接口调用成功，返回视频文件的临时文件路径，详见返回参数说明
 	 */
-	success ?: ((result : ChooseVideoSuccessCallback) => void) | null,
+	success ?: (ChooseVideoSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (ChooseVideoFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (ChooseVideoCompleteCallback) | null
 };
 
 export type ChooseVideo = (options : ChooseVideoOptions) => void;
 
-export type GetVideoInfoSuccessCallback = {
+export type GetVideoInfoSuccess = {
 	/**
 	 * 画面方向
 	 */
@@ -407,51 +497,61 @@ export type GetVideoInfoSuccessCallback = {
 	bitrate : number | null
 };
 
+export type GetVideoInfoFail = IMediaError;
+export type GetVideoInfoSuccessCallback = (callback : GetVideoInfoSuccess) => void
+export type GetVideoInfoFailCallback = (callback : GetVideoInfoFail) => void
+export type GetVideoInfoCompleteCallback = ChooseImageCompleteCallback
+
 export type GetVideoInfoOptions = {
 	/**
 	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
 	 */
-	src : string,
+	src : string.VideoURIString,
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : GetVideoInfoSuccessCallback) => void) | null,
+	success ?: (GetVideoInfoSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (GetVideoInfoFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (GetVideoInfoCompleteCallback) | null
 };
 
 export type GetVideoInfo = (options : GetVideoInfoOptions) => void;
 
-export type SaveVideoToPhotosAlbumSuccessCallback = {};
+export type SaveVideoToPhotosAlbumSuccess = {};
+
+export type SaveVideoToPhotosAlbumFail = IMediaError;
+export type SaveVideoToPhotosAlbumSuccessCallback = (callback : SaveVideoToPhotosAlbumSuccess) => void
+export type SaveVideoToPhotosAlbumFailCallback = (callback : SaveVideoToPhotosAlbumFail) => void
+export type SaveVideoToPhotosAlbumCompleteCallback = ChooseImageCompleteCallback
 
 export type SaveVideoToPhotosAlbumOptions = {
 	/**
 	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
 	 */
-	filePath : string,
+	filePath : string.VideoURIString,
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : SaveVideoToPhotosAlbumSuccessCallback) => void) | null,
+	success ?: (SaveVideoToPhotosAlbumSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (SaveVideoToPhotosAlbumFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (SaveVideoToPhotosAlbumCompleteCallback) | null
 };
 
 export type SaveVideoToPhotosAlbum = (options : SaveVideoToPhotosAlbumOptions) => void;
 
-export type CompressVideoSuccessCallback = {
+export type CompressVideoSuccess = {
 	/**
 	 * 压缩后的临时文件地址
 	 */
@@ -462,11 +562,16 @@ export type CompressVideoSuccessCallback = {
 	size : number
 };
 
+export type CompressVideoFail = IMediaError;
+export type CompressVideoSuccessCallback = (callback : CompressVideoSuccess) => void
+export type CompressVideoFailCallback = (callback : CompressVideoFail) => void
+export type CompressVideoCompleteCallback = ChooseImageCompleteCallback
+
 export type CompressVideoOptions = {
 	/**
 	 * 视频文件路径，可以是临时文件路径也可以是永久文件路径
 	 */
-	src : string,
+	src : string.VideoURIString,
 	/**
 	 * 压缩质量
 	 * - low: 低
@@ -490,15 +595,15 @@ export type CompressVideoOptions = {
 	/**
 	 * 接口调用成功的回调函数
 	 */
-	success ?: ((result : CompressVideoSuccessCallback) => void) | null,
+	success ?: (CompressVideoSuccessCallback) | null,
 	/**
 	 * 接口调用失败的回调函数
 	 */
-	fail ?: ((result : UniError) => void) | null,
+	fail ?: (CompressVideoFailCallback) | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 */
-	complete ?: ((result : any) => void) | null
+	complete ?: (CompressVideoCompleteCallback) | null
 };
 
 export type CompressVideo = (options : CompressVideoOptions) => void;
@@ -514,7 +619,11 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -542,7 +651,11 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example

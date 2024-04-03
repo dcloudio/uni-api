@@ -1,0 +1,98 @@
+import { ChannelManager, SetPushChannelOptions } from "../../interface.uts";
+import Context from 'android.content.Context';
+import Build from 'android.os.Build';
+import NotificationManager from 'android.app.NotificationManager';
+import NotificationChannelGroup from 'android.app.NotificationChannelGroup';
+import NotificationChannel from 'android.app.NotificationChannel';
+import TextUtils from 'android.text.TextUtils';
+import ContentResolver from 'android.content.ContentResolver';
+import Uri from 'android.net.Uri';
+import RingtoneManager from 'android.media.RingtoneManager';
+
+export class PushChannelManager implements ChannelManager {
+
+	static LOCAL_PUSH_CHANNEL_ID = "DcloudChannelID";
+	static LOCAL_PUSH_GROUP_ID = "DcloudGroupID";
+
+	private static INSTANCE : PushChannelManager | null = null
+
+	static getInstance() : PushChannelManager {
+		if (this.INSTANCE == null) {
+			this.INSTANCE = new PushChannelManager()
+		}
+		return this.INSTANCE!!
+	}
+
+	createDefaultChannel(context : Context) {
+		if (Build.VERSION.SDK_INT >= 26) {
+			const notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+			const pChannelId = PushChannelManager.LOCAL_PUSH_CHANNEL_ID
+			const pChannelName = context.getResources().getString(R.string.dcloud_feature_aps_notification_channel)
+			if (notificationManager.getNotificationChannel(pChannelId) == null) {
+				notificationManager.createNotificationChannelGroup(new NotificationChannelGroup(PushChannelManager.LOCAL_PUSH_GROUP_ID, context.getResources().getString(R.string.dcloud_feature_aps_notification_group)))
+				const channel = new NotificationChannel(pChannelId, pChannelName, NotificationManager.IMPORTANCE_DEFAULT)
+				channel.enableLights(true)
+				channel.setShowBadge(true)
+				notificationManager.createNotificationChannel(channel)
+			}
+		}
+	}
+
+	/**
+	 * 设置推送渠道
+	 */
+	setPushChannel(options : SetPushChannelOptions) : void {
+		if (Build.VERSION.SDK_INT >= 26) {
+			const context = UTSAndroid.getAppContext() as Context
+			const notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager;
+			if (notificationManager.getNotificationChannel(options.channelId) == null) {
+				const notificationChannel = new NotificationChannel(options.channelId, options.channelDesc, NotificationManager.IMPORTANCE_DEFAULT);
+				notificationChannel.setShowBadge(true);
+				let sound = 0;
+				if (!TextUtils.isEmpty(options.soundName)) {
+					const packName = context.getApplicationInfo().packageName
+					sound = context.getResources().getIdentifier(options.soundName!!, "raw", packName)
+				}
+				let uriStr = "";
+				if (sound != 0) {
+					uriStr = ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/raw/" + sound;
+				}
+
+				if (!TextUtils.isEmpty(uriStr)) {
+					notificationChannel.setSound(Uri.parse(uriStr), null);
+				} else {
+					const uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);//默认铃音
+					notificationChannel.setSound(uri, null);
+				}
+
+				if (options.importance != null) {
+					notificationChannel.setImportance(options.importance!!.toInt());
+				}
+				if (options.lockscreenVisibility != null) {
+					notificationChannel.setLockscreenVisibility(options.lockscreenVisibility!!.toInt());
+				}
+				notificationChannel.enableLights(options.enableLights ?? false);
+				notificationChannel.enableVibration(options.enableVibration ?? false);
+				notificationManager.createNotificationChannel(notificationChannel);
+			}
+		}
+	}
+	/**
+	 * 获取当前应用注册的所有的通知渠道。
+	 */
+	getAllChannels() : string[] {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			const context = UTSAndroid.getAppContext() as Context
+			const nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+			const channels : string[] = []
+			const list = nm.getNotificationChannels()
+			for (let i:Int = 0; i < list.size; i++) {
+				channels.push(list.get(i).toString())
+			}
+			return channels
+		}else{
+			return [] as string[]
+		}
+	}
+
+}

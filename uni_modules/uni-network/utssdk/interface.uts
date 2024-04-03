@@ -1,4 +1,4 @@
-export type Request<T> = (param: RequestOptions<T>) => RequestTask | null;
+export type Request<T> = (param: RequestOptions<T>) => RequestTask;
 
 /**
  * 网络请求参数
@@ -55,21 +55,21 @@ export type RequestOptions<T> = {
   /**
    * 跨域请求时是否携带凭证（cookies）
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
-   * 
    */
   withCredentials?: boolean | null,
   /**
@@ -132,13 +132,11 @@ export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD"
  * - 1000 服务端系统错误
  * - 100001 json数据解析错误
  * - 100002 错误信息json解析失败
- * - 600000 未知的网络错误
  * - 600003 网络中断
  * - 600009 URL格式不合法
- * - 600010 请求的 data 序列化失败
  * - 602001 request系统错误
  */
-export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600000 | 600003 | 600009 | 600010  | 602001;
+export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600003 | 600009 | 602001;
 /**
  * 网络请求失败的错误回调参数
  */
@@ -158,20 +156,25 @@ export interface RequestTask {
     * @param {void} 
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#request
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "x",
+  *     "unixVer": "x"
+  *   }
+	* }
     * @example
      ```typescript
       var requestTask = uni.request({
@@ -187,35 +190,36 @@ export interface RequestTask {
 //===============================上传==================================
 
 
-export type UploadFile = (options: UploadFileOptions) => UploadTask | null;
+export type UploadFile = (options: UploadFileOptions) => UploadTask;
 export type UploadFileOptionFiles = {
   /**
    * multipart 提交时，表单的项目名，默认为 file，如果 name 不填或填的值相同，可能导致服务端读取文件时只能读取到一个文件。
    * @defaultValue "file"
    */
-  name: string | null,
+  name?: string | null,
   /**
    * 要上传文件资源的路径
    */
   uri: string,
   /**
    * 要上传的文件对象
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	}
+	* }
    */
-  file: any | null
+  file?: any | null
 };
 export type UploadFileSuccess = {
   /**
@@ -312,20 +316,25 @@ export interface UploadTask {
     * @param {void} 
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "x",
+  *     "unixVer": "x"
+  *   }
+	* }
     * @example
      ```typescript
       var uploadTask = uni.uploadFile({
@@ -343,20 +352,21 @@ export interface UploadTask {
     * @param {UploadFileProgressUpdateCallback}  callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	}
+	* }
     * @example
      ```typescript
       uploadTask.onProgressUpdate((res) => {
@@ -371,7 +381,7 @@ export interface UploadTask {
 
 //===============================下载==================================
 
-export type DownloadFile = (options: DownloadFileOptions) => DownloadTask | null;
+export type DownloadFile = (options: DownloadFileOptions) => DownloadTask;
 export type DownloadFileSuccess = {
   /**
    * 临时文件路径，下载后的文件会存储到一个临时文件
@@ -455,20 +465,25 @@ export interface DownloadTask {
     * @param {void} 
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "x",
+  *     "unixVer": "x"
+  *   }
+	* }
     * @example
      ```typescript
       var downloadTask = uni.downloadFile({
@@ -486,20 +501,21 @@ export interface DownloadTask {
     * @param {DownloadFileProgressUpdateCallback}  callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	}
+	* }
     * @example
      ```typescript
       downloadTask.onProgressUpdate((res) => {
@@ -519,22 +535,27 @@ export interface Uni {
     * @description 
     * 发起网络请求。
     * @param {RequestOptions} options
-    * @return {RequestTask | null} 
+    * @return {RequestTask} 
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
         uni.request({
@@ -564,28 +585,33 @@ export interface Uni {
             });
      ```
     */
-  request<T>(param: RequestOptions<T>): RequestTask | null;
+  request<T>(param: RequestOptions<T>): RequestTask;
   /**
     * UploadFile()
     * @description 
     * 将本地资源上传到开发者服务器。
     * @param {UploadFileOptions} options
-    * @return {UploadTask | null}
+    * @return {UploadTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.uploadFile({
@@ -601,28 +627,33 @@ export interface Uni {
             });
      ```
     */
-  uploadFile(options: UploadFileOptions): UploadTask | null;
+  uploadFile(options: UploadFileOptions): UploadTask;
   /**
     * DownloadFile()
     * @description 
     * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
     * @param {DownloadFileOptions} options
-    * @return {DownloadTask | null}
+    * @return {DownloadTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.downloadFile({
@@ -633,5 +664,5 @@ export interface Uni {
               });
      ```
     */
-  downloadFile(options: DownloadFileOptions): DownloadTask | null;
+  downloadFile(options: DownloadFileOptions): DownloadTask;
 }

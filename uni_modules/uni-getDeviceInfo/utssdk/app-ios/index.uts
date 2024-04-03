@@ -23,7 +23,6 @@ export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | nu
 			"devicePixelRatio",
 			"system",
 			"platform",
-			"idfa",
 			"isRoot",
 			"isSimulator"
 		];
@@ -65,9 +64,6 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 	}
 	if (filterArray.indexOf("platform") != -1) {
 		result.platform = "ios";
-	}
-	if (filterArray.indexOf("idfa") != -1) {
-		result.idfa = DeviceUtil.getIdfa();
 	}
 	if (filterArray.indexOf("isRoot") != -1) {
 		result.isRoot = DeviceUtil.hasRootPrivilege();

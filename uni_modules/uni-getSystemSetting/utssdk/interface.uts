@@ -24,7 +24,7 @@ export type GetSystemSettingResult = {
   /**
    * 设备方向
    */
-  deviceOrientation : string
+  deviceOrientation : 'portrait' | 'landscape',
 }
 
 
@@ -38,20 +38,21 @@ export interface Uni {
     * 获取系统设置
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	}
+	* }
     * @example
      ```typescript
       uni.getSystemSetting()

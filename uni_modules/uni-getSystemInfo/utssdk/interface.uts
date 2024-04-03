@@ -6,20 +6,25 @@ export interface Uni {
     * @param {GetSystemInfoOptions}  options
     * @return {void}
     * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfo
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.getSystemInfo({
@@ -41,20 +46,25 @@ export interface Uni {
     * @param {void}  
     * @return {GetSystemInfoResult}
     * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.getSystemInfoSync()
@@ -69,20 +79,25 @@ export interface Uni {
     * @param {void}  
     * @return {GetWindowInfoResult} result
     * @tutorial http://uniapp.dcloud.io/api/system/getWindowInfo.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "9.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "x"
+	* 		}
+	* 	},
+  *   "web": {
+  *     "uniVer": "√",
+  *     "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.getWindowInfo()
@@ -166,22 +181,23 @@ export type GetSystemInfoResult = {
   /**
    * 应用资源（wgt）的版本名称。
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
-  appWgtVersion: string | null,
+  appWgtVersion?: string | null,
   /**
    * 手机品牌。
    */
@@ -207,20 +223,18 @@ export type GetSystemInfoResult = {
    */
   deviceModel: string,
   /**
-   * 设备类型。`phone`、`pad`、`pc`
+   * 设备类型。
    */
-  deviceType: string,
+  deviceType: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
   /**
    * 设备像素比
    */
   devicePixelRatio: number,
   /**
-   * 设备方向。如：`竖屏 portrait`、`横屏 landscape`
-   * - portrait: 竖屏
-   * - landscape: 横屏
+   * 设备方向。
    * @type 'portrait' | 'landscape'
    */
-  deviceOrientation: string,
+  deviceOrientation: 'portrait' | 'landscape',
   /**
    * 程序设置的语言
    */
@@ -230,9 +244,9 @@ export type GetSystemInfoResult = {
    */
   model: string,
   /**
-   * ios、android、windows、mac、linux
+   * 系统名称	
    */
-  osName: string,
+  osName: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
    */
@@ -242,24 +256,25 @@ export type GetSystemInfoResult = {
    */
   osLanguage: string,
   /**
-   * 操作系统主题 light、dark。
+   * 操作系统主题
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "√"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "9.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
-  osTheme: string | null,
+  osTheme?: 'light' | 'dark' | null,
   /**
    * 设备像素比
    */
@@ -267,7 +282,7 @@ export type GetSystemInfoResult = {
   /**
    * 客户端平台
    */
-  platform: string,
+  platform: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
   /**
    * 屏幕宽度
    */
@@ -298,20 +313,30 @@ export type GetSystemInfoResult = {
   ua: string,
   /**
    * uni 编译器版本
+   * @deprecated 已废弃，仅为了向下兼容保留
    */
   uniCompileVersion: string,
   /**
-   * uni-app 运行平台。如：`app`、`mp-weixin`、`web`
+   * uni 编译器版本
    */
-  uniPlatform: string,
+  uniCompilerVersion: string,
+  /**
+   * uni-app 运行平台。
+   */
+  uniPlatform: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
    * uni 运行时版本
    */
   uniRuntimeVersion: string,
   /**
    * uni 编译器版本号
+   * @deprecated 已废弃，仅为了向下兼容保留
    */
   uniCompileVersionCode: number,
+  /**
+   * uni 编译器版本号
+   */
+  uniCompilerVersionCode: number,
   /**
    * uni 运行时版本号
    */
@@ -346,43 +371,25 @@ export type GetSystemInfoResult = {
    */
   windowBottom: number,
   /**
-   * oaid
-   * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
-   * }
-   */
-  oaid: string | null
-  /**
    * Android 系统API库的版本。
    * 
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "√"
-   *        },
-   *        "ios": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "√"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
-  osAndroidAPILevel: number | null
+  osAndroidAPILevel?: number | null
 };
 export type GetSystemInfoSuccessCallback = (result: GetSystemInfoResult) => void;
 type GetSystemInfoFail = UniError;

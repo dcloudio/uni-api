@@ -17,7 +17,7 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
@@ -26,13 +26,39 @@ export interface Uni {
    *            "uniVer": "x",
    *            "unixVer": "x"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
-   * }
+   * }9999
+   * 
    */
   getLocation(options: GetLocationOptions):void;
   
 }
 
+
+/**
+ * 错误码
+ * - 1505004  缺失权限
+ * - 1505005  缺失高精度权限授权（iOS特有）
+ * - 1505021  超时
+ * - 1505022  不支持的定位类型
+ * - 1505023  不支持逆地理编码
+ * - 1505024  没有找到具体的定位引擎，请定位开关是否已打开
+ * - 1505025  逆地理编码捕获失败
+ * - 1505026  捕获定位失败
+ */
+export type LocationErrorCode = 1505004 | 1505005 | 1505021 | 1505022 | 1505023 | 1505024 | 1505025 | 1505026;
+/**
+ * 网络请求失败的错误回调参数
+ */
+export interface IGetLocationFail extends IUniError{
+	errCode: LocationErrorCode
+};
+
+export type GetLocationFail = IGetLocationFail
 
 
 export type GetLocation = (options: GetLocationOptions) => void;
@@ -78,15 +104,15 @@ export type GetLocationSuccess = {
   address: any | null
 };
 type GetLocationSuccessCallback = (result: GetLocationSuccess) => void;
-type GetLocationFailCallback = (result: UniError) => void;
+type GetLocationFailCallback = (result: GetLocationFail) => void;
 type GetLocationComplete = any;
 type GetLocationCompleteCallback = (result: GetLocationComplete) => void;
 export type GetLocationOptions = {
   /**
-   * 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于uni.openLocation的坐标
+   * 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于uni.openLocation的坐标，web端需配置定位 SDK 信息才可支持 gcj02
    * @defaultValue wgs84
    */
-  type?: string | null,
+  type?: "wgs84" | "gcj02" | "gps" | null,
   /**
    * 传入 true 会返回高度信息，由于获取高度需要较高精确度，会减慢接口返回速度
    * @type boolean

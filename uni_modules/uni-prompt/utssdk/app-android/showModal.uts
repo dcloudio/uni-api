@@ -5,12 +5,16 @@ import TextView from 'android.widget.TextView';
 import EditText from 'android.widget.EditText';
 import View from 'android.view.View';
 import Color from 'android.graphics.Color';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
-import Typeface from 'android.graphics.Typeface';
 
 
 import { ShowModalOptions,ShowModalSuccess,ShowModalFail} from '../interface.uts'
 import TextUtils from 'android.text.TextUtils';
+
+// #ifdef UNI-APP-X
+import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
+import onReady from 'io.dcloud.uniapp.framework.onReady';
+import onUnload from 'io.dcloud.uniapp.framework.onUnload';
+// #endif
 
 
 class UTSDialog extends Dialog implements View.OnClickListener {
@@ -26,9 +30,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 		super(context);
 		
 		if(UTSAndroid.getAppDarkMode()){
-			this.setContentView(R.layout.modal_dialog_night);
+			this.setContentView(R.layout.uni_prompt_modal_dialog_night);
 		}else{
-			this.setContentView(R.layout.modal_dialog);
+			this.setContentView(R.layout.uni_prompt_modal_dialog);
 		}
 		
 		this.getWindow()?.setBackgroundDrawableResource(android.R.color.transparent);
@@ -44,6 +48,24 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 	
 	hostStyle:ShowModalOptions|null = null
 	
+	override dismiss():void {
+		/**
+		 * 对齐微信，dismiss中的调用都是 cancel
+		 */
+		const res: ShowModalSuccess = {
+			confirm: false,
+			cancel: true,
+		}
+		// 为了确保complete只调用一次，执行后手动置空
+		this.hostStyle?.complete?.(res)
+		if(this.hostStyle != null){
+			this.hostStyle!.complete = null
+		}
+		
+		super.dismiss()
+		
+	}
+	
 	initStyle(style:ShowModalOptions){
 		this.hostStyle = style
 		this.setCanceledOnTouchOutside(false)
@@ -54,9 +76,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 			this.tvSureAction.setVisibility(View.VISIBLE)
 			
 			if(UTSAndroid.getAppDarkMode()){
-				this.tvSureAction.setBackgroundResource(R.drawable.dialog_button_select_right_night)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_right_night)
 			}else{
-				this.tvSureAction.setBackgroundResource(R.drawable.dialog_button_select_right)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_right)
 			}
 		}else{
 			this.tvCancelAction.setVisibility(View.GONE)
@@ -64,9 +86,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 			this.tvSureAction.setVisibility(View.VISIBLE)
 			
 			if(UTSAndroid.getAppDarkMode()){
-				this.tvSureAction.setBackgroundResource(R.drawable.dialog_button_select_total_night)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_total_night)
 			}else{
-				this.tvSureAction.setBackgroundResource(R.drawable.dialog_button_select_total)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_total)
 			}
 			
 		}
@@ -116,9 +138,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 				if(TextUtils.isEmpty(style.title)){
 					// 如果此时title 为空，需要修改文本颜色
 					if(UTSAndroid.getAppDarkMode()){
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.dialog_title_text_night))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text_night))
 					}else{
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.dialog_title_text))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text))
 					}
 				}
 			}else{
@@ -128,9 +150,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 					this.tv_content.setVisibility(View.VISIBLE)
 					this.tv_content.setText(style.title)
 					if(UTSAndroid.getAppDarkMode()){
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.dialog_title_text_night))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text_night))
 					}else{
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.dialog_title_text))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text))
 					}
 				}else{
 					this.tv_content.setVisibility(View.GONE)
@@ -189,8 +211,11 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 		}
 		
 		this.hostStyle?.success?.(res)
+		// 为了确保complete只调用一次，执行后手动置空
 		this.hostStyle?.complete?.(res)
-		
+		if(this.hostStyle != null){
+			this.hostStyle!.complete = null
+		}
 		this.dismiss()
 	}
 }
@@ -202,14 +227,73 @@ let utsDialog:UTSDialog|null = null
 export function showModalImpl(style:ShowModalOptions){
 	if(utsDialog != null){
 		utsDialog?.dismiss()
-	}
-	utsDialog = new UTSDialog(UTSAndroid.getUniActivity()!);
-	utsDialog?.initStyle(style)
-	utsDialog?.show();
-	
-	UTSAndroid.onAppActivityDestroy(function(){
-		utsDialog?.dismiss()
 		utsDialog = null
-	})
+	}
+	
+	
+	
+	// #ifndef UNI-APP-X
+		/**
+		 * uni-app
+		 */
+		if(UTSAndroid.getTopPageActivity() == null){
+			return 
+		}
+		if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+			return 
+		}
+		utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+		utsDialog?.initStyle(style)
+		utsDialog?.show();
+		
+		UTSAndroid.onAppActivityDestroy(function(){
+			utsDialog?.dismiss()
+			utsDialog = null
+		})
+		
+	// #endif
+	// #ifdef UNI-APP-X
+		/**
+		 * uni-app x
+		 * 需要特殊处理生命周期 
+		 */
+		const pages = getCurrentPages();
+		if (pages.length > 0) {
+		    const page = pages[pages.length - 1]
+		    const instance = page.$
+		    if (page.$isReady) {
+				if(UTSAndroid.getTopPageActivity() == null){
+					return 
+				}
+				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+					return 
+				}
+				utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+				utsDialog?.initStyle(style)
+		        utsDialog?.show();
+		    } else {
+		        onReady(() => {
+					if(UTSAndroid.getTopPageActivity() == null){
+						return 
+					}
+					if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+						return 
+					}
+					utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+					utsDialog?.initStyle(style)
+		            utsDialog?.show();
+		        }, instance)
+		    }
+		    
+			onUnload(() => {
+				utsDialog?.dismiss()
+				utsDialog = null
+			}, instance)
+			
+		    
+		}
+	// #endif
+	
+	
 	
 }

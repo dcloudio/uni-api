@@ -1,7 +1,6 @@
 import { ChooseImageOptions, ChooseVideoOptions } from "./interface.uts"
 import {
-	UniError_ChooseImage, UniError_ChooseVideo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
-	UniErrors
+	UniError_ChooseImage, UniError_ChooseVideo, MediaErrorImpl
 } from "./unierror.uts"
 export const CODE_CAMERA_ERROR = 11;
 export const CODE_GALLERY_ERROR = 12;
@@ -19,9 +18,9 @@ export function uniChooseImage(options : ChooseImageOptions, onSourceTypeSelect 
 	let itemList = ["拍摄", "从相册选择"]
 	if (sourceType.length == 1) {
 		if (sourceType.indexOf("album") >= 0) {
-			onSourceTypeSelect?.(count!, compressed, 1)
+			onSourceTypeSelect(count!, compressed, 1)
 		} else if (sourceType.indexOf("camera") >= 0) {
-			onSourceTypeSelect?.(count!, compressed, 0)
+			onSourceTypeSelect(count!, compressed, 0)
 		}
 		return
 	}
@@ -29,10 +28,10 @@ export function uniChooseImage(options : ChooseImageOptions, onSourceTypeSelect 
 		uni.showActionSheet({
 			itemList: itemList,
 			success: (e) => {
-				onSourceTypeSelect?.(count!, compressed, e.tapIndex!)
+				onSourceTypeSelect(count!, compressed, e.tapIndex!)
 			},
 			fail: (e) => {
-				let error : UniError = { "errSubject": UniError_ChooseImage, "errCode": 1101001, "errMsg": UniErrors[1101001]! }
+				let error = new MediaErrorImpl(1101001, UniError_ChooseImage);
 				options.fail?.(error)
 				options.complete?.(error)
 			}
@@ -50,9 +49,9 @@ export function uniChooseVideo(options : ChooseVideoOptions, onSourceTypeSelect 
 	let itemList = ["拍摄", "从相册选择"]
 	if (sourceType.length == 1) {
 		if (sourceType.indexOf("album") >= 0) {
-			onSourceTypeSelect?.(count!, compressed, 1)
+			onSourceTypeSelect(count!, compressed, 1)
 		} else if (sourceType.indexOf("camera") >= 0) {
-			onSourceTypeSelect?.(count!, compressed, 0)
+			onSourceTypeSelect(count!, compressed, 0)
 		}
 		return
 	}
@@ -61,10 +60,10 @@ export function uniChooseVideo(options : ChooseVideoOptions, onSourceTypeSelect 
 		uni.showActionSheet({
 			itemList: itemList,
 			success: (e) => {
-				onSourceTypeSelect?.(count!, compressed, e.tapIndex!)
+				onSourceTypeSelect(count!, compressed, e.tapIndex!)
 			},
 			fail: (e) => {
-				let error : UniError = { "errSubject": UniError_ChooseVideo, "errCode": 1101001, "errMsg": UniErrors[1101001]! }
+				let error = new MediaErrorImpl(1101001, UniError_ChooseVideo);
 				options.fail?.(error)
 				options.complete?.(error)
 			}
