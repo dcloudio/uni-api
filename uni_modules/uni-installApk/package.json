@@ -1,7 +1,7 @@
 {
 	"id": "uni-installApk",
 	"displayName": "uni-installApk",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "uni-installApk",
 	"keywords": [
         "uni-installApk"
@@ -48,7 +48,8 @@
 		"platforms": {
 			"cloud": {
 				"tcb": "y",
-				"aliyun": "y"
+                "aliyun": "y",
+                "alipay": "n"
 			},
 			"client": {
 				"Vue": {
