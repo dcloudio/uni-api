@@ -82,9 +82,9 @@ export type SetUserCaptureScreen = (options : SetUserCaptureScreenOptions) => vo
 
 export interface Uni {
 	/**
-	 * 开启截屏监听 
-	 * 
-	 * @param {UserCaptureScreenCallback} callback 
+	 * 开启截屏监听
+	 *
+	 * @param {UserCaptureScreenCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#onusercapturescreen
 	 * @uniPlatform {
 	 *    "app": {
@@ -94,9 +94,9 @@ export interface Uni {
 	 *            "unixVer": "3.9.0"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "9.0",
+	 *            "osVer": "12.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "4.11"
 	 *   	  }
 	 *    }
 	 * }
@@ -106,9 +106,9 @@ export interface Uni {
 	 */
 	onUserCaptureScreen(callback : UserCaptureScreenCallback | null) : void,
 	/**
-	 * 关闭截屏监听 
-	 * 
-	 * @param {UserCaptureScreenCallback} callback 
+	 * 关闭截屏监听
+	 *
+	 * @param {UserCaptureScreenCallback} callback
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#offusercapturescreen
 	 * @uniPlatform {
 	 *    "app": {
@@ -118,9 +118,9 @@ export interface Uni {
 	 *            "unixVer": "3.9.0"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "9.0",
+	 *            "osVer": "12.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "4.11"
 	 *   	  }
 	 *    }
 	 * }
@@ -130,9 +130,9 @@ export interface Uni {
 	 */
 	offUserCaptureScreen(callback : UserCaptureScreenCallback | null) : void,
 	/**
-	 * 设置防截屏  
-	 * 
-	 * @param {SetUserCaptureScreenOptions} options 
+	 * 设置防截屏
+	 *
+	 * @param {SetUserCaptureScreenOptions} options
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen
 	 * @uniPlatform {
 	 *    "app": {
@@ -144,7 +144,7 @@ export interface Uni {
 	 *        "ios": {
 	 *            "osVer": "13.0",
 	 *            "uniVer": "3.7.7",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "4.11"
 	 *   	  }
 	 *    }
 	 * }
