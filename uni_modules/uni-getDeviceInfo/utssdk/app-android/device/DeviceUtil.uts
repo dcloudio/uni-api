@@ -215,6 +215,15 @@ export class DeviceUtil {
 	public static getOaid(): string {
 		return UTSAndroid.getOAID();
 	}
+	
+	public static getRomName():string{
+		DeviceUtil.setCustomInfo(Build.MANUFACTURER);
+		return DeviceUtil.customOS ?? "";
+	}
+	public static getRomVersion():string{
+		DeviceUtil.setCustomInfo(Build.MANUFACTURER);
+		return DeviceUtil.customOSVersion ?? "";
+	}
 
 
 	/**

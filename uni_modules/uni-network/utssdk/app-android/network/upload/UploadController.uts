@@ -136,7 +136,7 @@ class UploadController {
 		} catch (exception : Exception) {
 			let option = {};
 			option['statusCode'] = '-1';
-			option['errorCode'] = '-1';
+			option['errorCode'] = '600009';
 			option['errorMsg'] = "invalid URL";
 			let cause = exception.cause.toString();
 			option['cause'] = new SourceError(cause);

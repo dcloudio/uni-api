@@ -3,12 +3,12 @@ import { RequestErrorCode, RequestFail, UploadFileFail, DownloadFileFail } from 
 /**
  * 错误主题
  */
-export const UniErrorSubject = 'uni-request';
+export const UniNetWorkErrorSubject = 'uni-request';
 /**
  * 错误码
  * @UniError
  */
-export const UniErrors : Map<RequestErrorCode, string> = new Map([
+const NetWorkUniErrors : Map<RequestErrorCode, string> = new Map([
 
 	/**
 	 * 接口超时
@@ -42,7 +42,7 @@ export const UniErrors : Map<RequestErrorCode, string> = new Map([
 
 
 export function getErrcode(errCode : number) : RequestErrorCode {
-	const res = UniErrors[errCode];
+	const res = NetWorkUniErrors[errCode];
 	return res == null ? 602001 : errCode;
 }
 
@@ -53,9 +53,9 @@ export class RequestFailImpl extends UniError implements RequestFail {
 // #endif
 	constructor(errCode : RequestErrorCode) {
 		super();
-		this.errSubject = UniErrorSubject;
+		this.errSubject = UniNetWorkErrorSubject;
 		this.errCode = errCode;
-		this.errMsg = UniErrors[errCode] ?? "";
+		this.errMsg = NetWorkUniErrors[errCode] ?? "";
 	}
 }
 
@@ -68,7 +68,7 @@ export class UploadFileFailImpl extends UniError implements UploadFileFail {
 		super();
 		this.errSubject = "uni-uploadFile";
 		this.errCode = errCode;
-		this.errMsg = UniErrors[errCode] ?? "";
+		this.errMsg = NetWorkUniErrors[errCode] ?? "";
 	}
 }
 
@@ -81,6 +81,6 @@ export class DownloadFileFailImpl extends UniError implements DownloadFileFail {
 		super();
 		this.errSubject = "uni-downloadFile";
 		this.errCode = errCode;
-		this.errMsg = UniErrors[errCode] ?? "";
+		this.errMsg = NetWorkUniErrors[errCode] ?? "";
 	}
 }

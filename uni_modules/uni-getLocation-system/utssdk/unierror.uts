@@ -3,12 +3,14 @@ import { LocationErrorCode, IGetLocationFail } from "./interface.uts"
 /**
  * 错误主题
  */
-export const UniErrorSubject = 'uni-location';
+
+export const SystemLocationUniErrorSubject = 'uni-location';
+
 /**
  * 错误码
  * @UniError
  */
-export const UniErrors : Map<LocationErrorCode, string> = new Map([
+export const SystemLocationUniErrors : Map<LocationErrorCode, string> = new Map([
 
 	/**
 	 * 缺失权限
@@ -17,7 +19,7 @@ export const UniErrors : Map<LocationErrorCode, string> = new Map([
 	/**
 	 * iOS特有的缺失高精度权限
 	 */
-	[1505004, 'Unauthorized access to high-accuracy location services.'],
+	[1505005, 'Unauthorized access to high-accuracy location services.'],
 	/**
 	 * 超时
 	 */
@@ -46,8 +48,8 @@ export const UniErrors : Map<LocationErrorCode, string> = new Map([
 ]);
 
 
-export function getErrcode(errCode : number) : LocationErrorCode {
-	const res = UniErrors[errCode];
+export function getSystemLocationErrcode(errCode : number) : LocationErrorCode {
+	const res = SystemLocationUniErrors[errCode];
 	return res == null ? 1505021 : errCode;
 }
 
@@ -55,9 +57,9 @@ export function getErrcode(errCode : number) : LocationErrorCode {
 export class GetLocationFailImpl extends UniError implements IGetLocationFail {
 	constructor(errCode : LocationErrorCode) {
 		super();
-		this.errSubject = UniErrorSubject;
+		this.errSubject = SystemLocationUniErrorSubject;
 		this.errCode = errCode;
-		this.errMsg = UniErrors[errCode] ?? "";
+		this.errMsg = SystemLocationUniErrors[errCode] ?? "";
 	}
 }
 

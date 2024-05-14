@@ -273,7 +273,7 @@ class SimpleDownloadCallback implements Callback {
 					path = UTSAndroid.getAppTempPath()!! + "/" + this.specifyPath;
 				}
 
-				const file = new File(path)
+				var file = new File(path)
 				const parentFile = file.getParentFile()
 				if (parentFile != null) {
 					if (!parentFile.exists()) {
@@ -287,6 +287,23 @@ class SimpleDownloadCallback implements Callback {
 					option['errorMsg'] = "The target file path is already a directory file, and file creation failed.";
 					option['cause'] = null;
 					this.listener?.onComplete(option);
+				}
+				
+				if (file.exists()) {
+					const index = path.lastIndexOf(".");
+					let tFileName = path;
+					let tFileType = "";
+					if (index >= 0) {
+						tFileName = path.substring(0, index)
+						tFileType = path.substring(index)
+					}
+				
+					var number = 1
+					while (new File(path).exists()) {
+						path = tFileName + "(" + number + ")" + tFileType;
+						number++
+					}
+					file = new File(path)
 				}
 
 				if (!file.exists()) {
@@ -323,11 +340,12 @@ class SimpleDownloadCallback implements Callback {
 							if (pair != null) {
 								let key = pair[0];
 								let value = pair[1];
+								const reg = new RegExp("^\"|\"$","g")
 								if (key != null) {
-									key = key.replace("\"", "");
+									key = key.replace(reg, "");
 								}
 								if (value != null) {
-									value = value.replace("\"", "");
+									value = value.replace(reg, "");
 								}
 
 								if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value) && key!.equals("filename", true)) {

@@ -15,15 +15,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -52,15 +52,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -87,15 +87,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -122,15 +122,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -156,15 +156,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -190,15 +190,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -222,15 +222,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -265,17 +265,62 @@ type ConnectSocketComplete = any;
 type ConnectSocketCompleteCallback = (result: ConnectSocketComplete) => void;
 export type ConnectSocketOptions = {
   /**
-   * 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
+   * 开发者服务器接口地址
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   url: string,
   /**
    * HTTP 请求 Header，header 中不能设置 Referer
    * @defaultValue null
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   header?: UTSJSONObject | null,
   /**
    * 子协议数组
    * @defaultValue null
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   protocols?: (string[]) | null,
   /**
@@ -318,6 +363,21 @@ export type SendSocketMessageOptions = {
    * 需要发送的内容
    * @type string | ArrayBuffer
    * @type {SocketDataOptions}
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   data: any,
   /**
@@ -340,11 +400,41 @@ export type CloseSocketOptions = {
   /**
    * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。如果这个参数没有被指定，默认的取值是1000 （表示正常连接关闭）
    * @defaultValue 1000
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   code?: number | null,
   /**
    * 一个可读的字符串，表示连接被关闭的原因。这个字符串必须是不长于123字节的UTF-8 文本（不是字符）
    * @defaultValue ""
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   reason?: string | null,
   /**
@@ -366,6 +456,21 @@ export type CloseSocketOptions = {
 export type OnSocketOpenCallbackResult = {
   /**
    * 连接成功的 HTTP 响应 Header
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   header: any
 };
@@ -373,6 +478,21 @@ export type OnSocketMessageCallbackResult = {
   /**
    * 服务器返回的消息
    * @type {SocketDataOptions}
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   data: any
 };
@@ -393,15 +513,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -425,15 +545,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -457,15 +577,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -489,15 +609,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -522,15 +642,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -555,15 +675,15 @@ export interface SocketTask {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -594,11 +714,41 @@ export type OnSocketMessage = (callback: OnSocketMessageCallback) => void;
 export type CloseSocket = (options: CloseSocketOptions) => void;
 export type OnSocketCloseCallbackResult = {
   /**
-   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。	
+   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   code: number,
   /**
    * 一个可读的字符串，表示连接被关闭的原因。	
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   reason: string
 };

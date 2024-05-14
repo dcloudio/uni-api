@@ -1,0 +1,11 @@
+framework module DCloudAlertController {
+  umbrella header "DCloudAlertController.h"
+  export *
+
+  module * { export * }
+}
+
+module DCloudAlertController.Swift {
+  header "DCloudAlertController-Swift.h"
+  requires objc
+}

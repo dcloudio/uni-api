@@ -1,0 +1,10 @@
+import { onThemeChange as  _onThemeChange, OnThemeChangeCallback } from '@dcloudio/uni-runtime'
+import {OnThemeChange} from './interface.uts'
+
+export const onOSThemeChange = defineSyncApi<OnThemeChange>(
+    'onOSThemeChange',
+    (callback: OnThemeChangeCallback) => {
+        _onThemeChange(callback)
+    },
+)
+

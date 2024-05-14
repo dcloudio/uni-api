@@ -1,5 +1,0 @@
-import { RequestPaymentOptions, RequestPayment } from "../interface.uts";
-
-export const requestPayment: RequestPayment = function(options: RequestPaymentOptions) {
-    // TODO
-};

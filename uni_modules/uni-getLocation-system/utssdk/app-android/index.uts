@@ -1,5 +1,5 @@
 import { GetLocation, GetLocationOptions, GetLocationSuccess } from "../interface.uts"
-import { GetLocationFailImpl, getErrcode } from '../unierror';
+import { GetLocationFailImpl, getSystemLocationErrcode } from '../unierror';
 import Context from 'android.content.Context';
 import LocationManager from 'android.location.LocationManager';
 import Criteria from 'android.location.Criteria';
@@ -24,7 +24,7 @@ export const getLocation : GetLocation = function (options : GetLocationOptions)
 		}
 		
 	}, function (_:boolean,_:string[]) {
-		let err = new GetLocationFailImpl(getErrcode(1505004));
+		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505004));
 		options.fail?.(err)
 		options.complete?.(err)
 	})
@@ -126,7 +126,7 @@ class LocationRequest{
 			this.hostLocationManager.removeUpdates(systemListener)
 			if (!this.hasSuccessDone) {
 				// 超过6s/或者设定的超时时间，尚未成功返回，则需要返回错误
-				let err = new GetLocationFailImpl(getErrcode(-4));
+				let err = new GetLocationFailImpl(getSystemLocationErrcode(-4));
 				this.hostOption.fail?.(err)
 				this.hostOption.complete?.(err)
 			}else{
@@ -158,7 +158,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	
 	if(options.type != 'wgs84'){
 		// 系统定位只支持wgs84，如果不是则报错
-		let err = new GetLocationFailImpl(getErrcode(1505022));
+		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505022));
 		options.fail?.(err)
 		options.complete?.(err)
 		return
@@ -166,7 +166,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	
 	if(options.geocode != null && options.geocode == true){
 		// 系统定位不支持逆地理编码
-		let err = new GetLocationFailImpl(getErrcode(1505023));
+		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505023));
 		options.fail?.(err)
 		options.complete?.(err)
 		return
@@ -201,7 +201,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	
 	if (providerName == null) {
 		// 没有找到合法的系统定位能力提供者，错误的逻辑 todo
-		let err = new GetLocationFailImpl(getErrcode(1505024));
+		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505024));
 		options.fail?.(err)
 		options.complete?.(err)
 		return;

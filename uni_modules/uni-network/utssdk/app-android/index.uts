@@ -331,8 +331,8 @@ class UploadNetworkListener implements NetworkUploadFileListener {
 		let kParam = this.param;
 		if (kParam != null) {
 			const errorMsg = option["errorMsg"];
-			let errCode = (option['statusCode']! as string).toInt();
 			if (errorMsg != null) {
+				let errCode = (option['errorCode']! as string).toInt();
 				let failResult = new UploadFileFailImpl(getErrcode(errCode));
 				let cause = option['cause'];
 				if (cause != null) {
@@ -358,9 +358,10 @@ class UploadNetworkListener implements NetworkUploadFileListener {
 				if (kData != null) {
 					data = kData as string;
 				}
+				let statusCode = (option['statusCode']! as string).toInt();
 				let successResult : UploadFileSuccess = {
 					data: data,
-					statusCode: errCode
+					statusCode: statusCode
 				}
 				new RunnableTask(this.looper, () => {
 					if (kParam != null) {
@@ -401,7 +402,6 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 	onComplete(option : UTSJSONObject) {
 		let kParam = this.param;
 		if (kParam != null) {
-			let statusCode = (option['statusCode']! as string).toInt();
 			let errMsg = option['errorMsg'];
 			if (errMsg != null) {
 				let errCode = (option['errorCode']! as string).toInt();
@@ -430,6 +430,7 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 				if (kTempFilePath != null) {
 					tempFilePath = kTempFilePath as string;
 				}
+				let statusCode = (option['statusCode']! as string).toInt();
 				let successResult : DownloadFileSuccess = {
 					tempFilePath: tempFilePath,
 					statusCode: statusCode

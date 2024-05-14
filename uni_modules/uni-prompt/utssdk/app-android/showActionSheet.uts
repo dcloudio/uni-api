@@ -18,6 +18,7 @@ import RecyclerView from 'androidx.recyclerview.widget.RecyclerView';
 import WindowManager from 'android.view.WindowManager';
 
 import { ShowActionSheetOptions, ShowActionSheetSuccess} from '../interface.uts'
+import { PromptErrorImpl } from "../unierror.uts"
 
 // #ifdef UNI-APP-X
 import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
@@ -38,7 +39,7 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	 */
 	if(style.itemList == null || style.itemList.length < 1){
 
-		let res = new UniError("uni-prompt",-1,"showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
 		
 		style.fail?.(res)
 		style.complete?.(res)
@@ -50,7 +51,7 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	 * 元素个数不能超过6个
 	 */
 	if(style.itemList.size > 6){
-		let res = new UniError("uni-prompt",-2,"showActionSheet:fail parameter error: itemList should not be large than 6");
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: itemList should not be large than 6");
 		
 		style.fail?.(res)
 		style.complete?.(res)
@@ -167,7 +168,7 @@ export class UniActionSheet extends Dialog{
 
 
 	override dismiss():void {
-		let res = new UniError("uni-prompt",1002,"showActionSheet:fail cancel");
+		let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
 		this.hostStyle.fail?.(res)
 		this.hostStyle.fail = null
 		// 为了确保complete只调用一次，执行后手动置空
@@ -274,9 +275,7 @@ class CancelClickListener extends View.OnClickListener{
 	}
 	
     override onClick(v?: View):void{
-		
-		let res = new UniError("uni-prompt",1002,"showActionSheet:fail cancel");
-		
+		let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
 		this.hostStyle.fail?.(res)
 		this.hostStyle.fail = null
 		this.hostStyle.complete?.(res)

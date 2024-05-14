@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/websocket.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		aFAkmJWk8HsrY4YIFifAtpoWZk4=
+		xR4DAtKcDxSJ74nevmjgLVdZTbU=
 		</data>
 		<key>Modules/websocket.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		+1HLDv0WznrIJACwXgwV1oZ4Q2c=
+		bybpJJNviZp+EAyb6Io3BysGneo=
 		</data>
 		<key>Modules/websocket.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -108,22 +108,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aFAkmJWk8HsrY4YIFifAtpoWZk4=
+			xR4DAtKcDxSJ74nevmjgLVdZTbU=
 			</data>
 			<key>hash2</key>
 			<data>
-			MUtV6WBdfj1Vnk36MP8zeRuJyD+PHBJFDb8ho8zTquE=
+			6NUg4GSgktjsc6xUSphofzvXIHVWRCMblcSKwdz1EGg=
 			</data>
 		</dict>
 		<key>Modules/websocket.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+1HLDv0WznrIJACwXgwV1oZ4Q2c=
+			bybpJJNviZp+EAyb6Io3BysGneo=
 			</data>
 			<key>hash2</key>
 			<data>
-			3kArSoOAKTSBXNmin2NMMpj/n4NyFfs1vXzoDqjcX8w=
+			qFbZs1n92xuPwc8kqljjVqAmmJqRVXpIYh+jkwMERNY=
 			</data>
 		</dict>
 		<key>Modules/websocket.swiftmodule/arm64-apple-ios-simulator.abi.json</key>

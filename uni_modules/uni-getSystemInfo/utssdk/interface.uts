@@ -15,9 +15,9 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
   *   "web": {
@@ -55,9 +55,9 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
   *   "web": {
@@ -88,9 +88,9 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
   *   "web": {
@@ -111,71 +111,391 @@ export type GetSystemInfoSync = () => GetSystemInfoResult;
 export type GetWindowInfo = () => GetWindowInfoResult;
 export type SafeArea = {
   /**
-   * 安全区域左上角横坐标
+   * 安全区域左上角横坐标，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   left: number,
   /**
-   * 安全区域右下角横坐标
+   * 安全区域右下角横坐标，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   right: number,
   /**
-   * 安全区域左上角纵坐标
+   * 安全区域左上角纵坐标，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   top: number,
   /**
-   * 安全区域右下角纵坐标
+   * 安全区域右下角纵坐标，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   bottom: number,
   /**
-   * 安全区域的宽度，单位逻辑像素
+   * 安全区域的宽度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   width: number,
   /**
-   * 安全区域的高度，单位逻辑像素
+   * 安全区域的高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   height: number
 };
 export type SafeAreaInsets = {
   /**
-   * 安全区域左侧插入位置
+   * 安全区域左侧插入位置，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   left: number,
   /**
-   * 安全区域右侧插入位置
+   * 安全区域右侧插入位置，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   right: number,
   /**
-   * 安全区顶部插入位置
+   * 安全区顶部插入位置，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   top: number,
   /**
-   * 安全区域底部插入位置
+   * 安全区域底部插入位置，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   bottom: number
 };
 export type GetSystemInfoResult = {
   /**
    * 客户端基础库版本
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   SDKVersion: string,
   /**
    * `manifest.json` 中应用appid。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   appId: string,
   /**
    * 应用设置的语言。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   appLanguage: string,
   /**
    * `manifest.json` 中应用名称。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   appName: string,
   /**
    * `manifest.json` 中应用版本名称。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   appVersion: string,
   /**
    * `manifest.json` 中应用版本名号。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   appVersionCode: string,
   /**
@@ -190,69 +510,352 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "9.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   appWgtVersion?: string | null,
   /**
    * 手机品牌。
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   brand: string,
   /**
    * 浏览器名称。`App` 端是系统 webview 的名字，比如 wkwebview、chrome。小程序端为空
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   browserName: string,
   /**
    * 浏览器版本、webview 版本。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   browserVersion: string,
   /**
    * 设备 ID
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   deviceId: string,
   /**
    * 设备品牌。如：`apple`、`huawei`。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   deviceBrand: string,
   /**
    * 设备型号
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   deviceModel: string,
   /**
    * 设备类型。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   deviceType: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
   /**
    * 设备像素比
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   devicePixelRatio: number,
   /**
    * 设备方向。
    * @type 'portrait' | 'landscape'
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   deviceOrientation: 'portrait' | 'landscape',
   /**
    * 程序设置的语言
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   language: string,
   /**
    * 手机型号
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   model: string,
   /**
    * 系统名称	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   osName: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   osVersion: string,
   /**
    * 操作系统语言
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   osLanguage: string,
   /**
@@ -267,107 +870,574 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "√"
    * 		},
    * 		"ios": {
-   * 			"osVer": "9.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   osTheme?: 'light' | 'dark' | null,
   /**
    * 设备像素比
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   pixelRatio: number,
   /**
    * 客户端平台
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   platform: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
   /**
-   * 屏幕宽度
+   * 屏幕宽度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   screenWidth: number,
   /**
-   * 屏幕高度
+   * 屏幕高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   screenHeight: number,
   /**
-   * 状态栏的高度
+   * 状态栏的高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   statusBarHeight: number,
   /**
    * 操作系统版本
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   system: string,
   /**
    * 在竖屏正方向下的安全区域
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   safeArea: SafeArea,
   /**
    * 在竖屏正方向下的安全区域插入位置
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   safeAreaInsets: SafeAreaInsets,
   /**
    * 用户标识。小程序端为空
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   ua: string,
   /**
-   * uni 编译器版本
+   * uni 编译器版本。
    * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniCompileVersion: string,
   /**
-   * uni 编译器版本
+   * uni 编译器版本。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   uniCompilerVersion: string,
   /**
-   * uni-app 运行平台。
+   * uni-app 运行平台，与条件编译平台相同。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniPlatform: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
-   * uni 运行时版本
+   * uni 运行时版本。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniRuntimeVersion: string,
   /**
-   * uni 编译器版本号
+   * uni 编译器版本号。
    * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniCompileVersionCode: number,
   /**
-   * uni 编译器版本号
+   * uni 编译器版本号。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   uniCompilerVersionCode: number,
   /**
-   * uni 运行时版本号
+   * uni 运行时版本号。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniRuntimeVersionCode: number,
   /**
-   * 引擎版本号。已废弃，仅为了向下兼容保留 
+   * 引擎版本号。
    * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   version: string,
   /**
    * rom 名称。Android 部分机型获取不到值。iOS 恒为 `ios`
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   romName: string,
   /**
-   * rom 版本号。Android 部分机型获取不到值。iOS 恒为 `ios 版本号`
+   * rom 版本号。Android 部分机型获取不到值。iOS 为操作系统版本号（同 `osVersion`）。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   romVersion: string,
   /**
-   * 可使用窗口宽度
+   * 可使用窗口宽度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowWidth: number,
   /**
-   * 可使用窗口高度
+   * 可使用窗口高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowHeight: number,
   /**
-   * 可使用窗口的顶部位置
+   * 内容区域距离顶部的距离（同CSS变量 `--window-top`），单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowTop: number,
   /**
-   * 可使用窗口的底部位置
+   * 内容区域距离底部的距离（同CSS变量 `--window-bottom`），单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowBottom: number,
   /**
@@ -386,7 +1456,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   osAndroidAPILevel?: number | null
@@ -417,46 +1491,262 @@ export type GetSystemInfoOptions = {
 export type GetWindowInfoResult = {
   /**
    * 设备像素比
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   pixelRatio: number,
   /**
-   * 屏幕宽度
+   * 屏幕宽度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   screenWidth: number,
   /**
-   * 屏幕高度
+   * 屏幕高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   screenHeight: number,
   /**
-   * 可使用窗口宽度
+   * 可使用窗口宽度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowWidth: number,
   /**
-   * 可使用窗口高度
+   * 可使用窗口高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   windowHeight: number,
   /**
-   * 状态栏的高度
+   * 状态栏的高度，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   statusBarHeight: number,
   /**
-   * 可使用窗口的顶部位置
+   * 内容区域距离顶部的距离（同CSS变量 `--window-top`），单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowTop: number,
   /**
-   * 可使用窗口的底部位置
+   * 内容区域距离底部的距离（同CSS变量 `--window-bottom`），单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   windowBottom: number,
   /**
    * 在竖屏正方向下的安全区域
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   safeArea: SafeArea,
   /**
    * 在竖屏正方向下的安全区域插入位置
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   safeAreaInsets: SafeAreaInsets,
   /**
-   * 窗口上边缘的 y 值
+   * 窗口上边缘的 y 值，单位为px
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   screenTop: number
 };

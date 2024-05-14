@@ -15,11 +15,15 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "x"
+	* 			"unixVer": "4.11"
 	* 		}
-	* 	}
+	* 	},
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "x"
+    *   }
 	* }
     * @example
      ```typescript
@@ -47,9 +51,9 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "9.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }
@@ -71,9 +75,9 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "9.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }
@@ -86,6 +90,21 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台：表示没有配置 `android.permission.CAMERA` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台没有该值
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   cameraAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
@@ -95,6 +114,21 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台：表示没有配置 `android.permission.ACCESS_COARSE_LOCATION` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `Geolocation(定位)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   locationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
@@ -103,6 +137,21 @@ export type GetAppAuthorizeSettingResult = {
    * - full: 精准定位
    * - unsupported: 不支持（包括用户拒绝定位权限和没有在 `manifest.json -> App模块配置` 中配置 `Geolocation(定位)` 模块）
    * @type 'reduced' | 'full' | 'unsupported'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   locationAccuracy?: 'reduced' | 'full' | 'unsupported' | null,
   /**
@@ -117,9 +166,9 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "9.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }
@@ -132,6 +181,21 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台：表示没有配置 `android.permission.RECORD_AUDIO` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台没有该值
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   microphoneAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
@@ -141,10 +205,25 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台没有该值；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `Push(推送)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   notificationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
-   * 允许 App 通知带有提醒的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有提醒的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
@@ -159,16 +238,16 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "10.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }
    */
   notificationAlertAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
-   * 允许 App 通知带有标记的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有标记的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
@@ -183,16 +262,16 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "10.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }
    */
   notificationBadgeAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
-   * 允许 App 通知带有声音的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有声音的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
@@ -207,9 +286,9 @@ export type GetAppAuthorizeSettingResult = {
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "10.0",
+   * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.11"
    * 		}
    * 	}
    * }

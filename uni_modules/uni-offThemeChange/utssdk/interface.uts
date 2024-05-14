@@ -1,0 +1,37 @@
+import { OnThemeChangeCallback } from '@dcloudio/uni-runtime'
+
+export type OffThemeChange = (callback: OnThemeChangeCallback) => void
+
+export interface Uni {
+    /**
+     * 取消监听系统主题状态变化。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/off-os-theme-change.html
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "3.6.9",
+     *      "unixVer": "4.17"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "2.6.5",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *  },
+     *  "web": {
+     *    "uniVer": "3.6.9",
+     *    "unixVer": "x"
+     *  }
+     * }
+     */
+    offOSThemeChange(callback: OnThemeChangeCallback): void;
+}

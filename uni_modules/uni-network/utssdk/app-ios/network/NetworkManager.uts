@@ -1,6 +1,8 @@
-import { RequestOptions, RequestTask } from '../interface.uts'
+import { RequestOptions, RequestTask, UploadTask, UploadFileOptions, OnProgressUpdateResult, UploadFileProgressUpdateCallback, OnProgressDownloadResult, DownloadTask, DownloadFileOptions, DownloadFileProgressUpdateCallback } from '../interface.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
 import { URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
+import { UploadController } from './upload/UploadController.uts';
+import { DownloadController } from './download/DownloadController.uts';
 
 class NetworkRequestListener {
 	public onStart() : void { }
@@ -13,6 +15,23 @@ class NetworkRequestListener {
 
 	public onFail(error : NSError) : void { }
 }
+
+interface NetworkUploadFileListener {
+	progressListeners: Array<UploadFileProgressUpdateCallback>;
+	onProgress(progressUpdate: OnProgressUpdateResult): void;
+	onDataReceived(data : Data) : void;
+	onFinished(response : HTTPURLResponse) : void;
+	onFail(error : NSError) : void;
+}
+
+interface NetworkDownloadFileListener {
+	options : DownloadFileOptions | null;
+	progressListeners: Array<DownloadFileProgressUpdateCallback>;
+	onProgress(progressUpdate: OnProgressDownloadResult): void;
+	onFinished(response : HTTPURLResponse, filePath: string) : void;
+	onFail(error : NSError) : void;
+}
+
 
 class NetworkRequestTaskImpl implements RequestTask {
 	private task : URLSessionDataTask | null = null;
@@ -41,7 +60,7 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask {
+	public request<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : RequestTask {
 		let request = this.createRequest(param);
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
@@ -62,9 +81,17 @@ class NetworkManager implements URLSessionDataDelegate {
 		let requestTask = new NetworkRequestTaskImpl(task);
 		return requestTask;
 	}
+	
+	public uploadFile(options: UploadFileOptions, listener: NetworkUploadFileListener): UploadTask {
+		return UploadController.getInstance().uploadFile(options, listener);
+	}
+	
+	public downloadFile(options: DownloadFileOptions, listener: NetworkDownloadFileListener): DownloadTask {
+		return DownloadController.getInstance().downloadFile(options, listener);
+	}
 
 
-	public createRequest(param : RequestOptions) : URLRequest | null {
+	public createRequest<T>(param : RequestOptions<T>) : URLRequest | null {
 		let url = new URL(string = param.url);
 		if (url == null) {
 			return null
@@ -89,26 +116,31 @@ class NetworkManager implements URLSessionDataDelegate {
 		}
 
 
-		let headers = param.header?.toMap() as Map<string, any>;
+		let headers = param.header?.toMap();
 		let hasContentType = false;
 		if (headers != null) {
-			for (entry in headers) {
+			for (entry in headers!) {
 				let key = entry.key;
+				let value = entry.value;
 				if (key.caseInsensitiveCompare("Content-Type") == ComparisonResult.orderedSame) {
 					hasContentType = true;
 				}
-				if (typeof (entry.value) == 'string') {
-					request.setValue((entry.value) as string, forHTTPHeaderField = key);
+				let valueStr = "";
+				if (value instanceof UTSJSONObject) {
+					valueStr = JSON.stringify(value) ?? ""
+				}else{
+					valueStr = `${value}`
 				}
+				request.setValue(valueStr, forHTTPHeaderField = key);
 			}
 		}
 
 		if (!hasContentType) {
-			if ("GET" != param.method) {
+			if ("GET" != method) {
 				request.setValue("application/json", forHTTPHeaderField = "Content-Type");
 			}
 		}
-		if ("GET" == param.method) {
+		if ("GET" == method) {
 			const data = param.data;
 			if (data != null) {
 				let json : UTSJSONObject | null = null;
@@ -249,5 +281,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 export {
 	NetworkManager,
-	NetworkRequestListener
+	NetworkRequestListener,
+	NetworkUploadFileListener,
+	NetworkDownloadFileListener
 }

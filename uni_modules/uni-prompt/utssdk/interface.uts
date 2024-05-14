@@ -1,8 +1,25 @@
 /**
+ * 错误码
+ * - 1	  撤销
+ * - 1001  请求参数非法
+ */
+
+export type PromptErrorCode = 1 | 1001
+
+export interface IPromptError extends IUniError {
+	errCode : PromptErrorCode
+};
+
+/**
  * uni.showToast成功回调参数
  */
 export type ShowToastSuccess = {
 }
+
+/**
+ * uni.showToast失败回调参数
+ */
+export type ShowToastFail = IPromptError;
 
 /**
  * uni.showToast成功回调函数定义
@@ -11,7 +28,7 @@ export type ShowToastSuccessCallback = (res: ShowToastSuccess) => void
 /**
  * uni.showToast失败回调函数定义
  */
-export type ShowToastFailCallback = (res: UniError) => void
+export type ShowToastFailCallback = (res: ShowToastFail) => void
 /**
  * uni.showToast完成回调函数定义
  */
@@ -75,9 +92,9 @@ export type ShowToastOptions = {
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
  *    "web": {
@@ -101,9 +118,9 @@ export type ShowToast = (options: ShowToastOptions) => void
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
  *    "web": {
@@ -122,13 +139,18 @@ export type ShowLoadingSuccess = {
 }
 
 /**
+ * uni.showLoading失败回调参数
+ */
+export type ShowLoadingFail = IPromptError;
+
+/**
  * uni.showLoading成功回调函数定义
  */
 export type ShowLoadingSuccessCallback = (res: ShowLoadingSuccess) => void
 /**
  * uni.showLoading失败回调函数定义
  */
-export type ShowLoadingFailCallback = (res: UniError) => void
+export type ShowLoadingFailCallback = (res: ShowLoadingFail) => void
 /**
  * uni.showLoading完成回调函数定义
  */
@@ -174,9 +196,9 @@ export type ShowLoadingOptions = {
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
  *    "web": {
@@ -200,9 +222,9 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
  *    "web": {
@@ -233,13 +255,18 @@ export type ShowModalSuccess = {
 }
 
 /**
+ * uni.showModal失败回调参数
+ */
+export type ShowModalFail = IPromptError;
+
+/**
  * uni.showModal成功回调函数定义
  */
 export type ShowModalSuccessCallback = (res: ShowModalSuccess) => void
 /**
  * uni.showModal失败回调函数定义
  */
-export type ShowModalFailCallback = (res: UniError) => void
+export type ShowModalFailCallback = (res: ShowModalFail) => void
 /**
  * uni.showModal完成回调函数定义
  */
@@ -315,9 +342,9 @@ export type ShowModalOptions = {
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
  *    "web": {
@@ -358,13 +385,18 @@ export type Popover = {
 }
 
 /**
+ * uni.ShowActionSheet失败回调参数
+ */
+export type ShowActionSheetFail = IPromptError;
+
+/**
  * uni.showActionSheet成功回调函数定义
  */
 export type ShowActionSheetSuccessCallback = (res: ShowActionSheetSuccess) => void
 /**
  * uni.showActionSheet成功回调函数定义
  */
-export type ShowActionSheetFailCallback = (res: UniError) => void
+export type ShowActionSheetFailCallback = (res: ShowActionSheetFail) => void
 /**
  * uni.showActionSheet成功回调函数定义
  */
@@ -423,9 +455,9 @@ export type ShowActionSheetOptions = {
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.11"
  *   	  }
  *    },
 *    "web": {
@@ -451,7 +483,7 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -460,9 +492,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
@@ -478,7 +510,7 @@ export interface Uni {
    * ```typescript
    *    uni.hideToast();
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -487,9 +519,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
@@ -511,7 +543,7 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -520,9 +552,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
@@ -545,7 +577,7 @@ export interface Uni {
    *	}, 2000);
    *
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -554,9 +586,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
@@ -585,7 +617,7 @@ export interface Uni {
      *
    *
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -594,9 +626,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
@@ -621,7 +653,7 @@ export interface Uni {
    *		}
    *	});
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -630,9 +662,9 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {

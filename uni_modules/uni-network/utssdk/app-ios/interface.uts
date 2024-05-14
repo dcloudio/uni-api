@@ -1,10 +1,10 @@
 
-export type Request = (param: RequestOptions) => RequestTask;
+export type Request<T> = (param: RequestOptions<T>) => RequestTask;
 
 /**
  * 网络请求参数
  */
-export type RequestOptions = {
+export type RequestOptions<T> = {
   /**
    * 开发者服务器接口地址
    */
@@ -19,14 +19,14 @@ export type RequestOptions = {
    * 设置请求的 header，header 中不能设置 Referer
    * @defaultValue null
    */
-  header?: UTSJSONObject,
+  header?: UTSJSONObject | null,
   /**
    * 请求类型 默认值GET	
    * GET|POST|PUT|DELETE|HEAD|OPTIONS
    * @type {RequestMethod}
    * @defaultValue "GET"
    */
-  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS"| null,
+  method?: RequestMethod | null,
   /**
    * 超时时间，单位 ms
    * @defaultValue 60000
@@ -63,7 +63,7 @@ export type RequestOptions = {
    * 			 "unixVer": "x"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *  		  	 "uniVer": "√",
    * 			 "unixVer": "x"
    *        }
@@ -80,7 +80,7 @@ export type RequestOptions = {
    * 网络请求成功回调。
    * @defaultValue null
    */
-  success?: RequestSuccessCallback | null,
+  success?: RequestSuccessCallback<T> | null,
   /**
    * 网络请求失败回调。
    * @defaultValue null
@@ -93,12 +93,12 @@ export type RequestOptions = {
   complete?: RequestCompleteCallback | null
 }
 
-export type RequestSuccess = {
+export type RequestSuccess<T> = {
   /**
    * 开发者服务器返回的数据
    * @type {RequestDataOptions}
    */
-  data: any | null,
+  data: T | null,
   /**
    * 开发者服务器返回的 HTTP 状态码
    */
@@ -113,8 +113,40 @@ export type RequestSuccess = {
   cookies: Array<string>
 }
 
-export type RequestFail = UniError;
-export type RequestSuccessCallback = (option: RequestSuccess) => void;
+/**
+ * 请求方法
+ * - GET  GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
+ * - POST  POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
+ * - PUT  PUT方法用有效载荷请求替换目标资源的所有当前表示。
+ * - PATCH  PATCH方法用于对资源应用部分修改。
+ * - DELETE  DELETE方法删除指定的资源。
+ * - HEAD  HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。 
+ * - OPTIONS  OPTIONS 方法用于描述目标资源的通信选项。
+ */
+export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
+
+/**
+ * 错误码
+ * - 5 接口超时
+ * - 1000 服务端系统错误
+ * - 100001 json数据解析错误
+ * - 100002 错误信息json解析失败
+ * - 600003 网络中断
+ * - 600009 URL格式不合法
+ * - 602001 request系统错误
+ */
+export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600003 | 600009 | 602001;
+
+
+// export type RequestFail = UniError;
+// /**
+//  * 网络请求失败的错误回调参数
+//  */
+// export interface RequestFail extends IUniError{
+// 	errCode: RequestErrorCode
+// };
+
+export type RequestSuccessCallback<T> = (option: RequestSuccess<T>) => void;
 export type RequestFailCallback = (option: RequestFail) => void;
 export type RequestCompleteCallback = (option: any) => void;
 
@@ -135,9 +167,9 @@ export interface RequestTask {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -175,12 +207,12 @@ export type UploadFileOptionFiles = {
    *        "android": {
    *            "osVer": "4.4",
    *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
+   * 			 "unixVer": "3.9+"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
+   * 			 "unixVer": "4.11"
    *        }
    *    }
    * }
@@ -198,7 +230,13 @@ export type UploadFileSuccess = {
   statusCode: number
 };
 export type UploadFileSuccessCallback = (result: UploadFileSuccess) => void;
-export type UploadFileFail = UniError;
+// export type UploadFileFail = UniError;
+// /**
+//  * 上传文件失败的错误回调参数
+//  */
+// export interface UploadFileFail extends IUniError{
+// 	errCode: RequestErrorCode
+// };
 export type UploadFileFailCallback = (result: UploadFileFail) => void;
 
 export type UploadFileCompleteCallback = (result: any) => void;
@@ -208,39 +246,48 @@ export type UploadFileOptions = {
    */
   url: string,
   /**
-   * 要上传文件资源的路径
+   * 要上传文件资源的路径, 支持uni.env
+   * @defaultValue null
    */
   filePath?: string | null,
   /**
    * 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+   * @defaultValue null
    */
   name?: string | null,
   /**
    * 需要上传的文件列表。
+   * @defaultValue null
    */
-  files?: (UploadFileOptionFiles[]) | null,
+  files?: Array<UploadFileOptionFiles> | null,
   /**
    * HTTP 请求 Header, header 中不能设置 Referer
+   * @defaultValue null
    */
   header?: UTSJSONObject | null,
   /**
    * HTTP 请求中其他额外的 form data
+   * @defaultValue null
    */
   formData?: UTSJSONObject | null,
   /**
    * 超时时间，单位 ms
+   * @defaultValue 120000
    */
   timeout?: number | null,
   /**
    * 成功返回的回调函数
+   * @defaultValue null
    */
   success?: UploadFileSuccessCallback | null,
   /**
    * 失败的回调函数
+   * @defaultValue null
    */
   fail?: UploadFileFailCallback | null,
   /**
    * 结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
    */
   complete?: UploadFileCompleteCallback | null
 };
@@ -276,9 +323,9 @@ export interface UploadTask {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -307,9 +354,9 @@ export interface UploadTask {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -339,7 +386,13 @@ export type DownloadFileSuccess = {
   statusCode: number
 };
 export type DownloadFileSuccessCallback = (result: DownloadFileSuccess) => void;
-export type DownloadFileFail = UniError;
+// export type DownloadFileFail = UniError;
+// /**
+//  * 下载文件失败的错误回调参数
+//  */
+// export interface DownloadFileFail extends IUniError{
+// 	errCode: RequestErrorCode
+// };
 export type DownloadFileFailCallback = (result: DownloadFileFail) => void;
 export type DownloadFileComplete = any;
 export type DownloadFileCompleteCallback = (result: DownloadFileComplete) => void;
@@ -350,22 +403,37 @@ export type DownloadFileOptions = {
   url: string,
   /**
    * HTTP 请求 Header，header 中不能设置 Referer
+   * @defaultValue null
    */
   header?: UTSJSONObject | null,
   /**
+   * 指定文件下载路径
+   * 支持相对路径与绝对路径，例：
+   * `/imgs/pic.png`
+   * 并且支持指定下载目录，例：
+   * `/imgs/`
+   * 支持uni.env的平台兼容性：Android自3.9开始支持uni.env，iOS自4.13开始支持uni.env
+   * @defaultValue null
+   */
+  filePath?: string | null,
+  /**
    * 超时时间，单位 ms
+   * @defaultValue 120000
    */
   timeout?: number | null,
   /**
    * 下载成功后以 tempFilePath 的形式传给页面，res = {tempFilePath: '文件的临时路径'}
+   * @defaultValue null
    */
   success?: DownloadFileSuccessCallback | null,
   /**
    * 失败的回调函数
+   * @defaultValue null
    */
   fail?: DownloadFileFailCallback | null,
   /**
    * 结束的回调函数（调用成功、失败都会执行）
+   * @defaultValue null
    */
   complete?: DownloadFileCompleteCallback | null
 };
@@ -400,9 +468,9 @@ export interface DownloadTask {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -431,9 +499,9 @@ export interface DownloadTask {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -466,9 +534,9 @@ export interface Uni {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -501,7 +569,7 @@ export interface Uni {
             });
      ```
     */
-  request: Request,
+  request<T>(param: RequestOptions<T>): RequestTask;
   /**
     * UploadFile()
     * @description 
@@ -517,9 +585,9 @@ export interface Uni {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -538,7 +606,7 @@ export interface Uni {
             });
      ```
     */
-  uploadFile: UploadFile,
+  uploadFile: UploadFile;
   /**
     * DownloadFile()
     * @description 
@@ -554,9 +622,9 @@ export interface Uni {
     * 			 "unixVer": "3.9+"
     *        },
     *        "ios": {
-    *            "osVer": "9.0",
+    *            "osVer": "12.0",
     *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
+    * 			 "unixVer": "4.11"
     *        }
     *    }
     * }
@@ -570,5 +638,5 @@ export interface Uni {
               });
      ```
     */
-  downloadFile: DownloadFile
+  downloadFile: DownloadFile;
 }

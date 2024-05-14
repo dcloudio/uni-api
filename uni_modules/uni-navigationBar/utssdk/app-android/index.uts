@@ -1,0 +1,70 @@
+import { getCurrentPage } from '@dcloudio/uni-runtime'
+import {
+    SetNavigationBarColorOptions,
+    SetNavigationBarColorSuccess,
+    SetNavigationBarTitleOptions,
+    SetNavigationBarTitleSuccess,
+} from '../interface.uts'
+import {
+    SetNavigationBarColorFailImpl,
+    SetNavigationBarTitleFailImpl,
+} from '../unierror.uts'
+
+export const setNavigationBarColor = defineAsyncApi<
+    SetNavigationBarColorOptions,
+    SetNavigationBarColorSuccess
+>(
+    'setNavigationBarColor',
+    (options: SetNavigationBarColorOptions, res: ApiExecutor) => {
+        const page = getCurrentPage()
+        if (page == null) {
+            res.reject(new SetNavigationBarColorFailImpl('page is not ready'))
+            return
+        }
+        const appPage = page.$nativePage
+        appPage!.updateStyle(
+            new Map<string, any | null>([
+                [
+                    'navigationBar',
+                    new Map<string, any | null>([
+                        [
+                            'navigationBarTextStyle',
+                            options.frontColor == '#000000' ? 'black' : 'white',
+                        ],
+                        [
+                            'navigationBarBackgroundColor',
+                            options.backgroundColor,
+                        ],
+                    ]),
+                ],
+            ]),
+        )
+        res.resolve(null)
+    },
+)
+
+export const setNavigationBarTitle = defineAsyncApi<
+    SetNavigationBarTitleOptions,
+    SetNavigationBarTitleSuccess
+>(
+    'setNavigationBarTitle',
+    (options: SetNavigationBarTitleOptions, res: ApiExecutor) => {
+        const page = getCurrentPage()
+        if (page == null) {
+            res.reject(new SetNavigationBarTitleFailImpl('page is not ready'))
+            return
+        }
+        const appPage = page.$nativePage
+        appPage!.updateStyle(
+            new Map<string, any | null>([
+                [
+                    'navigationBar',
+                    new Map<string, any | null>([
+                        ['navigationBarTitleText', options.title],
+                    ]),
+                ],
+            ]),
+        )
+        res.resolve(null)
+    },
+)

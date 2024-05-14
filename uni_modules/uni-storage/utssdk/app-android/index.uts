@@ -11,7 +11,12 @@ import { ClearStorage, ClearStorageSuccess, ClearStorageOptions } from "../inter
 import { ClearStorageSync } from "../interface.uts"
 
 // @ts-expect-error
+// #ifdef UNI-APP-X
+import DCStorage from "io.dcloud.common.unix.util.db.DCStorage";
+// #endif
+// #ifndef UNI-APP-X
 import DCStorage from "io.dcloud.common.util.db.DCStorage";
+// #endif
 // @ts-expect-error
 import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 // @ts-expect-error

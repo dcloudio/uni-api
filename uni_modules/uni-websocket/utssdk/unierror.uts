@@ -3,7 +3,7 @@ import {ConnectSocketFail, SendSocketMessageFail ,ConnectSocketErrorCode, SendSo
 /**
  * 错误主题
  */
-export const UniErrorSubject = 'uni-websocket';
+export const UniWebsocketErrorSubject = 'uni-websocket';
 /**
  * 错误码
  * @UniError
@@ -42,7 +42,7 @@ export class ConnectSocketFailImpl extends UniError implements ConnectSocketFail
 // #endif
 	constructor(errCode : ConnectSocketErrorCode) {
 		super();
-		this.errSubject = UniErrorSubject;
+		this.errSubject = UniWebsocketErrorSubject;
 		this.errCode = errCode;
 		this.errMsg = ConnectUniErrors[errCode] ?? ""
 	}
@@ -54,7 +54,7 @@ export class SendSocketMessageFailImpl extends UniError implements SendSocketMes
 // #endif
 	constructor(errCode : SendSocketMessageErrorCode) {
 		super();
-		this.errSubject = UniErrorSubject;
+		this.errSubject = UniWebsocketErrorSubject;
 		this.errCode = errCode;
 		this.errMsg = SendMessageUniErrors[errCode] ?? ""
 	}

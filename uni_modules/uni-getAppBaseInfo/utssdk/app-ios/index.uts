@@ -85,7 +85,7 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 		result.version = AppBaseInfoDeviceUtil.getAppInnerVersion();
 	}
 	if (filterArray.indexOf("appWgtVersion") != -1) {
-		result.appWgtVersion = AppBaseInfoDeviceUtil.getAppWgtVersion();
+		result.appWgtVersion = AppBaseInfoDeviceUtil.getAppVersion();
 	}
 	if (filterArray.indexOf("bundleId") != -1) {
 		result.bundleId = AppBaseInfoDeviceUtil.getBundleId();

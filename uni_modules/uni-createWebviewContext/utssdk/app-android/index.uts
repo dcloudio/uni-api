@@ -1,4 +1,3 @@
-import { ComponentPublicInstance } from 'vue';
 import { CreateWebviewContext, WebviewContext } from '../interface.uts';
 
 export const createWebviewContext : CreateWebviewContext = function (webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null) : WebviewContext | null {

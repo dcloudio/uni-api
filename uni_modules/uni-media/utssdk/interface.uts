@@ -429,6 +429,7 @@ export type ChooseVideoOptions = {
 	/**
 	 * 是否压缩所选的视频源文件，默认值为true，需要压缩
 	 * @type boolean
+	 * @default true
 	 */
 	compressed ?: boolean | null,
 	/**
@@ -618,6 +619,11 @@ export interface Uni {
 	 *			"osVer": "4.4",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
 	 *		}
 	 *	},
      *  "web": {
@@ -650,6 +656,11 @@ export interface Uni {
 	 *			"osVer": "4.4",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
 	 *		}
 	 *	},
      *  "web": {
@@ -682,6 +693,11 @@ export interface Uni {
 	 *			"osVer": "4.4",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
 	 *		}
 	 *	}
 	 * }
@@ -742,6 +758,11 @@ export interface Uni {
 	 *			"osVer": "4.4",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
 	 *		}
 	 *	}
 	 * }

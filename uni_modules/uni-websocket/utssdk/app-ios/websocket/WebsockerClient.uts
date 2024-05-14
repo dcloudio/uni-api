@@ -139,7 +139,7 @@ class RunnableTask {
 		if (this.looper == null || this.looper!.currentMode == null) {
 			this.callback?.();
 		} else {
-			this.looper?.perform(() => {
+			this.looper?.perform(inModes = [RunLoop.Mode.common], block = () => {
 				this.callback?.();
 			})
 		}

@@ -1,7 +1,7 @@
 import { CLLocationManager, CLAuthorizationStatus, CLLocationManagerDelegate, CLGeocoder, CLPlacemark, kCLLocationAccuracyBest, kCLLocationAccuracyHundredMeters, kCLLocationAccuracyKilometer, CLAccuracyAuthorization, CLLocation } from "CoreLocation"
 import { NSError, Int } from "Foundation"
 import { GetLocation, GetLocationOptions, GetLocationSuccess } from "../interface.uts"
-import { GetLocationFailImpl, getErrcode } from '../unierror'
+import { GetLocationFailImpl, getSystemLocationErrcode } from '../unierror'
 import { UTSiOS } from "DCloudUTSFoundation"
 
 /****************************************内部功能实现****************************************************/
@@ -157,7 +157,7 @@ class LBSLocation implements CLLocationManagerDelegate {
 
 	// failed action
 	failedAction(errCode : number) {
-		let err = new GetLocationFailImpl(getErrcode(errCode));
+		let err = new GetLocationFailImpl(getSystemLocationErrcode(errCode));
 		this.locationOptions?.fail?.(err)
 		this.locationOptions?.complete?.(err)
 		// this.previousLocation = null
