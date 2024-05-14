@@ -30,15 +30,15 @@ export function toShowModal(options: ShowModalOptions) {
 				}
 				// 点击按钮的回调方法
 				const res: ShowModalSuccess = {
-					confirm: true,
-					cancel: false,
+					confirm: false,
+					cancel: true,
 					content: inputText
 				}
 				options.success?.(res)
 				options.complete?.(res)
 			})
 			// 自定义取消按钮颜色
-			if (options.cancelColor != null) {
+			if (options.cancelColor != null && options.cancelColor != '') {
 				const color = UTSiOS.colorWithString(options.cancelColor!)
 				cancelAction.titleColor = color
 			}
@@ -64,7 +64,7 @@ export function toShowModal(options: ShowModalOptions) {
 			options.complete?.(res)
 		})
 		// 自定义确定按钮颜色
-		if (options.confirmColor != null) {
+		if (options.confirmColor != null && options.confirmColor != '') {
 			const color = UTSiOS.colorWithString(options.confirmColor!)
 			okAction.titleColor = color
 		}

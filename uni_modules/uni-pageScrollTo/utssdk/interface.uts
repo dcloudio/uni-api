@@ -1,0 +1,143 @@
+/**
+ * 设置页面滚动错误码
+ * - 4: 框架内部异常
+ */
+export type PageScrollToErrorCode = 4
+export interface PageScrollToFail extends IUniError {
+    errCode: PageScrollToErrorCode
+}
+
+export type PageScrollToSuccess = AsyncApiSuccessResult
+export type PageScrollToSuccessCallback = (result: PageScrollToSuccess) => void
+
+export type PageScrollToFailCallback = (result: PageScrollToFail) => void
+export type PageScrollToComplete = AsyncApiResult
+export type PageScrollToCompleteCallback = (
+    result: PageScrollToComplete,
+) => void
+export type PageScrollToOptions = {
+    /**
+     * 滚动到页面的目标位置
+     */
+    scrollTop?: number | null
+    /**
+     * 选择器
+     */
+    selector?: string | null
+    /**
+     * 偏移距离，可以滚动到 selector 加偏移距离的位置
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "3.91"
+     *      },
+     *      "ios": {
+     *          "osVer": "12.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.11"
+     *      }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *      "uniVer": "√",
+     *      "unixVer": "4.0"
+     *  }
+     * }
+     */
+    offsetTop?: number | null
+    /**
+     * 滚动动画的时长
+     */
+    duration?: number | null
+    /**
+     * 接口调用成功的回调函数
+     */
+    success?: PageScrollToSuccessCallback | null
+    /**
+     * 接口调用失败的回调函数
+     */
+    fail?: PageScrollToFailCallback | null
+    /**
+     * 接口调用结束的回调函数（调用成功、失败都会执行）
+     */
+    complete?: PageScrollToCompleteCallback | null
+}
+
+export interface Uni {
+    /**
+     * 将页面滚动到目标位置
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/page-scroll-to.html
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "3.91"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "4.11"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "alipay": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "baidu": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "toutiao": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "lark": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "qq": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "kuaishou": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "jd": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
+     */
+    pageScrollTo(
+        options: PageScrollToOptions,
+    ): Promise<PageScrollToSuccess> | null
+}

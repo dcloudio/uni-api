@@ -1,13 +1,10 @@
-import AlertDialog from 'android.app.AlertDialog';
 import Dialog from 'android.app.Dialog';
 import Activity from 'android.app.Activity';
 import Gravity from 'android.view.Gravity';
-import { UTSAndroid } from "io.dcloud.uts";
 
 import ViewGroup from 'android.view.ViewGroup';
 import View from 'android.view.View';
 import Color from 'android.graphics.Color';
-import ColorDrawable from 'android.graphics.drawable.ColorDrawable';
 
 import R from 'io.dcloud.uts.prompt.R';
 import TextView from 'android.widget.TextView';
@@ -18,12 +15,17 @@ import LinearLayoutCompat from 'androidx.appcompat.widget.LinearLayoutCompat';
 
 import LinearLayoutManager from 'androidx.recyclerview.widget.LinearLayoutManager';
 import RecyclerView from 'androidx.recyclerview.widget.RecyclerView';
-
-
-
-import { ShowActionSheetOptions, ShowActionSheetSuccess,ShowActionSheetFail} from '../interface.uts'
-import string from 'android.R.string';
 import WindowManager from 'android.view.WindowManager';
+
+import { ShowActionSheetOptions, ShowActionSheetSuccess} from '../interface.uts'
+import { PromptErrorImpl } from "../unierror.uts"
+
+// #ifdef UNI-APP-X
+import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
+import onReady from 'io.dcloud.uniapp.framework.onReady';
+import onUnload from 'io.dcloud.uniapp.framework.onUnload';
+// #endif
+
 
 let uniActionSheet:UniActionSheet|null = null
 
@@ -37,7 +39,7 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	 */
 	if(style.itemList == null || style.itemList.length < 1){
 
-		let res = new UniError("uni-prompt",-1,"showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
 		
 		style.fail?.(res)
 		style.complete?.(res)
@@ -49,7 +51,7 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	 * 元素个数不能超过6个
 	 */
 	if(style.itemList.size > 6){
-		let res = new UniError("uni-prompt",-2,"showActionSheet:fail parameter error: itemList should not be large than 6");
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: itemList should not be large than 6");
 		
 		style.fail?.(res)
 		style.complete?.(res)
@@ -59,14 +61,67 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	
 	if(uniActionSheet != null){
 		uniActionSheet?.dismiss()
-	}
-	uniActionSheet = new UniActionSheet(UTSAndroid.getUniActivity()!, style)
-	uniActionSheet?.show()
-	
-	UTSAndroid.onAppActivityDestroy(function(){
-		uniActionSheet?.dismiss()
 		uniActionSheet = null
-	})
+	}
+	
+	
+	// #ifndef UNI-APP-X
+		/**
+		 * uni-app
+		 */
+		if(UTSAndroid.getTopPageActivity() == null){
+			return 
+		}
+		if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+			return 
+		}
+		uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
+		uniActionSheet?.show()
+		UTSAndroid.onAppActivityDestroy(function(){
+			uniActionSheet?.dismiss()
+			uniActionSheet = null
+		})
+		
+	// #endif
+	// #ifdef UNI-APP-X
+		/**
+		 * uni-app x
+		 * 需要特殊处理生命周期 
+		 */
+		const pages = getCurrentPages();
+		if (pages.length > 0) {
+		    const page = pages[pages.length - 1]
+		    const instance = page.$
+		    if (page.$isReady) {
+				if(UTSAndroid.getTopPageActivity() == null){
+					return 
+				}
+				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+					return 
+				}
+				uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
+		        uniActionSheet?.show()
+		    } else {
+		        onReady(() => {
+					if(UTSAndroid.getTopPageActivity() == null){
+						return 
+					}
+					if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+						return 
+					}
+					uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
+		            uniActionSheet?.show()
+		        }, instance)
+		    }
+		    
+			onUnload(() => {
+				uniActionSheet?.dismiss()
+				uniActionSheet = null
+			}, instance)
+			
+		}
+	// #endif
+	
 	
 }
 
@@ -111,10 +166,22 @@ export class UniActionSheet extends Dialog{
 	 */
 	lineCancel: LinearLayoutCompat
 
+
+	override dismiss():void {
+		let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
+		this.hostStyle.fail?.(res)
+		this.hostStyle.fail = null
+		// 为了确保complete只调用一次，执行后手动置空
+		this.hostStyle.complete?.(res)
+		this.hostStyle.complete = null
+		
+		super.dismiss()
+	}
+	
 	
 	constructor(activity: Activity, style: ShowActionSheetOptions) {
 		
-		super(activity,R.style.actionsheetDialog);
+		super(activity,R.style.uni_prompt_ActionsheetDialog);
 		
 		this.hostActivity = activity
 		this.hostStyle = style
@@ -123,9 +190,9 @@ export class UniActionSheet extends Dialog{
 		 * 适配暗黑模式，配置不同的布局文件
 		 */
 		if(UTSAndroid.getAppDarkMode()){
-			setContentView(R.layout.uts_action_sheet_night)
+			setContentView(R.layout.uni_prompt_uts_action_sheet_night)
 		}else{
-			setContentView(R.layout.uts_action_sheet)
+			setContentView(R.layout.uni_prompt_uts_action_sheet)
 		}
 		
 		
@@ -151,7 +218,7 @@ export class UniActionSheet extends Dialog{
 			this.window!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 			this.window!.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
 			if(this.window!.attributes != null){
-				this.window!.attributes!.windowAnimations = R.style.DialogAnimations_utsSmileWindow;
+				this.window!.attributes!.windowAnimations = R.style.uni_prompt_DialogAnimations_slideWindow;
 			}
 		}
 		
@@ -183,8 +250,11 @@ class ItemClickListener extends View.OnClickListener{
 		}
 		
 		this.hostStyle.success?.(res)
+		this.hostStyle.success = null
 		this.hostStyle.complete?.(res)
-		
+		this.hostStyle.complete = null
+		// 点击触发成功后，去掉fail
+		this.hostStyle.fail = null
 		this.host.dismiss()
 		
     }
@@ -205,12 +275,11 @@ class CancelClickListener extends View.OnClickListener{
 	}
 	
     override onClick(v?: View):void{
-		
-		let res = new UniError("uni-prompt",1002,"showActionSheet:fail cancel");
-		
+		let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
 		this.hostStyle.fail?.(res)
+		this.hostStyle.fail = null
 		this.hostStyle.complete?.(res)
-		
+		this.hostStyle.complete = null
 		this.host.dismiss()
 		
     }
@@ -270,18 +339,18 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 		if(viewType == 1002){
 			if(UTSAndroid.getAppDarkMode()){
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.ac_recyclerview_layout_night, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_night, parent, false)
 			}else{
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.ac_recyclerview_layout, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout, parent, false)
 			}
 		}else{
 			if(UTSAndroid.getAppDarkMode()){
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.ac_recyclerview_layout_top_night, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_top_night, parent, false)
 			}else{
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.ac_recyclerview_layout_top, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_top, parent, false)
 			}
 		}
 		

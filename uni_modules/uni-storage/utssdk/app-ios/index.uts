@@ -27,7 +27,8 @@ class StorageTool {
 			const path = new URL(fileURLWithPath = dataPath).appendingPathComponent(dc_storage_path_component).absoluteString
 			let inputData = NSData.init(contentsOfFile = path)
 			if ( inputData != null ) {
-				let data = UTSiOS.dc_AESDecrypt(data = inputData!, key = dc_storage_aes_key)
+				let input  = inputData! as Data
+				let data = UTSiOS.dc_AESDecrypt(data = input, key = dc_storage_aes_key)
 				if (data != null) {
 					content = NSKeyedUnarchiver.unarchiveObject(with = data!)
 				}

@@ -59,16 +59,22 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "3.8.15",
-   *            "unixVer": "3.9.0"
+   *            "unixVer": "3.9.0",
+	 *            "utsPlugin": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "x",
    *            "uniVer": "x",
-   *            "unixVer": "x"
+   *            "unixVer": "x",
+	 *            "utsPlugin": "x"
    *   	  }
-   *    }
+   *    },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
    * }
    * @uniVueVersion 2,3  //支持的vue版本
    */

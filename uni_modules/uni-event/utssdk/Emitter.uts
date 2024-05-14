@@ -1,0 +1,66 @@
+import { callFunction } from '@dcloudio/uni-runtime'
+export class Emitter {
+    private map = new Map<string, Array<Function>>()
+    private onceMap = new Map<string, Array<boolean>>()
+    private _on(
+        eventName: string,
+        callback: Function,
+        once: boolean = false,
+    ): void {
+        if (!this.map.has(eventName)) {
+            this.map.set(eventName, [])
+        }
+        if (!this.onceMap.has(eventName)) {
+            this.onceMap.set(eventName, [])
+        }
+        this.map.get(eventName)!.push(callback)
+        this.onceMap.get(eventName)!.push(once)
+    }
+    on(eventName: string, callback: Function): void {
+        this._on(eventName, callback)
+    }
+    once(eventName: string, callback: Function): void {
+        this._on(eventName, callback, true)
+    }
+    off(eventName: string, callback: Function | null = null): void {
+        if (callback === null) {
+            this.map.delete(eventName)
+            this.onceMap.delete(eventName)
+            return
+        }
+        const fns = this.map.get(eventName)
+        const onceFns = this.onceMap.get(eventName)
+        if (fns !== null) {
+            const index = fns!.lastIndexOf(callback)
+            if (index !== -1) {
+                fns!.splice(index, 1)
+                onceFns!.splice(index, 1)
+            }
+        }
+    }
+    emit(eventName: string, ...args: Array<any | null>): void {
+        const fns = this.map.get(eventName)
+        const onceFns = this.onceMap.get(eventName)
+        const removeFns: Array<Function> = []
+        if (fns !== null) {
+            fns!.forEach((fn, index) => {
+                try {
+                    // TODO 条件编译
+                    callFunction(fn, args)
+                } catch (e) {
+                    // console.error(e)
+                }
+                if (onceFns![index]) {
+                    removeFns.push(fn)
+                }
+            })
+            removeFns.forEach(fn => {
+                const index = fns!.indexOf(fn)
+                if (index !== -1) {
+                    fns!.splice(index, 1)
+                    onceFns!.splice(index, 1)
+                }
+            })
+        }
+    }
+}

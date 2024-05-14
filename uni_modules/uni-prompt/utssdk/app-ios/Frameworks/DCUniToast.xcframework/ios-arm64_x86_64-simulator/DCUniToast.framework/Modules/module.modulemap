@@ -1,0 +1,11 @@
+framework module DCUniToast {
+  umbrella header "DCUniToast.h"
+  export *
+
+  module * { export * }
+}
+
+module DCUniToast.Swift {
+  header "DCUniToast-Swift.h"
+  requires objc
+}

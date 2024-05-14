@@ -1,14 +1,12 @@
 import {
-	CompressImageSuccessCallback, CompressImageOptions,
-	CompressVideoOptions, CompressVideoSuccessCallback
+	CompressImageSuccess, CompressImageOptions,
+	CompressVideoOptions, CompressVideoSuccess
 } from "../../interface.uts"
 import {
-	UniError_ChooseImage, UniError_ChooseVideo, UniError_CompressVideo,UniError_CompressImage,
-	UniErrors
+	UniError_CompressVideo,UniError_CompressImage,
+	MediaErrorImpl
 } from "../../unierror.uts"
-import { uniChooseImage, CODE_CAMERA_ERROR, CODE_GALLERY_ERROR, CODE_GET_IMAGE_INFO_CODE } from "../../ChooseImageUtils.uts"
 import TextUtils from 'android.text.TextUtils';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import File from 'java.io.File';
 import BitmapFactory from 'android.graphics.BitmapFactory';
 import Bitmap from 'android.graphics.Bitmap';
@@ -20,22 +18,23 @@ import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
 import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
 import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
 
+const mediaCachePath = UTSAndroid.getAppCachePath()+"uni-media/"
 // export function threadCompress() {
 // }
 export function transcodeImage(options : CompressImageOptions) {
 	if (options.src.length == 0) {
-		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressImage }
-		options.fail?.(fail)
-		options.complete?.(fail)
+		let error = new MediaErrorImpl(1101003, UniError_CompressImage);
+		options.fail?.(error)
+		options.complete?.(error)
 		return
 	}
 	let compressOption = new CompressOptions()
 	compressOption.src = UTSAndroid.convert2AbsFullPath(options.src)
 	let srcFile = new File(compressOption.src)
 	if (!srcFile.exists()) {
-		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressImage }
-		options.fail?.(fail)
-		options.complete?.(fail)
+		let error = new MediaErrorImpl(1101003, UniError_CompressImage);
+		options.fail?.(error)
+		options.complete?.(error)
 		return
 	}
 	if (options.quality != null && options.quality! > 0) {
@@ -47,18 +46,16 @@ export function transcodeImage(options : CompressImageOptions) {
 	var widthStr = ""
 	var heightStr = ""
 	if (options.compressedWidth != null) {
-		compressOption.width = options.compressedWidth!
+		widthStr = options.compressedWidth.toString();
 	} else {
 		widthStr = TextUtils.isEmpty(options.width) ? "auto" : options.width!
 	}
 	if (options.compressedHeight != null) {
-		compressOption.height = options.compressedHeight!
+		heightStr = options.compressedHeight.toString();
 	} else {
 		heightStr = TextUtils.isEmpty(options.height) ? "auto" : options.height!
 	}
-	if (compressOption.width <= 0 || compressOption.height <= 0) {
-		getHeightAndWidth(compressOption, widthStr, heightStr)
-	}
+	getHeightAndWidth(compressOption, widthStr, heightStr);
 	let bitmapOptions = new BitmapFactory.Options()
 	bitmapOptions.inJustDecodeBounds = false;
 	if (srcFile.length() > 1500000) {
@@ -72,9 +69,9 @@ export function transcodeImage(options : CompressImageOptions) {
 	} catch (e) {
 	}
 	if (srcBitmap == null) {
-		let fail : UniError = { "errCode": 1101009, "errMsg": UniErrors[1101009]!, "errSubject": UniError_CompressImage }
-		options.fail?.(fail)
-		options.complete?.(fail)
+		let error = new MediaErrorImpl(1101009, UniError_CompressImage);
+		options.fail?.(error)
+		options.complete?.(error)
 		return
 	}
 
@@ -91,7 +88,7 @@ export function transcodeImage(options : CompressImageOptions) {
 		srcBitmap = Bitmap.createBitmap(srcBitmap!, 0, 0, srcBitmap.getWidth(), srcBitmap.getHeight(), matrix, false)
 	}
 	// 保存
-	let destPath = UTSAndroid.getAppTempPath()! + "compress/" + System.currentTimeMillis() + ".jpg"
+	let destPath = mediaCachePath + System.currentTimeMillis() + ".jpg"
 	let destFile = new File(destPath)
 	if (!destFile.getParentFile().exists()) {
 		destFile.getParentFile().mkdirs()
@@ -104,13 +101,13 @@ export function transcodeImage(options : CompressImageOptions) {
 			srcBitmap!.recycle()
 		}
 		saveExif(options.src, destPath)
-		let success : CompressImageSuccessCallback = { "tempFilePath": "file://" + destPath }
+		let success : CompressImageSuccess = { "tempFilePath": "file://" + destPath }
 		options.success?.(success)
 		options.complete?.(success)
 	} catch (ex) {
-		let fail : UniError = { "errCode": 1101009, "errMsg": UniErrors[1101009]!, "errSubject": UniError_CompressImage }
-		options.fail?.(fail)
-		options.complete?.(fail)
+		let error = new MediaErrorImpl(1101009, UniError_CompressImage);
+		options.fail?.(error)
+		options.complete?.(error)
 	}
 }
 
@@ -176,7 +173,7 @@ function str2Float(valuestr : string, realValue : number, defValue : number) : n
 	}
 	valuestr = valuestr.toLowerCase()
 	if (valuestr.endsWith("px")) {
-		valuestr == valuestr.substring(0, valuestr.length - 2);
+		valuestr = valuestr.substring(0, valuestr.length - 2);
 	}
 	try {
 		return Integer.parseInt(valuestr)
@@ -207,9 +204,9 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	let inPath = UTSAndroid.convert2AbsFullPath(options.src)
 	let inFile = new File(inPath)
 	if (!inFile.exists()) {
-		let fail : UniError = { "errCode": 1101003, "errMsg": UniErrors[1101003]!, "errSubject": UniError_CompressVideo }
-		options.fail?.(fail)
-		options.complete?.(fail)
+		let error = new MediaErrorImpl(1101003, UniError_CompressVideo);
+		options.fail?.(error)
+		options.complete?.(error)
 		return
 	}
 	var compressLevel = 1
@@ -232,22 +229,13 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	} else if (resolution! > 1 || resolution! <= 0) {
 		resolution = 1.0
 	}
-	let fileName = getFileName(inPath);
-	let outPath = UTSAndroid.getAppTempPath()! + "compress/" + (fileName == "" ? (System.currentTimeMillis() + ".mp4") : fileName)
+	let outPath = mediaCachePath + "compress_video_" + System.currentTimeMillis() + ".mp4";
 	let outFile = new File(outPath)
 	if (!outFile.getParentFile().exists()) {
 		outFile.getParentFile().mkdirs()
 	}
 
 	MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
-}
-
-function getFileName(path : string) : string {
-	const array = path.split("/")
-	if (array.length > 0) {
-		return array[array.length - 1]
-	}
-	return ""
 }
 
 class MediaTranscoderListener implements Listener {
@@ -266,33 +254,27 @@ class MediaTranscoderListener implements Listener {
 	override onTranscodeCompleted() {
 		let outFile = new File(this.outPath)
 		if (outFile.exists()) {
-			let success : CompressVideoSuccessCallback = {
+			let success : CompressVideoSuccess = {
 				tempFilePath: "file://" + this.outPath,
 				size: outFile.length()
 			}
 			this.options.success?.(success)
 			this.options.complete?.(success)
 		} else {
-			let error : UniError = {
-				"errSubject": UniError_CompressVideo, "errCode": 1101004, "errMsg": UniErrors[1101004]!
-			}
+			let error = new MediaErrorImpl(1101004, UniError_CompressVideo);
 			this.options.fail?.(error)
 			this.options.complete?.(error)
 		}
 	}
 
 	override onTranscodeCanceled() {
-		let error : UniError = {
-			"errSubject": UniError_CompressVideo, "errCode": 1101004, "errMsg": UniErrors[1101004]!
-		}
+		let error = new MediaErrorImpl(1101004, UniError_CompressVideo);
 		this.options.fail?.(error)
 		this.options.complete?.(error)
 	}
 
 	override onTranscodeFailed(exception : Exception) {
-		let error : UniError = {
-			"errSubject": UniError_CompressVideo, "errCode": 1101010, "errMsg": UniErrors[1101010]! + exception.toString()
-		}
+		let error = new MediaErrorImpl(1101010, UniError_CompressVideo);
 		this.options.fail?.(error)
 		this.options.complete?.(error)
 	}

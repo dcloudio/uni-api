@@ -1,0 +1,5 @@
+import { Wxpay } from "./src/Wxpay";
+export * from './src/WXPayEntryActivity.uts'
+export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
+	new Wxpay().requestPayment(options)
+};

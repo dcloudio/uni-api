@@ -8,7 +8,6 @@ import Dispatcher from 'okhttp3.Dispatcher';
 import Callback from 'okhttp3.Callback';
 import Response from 'okhttp3.Response';
 import Request from 'okhttp3.Request';
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import Call from 'okhttp3.Call';
 import IOException from 'java.io.IOException';
 import ResponseBody from 'okhttp3.ResponseBody';
@@ -24,11 +23,12 @@ import CookieManager from 'android.webkit.CookieManager';
 import KotlinArray from 'kotlin.Array';
 import Context from 'android.content.Context';
 import Environment from 'android.os.Environment';
+import { CookieInterceptor } from '../interceptor/CookieInterceptor.uts'
 
 class NetworkDownloadTaskImpl implements DownloadTask {
 	private call : Call | null = null;
 	private listener : NetworkDownloadFileListener | null = null;
-	constructor(call : Call, listener : NetworkDownloadFileListener) {
+	constructor(call : Call | null, listener : NetworkDownloadFileListener) {
 		this.call = call;
 		this.listener = listener;
 	}
@@ -64,11 +64,11 @@ export class DownloadController {
 		return this.instance!;
 	}
 
-	public downloadFile(options : DownloadFileOptions, listener : NetworkDownloadFileListener) : DownloadTask | null {
+	public downloadFile(options : DownloadFileOptions, listener : NetworkDownloadFileListener) : DownloadTask {
 		const client = this.createDownloadClient(options);
 		let request = this.createDownloadRequest(options, listener);
 		if (request == null) {
-			return null;
+			return new NetworkDownloadTaskImpl(null, listener);
 		}
 		let call : Call = client.newCall(request);
 		call.enqueue(new SimpleDownloadCallback(listener, options.filePath ?? ""));
@@ -80,7 +80,6 @@ export class DownloadController {
 
 
 
-
 	private createDownloadClient(option : DownloadFileOptions) : OkHttpClient {
 
 		let clientBuilder = OkHttpClient.Builder();
@@ -89,6 +88,7 @@ export class DownloadController {
 		clientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.callTimeout(timeout, TimeUnit.MILLISECONDS);
+		clientBuilder.addInterceptor(new CookieInterceptor());
 
 		if (this.downloadExecutorService == null) {
 			this.downloadExecutorService = Executors.newFixedThreadPool(10);
@@ -103,12 +103,13 @@ export class DownloadController {
 		let requestBilder = new Request.Builder();
 		try {
 			requestBilder.url(options.url);
-		} catch (e : Exception) {
-			let option = {};
+		} catch (exception : Exception) {
+			let option: UTSJSONObject = {};
 			option['statusCode'] = '-1';
 			option['errorCode'] = '-1';
 			option['errorMsg'] = "invalid URL";
-			option['cause'] = e;
+			let cause = exception.cause.toString();
+			option['cause'] = new SourceError(cause);
 			if (listener != null) {
 				listener.onComplete(option);
 			}
@@ -138,28 +139,32 @@ export class DownloadController {
 }
 
 class SimpleDownloadCallback implements Callback {
-	private downloadFilePath = "/download/";
+	private downloadFilePath = "/uni-download/";
 	private listener : NetworkDownloadFileListener | null = null;
 	private specifyPath = "";
 	constructor(listener : NetworkDownloadFileListener, specifyPath : string) {
 		this.listener = listener;
-		this.specifyPath = specifyPath;
+		if(specifyPath.startsWith("unifile://")){
+			this.specifyPath = UTSAndroid.convert2AbsFullPath(specifyPath);
+		}else{
+			this.specifyPath = specifyPath
+		}
 	}
 
 
 	override onFailure(call : Call, exception : IOException) {
-		let option = {};
+		let option: UTSJSONObject = {};
 		option['statusCode'] = '-1';
 		option['errorCode'] = '-1';
 		option['errorMsg'] = exception.message;
-		option['cause'] = exception;
+		let cause = exception.cause.toString();
+		option['cause'] = new SourceError(cause);
 		this.listener?.onComplete(option);
 	}
 	override onResponse(call : Call, response : Response) {
 		if (response.isSuccessful()) {
 			const source = response.body()?.source()
 			if (source != null) {
-				this.setCookie(response);
 				const tempFile = this.getTempFile()
 				let tempSink : BufferedSink | null = null;
 				let tempSource : BufferedSource | null = null;
@@ -214,21 +219,16 @@ class SimpleDownloadCallback implements Callback {
 			}
 
 		} else {
-			let option = {};
+			let option: UTSJSONObject = {};
 			const code = response.code() + "";
 			const errorMsg = response.body()?.string();
 			option['statusCode'] = code;
 			option['errorCode'] = code;
 			option['errorMsg'] = errorMsg;
-			option['cause'] = null;
+			const sourceError = new SourceError(errorMsg ?? "");
+			sourceError.code = response.code();
+			option['cause'] = sourceError;
 			this.listener?.onComplete(option);
-		}
-	}
-
-	setCookie(response : Response) {
-		const setCookie = response.header("Set-Cookie")
-		if (!TextUtils.isEmpty(setCookie)) {
-			CookieManager.getInstance().setCookie(response.request().url().toString(), setCookie);
 		}
 	}
 
@@ -273,7 +273,7 @@ class SimpleDownloadCallback implements Callback {
 					path = UTSAndroid.getAppTempPath()!! + "/" + this.specifyPath;
 				}
 
-				const file = new File(path)
+				var file = new File(path)
 				const parentFile = file.getParentFile()
 				if (parentFile != null) {
 					if (!parentFile.exists()) {
@@ -288,6 +288,23 @@ class SimpleDownloadCallback implements Callback {
 					option['cause'] = null;
 					this.listener?.onComplete(option);
 				}
+				
+				if (file.exists()) {
+					const index = path.lastIndexOf(".");
+					let tFileName = path;
+					let tFileType = "";
+					if (index >= 0) {
+						tFileName = path.substring(0, index)
+						tFileType = path.substring(index)
+					}
+				
+					var number = 1
+					while (new File(path).exists()) {
+						path = tFileName + "(" + number + ")" + tFileType;
+						number++
+					}
+					file = new File(path)
+				}
 
 				if (!file.exists()) {
 					try {
@@ -297,7 +314,8 @@ class SimpleDownloadCallback implements Callback {
 						option['statusCode'] = '-1';
 						option['errorCode'] = '602001';
 						option['errorMsg'] = exception.message;
-						option['cause'] = exception;
+						let cause = exception.cause.toString();
+						option['cause'] = new SourceError(cause);
 						this.listener?.onComplete(option);
 					}
 				}
@@ -322,11 +340,12 @@ class SimpleDownloadCallback implements Callback {
 							if (pair != null) {
 								let key = pair[0];
 								let value = pair[1];
+								const reg = new RegExp("^\"|\"$","g")
 								if (key != null) {
-									key = key.replace("\"", "");
+									key = key.replace(reg, "");
 								}
 								if (value != null) {
-									value = value.replace("\"", "");
+									value = value.replace(reg, "");
 								}
 
 								if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value) && key!.equals("filename", true)) {
@@ -404,11 +423,12 @@ class SimpleDownloadCallback implements Callback {
 			try {
 				file.createNewFile()
 			} catch (exception : Exception) {
-				let option = {};
+				let option: UTSJSONObject = {};
 				option['statusCode'] = '-1';
 				option['errorCode'] = '602001';
 				option['errorMsg'] = exception.message;
-				option['cause'] = exception;
+				let cause = exception.cause.toString();
+				option['cause'] = new SourceError(cause);
 				this.listener?.onComplete(option);
 			}
 		}

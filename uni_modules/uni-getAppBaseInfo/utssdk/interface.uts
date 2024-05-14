@@ -7,191 +7,574 @@ export type GetAppBaseInfoOptions = {
 
 export type GetAppBaseInfoResult = {
   /**
-   * manifest.json 中应用appid，即DCloud appid。
+   * manifest.json 中应用appid，即DCloud appid。	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   appId?: string,
   /**
    * `manifest.json` 中应用名称。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   appName?: string,
   /**
    * `manifest.json` 中应用版本名称。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   appVersion?: string,
   /**
    * `manifest.json` 中应用版本名号。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   appVersionCode?: string,
   /**
-   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es
+   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   appLanguage?: string,
   /**
-   * 应用设置的语言
+   * 应用设置的语言	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   language?: string,
   /**
    * 引擎版本号。已废弃，仅为了向下兼容保留
    * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   version?: string,
   /**
-   * 应用资源（wgt）的版本名称。
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 应用资源（wgt）的版本名称。	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   appWgtVersion?: string,
   /**
-   * 小程序宿主语言
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 小程序宿主语言	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostLanguage?: string,
   /**
    * App、小程序宿主版本。
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostVersion?: string,
   /**
-   * 小程序宿主名称
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 小程序宿主名称	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostName?: string,
   /**
-   * 小程序宿主包名
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 小程序宿主包名	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostPackageName?: string,
   /**
-   * uni小程序SDK版本、小程序客户端基础库版本
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * uni小程序SDK版本、小程序客户端基础库版本	
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostSDKVersion?: string,
   /**
    * 系统当前主题，取值为light或dark。微信小程序全局配置"darkmode":true时才能获取，否则为 undefined （不支持小游戏）
-   *
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   hostTheme?: string,
   /**
    * 是否uni-app x
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   isUniAppX ?: boolean,
+  
   /**
    * uni 编译器版本
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   uniCompileVersion ?: string,
   /**
-   * uni-app 运行平台。如：`app`、`mp-weixin`、`web`
+   * uni 编译器版本
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.0"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
-  uniPlatform ?: string,
+  uniCompilerVersion ?: string,
+  /**
+   * uni-app 运行平台。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
+   */
+  uniPlatform ?: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
    * uni 运行时版本
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   uniRuntimeVersion ?: string,
   /**
    * uni 编译器版本号
+   * @deprecated 已废弃，仅为了向下兼容保留
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
    */
   uniCompileVersionCode?: number,
   /**
+   * uni 编译器版本号
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.0"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  uniCompilerVersionCode?: number,
+  /**
    * uni 运行时版本号
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   uniRuntimeVersionCode?: number,
+  /**
+   * Android的包名
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.97"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  packageName?: string,
+  /**
+   * iOS的bundleId
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  bundleId?: string,
+  /**
+   * Android: 应用签名证书的SHA1值（全部为小写，中间不包含“:”）。 为了保证应用的安全性，请使用自己生成的证书（不要使用公共测试证书）。
+   * iOS: 应用签名证书中绑定的Bundle ID（AppleID）的md5值（全部为小写）。
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "3.97"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  signature?: string,
 }
 
 /**
@@ -203,25 +586,30 @@ export type GetAppBaseInfo = (options?: GetAppBaseInfoOptions | null) => GetAppB
 export interface Uni {
   /**
     * GetAppBaseInfo(Object object)
-    * @description
+    * @description 
     * 获取app基本信息
     * @param {GetAppBaseInfoOptions} options [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
     * @tutorial https://uniapp.dcloud.net.cn/api/system/getAppBaseInfo.html
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+  *   "web": {
+  *      "uniVer": "√",
+  *      "unixVer": "4.0"
+  *   }
+	* }
     * @example
      ```typescript
       uni.getAppBaseInfo({

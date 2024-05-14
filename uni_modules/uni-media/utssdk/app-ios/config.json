@@ -1,0 +1,7 @@
+{
+	"frameworks": [
+		"AssetsLibrary.framework",
+		"Photos.framework",
+		"AVFoundation.framework"
+	]
+}

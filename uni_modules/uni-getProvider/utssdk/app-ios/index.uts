@@ -1,0 +1,25 @@
+import { GetProvider, GetProviderOptions, GetProviderSuccess } from '../interface.uts'
+import { UTSiOS } from "DCloudUTSFoundation";
+
+const SupportedProviderServiceList = ['oauth', 'share', 'payment', 'push', 'location']
+
+export const getProvider : GetProvider = (options: GetProviderOptions) : void => {
+  if (!SupportedProviderServiceList.includes(options.service)) {
+    if (options.fail != null) {
+      const uniError = new UniError('uni-getProvider', -1, 'Parameter service invalid.');
+      options.fail?.(uniError);
+    }
+  } else {
+    const provider = UTSiOS.getExtApiProviders(options.service)
+    if (options.success != null) { 
+      const result = {
+        service: options.service,
+        provider,
+        errMsg: 'GetProvider:ok'
+      } as GetProviderSuccess;
+      options.success?.(result);
+    }
+  }
+
+  options.complete?.({});
+}

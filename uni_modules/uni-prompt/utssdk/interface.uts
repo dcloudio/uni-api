@@ -1,8 +1,25 @@
 /**
+ * 错误码
+ * - 1	  撤销
+ * - 1001  请求参数非法
+ */
+
+export type PromptErrorCode = 1 | 1001
+
+export interface IPromptError extends IUniError {
+	errCode : PromptErrorCode
+};
+
+/**
  * uni.showToast成功回调参数
  */
 export type ShowToastSuccess = {
 }
+
+/**
+ * uni.showToast失败回调参数
+ */
+export type ShowToastFail = IPromptError;
 
 /**
  * uni.showToast成功回调函数定义
@@ -11,7 +28,7 @@ export type ShowToastSuccessCallback = (res: ShowToastSuccess) => void
 /**
  * uni.showToast失败回调函数定义
  */
-export type ShowToastFailCallback = (res: UniError) => void
+export type ShowToastFailCallback = (res: ShowToastFail) => void
 /**
  * uni.showToast完成回调函数定义
  */
@@ -29,11 +46,11 @@ export type ShowToastOptions = {
    * 图标，有效值详见下方说明，默认：success。
    * @description icon值说明 success: 显示成功图标，error: 显示错误图标； fail: 显示错误图标，此时title文本无长度显示； exception: 显示异常图标，此时title文本无长度显示； loading: 显示加载图标；none: 不显示图标。
    */
-  icon?: string | null,
+  icon?: "success" | "error" | "fail" | "exception" | "loading" | "none" | null,
   /**
    * 自定义图标的本地路径（app端暂不支持gif）
    */
-  image?: string | null,
+  image?: string.ImageURIString | null,
   /**
    * 是否显示透明蒙层，防止触摸穿透，默认：false
    */
@@ -46,7 +63,7 @@ export type ShowToastOptions = {
    * 纯文本轻提示显示位置，填写有效值后只有 title 属性生效，且不支持通过 uni.hideToast 隐藏。
    * @description position值说明（仅App生效） top: 居上显示； center: 居中显示；bottom： 居底显示
    */
-  position?: string | null,
+  position?: "top" | "center" | "bottom" | null,
   /**
    * 接口调用成功的回调函数
    */
@@ -63,22 +80,26 @@ export type ShowToastOptions = {
 
 /**
  * uni.showToast函数定义
- * 弹出toast
- *
- * @param {ShowToastOptions} options
+ * 弹出toast  
+ * 
+ * @param {ShowToastOptions} options 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -87,20 +108,24 @@ export type ShowToast = (options: ShowToastOptions) => void
 /**
  * uni.hideToast函数定义
  * 隐藏toast
- *
+ * 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -114,13 +139,18 @@ export type ShowLoadingSuccess = {
 }
 
 /**
+ * uni.showLoading失败回调参数
+ */
+export type ShowLoadingFail = IPromptError;
+
+/**
  * uni.showLoading成功回调函数定义
  */
 export type ShowLoadingSuccessCallback = (res: ShowLoadingSuccess) => void
 /**
  * uni.showLoading失败回调函数定义
  */
-export type ShowLoadingFailCallback = (res: UniError) => void
+export type ShowLoadingFailCallback = (res: ShowLoadingFail) => void
 /**
  * uni.showLoading完成回调函数定义
  */
@@ -155,21 +185,25 @@ export type ShowLoadingOptions = {
 /**
  * uni.showLoading函数定义
  * 弹出loading
- *
- * @param {ShowLoadingOptions} options
+ * 
+ * @param {ShowLoadingOptions} options 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -178,23 +212,27 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
 /**
  * uni.hideLoading函数定义
  * 隐藏loading
- *
+ * 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
- *
+ * 
  */
 export type HideLoading = () => void
 
@@ -217,13 +255,18 @@ export type ShowModalSuccess = {
 }
 
 /**
+ * uni.showModal失败回调参数
+ */
+export type ShowModalFail = IPromptError;
+
+/**
  * uni.showModal成功回调函数定义
  */
 export type ShowModalSuccessCallback = (res: ShowModalSuccess) => void
 /**
  * uni.showModal失败回调函数定义
  */
-export type ShowModalFailCallback = (res: UniError) => void
+export type ShowModalFailCallback = (res: ShowModalFail) => void
 /**
  * uni.showModal完成回调函数定义
  */
@@ -252,7 +295,7 @@ export type ShowModalOptions = {
   /**
    * 取消按钮的文字颜色，默认为"#000000"
    */
-  cancelColor?: string | null,
+  cancelColor?: string.ColorString | null,
   /**
    * 确定按钮的文字，默认为"确定"
    */
@@ -260,7 +303,7 @@ export type ShowModalOptions = {
   /**
    * 确定按钮的文字颜色
    */
-  confirmColor?: string | null,
+  confirmColor?: string.ColorString | null,
   /**
    * @default false
    * 是否显示输入框
@@ -286,23 +329,27 @@ export type ShowModalOptions = {
 
 /**
  * uni.showModal 函数定义
- *
+ * 
  * 弹出modal
- *
- * @param {ShowModalOptions} options
+ * 
+ * @param {ShowModalOptions} options 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+ *    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -338,13 +385,18 @@ export type Popover = {
 }
 
 /**
+ * uni.ShowActionSheet失败回调参数
+ */
+export type ShowActionSheetFail = IPromptError;
+
+/**
  * uni.showActionSheet成功回调函数定义
  */
 export type ShowActionSheetSuccessCallback = (res: ShowActionSheetSuccess) => void
 /**
  * uni.showActionSheet成功回调函数定义
  */
-export type ShowActionSheetFailCallback = (res: UniError) => void
+export type ShowActionSheetFailCallback = (res: ShowActionSheetFail) => void
 /**
  * uni.showActionSheet成功回调函数定义
  */
@@ -369,7 +421,7 @@ export type ShowActionSheetOptions = {
   /**
    * 按钮的文字颜色，字符串格式（iOS默认为系统控件颜色）
    */
-  itemColor?: string | null,
+  itemColor?: string.ColorString | null,
   /**
    * 大屏设备弹出原生选择按钮框的指示区域，默认居中显示
    */
@@ -390,23 +442,27 @@ export type ShowActionSheetOptions = {
 
 /**
  * uni.showActionSheet函数定义
- *
+ * 
  * 弹出actionSheet
- *
- * @param {ShowActionSheetOptions} options
+ * 
+ * @param {ShowActionSheetOptions} options 
  * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
  * @uniPlatform {
  *    "app": {
  *        "android": {
- *            "osVer": "4.4.4",
+ *            "osVer": "5.0",
  *            "uniVer": "√",
  *            "unixVer": "3.9.0"
  *        },
  *        "ios": {
- *            "osVer": "9.0",
+ *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "x"
+ *            "unixVer": "4.11"
  *   	  }
+ *    },
+*    "web": {
+ *        "uniVer": "√",
+ *        "unixVer": "4.0"
  *    }
  * }
  */
@@ -427,19 +483,23 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -450,19 +510,23 @@ export interface Uni {
    * ```typescript
    *    uni.hideToast();
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -479,19 +543,23 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -509,19 +577,23 @@ export interface Uni {
    *	}, 2000);
    *
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -545,19 +617,23 @@ export interface Uni {
      *
    *
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */
@@ -577,19 +653,23 @@ export interface Uni {
    *		}
    *	});
    * ```
-   * @tutorial [](https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet)
+   * @tutorial https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
+   *            "osVer": "5.0",
    *            "uniVer": "√",
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
+   *            "osVer": "12.0",
    *            "uniVer": "√",
-   *            "unixVer": "x"
+   *            "unixVer": "4.11"
    *        }
+   *    },
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
    *    }
    * }
    */

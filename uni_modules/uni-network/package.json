@@ -47,7 +47,7 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true
 					}
 				},
 				"downloadFile": {
@@ -55,7 +55,7 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true
 					}
 				}
 			}

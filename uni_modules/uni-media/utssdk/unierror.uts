@@ -1,3 +1,5 @@
+import { IMediaError, MediaErrorCode } from "./interface.uts";
+
 /**
  * 错误主题
  */
@@ -14,7 +16,7 @@ export const UniError_GetVideoInfo = "uni-getVideoInfo"
  * 错误码
  * @UniError
  */
-export const UniErrors : Map<number, string> = new Map([
+export const MediaUniErrors : Map<number, string> = new Map([
 	/**
 	 * 用户取消
 	 */
@@ -56,3 +58,15 @@ export const UniErrors : Map<number, string> = new Map([
 	 */
 	[1101010, "unexpect error:"]
 ]);
+
+export class MediaErrorImpl extends UniError implements IMediaError {
+	// #ifdef APP-ANDROID
+	override errCode : MediaErrorCode
+	// #endif
+	constructor(errCode : MediaErrorCode, uniErrorSubject : string) {
+		super()
+		this.errSubject = uniErrorSubject
+		this.errCode = errCode
+		this.errMsg = MediaUniErrors[errCode] ?? "";
+	}
+}

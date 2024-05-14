@@ -2,11 +2,12 @@ import { UTSiOS } from "DCloudUTSFoundation"
 import { MCToast, MCToastConfig } from "DCUniToast"  assert { type: "implementationOnly" };
 import { UIScreen, UIImage } from 'UIKit'
 import { ShowToastOptions, ShowLoadingOptions, ShowToastSuccess, ShowToastFail, ShowLoadingSuccess, ShowLoadingFail } from '../interface.uts'
+import { PromptErrorImpl } from "../unierror.uts"
 
 /* 显示toast */
-export function toShowToast(options: ShowToastOptions) {
+export function toShowToast(options : ShowToastOptions) {
 	if (options.title == null || options.title.length == 0) {
-		let res = new UniError("uni-prompt",1001,"showLoading:title is null");
+		let res = new PromptErrorImpl(1001, "showLoading:title is null");
 		options.fail?.(res)
 		options.complete?.(res)
 	} else {
@@ -55,7 +56,7 @@ export function toShowToast(options: ShowToastOptions) {
 				MCToast.mc_success(options.title, duration = CGFloat(duration.toFloat()), respond = mask)
 			}
 		}
-		const res: ShowToastSuccess = {
+		const res : ShowToastSuccess = {
 		}
 		options.success?.(res)
 		options.complete?.(res)
@@ -69,27 +70,21 @@ export function toHideToast() {
 }
 
 /* 显示loading + text */
-export function toShowLoading(options: ShowLoadingOptions) {
-	if (options.title == null || options.title.length == 0) {
-		let res = new UniError("uni-prompt",1001,"showLoading:title is null");
-		options.fail?.(res)
-		options.complete?.(res)
-	} else {
-		// mask
-		let mask = MCToast.MCToastRespond.default
-		if (options.mask == true) {
-			mask = MCToast.MCToastRespond.noRespond
-		}
-		// config
-		MCToastConfig.shared.background.size = CGSize.init(width = 135, height = 120);
-		// show loading
-		MCToast.mc_loading(text = options.title, respond = mask)
-		// callback
-		const res: ShowLoadingSuccess = {
-		}
-		options.success?.(res)
-		options.complete?.(res)
+export function toShowLoading(options : ShowLoadingOptions) {
+
+	let mask = MCToast.MCToastRespond.default
+	if (options.mask == true) {
+		mask = MCToast.MCToastRespond.noRespond
 	}
+	// config
+	MCToastConfig.shared.background.size = CGSize.init(width = 135, height = 120);
+	// show loading
+	MCToast.mc_loading(text = options.title, respond = mask)
+	// callback
+	const res : ShowLoadingSuccess = {
+	}
+	options.success?.(res)
+	options.complete?.(res)
 
 }
 

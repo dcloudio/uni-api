@@ -3,15 +3,25 @@ import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
 import { DCActionSheetController, DCAlertAction, DCAlertActionStyle } from "DCloudAlertController" assert { type: "implementationOnly" };
 import { ShowActionSheetOptions, ShowActionSheetSuccess, ShowActionSheetFail } from '../interface.uts'
-
+import { PromptErrorImpl } from "../unierror.uts"
 
 export function actionSheet(options : ShowActionSheetOptions) {
 	const itemList = options.itemList!
 	if (itemList.length < 1) {
-		let res = new UniError("uni-prompt",-3,"showActionSheet:fail cancel");
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
 		options.fail?.(res)
 		options.complete?.(res)
 		return
+	}
+	
+	/**
+	 * 元素个数不能超过6个
+	 */
+	if(options.itemList.count > 6){
+		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: itemList should not be large than 6");
+		options.fail?.(res)
+		options.complete?.(res)
+		return ;
 	}
 
 	// uts方法默认会在子线程中执行，涉及 UI 操作必须在主线程中运行，通过 DispatchQueue.main.async 方法可将代码在主线程中运行
@@ -25,7 +35,7 @@ export function actionSheet(options : ShowActionSheetOptions) {
 			let action = DCAlertAction.init(title = item, style = DCAlertActionStyle.defaultStyle, handler = (action: DCAlertAction): void => {
 				// 点击按钮的回调方法
 				const res: ShowActionSheetSuccess = {
-					tapIndex: index + 1,
+					tapIndex: index,
 				}
 				options.success?.(res)
 				options.complete?.(res)   
@@ -39,7 +49,7 @@ export function actionSheet(options : ShowActionSheetOptions) {
 		})
 		let cancelAction = DCAlertAction.init(title = "取消", style = DCAlertActionStyle.cancelStyle, handler = (action: DCAlertAction): void => {
 				// 点击按钮的回调方法
-				let res = new UniError("uni-prompt",1002,"showActionSheet:fail cancel");
+				let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
 				options.fail?.(res)
 				options.complete?.(res)
 		})
