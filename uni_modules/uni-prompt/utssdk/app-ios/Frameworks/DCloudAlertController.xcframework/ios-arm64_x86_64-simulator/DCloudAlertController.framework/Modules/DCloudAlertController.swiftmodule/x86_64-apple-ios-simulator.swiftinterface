@@ -1,0 +1,173 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name DCloudAlertController
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+@_exported import DCloudAlertController
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class DCActionSheetController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public init(noticeTitle: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func loadView()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func addAction(_ action: DCloudAlertController.DCAlertAction)
+  @_Concurrency.MainActor(unsafe) public func addAction(_ title: Swift.String, _ style: DCloudAlertController.DCAlertActionStyle, _ handler: @escaping (_ action: DCloudAlertController.DCAlertAction) -> Swift.Void) -> DCloudAlertController.DCAlertAction
+  @_Concurrency.MainActor(unsafe) public func show()
+  @objc deinit
+}
+extension DCloudAlertController.DCActionSheetController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, heightForFooterInSection section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func tableView(_ tableView: UIKit.UITableView, viewForFooterInSection section: Swift.Int) -> UIKit.UIView?
+}
+extension Foundation.NSString {
+  public func dc_boundingSize(_ font: UIKit.UIFont?, _ lineHeight: CoreFoundation.CGFloat, _ size: CoreFoundation.CGSize) -> CoreFoundation.CGSize
+}
+public enum DCAlertViewControllerStyle : Swift.Int {
+  case alert
+  case textViewAlert
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol DCAlertViewControllerDismissDelegate : UIKit.UITextViewDelegate {
+  func canDismissWithAction(_ action: DCloudAlertController.DCAlertAction?, _ param: Any?) -> Swift.Bool
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class DCAlertViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public var canOpenDarkMode: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var contentViewVisible: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var mesageTitle: Swift.String? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var message: Swift.String? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var textViewText: Swift.String? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var textView: UIKit.UITextView? {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) weak public var dismissDelegate: (any DCloudAlertController.DCAlertViewControllerDismissDelegate)? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var preferredStyle: DCloudAlertController.DCAlertViewControllerStyle
+  @_Concurrency.MainActor(unsafe) public var tapGesture: UIKit.UITapGestureRecognizer?
+  @_Concurrency.MainActor(unsafe) public var contentView: (any UIKit.UIView & DCloudAlertController.DCAlertControllerContentViewProtocol)?
+  @objc deinit
+  @_Concurrency.MainActor(unsafe) public init(_ title: Swift.String?, _ message: Swift.String?, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle, _ placeholder: Swift.String?)
+  @_Concurrency.MainActor(unsafe) public init(_ customView: any UIKit.UIView & DCloudAlertController.DCAlertControllerContentViewProtocol, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func loadView()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) public func alertControllerWithTitle(_ title: Swift.String?, _ message: Swift.String?, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle, _ placeholder: Swift.String?) -> DCloudAlertController.DCAlertViewController
+  @_Concurrency.MainActor(unsafe) public func alertControllerWithCustomView(_ view: any UIKit.UIView & DCloudAlertController.DCAlertControllerContentViewProtocol, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle) -> DCloudAlertController.DCAlertViewController
+  @_Concurrency.MainActor(unsafe) public func addActionWithTitle(_ title: Foundation.NSString, _ style: DCloudAlertController.DCAlertActionStyle, _ handler: @escaping (_ action: DCloudAlertController.DCAlertAction) -> Swift.Void) -> DCloudAlertController.DCAlertAction
+  @_Concurrency.MainActor(unsafe) public func addImage(_ image: UIKit.UIImage, _ position: DCloudAlertController.DCAlertImagePosition)
+  @_Concurrency.MainActor(unsafe) public func addCustomView(_ customView: UIKit.UIView)
+  @_Concurrency.MainActor(unsafe) public func addAction(_ action: DCloudAlertController.DCAlertAction)
+  @_Concurrency.MainActor(unsafe) public func addTapGesture()
+  @_Concurrency.MainActor(unsafe) public func onTapAction(_ action: DCloudAlertController.DCAlertAction)
+  @_Concurrency.MainActor(unsafe) public func resetDoneBtnTitleColor(_ color: UIKit.UIColor)
+}
+extension DCloudAlertController.DCAlertViewController : UIKit.UIViewControllerTransitioningDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func animationController(forPresented presented: UIKit.UIViewController, presenting: UIKit.UIViewController, source: UIKit.UIViewController) -> (any UIKit.UIViewControllerAnimatedTransitioning)?
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func animationController(forDismissed dismissed: UIKit.UIViewController) -> (any UIKit.UIViewControllerAnimatedTransitioning)?
+}
+public typealias DCAlertView = DCloudAlertController.DCAlertViewController
+extension DCloudAlertController.DCAlertViewController {
+  @_Concurrency.MainActor(unsafe) public func show()
+  @_Concurrency.MainActor(unsafe) public func dismiss()
+  @_Concurrency.MainActor(unsafe) public static func alertView(_ title: Swift.String, _ doneItem: DCloudAlertController.DCRIButtonItem, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle = .alert, _ placeholder: Swift.String = "") -> DCloudAlertController.DCAlertView
+  @_Concurrency.MainActor(unsafe) public static func alertView(_ title: Swift.String?, _ cancelItem: DCloudAlertController.DCRIButtonItem, _ doneItem: DCloudAlertController.DCRIButtonItem, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle = .alert, _ placeholder: Swift.String = "") -> DCloudAlertController.DCAlertView
+  @_Concurrency.MainActor(unsafe) public static func alertView(_ title: Swift.String?, _ subTitle: Swift.String?, _ doneItem: DCloudAlertController.DCRIButtonItem, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle = .alert, _ placeholder: Swift.String = "") -> DCloudAlertController.DCAlertView
+  @_Concurrency.MainActor(unsafe) public static func alertView(_ title: Swift.String?, _ subTitle: Swift.String?, _ cancelItem: DCloudAlertController.DCRIButtonItem, _ doneItem: DCloudAlertController.DCRIButtonItem, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle = .alert, _ placeholder: Swift.String = "") -> DCloudAlertController.DCAlertView
+  @_Concurrency.MainActor(unsafe) public static func alertView(_ title: Swift.String?, _ subTitle: Swift.String?, _ cancelItem: DCloudAlertController.DCRIButtonItem, _ cancelActionStyle: DCloudAlertController.DCAlertActionStyle, _ doneItem: DCloudAlertController.DCRIButtonItem, _ doneActionStyle: DCloudAlertController.DCAlertActionStyle, _ preferredStyle: DCloudAlertController.DCAlertViewControllerStyle, _ placeholder: Swift.String = "") -> DCloudAlertController.DCAlertView
+}
+public enum DCAlertActionStyle : Swift.Int {
+  case defaultStyle
+  case cancelStyle
+  case destructiveStyle
+  case preferredStyle
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum DCAlertImagePosition : Swift.Int {
+  case null
+  case topCenter
+  case leftTopCenter
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class DCAlertAction : ObjectiveC.NSObject {
+  public var title: Swift.String?
+  public var titleColor: UIKit.UIColor? {
+    get
+    set
+  }
+  public var style: DCloudAlertController.DCAlertActionStyle
+  weak public var button: UIKit.UIButton?
+  public var handler: (_ action: DCloudAlertController.DCAlertAction) -> Swift.Void
+  public var enabled: Swift.Bool {
+    get
+    set
+  }
+  public init(title: Swift.String, style: DCloudAlertController.DCAlertActionStyle, handler: @escaping (_ action: DCloudAlertController.DCAlertAction) -> Swift.Void)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class DCAlertActionButton : UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol DCAlertControllerContentViewProtocol : ObjectiveC.NSObject {
+  var titleLabel: UIKit.UILabel { get set }
+  var messageLabel: UIKit.UITextView { get set }
+  var title: Swift.String? { get set }
+  var message: Swift.String? { get set }
+  var image: UIKit.UIImage? { get set }
+  var customView: UIKit.UIView? { get set }
+  var imagePositon: DCloudAlertController.DCAlertImagePosition? { get set }
+  var buttons: [DCloudAlertController.DCAlertActionButton] { get }
+  var actionClickedHandler: ((_ action: DCloudAlertController.DCAlertAction) -> Swift.Void)? { get set }
+  func addAction(_ action: DCloudAlertController.DCAlertAction)
+  func setHairLineColor(_ hairLineColor: UIKit.UIColor?)
+}
+@objc @_inheritsConvenienceInitializers public class DCRIButtonItem : ObjectiveC.NSObject {
+  public static func item() -> DCloudAlertController.DCRIButtonItem
+  public static func itemWithLabel(_ inLabel: Swift.String) -> DCloudAlertController.DCRIButtonItem
+  public static func itemWithLabel(_ inLabel: Swift.String, _ labelColor: UIKit.UIColor? = nil, inAction action: @escaping (() -> Swift.Void)) -> DCloudAlertController.DCRIButtonItem
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension DCloudAlertController.DCAlertViewControllerStyle : Swift.Equatable {}
+extension DCloudAlertController.DCAlertViewControllerStyle : Swift.Hashable {}
+extension DCloudAlertController.DCAlertViewControllerStyle : Swift.RawRepresentable {}
+extension DCloudAlertController.DCAlertActionStyle : Swift.Equatable {}
+extension DCloudAlertController.DCAlertActionStyle : Swift.Hashable {}
+extension DCloudAlertController.DCAlertActionStyle : Swift.RawRepresentable {}
+extension DCloudAlertController.DCAlertImagePosition : Swift.Equatable {}
+extension DCloudAlertController.DCAlertImagePosition : Swift.Hashable {}
+extension DCloudAlertController.DCAlertImagePosition : Swift.RawRepresentable {}

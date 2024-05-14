@@ -39,7 +39,7 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": false
+					"swift": true
 				}
 			},
 			"getSystemInfoSync":{
@@ -47,7 +47,7 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": false
+					"swift": true
 				}
 			},
 			"getWindowInfo":{
@@ -55,7 +55,7 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": false
+					"swift": true
 				}
 			}
 		}

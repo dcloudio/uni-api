@@ -1,5 +1,4 @@
 import { GetNetworkTypeOptions, GetNetworkType, GetNetworkTypeSuccess } from "../interface.uts";
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import Context from 'android.content.Context';
 import ConnectivityManager from 'android.net.ConnectivityManager';
 import TelephonyManager from 'android.telephony.TelephonyManager';
@@ -69,7 +68,7 @@ export const getNetworkType : GetNetworkType = function (options : GetNetworkTyp
 						type = "5g";
 						break;
 					}
-					default://对于case之外的反馈到js，js层收集之后回馈5+进行填补完善
+					default:
 						type = "" + subtype;
 						break;
 				}

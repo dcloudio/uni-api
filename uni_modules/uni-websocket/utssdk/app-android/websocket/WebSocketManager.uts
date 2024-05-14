@@ -1,6 +1,6 @@
 import { ConnectSocket, ConnectSocketOptions, SocketTask, SendSocketMessageOptions, CloseSocketOptions, OnSocketOpenCallbackResult, GeneralCallbackResult, OnSocketMessageCallbackResult, OnSocketOpenCallback, OnSocketMessageCallback, OnSocketCloseCallback, OnSocketErrorCallback, OnSocketCloseCallbackResult, OnSocketErrorCallbackResult, ConnectSocketSuccess } from "../../interface";
 import { WebsockerClient } from "./WebsockerClient"
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
+import { SendSocketMessageFailImpl } from "../../unierror.uts";
 class SimpleSocketTask implements SocketTask {
 
 	private client : WebsockerClient | null = null;
@@ -47,9 +47,7 @@ class SimpleSocketTask implements SocketTask {
 		if (this.client == null) {
 			const fail = options.fail;
 			const complete = options.complete;
-			let result : GeneralCallbackResult = {
-				errMsg: "sendSocketMessage:fail WebSocket is not connected"
-			}
+			let result = new SendSocketMessageFailImpl(10002);
 			fail?.(result);
 			complete?.(result);
 			return
@@ -159,9 +157,7 @@ export class WebSocketManager implements WebSocketManagerListener {
 		} else {
 			const fail = options.fail;
 			const complete = options.complete;
-			let result : GeneralCallbackResult = {
-				errMsg: "sendSocketMessage:fail WebSocket is not connected"
-			}
+			let result = new SendSocketMessageFailImpl(10002);
 			fail?.(result);
 			complete?.(result);
 		}

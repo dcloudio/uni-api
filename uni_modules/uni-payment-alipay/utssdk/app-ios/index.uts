@@ -1,0 +1,5 @@
+import { Alipay } from './Alipay.uts'
+
+export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
+    new Alipay().requestPayment(options)
+};

@@ -1,0 +1,17 @@
+{
+	"frameworks": [
+		"libc++.tbd",
+		"libz.tbd",
+		"SystemConfiguration.framework",
+		"CoreTelephony.framework",
+		"QuartzCore.framework",
+		"CoreText.framework",
+		"CoreGraphics.framework",
+		"UIKit.framework",
+		"Foundation.framework",
+		"CFNetwork.framework",
+		"CoreMotion.framework"
+	],
+	"deploymentTarget": "12.0"
+}
+

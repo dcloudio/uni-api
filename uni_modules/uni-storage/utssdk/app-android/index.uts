@@ -11,7 +11,12 @@ import { ClearStorage, ClearStorageSuccess, ClearStorageOptions } from "../inter
 import { ClearStorageSync } from "../interface.uts"
 
 // @ts-expect-error
+// #ifdef UNI-APP-X
+import DCStorage from "io.dcloud.common.unix.util.db.DCStorage";
+// #endif
+// #ifndef UNI-APP-X
 import DCStorage from "io.dcloud.common.util.db.DCStorage";
+// #endif
 // @ts-expect-error
 import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 // @ts-expect-error
@@ -64,10 +69,6 @@ export const setStorageSync: SetStorageSync = function (key: string, data: any) 
   }
   uni_setStorageSync(key, data, (itemKey: string, itemValue: string) => {
     let dataString = itemValue
-    if (typeof data == "string") {
-      // string 类型不进行序列化
-      dataString = data as string
-    }
     dcStorage.performSetItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey, dataString);
   }, (itemKey: string) => {
     dcStorage.performRemoveItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey);
@@ -83,7 +84,6 @@ export const setStorageSync: SetStorageSync = function (key: string, data: any) 
 function includeKey(key: string): boolean {
 
   let info = DCStorage.getDCStorage(UTSAndroid.getUniActivity()!).performGetAllKeys(UTSAndroid.getAppId())
-  console.log(info)
   if (info.v != null && info.code == DCStorage.SUCCESS) {
     //&& info.v instanceof java.util.List
     // @ts-expect-error

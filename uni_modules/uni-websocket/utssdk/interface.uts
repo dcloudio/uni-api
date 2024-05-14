@@ -6,20 +6,25 @@ export interface Uni {
     * @param {ConnectSocketOptions} options
     * @return {SocketTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
         uni.connectSocket({
@@ -38,20 +43,25 @@ export interface Uni {
     * @param {OnSocketOpenCallback} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.onSocketOpen(function (res) {
@@ -68,20 +78,25 @@ export interface Uni {
     * @param {OnSocketErrorCallback} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.onSocketError(function (res) {
@@ -98,20 +113,25 @@ export interface Uni {
     * @param {SendSocketMessageOptions} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.sendSocketMessage({
@@ -127,20 +147,25 @@ export interface Uni {
     * @param {OnSocketMessageCallback} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.onSocketMessage(function (res) {
@@ -156,20 +181,25 @@ export interface Uni {
     * @param {CloseSocketOptions} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.closeSocket();
@@ -183,20 +213,25 @@ export interface Uni {
     * @param {OnSocketCloseCallback} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       uni.onSocketClose(function (res) {
@@ -230,19 +265,64 @@ type ConnectSocketComplete = any;
 type ConnectSocketCompleteCallback = (result: ConnectSocketComplete) => void;
 export type ConnectSocketOptions = {
   /**
-   * 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
+   * 开发者服务器接口地址
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   url: string,
   /**
    * HTTP 请求 Header，header 中不能设置 Referer
    * @defaultValue null
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  header: UTSJSONObject | null,
+  header?: UTSJSONObject | null,
   /**
    * 子协议数组
    * @defaultValue null
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  protocols: (string[]) | null,
+  protocols?: (string[]) | null,
   /**
    * 接口调用成功的回调函数
    * @defaultValue null
@@ -265,11 +345,39 @@ export type GeneralCallbackResult = {
    */
   errMsg: string
 };
+/**
+ * 错误码
+ * - 10001 发送数据超限，发送队列不能超过16M大小。
+ * - 10002 websocket未连接
+ * - 602001 websocket系统错误
+ */
+export type SendSocketMessageErrorCode = 10001 | 10002 | 602001;
+/**
+ * 发送失败的错误回调参数
+ */
+export interface SendSocketMessageFail extends IUniError { 
+	errCode: SendSocketMessageErrorCode;
+};
 export type SendSocketMessageOptions = {
   /**
    * 需要发送的内容
    * @type string | ArrayBuffer
    * @type {SocketDataOptions}
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   data: any,
   /**
@@ -281,22 +389,52 @@ export type SendSocketMessageOptions = {
    * 接口调用失败的回调函数
    * @defaultValue null
    */
-  fail?: ((result: GeneralCallbackResult) => void) | null,
+  fail?: ((result: SendSocketMessageFail) => void) | null,
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
    * @defaultValue null
    */
-  complete?: ((result: GeneralCallbackResult) => void) | null
+  complete?: ((result: any) => void) | null
 };
 export type CloseSocketOptions = {
   /**
    * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。如果这个参数没有被指定，默认的取值是1000 （表示正常连接关闭）
    * @defaultValue 1000
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   code?: number | null,
   /**
    * 一个可读的字符串，表示连接被关闭的原因。这个字符串必须是不长于123字节的UTF-8 文本（不是字符）
    * @defaultValue ""
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   reason?: string | null,
   /**
@@ -318,6 +456,21 @@ export type CloseSocketOptions = {
 export type OnSocketOpenCallbackResult = {
   /**
    * 连接成功的 HTTP 响应 Header
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   header: any
 };
@@ -325,6 +478,21 @@ export type OnSocketMessageCallbackResult = {
   /**
    * 服务器返回的消息
    * @type {SocketDataOptions}
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   data: any
 };
@@ -336,20 +504,25 @@ export interface SocketTask {
     * @param {SendSocketMessageOptions} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.send({data:"halo"});
@@ -363,20 +536,25 @@ export interface SocketTask {
     * @param {CloseSocketOptions} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.close();
@@ -390,20 +568,25 @@ export interface SocketTask {
     * @param {OnSocketOpenCallbackResult} options
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.onOpen((res) => {})
@@ -417,20 +600,25 @@ export interface SocketTask {
     * @param {(result : any) => void} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.onClose((res) => {
@@ -445,20 +633,25 @@ export interface SocketTask {
     * @param {(result : GeneralCallbackResult) => void} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.onError((res) => {
@@ -473,20 +666,25 @@ export interface SocketTask {
     * @param {(result : OnSocketMessageCallbackResult) => void} callback
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "4.4",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
+	* }
     * @example
      ```typescript
       task.onMessage((res) => {
@@ -516,11 +714,41 @@ export type OnSocketMessage = (callback: OnSocketMessageCallback) => void;
 export type CloseSocket = (options: CloseSocketOptions) => void;
 export type OnSocketCloseCallbackResult = {
   /**
-   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。	
+   * 一个数字值表示关闭连接的状态号，表示连接被关闭的原因。
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   code: number,
   /**
    * 一个可读的字符串，表示连接被关闭的原因。	
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   reason: string
 };

@@ -1,0 +1,92 @@
+import {
+    ANIMATION_DURATION,
+    ANIMATION_TYPE,
+    NAVIGATE_BACK,
+    ON_LAST_PAGE_BACK_PRESS,
+    ON_SHOW,
+    invokeAfterRouteHooks,
+    invokeBeforeRouteHooks,
+    invokeCurrentAppHook,
+    invokeCurrentPageHook,
+    invokePageOnBackPress,
+    isTabPage,
+} from '@dcloudio/uni-runtime'
+import { NavigateBackOptions, NavigateBackSuccess } from '../interface.uts'
+import {
+    DEFAULT_ANIMATION_DURATION,
+    DEFAULT_ANIMATION_OUT,
+} from '../constants.uts'
+import { NavigateBackFailImpl } from '../unierror.uts'
+import { isDirectPage, reLaunchEntryPage } from './direct.uts'
+
+export const navigateBack = defineAsyncApi<
+    NavigateBackOptions | null,
+    NavigateBackSuccess
+>(NAVIGATE_BACK, (options: NavigateBackOptions | null, res: ApiExecutor) => {
+    _navigateBack(NAVIGATE_BACK, options, res)
+})
+
+export const _navigateBack = (
+    from: string,
+    options: NavigateBackOptions | null,
+    res: ApiExecutor | null,
+) => {
+    const pages = getCurrentPages()
+    if (pages.length == 0) {
+        if (res !== null) {
+            res.reject(new NavigateBackFailImpl(`getCurrentPage is empty`))
+        }
+        return
+    }
+    const currentPage = pages[pages.length - 1]
+    const onBackPressRes = invokePageOnBackPress(currentPage, from)
+    if (onBackPressRes == true) {
+        if (res !== null) {
+            res.resolve(null)
+        }
+        return
+    }
+    invokeBeforeRouteHooks(NAVIGATE_BACK)
+    if (isDirectPage(currentPage)) {
+        reLaunchEntryPage()
+    } else if (isTabPage(currentPage) || pages.length == 1) {
+        quit()
+    } else {
+        if (options?.delta !== null && options?.delta! > 1) {
+            const length = pages.length
+            options!.delta = Math.min(options!.delta!, length - 1)
+            // 中间页隐藏
+            const deltaPages = pages.splice(
+                length - options!.delta!,
+                options!.delta! - 1,
+            )
+            deltaPages.reverse()
+            deltaPages.forEach(deltaPage => {
+                deltaPage.$close(
+                    new Map<string, any | null>([[ANIMATION_TYPE, 'none']]),
+                )
+            })
+        }
+        currentPage.$close(
+            new Map<string, any | null>([
+                [
+                    ANIMATION_TYPE,
+                    options?.animationType ?? DEFAULT_ANIMATION_OUT,
+                ],
+                [
+                    ANIMATION_DURATION,
+                    options?.animationDuration ?? DEFAULT_ANIMATION_DURATION,
+                ],
+            ]),
+        )
+        invokeCurrentPageHook(ON_SHOW)
+        invokeAfterRouteHooks(NAVIGATE_BACK)
+    }
+    if (res !== null) {
+        res.resolve(null)
+    }
+}
+
+function quit() {
+    invokeCurrentAppHook(ON_LAST_PAGE_BACK_PRESS)
+}

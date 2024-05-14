@@ -1,8 +1,15 @@
-import { getUniActivity } from "io.dcloud.uts.android";
+
 import Gravity from 'android.view.Gravity';
 import Toast from "android.widget.Toast";
 import { WaitingView } from "./WaitingView.uts"
-import { ShowToastOptions, ShowLoadingOptions, ShowToastFail,ShowToastSuccess, ShowLoadingFail,ShowLoadingSuccess } from '../interface.uts'
+import { ShowToastOptions, ShowLoadingOptions, ShowToastSuccess, ShowLoadingSuccess } from '../interface.uts'
+import { PromptErrorImpl } from "../unierror.uts"
+
+// #ifdef UNI-APP-X
+import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
+import onReady from 'io.dcloud.uniapp.framework.onReady';
+import onUnload from 'io.dcloud.uniapp.framework.onUnload';
+// #endif
 
 
 type ToastStyle = {
@@ -67,7 +74,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 	closeToast(null)
 	if (style.title == null) {
 		// 没有title 打回报错信息即可
-		let res = new UniError("uni-prompt",1001,"showLoading:title is null");
+		let res = new PromptErrorImpl(1001, "showLoading:title is null");
 		style.fail?.(res)
 		style.complete?.(res)
 
@@ -88,10 +95,51 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 		options["width"] = "140"
 		options["height"] = "112"
 
-		const alert = new WaitingView(getUniActivity(), options)
-		toast = alert
-		alert.showWaiting()
-
+		
+		
+		// #ifndef UNI-APP-X
+			/**
+			 * uni-app
+			 */
+			const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+			toast = alert
+			alert?.showWaiting();
+			
+			UTSAndroid.onAppActivityDestroy(function(){
+				toast?.close()
+				toast = null
+			})
+			
+		// #endif
+		// #ifdef UNI-APP-X
+			/**
+			 * uni-app x
+			 * 需要特殊处理生命周期 
+			 */
+			const pages = getCurrentPages();
+			if (pages.length > 0) {
+			    const page = pages[pages.length - 1]
+			    const instance = page.$
+			    if (page.$isReady) {
+					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+					toast = alert
+			        alert?.showWaiting();
+			    } else {
+			        onReady(() => {
+						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+						toast = alert
+			            alert?.showWaiting();
+			        }, instance)
+			    }
+			    
+				onUnload(() => {
+					toast?.close()
+					toast = null
+				}, instance)
+			}
+		// #endif
+		
+		
 		const res : ShowLoadingSuccess = {
 		}
 		style.success?.(res)
@@ -105,8 +153,7 @@ let androidToast:Toast| null = null
 function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 	closeToast(null)
 	if (style.title == null || style.title.length == 0) {
-
-		let res = new UniError("uni-prompt",1001,"showLoading:title is null");
+		let res = new PromptErrorImpl(1001, "showLoading:title is null");
 		style.fail?.(res)
 		style.complete?.(res)
 
@@ -114,7 +161,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 		
 		toastType = type
 		if (["top", "center", "bottom"].indexOf(style.position) >= 0) {
-			androidToast = Toast.makeText(getUniActivity(), style.title, Toast.LENGTH_SHORT);
+			androidToast = Toast.makeText(UTSAndroid.getTopPageActivity(), style.title, Toast.LENGTH_SHORT);
 			switch (style.position) {
 				case "top": {
 					// 修复bottom/top 与 前端api位置不一致的问题
@@ -173,16 +220,58 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				}
 			}
 
-			const alert = new WaitingView(getUniActivity(), options)
-			toast = alert
-			alert.showWaiting()
+			
+			
+			// #ifndef UNI-APP-X
+				/**
+				 * uni-app
+				 */
+				const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+				toast = alert
+				alert?.showWaiting();
+				
+				UTSAndroid.onAppActivityDestroy(function(){
+					toast?.close()
+					toast = null
+				})
+				
+			// #endif
+			// #ifdef UNI-APP-X
+				/**
+				 * uni-app x
+				 * 需要特殊处理生命周期 
+				 */
+				const pages = getCurrentPages();
+				if (pages.length > 0) {
+				    const page = pages[pages.length - 1]
+				    const instance = page.$
+				    if (page.$isReady) {
+						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+						toast = alert
+				        alert?.showWaiting();
+				    } else {
+				        onReady(() => {
+							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+							toast = alert
+				            alert?.showWaiting();
+				        }, instance)
+				    }
+				    
+					onUnload(() => {
+						toast?.close()
+						toast = null
+					}, instance)
+				}
+			// #endif
+			
+			
 			let duration : number | null = style.duration
 			if (duration == null || duration <= 0) {
 				duration = 1500
 			}
 			if (type !== "loading") {
 				timeout = setTimeout(() => {
-					alert.close()
+					toast?.close()
 				}, duration)
 			}
 			

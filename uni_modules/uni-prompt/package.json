@@ -72,7 +72,7 @@
 						"kotlin": true,
 						"swift": true
 					}
-				}, 
+				},
 				"showActionSheet": {
 					"name": "showActionSheet",
 					"app": {
@@ -83,7 +83,9 @@
 				}
 			}
 		},
-		"dependencies": [],
+		"dependencies": [
+			"uni-framework"
+		],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
@@ -131,4 +133,3 @@
 		}
 	}
 }
-

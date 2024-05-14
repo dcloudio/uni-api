@@ -6,20 +6,25 @@ export interface Uni {
     * @param {void}  
     * @return {GetAppAuthorizeSettingResult}
     * @tutorial http://uniapp.dcloud.io/api/system/getappauthorizesetting
-    * @uniPlatform {
-    *    "app": {
-    *        "android": {
-    *            "osVer": "4.4",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "3.9+"
-    *        },
-    *        "ios": {
-    *            "osVer": "9.0",
-    *  		  	 "uniVer": "√",
-    * 			 "unixVer": "x"
-    *        }
-    *    }
-    * }
+    * @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "3.9+"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "√",
+	* 			"unixVer": "4.11"
+	* 		}
+	* 	},
+    *   "web": {
+    *     "uniVer": "x",
+    *     "unixVer": "x"
+    *   }
+	* }
     * @example
      ```typescript
       uni.getAppAuthorizeSetting()
@@ -37,22 +42,23 @@ export type GetAppAuthorizeSettingResult = {
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * @type 'authorized' | 'denied' | 'not determined'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform 
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  albumAuthorized: string | null,
+  albumAuthorized?: 'authorized' | 'denied' | 'not determined' | null,
   /**
    * 允许 App 使用蓝牙的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
@@ -60,76 +66,138 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台没有该值；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `BlueTooth(低功耗蓝牙)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  bluetoothAuthorized: string | null,
+  bluetoothAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
    * 允许 App 使用摄像头的开关
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有授予 `android.permission.CAMERA` 权限；iOS平台没有该值
+   * - config error: Android平台：表示没有配置 `android.permission.CAMERA` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台没有该值
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  cameraAuthorized: string,
+  cameraAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
    * 允许 App 使用定位的开关
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有授予 `android.permission.ACCESS_COARSE_LOCATION` 权限；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `Geolocation(定位)` 模块
+   * - config error: Android平台：表示没有配置 `android.permission.ACCESS_COARSE_LOCATION` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `Geolocation(定位)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  locationAuthorized: string,
+  locationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
-   * 定位准确度。true 表示模糊定位，false 表示精确定位
+   * 定位准确度。
    * - reduced: 模糊定位
    * - full: 精准定位
    * - unsupported: 不支持（包括用户拒绝定位权限和没有在 `manifest.json -> App模块配置` 中配置 `Geolocation(定位)` 模块）
    * @type 'reduced' | 'full' | 'unsupported'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  locationAccuracy: string | null,
+  locationAccuracy?: 'reduced' | 'full' | 'unsupported' | null,
   /**
    * 定位准确度（推荐使用 locationAccuracy 属性）。true 表示模糊定位，false 表示精确定位（仅 iOS 支持）
    * @type boolean
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "9.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  locationReducedAccuracy: boolean | null,
+  locationReducedAccuracy?: boolean | null,
   /**
    * 允许 App 使用麦克风的开关
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有授予 `android.permission.RECORD_AUDIO` 权限；iOS平台没有该值
+   * - config error: Android平台：表示没有配置 `android.permission.RECORD_AUDIO` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台没有该值
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  microphoneAuthorized: string,
+  microphoneAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
    * 允许 App 通知的开关
    * - authorized: 已经获得授权，无需再次请求授权
@@ -137,97 +205,116 @@ export type GetAppAuthorizeSettingResult = {
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: Android平台没有该值；iOS平台：表示没有在 `manifest.json -> App模块配置` 中配置 `Push(推送)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "4.4",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
-  notificationAuthorized: string,
+  notificationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
   /**
-   * 允许 App 通知带有提醒的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有提醒的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: 没有在 `manifest.json -> App模块配置` 中配置 `Push(推送)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "10.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  notificationAlertAuthorized: string | null,
+  notificationAlertAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
-   * 允许 App 通知带有标记的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有标记的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: 没有在 `manifest.json -> App模块配置` 中配置 `Push(推送)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "10.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  notificationBadgeAuthorized: string | null,
+  notificationBadgeAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
-   * 允许 App 通知带有声音的开关（仅 iOS 10.0+ 支持）
+   * 允许 App 通知带有声音的开关（仅 iOS 支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * - config error: 没有在 `manifest.json -> App模块配置` 中配置 `Push(推送)` 模块
    * @type 'authorized' | 'denied' | 'not determined' | 'config error'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "10.0",
-   *  		  	 "uniVer": "√",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
    * }
    */
-  notificationSoundAuthorized: string | null,
+  notificationSoundAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
   /**
    * 允许读写日历的开关（仅微信小程序支持）
    * - authorized: 已经获得授权，无需再次请求授权
    * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
    * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
    * @type 'authorized' | 'denied' | 'not determined'
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        },
-   *        "ios": {
-   *            "osVer": "x",
-   *  		  	 "uniVer": "x",
-   * 			 "unixVer": "x"
-   *        }
-   *    }
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
    * }
    */
-  phoneCalendarAuthorized: string | null
+  phoneCalendarAuthorized?: 'authorized' | 'denied' | 'not determined' | null
 };

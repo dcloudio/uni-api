@@ -138,9 +138,9 @@ export class UniActionSheet {
 
 		let v : View
 		if (UTSAndroid.getAppDarkMode()) {
-			v = LayoutInflater.from(this.hostActivity).inflate(R.layout.action_sheet_night, null)
+			v = LayoutInflater.from(this.hostActivity).inflate(R.layout.uni_media_action_sheet_night, null)
 		} else {
-			v = LayoutInflater.from(this.hostActivity).inflate(R.layout.action_sheet, null)
+			v = LayoutInflater.from(this.hostActivity).inflate(R.layout.uni_media_action_sheet, null)
 		}
 
 
@@ -172,7 +172,7 @@ export class UniActionSheet {
 	 * 弹出actionsheet
 	 */
 	show() {
-		this.alertDialog.window!.attributes.windowAnimations = R.style.DialogAnimations_SmileWindow
+		// this.alertDialog.window!.attributes.windowAnimations = R.style.DialogAnimations_SmileWindow
 		this.alertDialog.setCancelable(true)
 		this.alertDialog.window!.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM)
 		this.alertDialog.window!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -283,10 +283,10 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 		let view : View
 		if (UTSAndroid.getAppDarkMode()) {
 			view =
-				LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_layout_night, parent, false)
+				LayoutInflater.from(parent.context).inflate(R.layout.uni_media_recyclerview_layout_night, parent, false)
 		} else {
 			view =
-				LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_layout, parent, false)
+				LayoutInflater.from(parent.context).inflate(R.layout.uni_media_recyclerview_layout, parent, false)
 		}
 
 		return ViewHolder(view)

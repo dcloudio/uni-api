@@ -1,0 +1,25 @@
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-fileSystemManager';
+
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors : Map<number, string> = new Map([
+
+	[1200002, 'type error. only support base64 / utf-8'],
+	[1300002, 'no such file or directory'],
+	[1300013, 'permission denied'],
+	[1300021, 'Is a directory'],
+	[1300022, 'Invalid argument'],
+	[1300066, 'directory not empty'],
+	[1301003, 'illegal operation on a directory'],
+	[1301005, 'file already exists'],
+	[1300201, 'system error'],
+	[1300202, 'the maximum size of the file storage limit is exceeded'],
+	[1301111, 'brotli decompress fail'],
+	[1302003, 'invalid flag'],
+	[1300009, 'bad file descriptor']
+]);

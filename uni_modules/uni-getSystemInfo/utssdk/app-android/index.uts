@@ -1,5 +1,4 @@
 import { GetSystemInfoOptions, GetSystemInfo, GetSystemInfoResult, SafeArea, SafeAreaInsets, GetSystemInfoSync, GetWindowInfo, GetWindowInfoResult } from "../interface.uts";
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import PackageManager from 'android.content.pm.PackageManager';
 import Build from 'android.os.Build';
 import { DeviceUtil } from './device/SystemInfoDeviceUtil.uts'
@@ -19,7 +18,10 @@ export const getSystemInfo : GetSystemInfo = function (options : GetSystemInfoOp
 export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfoResult {
 	const runnable = function(): GetSystemInfoResult | null{
 		try {
-			const activity = UTSAndroid.getUniActivity()!!;
+			let activity = UTSAndroid.getTopPageActivity();
+			if(activity == null){
+				activity = UTSAndroid.getUniActivity()!!
+			}			
 		
 			const appId = UTSAndroid.getAppId();
 			const appLanguage = DeviceUtil.getOsLanguageNormal(activity);
@@ -46,10 +48,10 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 			const statusBarHeight = DeviceUtil.getStatusBarHeight();
 			const system = "Android " + Build.VERSION.RELEASE;
 			const ua = UTSAndroid.getWebViewInfo(activity)["ua"].toString();
-			const uniCompileVersion = UTSAndroid.getUniCompileVersion();
+			const uniCompilerVersion = UTSAndroid.getUniCompileVersion();
 			const uniPlatform = "app";
 			const uniRuntimeVersion = UTSAndroid.getUniRuntimeVersion();
-			const uniCompileVersionCode = convertVersionCode(uniCompileVersion);
+			const uniCompilerVersionCode = convertVersionCode(uniCompilerVersion);
 			const uniRuntimeVersionCode = convertVersionCode(uniRuntimeVersion);
 			const version = UTSAndroid.getInnerVersion();
 			const romName = DeviceUtil.getRomName();
@@ -75,7 +77,6 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
 			}
 			const osAndroidAPILevel = Build.VERSION.SDK_INT;
-			const oaid = UTSAndroid.getOAID();
 		
 			const result = {
 				SDKVersion: "",
@@ -107,10 +108,12 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				statusBarHeight: statusBarHeight,
 				system: system,
 				ua: ua,
-				uniCompileVersion: uniCompileVersion,
+				uniCompileVersion: uniCompilerVersion,
+				uniCompilerVersion: uniCompilerVersion,
 				uniPlatform: uniPlatform,
 				uniRuntimeVersion: uniRuntimeVersion,
-				uniCompileVersionCode: uniCompileVersionCode,
+				uniCompileVersionCode: uniCompilerVersionCode,
+				uniCompilerVersionCode: uniCompilerVersionCode,
 				uniRuntimeVersionCode: uniRuntimeVersionCode,
 				version: version,
 				romName: romName,
@@ -121,7 +124,6 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				windowBottom: windowBottom,
 				safeAreaInsets: safeAreaInsets,
 				safeArea: safeArea,
-				oaid: oaid,
 				osAndroidAPILevel: osAndroidAPILevel,
 			} as GetSystemInfoResult;
 			return result;
@@ -147,7 +149,10 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 
 
 export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
-	const activity = UTSAndroid.getUniActivity()!!;
+	let activity = UTSAndroid.getTopPageActivity();
+	if(activity == null){
+		activity = UTSAndroid.getUniActivity()!!
+	}			
 	const pixelRatio = DeviceUtil.getScaledDensity(activity)
 	const screenWidth = DeviceUtil.getScreenWidth();
 	const screenHeight = DeviceUtil.getScreenHeight();

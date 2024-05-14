@@ -26,7 +26,6 @@ import OkHostnameVerifier from 'okhttp3.internal.tls.OkHostnameVerifier';
 import { SSLFactoryManager } from './tls/SSLFactoryManager.uts';
 import { SSLConfig } from './tls/SSLConfig.uts';
 import { CookieInterceptor } from './interceptor/CookieInterceptor.uts'
-import UTSAndroid from 'io.dcloud.uts.UTSAndroid';
 import MultipartBody from 'okhttp3.MultipartBody';
 import JSONObject from 'com.alibaba.fastjson.JSONObject';
 import { UploadController } from './upload/UploadController.uts';
@@ -58,7 +57,7 @@ interface NetworkDownloadFileListener {
 
 class NetworkRequestTaskImpl implements RequestTask {
 	private call: Call | null = null;
-	constructor(call: Call) {
+	constructor(call: Call | null) {
 		this.call = call;
 	}
 
@@ -92,14 +91,14 @@ class NetworkManager {
 
 
 
-	public request<T>(param: RequestOptions<T>, listener: NetworkRequestListener): RequestTask | null {
+	public request<T>(param: RequestOptions<T>, listener: NetworkRequestListener): RequestTask {
 		if (listener != null) {
 			listener.onStart();
 		}
 		let client = this.createRequestClient(param!);
 		let request = this.createRequest(param!, listener!);
 		if (request == null) {
-			return null;
+			return new NetworkRequestTaskImpl(null);
 		}
 		let call: Call = client.newCall(request);
 
@@ -296,10 +295,14 @@ class NetworkManager {
 		});
 		const dataMap: Map<string, any|null> = data.toMap();
 		dataMap.forEach((value, key)=>{
+			if(value == null){
+				value = "";
+			}
+			let encodeKey = encodeURIComponent(key)!
 			if (value instanceof UTSJSONObject || value instanceof Array<any|null>){
-				queryMap[key] = JSON.stringify(value);
+				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(value))!
 			}else{
-				queryMap[key] = "" + value;
+				queryMap[encodeKey] = encodeURIComponent("" + value)!;
 			}
 		})
 		let queryStr = "";
@@ -317,11 +320,11 @@ class NetworkManager {
 	}
 
 
-	public uploadFile(options: UploadFileOptions, listener: NetworkUploadFileListener): UploadTask | null {
+	public uploadFile(options: UploadFileOptions, listener: NetworkUploadFileListener): UploadTask {
 		return UploadController.getInstance().uploadFile(options, listener);
 	}
 
-	public downloadFile(options: DownloadFileOptions, listener: NetworkDownloadFileListener): DownloadTask | null {
+	public downloadFile(options: DownloadFileOptions, listener: NetworkDownloadFileListener): DownloadTask {
 		return DownloadController.getInstance().downloadFile(options, listener);
 	}
 

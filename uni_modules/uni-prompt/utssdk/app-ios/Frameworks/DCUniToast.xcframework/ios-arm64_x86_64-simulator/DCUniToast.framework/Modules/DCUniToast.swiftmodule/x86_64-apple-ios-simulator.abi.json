@@ -1,0 +1,5034 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MCToast",
+        "printedName": "MCToast",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "mc_text",
+            "printedName": "mc_text(_:offset:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreGraphics.CGFloat?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC7mc_text_6offset8duration7respond8callbackySS_14CoreFoundation7CGFloatVSgAkC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC7mc_text_6offset8duration7respond8callbackySS_12CoreGraphics7CGFloatVSgAkC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_remove",
+            "printedName": "mc_remove(callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC9mc_remove8callbackyyycSg_tFZ",
+            "mangledName": "$s10DCUniToast7MCToastC9mc_remove8callbackyyycSg_tFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "MCToastRespond",
+            "printedName": "MCToastRespond",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "default",
+                "printedName": "default",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastRespond.Type) -> DCUniToast.MCToast.MCToastRespond",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastRespond",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond",
+                        "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastRespond",
+                            "printedName": "DCUniToast.MCToast.MCToastRespond",
+                            "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO7defaultyA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO7defaultyA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "noRespond",
+                "printedName": "noRespond",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastRespond.Type) -> DCUniToast.MCToast.MCToastRespond",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastRespond",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond",
+                        "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastRespond",
+                            "printedName": "DCUniToast.MCToast.MCToastRespond",
+                            "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO02noD0yA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO02noD0yA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "respond",
+                "printedName": "respond",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastRespond.Type) -> DCUniToast.MCToast.MCToastRespond",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastRespond",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond",
+                        "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastRespond",
+                            "printedName": "DCUniToast.MCToast.MCToastRespond",
+                            "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO7respondyA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO7respondyA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "navBarRespond",
+                "printedName": "navBarRespond",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastRespond.Type) -> DCUniToast.MCToast.MCToastRespond",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastRespond",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond",
+                        "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastRespond.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastRespond",
+                            "printedName": "DCUniToast.MCToast.MCToastRespond",
+                            "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO06navBarD0yA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO06navBarD0yA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastRespond",
+                    "printedName": "DCUniToast.MCToast.MCToastRespond",
+                    "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastRespond",
+                    "printedName": "DCUniToast.MCToast.MCToastRespond",
+                    "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO2eeoiySbAE_AEtFZ",
+                "moduleName": "DCUniToast",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO9hashValueSivp",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO9hashValueSivp",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast7MCToastC0C7RespondO9hashValueSivg",
+                    "mangledName": "$s10DCUniToast7MCToastC0C7RespondO9hashValueSivg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s10DCUniToast7MCToastC0C7RespondO4hash4intoys6HasherVz_tF",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:10DCUniToast7MCToastC0C7RespondO",
+            "mangledName": "$s10DCUniToast7MCToastC0C7RespondO",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "colorWithSystemStyle",
+            "printedName": "colorWithSystemStyle(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC20colorWithSystemStyleySo7UIColorCAF_AFtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC20colorWithSystemStyleySo7UIColorCAF_AFtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "MCToastType",
+            "printedName": "MCToastType",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "success",
+                "printedName": "success",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastType.Type) -> DCUniToast.MCToast.MCToastType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastType",
+                        "printedName": "DCUniToast.MCToast.MCToastType",
+                        "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastType",
+                            "printedName": "DCUniToast.MCToast.MCToastType",
+                            "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO7successyA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO7successyA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "failure",
+                "printedName": "failure",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastType.Type) -> DCUniToast.MCToast.MCToastType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastType",
+                        "printedName": "DCUniToast.MCToast.MCToastType",
+                        "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastType",
+                            "printedName": "DCUniToast.MCToast.MCToastType",
+                            "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO7failureyA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO7failureyA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "warning",
+                "printedName": "warning",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(DCUniToast.MCToast.MCToastType.Type) -> DCUniToast.MCToast.MCToastType",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MCToastType",
+                        "printedName": "DCUniToast.MCToast.MCToastType",
+                        "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "DCUniToast.MCToast.MCToastType.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MCToastType",
+                            "printedName": "DCUniToast.MCToast.MCToastType",
+                            "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO7warningyA2EmF",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO7warningyA2EmF",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "RawDocComment"
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastType",
+                    "printedName": "DCUniToast.MCToast.MCToastType",
+                    "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastType",
+                    "printedName": "DCUniToast.MCToast.MCToastType",
+                    "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO2eeoiySbAE_AEtFZ",
+                "moduleName": "DCUniToast",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO9hashValueSivp",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO9hashValueSivp",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast7MCToastC0C4TypeO9hashValueSivg",
+                    "mangledName": "$s10DCUniToast7MCToastC0C4TypeO9hashValueSivg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:10DCUniToast7MCToastC0C4TypeO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s10DCUniToast7MCToastC0C4TypeO4hash4intoys6HasherVz_tF",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:10DCUniToast7MCToastC0C4TypeO",
+            "mangledName": "$s10DCUniToast7MCToastC0C4TypeO",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "mc_success",
+            "printedName": "mc_success(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10mc_success_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10mc_success_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_failure",
+            "printedName": "mc_failure(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10mc_failure_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10mc_failure_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_warning",
+            "printedName": "mc_warning(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10mc_warning_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10mc_warning_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "showStatus",
+            "printedName": "showStatus(_:text:iconImage:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Tuple",
+                "printedName": "(imageView: UIKit.UIImageView, label: UIKit.UILabel)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImageView",
+                    "printedName": "UIKit.UIImageView",
+                    "usr": "c:objc(cs)UIImageView"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UILabel",
+                    "printedName": "UIKit.UILabel",
+                    "usr": "c:objc(cs)UILabel"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "DCUniToast.MCToast.MCToastType?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastType",
+                    "printedName": "DCUniToast.MCToast.MCToastType",
+                    "usr": "s:10DCUniToast7MCToastC0C4TypeO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIImage?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10showStatus_4text9iconImage8duration7respond8callbackSo11UIImageViewC05imageM0_So7UILabelC5labeltAC0C4TypeOSg_SSSo0L0CSg14CoreFoundation7CGFloatVAC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10showStatus_4text9iconImage8duration7respond8callbackSo11UIImageViewC05imageM0_So7UILabelC5labeltAC0C4TypeOSg_SSSo0L0CSg12CoreGraphics7CGFloatVAC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "DiscardableResult"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_statusBar",
+            "printedName": "mc_statusBar(_:duration:font:backgroundColor:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIFont",
+                "printedName": "UIKit.UIFont",
+                "hasDefaultArg": true,
+                "usr": "c:objc(cs)UIFont"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIColor?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC12mc_statusBar_8duration4font15backgroundColor8callbackySS_14CoreFoundation7CGFloatVSo6UIFontCSo7UIColorCSgyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC12mc_statusBar_8duration4font15backgroundColor8callbackySS_12CoreGraphics7CGFloatVSo6UIFontCSo7UIColorCSgyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_loading",
+            "printedName": "mc_loading(text:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "hasDefaultArg": true,
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10mc_loading4text8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10mc_loading4text8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_loading",
+            "printedName": "mc_loading(imageNames:animationSpeed:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[UIKit.UIImage?]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:10DCUniToast7MCToastC10mc_loading10imageNames14animationSpeed8duration7respond8callbackySaySo7UIImageCSgG_14CoreFoundation7CGFloatVApC0C7RespondOyycSgtFZ",
+            "mangledName": "$s10DCUniToast7MCToastC10mc_loading10imageNames14animationSpeed8duration7respond8callbackySaySo7UIImageCSgG_12CoreGraphics7CGFloatVApC0C7RespondOyycSgtFZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@DCUniToast@objc(cs)MCToast",
+        "mangledName": "$s10DCUniToast7MCToastC",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MCToastConfig",
+        "printedName": "MCToastConfig",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastConfig",
+                "printedName": "DCUniToast.MCToastConfig",
+                "usr": "c:@M@DCUniToast@objc(cs)MCToastConfig"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC6sharedACvpZ",
+            "mangledName": "$s10DCUniToast13MCToastConfigC6sharedACvpZ",
+            "moduleName": "DCUniToast",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastConfig",
+                    "printedName": "DCUniToast.MCToastConfig",
+                    "usr": "c:@M@DCUniToast@objc(cs)MCToastConfig"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC6sharedACvgZ",
+                "mangledName": "$s10DCUniToast13MCToastConfigC6sharedACvgZ",
+                "moduleName": "DCUniToast",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "respond",
+            "printedName": "respond",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastRespond",
+                    "printedName": "DCUniToast.MCToast.MCToastRespond",
+                    "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MCToastRespond",
+                    "printedName": "DCUniToast.MCToast.MCToastRespond",
+                    "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7respondAA0C0C0C7RespondOvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "background",
+            "printedName": "background",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Background",
+                "printedName": "DCUniToast.MCToastConfig.Background",
+                "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Background",
+                    "printedName": "DCUniToast.MCToastConfig.Background",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Background",
+                    "printedName": "DCUniToast.MCToastConfig.Background",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC10backgroundAC10BackgroundVvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "icon",
+            "printedName": "icon",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Icon",
+                "printedName": "DCUniToast.MCToastConfig.Icon",
+                "usr": "s:10DCUniToast13MCToastConfigC4IconV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC4iconAC4IconVvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC4iconAC4IconVvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Icon",
+                    "printedName": "DCUniToast.MCToastConfig.Icon",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4iconAC4IconVvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4iconAC4IconVvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Icon",
+                    "printedName": "DCUniToast.MCToastConfig.Icon",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4iconAC4IconVvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4iconAC4IconVvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4iconAC4IconVvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4iconAC4IconVvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "text",
+            "printedName": "text",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Text",
+                "printedName": "DCUniToast.MCToastConfig.Text",
+                "usr": "s:10DCUniToast13MCToastConfigC4TextV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC4textAC4TextVvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC4textAC4TextVvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Text",
+                    "printedName": "DCUniToast.MCToastConfig.Text",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4textAC4TextVvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4textAC4TextVvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Text",
+                    "printedName": "DCUniToast.MCToastConfig.Text",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4textAC4TextVvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4textAC4TextVvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC4textAC4TextVvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4textAC4TextVvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "spacing",
+            "printedName": "spacing",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MainAreaSpacing",
+                "printedName": "DCUniToast.MCToastConfig.MainAreaSpacing",
+                "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MainAreaSpacing",
+                    "printedName": "DCUniToast.MCToastConfig.MainAreaSpacing",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MainAreaSpacing",
+                    "printedName": "DCUniToast.MCToastConfig.MainAreaSpacing",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC7spacingAC15MainAreaSpacingVvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "duration",
+            "printedName": "duration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10DCUniToast13MCToastConfigC8duration14CoreFoundation7CGFloatVvp",
+            "mangledName": "$s10DCUniToast13MCToastConfigC8duration12CoreGraphics7CGFloatVvp",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC8duration14CoreFoundation7CGFloatVvg",
+                "mangledName": "$s10DCUniToast13MCToastConfigC8duration12CoreGraphics7CGFloatVvg",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC8duration14CoreFoundation7CGFloatVvs",
+                "mangledName": "$s10DCUniToast13MCToastConfigC8duration12CoreGraphics7CGFloatVvs",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10DCUniToast13MCToastConfigC8duration14CoreFoundation7CGFloatVvM",
+                "mangledName": "$s10DCUniToast13MCToastConfigC8duration12CoreGraphics7CGFloatVvM",
+                "moduleName": "DCUniToast",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastConfig",
+                "printedName": "DCUniToast.MCToastConfig",
+                "usr": "c:@M@DCUniToast@objc(cs)MCToastConfig"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@DCUniToast@objc(cs)MCToastConfig(im)init",
+            "mangledName": "$s10DCUniToast13MCToastConfigCACycfc",
+            "moduleName": "DCUniToast",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Background",
+            "printedName": "Background",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "color",
+                "printedName": "color",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIColor",
+                        "printedName": "UIKit.UIColor",
+                        "usr": "c:objc(cs)UIColor"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIColor",
+                        "printedName": "UIKit.UIColor",
+                        "usr": "c:objc(cs)UIColor"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV5colorSo7UIColorCvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "size",
+                "printedName": "size",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGSize",
+                    "printedName": "CoreFoundation.CGSize",
+                    "usr": "c:@S@CGSize"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV4sizeSo6CGSizeVvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:10DCUniToast13MCToastConfigC10BackgroundV",
+            "mangledName": "$s10DCUniToast13MCToastConfigC10BackgroundV",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Icon",
+            "printedName": "Icon",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "size",
+                "printedName": "size",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGSize",
+                    "printedName": "CoreFoundation.CGSize",
+                    "usr": "c:@S@CGSize"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGSize",
+                        "printedName": "CoreFoundation.CGSize",
+                        "usr": "c:@S@CGSize"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV4sizeSo6CGSizeVvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "successImage",
+                "printedName": "successImage",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12successImageSo7UIImageCSgvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "failureImage",
+                "printedName": "failureImage",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12failureImageSo7UIImageCSgvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "warningImage",
+                "printedName": "warningImage",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIImage?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIImage",
+                            "printedName": "UIKit.UIImage",
+                            "usr": "c:objc(cs)UIImage"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4IconV12warningImageSo7UIImageCSgvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:10DCUniToast13MCToastConfigC4IconV",
+            "mangledName": "$s10DCUniToast13MCToastConfigC4IconV",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "Text",
+            "printedName": "Text",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "textColor",
+                "printedName": "textColor",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIColor?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIColor",
+                        "printedName": "UIKit.UIColor",
+                        "usr": "c:objc(cs)UIColor"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIColor?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIColor",
+                            "printedName": "UIKit.UIColor",
+                            "usr": "c:objc(cs)UIColor"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "UIKit.UIColor?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "UIColor",
+                            "printedName": "UIKit.UIColor",
+                            "usr": "c:objc(cs)UIColor"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV9textColorSo7UIColorCSgvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "font",
+                "printedName": "font",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIFont",
+                    "printedName": "UIKit.UIFont",
+                    "usr": "c:objc(cs)UIFont"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIFont",
+                        "printedName": "UIKit.UIFont",
+                        "usr": "c:objc(cs)UIFont"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIFont",
+                        "printedName": "UIKit.UIFont",
+                        "usr": "c:objc(cs)UIFont"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV4fontSo6UIFontCvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "offset",
+                "printedName": "offset",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC4TextV6offset14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC4TextV6offset12CoreGraphics7CGFloatVvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV6offset14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV6offset12CoreGraphics7CGFloatVvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV6offset14CoreFoundation7CGFloatVvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV6offset12CoreGraphics7CGFloatVvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC4TextV6offset14CoreFoundation7CGFloatVvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC4TextV6offset12CoreGraphics7CGFloatVvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:10DCUniToast13MCToastConfigC4TextV",
+            "mangledName": "$s10DCUniToast13MCToastConfigC4TextV",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "MainAreaSpacing",
+            "printedName": "MainAreaSpacing",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "margin",
+                "printedName": "margin",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin12CoreGraphics7CGFloatVvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin12CoreGraphics7CGFloatVvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin14CoreFoundation7CGFloatVvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin12CoreGraphics7CGFloatVvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin14CoreFoundation7CGFloatVvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV6margin12CoreGraphics7CGFloatVvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              },
+              {
+                "kind": "Var",
+                "name": "padding",
+                "printedName": "padding",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding14CoreFoundation7CGFloatVvp",
+                "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding12CoreGraphics7CGFloatVvp",
+                "moduleName": "DCUniToast",
+                "declAttributes": [
+                  "HasInitialValue",
+                  "HasStorage",
+                  "AccessControl",
+                  "RawDocComment"
+                ],
+                "hasStorage": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding14CoreFoundation7CGFloatVvg",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding12CoreGraphics7CGFloatVvg",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Set",
+                    "printedName": "Set()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGFloat",
+                        "printedName": "CoreGraphics.CGFloat",
+                        "usr": "s:14CoreFoundation7CGFloatV"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding14CoreFoundation7CGFloatVvs",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding12CoreGraphics7CGFloatVvs",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "set"
+                  },
+                  {
+                    "kind": "Accessor",
+                    "name": "Modify",
+                    "printedName": "Modify()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding14CoreFoundation7CGFloatVvM",
+                    "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV7padding12CoreGraphics7CGFloatVvM",
+                    "moduleName": "DCUniToast",
+                    "implicit": true,
+                    "accessorKind": "_modify"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Struct",
+            "usr": "s:10DCUniToast13MCToastConfigC15MainAreaSpacingV",
+            "mangledName": "$s10DCUniToast13MCToastConfigC15MainAreaSpacingV",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@DCUniToast@objc(cs)MCToastConfig",
+        "mangledName": "$s10DCUniToast13MCToastConfigC",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "DCUniToast",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "UIResponder",
+        "printedName": "UIResponder",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "mc_text",
+            "printedName": "mc_text(_:offset:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreGraphics.CGFloat?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGFloat",
+                    "printedName": "CoreGraphics.CGFloat",
+                    "usr": "s:14CoreFoundation7CGFloatV"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE7mc_text_6offset8duration7respond8callbackySS_14CoreFoundation7CGFloatVSgAkC7MCToastC0M7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE7mc_text_6offset8duration7respond8callbackySS_12CoreGraphics7CGFloatVSgAkC7MCToastC0M7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_remove",
+            "printedName": "mc_remove(callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE9mc_remove8callbackyyycSg_tF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE9mc_remove8callbackyyycSg_tF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_success",
+            "printedName": "mc_success(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE10mc_success_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE10mc_success_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_failure",
+            "printedName": "mc_failure(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE10mc_failure_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE10mc_failure_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_warning",
+            "printedName": "mc_warning(_:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE10mc_warning_8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE10mc_warning_8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC7MCToastC0L7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_statusBar",
+            "printedName": "mc_statusBar(_:duration:font:backgroundColor:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIFont",
+                "printedName": "UIKit.UIFont",
+                "hasDefaultArg": true,
+                "usr": "c:objc(cs)UIFont"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIColor?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE12mc_statusBar_8duration4font15backgroundColor8callbackySS_14CoreFoundation7CGFloatVSo6UIFontCSo7UIColorCSgyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE12mc_statusBar_8duration4font15backgroundColor8callbackySS_12CoreGraphics7CGFloatVSo6UIFontCSo7UIColorCSgyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_loading",
+            "printedName": "mc_loading(text:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "hasDefaultArg": true,
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE10mc_loading4text8duration7respond8callbackySS_14CoreFoundation7CGFloatVAC7MCToastC0M7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE10mc_loading4text8duration7respond8callbackySS_12CoreGraphics7CGFloatVAC7MCToastC0M7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "mc_loading",
+            "printedName": "mc_loading(imageNames:animationSpeed:duration:respond:callback:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[UIKit.UIImage?]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIImage?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIImage",
+                        "printedName": "UIKit.UIImage",
+                        "usr": "c:objc(cs)UIImage"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "hasDefaultArg": true,
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MCToastRespond",
+                "printedName": "DCUniToast.MCToast.MCToastRespond",
+                "hasDefaultArg": true,
+                "usr": "s:10DCUniToast7MCToastC0C7RespondO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So11UIResponderC10DCUniToastE10mc_loading10imageNames14animationSpeed8duration7respond8callbackySaySo7UIImageCSgG_14CoreFoundation7CGFloatVApC7MCToastC0Q7RespondOyycSgtF",
+            "mangledName": "$sSo11UIResponderC10DCUniToastE10mc_loading10imageNames14animationSpeed8duration7respond8callbackySaySo7UIImageCSgG_12CoreGraphics7CGFloatVApC7MCToastC0Q7RespondOyycSgtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)UIResponder",
+        "moduleName": "UIKit",
+        "isOpen": true,
+        "intro_iOS": "2.0",
+        "objc_name": "UIResponder",
+        "declAttributes": [
+          "Available",
+          "ObjC",
+          "NonSendable",
+          "Custom",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "NSString",
+        "printedName": "NSString",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "dc_getBoundingSize",
+            "printedName": "dc_getBoundingSize(_:_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CGSize",
+                "printedName": "CoreFoundation.CGSize",
+                "usr": "c:@S@CGSize"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIFont?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIFont",
+                    "printedName": "UIKit.UIFont",
+                    "usr": "c:objc(cs)UIFont"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGSize",
+                "printedName": "CoreFoundation.CGSize",
+                "usr": "c:@S@CGSize"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So8NSStringC10DCUniToastE18dc_getBoundingSizeySo6CGSizeVSo6UIFontCSg_14CoreFoundation7CGFloatVAFtF",
+            "mangledName": "$sSo8NSStringC10DCUniToastE18dc_getBoundingSizeySo6CGSizeVSo6UIFontCSg_12CoreGraphics7CGFloatVAFtF",
+            "moduleName": "DCUniToast",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)NSString",
+        "moduleName": "Foundation",
+        "isOpen": true,
+        "objc_name": "NSString",
+        "declAttributes": [
+          "ObjC",
+          "NonSendable",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByStringLiteral",
+            "printedName": "ExpressibleByStringLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "StringLiteralType",
+                "printedName": "StringLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StaticString",
+                    "printedName": "Swift.StaticString",
+                    "usr": "s:s12StaticStringV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s26ExpressibleByStringLiteralP",
+            "mangledName": "$ss26ExpressibleByStringLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByExtendedGraphemeClusterLiteral",
+            "printedName": "ExpressibleByExtendedGraphemeClusterLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ExtendedGraphemeClusterLiteralType",
+                "printedName": "ExtendedGraphemeClusterLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StaticString",
+                    "printedName": "Swift.StaticString",
+                    "usr": "s:s12StaticStringV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s43ExpressibleByExtendedGraphemeClusterLiteralP",
+            "mangledName": "$ss43ExpressibleByExtendedGraphemeClusterLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ExpressibleByUnicodeScalarLiteral",
+            "printedName": "ExpressibleByUnicodeScalarLiteral",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "UnicodeScalarLiteralType",
+                "printedName": "UnicodeScalarLiteralType",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StaticString",
+                    "printedName": "Swift.StaticString",
+                    "usr": "s:s12StaticStringV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s33ExpressibleByUnicodeScalarLiteralP",
+            "mangledName": "$ss33ExpressibleByUnicodeScalarLiteralP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_HasCustomAnyHashableRepresentation",
+            "printedName": "_HasCustomAnyHashableRepresentation",
+            "usr": "s:s35_HasCustomAnyHashableRepresentationP",
+            "mangledName": "$ss35_HasCustomAnyHashableRepresentationP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_CustomPlaygroundQuickLookable",
+            "printedName": "_CustomPlaygroundQuickLookable",
+            "usr": "s:s30_CustomPlaygroundQuickLookableP",
+            "mangledName": "$ss30_CustomPlaygroundQuickLookableP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2451,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2781,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2921,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2927,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3023,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3029,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3059,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3128,
+      "length": 2,
+      "value": "30"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3346,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3618,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3686,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3809,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3842,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 439,
+      "length": 12,
+      "value": "\"Frameworks\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 626,
+      "length": 11,
+      "value": "\"framework\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 859,
+      "length": 8,
+      "value": "\"bundle\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 1003,
+      "length": 5,
+      "value": "\"png\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 1723,
+      "length": 12,
+      "value": "\"Frameworks\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 1910,
+      "length": 11,
+      "value": "\"framework\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 1997,
+      "length": 20,
+      "value": "\"获取bundle失败\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "StringLiteral",
+      "offset": 2217,
+      "length": 8,
+      "value": "\"bundle\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2923,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3226,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3521,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3526,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "FloatLiteral",
+      "offset": 964,
+      "length": 3,
+      "value": "0.2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1092,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1213,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1802,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1857,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2076,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2080,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2087,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2291,
+      "length": 4,
+      "value": "1000"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 267,
+      "length": 4,
+      "value": "1001"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 700,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 986,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1006,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2069,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2075,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2310,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2425,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2479,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2609,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2615,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2762,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2968,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "FloatLiteral",
+      "offset": 3521,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "FloatLiteral",
+      "offset": 3562,
+      "length": 3,
+      "value": "0.2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3610,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5103,
+      "length": 2,
+      "value": "40"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5115,
+      "length": 2,
+      "value": "40"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5985,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6059,
+      "length": 2,
+      "value": "35"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6065,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6478,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6577,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6723,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6757,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6854,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6860,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6916,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7193,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7213,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1934,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1971,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2159,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2305,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2616,
+      "length": 4,
+      "value": "0x6a"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2621,
+      "length": 5,
+      "value": "0x100"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2635,
+      "length": 4,
+      "value": "0xb4"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2640,
+      "length": 5,
+      "value": "0x100"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2653,
+      "length": 4,
+      "value": "0x9f"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2658,
+      "length": 5,
+      "value": "0x100"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2672,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2761,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3239,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "kind": "FloatLiteral",
+      "offset": 3594,
+      "length": 3,
+      "value": "0.3"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "FloatLiteral",
+      "offset": 722,
+      "length": 3,
+      "value": "1.5"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 870,
+      "length": 2,
+      "value": "76"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 873,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 885,
+      "length": 2,
+      "value": "76"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 888,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 899,
+      "length": 2,
+      "value": "76"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 902,
+      "length": 3,
+      "value": "255"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "FloatLiteral",
+      "offset": 914,
+      "length": 3,
+      "value": "0.9"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 997,
+      "length": 3,
+      "value": "135"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1010,
+      "length": 3,
+      "value": "135"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1134,
+      "length": 2,
+      "value": "50"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1146,
+      "length": 2,
+      "value": "50"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1411,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1488,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1492,
+      "length": 3,
+      "value": "120"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1676,
+      "length": 2,
+      "value": "55"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1783,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "StringLiteral",
+      "offset": 562,
+      "length": 17,
+      "value": "\"正在加载中\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 628,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 1292,
+      "length": 3,
+      "value": "0.1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1344,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "StringLiteral",
+      "offset": 2804,
+      "length": 17,
+      "value": "\"正在加载中\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2877,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 3569,
+      "length": 3,
+      "value": "0.1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3628,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5754,
+      "length": 2,
+      "value": "40"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5766,
+      "length": 2,
+      "value": "40"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6078,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6098,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6179,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6183,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6191,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6370,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 6424,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 6430,
+      "length": 4,
+      "value": "30.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6527,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7094,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 7206,
+      "length": 4,
+      "value": "14.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7393,
+      "length": 2,
+      "value": "36"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7427,
+      "length": 2,
+      "value": "36"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7480,
+      "length": 1,
+      "value": "7"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7508,
+      "length": 2,
+      "value": "12"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7538,
+      "length": 2,
+      "value": "14"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7665,
+      "length": 2,
+      "value": "18"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "Array",
+      "offset": 8189,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8729,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 8749,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 9258,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 9435,
+      "length": 4,
+      "value": "1000"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 9649,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 12087,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 12093,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "kind": "FloatLiteral",
+      "offset": 12625,
+      "length": 3,
+      "value": "0.0"
+    }
+  ]
+}
