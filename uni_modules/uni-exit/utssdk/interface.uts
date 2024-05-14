@@ -61,14 +61,12 @@ export interface Uni {
    *        "android": {
    *            "osVer": "5.0",
    *            "uniVer": "3.8.15",
-   *            "unixVer": "3.9.0",
-	 *            "utsPlugin": "3.9.0"
+   *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
    *            "osVer": "x",
    *            "uniVer": "x",
-   *            "unixVer": "x",
-	 *            "utsPlugin": "x"
+   *            "unixVer": "x"
    *   	  }
    *    },
    *  "web": {

@@ -1,13 +1,13 @@
 import PayTask from 'com.alipay.sdk.app.PayTask';
 import string from 'android.R.string';
-const defaultErrorCode : number = 700000
+const defaultErrorCode : number = 700716
 const errorCodeMap : Map<number, number> = new Map([
-	[8000, 700600],
-	[4000, 701100],
-	[5000, 701110],
-	[6001, 700601],
-	[6002, 700602],
-	[6004, 700603]
+	[8000, 700710],
+	[4000, 700711],
+	[5000, 700712],
+	[6001, 700713],
+	[6002, 700714],
+	[6004, 700715]
 ])
 export class Alipay {
 	public requestPayment(options : RequestPaymentOptions) {

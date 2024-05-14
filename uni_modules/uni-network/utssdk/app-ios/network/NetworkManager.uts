@@ -60,7 +60,7 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public request<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : RequestTask {
+	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask {
 		let request = this.createRequest(param);
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
@@ -91,7 +91,7 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public createRequest<T>(param : RequestOptions<T>) : URLRequest | null {
+	public createRequest(param : RequestOptions) : URLRequest | null {
 		let url = new URL(string = param.url);
 		if (url == null) {
 			return null

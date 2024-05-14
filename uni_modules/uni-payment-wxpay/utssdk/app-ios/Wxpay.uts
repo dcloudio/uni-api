@@ -1,0 +1,113 @@
+import { WXApi, WXApiDelegate, BaseReq, PayReq, PayResp } from "WechatOpenSDK";
+import { UTSiOSHookProxy } from "DCloudUniappRuntime";
+import { UIApplication } from "UIKit";
+import { URL, NSUserActivity } from "Foundation";
+
+const defaultErrorCode : number = 700716
+
+const errorCodeMap : Map<number, number> = new Map([
+	[-1, 700711],
+	[-2, 700713]
+])
+
+export class Wxpay implements UTSiOSHookProxy, WXApiDelegate {
+
+	options ?: RequestPaymentOptions
+
+	// 应用正常启动时 (不包括已在后台转到前台的情况)的回调函数。
+	applicationDidFinishLaunchingWithOptions(application : UIApplication | null, launchOptions : Map<UIApplication.LaunchOptionsKey, any> | null = null) : boolean {
+		WXApi.registerApp('wxd930ea5d5a258f4f', universalLink = 'YourUniversionLink')
+		return false
+	}
+
+	// 通过 url scheme 方式唤起 app 时的回调函数。
+	applicationOpenURLOptions(app : UIApplication | null, url : URL, options : Map<UIApplication.OpenURLOptionsKey, any> | null = null) : boolean {
+
+		WXApi.handleOpen(url, delegate = this)
+		return true
+	}
+
+	// 当应用程序接收到与用户活动相关的数据时调用此方法，例如，当用户使用 Universal Link 唤起应用时。
+	applicationContinueUserActivityRestorationHandler(application : UIApplication | null, userActivity : NSUserActivity | null, restorationHandler : ((res : [any] | null) => void) | null = null) : boolean {
+		if (userActivity != null) {
+			WXApi.handleOpenUniversalLink(userActivity!, delegate = this)
+		}
+		
+		return true
+	}
+
+	//@brief 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
+	onReq(req : BaseReq) {
+		//TODO
+	}
+
+	//@brief 发送一个sendReq后，收到微信的回应
+	onResp(resp : BaseReq) {
+		const payResp :PayResp | null = resp as PayResp
+		if (payResp != null) {
+			if (payResp!.errCode == 0) {
+				let res : RequestPaymentSuccess = {
+					data: payResp!
+				}
+				this.options?.success?.(res)
+				this.options?.complete?.(res)
+			} else {
+				const errCode = payResp!.errCode as number
+				let code = errorCodeMap[errCode];
+				if (code == null) {
+					code = defaultErrorCode
+				}
+				let err = new RequestPaymentFailImpl(code!);
+				this.options?.fail?.(err)
+				this.options?.complete?.(err)
+			}
+		}
+	}
+
+	requestPayment(options : RequestPaymentOptions) {
+		this.options = options
+		
+		if (this.isWXAppInstalled() == true) {
+			let err = new RequestPaymentFailImpl(defaultErrorCode);
+			options.fail?.(err)
+			options.complete?.(err)
+			return
+		}
+
+		const params = JSON.parse(options.orderInfo) as UTSJSONObject
+		const partnerId = params.getString("partnerid")
+		const prepayId = params.getString("prepayid")
+		const packageV = params.getString("package")
+		const nonceStr = params.getString("noncestr")
+		const timeStamp = params.getNumber("timestamp")
+		const sign = params.getString("sign")
+
+		let request = new PayReq();
+		if (partnerId != null) {
+			request.partnerId = partnerId!
+		}
+		if (prepayId != null) {
+			request.prepayId = prepayId!
+		}
+		if (packageV != null) {
+			request.package = packageV!
+		}
+		if (nonceStr != null) {
+			request.nonceStr = nonceStr!
+		}
+		if (timeStamp != null) {
+			request.timeStamp = timeStamp!.toUInt32()
+		}
+		if (sign != null) {
+			request.sign = sign!
+		}
+		
+		//函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp
+		WXApi.send(request);
+	}
+	
+	//@brief 检查微信是否已被用户安装
+	isWXAppInstalled() : boolean {
+		return WXApi.isWXAppInstalled()
+	}
+}

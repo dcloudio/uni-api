@@ -1,7 +1,7 @@
 import { WriteFileOptions, ReadFileOptions, MkDirOptions, RmDirOptions, TruncateFileOptions, UnLinkOptions, ReadDirOptions, AccessOptions, RenameOptions, GetFileInfoOptions, CopyFileOptions, StatOptions, AppendFileOptions, OpenFileOptions, OpenFileSuccessCallback, OpenFileSuccessResult, SaveFileOptions, UnzipFileOptions, GetSavedFileListOptions, ReadCompressedFileOptions, ReadCompressedFileResult, RemoveSavedFileOptions, WriteOptions, WriteResult, OpenFileSyncOptions, WriteSyncOptions, CloseOptions, CloseSyncOptions, FStatOptions, FStatSuccessResult, FTruncateFileOptions, FTruncateFileSyncOptions, FStatSyncOptions, ReadZipEntryOptions, ZipFileItem, ReadZipEntryCallback, EntriesResult } from "../interface.uts"
 import { ReadFileSuccessResult, FileManagerSuccessResult, ReadDirSuccessResult, AccessSuccessResult, SaveFileSuccessResult, GetFileInfoSuccessResult, StatSuccessResult, FileStats, Stats, GetSavedFileListResult } from "../interface.uts"
 import { GetFileSystemManager, FileSystemManager } from "../interface.uts"
-import { FileSystemManagerFailImpl, FileSystemManagerUniErrorSubject, FileSystemManagerUniErrors, UniErrors } from "../unierror.uts"
+import { UniErrorSubject, UniErrors } from "../unierror.uts"
 import { FileDescriptorUtil } from "./FileDescriptorUtil"
 import File from "java.io.File"
 import Base64 from "android.util.Base64"
@@ -18,7 +18,6 @@ import Option from 'android.app.VoiceInteractor.PickOptionRequest.Option';
 import FileDescriptor from 'java.io.FileDescriptor';
 import ParcelFileDescriptor from 'android.os.ParcelFileDescriptor';
 import ByteBuffer from 'java.nio.ByteBuffer';
-import InputStream from 'java.io.InputStream';
 
 class AndroidStats implements Stats, io.dcloud.uts.log.LogSelf, io.dcloud.uts.json.IJsonStringify {
 	/**
@@ -97,7 +96,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let isSandyBox = isSandyBoxPath(filePath, true)
 				if (!isSandyBox) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
+						let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.path);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -111,7 +110,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					 * 文件不存在
 					 */
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.path);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -179,14 +178,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let tempRecursive = recursive
 		let isSandyBox = isSandyBoxPath(filePath, true)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let targetFile = new File(filePath)
 		if (!targetFile.exists()) {
 			/**
 			 * 文件不存在
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!);
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!);
 		}
 		if (tempRecursive == true && targetFile.isDirectory()) {
 			// 如果当前是目录，并且设置 则需要遍历所有子目录
@@ -234,7 +233,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -248,7 +247,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -260,7 +259,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件是个目录
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl( 1300021);
+					let err = new UniError(UniErrorSubject, 1300021, UniErrors.get(1300021)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -275,7 +274,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * invalid digestAlgorithm
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300022);
+					let err = new UniError(UniErrorSubject, 1300022, UniErrors.get(1300022)! + ":invalid digestAlgorithm " + options.digestAlgorithm);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -341,57 +340,57 @@ class AndroidFileSystemManager implements FileSystemManager {
 				byteArray = new ByteArray(byteLen)
 				assetStream.read(byteArray);
 			} catch (e) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!);
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!);
 			}
 			// 检查目标文件
 			let newFilePath = UTSAndroid.convert2AbsFullPath(destPath)
 			let isSandyBox = isSandyBoxPath(newFilePath, false)
 			if (!isSandyBox) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!);
+				throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!);
 			}
 			let newFile = new File(newFilePath)
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 				/**
 				 * 父文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 			}
 			newFile.writeBytes(byteArray)
 			if (!newFile.exists()) {
 				// 调用系统api 失败
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 			}
 
 		} else {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+				throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 			}
 			let targetFile = new File(filePath)
 			if (!targetFile.exists()) {
 				/**
 				 * 文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 			}
 			// 检查目标文件
 			let newFilePath = UTSAndroid.convert2AbsFullPath(destPath)
 			isSandyBox = isSandyBoxPath(newFilePath, false)
 			if (!isSandyBox) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+				throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 			}
 			let newFile = new File(newFilePath)
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 				/**
 				 * 父文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 			}
 
 			let copyRetFile = targetFile.copyTo(newFile, true)
 			if (!copyRetFile.exists()) {
 				// 调用系统api 失败
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 			}
 		}
 	}
@@ -422,7 +421,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 				if (exceptionInfo != null) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + exceptionInfo.message);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -435,7 +434,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let isSandyBox = isSandyBoxPath(newFilePath, false)
 				if (!isSandyBox) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
+						let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.destPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -447,7 +446,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					 * 父文件不存在
 					 */
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.destPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -457,7 +456,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				if (!newFile.exists()) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)!);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -476,7 +475,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let isSandyBox = isSandyBoxPath(filePath, true)
 				if (!isSandyBox) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
+						let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.srcPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -488,7 +487,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					 * 文件不存在
 					 */
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.srcPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -499,7 +498,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				isSandyBox = isSandyBoxPath(newFilePath, false)
 				if (!isSandyBox) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
+						let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.destPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -511,7 +510,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					 * 父文件不存在
 					 */
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.destPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -522,7 +521,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				if (!copyRetFile.exists()) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)!);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -548,7 +547,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let filePath = UTSAndroid.convert2AbsFullPath(oldPath)
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1301003)!);
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1301003)!);
 		}
 
 		let targetFile = new File(filePath)
@@ -556,12 +555,12 @@ class AndroidFileSystemManager implements FileSystemManager {
 			/**
 			 * 文件不存在
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 		let newFilePath = UTSAndroid.convert2AbsFullPath(newPath)
 		isSandyBox = isSandyBoxPath(newFilePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let newFile = new File(newFilePath)
 
@@ -569,14 +568,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 			/**
 			 * 父文件不存在
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 
 
 		let renameRet = targetFile.renameTo(newFile)
 		if (!renameRet) {
 			// 调用系统api 失败
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 		}
 	}
 
@@ -589,7 +588,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.oldPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -602,7 +601,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.oldPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -612,7 +611,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			isSandyBox = isSandyBoxPath(newFilePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.newPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -625,7 +624,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 父文件不存在
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.newPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -637,7 +636,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			if (!renameRet) {
 				// 调用系统api 失败
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300201);
+					let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)!);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -661,14 +660,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let targetFile = new File(filePath)
 		let isSandyBox = isSandyBoxPath(filePath, true)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 
 		if (!targetFile.exists()) {
 			/**
 			 * 文件不存在，或者不是文件夹，异常
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 	}
 
@@ -683,7 +682,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.path);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -695,7 +694,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在，或者不是文件夹，异常
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.path);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -721,7 +720,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let filePath = UTSAndroid.convert2AbsFullPath(dirPath)
 		let isSandyBox = isSandyBoxPath(filePath, true)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 
 		let targetFile = new File(filePath)
@@ -729,7 +728,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			/**
 			 * 文件不存在，或者不是文件夹，异常
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 		return UTSArray.fromNative(targetFile.list()!)
 	}
@@ -742,7 +741,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -755,7 +754,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在，或者不是文件夹，异常
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -778,14 +777,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let targetFile = new File(filePath)
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 
 		if (!targetFile.exists() || !targetFile.isDirectory()) {
 			/**
 			 * 文件不存在 或者 文件是不是文件夹
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 
 
@@ -794,13 +793,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let childList = targetFile.list()
 			if (childList != null && childList.size > 0) {
 				// 存在子目录
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300066, msgPrefix + FileSystemManagerUniErrors.get(1300066)!)
+				throw new UniError(UniErrorSubject, 1300066, msgPrefix + UniErrors.get(1300066)!)
 			}
 		} else {
 			let delRet = targetFile.deleteRecursively()
 			if (!delRet) {
 				// 调用系统api 失败
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 			}
 		}
 	}
@@ -808,31 +807,31 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public mkdirSync(dirPath : string, recursive : boolean) : void {
 		let msgPrefix = "mkdirSync:fail "
 		if (dirPath.isEmpty()) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300066, msgPrefix + FileSystemManagerUniErrors.get(1300066)!)
+			throw new UniError(UniErrorSubject, 1300066, msgPrefix + UniErrors.get(1300066)!)
 		}
 		let filePath = UTSAndroid.convert2AbsFullPath(dirPath)
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let targetFile = new File(filePath)
 		if (targetFile.exists()) {
 			/**
 			 * 文件已经存在，则无法继续创建
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1301005, msgPrefix + FileSystemManagerUniErrors.get(1301005)!)
+			throw new UniError(UniErrorSubject, 1301005, msgPrefix + UniErrors.get(1301005)!)
 		}
 
 		if (!recursive) {
 			//  没有设置递归创建
 			if (targetFile.getParentFile() == null || !targetFile.getParentFile()!.exists()) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 			} else {
 				// 父文件夹存在，则继续创建
 				let mkRet = targetFile.mkdir()
 				if (!mkRet) {
 					// 调用系统api 失败
-					throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+					throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 				}
 			}
 		} else {
@@ -840,7 +839,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let mkRet = targetFile.mkdirs()
 			if (!mkRet) {
 				// 调用系统api 失败
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 			}
 		}
 	}
@@ -856,7 +855,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -868,7 +867,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在 或者 文件是不是文件夹
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -882,7 +881,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				if (childList != null && childList.size > 0) {
 					// 存在子目录
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300066);
+						let err = new UniError(UniErrorSubject, 1300066, UniErrors.get(1300066)! + ":" + options.dirPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -894,7 +893,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				if (!delRet) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + options.dirPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -923,7 +922,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			if (options.dirPath.isEmpty()) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300066);
+					let err = new UniError(UniErrorSubject, 1300066, UniErrors.get(1300066)!);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -934,7 +933,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -947,7 +946,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件已经存在，则无法继续创建
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1301005);
+					let err = new UniError(UniErrorSubject, 1301005, UniErrors.get(1301005)! + ":" + options.dirPath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -958,7 +957,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				//  没有设置递归创建
 				if (targetFile.getParentFile() == null || !targetFile.getParentFile()!.exists()) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.dirPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -969,7 +968,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					if (!mkRet) {
 						// 调用系统api 失败
 						currentDispatcher.async(function (_) {
-							let err = new FileSystemManagerFailImpl(1300201);
+							let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + options.dirPath);
 							options.fail?.(err)
 							options.complete?.(err)
 						})
@@ -983,7 +982,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				if (!mkRet) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + options.dirPath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1011,19 +1010,19 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let temFilePath = UTSAndroid.convert2AbsFullPath(filePath)
 		let isSandyBox = isSandyBoxPath(temFilePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 
 		let targetFile = new File(temFilePath)
 		if (!targetFile.exists()) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 
 		// 文件存在，则进行删除操作
 		let delRet = targetFile.delete()
 		if (!delRet) {
 			// 调用系统api 删除失败
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 		}
 	}
 
@@ -1041,7 +1040,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let isSandyBox = isSandyBoxPath(filePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -1051,7 +1050,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			let targetFile = new File(filePath)
 			if (!targetFile.exists()) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -1063,7 +1062,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			if (!delRet) {
 				// 调用系统api 删除失败
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300201);
+					let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -1092,7 +1091,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			tempEncoding = "utf-8"
 		}
 		if (tempEncoding.toLowerCase() != 'base64' && tempEncoding.toLowerCase() != 'utf-8' && tempEncoding.toLowerCase() != 'ascii') {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1200002, msgPrefix + FileSystemManagerUniErrors.get(1200002)!)
+			throw new UniError(UniErrorSubject, 1200002, msgPrefix + UniErrors.get(1200002)!)
 		}
 		let tempFilePath = UTSAndroid.convert2AbsFullPath(filePath)
 		if (tempFilePath.startsWith("/android_asset/")) {
@@ -1104,7 +1103,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				byteArray = new ByteArray(byteLen)
 				assetStream.read(byteArray);
 			} catch (e : Exception) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)! + ":" + filePath)
+				throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)! + ":" + filePath)
 			}
 
 			if (tempEncoding.toLowerCase() == 'base64') {
@@ -1130,18 +1129,18 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			let targetFile = new File(tempFilePath)
 			if (!targetFile.exists()) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)! + ":" + filePath);
+				throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)! + ":" + filePath);
 			}
 
 			if (targetFile.isDirectory()) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1301003, msgPrefix + FileSystemManagerUniErrors.get(1301003)! + ":" + filePath);
+				throw new UniError(UniErrorSubject, 1301003, msgPrefix + UniErrors.get(1301003)! + ":" + filePath);
 			}
 
 			/**
 			 * 文件超过100M，会超过应用内存
 			 */
 			if (targetFile.length() > 100 * 1024 * 1024) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300202, msgPrefix + FileSystemManagerUniErrors.get(1300202)! + ":" + filePath);
+				throw new UniError(UniErrorSubject, 1300202, msgPrefix + UniErrors.get(1300202)! + ":" + filePath);
 			}
 
 			if (tempEncoding.toLowerCase() == 'base64') {
@@ -1167,7 +1166,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		// 判断type 是否合法
 		if (options.encoding.toLowerCase() != 'base64' && options.encoding.toLowerCase() != 'utf-8' && options.encoding.toLowerCase() != 'ascii') {
-			let err = new FileSystemManagerFailImpl(1200002);
+			let err = new UniError(UniErrorSubject, 1200002, UniErrors.get(1200002)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1200,7 +1199,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 				if (exceptionInfo != null) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300201);
+						let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + exceptionInfo.message);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1238,7 +1237,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let isSandyBox = isSandyBoxPath(filePath, true)
 				if (!isSandyBox) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
+						let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1248,7 +1247,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let targetFile = new File(filePath)
 				if (!targetFile.exists()) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.filePath);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1257,7 +1256,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 				if (targetFile.isDirectory()) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1301003);
+						let err = new UniError(UniErrorSubject, 1301003, UniErrors.get(1301003)!);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1269,7 +1268,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 */
 				if (targetFile.length() > 100 * 1024 * 1024) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300202);
+						let err = new UniError(UniErrorSubject, 1300202, UniErrors.get(1300202)!);
 						options.fail?.(err)
 						options.complete?.(err)
 					})
@@ -1312,7 +1311,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let msgPrefix = "writeFileSync:fail "
 		let tempEncoding = encoding
 		if (tempEncoding.toLowerCase() != 'base64' && tempEncoding.toLowerCase() != 'utf-8' && tempEncoding.toLowerCase() != 'ascii') {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1200002, msgPrefix + FileSystemManagerUniErrors.get(1200002)!)
+			throw new UniError(UniErrorSubject, 1200002, msgPrefix + UniErrors.get(1200002)!)
 		}
 
 		// 判断type 是否合法
@@ -1320,13 +1319,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let isSandyBox = isSandyBoxPath(tempFilePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 
 		let nextFile = new File(tempFilePath)
 
 		if (nextFile.exists() && nextFile.isDirectory()) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1301003, msgPrefix + FileSystemManagerUniErrors.get(1301003)!)
+			throw new UniError(UniErrorSubject, 1301003, msgPrefix + UniErrors.get(1301003)!)
 		}
 
 		/**
@@ -1364,7 +1363,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 	public writeFile(options : WriteFileOptions) {
 		if (options.encoding.toLowerCase() != 'base64' && options.encoding.toLowerCase() != 'utf-8' && options.encoding.toLowerCase() != 'ascii') {
-			let err = new FileSystemManagerFailImpl(1200002);
+			let err = new UniError(UniErrorSubject, 1200002, UniErrors.get(1200002)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1375,7 +1374,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			let err = new FileSystemManagerFailImpl(1300013);
+			let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1385,7 +1384,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		if (nextFile.exists() && nextFile.isDirectory()) {
 			// 出错了，目标文件已存在，并且是个目录
-			let err = new FileSystemManagerFailImpl(1301003);
+			let err = new UniError(UniErrorSubject, 1301003, UniErrors.get(1301003)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1440,20 +1439,20 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let msgPrefix = "appendFileSync:fail "
 		let tempEncoding = encoding
 		if (tempEncoding.toLowerCase() != 'base64' && tempEncoding.toLowerCase() != 'utf-8' && tempEncoding.toLowerCase() != 'ascii') {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1200002, msgPrefix + FileSystemManagerUniErrors.get(1200002)!)
+			throw new UniError(UniErrorSubject, 1200002, msgPrefix + UniErrors.get(1200002)!)
 		}
 		// 判断type 是否合法
 		let tempFilePath = UTSAndroid.convert2AbsFullPath(filePath)
 		let isSandyBox = isSandyBoxPath(tempFilePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let nextFile = new File(tempFilePath)
 		if (!nextFile.exists()) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		} else if (nextFile.isDirectory()) {
 			// 出错了，目标文件已存在，并且是个目录
-			throw new UniError(FileSystemManagerUniErrorSubject, 1301003, msgPrefix + FileSystemManagerUniErrors.get(1301003)!)
+			throw new UniError(UniErrorSubject, 1301003, msgPrefix + UniErrors.get(1301003)!)
 		}
 		// 写入文本，根据不同的编码内容写入不同的数据
 		if (tempEncoding.toLowerCase() == 'ascii') {
@@ -1478,7 +1477,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 	public appendFile(options : AppendFileOptions) {
 		if (options.encoding.toLowerCase() != 'base64' && options.encoding.toLowerCase() != 'utf-8' && options.encoding.toLowerCase() != 'ascii') {
-			let err = new FileSystemManagerFailImpl(1200002);
+			let err = new UniError(UniErrorSubject, 1200002, UniErrors.get(1200002)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1489,7 +1488,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			let err = new FileSystemManagerFailImpl(1300013);
+			let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1499,13 +1498,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 
 		if (!nextFile.exists()) {
-			let err = new FileSystemManagerFailImpl(1300002);
+			let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
 		} else if (nextFile.isDirectory()) {
 			// 出错了，目标文件已存在，并且是个目录
-			let err = new FileSystemManagerFailImpl(1301003);
+			let err = new UniError(UniErrorSubject, 1301003, UniErrors.get(1301003)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1557,7 +1556,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			&& optFlag != 'w+'
 			&& optFlag != 'wx'
 			&& optFlag != 'wx+') {
-			let err = new FileSystemManagerFailImpl(1302003);
+			let err = new UniError(UniErrorSubject, 1302003, UniErrors.get(1302003)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1567,7 +1566,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			let err = new FileSystemManagerFailImpl(1300013);
+			let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -1590,14 +1589,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 			&& optFlag != 'w+'
 			&& optFlag != 'wx'
 			&& optFlag != 'wx+') {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1302003, msgPrefix + FileSystemManagerUniErrors.get(1302003)!)
+			throw new UniError(UniErrorSubject, 1302003, msgPrefix + UniErrors.get(1302003)!)
 		}
 
 		let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
 
 		let isSandyBox = isSandyBoxPath(filePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		return this.fileDesUtil.openSync(options, new File(filePath))
 	}
@@ -1611,7 +1610,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.tempFilePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1623,7 +1622,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.tempFilePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1638,7 +1637,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			isSandyBox = isSandyBoxPath(newFilePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300013);
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1651,7 +1650,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 父文件不存在
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1662,7 +1661,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			if (!copyRetFile.exists()) {
 				// 调用系统api 失败
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300201);
+					let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)!);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1687,14 +1686,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let isSandyBox = isSandyBoxPath(tfPath, true)
 
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let targetFile = new File(tfPath)
 		if (!targetFile.exists()) {
 			/**
 			 * 文件不存在
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 		let fp = filePath
 		if (fp == null) {
@@ -1704,7 +1703,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let newFilePath = UTSAndroid.convert2AbsFullPath(fp + targetFile.getName())
 		isSandyBox = isSandyBoxPath(newFilePath, false)
 		if (!isSandyBox) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			throw new UniError(UniErrorSubject, 1300013, msgPrefix + UniErrors.get(1300013)!)
 		}
 		let newFile = new File(newFilePath)
 		console.log(newFile.getPath())
@@ -1712,13 +1711,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 			/**
 			 * 父文件不存在
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 
 		let copyRetFile = targetFile.copyTo(newFile, true)
 		if (!copyRetFile.exists()) {
 			// 调用系统api 失败
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 		}
 		targetFile.delete()
 		return newFilePath
@@ -1727,73 +1726,56 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let msgPrefix = "unzip:fail "
 		// 检查来源文件
 		let zipFilePath = UTSAndroid.convert2AbsFullPath(options.zipFilePath)
-		
+		let isSandyBox = isSandyBoxPath(zipFilePath, true)
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
 		UTSAndroid.getDispatcher('io').async(function (_) {
-			let is:InputStream;
-			let targetPath = UTSAndroid.convert2AbsFullPath(options.targetPath)
-			if (zipFilePath.startsWith("/android_asset/")) {
-				try {
-					let assetName = zipFilePath.substring("/android_asset/".length)
-					is = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
-				} catch (e : Exception) {
-					/**
-					 * 文件不存在
-					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-			} else {
-				let isSandyBox = isSandyBoxPath(zipFilePath, true)
-				if (!isSandyBox) {
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-				let zipFile = new File(zipFilePath)
-				if (!zipFile.exists()) {
-					/**
-					 * 文件不存在
-					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-				
-				isSandyBox = isSandyBoxPath(targetPath, true)
-				let targetFile = new File(targetPath)
-				if (!isSandyBox) {
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300013);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				
-				}
-				if (!targetFile.exists() || !targetFile.isDirectory()) {
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-				is = new FileInputStream(zipFile);
+			if (!isSandyBox) {
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.zipFilePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
 			}
-			
+			let zipFile = new File(zipFilePath)
+			if (!zipFile.exists()) {
+				/**
+				 * 文件不存在
+				 */
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.zipFilePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+			}
+
+			let targetPath = UTSAndroid.convert2AbsFullPath(options.targetPath)
+			isSandyBox = isSandyBoxPath(targetPath, true)
+			let targetFile = new File(targetPath)
+			if (!isSandyBox) {
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1300013, UniErrors.get(1300013)! + ":" + options.zipFilePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+
+			}
+			if (!targetFile.exists() || !targetFile.isDirectory()) {
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + options.zipFilePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+			}
+
+
 			try {
+				let is = new FileInputStream(zipFile);
 				let zis = new ZipInputStream(new BufferedInputStream(is));
+				console.log(zipFile.getPath())
 				let buffer = new ByteArray(1024)
 				let count : number = 0;
 				let ze = zis.getNextEntry()
@@ -1837,7 +1819,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			} catch (e : Exception) {
 				console.log(e.message)
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300201);
+					let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + options.zipFilePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1859,7 +1841,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在，或者不是文件夹，异常
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1900,7 +1882,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在，或者是文件夹，异常
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1936,7 +1918,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			/**
 			 * 文件不存在，或者是文件夹，异常
 			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
 		}
 
 		let content = targetFile.readText()
@@ -1949,58 +1931,38 @@ class AndroidFileSystemManager implements FileSystemManager {
 	readCompressedFile(options : ReadCompressedFileOptions) {
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
 		UTSAndroid.getDispatcher('io').async(function (_) {
+			let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
+
+			let targetFile = new File(filePath)
+			if (!targetFile.exists() || targetFile.isDirectory()) {
+				/**
+				 * 文件不存在，或者是文件夹，异常
+				 */
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + filePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+			}
+			if (options.compressionAlgorithm != 'br') {
+				currentDispatcher.async(function (_) {
+					let err = new UniError(UniErrorSubject, 1301111, UniErrors.get(1301111)! + ":" + filePath);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+			}
 			let success : ReadCompressedFileResult = {
 				data: ""
 			}
-			let is:InputStream
-			let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
-			if (filePath.startsWith("/android_asset/")) {
-				try {
-					let assetName = filePath.substring("/android_asset/".length)
-					is = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
-				
-				} catch (e : Exception) {
-					/**
-					 * 文件不存在，或者是文件夹，异常
-					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-			} else {
-				let targetFile = new File(filePath)
-				if (!targetFile.exists() || targetFile.isDirectory()) {
-					/**
-					 * 文件不存在，或者是文件夹，异常
-					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-				if (options.compressionAlgorithm != 'br') {
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1301111);
-						options.fail?.(err)
-						options.complete?.(err)
-					}, null)
-					return
-				}
-				is = new FileInputStream(targetFile)
-
-			}
 			try {
-				let brInput = new BrotliInputStream(is)
+				let brInput = new BrotliInputStream(new FileInputStream(targetFile))
 				success.data = new String(brInput.readBytes())
 				brInput.close()
 			} catch (e : Exception) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300201);
+					let err = new UniError(UniErrorSubject, 1300201, UniErrors.get(1300201)! + ":" + filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -2016,36 +1978,23 @@ class AndroidFileSystemManager implements FileSystemManager {
 	readCompressedFileSync(filePath : string, compressionAlgorithm : string) : string {
 		let msgPrefix = "readCompressedFileSync:fail "
 		let tempFilePath = UTSAndroid.convert2AbsFullPath(filePath)
-		let is : InputStream
-		if (tempFilePath.startsWith("/android_asset/")) {
-			try {
-				let assetName = tempFilePath.substring("/android_asset/".length)
-				is = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
-
-			} catch (e : Exception) {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
-			}
-		} else {
-			let targetFile = new File(tempFilePath)
-			if (!targetFile.exists() || targetFile.isDirectory()) {
-				/**
-				 * 文件不存在，或者是文件夹，异常
-				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
-			}
-			if (compressionAlgorithm != 'br') {
-				throw new UniError(FileSystemManagerUniErrorSubject, 1301111, msgPrefix + FileSystemManagerUniErrors.get(1301111)!)
-			}
-			is = new FileInputStream(targetFile)
+		let targetFile = new File(tempFilePath)
+		if (!targetFile.exists() || targetFile.isDirectory()) {
+			/**
+			 * 文件不存在，或者是文件夹，异常
+			 */
+			throw new UniError(UniErrorSubject, 1300002, msgPrefix + UniErrors.get(1300002)!)
+		}
+		if (compressionAlgorithm != 'br') {
+			throw new UniError(UniErrorSubject, 1301111, msgPrefix + UniErrors.get(1301111)!)
 		}
 		let data : string
-
 		try {
-			let brInput = new BrotliInputStream(is)
+			let brInput = new BrotliInputStream(new FileInputStream(targetFile))
 			data = new String(brInput.readBytes())
 			brInput.close()
 		} catch (e : Exception) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 		}
 		return data
 	}
@@ -2061,7 +2010,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 * 文件不存在，或者是文件夹，异常
 				 */
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new UniError(UniErrorSubject, 1300002, UniErrors.get(1300002)! + ":" + filePath);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -2081,7 +2030,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public write(options : WriteOptions) {
 		console.log(JSON.stringify(options))
 		if (options.encoding.toLowerCase() != 'base64' && options.encoding.toLowerCase() != 'utf-8' && options.encoding.toLowerCase() != 'ascii') {
-			let err = new FileSystemManagerFailImpl(1200002);
+			let err = new UniError(UniErrorSubject, 1200002, UniErrors.get(1200002)!);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -2093,7 +2042,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			let fd = ParcelFileDescriptor.fromFd(options.fd.toInt())
 			if (fd == null) {
-				let err = new FileSystemManagerFailImpl(1300009);
+				let err = new UniError(UniErrorSubject, 1300009, UniErrors.get(1300009)!);
 				options.fail?.(err)
 				options.complete?.(err)
 				return
@@ -2140,11 +2089,11 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public writeSync(options : WriteSyncOptions) : WriteResult {
 		let msgPrefix = "writeSync:fail "
 		if (options.encoding.toLowerCase() != 'base64' && options.encoding.toLowerCase() != 'utf-8' && options.encoding.toLowerCase() != 'ascii') {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1200002, msgPrefix + FileSystemManagerUniErrors.get(1200002)!)
+			throw new UniError(UniErrorSubject, 1200002, msgPrefix + UniErrors.get(1200002)!)
 		}
 		let fd = ParcelFileDescriptor.fromFd(options.fd.toInt())
 		if (fd == null) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
+			throw new UniError(UniErrorSubject, 1300009, msgPrefix + UniErrors.get(1300009)!)
 		}
 		try {
 			let outStream = new FileOutputStream(fd.getFileDescriptor())
@@ -2176,7 +2125,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				fileChannel.write(buffer, 0)
 			}
 		} catch (e) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			throw new UniError(UniErrorSubject, 1300201, msgPrefix + UniErrors.get(1300201)!)
 		}
 		let ret : WriteResult = {
 			bytesWritten: options.data.length
@@ -2198,7 +2147,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				options.success?.(success)
 				options.complete?.(success)
 			} catch (e) {
-				let err = new FileSystemManagerFailImpl(1300009);
+				let err = new UniError(UniErrorSubject, 1300009, UniErrors.get(1300009)!);
 				options.fail?.(err)
 				options.complete?.(err)
 			}
@@ -2213,7 +2162,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				this.fileDesUtil.openMap.delete(options.fd)
 			}
 		} catch (e) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
+			throw new UniError(UniErrorSubject, 1300009, msgPrefix + UniErrors.get(1300009)!)
 		}
 	}
 	public fstat(options : FStatOptions) {
@@ -2222,7 +2171,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			currentDispatcher.async(function (_) {
 				if (!this.fileDesUtil.openMap.has(options.fd)) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300009);
+						let err = new UniError(UniErrorSubject, 1300009, UniErrors.get(1300009)! + ":" + options.fd);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
@@ -2239,7 +2188,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public fstatSync(options : FStatSyncOptions) : Stats {
 		let msgPrefix = "ftruncateSync:fail "
 		if (!this.fileDesUtil.openMap.has(options.fd)) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
+			throw new UniError(UniErrorSubject, 1300009, msgPrefix + UniErrors.get(1300009)!)
 		}
 		return wrapStats(this.fileDesUtil.openMap.get(options.fd)!)
 	}
@@ -2248,7 +2197,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		UTSAndroid.getDispatcher('io').async(function (_) {
 			if (!this.fileDesUtil.openMap.has(options.fd)) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300009);
+					let err = new UniError(UniErrorSubject, 1300009, UniErrors.get(1300009)! + ":" + options.fd);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -2273,7 +2222,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public ftruncateSync(options : FTruncateFileSyncOptions) {
 		let msgPrefix = "ftruncateSync:fail "
 		if (!this.fileDesUtil.openMap.has(options.fd)) {
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
+			throw new UniError(UniErrorSubject, 1300009, msgPrefix + UniErrors.get(1300009)!)
 		}
 		let targetFile = this.fileDesUtil.openMap.get(options.fd)
 		let content = targetFile!.readText()
@@ -2286,14 +2235,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public readZipEntry(options : ReadZipEntryOptions) {
 		let targetPath = uni.env.CACHE_PATH + "/" + Base64.encodeToString(options.filePath.toByteArray(), Base64.NO_WRAP)
 		targetPath = UTSAndroid.convert2AbsFullPath(targetPath)
+
 		console.log("readZipEntry", targetPath)
 		let file : File = new File(targetPath)
 		if (!file.exists()) {
 			file.mkdirs()
 		}
-
 		let target = this
-		let zipOptions : uts.sdk.modules.uniFileSystemManager.UnzipFileOptions = {//todo 需要去掉
+		let zipOptions : UnzipFileOptions = {
 			zipFilePath: options.filePath,
 			targetPath: targetPath,
 			success: (_) => {
@@ -2305,6 +2254,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 					filterEntries?.forEach((item) => {
 						let fileItem = new File(targetPath + "/" + item.path)
+						console.log("readZipEntry", file.getPath())
 						if (!fileItem.exists() || fileItem.isDirectory()) {
 							let zipFileItem : ZipFileItem = {
 								errMsg: 'no such file'
@@ -2363,8 +2313,8 @@ class AndroidFileSystemManager implements FileSystemManager {
 					targetFile.delete()
 				})
 			},
-			fail: (res) => {
-				let err = new FileSystemManagerFailImpl(res.errCode);
+			fail: (res : UniError) => {
+				let err = new UniError(UniErrorSubject, res.errCode, res.errMsg);
 				options.fail?.(err)
 				options.complete?.(err)
 			}

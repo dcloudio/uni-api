@@ -46,16 +46,18 @@ export function transcodeImage(options : CompressImageOptions) {
 	var widthStr = ""
 	var heightStr = ""
 	if (options.compressedWidth != null) {
-		widthStr = options.compressedWidth.toString();
+		compressOption.width = options.compressedWidth!
 	} else {
 		widthStr = TextUtils.isEmpty(options.width) ? "auto" : options.width!
 	}
 	if (options.compressedHeight != null) {
-		heightStr = options.compressedHeight.toString();
+		compressOption.height = options.compressedHeight!
 	} else {
 		heightStr = TextUtils.isEmpty(options.height) ? "auto" : options.height!
 	}
-	getHeightAndWidth(compressOption, widthStr, heightStr);
+	if (compressOption.width <= 0 || compressOption.height <= 0) {
+		getHeightAndWidth(compressOption, widthStr, heightStr)
+	}
 	let bitmapOptions = new BitmapFactory.Options()
 	bitmapOptions.inJustDecodeBounds = false;
 	if (srcFile.length() > 1500000) {
@@ -173,7 +175,7 @@ function str2Float(valuestr : string, realValue : number, defValue : number) : n
 	}
 	valuestr = valuestr.toLowerCase()
 	if (valuestr.endsWith("px")) {
-		valuestr = valuestr.substring(0, valuestr.length - 2);
+		valuestr == valuestr.substring(0, valuestr.length - 2);
 	}
 	try {
 		return Integer.parseInt(valuestr)
@@ -229,13 +231,22 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	} else if (resolution! > 1 || resolution! <= 0) {
 		resolution = 1.0
 	}
-	let outPath = mediaCachePath + "compress_video_" + System.currentTimeMillis() + ".mp4";
+	let fileName = getFileName(inPath);
+	let outPath = mediaCachePath + (fileName == "" ? (System.currentTimeMillis() + ".mp4") : fileName)
 	let outFile = new File(outPath)
 	if (!outFile.getParentFile().exists()) {
 		outFile.getParentFile().mkdirs()
 	}
 
 	MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
+}
+
+function getFileName(path : string) : string {
+	const array = path.split("/")
+	if (array.length > 0) {
+		return array[array.length - 1]
+	}
+	return ""
 }
 
 class MediaTranscoderListener implements Listener {

@@ -2,7 +2,7 @@ import IWXAPI from 'com.tencent.mm.opensdk.openapi.IWXAPI';
 import WXAPIFactory from 'com.tencent.mm.opensdk.openapi.WXAPIFactory';
 import PayReq from 'com.tencent.mm.opensdk.modelpay.PayReq';
 import BaseReq from 'com.tencent.mm.opensdk.modelbase.BaseReq';
-const defaultErrorCode : number = 700000
+const defaultErrorCode : number = 700716
 export class Wxpay {
 	public static mOptions : RequestPaymentOptions = {
 		orderInfo: "",
@@ -10,7 +10,7 @@ export class Wxpay {
 	} as RequestPaymentOptions
 	public requestPayment(options : RequestPaymentOptions) {
 		if (!Wxpay.isInstalled()) {
-			let err = new RequestPaymentFailImpl(700604);
+			let err = new RequestPaymentFailImpl(700717);
 			options.fail?.(err)
 			options.complete?.(err)
 			return

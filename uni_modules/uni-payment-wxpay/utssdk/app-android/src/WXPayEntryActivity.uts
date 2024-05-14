@@ -7,10 +7,10 @@ import Bundle from 'android.os.Bundle'
 import WXAPIFactory from 'com.tencent.mm.opensdk.openapi.WXAPIFactory';
 import {Wxpay} from './Wxpay';
 import R from 'uts.sdk.modules.uniPaymentWxpay.R';
-const defaultErrorCode : number = 700000
+const defaultErrorCode : number = 700716
 const errorCodeMap : Map<number, number> = new Map([
-	[-1, 701100],
-	[-2, 700601]
+	[-1, 700711],
+	[-2, 700713]
 ])
 export class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	constructor() {

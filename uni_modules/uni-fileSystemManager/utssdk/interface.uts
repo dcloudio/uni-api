@@ -21,7 +21,7 @@ export type FileManagerSuccessCallback = (res : FileManagerSuccessResult) => voi
 /**
  * 通用的错误返回结果回调
  */
-export type FileManagerFailCallback = (res : FileSystemManagerFail) => void
+export type FileManagerFailCallback = (res : UniError) => void
 /**
  * 通用的结束返回结果回调
  */
@@ -39,7 +39,7 @@ export type ReadFileOptions = {
 	 */
 	encoding : "base64" | "utf-8",
 	/**
-	 * 文件路径，支持相对地址和绝对地址，app-android平台支持代码包文件目录
+	 * 文件路径，支持相对地址和绝对地址
 	 */
 	filePath : string.URIString,
 	/**
@@ -553,7 +553,7 @@ export type ReadCompressedFileResult = {
 export type ReadCompressedFileCallback = (res : ReadCompressedFileResult) => void
 export type ReadCompressedFileOptions = {
 	/**
-	 * 要读取的文件的路径 (本地用户文件或代码包文件)，app-android平台支持代码包文件目录
+	 * 要读取的文件的路径 (本地用户文件或代码包文件)
 	 */
 	filePath : string.URIString,
 	/**
@@ -779,7 +779,7 @@ export type ZipFileItem = {
 export type ReadZipEntryCallback = (res : EntriesResult) => void
 export type ReadZipEntryOptions = {
 	/**
-	 * 要读取的压缩包的路径 (本地路径)，app-android平台支持代码包文件目录
+	 * 要读取的压缩包的路径 (本地路径)
 	 */
 	filePath : string.URIString,
 	/**
@@ -829,8 +829,6 @@ export interface FileSystemManager {
 	readFile(options : ReadFileOptions) : void;
 	/**
 	 * FileSystemManager.readFile 的同步版本参数
-	 * @param 文件路径，支持相对地址和绝对地址，app-android平台支持代码包文件目录
-	 * @param base64 / utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -875,9 +873,6 @@ export interface FileSystemManager {
 	writeFile(options : WriteFileOptions) : void;
 	/**
 	 * FileSystemManager.writeFile 的同步版本
-	 * @param 文件路径，只支持绝对地址
-	 * @param 写入的文本内容
-	 * @param 指定写入文件的字符编码,支持:ascii base64 utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -922,7 +917,6 @@ export interface FileSystemManager {
 	unlink(options : UnLinkOptions) : void;
 	/**
 	 * FileSystemManager.unlink 的同步版本
-	 * @param 文件路径，只支持绝对地址
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -967,8 +961,6 @@ export interface FileSystemManager {
 	mkdir(options : MkDirOptions) : void;
 	/**
 	 * FileSystemManager.mkdir 的同步版本
-	 * @param 创建的目录路径 (本地路径)
-	 * @param 是否在递归创建该目录的上级目录后再创建该目录。如果对应的上级目录已经存在，则不创建该上级目录。如 dirPath 为 a/b/c/d 且 recursive 为 true，将创建 a 目录，再在 a 目录下创建 b 目录，以此类推直至创建 a/b/c 目录下的 d 目录。
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1013,8 +1005,6 @@ export interface FileSystemManager {
 	rmdir(options : RmDirOptions) : void;
 	/**
 	 * FileSystemManager.rmdir 的同步版本
-	 * @param 要删除的目录路径 (本地路径)
-	 * @param 是否递归删除目录。如果为 true，则删除该目录和该目录下的所有子目录以及文件。
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1059,7 +1049,6 @@ export interface FileSystemManager {
 	readdir(options : ReadDirOptions) : void;
 	/**
 	 * FileSystemManager.readdir 的同步版本
-	 * @param 要读取的目录路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1104,7 +1093,6 @@ export interface FileSystemManager {
 	access(options : AccessOptions) : void;
 	/**
 	 * FileSystemManager.access 的同步版本
-	 * @param 要删除的目录路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1149,8 +1137,6 @@ export interface FileSystemManager {
 	rename(options : RenameOptions) : void;
 	/**
 	 * FileSystemManager.rename 的同步版本
-	 * @param 源文件路径，支持本地路径
-	 * @param 新文件路径，支持本地路径
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1195,8 +1181,6 @@ export interface FileSystemManager {
 	copyFile(options : CopyFileOptions) : void;
 	/**
 	 * FileSystemManager.copyFile 的同步版本
-	 * @param 源文件路径，支持本地路径
-	 * @param 新文件路径，支持本地路径
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1263,8 +1247,6 @@ export interface FileSystemManager {
 	stat(options : StatOptions) : void;
 	/**
 	 * FileSystemManager.stat 的同步版本
-	 * @param 文件/目录路径 (本地路径)
-	 * @param 是否递归获取目录下的每个文件的 Stats 信息
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1309,9 +1291,6 @@ export interface FileSystemManager {
 	appendFile(options : AppendFileOptions) : void;
 	/**
 	 * FileSystemManager.appendFile 的同步版本
-	 * @param 要追加内容的文件路径 (本地路径)
-	 * @param 要追加的文本
-	 * @param 指定写入文件的字符编码支持:ascii base64 utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1803,25 +1782,3 @@ export interface Uni {
 	 */
 	getFileSystemManager() : FileSystemManager
 }
-
-/**
- * 错误码
- * - 1200002  类型错误。仅支持 base64 / utf-8
- * - 1300002  未找到文件
- * - 1300013  无权限
- * - 1300021  是目录
- * - 1300022  参数无效
- * - 1300066  目录非空
- * - 1301003  对目录的非法操作
- * - 1301005  文件已存在
- * - 1300201  系统错误
- * - 1300202  超出文件存储限制的最大尺寸
- * - 1301111  brotli解压失败
- * - 1302003  标志无效
- * - 1300009  文件描述符错误
- */
-export type FileSystemManagerErrorCode = 1200002 | 1300002 | 1300013 | 1300021 | 1300022 | 1300066 | 1301003 | 1301005 | 1300201 | 1300202 | 1301111 | 1302003 | 1300009;
-export type FileSystemManagerFail = IFileSystemManagerFail;
-export interface IFileSystemManagerFail extends IUniError {
-	errCode : FileSystemManagerErrorCode
-};

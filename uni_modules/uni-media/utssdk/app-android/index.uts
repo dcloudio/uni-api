@@ -343,7 +343,6 @@ function copyFile(fromFilePath : string, toFilePath : string) : boolean {
 			if (!fromFile.canRead()) {
 				return false;
 			}
-			fis = new FileInputStream(fromFile);
 		}
 		if (fis == null) {
 			return false
@@ -359,6 +358,7 @@ function copyFile(fromFilePath : string, toFilePath : string) : boolean {
 		toFile.createNewFile()
 	}
 	try {
+		// let fis = new FileInputStream(fromFile)
 		let fos = new FileOutputStream(toFile)
 		let byteArrays = ByteArray(1024)
 		var c = fis!!.read(byteArrays)
@@ -592,21 +592,6 @@ export const getVideoInfo : GetVideoInfo = function (options : GetVideoInfoOptio
 
 
 export const saveVideoToPhotosAlbum : SaveVideoToPhotosAlbum = function (options : SaveVideoToPhotosAlbumOptions) {
-	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-		let requestPermissionList : Array<string> = [Manifest.permission.WRITE_EXTERNAL_STORAGE];
-		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
-			loadFile(options);
-		}, (a : boolean, b : string[]) => {
-			let error = new MediaErrorImpl(1101005, UniError_SaveVideoToPhotosAlbum);
-			options.fail?.(error);
-			options.complete?.(error);
-		})
-	} else {
-		loadFile(options);
-	}
-}
-
-function loadFile(options : SaveVideoToPhotosAlbumOptions) {
 	if (TextUtils.isEmpty(options.filePath)) {
 		let error = new MediaErrorImpl(1101003, UniError_SaveVideoToPhotosAlbum);
 		options.fail?.(error)

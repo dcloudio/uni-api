@@ -8,292 +8,50 @@ export type GetDeviceInfoOptions = {
 export type GetDeviceInfoResult = {
   /**
    * 设备品牌
-   * @deprecated 已废弃，仅为了向下兼容保留
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "x"
-   *   }
-   * }
    */
   brand?: string
   /**
    * 设备品牌
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "x"
-   *   }
-   * }
    */
   deviceBrand?: string,
   /**
    * 设备 id 。由 uni-app 框架生成并存储，清空 Storage 会导致改变
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   deviceId?: string,
   /**
    * 设备型号	
-   * @deprecated 已废弃，仅为了向下兼容保留
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   model?: string,
   /**
    * 设备型号	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   deviceModel?: string,
   /**
    * 设备类型phone、pad、pc	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   deviceType?: string,
   /**
    * 设备方向 竖屏 portrait、横屏 landscape	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   deviceOrientation?: string,
   /**
    * 设备像素比	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   devicePixelRatio?: string,
   /**
    * 操作系统及版本	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   system?: string,
   /**
    * 客户端平台	
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
-   *   }
-   * }
    */
   platform?: string,
   /**
    * 是否root
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "x",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "x",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "x"
-   *   }
-   * }
    */
   isRoot?: boolean,
   /**
    * 是否是模拟器
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "x",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "x",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "x"
-   *   }
-   * }
    */
   isSimulator?: boolean,
   /**
@@ -312,11 +70,7 @@ export type GetDeviceInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		}
-   * 	},
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "x"
-   *   }
+   * 	}
    * }
    */
   isUSBDebugging?: boolean,

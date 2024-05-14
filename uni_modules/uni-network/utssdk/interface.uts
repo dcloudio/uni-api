@@ -6,63 +6,17 @@ export type Request<T> = (param: RequestOptions<T>) => RequestTask;
 export type RequestOptions<T> = {
   /**
    * 开发者服务器接口地址
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   url: string,
   /**
    * 请求的参数 UTSJSONObject|string类型
    * @type {RequestDataOptions}
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   data?: any | null,
   /**
    * 设置请求的 header，header 中不能设置 Referer
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   header?: UTSJSONObject | null,
   /**
@@ -70,41 +24,11 @@ export type RequestOptions<T> = {
    * 如果设置的值不在取值范围内，会以GET方法进行请求。
    * @type {RequestMethod}
    * @defaultValue "GET"
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   method?: RequestMethod | null,
   /**
    * 超时时间，单位 ms
    * @defaultValue 60000
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   timeout?: number | null,
   /**
@@ -155,21 +79,6 @@ export type RequestOptions<T> = {
   /**
    * DNS解析时优先使用ipv4
    * @defaultValue false
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "x"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "x"
-   * 		}
-   * 	}
-   * }
    */
   firstIpv4?: boolean | null,
   /**
@@ -193,78 +102,18 @@ export type RequestSuccess<T> = {
   /**
    * 开发者服务器返回的数据
    * @type {RequestDataOptions}
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   data: T | null,
   /**
    * 开发者服务器返回的 HTTP 状态码
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   statusCode: number,
   /**
    * 开发者服务器返回的 HTTP Response Header
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   header: any,
   /**
    * 开发者服务器返回的 cookies，格式为字符串数组
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   cookies: Array<string>
 }
@@ -350,40 +199,10 @@ export type UploadFileOptionFiles = {
   /**
    * multipart 提交时，表单的项目名，默认为 file，如果 name 不填或填的值相同，可能导致服务端读取文件时只能读取到一个文件。
    * @defaultValue "file"
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   name?: string | null,
   /**
    * 要上传文件资源的路径
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   uri: string,
   /**
@@ -413,40 +232,10 @@ export type UploadFileOptionFiles = {
 export type UploadFileSuccess = {
   /**
    * 开发者服务器返回的数据
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   data: string,
   /**
    * 开发者服务器返回的 HTTP 状态码
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   statusCode: number
 };
@@ -463,141 +252,36 @@ export type UploadFileCompleteCallback = (result: any) => void;
 export type UploadFileOptions = {
   /**
    * 开发者服务器 url
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   url: string,
   /**
    * 要上传文件资源的路径, 支持uni.env
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   filePath?: string | null,
   /**
    * 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   name?: string | null,
   /**
    * 需要上传的文件列表。
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   files?: (UploadFileOptionFiles[]) | null,
   /**
    * HTTP 请求 Header, header 中不能设置 Referer
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   header?: UTSJSONObject | null,
   /**
    * HTTP 请求中其他额外的 form data
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   formData?: UTSJSONObject | null,
   /**
    * 超时时间，单位 ms
    * @defaultValue 120000
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   timeout?: number | null,
   /**
@@ -619,59 +303,14 @@ export type UploadFileOptions = {
 export type OnProgressUpdateResult = {
   /**
    * 上传进度百分比
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   progress: number,
   /**
    * 已经上传的数据长度，单位 Bytes
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   totalBytesSent: number,
   /**
    * 预期需要上传的数据总长度，单位 Bytes
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   totalBytesExpectedToSend: number
 };
@@ -758,40 +397,10 @@ export type DownloadFile = (options: DownloadFileOptions) => DownloadTask;
 export type DownloadFileSuccess = {
   /**
    * 临时文件路径，下载后的文件会存储到一个临时文件
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   tempFilePath: string,
   /**
    * 开发者服务器返回的 HTTP 状态码
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   statusCode: number
 };
@@ -808,41 +417,11 @@ export type DownloadFileCompleteCallback = (result: DownloadFileComplete) => voi
 export type DownloadFileOptions = {
   /**
    * 下载资源的 url
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   url: string,
   /**
    * HTTP 请求 Header，header 中不能设置 Referer
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   header?: UTSJSONObject | null,
   /**
@@ -853,41 +432,11 @@ export type DownloadFileOptions = {
    * `/imgs/`
    * 支持uni.env的平台兼容性：Android自3.9开始支持uni.env，iOS自4.13开始支持uni.env
    * @defaultValue null
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   filePath?: string | null,
   /**
    * 超时时间，单位 ms
    * @defaultValue 120000
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   timeout?: number | null,
   /**
@@ -909,59 +458,14 @@ export type DownloadFileOptions = {
 export type OnProgressDownloadResult = {
   /**
    * 下载进度百分比
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   progress: number,
   /**
    * 已经下载的数据长度，单位 Bytes
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   totalBytesWritten: number,
   /**
    * 预期需要下载的数据总长度，单位 Bytes
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "3.9+"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
    */
   totalBytesExpectedToWrite: number
 };

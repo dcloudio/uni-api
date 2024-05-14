@@ -12,40 +12,36 @@ const RequestPaymentUniErrors : Map<RequestPaymentErrorCode, string> = new Map([
 	/**
 	 * 正在处理中，支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
 	 */
-	[700600, 'The payment result is unknown (it may have been successfully paid). Please check the payment status of the order in the merchant order list.'],
+	[700710, 'The payment result is unknown (it may have been successfully paid). Please check the payment status of the order in the merchant order list.'],
 	/**
 	 * 订单支付失败。
 	 */
-	[701100, 'Order payment failure.'],
+	[700711, 'Order payment failure.'],
 	/**
 	 * 重复请求。
 	 */
-	[701110, 'Repeat the request.'],
+	[700712, 'Repeat the request.'],
 	/**
 	 * 用户中途取消。
 	 */
-	[700601, 'The user canceled midway.'],
+	[700713, 'The user canceled midway.'],
 	/**
 	 * 网络连接出错。
 	 */
-	[700602, 'Network connection error.'],
+	[700714, 'Network connection error.'],
 	/**
 	 * 支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
 	 */
-	[700603, 'Payment result unknown (may have been successfully paid), please check the payment status of the order in the merchant order list.'],
+	[700715, 'Payment result unknown (may have been successfully paid), please check the payment status of the order in the merchant order list.'],
 	
 	/**
 	 * 其它支付错误。
 	 */
-	[700000, 'Other payment errors.'],
+	[700716, 'Other payment errors.'],
 	/**
 	 * 微信没有安装
 	 */
-	[700604, 'Wechat is not installed.'],
-	/**
-	 * iOS 没有配置对应的URL Scheme
-	 */
-	[700718, 'URL Scheme is not configured.']
+	[700717, 'Wechat is not installed.']
 	
 ]);
 
