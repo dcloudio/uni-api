@@ -3,7 +3,7 @@ import { RequestPaymentFailImpl } from '../unierror.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
 
 export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
-	const provider = UTSiOS.getProvider<UniPaymentProvider>("payment", options.provider)
+	const provider = UTSiOS.getProvider<UniPaymentProvider>("payment", options.provider, UniPaymentProvider.self)
 	if(provider != null){
 		provider!.requestPayment(options) 
 	} else {

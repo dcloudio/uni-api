@@ -84,8 +84,9 @@ export const chooseVideo : ChooseVideo = function (option : ChooseVideoOptions) 
 }
 
 class DCUniMediaPicker {
-	private mediaAlbum : DCloudMediaAlbum = new DCloudMediaAlbum();
-	private mediaCamera : DCloudMediaCamera = new DCloudMediaCamera();
+	private mediaAlbum : DCloudMediaAlbum | null = null;
+	private mediaCamera : DCloudMediaCamera | null = null;
+	private imageBrowser : PreviewImageBrowser | null = null;
 	openAlbumForImage(option : ChooseImageOptions, count : number){
 		this.chooseImageWithAlbum(option,count);
 	}
@@ -122,7 +123,10 @@ class DCUniMediaPicker {
 		options.set('maximum', 1);
 		options.set('filter', "video");
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaAlbum.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaAlbum == null){
+				this.mediaAlbum = new DCloudMediaAlbum();
+			}
+			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				const filePath : string = response.get('tempFilePath') as string
 				let success : ChooseVideoSuccess = {
 					tempFilePath: "file://" + filePath,
@@ -175,7 +179,10 @@ class DCUniMediaPicker {
 			options.set('crop', crop);
 		}
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaAlbum.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaAlbum == null){
+				this.mediaAlbum = new DCloudMediaAlbum();
+			}
+			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				let success : ChooseImageSuccess = {
 					"errSubject": "uni-chooseImage",
 					"tempFilePaths": response.get('tempFilePaths'),
@@ -223,7 +230,10 @@ class DCUniMediaPicker {
 		}
 		
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaCamera.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaCamera == null){
+				this.mediaCamera = new DCloudMediaCamera();
+			}
+			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				let success : ChooseVideoSuccess = {
 					tempFilePath: "file://" + cameraPath,
 					width: response.get('width'),
@@ -277,7 +287,10 @@ class DCUniMediaPicker {
 			options.set('crop', crop);
 		}
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaCamera.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaCamera == null){
+				this.mediaCamera = new DCloudMediaCamera();
+			}
+			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				let success : ChooseImageSuccess = {
 					"errSubject": "uni-chooseImage",
 					"tempFilePaths": ["file://" + cameraPath],
@@ -294,9 +307,14 @@ class DCUniMediaPicker {
 		})
 	}
 	
-	private imageBrowser = new PreviewImageBrowser()
+	
 	private closePreview(){
-		this.imageBrowser.close()
+		DispatchQueue.main.async(execute=():void => {
+			if (this.imageBrowser == null){
+				this.imageBrowser = new PreviewImageBrowser();
+			}
+			this.imageBrowser?.close();
+		})
 	}
 	private previewImageWithOptions(options : PreviewImageOptions){
 		
@@ -318,7 +336,10 @@ class DCUniMediaPicker {
 		op.set('loop', options.loop);
 		op.set("cachePath", UTSiOS.getMediaCacheDir());
 		DispatchQueue.main.async(execute=():void => {
-			this.imageBrowser.startPreview(op);
+			if (this.imageBrowser == null){
+				this.imageBrowser = new PreviewImageBrowser();
+			}
+			this.imageBrowser?.startPreview(op);
 		})
 		
 		let success : PreviewImageSuccess = { errMsg: 'ok', "errSubject": UniError_PreviewImage }

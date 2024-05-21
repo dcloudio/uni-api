@@ -256,7 +256,7 @@ class MediaTranscoderListener implements Listener {
 		if (outFile.exists()) {
 			let success : CompressVideoSuccess = {
 				tempFilePath: "file://" + this.outPath,
-				size: outFile.length()
+				size: outFile.length() / 1024
 			}
 			this.options.success?.(success)
 			this.options.complete?.(success)

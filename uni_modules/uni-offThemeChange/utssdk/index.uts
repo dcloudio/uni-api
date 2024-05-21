@@ -1,9 +1,0 @@
-import { offThemeChange as _offThemeChange, OnThemeChangeCallback } from '@dcloudio/uni-runtime'
-import {OffThemeChange} from './interface.uts'
-
-export const offOSThemeChange = defineSyncApi<OffThemeChange>(
-    'offOSThemeChange',
-    (callback: OnThemeChangeCallback) => {
-        _offThemeChange(callback)
-    },
-)

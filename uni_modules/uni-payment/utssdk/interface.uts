@@ -1,7 +1,7 @@
 import { RequestPaymentFailImpl as RequestPaymentFailImplement } from './unierror.uts'
 
 export type RequestPaymentFailImpl = RequestPaymentFailImplement
-export type UniPaymentProvider = Uni
+export interface UniPaymentProvider extends Uni{}
 export interface Uni {
 	/**
 	 * @description 请求支付
@@ -27,7 +27,7 @@ export interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "√",
-	 *            "unixVer": "x"
+	 *            "unixVer": "4.18"
 	 *        }
 	 *    },
 	 *    "web": {

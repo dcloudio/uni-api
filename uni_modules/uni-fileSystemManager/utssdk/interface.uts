@@ -829,8 +829,8 @@ export interface FileSystemManager {
 	readFile(options : ReadFileOptions) : void;
 	/**
 	 * FileSystemManager.readFile 的同步版本参数
-	 * @param 文件路径，支持相对地址和绝对地址，app-android平台支持代码包文件目录
-	 * @param base64 / utf-8
+	 * @param filePath 文件路径，支持相对地址和绝对地址，app-android平台支持代码包文件目录
+	 * @param encoding base64 / utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -875,9 +875,9 @@ export interface FileSystemManager {
 	writeFile(options : WriteFileOptions) : void;
 	/**
 	 * FileSystemManager.writeFile 的同步版本
-	 * @param 文件路径，只支持绝对地址
-	 * @param 写入的文本内容
-	 * @param 指定写入文件的字符编码,支持:ascii base64 utf-8
+	 * @param filePath 文件路径，只支持绝对地址
+	 * @param data 写入的文本内容
+	 * @param encoding 指定写入文件的字符编码,支持:ascii base64 utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -922,7 +922,7 @@ export interface FileSystemManager {
 	unlink(options : UnLinkOptions) : void;
 	/**
 	 * FileSystemManager.unlink 的同步版本
-	 * @param 文件路径，只支持绝对地址
+	 * @param filePath 文件路径，只支持绝对地址
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -967,8 +967,8 @@ export interface FileSystemManager {
 	mkdir(options : MkDirOptions) : void;
 	/**
 	 * FileSystemManager.mkdir 的同步版本
-	 * @param 创建的目录路径 (本地路径)
-	 * @param 是否在递归创建该目录的上级目录后再创建该目录。如果对应的上级目录已经存在，则不创建该上级目录。如 dirPath 为 a/b/c/d 且 recursive 为 true，将创建 a 目录，再在 a 目录下创建 b 目录，以此类推直至创建 a/b/c 目录下的 d 目录。
+	 * @param dirPath 创建的目录路径 (本地路径)
+	 * @param recursive 是否在递归创建该目录的上级目录后再创建该目录。如果对应的上级目录已经存在，则不创建该上级目录。如 dirPath 为 a/b/c/d 且 recursive 为 true，将创建 a 目录，再在 a 目录下创建 b 目录，以此类推直至创建 a/b/c 目录下的 d 目录。
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1013,8 +1013,8 @@ export interface FileSystemManager {
 	rmdir(options : RmDirOptions) : void;
 	/**
 	 * FileSystemManager.rmdir 的同步版本
-	 * @param 要删除的目录路径 (本地路径)
-	 * @param 是否递归删除目录。如果为 true，则删除该目录和该目录下的所有子目录以及文件。
+	 * @param dirPath 要删除的目录路径 (本地路径)
+	 * @param recursive 是否递归删除目录。如果为 true，则删除该目录和该目录下的所有子目录以及文件。
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1059,7 +1059,7 @@ export interface FileSystemManager {
 	readdir(options : ReadDirOptions) : void;
 	/**
 	 * FileSystemManager.readdir 的同步版本
-	 * @param 要读取的目录路径 (本地路径)
+	 * @param dirPath 要读取的目录路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1104,7 +1104,7 @@ export interface FileSystemManager {
 	access(options : AccessOptions) : void;
 	/**
 	 * FileSystemManager.access 的同步版本
-	 * @param 要删除的目录路径 (本地路径)
+	 * @param path 要删除的目录路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1149,8 +1149,8 @@ export interface FileSystemManager {
 	rename(options : RenameOptions) : void;
 	/**
 	 * FileSystemManager.rename 的同步版本
-	 * @param 源文件路径，支持本地路径
-	 * @param 新文件路径，支持本地路径
+	 * @param oldPath 源文件路径，支持本地路径
+	 * @param newPath 新文件路径，支持本地路径
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1195,8 +1195,8 @@ export interface FileSystemManager {
 	copyFile(options : CopyFileOptions) : void;
 	/**
 	 * FileSystemManager.copyFile 的同步版本
-	 * @param 源文件路径，支持本地路径
-	 * @param 新文件路径，支持本地路径
+	 * @param srcPath 源文件路径，支持本地路径
+	 * @param destPath 新文件路径，支持本地路径
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1263,8 +1263,8 @@ export interface FileSystemManager {
 	stat(options : StatOptions) : void;
 	/**
 	 * FileSystemManager.stat 的同步版本
-	 * @param 文件/目录路径 (本地路径)
-	 * @param 是否递归获取目录下的每个文件的 Stats 信息
+	 * @param path 文件/目录路径 (本地路径)
+	 * @param recursive 是否递归获取目录下的每个文件的 Stats 信息
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1309,9 +1309,9 @@ export interface FileSystemManager {
 	appendFile(options : AppendFileOptions) : void;
 	/**
 	 * FileSystemManager.appendFile 的同步版本
-	 * @param 要追加内容的文件路径 (本地路径)
-	 * @param 要追加的文本
-	 * @param 指定写入文件的字符编码支持:ascii base64 utf-8
+	 * @param filePath 要追加内容的文件路径 (本地路径)
+	 * @param data 要追加的文本
+	 * @param encoding 指定写入文件的字符编码支持:ascii base64 utf-8
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1356,6 +1356,8 @@ export interface FileSystemManager {
 	saveFile(options : SaveFileOptions) : void;
 	/**
 	 * FileSystemManager.saveFile 的同步版本
+	 * @param tempFilePath 临时存储文件路径 (本地路径)
+	 * @param filePath 要存储的文件路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1466,6 +1468,8 @@ export interface FileSystemManager {
 	truncate(options : TruncateFileOptions) : void;
 	/**
 	 * 对文件内容进行截断操作 (truncate 的同步版本)
+	 * @param filePath 要截断的文件路径 (本地路径)
+	 * @param length 截断位置，默认0。如果 length 小于文件长度（字节），则只有前面 length 个字节会保留在文件中，其余内容会被删除；如果 length 大于文件长度，不做处理
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1510,6 +1514,8 @@ export interface FileSystemManager {
 	readCompressedFile(options : ReadCompressedFileOptions) : void;
 	/**
 	 * 同步读取指定压缩类型的本地文件内容
+	 * @param filePath 要读取的文件的路径 (本地用户文件或代码包文件)，app-android平台支持代码包文件目录
+	 * @param compressionAlgorithm 文件压缩类型，目前仅支持 'br'。
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {

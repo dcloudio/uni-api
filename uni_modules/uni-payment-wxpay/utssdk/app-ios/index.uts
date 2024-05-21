@@ -13,6 +13,28 @@ const wxErrorCodeMap : Map<number, number> = new Map([
 	[-2, 700601]
 ])
 
+export class UniPaymentWxpayProvider implements UniPaymentProvider {
+	
+	id: string
+	
+	override description: string = "wechat"
+	
+	isAppExist: boolean
+
+    requestPayment(options : RequestPaymentOptions) {
+		Wxpay.requestPayment(options)
+	}
+	
+	checkAppExist() {
+		this.isAppExist = Wxpay.share.isWXAppInstalled()
+	}
+	
+	constructor() {
+		this.id = "wxpay"
+		this.isAppExist = Wxpay.share.isWXAppInstalled()
+	}
+}
+
 export class WxpayHookProxy implements UTSiOSHookProxy {
 	// 应用正常启动时 (不包括已在后台转到前台的情况)的回调函数。
 	applicationDidFinishLaunchingWithOptions(application : UIApplication | null, launchOptions : Map<UIApplication.LaunchOptionsKey, any> | null = null) : boolean {
@@ -90,7 +112,8 @@ export class Wxpay implements WXApiDelegate {
 	}
 	
 	//@brief 检查微信是否已被用户安装
-	private isWXAppInstalled() : boolean {
+	@UTSiOS.keyword("fileprivate")
+	isWXAppInstalled() : boolean {
 		return WXApi.isWXAppInstalled()
 	}
 	

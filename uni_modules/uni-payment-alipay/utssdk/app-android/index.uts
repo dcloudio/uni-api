@@ -1,4 +1,11 @@
 import { Alipay } from './Alipay.uts'
-export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
-    new Alipay().requestPayment(options)
-};
+
+export class UniPaymentAlipayProvider implements UniPaymentProvider {
+	override id : String = "alipay"
+	override description : String = "Alipay"
+	override isAppExist : boolean | null = null
+
+	override requestPayment(options : RequestPaymentOptions) {
+		new Alipay().requestPayment(options)
+	}
+}

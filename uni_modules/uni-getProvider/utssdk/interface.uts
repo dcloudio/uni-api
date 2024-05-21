@@ -16,7 +16,26 @@ export type GetProviderSuccess = {
     provider: string[],
     /**
      * 得到的服务供应商服务对象
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.18"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "9.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.18"
+	 *        }
+	 *    },
+	 *    "web": {
+	 *        "uniVer": "x",
+	 *        "unixVer": "x"
+	 *    }
+	 * }
      */
+	
     providers: UniProvider[],
     /**
      * 描述信息
@@ -71,7 +90,7 @@ export interface Uni {
    *    "ios": {
    *      "osVer": "9.0",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.18"
    *    }
    *  },
    *  "web": {

@@ -20,10 +20,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -60,10 +60,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -93,10 +93,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -587,7 +587,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   browserVersion: string,
@@ -809,7 +813,7 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  osName: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
+  osName: 'ios' | 'android' | 'macos' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
    * 
@@ -1145,7 +1149,7 @@ export type GetSystemInfoResult = {
    * 	},
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "x"
+   *     "unixVer": "4.18"
    *   }
    * }
    */
@@ -1242,7 +1246,7 @@ export type GetSystemInfoResult = {
    * 	},
    *   "web": {
    *     "uniVer": "x",
-   *     "unixVer": "x"
+   *     "unixVer": "4.18"
    *   }
    * }
    */
@@ -1463,7 +1467,31 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  osAndroidAPILevel?: number | null
+  osAndroidAPILevel?: number | null,
+  /**
+   * 当前App的主题
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  appTheme?: 'light' | 'dark' | 'auto' | null,
 };
 export type GetSystemInfoSuccessCallback = (result: GetSystemInfoResult) => void;
 type GetSystemInfoFail = UniError;

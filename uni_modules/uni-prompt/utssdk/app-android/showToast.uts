@@ -46,19 +46,23 @@ export function hideLoadingImpl() {
 	closeToast("loading")
 }
 
+
 // 全局存储
+// #ifdef UNI-APP-X
 const onReadyToast = new Map<ComponentPublicInstance,UTSJSONObject>()
+// #endif
 
 function closeToast(type : string | null) {
 	if (type != null && type !== toastType) {
 		return
 	}
+	// #ifdef UNI-APP-X
 	let pages = getCurrentPages();
 	if (pages.length > 0) {
 		let page = pages[pages.length - 1];
 		onReadyToast.remove(page)
 	}
-	
+	// #endif
 	if (timeout != null && (timeout as number) > 0) {
 		clearTimeout(timeout as number)
 		timeout = null

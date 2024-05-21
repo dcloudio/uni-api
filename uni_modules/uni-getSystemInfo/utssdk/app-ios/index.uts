@@ -74,6 +74,7 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 		windowBottom: windowInfo.windowBottom,
 		safeAreaInsets: windowInfo.safeAreaInsets,
 		safeArea: windowInfo.safeArea,
+		appTheme: UTSiOS.getAppTheme(),
 	};
 	return result;
 }

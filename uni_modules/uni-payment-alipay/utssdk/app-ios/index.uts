@@ -19,6 +19,25 @@ const errorCodeMap : Map<string, number> = new Map([
 	['6004', 700603]
 ]);
 
+export class UniPaymentAlipayProvider implements UniPaymentProvider {
+	
+	id: string
+	
+	override description: string = "Alipay"
+	
+	isAppExist: boolean
+
+    requestPayment(options : RequestPaymentOptions) {
+		Alipay.requestPayment(options)
+	}
+	
+	constructor() {
+		this.id = "alipay"
+		this.isAppExist = true
+	}
+}
+
+
 export class AlipayHookProxy implements UTSiOSHookProxy {
 	
 	// 通过 url scheme 方式唤起 app 时的回调函数。

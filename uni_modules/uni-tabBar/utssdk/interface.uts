@@ -917,10 +917,70 @@ export interface Uni {
     hideTabBarRedDot(
         options: HideTabBarRedDotOptions,
     ): Promise<HideTabBarRedDotSuccess> | null
-    // /**
-    //  * 监听中间按钮的点击事件
-    //  *
-    //  * @tutorial https://doc.dcloud.net.cn/uni-app-x/tabbar?id=ontabbarmidbuttontap
-    //  */
-    // onTabBarMidButtonTap(options: OnTabBarMidButtonTapCallback): void
+    /**
+     * 监听中间按钮的点击事件
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/tabbar?id=ontabbarmidbuttontap
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "3.91"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "toutiao": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "qq": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
+     */
+    onTabBarMidButtonTap(options: OnTabBarMidButtonTapCallback): void
 }
