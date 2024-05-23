@@ -35,7 +35,7 @@ export type GetProviderSuccess = {
 	 *    }
 	 * }
      */
-	
+
     providers: UniProvider[],
     /**
      * 描述信息
@@ -94,8 +94,8 @@ export interface Uni {
    *    }
    *  },
    *  "web": {
-   *    "uniVer": "√",
-   *    "unixVer": "4.05"
+   *    "uniVer": "x",
+   *    "unixVer": "x"
    *  }
    * }
    * @example
