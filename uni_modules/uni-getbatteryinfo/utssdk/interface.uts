@@ -93,6 +93,10 @@ interface Uni {
 	 *            "uniVer": "3.6.11",
 	 *            "unixVer": "4.11"
 	 *        }
+	 *    },
+	 *    "web": {
+	 *      "uniVer": "3.6.11",
+	 *      "unixVer": "4.0"
 	 *    }
 	 * }
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -120,6 +124,10 @@ interface Uni {
 	 *            "uniVer": "3.6.11",
 	 *            "unixVer": "4.11"
 	 *        }
+	 *    },
+	 *    "web": {
+	 *      "uniVer": "3.6.11",
+	 *      "unixVer": "4.0"
 	 *    }
 	 * }
 	 * @uniVueVersion 2,3  //支持的vue版本
