@@ -1,0 +1,68 @@
+/**
+ * 初始化数据库时的相关配置
+ * @param name 数据库名称
+ */
+export type createSQLiteContextOptions = {
+  /**
+   * 数据库名称
+   */
+  name: string,
+}
+
+/**
+ * 执行增删改等操作的SQL语句的相关配置
+ * @param sql SQL语句
+ * @param success 成功回调
+ * @param fail 失败回调
+ * @param complete 完成回调
+ */
+export type executeSqlOptions = {
+  /**
+   * SQL语句
+   */
+  sql: string,
+  /**
+   * 执行增删改等操作的SQL语句的成功回调
+   */
+  success?: executeSqlOptionsSuccessCallback | null,
+  /**
+   * 执行增删改等操作的SQL语句的失败回调
+   */
+  fail?: executeSqlOptionsFailCallback | null,
+  /**
+   * 执行增删改等操作的SQL语句的完成回调
+   */
+  complete?: executeSqlOptionsCompleteCallback | null,
+}
+
+/**
+ * 执行增删改等操作的SQL语句的成功回调
+ */
+export type executeSqlOptionsSuccessCallback = (res : executeSqlOptionsResult) => void
+
+/**
+ * 执行增删改等操作的SQL语句的失败回调
+ */
+export type executeSqlOptionsFailCallback = (res : executeSqlOptionsResult) => void
+
+/**
+ * 执行增删改等操作的SQL语句的完成回调
+ */
+export type executeSqlOptionsCompleteCallback = () => void
+
+/**
+ * 执行增删改等操作的SQL语句的返回结果
+ * @param errMsg 返回的错误信息
+ * @param date 返回的数据
+ */
+export type executeSqlOptionsResult = {
+  /**
+   * 返回的错误信息
+   */
+  errMsg: string,
+  /**
+   * 返回的数据
+   */
+  date?: string,
+}
+

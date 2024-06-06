@@ -1,0 +1,26 @@
+import Cursor from 'android.database.Cursor';
+import SQLiteDatabase from 'android.database.sqlite.SQLiteDatabase';
+import SQLiteOpenHelper from 'android.database.sqlite.SQLiteOpenHelper';
+
+import { createSQLiteContextOptions, executeSqlOptions } from '../interface.uts';
+
+class SQLiteContext extends SQLiteOpenHelper {
+  private databaseName: string | null;
+
+  constructor(name: string) {
+    let version = 1;
+    super(UTSAndroid.getAppContext()!, name, null, version.toInt());
+    this.databaseName = name;
+  }
+
+  executeSql(options: executeSqlOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const cursor: Cursor = database.rawQuery(options.sql, []);
+    
+  }
+}
+
+export const createSQLiteContext = function (options: createSQLiteContextOptions) {
+  const name = options.name + '.db';
+  return new SQLiteContext(name);
+}
