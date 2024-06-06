@@ -38,12 +38,12 @@ export type executeSqlOptions = {
 /**
  * 执行增删改等操作的SQL语句的成功回调
  */
-export type executeSqlOptionsSuccessCallback = (res : executeSqlOptionsResult) => void
+export type executeSqlOptionsSuccessCallback = (res: executeSqlOptionsResult) => void
 
 /**
  * 执行增删改等操作的SQL语句的失败回调
  */
-export type executeSqlOptionsFailCallback = (res : executeSqlOptionsResult) => void
+export type executeSqlOptionsFailCallback = (res: executeSqlOptionsResult) => void
 
 /**
  * 执行增删改等操作的SQL语句的完成回调
@@ -55,7 +55,7 @@ export type executeSqlOptionsCompleteCallback = () => void
  * @param errMsg 返回的错误信息
  * @param date 返回的数据
  */
-export type executeSqlOptionsResult = {
+export interface executeSqlOptionsResultInterface extends ICreateSQLiteContextError {
   /**
    * 返回的错误信息
    */
@@ -63,6 +63,67 @@ export type executeSqlOptionsResult = {
   /**
    * 返回的数据
    */
-  date?: string,
+  date?: boolean[],
+}
+export type executeSqlOptionsResult = executeSqlOptionsResultInterface
+
+/**
+ * 执行查询操作的SQL语句的相关配置
+ */
+export type selectSqlOptions = {
+  /**
+   * SQL语句
+   */
+  sql: string,
+  /**
+   * 执行查询操作的SQL语句的成功回调
+   */
+  success?: selectSqlOptionsSuccessCallback | null,
+  /**
+   * 执行查询操作的SQL语句的失败回调
+   */
+  fail?: selectSqlOptionsFailCallback | null,
+  /**
+   * 执行查询操作的SQL语句的完成回调
+   */
+  complete?: selectSqlOptionsCompleteCallback | null,
 }
 
+/**
+ * 执行查询操作的SQL语句的成功回调
+ */
+export type selectSqlOptionsSuccessCallback = (res: selectSqlOptionsResult) => void
+
+/**
+ * 执行查询操作的SQL语句的失败回调
+ */
+export type selectSqlOptionsFailCallback = (res: selectSqlOptionsResult) => void
+
+/**
+ * 执行查询操作的SQL语句的完成回调
+ */
+export type selectSqlOptionsCompleteCallback = () => void
+
+/**
+ * 执行查询操作的SQL语句的返回结果
+ * @param errMsg 返回的错误信息
+ * @param date 返回的数据
+ */
+export interface selectSqlOptionsResultInterface extends ICreateSQLiteContextError {
+  /**
+   * 返回的错误信息
+   */
+  errMsg: string,
+  /**
+   * 返回的数据
+   */
+  date?: string[],
+}
+export type selectSqlOptionsResult = selectSqlOptionsResultInterface
+
+/**
+ * uni.createSQLiteContext失败回调参数
+ */
+export interface ICreateSQLiteContextError extends IUniError {
+  errCode: number
+}

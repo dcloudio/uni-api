@@ -2,7 +2,8 @@ import Cursor from 'android.database.Cursor';
 import SQLiteDatabase from 'android.database.sqlite.SQLiteDatabase';
 import SQLiteOpenHelper from 'android.database.sqlite.SQLiteOpenHelper';
 
-import { createSQLiteContextOptions, executeSqlOptions } from '../interface.uts';
+import { createSQLiteContextOptions, executeSqlOptions, selectSqlOptions, executeSqlOptionsResult, selectSqlOptionsResult } from '../interface.uts';
+import { createSQLiteContextFailImpl } from '../unierror.uts';
 
 class SQLiteContext extends SQLiteOpenHelper {
   private databaseName: string | null;
@@ -13,10 +14,75 @@ class SQLiteContext extends SQLiteOpenHelper {
     this.databaseName = name;
   }
 
-  executeSql(options: executeSqlOptions) {
+  public executeSql(options: executeSqlOptions) {
     const database: SQLiteDatabase = this.getReadableDatabase();
-    const cursor: Cursor = database.rawQuery(options.sql, []);
-    
+    const SqlArray = options.sql.split(';');
+    let result: executeSqlOptionsResult = {
+      data: [] as boolean[],
+      errMsg: 'executeSql:ok',
+    }
+    try {
+      for (let i = 0; i < SqlArray.length; i++) {
+        if (SqlArray[i].length > 0) {
+          const sql = SqlArray[i].replace(/^\s+/, '');
+          try {
+            database.execSQL(sql);
+            result.data.push(true);
+          } catch {
+            result.data.push(false);
+          }
+        }
+      }
+      options.success?.(result);
+    } catch (e) {
+      const data = result.data;
+      result = new createSQLiteContextFailImpl(1000002);
+      result.data = data;
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
+  }
+
+  public selectSql(options: selectSqlOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const SqlArray = options.sql.split(';');
+    let result: selectSqlOptionsResult = {
+      data: [] as boolean[],
+      errMsg: 'selectSql:ok',
+    }
+    try {
+      for (let i = 0; i < SqlArray.length; i++) {
+        if (SqlArray[i].length > 0) {
+          const sql = SqlArray[i].replace(/^\s+/, '');
+          try {
+            const cursor: Cursor = database.rawQuery(sql, null);
+            //获取查询结果的字符串并push到result.data中
+            if (cursor.moveToFirst()) {
+              do {
+                const row = cursor.getColumnCount();
+                const rowArray = [] as string[];
+                for (let j = 0; j < row; j++) {
+                  rowArray.push(cursor.getString(j));
+                }
+                result.data.push(rowArray);
+              } while (cursor.moveToNext());
+            }
+            cursor.close();
+          } catch {
+            result.data.push("");
+          }
+        }
+      }
+      options.success?.(result);
+    } catch (e) {
+      const data = result.data;
+      result = new createSQLiteContextFailImpl(1000003);
+      result.data = data;
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
   }
 }
 
