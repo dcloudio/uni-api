@@ -38,6 +38,10 @@ export const UniErrors: Map<number, string> = new Map([
    * 数据库关闭失败
    */
   [1000007, 'Database shutdown failed'],
+  /**
+   * 未知错误
+   */
+  [1000008, 'Unknown error'],
 ]);
 
 export class createSQLiteContextFailImpl extends UniError implements ICreateSQLiteContextError {

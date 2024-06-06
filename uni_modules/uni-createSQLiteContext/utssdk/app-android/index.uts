@@ -2,7 +2,7 @@ import Cursor from 'android.database.Cursor';
 import SQLiteDatabase from 'android.database.sqlite.SQLiteDatabase';
 import SQLiteOpenHelper from 'android.database.sqlite.SQLiteOpenHelper';
 
-import { createSQLiteContextOptions, executeSqlOptions, selectSqlOptions, executeSqlOptionsResult, selectSqlOptionsResult } from '../interface.uts';
+import { createSQLiteContextOptions, executeSqlOptions, selectSqlOptions, executeSqlOptionsResult, selectSqlOptionsResult, CreateSQLiteContext, transactionOptions } from '../interface.uts';
 import { createSQLiteContextFailImpl } from '../unierror.uts';
 
 class SQLiteContext extends SQLiteOpenHelper {
@@ -84,9 +84,43 @@ class SQLiteContext extends SQLiteOpenHelper {
     options.complete?.(result);
     return result;
   }
+
+  public transaction(options: transactionOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const transaction = options.transaction;
+    let result: executeSqlOptionsResult = {
+      errMsg: 'transaction:ok',
+    }
+    try {
+      if (transaction == 'begin') {
+        //开启事务
+        database.execSQL('BEGIN TRANSACTION');
+      } else if (transaction == 'commit') {
+        //提交事务
+        database.execSQL('COMMIT');
+      } else if (transaction == 'rollback') {
+        //回滚事务
+        database.execSQL('ROLLBACK');
+      }
+      options.success?.(result);
+    } catch (e) {
+      let errCode = 1000008;
+      if (transaction == 'begin') {
+        errCode = 1000004;
+      } else if (transaction == 'commit') {
+        errCode = 1000005;
+      } else if (transaction == 'rollback') {
+        errCode = 1000006;
+      }
+      result = new createSQLiteContextFailImpl(errCode);
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
+  }
 }
 
-export const createSQLiteContext = function (options: createSQLiteContextOptions) {
+export const createSQLiteContext: CreateSQLiteContext = function (options: createSQLiteContextOptions) {
   const name = options.name + '.db';
   return new SQLiteContext(name);
 }
