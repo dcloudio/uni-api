@@ -55,8 +55,8 @@ class LBSLocation implements TencentLBSLocationManagerDelegate {
         this.locationManager.requestWhenInUseAuthorization()
       } else if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
         let ret = new UniError("uni-getLocation-tencent", -30, "permission missed.");
-        options.fail?.(ret)
-        options.complete?.(ret)
+        this.locationOptions?.fail?.(ret)
+        this.locationOptions?.complete?.(ret)
       }
     }
   }
@@ -141,13 +141,13 @@ class LBSLocation implements TencentLBSLocationManagerDelegate {
   // 实现定位出错的 delegate 方法
 
   tencentLBSDidChangeAuthorization(manager : TencentLBSLocationManager) {
-    const status = this.getAuthorizationStatus()
+    const status = CLLocationManager.authorizationStatus()
     if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
       let ret = new UniError("uni-getLocation-tencent", -30, "permission missed.");
-      options.fail?.(ret)
-      options.complete?.(ret)
+      this.locationOptions?.fail?.(ret)
+      this.locationOptions?.complete?.(ret)
     } else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
-      this.getLocation(this.locationOptions)
+      this.getLocation(this.locationOptions!)
     }
   }
 
