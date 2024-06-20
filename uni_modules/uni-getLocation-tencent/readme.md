@@ -1,5 +1,9 @@
 # uts-tencentgeolocation腾讯定位插件使用文档
 
+## API使用
+
+参考[uni.getLocation](https://doc.dcloud.net.cn/uni-app-x/api/get-location.html)
+
 ## Android 平台
 
 1. 申请腾讯地图key
@@ -26,7 +30,7 @@
 3. 制作自定义基座运行后生效
 提交云端打包制作自定义基座后，再在HBuilderX中真机运行。
 
-## iOS 平台（暂未支持）
+## iOS 平台
 
 1. 申请腾讯地图key
 
@@ -35,7 +39,6 @@
 2. 配置key到插件中
 
 在项目根目录下添加 Info.plist 文件，详情参考：[iOS原生应用配置文件](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-ios.html#infoplist)。将申请的 key 配置到项目 Info.plist 的 TencentLBSAPIKey 键值中，如下：
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -84,4 +87,4 @@ App的隐私政策中需披露使用的三方SDK相关情况：
 ## 相关开发文档
 
 - [UTS 语法](https://uniapp.dcloud.net.cn/tutorial/syntax-uts.html)
-- [UTS 原生插件](https://uniapp.dcloud.net.cn/plugin/uts-plugin.html)
+- [UTS 插件开发文档](https://doc.dcloud.net.cn/uni-app-x/plugin/uts-plugin.html)

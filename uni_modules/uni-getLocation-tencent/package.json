@@ -1,14 +1,15 @@
 {
 	"id": "uni-getLocation-tencent",
 	"displayName": "uni-getLocation-tencent",
-	"version": "1.0.1",
+	"version": "1.1",
 	"description": "基于腾讯定位服务，实现uni.getLocation 获取定位功能",
 	"keywords": [
-        "uni-getLocation-tencent"
+        "uni.getLocation",
+        "tencent"
     ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.8.12"
+		"HBuilderX": "^4.0"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -41,7 +42,8 @@
 		"platforms": {
 			"cloud": {
 				"tcb": "y",
-				"aliyun": "y"
+                "aliyun": "y",
+                "alipay": "n"
 			},
 			"client": {
 				"Vue": {
@@ -50,10 +52,10 @@
 				},
 				"App": {
 					"app-android": {
-                        "minVersion": "19"
+                        "minVersion": "21"
                     },
 					"app-ios": {
-                        "minVersion": "9"
+                        "minVersion": "12"
                     }
 				},
 				"H5-mobile": {
