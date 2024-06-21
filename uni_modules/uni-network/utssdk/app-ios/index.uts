@@ -1,15 +1,15 @@
-import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask, UploadFileOptions, UploadFile, UploadTask, OnProgressUpdateResult, UploadFileSuccess, UploadFileProgressUpdateCallback, DownloadFileProgressUpdateCallback, DownloadFileOptions, OnProgressDownloadResult, DownloadFile ,DownloadFileSuccess} from './interface';
+import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask, UploadFileOptions, UploadFile, UploadTask, OnProgressUpdateResult, UploadFileSuccess, UploadFileProgressUpdateCallback, DownloadFileProgressUpdateCallback, DownloadFileOptions, OnProgressDownloadResult, DownloadFile, DownloadFileSuccess } from './interface';
 import { NetworkManager, NetworkRequestListener, NetworkUploadFileListener, NetworkDownloadFileListener } from './network/NetworkManager.uts'
 import { Data, HTTPURLResponse, NSError, NSNumber, ComparisonResult, RunLoop, Thread } from 'Foundation';
 import { StatusCode } from './network/StatusCode.uts';
 import { RequestFailImpl, UploadFileFailImpl, DownloadFileFailImpl, getErrcode } from '../unierror';
 
-class SimpleNetworkListener extends NetworkRequestListener {
-	private param : RequestOptions | null = null;
+class SimpleNetworkListener<T> extends NetworkRequestListener {
+	private param : RequestOptions<T> | null = null;
 	private headers : Map<string, any> | null = null;
 	private received : number = 0;
 	private data : Data = new Data();
-	constructor(param : RequestOptions) {
+	constructor(param : RequestOptions<T>) {
 		this.param = param;
 		super();
 	}
@@ -53,12 +53,21 @@ class SimpleNetworkListener extends NetworkRequestListener {
 
 			result['data'] = this.parseData(this.data, strData, type);
 
-			let tmp : RequestSuccess = {
-				data: result['data']!,
+			if (result['data'] == null) {
+				let failResult = new RequestFailImpl(getErrcode(100001));
+				let fail = kParam?.fail;
+				let complete = kParam?.complete;
+				fail?.(failResult);
+				complete?.(failResult);
+				return
+			}
+
+			let tmp = new RequestSuccess<T>({
+				data: result['data']! as T,
 				statusCode: (new NSNumber(value = response.statusCode)),
 				header: result['header'] ?? "",
 				cookies: this.parseCookie(this.headers)
-			};
+			})
 			let success = kParam?.success;
 			let complete = kParam?.complete;
 			success?.(tmp);
@@ -81,7 +90,7 @@ class SimpleNetworkListener extends NetworkRequestListener {
 		} else {
 			errCode = 602001;
 		}
-		
+
 		let failResult = new RequestFailImpl(getErrcode(Number.from(errCode)));
 		failResult.cause = new SourceError(cause);
 
@@ -108,50 +117,57 @@ class SimpleNetworkListener extends NetworkRequestListener {
 		return result;
 	}
 
-	private parseData(data : Data | null, dataStr : string | null, type : string | null) : any | null {
-		if (type != null && type!.contains("json")) {
-			if (dataStr == null || dataStr!.length == 0) {
-				return {};
+	private parseData(data : Data | null, dataStr : string | null, parseType : string | null) : any | null {
+		if (`${type(of = T.self)}` == "Any.Protocol" || `${type(of = T.self)}` == "Optional<Any>.Type") {
+			if (parseType != null && parseType!.contains("json")) {
+				if (dataStr == null || dataStr!.length == 0) {
+					return {};
+				}
+
+				return JSON.parse(dataStr!);
+			} else if (parseType == 'jsonp') {
+				if (dataStr == null || dataStr!.length == 0) {
+					return {};
+				}
+				let start = dataStr!.indexOf('(');
+				let end = dataStr!.indexOf(')');
+				if (start == 0 || start >= end) {
+					return {};
+				}
+				start += 1;
+				let tmp = dataStr!.slice(start, end);
+				return JSON.parse(tmp);
+			} else {
+				//dataStr如果解码失败是空的时候，还需要继续尝试解码。极端情况，服务器不是utf8的，所以字符解码会出现乱码，所以特殊处理一下非utf8的字符。
+				if (data == null) {
+					return data;
+				}
+
+				let currentStr : string | null = dataStr;
+				//todo 等uts支持swift文件混编的时候，再进行处理。
+				// if (currentStr == null) {
+				// 	let data = cleanUTF8(data);
+				// 	if (data != null) {
+				// 		currentStr = new String(data = data, encoding = String.Encoding.utf8);
+				// 	}
+				// }
+
+				if (currentStr == null) {
+					currentStr = new String(data = data!, encoding = String.Encoding.utf8);
+				}
+				// utf8 如果失败了，就用ascii，虽然几率很小。
+				if (currentStr == null) {
+					currentStr = new String(data = data!, encoding = String.Encoding.ascii);
+				}
+
+				return currentStr;
 			}
-			return this.parseJson(dataStr!);
-		} else if (type == 'jsonp') {
-			if (dataStr == null || dataStr!.length == 0) {
-				return {};
-			}
-			let start = dataStr!.indexOf('(');
-			let end = dataStr!.indexOf(')');
-			if (start == 0 || start >= end) {
-				return {};
-			}
-			start += 1;
-			let tmp = dataStr!.slice(start, end);
-			return this.parseJson(tmp);
 		} else {
-			//dataStr如果解码失败是空的时候，还需要继续尝试解码。极端情况，服务器不是utf8的，所以字符解码会出现乱码，所以特殊处理一下非utf8的字符。
-			if (data == null) {
-				return data;
+			if (dataStr == null || dataStr!.length == 0) {
+				return null;
 			}
-
-			let currentStr : string | null = dataStr;
-			//todo 等uts支持swift文件混编的时候，再进行处理。
-			// if (currentStr == null) {
-			// 	let data = cleanUTF8(data);
-			// 	if (data != null) {
-			// 		currentStr = new String(data = data, encoding = String.Encoding.utf8);
-			// 	}
-			// }
-
-			if (currentStr == null) {
-				currentStr = new String(data = data!, encoding = String.Encoding.ascii);
-			}
-
-			return currentStr;
+			return JSON.parse<T>(dataStr!)
 		}
-	}
-
-
-	private parseJson(str : string) : any | null {
-		return JSON.parse(str);
 	}
 
 	private parseCookie(header : Map<string, any> | null) : string[] {
@@ -293,11 +309,11 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 		}
 	}
 
-	onFinished(response : HTTPURLResponse, filePath: string) : void {
+	onFinished(response : HTTPURLResponse, filePath : string) : void {
 		try {
 			let kParam = this.options;
 			let tmp : DownloadFileSuccess = {
-				tempFilePath:filePath,
+				tempFilePath: filePath,
 				statusCode: response.statusCode
 			};
 			let success = kParam?.success;
@@ -335,9 +351,14 @@ class DownloadNetworkListener implements NetworkDownloadFileListener {
 }
 
 
-export const request : Request = (options : RequestOptions) : RequestTask => {
-	return NetworkManager.getInstance().request(options, new SimpleNetworkListener(options));
+// export const request : Request = (options : RequestOptions) : RequestTask => {
+// 	return NetworkManager.getInstance().request(options, new SimpleNetworkListener(options));
+// }
+
+export function request<T>(options : RequestOptions<T>, _t : T.Type) : RequestTask {
+	return NetworkManager.getInstance().request(options, new SimpleNetworkListener<T>(options));
 }
+
 
 export const uploadFile : UploadFile = (options : UploadFileOptions) : UploadTask => {
 	return NetworkManager.getInstance().uploadFile(options, new UploadNetworkListener(options));

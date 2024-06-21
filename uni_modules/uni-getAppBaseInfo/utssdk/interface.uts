@@ -22,7 +22,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appId?: string,
@@ -42,7 +46,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appName?: string,
@@ -62,7 +70,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appVersion?: string,
@@ -82,7 +94,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appVersionCode?: string,
@@ -102,7 +118,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appLanguage?: string,
@@ -122,7 +142,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   language?: string,
@@ -143,7 +167,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   version?: string,
@@ -331,7 +359,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
+   *   }
    * }
    */
   isUniAppX ?: boolean,
@@ -353,7 +385,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+    *   "web": {
+    *      "uniVer": "x",
+    *      "unixVer": "x"
+    *   }
    * }
    */
   uniCompileVersion ?: string,
@@ -375,8 +411,8 @@ export type GetAppBaseInfoResult = {
    * 		}
    * 	},
    *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
    *   }
    * }
    */
@@ -397,7 +433,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
    * }
    */
   uniPlatform ?: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
@@ -417,7 +457,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
+   *   }
    * }
    */
   uniRuntimeVersion ?: string,
@@ -438,7 +482,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   uniCompileVersionCode?: number,
@@ -460,8 +508,8 @@ export type GetAppBaseInfoResult = {
    * 		}
    * 	},
    *   "web": {
-   *     "uniVer": "√",
-   *     "unixVer": "4.0"
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
    *   }
    * }
    */
@@ -482,7 +530,11 @@ export type GetAppBaseInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   uniRuntimeVersionCode?: number,
@@ -559,6 +611,30 @@ export type GetAppBaseInfoResult = {
    * }
    */
   signature?: string,
+  /**
+   * 当前App的主题
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		}
+   * 	},
+    *   "web": {
+    *      "uniVer": "x",
+    *      "unixVer": "x"
+    *   }
+   * }
+   */
+  appTheme?: 'light' | 'dark' | 'auto' | null,
 }
 
 /**
@@ -589,10 +665,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *      "uniVer": "√",
-  *      "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *      "uniVer": "√",
+    *      "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript

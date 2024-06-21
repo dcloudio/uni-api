@@ -25,17 +25,12 @@ export const setNavigationBarColor = defineAsyncApi<
         appPage!.updateStyle(
             new Map<string, any | null>([
                 [
-                    'navigationBar',
-                    new Map<string, any | null>([
-                        [
-                            'navigationBarTextStyle',
-                            options.frontColor == '#000000' ? 'black' : 'white',
-                        ],
-                        [
-                            'navigationBarBackgroundColor',
-                            options.backgroundColor,
-                        ],
-                    ]),
+                    'navigationBarTextStyle',
+                    options.frontColor == '#000000' ? 'black' : 'white',
+                ],
+                [
+                    'navigationBarBackgroundColor',
+                    options.backgroundColor,
                 ],
             ]),
         )
@@ -57,12 +52,7 @@ export const setNavigationBarTitle = defineAsyncApi<
         const appPage = page.$nativePage
         appPage!.updateStyle(
             new Map<string, any | null>([
-                [
-                    'navigationBar',
-                    new Map<string, any | null>([
-                        ['navigationBarTitleText', options.title],
-                    ]),
-                ],
+                ['navigationBarTitleText', options.title],
             ]),
         )
         res.resolve(null)

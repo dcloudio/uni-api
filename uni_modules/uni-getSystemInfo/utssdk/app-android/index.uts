@@ -77,6 +77,7 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
 			}
 			const osAndroidAPILevel = Build.VERSION.SDK_INT;
+			const appTheme = UTSAndroid.getAppTheme();
 		
 			const result = {
 				SDKVersion: "",
@@ -125,6 +126,7 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				safeAreaInsets: safeAreaInsets,
 				safeArea: safeArea,
 				osAndroidAPILevel: osAndroidAPILevel,
+				appTheme: appTheme,
 			} as GetSystemInfoResult;
 			return result;
 		} catch (e : Exception) {

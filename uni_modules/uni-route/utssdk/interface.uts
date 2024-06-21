@@ -100,7 +100,7 @@ export type NavigateToOptions = {
      *    "android": {
      *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.18"
      *      },
      *      "ios": {
      *          "osVer": "12.0",
@@ -151,8 +151,8 @@ export type NavigateToOptions = {
      *    }
      *  },
      *  "web": {
-     *      "uniVer": "√",
-     *      "unixVer": "4.0"
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *  }
      * }
      */
@@ -215,8 +215,8 @@ export type NavigateToOptions = {
      *    }
      *  },
      *  "web": {
-     *      "uniVer": "√",
-     *      "unixVer": "4.0"
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *  }
      * }
      */
@@ -1369,7 +1369,7 @@ export type NavigateBackOptions = {
      *    "android": {
      *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.18"
      *      },
      *      "ios": {
      *          "osVer": "12.0",
@@ -1420,8 +1420,8 @@ export type NavigateBackOptions = {
      *    }
      *  },
      *  "web": {
-     *      "uniVer": "√",
-     *      "unixVer": "4.0"
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *  }
      * }
      */
@@ -1484,8 +1484,8 @@ export type NavigateBackOptions = {
      *    }
      *  },
      *  "web": {
-     *      "uniVer": "√",
-     *      "unixVer": "4.0"
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *  }
      * }
      */

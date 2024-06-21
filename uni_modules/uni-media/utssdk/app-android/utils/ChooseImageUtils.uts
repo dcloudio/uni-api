@@ -1,7 +1,7 @@
-import { ChooseImageOptions, ChooseVideoOptions } from "./interface.uts"
+import { ChooseImageOptions, ChooseVideoOptions } from "../../interface.uts"
 import {
 	UniError_ChooseImage, UniError_ChooseVideo, MediaErrorImpl
-} from "./unierror.uts"
+} from "../../unierror.uts"
 export const CODE_CAMERA_ERROR = 11;
 export const CODE_GALLERY_ERROR = 12;
 export const CODE_GET_IMAGE_INFO_CODE = 13

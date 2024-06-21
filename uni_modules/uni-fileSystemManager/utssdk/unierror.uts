@@ -1,13 +1,15 @@
+import { FileSystemManagerErrorCode,IFileSystemManagerFail } from "./interface.uts"
+
 /**
  * 错误主题
  */
-export const UniErrorSubject = 'uni-fileSystemManager';
+export const FileSystemManagerUniErrorSubject = 'uni-fileSystemManager';
 
 /**
  * 错误码
  * @UniError
  */
-export const UniErrors : Map<number, string> = new Map([
+export const FileSystemManagerUniErrors : Map<FileSystemManagerErrorCode, string> = new Map([
 
 	[1200002, 'type error. only support base64 / utf-8'],
 	[1300002, 'no such file or directory'],
@@ -23,3 +25,11 @@ export const UniErrors : Map<number, string> = new Map([
 	[1302003, 'invalid flag'],
 	[1300009, 'bad file descriptor']
 ]);
+export class FileSystemManagerFailImpl extends UniError implements IFileSystemManagerFail {
+	constructor(errCode : FileSystemManagerErrorCode) {
+		super();
+		this.errSubject = FileSystemManagerUniErrorSubject;
+		this.errCode = errCode;
+		this.errMsg = FileSystemManagerUniErrors.get(errCode) ?? "";
+	}
+}

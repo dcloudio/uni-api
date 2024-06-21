@@ -68,7 +68,8 @@ class UploadController implements URLSessionDataDelegate {
 
 
 	private createRequest(param : UploadFileOptions, listener : NetworkUploadFileListener, boundary : string) : URLRequest | null {
-		let url = new URL(string = param.url);
+		const encodeUrl = this.percentEscapedString(param.url)
+		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
 			listener.onFail(error);
@@ -154,6 +155,12 @@ class UploadController implements URLSessionDataDelegate {
 		body.append(`--${boundary}--\r\n`.data(using = String.Encoding.utf8)!)
 
 		return body.copy() as Data;
+	}
+	
+	
+	private percentEscapedString(str: string): string {
+		//如果url已经有部分经过encode，那么需要先decode再encode。
+		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
 	}
 
 

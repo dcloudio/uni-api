@@ -60,7 +60,7 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public request(param : RequestOptions, listener : NetworkRequestListener) : RequestTask {
+	public request<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : RequestTask {
 		let request = this.createRequest(param);
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
@@ -91,8 +91,9 @@ class NetworkManager implements URLSessionDataDelegate {
 	}
 
 
-	public createRequest(param : RequestOptions) : URLRequest | null {
-		let url = new URL(string = param.url);
+	public createRequest<T>(param : RequestOptions<T>) : URLRequest | null {
+		const encodeUrl = this.percentEscapedString(param.url)
+		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			return null
 		}
@@ -150,8 +151,8 @@ class NetworkManager implements URLSessionDataDelegate {
 					json = data as UTSJSONObject;
 				}
 				if (json != null) {
-					let urlStr = param.url;
-					let url = new URL(string = this.stringifyQuery(urlStr!, json!));
+					let urlWithQuery = this.stringifyQuery(encodeUrl, json!)
+					let url = new URL(string = urlWithQuery);
 					request.url = url;
 				}
 			}
@@ -183,7 +184,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 			request.httpBody = bodyData;
 		}
-
+		
 		return request;
 	}
 
@@ -237,6 +238,11 @@ class NetworkManager implements URLSessionDataDelegate {
 			newUrl += "#" + hash;
 		}
 		return newUrl;
+	}
+	
+	private percentEscapedString(str: string): string {
+		//如果url已经有部分经过encode，那么需要先decode再encode。
+		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
 	}
 
 

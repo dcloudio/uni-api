@@ -35,7 +35,8 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"uniPlatform",
 			"uniRuntimeVersion",
 			"uniCompilerVersionCode",
-			"uniRuntimeVersionCode"
+			"uniRuntimeVersionCode",
+			"appTheme",
 		];
 		filter = defaultFilter;
 	}
@@ -115,6 +116,10 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	
 	if (filterArray.indexOf("uniRuntimeVersionCode") != -1) {
 		result.uniRuntimeVersionCode = AppBaseInfoConvertVersionCode(UTSiOS.getRuntimeVersion());
+	}
+	
+	if (filterArray.indexOf("appTheme") != -1) {
+		result.appTheme = UTSiOS.getAppTheme();
 	}
 
 	return result;

@@ -1,7 +1,7 @@
 import { RequestPaymentFailImpl as RequestPaymentFailImplement } from './unierror.uts'
 
 export type RequestPaymentFailImpl = RequestPaymentFailImplement
-export type UniPaymentProvider = Uni
+export interface UniPaymentProvider extends Uni{}
 export interface Uni {
 	/**
 	 * @description 请求支付
@@ -27,7 +27,7 @@ export interface Uni {
 	 *        "ios": {
 	 *            "osVer": "9.0",
 	 *            "uniVer": "√",
-	 *            "unixVer": "x"
+	 *            "unixVer": "4.18"
 	 *        }
 	 *    },
 	 *    "web": {
@@ -40,15 +40,18 @@ export interface Uni {
 }
 /**
  * 错误码
- * - 700710  正在处理中，支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态
- * - 700711  订单支付失败。
- * - 700712  重复请求。
- * - 700713  用户中途取消。
- * - 700714  网络连接出错。
- * - 700715  支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
- * - 700716  其它支付错误。
+ * - 700600  正在处理中，支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态
+ * - 701100  订单支付失败。
+ * - 701110  重复请求。
+ * - 700601  用户中途取消。
+ * - 700602  网络连接出错。
+ * - 700603  支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
+ * - 700000  其它支付错误。
+ * - 700604  微信没有安装。
+ * - 700800  没有配置对应的URL Scheme。
+ * - 700801  没有配置对应的universal Link。
  */
-export type RequestPaymentErrorCode = 700710 | 700711 | 700712 | 700713 | 700714 | 700715 | 700716;
+export type RequestPaymentErrorCode = 700600 | 701100 | 701110 | 700601 | 700602 | 700603 | 700000 | 700604 | 700800 | 700801;
 
 export type RequestPayment = (options : RequestPaymentOptions) => void;
 export type RequestPaymentSuccess = {

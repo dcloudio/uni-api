@@ -20,10 +20,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -60,10 +60,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -93,10 +93,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -126,7 +126,11 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   left: number,
@@ -146,7 +150,11 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   right: number,
@@ -166,7 +174,11 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   top: number,
@@ -186,7 +198,11 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   bottom: number,
@@ -206,7 +222,11 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   width: number,
@@ -226,14 +246,18 @@ export type SafeArea = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   height: number
 };
 export type SafeAreaInsets = {
   /**
-   * 安全区域左侧插入位置，单位为px
+   * 安全区域左侧插入位置（距离左边边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -248,12 +272,16 @@ export type SafeAreaInsets = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   left: number,
   /**
-   * 安全区域右侧插入位置，单位为px
+   * 安全区域右侧插入位置（距离右边边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -268,12 +296,16 @@ export type SafeAreaInsets = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   right: number,
   /**
-   * 安全区顶部插入位置，单位为px
+   * 安全区顶部插入位置（距离顶部边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -288,12 +320,16 @@ export type SafeAreaInsets = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   top: number,
   /**
-   * 安全区域底部插入位置，单位为px
+   * 安全区域底部插入位置（距离底部边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -308,7 +344,11 @@ export type SafeAreaInsets = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   bottom: number
@@ -330,7 +370,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   SDKVersion: string,
@@ -350,7 +394,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appId: string,
@@ -370,7 +418,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appLanguage: string,
@@ -390,7 +442,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appName: string,
@@ -410,7 +466,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appVersion: string,
@@ -430,7 +490,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   appVersionCode: string,
@@ -450,7 +514,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "x"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   appWgtVersion?: string | null,
@@ -471,7 +539,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   brand: string,
@@ -491,7 +563,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   browserName: string,
@@ -511,7 +587,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   browserVersion: string,
@@ -531,7 +611,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   deviceId: string,
@@ -551,7 +635,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   deviceBrand: string,
@@ -571,7 +659,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   deviceModel: string,
@@ -591,7 +683,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   deviceType: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
@@ -611,7 +707,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   devicePixelRatio: number,
@@ -632,7 +732,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   deviceOrientation: 'portrait' | 'landscape',
@@ -653,7 +757,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   language: string,
@@ -674,7 +782,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   model: string,
@@ -694,10 +806,14 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
-  osName: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
+  osName: 'ios' | 'android' | 'macos' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
    * 
@@ -714,7 +830,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   osVersion: string,
@@ -734,7 +854,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   osLanguage: string,
@@ -754,7 +878,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   osTheme?: 'light' | 'dark' | null,
@@ -775,7 +903,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   pixelRatio: number,
@@ -796,7 +928,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   platform: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
@@ -816,7 +952,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   screenWidth: number,
@@ -836,7 +976,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   screenHeight: number,
@@ -856,7 +1000,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   statusBarHeight: number,
@@ -877,7 +1025,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   system: string,
@@ -897,7 +1049,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   safeArea: SafeArea,
@@ -917,7 +1073,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   safeAreaInsets: SafeAreaInsets,
@@ -937,7 +1097,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   ua: string,
@@ -958,7 +1122,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   uniCompileVersion: string,
@@ -978,7 +1146,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
+   *   }
    * }
    */
   uniCompilerVersion: string,
@@ -998,7 +1170,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   uniPlatform: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
@@ -1018,7 +1194,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   uniRuntimeVersion: string,
@@ -1039,7 +1219,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   uniCompileVersionCode: number,
@@ -1059,7 +1243,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.18"
+   *   }
    * }
    */
   uniCompilerVersionCode: number,
@@ -1079,7 +1267,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   uniRuntimeVersionCode: number,
@@ -1100,7 +1292,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   version: string,
@@ -1120,7 +1316,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   romName: string,
@@ -1140,7 +1340,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
   romVersion: string,
@@ -1160,7 +1364,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowWidth: number,
@@ -1180,7 +1388,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowHeight: number,
@@ -1200,7 +1412,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowTop: number,
@@ -1220,7 +1436,11 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowBottom: number,
@@ -1240,10 +1460,38 @@ export type GetSystemInfoResult = {
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
    * }
    */
-  osAndroidAPILevel?: number | null
+  osAndroidAPILevel?: number | null,
+  /**
+   * 当前App的主题
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.18"
+   * 		}
+   * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  appTheme?: 'light' | 'dark' | 'auto' | null,
 };
 export type GetSystemInfoSuccessCallback = (result: GetSystemInfoResult) => void;
 type GetSystemInfoFail = UniError;
@@ -1285,7 +1533,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   pixelRatio: number,
@@ -1305,7 +1557,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   screenWidth: number,
@@ -1325,7 +1581,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   screenHeight: number,
@@ -1345,7 +1605,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowWidth: number,
@@ -1385,7 +1649,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   statusBarHeight: number,
@@ -1405,7 +1673,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowTop: number,
@@ -1425,12 +1697,16 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowBottom: number,
   /**
-   * 在竖屏正方向下的安全区域
+   * 安全区域在屏幕中的位置信息
    * 
    * @uniPlatform
    * {
@@ -1445,12 +1721,16 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   safeArea: SafeArea,
   /**
-   * 在竖屏正方向下的安全区域插入位置
+   * 安全区域插入位置（与屏幕边界的距离）信息
    * 
    * @uniPlatform
    * {
@@ -1465,7 +1745,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   safeAreaInsets: SafeAreaInsets,
@@ -1485,7 +1769,11 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   screenTop: number

@@ -1,10 +1,10 @@
 
-export type Request = (param: RequestOptions) => RequestTask;
+export type Request<T> = (param: RequestOptions<T>) => RequestTask;
 
 /**
  * 网络请求参数
  */
-export type RequestOptions = {
+export type RequestOptions<T> = {
   /**
    * 开发者服务器接口地址
    */
@@ -80,7 +80,7 @@ export type RequestOptions = {
    * 网络请求成功回调。
    * @defaultValue null
    */
-  success?: RequestSuccessCallback | null,
+  success?: RequestSuccessCallback<T> | null,
   /**
    * 网络请求失败回调。
    * @defaultValue null
@@ -93,12 +93,12 @@ export type RequestOptions = {
   complete?: RequestCompleteCallback | null
 }
 
-export type RequestSuccess = {
+export type RequestSuccess<T> = {
   /**
    * 开发者服务器返回的数据
    * @type {RequestDataOptions}
    */
-  data: any | null,
+  data: T | null,
   /**
    * 开发者服务器返回的 HTTP 状态码
    */
@@ -138,7 +138,7 @@ export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD"
 export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600003 | 600009 | 602001;
 
 
-export type RequestFail = UniError;
+// export type RequestFail = UniError;
 // /**
 //  * 网络请求失败的错误回调参数
 //  */
@@ -146,8 +146,7 @@ export type RequestFail = UniError;
 // 	errCode: RequestErrorCode
 // };
 
-
-export type RequestSuccessCallback = (option: RequestSuccess) => void;
+export type RequestSuccessCallback<T> = (option: RequestSuccess<T>) => void;
 export type RequestFailCallback = (option: RequestFail) => void;
 export type RequestCompleteCallback = (option: any) => void;
 
@@ -231,7 +230,7 @@ export type UploadFileSuccess = {
   statusCode: number
 };
 export type UploadFileSuccessCallback = (result: UploadFileSuccess) => void;
-export type UploadFileFail = UniError;
+// export type UploadFileFail = UniError;
 // /**
 //  * 上传文件失败的错误回调参数
 //  */
@@ -387,7 +386,7 @@ export type DownloadFileSuccess = {
   statusCode: number
 };
 export type DownloadFileSuccessCallback = (result: DownloadFileSuccess) => void;
-export type DownloadFileFail = UniError;
+// export type DownloadFileFail = UniError;
 // /**
 //  * 下载文件失败的错误回调参数
 //  */
@@ -570,7 +569,7 @@ export interface Uni {
             });
      ```
     */
-  request: Request,
+  request<T>(param: RequestOptions<T>): RequestTask;
   /**
     * UploadFile()
     * @description 
@@ -607,7 +606,7 @@ export interface Uni {
             });
      ```
     */
-  uploadFile: UploadFile,
+  uploadFile: UploadFile;
   /**
     * DownloadFile()
     * @description 
@@ -639,5 +638,5 @@ export interface Uni {
               });
      ```
     */
-  downloadFile: DownloadFile
+  downloadFile: DownloadFile;
 }
