@@ -9,17 +9,28 @@
         android:id="@+id/line_bottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+<<<<<<<< HEAD:uni_modules/uni-prompt/utssdk/app-android/res/layout/uni_prompt_ac_recyclerview_layout_top_night.xml
         android:background="@color/uni_prompt_night_bg_hair_line_night"
+========
+        android:background="@color/uni_prompt_night_bg_hair_line"
+>>>>>>>> dev:uni_modules/uni-prompt/utssdk/app-android/res/layout/uni_prompt_ac_recyclerview_layout_top.xml
         android:orientation="vertical" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<<< HEAD:uni_modules/uni-prompt/utssdk/app-android/res/layout/uni_prompt_ac_recyclerview_layout_top_night.xml
         android:background="@drawable/uni_prompt_actionsheet_button_select_total_night_top"
         android:gravity="center"
         android:padding="17dp"
         android:textColor="@color/uni_prompt_dialog_title_text_night"
+========
+        android:gravity="center"
+        android:padding="17dp"
+        android:textColor="@color/uni_prompt_dialog_title_text"
+        android:background="@drawable/uni_prompt_actionsheet_button_select_total_top"
+>>>>>>>> dev:uni_modules/uni-prompt/utssdk/app-android/res/layout/uni_prompt_ac_recyclerview_layout_top.xml
         android:textSize="16dp" />
 
 

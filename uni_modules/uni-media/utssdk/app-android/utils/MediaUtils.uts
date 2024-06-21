@@ -25,7 +25,7 @@ export function getVideoMetadata(src : string) : any {
 		let error = new MediaErrorImpl(1101003, UniError_GetVideoInfo);
 		return error
 	}
-	videoInfo.size = videoFile.length()
+	videoInfo.size = videoFile.length() / 1024;
 	try {
 		let retriever = new MediaMetadataRetriever()
 		retriever.setDataSource(path)

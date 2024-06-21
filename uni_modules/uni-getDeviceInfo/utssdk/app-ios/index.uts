@@ -3,6 +3,7 @@ import { UTSiOS } from "DCloudUTSFoundation";
 import { DeviceUtil } from './device/DeviceUtil.uts';
 
 import { GetDeviceInfo, GetDeviceInfoOptions, GetDeviceInfoResult } from '../interface.uts'
+import { UIScreen , UIDevice ,UIApplication } from 'UIKit';
 
 export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | null) : GetDeviceInfoResult => {
 	let filter : Array<string> = [];
@@ -24,7 +25,13 @@ export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | nu
 			"system",
 			"platform",
 			"isRoot",
-			"isSimulator"
+			"isSimulator",
+			"osName",
+			"osVersion",
+			"osLanguage",
+			"osTheme",
+			"romName",
+			"romVersion"
 		];
 		filter = defaultFilter;
 	}
@@ -70,6 +77,30 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 	}
 	if (filterArray.indexOf("isSimulator") != -1) {
 		result.isSimulator = UTSiOS.isSimulator();
+	}
+	
+	if (filterArray.indexOf("osName") != -1) {
+		result.osName = "ios";
+	}
+	if (filterArray.indexOf("osVersion") != -1) {
+		result.osVersion = UIDevice.current.systemVersion;
+	}
+	if (filterArray.indexOf("osLanguage") != -1) {
+		result.osLanguage = UTSiOS.getOsLanguage();
+	}
+	if (filterArray.indexOf("osTheme") != -1) {
+		let osTheme = 'light'
+		if(UTSiOS.available("iOS 13, *")){
+			let currentTraitCollection = UIApplication.shared.keyWindow?.traitCollection
+			osTheme = currentTraitCollection?.userInterfaceStyle == UIUserInterfaceStyle.dark ? "dark" : "light"
+		}
+		result.osTheme = osTheme;
+	}
+	if (filterArray.indexOf("romName") != -1) {
+		result.romName = "ios"
+	}
+	if (filterArray.indexOf("romVersion") != -1) {
+		result.romVersion = UIDevice.current.systemVersion;
 	}
 
 	return result;

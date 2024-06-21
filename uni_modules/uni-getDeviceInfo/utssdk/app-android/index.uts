@@ -24,7 +24,14 @@ export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | nu
 			"platform",
 			"isRoot",
 			"isSimulator",
-			"isUSBDebugging"
+			"isUSBDebugging",
+			"osName",
+			"osVersion",
+			"osLanguage",
+			"osTheme",
+			"osAndroidAPILevel",
+			"romName",
+			"romVersion"
 		];
 		filter = defaultFilter;
 	}
@@ -72,6 +79,28 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 	}
 	if (filterArray.indexOf("isUSBDebugging") != -1) {
 		result.isUSBDebugging = DeviceUtil.listeningForADB();
+	}
+	
+	if (filterArray.indexOf("osName") != -1) {
+		result.osName = "android";
+	}
+	if (filterArray.indexOf("osVersion") != -1) {
+		result.osVersion = Build.VERSION.RELEASE;
+	}
+	if (filterArray.indexOf("osLanguage") != -1) {
+		result.osLanguage = UTSAndroid.getLanguageInfo(activity)["osLanguage"].toString();
+	}
+	if (filterArray.indexOf("osTheme") != -1) {
+		result.osTheme = UTSAndroid.getOsTheme();
+	}
+	if (filterArray.indexOf("osAndroidAPILevel") != -1) {
+		result.osAndroidAPILevel = Build.VERSION.SDK_INT;
+	}
+	if (filterArray.indexOf("romName") != -1) {
+		result.romName = DeviceUtil.getRomName();
+	}
+	if (filterArray.indexOf("romVersion") != -1) {
+		result.romVersion = DeviceUtil.getRomVersion();
 	}
 	return result;
 }
