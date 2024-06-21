@@ -64,7 +64,7 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.deviceOrientation = DeviceUtil.getOrientation();
 	}
 	if (filterArray.indexOf("devicePixelRatio") != -1) {
-		result.devicePixelRatio = DeviceUtil.getScreenScale();
+		result.devicePixelRatio = Number.from(UIScreen.main.scale);
 	}
 	if (filterArray.indexOf("system") != -1) {
 		result.system = String(format = "iOS %@", osVersion);
@@ -89,12 +89,7 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.osLanguage = UTSiOS.getOsLanguage();
 	}
 	if (filterArray.indexOf("osTheme") != -1) {
-		let osTheme = 'light'
-		if(UTSiOS.available("iOS 13, *")){
-			let currentTraitCollection = UIApplication.shared.keyWindow?.traitCollection
-			osTheme = currentTraitCollection?.userInterfaceStyle == UIUserInterfaceStyle.dark ? "dark" : "light"
-		}
-		result.osTheme = osTheme;
+		result.osTheme = UTSiOS.getOsTheme();
 	}
 	if (filterArray.indexOf("romName") != -1) {
 		result.romName = "ios"

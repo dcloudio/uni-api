@@ -20,7 +20,11 @@ export type RequestOptions<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   url: string,
@@ -41,7 +45,11 @@ export type RequestOptions<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   data?: any | null,
@@ -61,7 +69,11 @@ export type RequestOptions<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   header?: UTSJSONObject | null,
@@ -83,7 +95,11 @@ export type RequestOptions<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   method?: RequestMethod | null,
@@ -145,10 +161,10 @@ export type RequestOptions<T> = {
    * 			"unixVer": "x"
    * 		}
    * 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
    * }
    */
   withCredentials?: boolean | null,
@@ -168,7 +184,11 @@ export type RequestOptions<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "x"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
    * }
    */
   firstIpv4?: boolean | null,
@@ -206,7 +226,11 @@ export type RequestSuccess<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   data: T | null,
@@ -225,7 +249,11 @@ export type RequestSuccess<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   statusCode: number,
@@ -244,7 +272,11 @@ export type RequestSuccess<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   header: any,
@@ -263,7 +295,11 @@ export type RequestSuccess<T> = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
    * }
    */
   cookies: Array<string>
@@ -325,10 +361,10 @@ export interface RequestTask {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -363,7 +399,11 @@ export type UploadFileOptionFiles = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   name?: string | null,
@@ -382,7 +422,11 @@ export type UploadFileOptionFiles = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
    * }
    */
   uri: string,
@@ -402,10 +446,10 @@ export type UploadFileOptionFiles = {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
    */
   file?: any | null
@@ -426,7 +470,11 @@ export type UploadFileSuccess = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   data: string,
@@ -445,7 +493,11 @@ export type UploadFileSuccess = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   statusCode: number
@@ -476,7 +528,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   url: string,
@@ -496,7 +552,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   filePath?: string | null,
@@ -516,7 +576,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   name?: string | null,
@@ -536,7 +600,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   files?: (UploadFileOptionFiles[]) | null,
@@ -556,7 +624,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   header?: UTSJSONObject | null,
@@ -576,7 +648,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   formData?: UTSJSONObject | null,
@@ -596,7 +672,11 @@ export type UploadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   timeout?: number | null,
@@ -632,7 +712,11 @@ export type OnProgressUpdateResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   progress: number,
@@ -651,7 +735,11 @@ export type OnProgressUpdateResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   totalBytesSent: number,
@@ -670,7 +758,11 @@ export type OnProgressUpdateResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   totalBytesExpectedToSend: number
@@ -699,10 +791,10 @@ export interface UploadTask {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -735,10 +827,10 @@ export interface UploadTask {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -771,7 +863,11 @@ export type DownloadFileSuccess = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   tempFilePath: string,
@@ -790,7 +886,11 @@ export type DownloadFileSuccess = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   statusCode: number
@@ -821,7 +921,11 @@ export type DownloadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   url: string,
@@ -866,7 +970,11 @@ export type DownloadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   filePath?: string | null,
@@ -886,7 +994,11 @@ export type DownloadFileOptions = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   timeout?: number | null,
@@ -922,7 +1034,11 @@ export type OnProgressDownloadResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   progress: number,
@@ -941,7 +1057,11 @@ export type OnProgressDownloadResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   totalBytesWritten: number,
@@ -960,7 +1080,11 @@ export type OnProgressDownloadResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		}
-   * 	}
+   * 	},
+   *    "web": {
+   *        "uniVer": "√",
+   *        "unixVer": "4.0"
+   *    }
    * }
    */
   totalBytesExpectedToWrite: number
@@ -988,10 +1112,10 @@ export interface DownloadTask {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -1024,10 +1148,10 @@ export interface DownloadTask {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -1064,10 +1188,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -1120,10 +1244,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript
@@ -1162,10 +1286,10 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
 	* }
     * @example
      ```typescript

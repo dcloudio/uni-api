@@ -18,15 +18,15 @@
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		IdV+EkzC6yD7+uw8Fb4oy5rwsco=
+		OIcbeXcKkes1/rODOADV39TMtkc=
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		drh3vEirfcomAMtvBARCPYKNS1Y=
+		aXSr1Y0pUq0pLZqjk1cDyY2fjnA=
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		UKRnBAn3KdyEMvTAIGMdAhxoyOg=
+		Yv+HLiGqlhUC67jjxlTgowbQZWg=
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -42,11 +42,11 @@
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		mXLd1iNwsCkaFv8noMU3ogYLjUo=
+		b7kIsEpw8AURIIwU69+tAHv/aoY=
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		UKRnBAn3KdyEMvTAIGMdAhxoyOg=
+		Yv+HLiGqlhUC67jjxlTgowbQZWg=
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Modules/DCloudAlertController.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		NA+6k3Vt/QC45SJPFVTgw/NWc80=
+		kbfsfCoKrRP5Yk5uvFDTEKadHdo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -97,33 +97,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IdV+EkzC6yD7+uw8Fb4oy5rwsco=
+			OIcbeXcKkes1/rODOADV39TMtkc=
 			</data>
 			<key>hash2</key>
 			<data>
-			HqlHy+EkEMnq1XAgYK2SsIerXBIxrpaGjjas1bpvpQE=
+			qF5Z5AmvoTXl8Dm0FcHwyNzoiJjZKXP9vWLQ02BRo4M=
 			</data>
 		</dict>
 		<key>Modules/DCloudAlertController.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			drh3vEirfcomAMtvBARCPYKNS1Y=
+			aXSr1Y0pUq0pLZqjk1cDyY2fjnA=
 			</data>
 			<key>hash2</key>
 			<data>
-			qnfgPxnDzR3XZd7VmWupEZruhJWUshCQn44BmgRmgB8=
+			V5tdQCVKaYis+EZBplb7kPW598TYYwc6VXHwtg/gs0U=
 			</data>
 		</dict>
 		<key>Modules/DCloudAlertController.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UKRnBAn3KdyEMvTAIGMdAhxoyOg=
+			Yv+HLiGqlhUC67jjxlTgowbQZWg=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z8AdD9sNc/i24bzKJgVcBel5CO901vdN0lMMih+ZBFE=
+			WBGdaKqKHqjTvCdG7wdXnsrdIiIV8uNiQUOanQs1b0g=
 			</data>
 		</dict>
 		<key>Modules/DCloudAlertController.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -163,22 +163,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mXLd1iNwsCkaFv8noMU3ogYLjUo=
+			b7kIsEpw8AURIIwU69+tAHv/aoY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ds8SClrSLvzAaf6S53v2GEY2MHSdHBrXTAfHSRpbI4M=
+			M8X/lXx6qJ3WpEe29d9ADWdDK4XucXCOK3sGdSeVPyw=
 			</data>
 		</dict>
 		<key>Modules/DCloudAlertController.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UKRnBAn3KdyEMvTAIGMdAhxoyOg=
+			Yv+HLiGqlhUC67jjxlTgowbQZWg=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z8AdD9sNc/i24bzKJgVcBel5CO901vdN0lMMih+ZBFE=
+			WBGdaKqKHqjTvCdG7wdXnsrdIiIV8uNiQUOanQs1b0g=
 			</data>
 		</dict>
 		<key>Modules/DCloudAlertController.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -218,11 +218,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NA+6k3Vt/QC45SJPFVTgw/NWc80=
+			kbfsfCoKrRP5Yk5uvFDTEKadHdo=
 			</data>
 			<key>hash2</key>
 			<data>
-			6j7OigsCalW76Oi+i7v4WK8q4puySK6GbV6BRBbneys=
+			2ZGi1RAu8LyXezoqQhRwCCuj4I/dorMk4O/aPNyVDQQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

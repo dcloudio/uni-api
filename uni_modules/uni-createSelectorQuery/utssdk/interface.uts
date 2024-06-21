@@ -123,35 +123,35 @@ export type NodeField = {
      * 是否返回节点 id
      * @type boolean
      */
-    id: boolean | null
+    id?: boolean | null
     /**
      * 是否返回节点 dataset
      * @type boolean
      */
-    dataset: boolean | null
+    dataset?: boolean | null
     /**
      * 是否返回节点布局位置（left right top bottom）
      * @type boolean
      */
-    rect: boolean | null
+    rect?: boolean | null
     /**
      * 是否返回节点尺寸（width height）
      * @type boolean
      */
-    size: boolean | null
+    size?: boolean | null
     /**
      * 是否返回节点的 scrollLeft scrollTop，节点必须是 scroll-view 或者 viewport
      * @type boolean
      */
-    scrollOffset: boolean | null
+    scrollOffset?: boolean | null
     /**
      * 指定属性名列表，返回节点对应属性名的当前属性值（只能获得组件文档中标注的常规属性值，id class style 和事件绑定的属性值不可获取）
      */
-    properties: string[] | null
+    properties?: string[] | null
     /**
      * 指定样式名列表，返回节点对应样式名的当前值
      */
-    computedStyle: string[] | null
+    computedStyle?: string[] | null
     /**
      * 是否返回节点对应的 Context 对象
      * @type boolean
@@ -216,7 +216,11 @@ export type NodeField = {
      *  }
      * }
      */
-    context: boolean | null
+    context?: boolean | null
+    /**
+     * 是否返回节点对应的 Node 实例
+     */
+    node?: boolean | null;
 }
 
 export interface NodesRef {

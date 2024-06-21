@@ -2,10 +2,6 @@ import { UTSiOSHookProxy } from "DCloudUniappRuntime";
 import { UIApplication } from "UIKit";
 import { URL, NSUserActivity } from "Foundation";
 
-export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
-	Wxpay.requestPayment(options)
-};
-
 const wxDefaultErrorCode : number = 700000
 
 const wxErrorCodeMap : Map<number, number> = new Map([

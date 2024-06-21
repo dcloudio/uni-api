@@ -257,7 +257,7 @@ export type SafeArea = {
 };
 export type SafeAreaInsets = {
   /**
-   * 安全区域左侧插入位置，单位为px
+   * 安全区域左侧插入位置（距离左边边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -281,7 +281,7 @@ export type SafeAreaInsets = {
    */
   left: number,
   /**
-   * 安全区域右侧插入位置，单位为px
+   * 安全区域右侧插入位置（距离右边边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -305,7 +305,7 @@ export type SafeAreaInsets = {
    */
   right: number,
   /**
-   * 安全区顶部插入位置，单位为px
+   * 安全区顶部插入位置（距离顶部边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -329,7 +329,7 @@ export type SafeAreaInsets = {
    */
   top: number,
   /**
-   * 安全区域底部插入位置，单位为px
+   * 安全区域底部插入位置（距离底部边界距离），单位为px
    * 
    * @uniPlatform
    * {
@@ -789,7 +789,7 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  model: string,
+  model?: string,
   /**
    * 系统名称	
    * 
@@ -813,7 +813,7 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  osName: 'ios' | 'android' | 'macos' | 'windows' | 'linux',
+  osName: 'ios' | 'android' | 'harmony' | 'macos' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
    * 
@@ -935,7 +935,7 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  platform: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
+  platform: 'ios' | 'android' | 'harmony' | 'mac' | 'windows' | 'linux',
   /**
    * 屏幕宽度，单位为px
    * 
@@ -1706,7 +1706,7 @@ export type GetWindowInfoResult = {
    */
   windowBottom: number,
   /**
-   * 在竖屏正方向下的安全区域
+   * 安全区域在屏幕中的位置信息
    * 
    * @uniPlatform
    * {
@@ -1730,7 +1730,7 @@ export type GetWindowInfoResult = {
    */
   safeArea: SafeArea,
   /**
-   * 在竖屏正方向下的安全区域插入位置
+   * 安全区域插入位置（与屏幕边界的距离）信息
    * 
    * @uniPlatform
    * {

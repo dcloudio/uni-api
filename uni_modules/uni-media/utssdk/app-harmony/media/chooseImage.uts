@@ -1,0 +1,58 @@
+import picker from '@ohos.file.picker'
+import { _chooseMedia, ChooseMediaOptions } from './media.uts'
+import {
+    ChooseImageOptions,
+    ChooseImageSuccess,
+    ChooseImage
+} from '../../interface.uts'
+import {
+    API_CHOOSE_IMAGE,
+    ChooseImageApiOptions,
+    ChooseImageApiProtocol,
+} from '../../protocol.uts'
+import {
+    MediaUniErrors
+} from '../../unierror.uts'
+
+interface TempFileItem {
+    path: string
+    size: number
+}
+
+export const chooseImage: ChooseImage =
+    defineAsyncApi<ChooseImageOptions, ChooseImageSuccess>(
+        API_CHOOSE_IMAGE,
+        function (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) {
+            _chooseMedia({
+                mimeType: picker.PhotoViewMIMETypes.IMAGE_TYPE,
+                count: options.count!,
+            } as ChooseMediaOptions)
+                .then((chooseMediaRes) => {
+                    const tempFiles = chooseMediaRes.tempFiles
+                    if (tempFiles.length === 0) {
+                        const errCode = 1101001
+                        const errMsg = MediaUniErrors.get(1101001) as string
+                        res.reject(errMsg, {
+                            errCode,
+                            errMsg
+                        } as ApiError);
+                        return;
+                    }
+                    res.resolve({
+                        errMsg: '',
+                        errSubject: 'uni-chooseImage',
+                        tempFilePaths: chooseMediaRes.tempFiles.map((file) => file.tempFilePath),
+                        tempFiles: chooseMediaRes.tempFiles.map((file) => {
+                            return {
+                                path: file.tempFilePath,
+                                size: file.size,
+                            } as TempFileItem
+                        }),
+                    } as ChooseImageSuccess)
+                }, (err: Error) => {
+                    res.reject(err.message)
+                })
+        },
+        ChooseImageApiProtocol,
+        ChooseImageApiOptions
+    ) as ChooseImage

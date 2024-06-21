@@ -1,0 +1,276 @@
+import {
+    RequestMethod,
+    RequestOptions,
+    RequestTask,
+    UploadFileOptions,
+    UploadTask,
+    DownloadFileOptions,
+    DownloadTask,
+} from './interface.uts'
+import {
+    getRealPath,
+} from '@dcloudio/uni-runtime'
+
+// request
+export const API_REQUEST = 'request';
+export const RequestApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'url',
+        {
+            type: 'string',
+            required: true
+        }
+    ],
+    [
+        'data',
+        {
+            type: 'object',
+            required: false
+        }
+    ],
+    [
+        'header',
+        {
+            type: 'object',
+            required: false
+        }
+    ],
+    [
+        'method',
+        {
+            type: 'string',
+            required: false
+        }
+    ],
+    [
+        'dataType',
+        {
+            type: 'string',
+            required: false
+        }
+    ],
+    [
+        'responseType',
+        {
+            type: 'string',
+            required: false
+        }
+    ],
+    [
+        'timeout',
+        {
+            type: 'number',
+            required: false
+        }
+    ],
+    [
+        'sslVerify',
+        {
+            type: 'boolean',
+            required: false
+        }
+    ],
+    [
+        'withCredentials',
+        {
+            type: 'boolean',
+            required: false
+        }
+    ],
+    [
+        'firstIpv4',
+        {
+            type: 'boolean',
+            required: false
+        }
+    ],
+])
+export const RequestApiOptions: ApiOptions<RequestOptions<any>> = {
+    formatArgs: new Map<string, Function>([
+        [
+            'url',
+            function (url: string, params: RequestOptions<any>) {
+                if (url == null) {
+                    throw new Error('url is required')
+                }
+            }
+        ],
+        [
+            'data',
+            function (data: object, params: RequestOptions<any>) {
+                if (data == null) {
+                    params.data = ''
+                }
+            }
+        ],
+        [
+            'method',
+            function (method: string, params: RequestOptions<any>) {
+                params.method = (method || 'GET').toUpperCase() as RequestMethod
+            }
+        ],
+        [
+            'dataType',
+            function (dataType: string, params: RequestOptions<any>) {
+                if (dataType == null) {
+                    params.dataType = 'json'
+                }
+            }
+        ],
+        [
+            'responseType',
+            function (responseType: string, params: RequestOptions<any>) {
+                if (responseType == null) {
+                    params.responseType = 'text'
+                }
+            }
+        ],
+        [
+            'timeout',
+            function (timeout: number, params: RequestOptions<any>) {
+                if (timeout == null) {
+                    params.timeout = 60000
+                }
+            }
+        ],
+        [
+            'sslVerify',
+            function (sslVerify: boolean, params: RequestOptions<any>) {
+                if (sslVerify == null) {
+                    params.sslVerify = true
+                }
+            }
+        ],
+        [
+            'withCredentials',
+            function (withCredentials: boolean, params: RequestOptions<any>) {
+                if (withCredentials == null) {
+                    params.withCredentials = false
+                }
+            }
+        ],
+        [
+            'firstIpv4',
+            function (firstIpv4: boolean, params: RequestOptions<any>) {
+                if (firstIpv4 == null) {
+                    params.firstIpv4 = false
+                }
+            }
+        ],
+    ]),
+}
+
+// downloadFile
+export const API_DOWNLOAD_FILE = 'downloadFile';
+export const DownloadFileApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'url',
+        {
+            type: 'string',
+            required: true
+        }
+    ],
+    [
+        'header',
+        {
+            type: 'object',
+            required: false
+        }
+    ],
+    [
+        'timeout',
+        {
+            type: 'number',
+            required: false
+        }
+    ],
+])
+export const DownloadFileApiOptions: ApiOptions<DownloadFileOptions> = {
+    formatArgs: new Map<string, Function>([
+        [
+            'url',
+            function (url: string, params: DownloadFileOptions) {
+                if (url == null) {
+                    throw new Error('url is required')
+                }
+            }
+        ],
+    ]),
+}
+
+// uploadFile
+export const API_UPLOAD_FILE = 'uploadFile';
+export const UploadFileApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'url',
+        {
+            type: 'string',
+            required: true
+        }
+    ],
+    [
+        'filePath',
+        {
+            type: 'string',
+            required: true
+        }
+    ],
+    [
+        'name',
+        {
+            type: 'string',
+            required: false
+        }
+    ],
+    [
+        'header',
+        {
+            type: 'object',
+            required: false
+        }
+    ],
+    [
+        'formData',
+        {
+            type: 'object',
+            required: false
+        }
+    ],
+    [
+        'timeout',
+        {
+            type: 'number',
+            required: false
+        }
+    ],
+    
+])
+export const UploadFileApiOptions: ApiOptions<UploadFileOptions> = {
+    formatArgs: new Map<string, Function>([
+        [
+            'url',
+            function (url: string, params: UploadFileOptions) {
+                if (url == null) {
+                    throw new Error('url is required')
+                }
+            }
+        ],
+        [
+            'filePath',
+            function (filePath: string, params: UploadFileOptions) {
+                if (filePath == null) {
+                    throw new Error('filePath is required')
+                }
+                params.filePath = getRealPath(filePath)
+            }
+        ],
+        [
+            'name',
+            function (name: string, params: UploadFileOptions) {
+                if (name == null) {
+                    params.name = 'file'
+                }
+            }
+        ],
+    ]),
+}

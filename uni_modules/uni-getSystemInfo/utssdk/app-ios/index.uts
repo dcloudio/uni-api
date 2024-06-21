@@ -16,12 +16,6 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 	
 	const osVersion = UIDevice.current.systemVersion
 	
-	let osTheme = 'light'
-	if(UTSiOS.available("iOS 13, *")){
-		let currentTraitCollection = UIApplication.shared.keyWindow?.traitCollection
-		osTheme = currentTraitCollection?.userInterfaceStyle == UIUserInterfaceStyle.dark ? "dark" : "light"
-	}
-	
 	let deviceOrientation = 'portrait'
 	const orient = UIApplication.shared.statusBarOrientation;
 	if (orient == UIInterfaceOrientation.landscapeLeft || orient == UIInterfaceOrientation.landscapeRight) {
@@ -50,7 +44,7 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 		osName: 'ios',
 		osVersion: osVersion,
 		osLanguage: UTSiOS.getOsLanguage(),
-		osTheme: osTheme,
+		osTheme: UTSiOS.getOsTheme(),
 		pixelRatio: windowInfo.pixelRatio,
 		platform: 'ios',
 		screenWidth: windowInfo.screenWidth,

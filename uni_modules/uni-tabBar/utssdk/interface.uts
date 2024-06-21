@@ -238,7 +238,11 @@ export type SetTabBarStyleOptions = {
     /**
      * tabbar上边框的颜色
      */
-    borderStyle?: string
+    borderColor?: string | string.ColorString
+    /**
+     * tabbar上边框的颜色
+     */
+    borderStyle?: 'black' | 'white'
     /**
      * tabbar 中间按钮 仅在 list 项为偶数时有效
      * @internal
@@ -920,13 +924,13 @@ export interface Uni {
     /**
      * 监听中间按钮的点击事件
      *
-     * @tutorial https://doc.dcloud.net.cn/uni-app-x/tabbar?id=ontabbarmidbuttontap
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/on-tab-bar-mid-button-tap.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "x"
      *    },
      *    "ios": {
      *      "osVer": "12.0",

@@ -107,7 +107,11 @@ export const setTabBarStyle = defineAsyncApi<
         ['backgroundImage', options.backgroundImage],
         ['backgroundRepeat', options.backgroundRepeat],
     ])
-    if (isString(options.borderStyle)) {
+    if (isString(options.borderColor)) {
+        style.set(
+            'borderStyle', options.borderColor as string,
+        )
+    } else if (isString(options.borderStyle)) {
         style.set(
             'borderStyle',
             getTabBarBorderStyle(options.borderStyle as string),

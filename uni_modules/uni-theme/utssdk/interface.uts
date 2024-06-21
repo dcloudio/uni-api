@@ -1,0 +1,466 @@
+export interface Uni {
+	/**
+		* @description
+		* 开启监听系统主题变化
+		* 
+		* @param {OnOsThemeChangeCallback} callback
+		* @return {number}
+		* @tutorial 
+		* @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		}
+	* 	},
+	*   "web": {
+	*     "uniVer": "x",
+	*     "unixVer": "x"
+	*   }
+	* }
+		* @example
+		 ```typescript
+		 const id = uni.onOsThemeChange((res) => {
+				console.log(res.osTheme)
+		 })
+		 ```
+		*/
+	onOsThemeChange(callback : OnOsThemeChangeCallback): number
+
+	/**
+		* @description
+		* 取消监听系统主题变化
+		* 
+		* @param {number} id
+		* @return {void}
+		* @tutorial 
+		* @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		}
+	* 	},
+	*   "web": {
+	*     "uniVer": "x",
+	*     "unixVer": "x"
+	*   }
+	* }
+		* @example
+		 ```typescript
+		 uni.offOsThemeChange(id)
+		 ```
+		*/
+	offOsThemeChange(id : number): void
+	
+	/**
+		* @description
+		* 设置应用主题
+		* 
+		* @param {SetAppThemeOptions} options
+		* @return {void}
+		* @tutorial 
+		* @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		}
+	* 	},
+	*   "web": {
+	*     "uniVer": "x",
+	*     "unixVer": "x"
+	*   }
+	* }
+		* @example
+		 ```typescript
+		 uni.setAppTheme({
+				theme: 'dark',
+				success: (res) => {
+					console.log('success')
+				},
+				fail: (err) => {
+					console.log(err)
+				},
+				complete: (res) => {
+					console.log('complete')
+				}
+		 })
+		 ```
+		*/
+	setAppTheme(options : SetAppThemeOptions): void
+	
+	/**
+		* @description
+		* 开启监听应用主题变化
+		* 
+		* @param {OnAppThemeChangeCallback} callback
+		* @return {number}
+		* @tutorial 
+		* @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		}
+	* 	},
+	*   "web": {
+	*     "uniVer": "x",
+	*     "unixVer": "x"
+	*   }
+	* }
+		* @example
+		 ```typescript
+		 const id = uni.onAppThemeChange((res) => {
+				console.log(res.appTheme)
+		 })
+		 ```
+		*/
+	onAppThemeChange(callback : OnAppThemeChangeCallback): number
+	
+	/**
+		* @description
+		* 取消监听应用主题变化
+		* 
+		* @param {number} id
+		* @return {void}
+		* @tutorial 
+		* @uniPlatform
+	* {
+	* 	"app": {
+	* 		"android": {
+	* 			"osVer": "5.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		},
+	* 		"ios": {
+	* 			"osVer": "12.0",
+	* 			"uniVer": "x",
+	* 			"unixVer": "4.18"
+	* 		}
+	* 	},
+	*   "web": {
+	*     "uniVer": "x",
+	*     "unixVer": "x"
+	*   }
+	* }
+		* @example
+		 ```typescript
+		 uni.offAppThemeChange(id)
+		 ```
+		*/
+	offAppThemeChange(id : number): void
+}
+
+/**
+ * @uniPlatform
+ * {
+ * 	"app": {
+ * 		"android": {
+ * 			"osVer": "5.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		},
+ * 		"ios": {
+ * 			"osVer": "12.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		}
+ * 	},
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "x"
+ *   }
+ * }
+ */
+export type OsThemeChangeResult = {
+	/**
+	 * 系统主题
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	osTheme : string
+}
+
+/**
+ * @uniPlatform
+ * {
+ * 	"app": {
+ * 		"android": {
+ * 			"osVer": "5.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		},
+ * 		"ios": {
+ * 			"osVer": "12.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		}
+ * 	},
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "x"
+ *   }
+ * }
+ */
+export type AppThemeChangeResult = {
+	/**
+	 * 应用主题
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	appTheme : string
+}
+
+/* 
+ * 系统主题相关类型定义
+ */
+export type OnOsThemeChangeCallback = (res : OsThemeChangeResult) => void
+export type OnOsThemeChange = (callback : OnOsThemeChangeCallback) => number
+export type OffOsThemeChange = (id : number) => void
+
+/* 
+ * 应用主题相关类型定义
+ */
+export type SetAppTheme = (options : SetAppThemeOptions) => void
+export type OnAppThemeChangeCallback = (res : AppThemeChangeResult) => void
+export type OnAppThemeChange = (callback : OnAppThemeChangeCallback) => number
+export type OffAppThemeChange = (id : number) => void
+export type SetAppThemeSuccessResult = {
+	theme : string
+}
+export type SetAppThemeSuccessCallback = (result : SetAppThemeSuccessResult) => void;
+export type SetAppThemeFailCallback = (result : AppThemeFail) => void;
+export type SetAppThemeCompleteCallback = (result : any) => void;
+
+/**
+ * @uniPlatform
+ * {
+ * 	"app": {
+ * 		"android": {
+ * 			"osVer": "5.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		},
+ * 		"ios": {
+ * 			"osVer": "12.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		}
+ * 	},
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "x"
+ *   }
+ * }
+ */
+export type SetAppThemeOptions = {
+	/**
+	 * 主题
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	theme : 'light' | 'dark' | 'auto'
+	/**
+	 * 接口调用成功的回调函数
+	 * @defaultValue null
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	success? : SetAppThemeSuccessCallback
+	/**
+	 * 接口调用失败的回调函数
+	 * @defaultValue null
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	fail? : SetAppThemeFailCallback
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 * @defaultValue null
+	 * @uniPlatform
+	 * {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.18"
+	 * 		}
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   }
+	 * }
+	 */
+	complete? : SetAppThemeCompleteCallback
+}
+
+/**
+ * 错误码
+ * - 702001  参数错误
+ * - 2002000  未知错误
+ * @uniPlatform
+ * {
+ * 	"app": {
+ * 		"android": {
+ * 			"osVer": "5.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		},
+ * 		"ios": {
+ * 			"osVer": "12.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		}
+ * 	},
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "x"
+ *   }
+ * }
+ */
+export type AppThemeErrorCode = 702001 | 2002000;
+export type AppThemeFail = IAppThemeFail;
+/**
+ * @uniPlatform
+ * {
+ * 	"app": {
+ * 		"android": {
+ * 			"osVer": "5.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		},
+ * 		"ios": {
+ * 			"osVer": "12.0",
+ * 			"uniVer": "x",
+ * 			"unixVer": "4.18"
+ * 		}
+ * 	},
+ *   "web": {
+ *     "uniVer": "x",
+ *     "unixVer": "x"
+ *   }
+ * }
+ */
+export interface IAppThemeFail extends IUniError {
+	errCode : AppThemeErrorCode
+};

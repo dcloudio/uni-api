@@ -63,7 +63,7 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.deviceId = DeviceUtil.getDeviceID(activity);
 	}
 	if (filterArray.indexOf("devicePixelRatio") != -1) {
-		result.devicePixelRatio = DeviceUtil.getScaledDensity(activity) + "";
+		result.devicePixelRatio = DeviceUtil.getScaledDensity(activity);
 	}
 	if (filterArray.indexOf("system") != -1) {
 		result.system = "Android " + Build.VERSION.RELEASE;

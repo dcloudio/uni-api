@@ -70,7 +70,7 @@ export type PageScrollToOptions = {
      */
     complete?: PageScrollToCompleteCallback | null
 }
-
+export type PageScrollTo = ( options: PageScrollToOptions ) => Promise<PageScrollToSuccess> | null
 export interface Uni {
     /**
      * 将页面滚动到目标位置
@@ -137,7 +137,5 @@ export interface Uni {
      *  }
      * }
      */
-    pageScrollTo(
-        options: PageScrollToOptions,
-    ): Promise<PageScrollToSuccess> | null
+    pageScrollTo: PageScrollTo
 }

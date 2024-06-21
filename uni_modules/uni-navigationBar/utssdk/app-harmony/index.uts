@@ -1,0 +1,107 @@
+import { UTSHarmony, getCurrentPage } from '@dcloudio/uni-runtime';
+import { SetNavigationBarColor, SetNavigationBarColorOptions, SetNavigationBarColorSuccess, SetNavigationBarTitle, SetNavigationBarTitleOptions, SetNavigationBarTitleSuccess } from '../interface.uts';
+import { API_SET_NAVIGATION_BAR_COLOR, API_SET_NAVIGATION_BAR_TITLE, SetNavigationBarColorProtocol, SetNavigationBarTitleProtocol } from '../protocol.uts';
+
+
+interface TitleNView {
+  titleText: string;
+  autoBackButton?: boolean
+}
+interface BackButton {
+  color?: string
+}
+interface PlusWebviewWebviewTitleNViewStyles {
+  backgroundColor?: string
+  titleColor?: string,
+  titleNView?: TitleNView
+  backButton?: BackButton
+}
+interface Webview {
+  getStyle: () => PlusWebviewWebviewTitleNViewStyles | null;
+  setStyle: (style: PlusWebviewWebviewTitleNViewStyles) => void;
+};
+interface $page {
+  statusBarStyle: 'dark' | 'light'
+}
+interface Page {
+  $getAppWebview: () => Webview | null;
+  $page: $page
+}
+
+const getWebview = (page: Page): Webview | null => {
+  const webview = page.$getAppWebview()
+  return webview
+
+}
+
+export const setNavigationBarColor: SetNavigationBarColor =
+  defineAsyncApi<SetNavigationBarColorOptions, SetNavigationBarColorSuccess>(
+    API_SET_NAVIGATION_BAR_COLOR,
+    (
+      options: SetNavigationBarColorOptions,
+      res: ApiExecutor<SetNavigationBarColorSuccess>
+    ) => {
+      const page = getCurrentPage() as Page
+      if (!page) {
+        return res.reject(`getCurrentPages is empty`)
+      }
+      const webview = getWebview(page)
+      if (webview) {
+        const styles: PlusWebviewWebviewTitleNViewStyles = {}
+        if (options.frontColor) {
+          styles.titleColor = options.frontColor
+        }
+        if (options.backgroundColor) {
+          styles.backgroundColor = options.backgroundColor
+        }
+        const statusBarStyle = options.frontColor === '#000000' ? 'dark' : 'light'
+        UTSHarmony.navigator.setStatusBarStyle(statusBarStyle)
+
+        // 用户调用api时同时改变当前页配置，这样在系统调用设置时，可以避免覆盖用户设置
+        page.$page.statusBarStyle = statusBarStyle
+
+        const style = webview.getStyle()
+        if (style && style.titleNView) {
+          if (style.titleNView.autoBackButton) {
+            styles.backButton = styles.backButton || {}
+            styles.backButton.color = options.frontColor
+          }
+          webview.setStyle({
+            titleNView: styles as TitleNView,
+          } as PlusWebviewWebviewTitleNViewStyles)
+        }
+        res.resolve()
+      } else {
+        res.reject()
+      }
+    },
+    SetNavigationBarColorProtocol
+  ) as SetNavigationBarColor
+
+
+export const setNavigationBarTitle: SetNavigationBarTitle =
+  defineAsyncApi<SetNavigationBarTitleOptions, SetNavigationBarTitleSuccess>(
+    API_SET_NAVIGATION_BAR_TITLE,
+    (options: SetNavigationBarTitleOptions, res: ApiExecutor<SetNavigationBarTitleSuccess>) => {
+      const page = getCurrentPage() as Page
+      if (!page) {
+        return res.reject(`getCurrentPages is empty`)
+      }
+
+      const webview = getWebview(page)
+      if (webview) {
+        const style = webview.getStyle()
+        if (style && style.titleNView) {
+          webview.setStyle({
+            titleNView: {
+              titleText: options.title,
+            } as TitleNView,
+          } as PlusWebviewWebviewTitleNViewStyles)
+        }
+        res.resolve()
+      } else {
+        res.reject()
+      }
+    },
+    SetNavigationBarTitleProtocol
+  ) as SetNavigationBarTitle

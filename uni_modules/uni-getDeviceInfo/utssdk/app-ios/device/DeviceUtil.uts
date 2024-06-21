@@ -28,15 +28,6 @@ export class DeviceUtil {
 		return orientation;
 	}
 
-	public static getScreenScale(): string {
-		return UIScreen.main.scale.description;
-	}
-
-
-	public static getIdfa(): string {
-		return UTSiOS.getGgbs()
-	}
-
 	public static hasRootPrivilege(): boolean {
 		return UTSiOS.isRoot()
 	}

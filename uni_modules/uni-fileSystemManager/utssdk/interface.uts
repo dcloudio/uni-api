@@ -1645,7 +1645,7 @@ export interface FileSystemManager {
 	 *  }
 	 * }
 	 */
-	close(options : CloseOptions);
+	close(options : CloseOptions) : void;
 	/**
 	 * 同步关闭文件
 	 * @uniPlatform {

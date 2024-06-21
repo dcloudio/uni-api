@@ -1,7 +1,7 @@
-import { ChooseImageOptions, ChooseVideoOptions } from "../interface.uts"
+import { ChooseImageOptions, ChooseVideoOptions } from "../../interface.uts"
 import {
 	UniError_ChooseImage, UniError_ChooseVideo, MediaErrorImpl
-} from "../unierror.uts"
+} from "../../unierror.uts"
 export const CODE_CAMERA_ERROR = 11;
 export const CODE_GALLERY_ERROR = 12;
 export const CODE_GET_IMAGE_INFO_CODE = 13
@@ -16,6 +16,7 @@ export function uniChooseImage(options : ChooseImageOptions, onSourceTypeSelect 
 	/* source type 乱传如何处理 */
 	let sourceType : Array<string> = (options.sourceType != null && options.sourceType!.length > 0) ? options.sourceType! : ["album", "camera"];
 	let itemList = ["拍摄", "从相册选择"]
+	// onSourceTypeSelect(1, compressed, 1)
 	if (sourceType.length == 1) {
 		if (sourceType.indexOf("album") >= 0) {
 			onSourceTypeSelect(count!, compressed, 1)
@@ -45,6 +46,7 @@ export function uniChooseVideo(options : ChooseVideoOptions, onSourceTypeSelect 
 	/* source type 乱传如何处理 */
 	let sourceType : Array<string> = (options.sourceType != null && options.sourceType!.length > 0) ? options.sourceType! : ["album", "camera"];
 	let itemList = ["拍摄", "从相册选择"]
+	// onSourceTypeSelect(1, options.compressed, 1)
 	if (sourceType.length == 1) {
 		if (sourceType.indexOf("album") >= 0) {
 			onSourceTypeSelect(count, options.compressed, 1)

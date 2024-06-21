@@ -92,7 +92,8 @@ class NetworkManager implements URLSessionDataDelegate {
 
 
 	public createRequest<T>(param : RequestOptions<T>) : URLRequest | null {
-		let url = new URL(string = param.url);
+		const encodeUrl = this.percentEscapedString(param.url)
+		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			return null
 		}
@@ -128,6 +129,8 @@ class NetworkManager implements URLSessionDataDelegate {
 				let valueStr = "";
 				if (value instanceof UTSJSONObject) {
 					valueStr = JSON.stringify(value) ?? ""
+				}else if(value instanceof Map<string, any>){
+					valueStr = JSON.stringify(new UTSJSONObject(value)) ?? ""
 				}else{
 					valueStr = `${value}`
 				}
@@ -148,10 +151,12 @@ class NetworkManager implements URLSessionDataDelegate {
 					json = JSON.parseObject(data as string);
 				} else if (data instanceof UTSJSONObject) {
 					json = data as UTSJSONObject;
+				} else if(data instanceof Map<string, any>){
+					json = new UTSJSONObject(data!)
 				}
 				if (json != null) {
-					let urlStr = param.url;
-					let url = new URL(string = this.stringifyQuery(urlStr!, json!));
+					let urlWithQuery = this.stringifyQuery(encodeUrl, json!)
+					let url = new URL(string = urlWithQuery);
 					request.url = url;
 				}
 			}
@@ -159,12 +164,12 @@ class NetworkManager implements URLSessionDataDelegate {
 			let bodyData : Data | null = null;
 			if (typeof (param.data) == 'string') {
 				bodyData = (param.data as string).data(using = String.Encoding.utf8);
-			} else if (param.data instanceof UTSJSONObject) {
+			} else if (param.data instanceof Map<string, any>) {
 				let body : string | null = "";
 				const contentType = request.value(forHTTPHeaderField = "Content-Type")
+				const data = new UTSJSONObject(param.data!);
 				if (contentType != null) {
 					if (contentType!.indexOf("application/x-www-form-urlencoded") == 0) {
-						const data = param.data as UTSJSONObject;
 						const map : Map<string, any | null> = data.toMap();
 						const bodyArray = new Array<string>();
 						map.forEach((value, key) => {
@@ -172,7 +177,7 @@ class NetworkManager implements URLSessionDataDelegate {
 						})
 						body = bodyArray.join("&");
 					} else {
-						body = JSON.stringify(param.data);
+						body = JSON.stringify(data);
 					}
 					bodyData = body?.data(using = String.Encoding.utf8);
 				}
@@ -183,7 +188,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 			request.httpBody = bodyData;
 		}
-
+		
 		return request;
 	}
 
@@ -220,7 +225,9 @@ class NetworkManager implements URLSessionDataDelegate {
 			let encodeKey = encodeURIComponent(key)!
 			if (value instanceof UTSJSONObject || value instanceof Array<any|null>){
 				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(value)!)!
-			}else{
+			} else if(value instanceof Map<string, any>){
+				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(new UTSJSONObject(value))!)!
+			} else{
 				queryMap[encodeKey] = encodeURIComponent(`${value!}`)!;
 			}
 		})
@@ -237,6 +244,11 @@ class NetworkManager implements URLSessionDataDelegate {
 			newUrl += "#" + hash;
 		}
 		return newUrl;
+	}
+	
+	private percentEscapedString(str: string): string {
+		//如果url已经有部分经过encode，那么需要先decode再encode。
+		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
 	}
 
 

@@ -1,0 +1,18 @@
+import { ShowLoading, ShowLoadingOptions, ShowLoadingSuccess, HideLoading } from '../interface.uts';
+import { API_SHOW_LOADING,ShowLoadingApiOptions,ShowLoadingProtocol,API_HIDE_LOADING } from '../protocol.uts';
+
+export const showLoading: ShowLoading = defineAsyncApi<ShowLoadingOptions, ShowLoadingSuccess>(
+  API_SHOW_LOADING,
+  async function (options: ShowLoadingOptions, res: ApiExecutor<ShowLoadingSuccess>) {
+    res.reject('showLoading is not supported on HarmonyOS')
+  },
+  ShowLoadingProtocol,
+  ShowLoadingApiOptions
+) as ShowLoading
+
+export const hideLoading: HideLoading = () => defineAsyncApi(
+  API_HIDE_LOADING,
+  function (options: any, res: ApiExecutor<any>) {
+    res.reject('hideLoading is not supported on HarmonyOS')
+  },
+)

@@ -100,7 +100,7 @@ export type NavigateToOptions = {
      *    "android": {
      *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.18"
      *      },
      *      "ios": {
      *          "osVer": "12.0",
@@ -1369,7 +1369,7 @@ export type NavigateBackOptions = {
      *    "android": {
      *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.18"
      *      },
      *      "ios": {
      *          "osVer": "12.0",

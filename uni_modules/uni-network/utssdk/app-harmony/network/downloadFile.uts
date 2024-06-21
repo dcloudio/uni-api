@@ -1,0 +1,186 @@
+import http from '@ohos.net.http'
+import fs from '@ohos.file.fs'
+import {
+    getEnv,
+    Emitter,
+} from '@dcloudio/uni-runtime'
+import {
+    DownloadTask as UniDownloadTask,
+    DownloadFileOptions as UniDownloadFileOptions,
+    DownloadFileSuccess as UniDownloadFileSuccess,
+    OnProgressDownloadResult,
+    DownloadFile
+} from '../../interface.uts'
+import {
+    API_DOWNLOAD_FILE,
+    DownloadFileApiOptions,
+    DownloadFileApiProtocol,
+} from '../../protocol.uts'
+import {
+    lookupExt
+} from './mime.uts'
+import fileUri from "@ohos.file.fileuri";
+
+interface IDownloadTask {
+    abort: Function
+    onHeadersReceived: Function
+    offHeadersReceived: Function
+    onProgressUpdate: Function
+    offProgressUpdate: Function
+}
+
+function getPossibleExt(contentType: string, contentDisposition: string, url: string): string {
+    const contentDispositionFileNameMatches = contentDisposition.match(/filename="(.*)"/)
+    const contentDispositionFileName = contentDispositionFileNameMatches ? contentDispositionFileNameMatches[1] : ''
+    const contentDispositionExt = contentDispositionFileName ? contentDispositionFileName.split('.').pop() : ''
+    if (contentDispositionExt) {
+        return contentDispositionExt
+    }
+    const contentTypeExt = lookupExt(contentType)
+    if (contentTypeExt) {
+        return contentTypeExt
+    }
+    const urlExt = url.split('?')[0].split('/').pop()?.split('.')[1]
+    return urlExt || ''
+}
+
+/**
+ * TODO 鸿蒙的downloadFile接口也需要传filePath，仍然会遇到content-type -> extension的问题
+ */
+
+class DownloadTask implements UniDownloadTask {
+    private _downloadTask: IDownloadTask
+    constructor(downloadTask: IDownloadTask) {
+        this._downloadTask = downloadTask
+    }
+
+    abort() {
+        this._downloadTask.abort()
+    }
+
+    onProgressUpdate(callback: Function) {
+        this._downloadTask.onProgressUpdate(callback)
+    }
+
+    offProgressUpdate(callback?: Function) {
+        this._downloadTask.offProgressUpdate(callback)
+    }
+
+    onHeadersReceived(callback: Function) {
+        this._downloadTask.onHeadersReceived(callback)
+    }
+
+    offHeadersReceived(callback?: Function) {
+        this._downloadTask.offHeadersReceived(callback)
+    }
+}
+
+export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFileSuccess, UniDownloadTask>(
+    API_DOWNLOAD_FILE,
+    (args: UniDownloadFileOptions, exec: ApiExecutor<UniDownloadFileSuccess>) => {
+        let { url, timeout, header } = args
+
+        const httpRequest = http.createHttp()
+        const emitter = new Emitter()
+        const downloadTask: IDownloadTask = {
+            abort() {
+                httpRequest.destroy()
+            },
+            onHeadersReceived(callback: Function) {
+                emitter.on('headersReceive', callback)
+            },
+            offHeadersReceived(callback?: Function) {
+                emitter.off('headersReceive', callback)
+            },
+            onProgressUpdate(callback: Function) {
+                emitter.on('progress', callback)
+            },
+            offProgressUpdate(callback?: Function) {
+                emitter.off('progress', callback)
+            },
+        }
+
+        let responseContentType = ''
+        let responseContentDisposition = ''
+
+        httpRequest.on('headersReceive', (headers: Object) => {
+            const realHeaders = headers as Record<string, string>
+            responseContentType =
+                realHeaders['content-type'] ||
+                realHeaders['Content-Type'] ||
+                ''
+            responseContentDisposition =
+                realHeaders['content-disposition'] ||
+                realHeaders['Content-Disposition'] ||
+                ''
+
+            // TODO headersReceive在重定向时会多次触发，这点与微信不同，暂不支持回调给用户
+            // emitter.emit('headersReceive', header);
+        })
+        httpRequest.on('dataReceiveProgress', ({ receiveSize, totalSize }) => {
+            emitter.emit('progress', {
+                progress: Math.floor((receiveSize / totalSize) * 100),
+                totalBytesWritten: receiveSize,
+                totalBytesExpectedToWrite: totalSize,
+            } as OnProgressDownloadResult)
+        })
+        const TEMP_PATH = getEnv().TEMP_PATH as string
+        const downloadPath = TEMP_PATH + '/download'
+        if (!fs.accessSync(downloadPath)) {
+            fs.mkdirSync(downloadPath)
+        }
+        let stream: fs.Stream
+        let tempFilePath = ''
+
+        let writePromise = Promise.resolve(0)
+        async function queueWrite(data: ArrayBuffer): Promise<number> {
+            writePromise = writePromise.then(async (total) => {
+                const length = await stream.write(data)
+                return total + length
+            })
+            return writePromise
+        }
+
+        httpRequest.on('dataReceive', (data) => {
+            const ext = getPossibleExt(responseContentType, responseContentDisposition, url)
+            // TODO 鸿蒙未暴露文件后缀与contentType的映射关系，目前引入三方包解决
+            tempFilePath = downloadPath + '/' + Date.now() + (ext ? '.' + ext : '')
+            stream = fs.createStreamSync(tempFilePath, 'w+')
+            queueWrite(data)
+        })
+        httpRequest.requestInStream(
+            url,
+            {
+                header: header ? header : {} as ESObject,
+                method: http.RequestMethod.GET,
+                connectTimeout: timeout ? timeout : undefined, // 不支持仅设置一个timeout
+                readTimeout: timeout ? timeout : undefined,
+            } as http.HttpRequestOptions,
+            (err, statusCode) => {
+                // 此回调先于dataEnd回调执行
+                if (err) {
+                    /**
+                     * TODO abort后此处收到如下错误，待确认是否直接将此错误码转为abort错误
+                     * {"code":2300023,"message":"Failed writing received data to disk/application"}
+                     */
+                    exec.reject(err.message)
+                } else {
+                    writePromise.then(() => {
+                        stream.flushSync()
+                        stream.closeSync()
+                        exec.resolve({
+                            tempFilePath: 'file://' + tempFilePath,
+                            statusCode,
+                        } as UniDownloadFileSuccess)
+                    })
+                }
+                downloadTask.offHeadersReceived()
+                downloadTask.offProgressUpdate()
+                httpRequest.destroy() // 调用完毕后必须调用destroy方法
+            }
+        )
+        return new DownloadTask(downloadTask)
+    },
+    DownloadFileApiProtocol,
+    DownloadFileApiOptions
+) as DownloadFile

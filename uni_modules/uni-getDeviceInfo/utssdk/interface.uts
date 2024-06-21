@@ -151,7 +151,7 @@ export type GetDeviceInfoOptions = {
      *   }
      * }
      */
-    deviceType?: string,
+    deviceType?: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
     /**
      * 设备方向 竖屏 portrait、横屏 landscape	
      * 
@@ -199,7 +199,7 @@ export type GetDeviceInfoOptions = {
      *   }
      * }
      */
-    devicePixelRatio?: string,
+    devicePixelRatio?: number,
     /**
      * 操作系统及版本	
      * 
@@ -247,9 +247,9 @@ export type GetDeviceInfoOptions = {
      *   }
      * }
      */
-    platform?: string,
+    platform?: 'ios' | 'android' | 'harmony' | 'mac' | 'windows' | 'linux',
     /**
-     * 是否root
+     * 是否root。iOS 为是否越狱
      * 
      * @uniPlatform
      * {
@@ -343,7 +343,7 @@ export type GetDeviceInfoOptions = {
      *   }
      * }
      */
-    osName?: 'ios' | 'android' | 'macos' | 'windows' | 'linux' | null,
+    osName?: 'ios' | 'android' | 'harmony' | 'macos' | 'windows' | 'linux' | null,
     /**
      * 操作系统版本。如 ios 版本，andriod 版本
      * 

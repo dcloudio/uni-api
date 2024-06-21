@@ -1,0 +1,15 @@
+import {
+    request
+} from './network/request.uts'
+import {
+    uploadFile
+} from './network/uploadFile.uts'
+import {
+    downloadFile
+} from './network/downloadFile.uts'
+
+export {
+    request,
+    uploadFile,
+    downloadFile
+}

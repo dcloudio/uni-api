@@ -214,39 +214,130 @@ class SelectorQueryImpl implements SelectorQuery {
     }
 }
 
-function getNodeInfo(node: Element): NodeInfo {
-    const rect = node.getBoundingClientRect()
-    const nodeInfo = {
-        id: node.getAttribute('id')?.toString(),
-        dataset: null,
-        left: rect.left,
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom,
-        width: rect.width,
-        height: rect.height,
-    } as NodeInfo
-    return nodeInfo
-}
+class QuerySelectorHelper {
+    _element: Element
 
-function querySelf(element: Element | null, selector: string): Element | null {
-    if (element == null || selector.length < 2) {
+    constructor(element: Element) {
+        this._element = element
+    }
+
+    static queryElement(
+        element: Element,
+        selector: string,
+        all: boolean,
+    ): any | null {
+        return new QuerySelectorHelper(element).query(selector, all)
+    }
+
+    query(selector: string, all: boolean): any | null {
+        if (this._element.nodeName == '#comment') {
+            return this.queryFragment(this._element, selector, all)
+        } else {
+            return all
+                ? this.querySelectorAll(this._element, selector)
+                : this.querySelector(this._element, selector)
+        }
+    }
+
+    queryFragment(el: Element, selector: string, all: boolean): any | null {
+        const startNodeId = parseInt(el.getNodeId())
+        const endNodeId = (startNodeId + 1).toString()
+        let current = el.nextSibling
+        if (current == null) {
+            return null
+        }
+
+        if (all) {
+            const result1: Array<NodeInfo> = []
+            while (true) {
+                const queryResult = this.querySelectorAll(current!, selector)
+                if (queryResult != null) {
+                    result1.push(...queryResult)
+                }
+                current = current.nextSibling
+                if (current == null || current.getNodeId() == endNodeId) {
+                    break
+                }
+            }
+            return result1
+        } else {
+            let result2: NodeInfo | null = null
+            while (true) {
+                result2 = this.querySelector(current!, selector)
+                current = current.nextSibling
+                if (
+                    result2 != null ||
+                    current == null ||
+                    current.getNodeId() == endNodeId
+                ) {
+                    break
+                }
+            }
+            return result2
+        }
+    }
+
+    querySelector(element: Element, selector: string): NodeInfo | null {
+        let element2 = this.querySelf(element, selector)
+        if (element2 == null) {
+            element2 = element.querySelector(selector)
+        }
+        if (element2 != null) {
+            return this.getNodeInfo(element2)
+        }
         return null
     }
 
-    const selectorType = selector.charAt(0)
-    const selectorName = selector.slice(1)
-    if (selectorType == '.' && element!.classList.includes(selectorName)) {
-        return element
-    }
-    if (selectorType == '#' && element!.getAttribute('id') == selectorName) {
-        return element
-    }
-    if (selector.toUpperCase() == element!.nodeName!.toUpperCase()) {
-        return element
+    querySelectorAll(
+        element: Element,
+        selector: string,
+    ): Array<NodeInfo> | null {
+        const nodesInfoArray: Array<NodeInfo> = []
+        const element2 = this.querySelf(element, selector)
+        if (element2 != null) {
+            nodesInfoArray.push(this.getNodeInfo(element))
+        }
+        const findNodes = element.querySelectorAll(selector)
+        findNodes?.forEach((el: Element) => {
+            nodesInfoArray.push(this.getNodeInfo(el))
+        })
+        return nodesInfoArray
     }
 
-    return null
+    querySelf(element: Element | null, selector: string): Element | null {
+        if (element == null || selector.length < 2) {
+            return null
+        }
+
+        const selectorType = selector.charAt(0)
+        const selectorName = selector.slice(1)
+        if (selectorType == '.' && element.classList.includes(selectorName)) {
+            return element
+        }
+        if (selectorType == '#' && element.getAttribute('id') == selectorName) {
+            return element
+        }
+        if (selector.toUpperCase() == element.nodeName.toUpperCase()) {
+            return element
+        }
+
+        return null
+    }
+
+    getNodeInfo(element: Element): NodeInfo {
+        const rect = element.getBoundingClientRect()
+        const nodeInfo = {
+            id: element.getAttribute('id')?.toString(),
+            dataset: null,
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+            width: rect.width,
+            height: rect.height,
+        } as NodeInfo
+        return nodeInfo
+    }
 }
 
 function requestComponentInfo(
@@ -258,27 +349,13 @@ function requestComponentInfo(
     const el = vueComponent?.$el
     if (el != null) {
         queue.forEach((item: SelectorQueryRequest) => {
-            if (item.single) {
-                let element = querySelf(el, item.selector)
-                if (element == null) {
-                    element = el.querySelector(item.selector)
-                }
-                if (element != null) {
-                    result.push(getNodeInfo(element))
-                }
-            } else {
-                const nodesInfo: Array<NodeInfo> = []
-
-                const element = querySelf(el, item.selector)
-                if (element != null) {
-                    nodesInfo.push(getNodeInfo(element))
-                }
-
-                const findNodes = el.querySelectorAll(item.selector)
-                findNodes?.forEach((node: Element) => {
-                    nodesInfo.push(getNodeInfo(node))
-                })
-                result.push(nodesInfo)
+            const queryResult = QuerySelectorHelper.queryElement(
+                el,
+                item.selector,
+                !item.single,
+            )
+            if (queryResult != null) {
+                result.push(queryResult)
             }
         })
     }

@@ -67,6 +67,6 @@ export class MediaErrorImpl extends UniError implements IMediaError {
 		super()
 		this.errSubject = uniErrorSubject
 		this.errCode = errCode
-		this.errMsg = MediaUniErrors[errCode] ?? "";
+		this.errMsg = MediaUniErrors.get(errCode) ?? "";
 	}
 }
