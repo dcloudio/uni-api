@@ -69,8 +69,7 @@ interface Uni {
 
 	/**
 	 * 获取电池电量信息
-	 * @description 获取电池电量信息
-	 * @param {GetBatteryInfoOptions} options
+	 *
 	 * @example
 	 * ```typescript
 	 * uni.getBatteryInfo({
@@ -92,7 +91,12 @@ interface Uni {
 	 *            "osVer": "12.0",
 	 *            "uniVer": "3.6.11",
 	 *            "unixVer": "4.11"
-	 *        }
+	 *        },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 *    }
 	 * }
 	 * @uniVueVersion 2,3  //支持的vue版本
@@ -101,7 +105,7 @@ interface Uni {
 	getBatteryInfo (options : GetBatteryInfoOptions) : void,
 	/**
 	 * 同步获取电池电量信息
-	 * @description 获取电池电量信息
+	 *
 	 * @example
 	 * ```typescript
 	 * uni.getBatteryInfo()
@@ -119,7 +123,12 @@ interface Uni {
 	 *            "osVer": "12.0",
 	 *            "uniVer": "3.6.11",
 	 *            "unixVer": "4.11"
-	 *        }
+	 *        },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 *    }
 	 * }
 	 * @uniVueVersion 2,3  //支持的vue版本
