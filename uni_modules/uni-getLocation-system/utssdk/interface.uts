@@ -22,16 +22,16 @@ export interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "x",
-   *            "uniVer": "x",
-   *            "unixVer": "x"
+   *            "osVer": "12.0",
+   *            "uniVer": "√",
+   *            "unixVer": "4.11"
    *        }
    *    },
    *    "web": {
    *        "uniVer": "√",
    *        "unixVer": "4.0"
    *    }
-   * }9999
+   * }
    * 
    */
   getLocation(options: GetLocationOptions):void;
@@ -112,7 +112,7 @@ export type GetLocationOptions = {
    * 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于uni.openLocation的坐标，web端需配置定位 SDK 信息才可支持 gcj02
    * @defaultValue wgs84
    */
-  type?: "wgs84" | "gcj02" | "gps" | null,
+  type?: "wgs84" | "gcj02" | null,
   /**
    * 传入 true 会返回高度信息，由于获取高度需要较高精确度，会减慢接口返回速度
    * @type boolean

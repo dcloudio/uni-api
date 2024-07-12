@@ -79,6 +79,12 @@ export type ChooseImageOptions = {
 	 * original 原图，compressed 压缩图，默认二者都有
 	 * @type string | string []
 	 * @defaultValue ['original','compressed']
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	sizeType ?: (string[]) | null,
 	/**
@@ -101,6 +107,12 @@ export type ChooseImageOptions = {
 	extension ?: (string[]) | null,
 	/**
 	 * 图像裁剪参数，设置后 sizeType 失效。
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	crop ?: (ChooseImageCropOptions) | null,
 	/**
@@ -171,7 +183,7 @@ export type PreviewImageCompleteCallback = ChooseImageCompleteCallback
 
 export type PreviewImageOptions = {
 	/**
-	 * current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张。
+	 * current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张。APP平台仅支持索引值。
 	 * @type string | number
 	 */
 	current ?: any | null,
@@ -197,7 +209,7 @@ export type PreviewImageOptions = {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
 	 *		}
@@ -265,10 +277,22 @@ export type GetImageInfoSuccess = {
 	path : string,
 	/**
 	 * 返回图片的方向
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	orientation : string | null,
 	/**
 	 * 返回图片的格式
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	type : string | null
 };
@@ -357,10 +381,12 @@ export type CompressImageOptions = {
 	rotate ?: number | null,
 	/**
 	 * 缩放图片的宽度
+	 * @deprecated 已废弃
 	 */
 	width ?: string | null,
 	/**
 	 * 缩放图片的高度
+	 * @deprecated 已废弃
 	 */
 	height ?: string | null,
 	/**
@@ -429,10 +455,23 @@ export type ChooseVideoOptions = {
 	/**
 	 * 是否压缩所选的视频源文件，默认值为true，需要压缩
 	 * @type boolean
+	 * @default true
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	compressed ?: boolean | null,
 	/**
 	 * 拍摄视频最长拍摄时间，单位秒。最长支持 60 秒
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	maxDuration ?: number | null,
 	/**
@@ -440,10 +479,25 @@ export type ChooseVideoOptions = {
 	 * - front: 前置摄像头
 	 * - back: 后置摄像头
 	 * @type 'front' | 'back'
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	camera ?: string | null,
 	/**
 	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		}
+	 *	 }
+	 * }
 	 */
 	extension ?: (string[]) | null,
 	/**
@@ -465,10 +519,22 @@ export type ChooseVideo = (options : ChooseVideoOptions) => void;
 export type GetVideoInfoSuccess = {
 	/**
 	 * 画面方向
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	orientation : string | null,
 	/**
 	 * 视频格式
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	type : string | null,
 	/**
@@ -489,10 +555,22 @@ export type GetVideoInfoSuccess = {
 	width : number,
 	/**
 	 * 视频帧率
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	fps : number | null,
 	/**
 	 * 视频码率，单位 kbps
+	 * @uniPlatform {
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
 	 */
 	bitrate : number | null
 };
@@ -582,10 +660,28 @@ export type CompressVideoOptions = {
 	quality ?: string | null,
 	/**
 	 * 码率，单位 kbps
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		}
+	 *	 }
+	 * }
 	 */
 	bitrate ?: number | null,
 	/**
 	 * 帧率
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		}
+	 *	 }
+	 * }
 	 */
 	fps ?: number | null,
 	/**
@@ -615,7 +711,7 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		},
@@ -652,7 +748,7 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		},
@@ -689,7 +785,7 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		},
@@ -698,7 +794,11 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -721,11 +821,15 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -754,7 +858,7 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "3.9+"
 	 *		},
@@ -763,7 +867,11 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -792,11 +900,15 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -826,11 +938,20 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -851,11 +972,15 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -877,11 +1002,20 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -903,11 +1037,15 @@ export interface Uni {
 	 * @uniPlatform {
 	 *	 "app": {
 	 *		"android": {
-	 *			"osVer": "4.4",
+	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
-	 *			"unixVer": "3.9+"
+	 *			"unixVer": "4.18"
 	 *		}
-	 *	}
+	 *	},
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example

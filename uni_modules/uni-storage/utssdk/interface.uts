@@ -26,7 +26,7 @@ export type SetStorageOptions = {
    */
   key: string,
   /**
-   * 需要存储的内容，只支持原生类型、及能够通过 JSON.stringify 序列化的对象
+   * 需要存储的内容，只支持能通过 JSON.stringify 序列化的对象
    */
   data: any,
   /**
@@ -275,7 +275,7 @@ export interface Uni {
    * 将 data 存储在本地storage存储中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
    * 
    * @param {string} key  本地storage存储中的指定的 key
-   * @param {any} data  需要存储的内容，只支持原生类型、及能够通过 JSON.stringify 序列化的对象
+   * @param {any} data  需要存储的内容，只支持能通过 JSON.stringify 序列化的对象
    * @tutorial https://uniapp.dcloud.net.cn/api/storage/storage.html#setstoragesync
    * @uniPlatform {
    *    "app": {

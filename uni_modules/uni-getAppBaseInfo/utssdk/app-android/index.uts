@@ -39,7 +39,8 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"uniCompilerVersionCode",
 			"uniRuntimeVersionCode",
 			"packageName",
-			"signature"
+			"signature",
+			"appTheme",
 		];
 		filter = defaultFilter;
 	}
@@ -134,6 +135,10 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	
 	if (filterArray.indexOf("signature") != -1) {
 		result.signature = AppBaseInfoDeviceUtil.getAppSignatureSHA1(activity);
+	}
+	
+	if (filterArray.indexOf("appTheme") != -1) {
+		result.appTheme = UTSAndroid.getAppTheme();
 	}
 
 	return result;

@@ -1,6 +1,7 @@
 export const DEFAULT_ANIMATION_IN = 'pop-in'
 export const DEFAULT_ANIMATION_OUT = 'pop-out'
 export const DEFAULT_ANIMATION_DURATION = 300
+export const DEFAULT_ANIMATION_NAVIGATE_BACK = 'auto'
 
 export const ANIMATION_IN = [
     'slide-in-right',

@@ -46,10 +46,23 @@ export function hideLoadingImpl() {
 	closeToast("loading")
 }
 
+
+// 全局存储
+// #ifdef UNI-APP-X
+const onReadyToast = new Map<ComponentPublicInstance,UTSJSONObject>()
+// #endif
+
 function closeToast(type : string | null) {
 	if (type != null && type !== toastType) {
 		return
 	}
+	// #ifdef UNI-APP-X
+	let pages = getCurrentPages();
+	if (pages.length > 0) {
+		let page = pages[pages.length - 1];
+		onReadyToast.remove(page)
+	}
+	// #endif
 	if (timeout != null && (timeout as number) > 0) {
 		clearTimeout(timeout as number)
 		timeout = null
@@ -125,10 +138,17 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 					toast = alert
 			        alert?.showWaiting();
 			    } else {
+					onReadyToast.set(page,options)
 			        onReady(() => {
-						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
-						toast = alert
-			            alert?.showWaiting();
+						if(onReadyToast.containsKey(page)){
+							options = onReadyToast.get(page) as UTSJSONObject;
+							
+							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+							toast = alert
+							alert?.showWaiting();
+							
+							onReadyToast.remove(page)
+						}
 			        }, instance)
 			    }
 			    
@@ -250,10 +270,17 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 						toast = alert
 				        alert?.showWaiting();
 				    } else {
+						onReadyToast.set(page,options)
 				        onReady(() => {
-							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
-							toast = alert
-				            alert?.showWaiting();
+							if(onReadyToast.containsKey(page)){
+								options = onReadyToast.get(page) as UTSJSONObject;
+								 
+								const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+								toast = alert
+								alert?.showWaiting();
+							
+								onReadyToast.remove(page)
+							}
 				        }, instance)
 				    }
 				    

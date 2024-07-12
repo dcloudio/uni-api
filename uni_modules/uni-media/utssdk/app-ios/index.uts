@@ -3,12 +3,14 @@ import {
 	PreviewImageOptions, PreviewImage, PreviewImageSuccess,
 	ClosePreviewImage, ClosePreviewImageSuccess, ClosePreviewImageOptions,
 	SaveImageToPhotosAlbum, SaveImageToPhotosAlbumOptions, SaveImageToPhotosAlbumSuccess,
+	ChooseVideo, ChooseVideoOptions,
+	SaveVideoToPhotosAlbum, SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccess, ChooseVideoSuccess,
 } from "../interface.uts";
 import {
 	UniError_ChooseImage, UniError_SaveImageToPhotosAlbum,
-	MediaErrorImpl,UniError_PreviewImage
+	MediaErrorImpl,UniError_PreviewImage, UniError_ChooseVideo, UniError_SaveVideoToPhotosAlbum
 } from "../unierror.uts"
-import { uniChooseImage, uniChooseVideo } from "../ChooseImageUtils.uts";
+import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts";
 
 import { UTSiOS } from "DCloudUTSFoundation";
 import { NSFileManager } from "Foundation";
@@ -23,7 +25,7 @@ export const chooseImage : ChooseImage = function (option : ChooseImageOptions) 
 		if (index == 0) {
 			requestCameraPermission(function (status : number) {
 				if (status == 1) {
-					mediaPicker.openCameraForImage(option, compressed)
+					mediaPicker.openCameraForImage(option)
 				} else {
 					let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
 					option.fail?.(error)
@@ -34,7 +36,7 @@ export const chooseImage : ChooseImage = function (option : ChooseImageOptions) 
 		} else if (index == 1) {
 			requestAlbumPermission("readWrite", function (status : number) {
 				if (status == 1) {
-					mediaPicker.openAlbumForImage(option, count, 101)
+					mediaPicker.openAlbumForImage(option, count)
 				} else {
 					let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
 					option.fail?.(error)
@@ -45,14 +47,57 @@ export const chooseImage : ChooseImage = function (option : ChooseImageOptions) 
 	});
 }
 
+export const chooseVideo : ChooseVideo = function (option : ChooseVideoOptions) {
+	uniChooseVideo(option, (count : number, compressed : boolean, index : number) => {
+		if (index == 0) {
+			requestCameraPermission(function (status : number) {
+				if (status == 1) {
+					requestMicrophonePermission(function (status : number){
+						if (status == 1) {
+							mediaPicker.openCameraForVideo(option)
+						}else{
+							let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+							option.fail?.(error)
+							option.complete?.(error)
+						}
+					})
+					
+				} else {
+					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+					option.fail?.(error)
+					option.complete?.(error)
+				}
+			})
+		
+		} else if (index == 1) {
+			requestAlbumPermission("readWrite", function (status : number) {
+				if (status == 1) {
+					mediaPicker.openAlbumForVideo(option)
+				} else {
+					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+					option.fail?.(error)
+					option.complete?.(error)
+				}
+			})
+		}
+	})
+}
+
 class DCUniMediaPicker {
-	private mediaAlbum : DCloudMediaAlbum = new DCloudMediaAlbum();
-	private mediaCamera : DCloudMediaCamera = new DCloudMediaCamera();
-	openAlbumForImage(option : ChooseImageOptions, count : number, type : number){
-		this.chooseImageWithAlbum(option,count,type);
+	private mediaAlbum : DCloudMediaAlbum | null = null;
+	private mediaCamera : DCloudMediaCamera | null = null;
+	private imageBrowser : PreviewImageBrowser | null = null;
+	openAlbumForImage(option : ChooseImageOptions, count : number){
+		this.chooseImageWithAlbum(option,count);
 	}
-	openCameraForImage(option : ChooseImageOptions, compressed : boolean){
-		this.chooseImageWithCamera(option,compressed);
+	openAlbumForVideo(option : ChooseVideoOptions){
+		this.chooseVideoWithAlbum(option);
+	}
+	openCameraForVideo(option : ChooseVideoOptions){
+		this.chooseVideoWithCamera(option);
+	}
+	openCameraForImage(option : ChooseImageOptions){
+		this.chooseImageWithCamera(option);
 	}
 	preview(options : PreviewImageOptions){
 		this.previewImageWithOptions(options);
@@ -60,7 +105,47 @@ class DCUniMediaPicker {
 	close(){
 		this.closePreview();
 	}
-	private chooseImageWithAlbum(option : ChooseImageOptions, count : number, type : number){
+	
+	private chooseVideoWithAlbum(option : ChooseVideoOptions){
+		const mediaCachePath = UTSiOS.getMediaCacheDir() + "/"
+		let fileManager = FileManager.default
+		if (fileManager.fileExists(atPath = mediaCachePath) == false) {
+			try {
+				UTSiOS.try(fileManager.createDirectory(atPath = mediaCachePath, withIntermediateDirectories = true, attributes = null))
+			} catch (e) {
+				console.log(e)
+			}
+		}
+		let options : Map<string, any> = new Map();
+		options.set('resolution', "high");
+		options.set('videoCompress', option.compressed);
+		options.set('filePath', mediaCachePath);
+		options.set('maximum', 1);
+		options.set('filter', "video");
+		DispatchQueue.main.async(execute = () : void => {
+			if (this.mediaAlbum == null){
+				this.mediaAlbum = new DCloudMediaAlbum();
+			}
+			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
+				const filePath : string = response.get('tempFilePath') as string
+				let success : ChooseVideoSuccess = {
+					tempFilePath: "file://" + filePath,
+					width: response.get('width'),
+					height: response.get('height'),
+					size: response.get('size'),
+					duration: response.get('duration'),
+				}
+				option.success?.(success)
+				option.complete?.(success)
+			}, fail = (code : number) : void => {
+				let mediaError = new MediaErrorImpl(code, UniError_ChooseVideo);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
+			})
+		})
+	}
+	
+	private chooseImageWithAlbum(option : ChooseImageOptions, count : number){
 		const mediaCachePath = UTSiOS.getMediaCacheDir() + "/"
 		let fileManager = FileManager.default
 		if (fileManager.fileExists(atPath = mediaCachePath) == false) {
@@ -94,7 +179,10 @@ class DCUniMediaPicker {
 			options.set('crop', crop);
 		}
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaAlbum.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaAlbum == null){
+				this.mediaAlbum = new DCloudMediaAlbum();
+			}
+			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				let success : ChooseImageSuccess = {
 					"errSubject": "uni-chooseImage",
 					"tempFilePaths": response.get('tempFilePaths'),
@@ -111,7 +199,59 @@ class DCUniMediaPicker {
 		})
 	}
 	
-	private chooseImageWithCamera(option : ChooseImageOptions, compressed : boolean){
+	private chooseVideoWithCamera(option : ChooseVideoOptions){
+		const mediaCachePath = UTSiOS.getMediaCacheDir() + "/"
+		const fileManager = FileManager.default
+		if (fileManager.fileExists(atPath = mediaCachePath) == false) {
+			try {
+				UTSiOS.try(fileManager.createDirectory(atPath = mediaCachePath, withIntermediateDirectories = true, attributes = null))
+			} catch (e) {
+				console.log(e)
+			}
+		}
+		
+		const currentTime = Int(Date().timeIntervalSince1970)
+		const cameraPath = (mediaCachePath + currentTime.toString() + ".mp4")
+		
+		let options : Map<string, any> = new Map();
+		options.set('resolution', "high");
+		options.set('videoCompress', option.compressed);
+		options.set('filePath', cameraPath);
+		options.set('type', "video");
+		if (option.maxDuration != null){
+			if(option.maxDuration! > 0){
+				options.set('videoMaximumDuration', option.maxDuration);
+			}
+		}else{
+			options.set('videoMaximumDuration', 60);
+		}
+		if (option.camera != null){
+			options.set('index', option.camera == "front" ? 2 : 1);
+		}
+		
+		DispatchQueue.main.async(execute = () : void => {
+			if (this.mediaCamera == null){
+				this.mediaCamera = new DCloudMediaCamera();
+			}
+			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
+				let success : ChooseVideoSuccess = {
+					tempFilePath: "file://" + cameraPath,
+					width: response.get('width'),
+					height: response.get('height'),
+					size: response.get('size'),
+					duration: response.get('duration'),
+				}
+				option.success?.(success)
+				option.complete?.(success)
+			}, fail = (code : number) : void => {
+				let mediaError = new MediaErrorImpl(code, UniError_ChooseVideo);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
+			})
+		})
+	}
+	
+	private chooseImageWithCamera(option : ChooseImageOptions){
 		const mediaCachePath = UTSiOS.getMediaCacheDir() + "/"
 		const fileManager = FileManager.default
 		if (fileManager.fileExists(atPath = mediaCachePath) == false) {
@@ -129,6 +269,7 @@ class DCUniMediaPicker {
 		options.set('resolution', "high");
 		options.set('sizeType', option.sizeType);
 		options.set('filePath', cameraPath);
+		options.set('type', "image");
 		if (option.crop != null) {
 			let crop : Map<string, any> = new Map();
 			if (option.crop!.width != nil) {
@@ -146,7 +287,10 @@ class DCUniMediaPicker {
 			options.set('crop', crop);
 		}
 		DispatchQueue.main.async(execute = () : void => {
-			this.mediaCamera.start(options, success = (response : Map<AnyHashable, any>) : void => {
+			if (this.mediaCamera == null){
+				this.mediaCamera = new DCloudMediaCamera();
+			}
+			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
 				let success : ChooseImageSuccess = {
 					"errSubject": "uni-chooseImage",
 					"tempFilePaths": ["file://" + cameraPath],
@@ -163,9 +307,14 @@ class DCUniMediaPicker {
 		})
 	}
 	
-	private imageBrowser = new PreviewImageBrowser()
+	
 	private closePreview(){
-		this.imageBrowser.close()
+		DispatchQueue.main.async(execute=():void => {
+			if (this.imageBrowser == null){
+				this.imageBrowser = new PreviewImageBrowser();
+			}
+			this.imageBrowser?.close();
+		})
 	}
 	private previewImageWithOptions(options : PreviewImageOptions){
 		
@@ -187,12 +336,32 @@ class DCUniMediaPicker {
 		op.set('loop', options.loop);
 		op.set("cachePath", UTSiOS.getMediaCacheDir());
 		DispatchQueue.main.async(execute=():void => {
-			this.imageBrowser.startPreview(op);
+			if (this.imageBrowser == null){
+				this.imageBrowser = new PreviewImageBrowser();
+			}
+			this.imageBrowser?.startPreview(op);
 		})
 		
 		let success : PreviewImageSuccess = { errMsg: 'ok', "errSubject": UniError_PreviewImage }
 		options.success?.(success)
 		options.complete?.(success)
+	}
+}
+
+function requestMicrophonePermission(completion : (status : number) => void) {
+	let authorized = AVCaptureDevice.authorizationStatus(for= AVMediaType.audio)
+	if (authorized == AVAuthorizationStatus.authorized) {
+		completion(1)
+	} else if (authorized == AVAuthorizationStatus.notDetermined) {
+		AVCaptureDevice.requestAccess(for=AVMediaType.audio, completionHandler = (result : Bool) : void => {
+			if (result) {
+				completion(1)
+			} else {
+				completion(0)
+			}
+		})
+	} else {
+		completion(0)
 	}
 }
 
@@ -330,6 +499,37 @@ export const saveImageToPhotosAlbum : SaveImageToPhotosAlbum = function (options
 			}
 		} else {
 			let error = new MediaErrorImpl(1101005, UniError_SaveImageToPhotosAlbum);
+			options.fail?.(error)
+			options.complete?.(error)
+		}
+	})
+}
+
+export const saveVideoToPhotosAlbum : SaveVideoToPhotosAlbum = function (options : SaveVideoToPhotosAlbumOptions) {
+	const path = UTSiOS.getResourceAbsolutePath(options.filePath,null)
+	let url = new URL(string = path)
+	if (url == null) {
+		let error = new MediaErrorImpl(1101003, UniError_SaveVideoToPhotosAlbum);
+		options.fail?.(error)
+		options.complete?.(error)
+		return
+	}
+	requestAlbumPermission("addOnly", function (status : number) {
+		if (status == 1) {
+			try {
+				UTSiOS.try(PHPhotoLibrary.shared().performChangesAndWait(() : void => {
+					PHAssetCreationRequest.creationRequestForAssetFromVideo(atFileURL = url!)
+				}))
+				let success : SaveVideoToPhotosAlbumSuccess = {}
+				options.success?.(success)
+				options.complete?.(success)
+			} catch (e) {
+				let error = new MediaErrorImpl(1101006, UniError_SaveVideoToPhotosAlbum);
+				options.fail?.(error)
+				options.complete?.(error)
+			}
+		} else {
+			let error = new MediaErrorImpl(1101005, UniError_SaveVideoToPhotosAlbum);
 			options.fail?.(error)
 			options.complete?.(error)
 		}

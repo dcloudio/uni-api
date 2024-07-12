@@ -10,11 +10,14 @@ export const getProvider : GetProvider = (options: GetProviderOptions) : void =>
       options.fail?.(uniError);
     }
   } else {
-    const provider = UTSiOS.getExtApiProviders(options.service)
+    const providers = UTSiOS.getProviders(options.service)
     if (options.success != null) { 
       const result = {
         service: options.service,
-        provider,
+        provider: providers.map((provider): string => {
+          return provider.id
+        }),
+        providers,
         errMsg: 'GetProvider:ok'
       } as GetProviderSuccess;
       options.success?.(result);

@@ -1,8 +1,7 @@
 import { WriteFileOptions, ReadFileOptions, MkDirOptions, RmDirOptions, UnLinkOptions, ReadDirOptions, AccessOptions, RenameOptions, GetFileInfoOptions, CopyFileOptions, StatOptions } from "../interface.uts"
 import { ReadFileSuccessResult, FileManagerSuccessResult, ReadDirSuccessResult, GetFileInfoSuccessResult, StatSuccessResult, FileStats, Stats } from "../interface.uts"
 import { GetFileSystemManager, FileSystemManager } from "../interface.uts"
-import { UniErrorSubject, UniErrors } from "../unierror.uts"
-export { Stats,FileStats } from '../interface.uts'
+import { FileSystemManagerFailImpl, FileSystemManagerUniErrorSubject, FileSystemManagerUniErrors } from "../unierror.uts"
 
 class InnerStats implements Stats {
 	/**
@@ -93,7 +92,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.path);
+				let err = new FileSystemManagerFailImpl(code)
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -103,7 +102,7 @@ class JsFileSystemManager implements FileSystemManager {
 		if(options.digestAlgorithm == null || options.digestAlgorithm == undefined){
 			options.digestAlgorithm = "md5"
 		} else if (options.digestAlgorithm!.toLowerCase() != 'md5' && options.digestAlgorithm!.toLowerCase() != 'sha1') {
-			let err = new UniError(UniErrorSubject, 1300022, UniErrors.get(1300022)! + ":invalid digestAlgorithm " + options.digestAlgorithm);
+			let err = new FileSystemManagerFailImpl(1300022);
 			options.fail?.(err)
 			options.complete?.(err)
 			return
@@ -117,7 +116,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.filePath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -136,7 +135,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)!);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -155,7 +154,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)!);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -173,7 +172,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.path);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -191,7 +190,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.dirPath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -214,7 +213,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.dirPath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -229,7 +228,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.dirPath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -248,7 +247,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.filePath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -266,7 +265,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.filePath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})
@@ -286,7 +285,7 @@ class JsFileSystemManager implements FileSystemManager {
 				options.complete?.(ret)
 			},
 			function (code) {
-				let err = new UniError(UniErrorSubject, code, UniErrors.get(code)! + ":" + options.filePath);
+				let err = new FileSystemManagerFailImpl(code);
 				options.fail?.(err)
 				options.complete?.(err)
 			})

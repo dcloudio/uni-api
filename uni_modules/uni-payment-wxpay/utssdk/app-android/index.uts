@@ -1,5 +1,26 @@
 import { Wxpay } from "./src/Wxpay";
+import PackageManager from 'android.content.pm.PackageManager';
 export * from './src/WXPayEntryActivity.uts'
-export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {
-	new Wxpay().requestPayment(options)
-};
+export class UniPaymentWxpayProvider implements UniPaymentProvider {
+	override id : String = "wxpay"
+	override description : String = "wechat"
+	override isAppExist : boolean | null = null
+
+	override requestPayment(options : RequestPaymentOptions) {
+		new Wxpay().requestPayment(options)
+	}
+	constructor() {
+		this.isAppExist = this.isWeChatInstalled()
+	}
+	isWeChatInstalled() : boolean {
+		let pm = UTSAndroid.getAppContext()?.getPackageManager();
+		let app_installed : Boolean;
+		try {
+			pm?.getPackageInfo("com.tencent.mm", PackageManager.GET_ACTIVITIES);
+			app_installed = true;
+		} catch (e : PackageManager.NameNotFoundException) {
+			app_installed = false;
+		}
+		return app_installed;
+	}
+}

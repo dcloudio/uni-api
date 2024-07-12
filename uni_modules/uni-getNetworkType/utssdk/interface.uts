@@ -15,9 +15,9 @@ export interface Uni {
 	* 			"unixVer": "3.9+"
 	* 		},
 	* 		"ios": {
-	* 			"osVer": "9.0",
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
-	* 			"unixVer": "4.06"
+	* 			"unixVer": "4.11"
 	* 		}
 	* 	},
   *   "web": {

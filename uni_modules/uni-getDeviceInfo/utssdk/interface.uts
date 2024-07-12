@@ -1,121 +1,536 @@
 export type GetDeviceInfoOptions = {
+    /**
+     * @description 过滤字段的字符串数组，假如要获取指定字段，传入此数组。
+     */
+    filter: Array<string>
+  }
+  
+  export type GetDeviceInfoResult = {
+    /**
+     * 设备品牌
+     * @deprecated 已废弃，仅为了向下兼容保留
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    brand?: string
+    /**
+     * 设备品牌
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    deviceBrand?: string,
+    /**
+     * 设备 id 。由 uni-app 框架生成并存储，清空 Storage 会导致改变
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    deviceId?: string,
+    /**
+     * 设备型号	
+     * @deprecated 已废弃，仅为了向下兼容保留
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    model?: string,
+    /**
+     * 设备型号	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    deviceModel?: string,
+    /**
+     * 设备类型phone、pad、pc	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    deviceType?: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
+    /**
+     * 设备方向 竖屏 portrait、横屏 landscape	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    deviceOrientation?: string,
+    /**
+     * 设备像素比	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    devicePixelRatio?: number,
+    /**
+     * 操作系统及版本	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    system?: string,
+    /**
+     * 客户端平台	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "√",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "√",
+     *     "unixVer": "4.0"
+     *   }
+     * }
+     */
+    platform?: 'ios' | 'android' | 'mac' | 'windows' | 'linux',
+    /**
+     * 是否root。iOS 为是否越狱
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    isRoot?: boolean,
+    /**
+     * 是否是模拟器
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "3.9+"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.11"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    isSimulator?: boolean,
+    /**
+     * adb是否开启
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "√"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    isUSBDebugging?: boolean,
+    /**
+     * 系统名称	
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "4.18"
+     *   }
+     * }
+     */
+    osName?: 'ios' | 'android' | 'macos' | 'windows' | 'linux' | null,
+    /**
+     * 操作系统版本。如 ios 版本，andriod 版本
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "4.18"
+     *   }
+     * }
+     */
+    osVersion?: string | null,
+    /**
+     * 操作系统语言
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+       * 	},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    osLanguage?: string | null,
+    /**
+     * 操作系统主题
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    osTheme?: 'light' | 'dark' | null,
+    /**
+     * Android 系统API库的版本。
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "x",
+       *     "uniVer": "x",
+       *     "unixVer": "x"
+       *   }
+       * },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    osAndroidAPILevel?: number | null,
+    /**
+     * rom 名称。Android 部分机型获取不到值。iOS 恒为 `ios`
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    romName?: string | null,
+    /**
+     * rom 版本号。Android 部分机型获取不到值。iOS 为操作系统版本号（同 `osVersion`）。
+     * 
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "5.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "12.0",
+     * 			"uniVer": "x",
+     * 			"unixVer": "4.18"
+     * 		}
+     * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    romVersion?: string | null,
+  }
+  
+  
   /**
-   * @description 过滤字段的字符串数组，假如要获取指定字段，传入此数组。
+   * @param [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
    */
-  filter: Array<string>
-}
-
-export type GetDeviceInfoResult = {
-  /**
-   * 设备品牌
-   */
-  brand?: string
-  /**
-   * 设备品牌
-   */
-  deviceBrand?: string,
-  /**
-   * 设备 id 。由 uni-app 框架生成并存储，清空 Storage 会导致改变
-   */
-  deviceId?: string,
-  /**
-   * 设备型号	
-   */
-  model?: string,
-  /**
-   * 设备型号	
-   */
-  deviceModel?: string,
-  /**
-   * 设备类型phone、pad、pc	
-   */
-  deviceType?: string,
-  /**
-   * 设备方向 竖屏 portrait、横屏 landscape	
-   */
-  deviceOrientation?: string,
-  /**
-   * 设备像素比	
-   */
-  devicePixelRatio?: string,
-  /**
-   * 操作系统及版本	
-   */
-  system?: string,
-  /**
-   * 客户端平台	
-   */
-  platform?: string,
-  /**
-   * 是否root
-   */
-  isRoot?: boolean,
-  /**
-   * 是否是模拟器
-   */
-  isSimulator?: boolean,
-  /**
-   * adb是否开启
-   * 
-   * @uniPlatform
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "5.0",
-   * 			"uniVer": "x",
-   * 			"unixVer": "√"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "x",
-   * 			"uniVer": "x",
-   * 			"unixVer": "x"
-   * 		}
-   * 	}
-   * }
-   */
-  isUSBDebugging?: boolean,
-}
-
-
-/**
- * @param [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
- */
-export type GetDeviceInfo = (options?: GetDeviceInfoOptions | null) => GetDeviceInfoResult;
-
-
-export interface Uni {
-  /**
-    * GetDeviceInfo(Object object)
-    * @description 
-    * 获取设备信息
-    * @param {GetDeviceInfoOptions} options [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
-    * @return {object}
-    * @tutorial https://uniapp.dcloud.net.cn/api/system/getDeviceInfo.html
-    * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		}
-	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
-	* }
-  * @example
-     ```typescript
-      uni.getDeviceInfo({
-        filter:[]
-      })
-     ```
-    */
-  getDeviceInfo(options?: GetDeviceInfoOptions | null): GetDeviceInfoResult;
-}
+  export type GetDeviceInfo = (options?: GetDeviceInfoOptions | null) => GetDeviceInfoResult;
+  
+  
+  export interface Uni {
+    /**
+      * GetDeviceInfo(Object object)
+      * @description 
+      * 获取设备信息
+      * @param {GetDeviceInfoOptions} options [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
+      * @return {object}
+      * @tutorial https://uniapp.dcloud.net.cn/api/system/getDeviceInfo.html
+      * @uniPlatform
+      * {
+      * 	"app": {
+      * 		"android": {
+      * 			"osVer": "5.0",
+      * 			"uniVer": "√",
+      * 			"unixVer": "3.9+"
+      * 		},
+      * 		"ios": {
+      * 			"osVer": "12.0",
+      * 			"uniVer": "√",
+      * 			"unixVer": "4.11"
+      * 		}
+      * 	},
+    *   "web": {
+    *     "uniVer": "√",
+    *     "unixVer": "4.0"
+    *   }
+      * }
+    * @example
+       ```typescript
+        uni.getDeviceInfo({
+          filter:[]
+        })
+       ```
+      */
+    getDeviceInfo(options?: GetDeviceInfoOptions | null): GetDeviceInfoResult;
+  }
+  

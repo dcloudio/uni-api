@@ -8,7 +8,7 @@ import {
 	MediaErrorImpl
 } from "../../unierror.uts"
 import { getVideoMetadata } from "./MediaUtils.uts"
-import { uniChooseImage, uniChooseVideo } from "../../ChooseImageUtils.uts"
+import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts"
 import { getUniActivity } from "io.dcloud.uts.android";
 import Intent from 'android.content.Intent';
 import File from 'java.io.File';

@@ -14,6 +14,7 @@ import {
 import { NavigateBackOptions, NavigateBackSuccess } from '../interface.uts'
 import {
     DEFAULT_ANIMATION_DURATION,
+    DEFAULT_ANIMATION_NAVIGATE_BACK,
     DEFAULT_ANIMATION_OUT,
 } from '../constants.uts'
 import { NavigateBackFailImpl } from '../unierror.uts'
@@ -71,7 +72,7 @@ export const _navigateBack = (
             new Map<string, any | null>([
                 [
                     ANIMATION_TYPE,
-                    options?.animationType ?? DEFAULT_ANIMATION_OUT,
+                    options?.animationType ?? DEFAULT_ANIMATION_NAVIGATE_BACK,
                 ],
                 [
                     ANIMATION_DURATION,

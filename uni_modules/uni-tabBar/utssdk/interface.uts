@@ -236,9 +236,32 @@ export type SetTabBarStyleOptions = {
      */
     backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat'
     /**
+     * tabbar上边框的颜色（优先级高于 borderStyle）
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarstyle
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "x",
+     *      "unixVer": "4.23"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "4.23"
+     *  }
+     * }
+     */
+    borderColor?: string | string.ColorString
+    /**
      * tabbar上边框的颜色
      */
-    borderStyle?: string
+    borderStyle?: 'black' | 'white'
     /**
      * tabbar 中间按钮 仅在 list 项为偶数时有效
      * @internal
@@ -917,10 +940,70 @@ export interface Uni {
     hideTabBarRedDot(
         options: HideTabBarRedDotOptions,
     ): Promise<HideTabBarRedDotSuccess> | null
-    // /**
-    //  * 监听中间按钮的点击事件
-    //  *
-    //  * @tutorial https://doc.dcloud.net.cn/uni-app-x/tabbar?id=ontabbarmidbuttontap
-    //  */
-    // onTabBarMidButtonTap(options: OnTabBarMidButtonTapCallback): void
+    /**
+     * 监听中间按钮的点击事件
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/on-tab-bar-mid-button-tap.html
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "toutiao": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "qq": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
+     */
+    onTabBarMidButtonTap(options: OnTabBarMidButtonTapCallback): void
 }

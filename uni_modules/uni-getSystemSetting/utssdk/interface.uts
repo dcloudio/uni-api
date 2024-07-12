@@ -3,26 +3,122 @@
 export type GetSystemSettingResult = {
   /**
    * 蓝牙是否开启
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   bluetoothEnabled?: boolean,
   /**
    * 蓝牙的报错信息
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   bluetoothError?: string,
   /**
    * 位置是否开启
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   locationEnabled : boolean,
   /**
    * wifi是否开启
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   wifiEnabled?: boolean,
   /**
    * wifi的报错信息
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		}
+   * 	}
+   * }
    */
   wifiError?: string,
   /**
    * 设备方向
+   * 
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
    */
   deviceOrientation : 'portrait' | 'landscape',
 }
