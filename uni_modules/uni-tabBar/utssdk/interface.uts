@@ -236,9 +236,32 @@ export type SetTabBarStyleOptions = {
      */
     backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat'
     /**
+     * tabbar上边框的颜色（优先级高于 borderStyle）
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarstyle
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "x",
+     *      "unixVer": "4.23"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "4.23"
+     *  }
+     * }
+     */
+    borderColor?: string | string.ColorString
+    /**
      * tabbar上边框的颜色
      */
-    borderStyle?: string
+    borderStyle?: 'black' | 'white'
     /**
      * tabbar 中间按钮 仅在 list 项为偶数时有效
      * @internal

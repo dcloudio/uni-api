@@ -97,6 +97,8 @@ class UploadController implements URLSessionDataDelegate {
 				let valueStr = "";
 				if (value instanceof UTSJSONObject) {
 					valueStr = JSON.stringify(value) ?? ""
+				}else if(value instanceof Map<string, any>){
+					valueStr = JSON.stringify(new UTSJSONObject(value)) ?? ""
 				}else{
 					valueStr = `${value}`
 				}
@@ -116,6 +118,11 @@ class UploadController implements URLSessionDataDelegate {
 				if (value != null && typeof (key) == 'string') {
 					if (value instanceof UTSJSONObject) {
 						let valueStr = JSON.stringify(value)
+						if (valueStr != null) {
+							this.fillTextPart(body, boundary, key, valueStr as string)
+						}
+					}else if(value instanceof Map<string, any>){
+						let valueStr = JSON.stringify(new UTSJSONObject(value))
 						if (valueStr != null) {
 							this.fillTextPart(body, boundary, key, valueStr as string)
 						}

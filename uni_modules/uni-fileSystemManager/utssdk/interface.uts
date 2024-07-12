@@ -269,7 +269,7 @@ export type ReadDirOptions = {
 
 export type AccessOptions = {
 	/**
-	 * 要删除的目录路径 (本地路径)
+	 * 要判断是否存在的文件/目录路径 (本地路径)
 	 */
 	path : string.URIString,
 
@@ -1104,7 +1104,7 @@ export interface FileSystemManager {
 	access(options : AccessOptions) : void;
 	/**
 	 * FileSystemManager.access 的同步版本
-	 * @param path 要删除的目录路径 (本地路径)
+	 * @param path 要判断是否存在的文件/目录路径 (本地路径)
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {

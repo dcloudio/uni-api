@@ -64,7 +64,7 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.deviceOrientation = DeviceUtil.getOrientation();
 	}
 	if (filterArray.indexOf("devicePixelRatio") != -1) {
-		result.devicePixelRatio = DeviceUtil.getScreenScale();
+		result.devicePixelRatio = Number.from(UIScreen.main.scale);
 	}
 	if (filterArray.indexOf("system") != -1) {
 		result.system = String(format = "iOS %@", osVersion);

@@ -91,6 +91,8 @@ export class DownloadController implements URLSessionDownloadDelegate {
 				let valueStr = "";
 				if (value instanceof UTSJSONObject) {
 					valueStr = JSON.stringify(value) ?? ""
+				}else if(value instanceof Map<string, any>){
+					valueStr = JSON.stringify(new UTSJSONObject(value)) ?? ""
 				}else{
 					valueStr = `${value}`
 				}
