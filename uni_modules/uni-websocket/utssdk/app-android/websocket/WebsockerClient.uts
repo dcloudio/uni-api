@@ -57,7 +57,7 @@ export class WebsockerClient {
 			complete?.(result);
 			return
 		}
-
+		let isSuccess = false;
 		try {
 			const sendResult = this.websocketDelegate.websocket?.send(options.data as string);
 			if(sendResult != null && !sendResult){
@@ -67,12 +67,7 @@ export class WebsockerClient {
 				this.listener?.onError(this, "The queue memory exceeds 16 MiB and the connection will be closed");
 				return
 			}
-			
-			let result : GeneralCallbackResult = {
-				errMsg: "sendSocketMessage:ok"
-			}
-			success?.(result);
-			complete?.(result);
+			isSuccess = true;
 		} catch (e : Exception) {
 			let result = new SendSocketMessageFailImpl(602001);
 			const utsError = new UTSError(e.message ?? "")
@@ -80,6 +75,14 @@ export class WebsockerClient {
 			fail?.(result);
 			complete?.(result);
 			this.listener?.onError(this, e.message ?? "");
+		}
+		
+		if(isSuccess){
+			let result : GeneralCallbackResult = {
+				errMsg: "sendSocketMessage:ok"
+			}
+			success?.(result);
+			complete?.(result);
 		}
 	}
 
@@ -95,17 +98,14 @@ export class WebsockerClient {
 			complete?.(result);
 			return
 		}
+		let isSuccess = false;
 		try {
 			var code : Int = 1000;
 			if (options.code != null) {
 				code = options.code as Int
 			}
 			this.websocketDelegate.websocket?.close(code, options.reason ?? "");
-			let result : GeneralCallbackResult = {
-				errMsg: "closeSocket:ok"
-			}
-			success?.(result);
-			complete?.(result);
+			isSuccess = true;
 		} catch (e : Exception) {
 			let result : GeneralCallbackResult = {
 				errMsg: e.message ?? ""
@@ -113,6 +113,13 @@ export class WebsockerClient {
 			fail?.(result);
 			complete?.(result);
 			this.listener?.onError(this, e.message ?? "");
+		}
+		if(isSuccess){
+			let result : GeneralCallbackResult = {
+				errMsg: "closeSocket:ok"
+			}
+			success?.(result);
+			complete?.(result);
 		}
 	}
 

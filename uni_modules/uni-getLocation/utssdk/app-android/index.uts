@@ -1,0 +1,31 @@
+import { UniLocationProvider, GetLocation, GetLocationOptions } from "../interface.uts"
+import { GetLocationFailImpl } from "../unierror.uts"
+
+export { getLocationErrorCode, GetLocationFailImpl } from '../unierror.uts'
+export { GetLocationFail } from '../interface.uts'
+
+
+/**
+ * 对外的函数接口
+ */
+export const getLocation : GetLocation = function (options : GetLocationOptions) {
+	let providerName = 'system'
+	if (options.provider != null) {
+		providerName = options.provider!
+	} else {
+		//定位 API 需要特殊逻辑处理 type 和 provider 的特殊逻辑，没有设置 provider 时需根据 type 自动选择支持 type 的provider。
+		if (options.type == 'wgs84') {//默认使用系统定位
+			providerName = 'system'
+		} else if (options.type == 'gcj02') {//默认使用腾讯定位
+			providerName = 'tencent'
+		}
+	}
+	const provider = UTSAndroid.getProvider<UniLocationProvider>("location", providerName)
+	if (provider != null) {
+		provider!.getLocation(options)
+	} else {
+		const err = new GetLocationFailImpl(1505604);
+		options.fail?.(err)
+		options.complete?.(err)
+	}
+}

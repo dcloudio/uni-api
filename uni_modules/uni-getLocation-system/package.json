@@ -32,19 +32,14 @@
 	},
 	"uni_modules": {
 		"uni-ext-api": {
-			"uni": {
-				"getLocation": {
-					"name": "getLocation",
-					"app": {
-						"js": false,
-						"kotlin": true,
-						"swift": false
-					}
-				}
+			"provider": {
+				"service": "location",
+				"name": "system",
+				"servicePlugin":"uni-getLocation"
 			}
 		},
 		"dependencies": [
-			"app-ios:permission-location"
+			"uni-getLocation"
 		],
 		"encrypt": [],
 		"platforms": {

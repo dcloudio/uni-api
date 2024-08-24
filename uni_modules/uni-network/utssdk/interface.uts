@@ -6,7 +6,7 @@ export type Request<T> = (param: RequestOptions<T>) => RequestTask;
 export type RequestOptions<T> = {
   /**
    * 开发者服务器接口地址
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -19,7 +19,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -29,7 +34,7 @@ export type RequestOptions<T> = {
    */
   url: string,
   /**
-   * 请求的参数 UTSJSONObject|string类型
+   * 请求的参数 在`app-android端，参数类型只能为`UTSJSONObject`或者`string`类型
    * @type {RequestDataOptions}
    * @defaultValue null
    * @uniPlatform
@@ -44,7 +49,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -68,7 +78,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -78,9 +93,7 @@ export type RequestOptions<T> = {
    */
   header?: UTSJSONObject | null,
   /**
-   * 请求方法
-   * 如果设置的值不在取值范围内，会以GET方法进行请求。
-   * @type {RequestMethod}
+   * 请求方法，如果设置的值不在取值范围内，会以GET方法进行请求。
    * @defaultValue "GET"
    * @uniPlatform
    * {
@@ -94,7 +107,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -132,21 +150,21 @@ export type RequestOptions<T> = {
   dataType?: string | null,
   /**
    * 设置响应的数据类型。
-   * 
+   *
    * @deprecated 不支持
    * @autodoc false
    */
   responseType?: string | null,
   /**
    * 验证 ssl 证书
-   * 
+   *
    * @deprecated 不支持
    * @autodoc false
    */
   sslVerify?: boolean | null,
   /**
    * 跨域请求时是否携带凭证（cookies）
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -159,7 +177,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *    "web": {
    *      "uniVer": "√",
@@ -183,7 +206,12 @@ export type RequestOptions<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *    "web": {
    *        "uniVer": "x",
@@ -225,7 +253,12 @@ export type RequestSuccess<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -248,7 +281,12 @@ export type RequestSuccess<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -271,7 +309,12 @@ export type RequestSuccess<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -294,7 +337,12 @@ export type RequestSuccess<T> = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "x",
@@ -307,27 +355,74 @@ export type RequestSuccess<T> = {
 
 /**
  * 请求方法
- * - GET  GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
- * - POST  POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
- * - PUT  PUT方法用有效载荷请求替换目标资源的所有当前表示。
- * - PATCH  PATCH方法用于对资源应用部分修改。
- * - DELETE  DELETE方法删除指定的资源。
- * - HEAD  HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。 
- * - OPTIONS  OPTIONS 方法用于描述目标资源的通信选项。
  */
-export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
+export type RequestMethod =
+/**
+ * GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
+ */
+"GET" |
+/**
+ * POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
+ */
+"POST" |
+/**
+ * PUT方法用有效载荷请求替换目标资源的所有当前表示。
+ */
+"PUT" |
+/**
+ * PATCH方法用于对资源应用部分修改。
+ */
+"PATCH" |
+/**
+ * DELETE方法删除指定的资源。
+ */
+"DELETE" |
+/**
+ * HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。
+ */
+"HEAD" |
+/**
+ * OPTIONS 方法用于描述目标资源的通信选项。
+ */
+"OPTIONS";
 
 /**
  * 错误码
- * - 5 接口超时
- * - 1000 服务端系统错误
- * - 100001 json数据解析错误
- * - 100002 错误信息json解析失败
- * - 600003 网络中断
- * - 600009 URL格式不合法
- * - 602001 request系统错误
  */
-export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600003 | 600009 | 602001;
+export type RequestErrorCode =
+/**
+ * 接口超时
+ */
+5 |
+/**
+ * 服务端系统错误
+ */
+1000 |
+/**
+ * json数据解析错误
+ */
+100001 |
+/**
+ * 错误信息json解析失败
+ */
+100002 |
+/**
+ * 网络中断
+ */
+600003 |
+/**
+ * data参数类型不合法
+ */
+600008 |
+/**
+ * URL格式不合法
+ */
+600009 |
+/**
+ * request系统错误
+ */
+602001;
+
 /**
  * 网络请求失败的错误回调参数
  */
@@ -341,12 +436,10 @@ export type RequestCompleteCallback = (option: any) => void;
 
 export interface RequestTask {
   /**
-    * abort()
-    * @description 
     * 中断网络请求。
-    * @param {void} 
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#request
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -359,7 +452,12 @@ export interface RequestTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -398,7 +496,12 @@ export type UploadFileOptionFiles = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -421,7 +524,12 @@ export type UploadFileOptionFiles = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "x",
@@ -444,7 +552,12 @@ export type UploadFileOptionFiles = {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -469,7 +582,12 @@ export type UploadFileSuccess = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -492,7 +610,12 @@ export type UploadFileSuccess = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -527,7 +650,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -551,7 +679,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -575,7 +708,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -599,7 +737,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -623,7 +766,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -647,7 +795,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -671,7 +824,12 @@ export type UploadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -711,7 +869,12 @@ export type OnProgressUpdateResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -734,7 +897,12 @@ export type OnProgressUpdateResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -757,7 +925,12 @@ export type OnProgressUpdateResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -771,12 +944,10 @@ export type OnProgressUpdateResult = {
 export type UploadFileProgressUpdateCallback = (result: OnProgressUpdateResult) => void
 export interface UploadTask {
   /**
-    * abort()
-    * @description 
     * 中断上传任务。
-    * @param {void} 
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -789,7 +960,12 @@ export interface UploadTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -807,12 +983,10 @@ export interface UploadTask {
     */
   abort(): void,
   /**
-    * onProgressUpdate()
-    * @description 
     * 监听上传进度变化。
-    * @param {UploadFileProgressUpdateCallback}  callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -825,7 +999,12 @@ export interface UploadTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -862,7 +1041,12 @@ export type DownloadFileSuccess = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -885,7 +1069,12 @@ export type DownloadFileSuccess = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -920,7 +1109,12 @@ export type DownloadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -969,7 +1163,12 @@ export type DownloadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -993,7 +1192,12 @@ export type DownloadFileOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -1033,7 +1237,12 @@ export type OnProgressDownloadResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -1056,7 +1265,12 @@ export type OnProgressDownloadResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -1079,7 +1293,12 @@ export type OnProgressDownloadResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *    "web": {
    *        "uniVer": "√",
@@ -1092,12 +1311,10 @@ export type OnProgressDownloadResult = {
 export type DownloadFileProgressUpdateCallback = (result: OnProgressDownloadResult) => void;
 export interface DownloadTask {
   /**
-    * abort()
-    * @description 
-    * 中断下载任务。
-    * @param {void} 
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * 中断下载任务
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -1110,7 +1327,12 @@ export interface DownloadTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -1128,12 +1350,10 @@ export interface DownloadTask {
     */
   abort(): void,
   /**
-    * onProgressUpdate()
-    * @description 
     * 监听下载进度变化。
-    * @param {DownloadFileProgressUpdateCallback}  callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -1146,7 +1366,12 @@ export interface DownloadTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -1168,12 +1393,10 @@ export interface DownloadTask {
 
 export interface Uni {
   /**
-    * Request()
-    * @description 
     * 发起网络请求。
-    * @param {RequestOptions} options
-    * @return {RequestTask} 
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -1186,7 +1409,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -1224,12 +1452,10 @@ export interface Uni {
     */
   request<T>(param: RequestOptions<T>): RequestTask;
   /**
-    * UploadFile()
-    * @description 
     * 将本地资源上传到开发者服务器。
-    * @param {UploadFileOptions} options
-    * @return {UploadTask}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -1242,7 +1468,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -1266,12 +1497,10 @@ export interface Uni {
     */
   uploadFile(options: UploadFileOptions): UploadTask;
   /**
-    * DownloadFile()
-    * @description 
     * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
-    * @param {DownloadFileOptions} options
-    * @return {DownloadTask}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -1284,7 +1513,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",

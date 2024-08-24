@@ -4,6 +4,9 @@ import {
     getCurrentPage,
     navigate,
     removePage,
+    entryPageState,
+    redirectToPagesBeforeEntryPages,
+    RedirectToPage,
 } from '@dcloudio/uni-runtime'
 import { RedirectToOptions, RedirectToSuccess } from '../interface.uts'
 import { normalizeRouteOptions } from '../protocols.uts'
@@ -12,6 +15,11 @@ import { RedirectToFailImpl } from '../unierror.uts'
 export const redirectTo = defineAsyncApi<RedirectToOptions, RedirectToSuccess>(
     REDIRECT_TO,
     (options: RedirectToOptions, res: ApiExecutor) => {
+        if (!entryPageState.handledBeforeEntryPageRoutes) {
+            redirectToPagesBeforeEntryPages.push({ options } as RedirectToPage)
+            return
+        }
+        const navigationStart = Date.now()
         const normalizeRouteOptionsResult = normalizeRouteOptions(
             REDIRECT_TO,
             options.url as string,
@@ -34,6 +42,7 @@ export const redirectTo = defineAsyncApi<RedirectToOptions, RedirectToSuccess>(
                         removePage(currentPage!)
                     }
                 },
+                navigationStart
             )
             res.resolve(null)
         }, 0)

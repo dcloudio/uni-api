@@ -32,6 +32,46 @@
     },
     "uni_modules": {
         "encrypt": [],
+        "uni-ext-api": {
+            "uni": {
+                "setNavigationBarColor": {
+                    "name": "setNavigationBarColor",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "setNavigationBarTitle": {
+                    "name": "setNavigationBarTitle",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "showNavigationBarLoading": {
+                    "name": "showNavigationBarLoading",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "hideNavigationBarLoading": {
+                    "name": "hideNavigationBarLoading",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                }
+            }
+        },
         "platforms": {
             "cloud": {
                 "tcb": "u",

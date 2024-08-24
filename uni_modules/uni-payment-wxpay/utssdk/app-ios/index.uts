@@ -1,6 +1,8 @@
 import { UTSiOSHookProxy } from "DCloudUniappRuntime";
 import { UIApplication } from "UIKit";
 import { URL, NSUserActivity } from "Foundation";
+import { UniPaymentWxpayProvider } from "./interface.uts"
+
 
 const wxDefaultErrorCode : number = 700000
 
@@ -9,25 +11,40 @@ const wxErrorCodeMap : Map<number, number> = new Map([
 	[-2, 700601]
 ])
 
-export class UniPaymentWxpayProvider implements UniPaymentProvider {
-	
-	id: string
-	
-	override description: string = "wechat"
-	
-	isAppExist: boolean
+export class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
 
-    requestPayment(options : RequestPaymentOptions) {
+	id : string = "wxpay"
+
+	override description : string = "微信支付"
+	
+
+	get isAppExist() : boolean {
+		return Wxpay.share.isWXAppInstalled()
+	}
+
+	set isAppExist(newValue: boolean) {
+		
+	}
+
+	requestPayment(options : RequestPaymentOptions) {
 		Wxpay.requestPayment(options)
 	}
 	
 	checkAppExist() {
 		this.isAppExist = Wxpay.share.isWXAppInstalled()
+		this.isWeChatInstalled = Wxpay.share.isWXAppInstalled()
+	}
+
+	get isWeChatInstalled() : boolean {
+		return Wxpay.share.isWXAppInstalled()
 	}
 	
+	set isWeChatInstalled(newValue: boolean) {
+		
+	}
+
 	constructor() {
-		this.id = "wxpay"
-		this.isAppExist = Wxpay.share.isWXAppInstalled()
+
 	}
 }
 
@@ -61,7 +78,7 @@ export class Wxpay implements WXApiDelegate {
 		const scheme = Wxpay.share.getApplicationScheme()
 		const universalLink = Wxpay.share.getApplicationUniversalLink()
 		if (scheme != null && universalLink != null) {
-			WXApi.registerApp(scheme!, universalLink = universalLink!) 
+			WXApi.registerApp(scheme!, universalLink = universalLink!)
 		}
 	}
 
@@ -106,13 +123,13 @@ export class Wxpay implements WXApiDelegate {
 		}
 		return universalLink
 	}
-	
+
 	//@brief 检查微信是否已被用户安装
 	@UTSiOS.keyword("fileprivate")
 	isWXAppInstalled() : boolean {
 		return WXApi.isWXAppInstalled()
 	}
-	
+
 	//@brief 发送一个sendReq后，收到微信的回应
 	onResp(resp : BaseResp) {
 		if (resp.errCode == 0) {

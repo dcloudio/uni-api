@@ -1,0 +1,30 @@
+import { PageScrollToOptions, PageScrollToSuccess } from './interface.uts';
+
+export const API_PAGE_SCROLL_TO = 'pageScrollTo'
+
+export const PageScrollToProtocol = new Map<string, ProtocolOptions>([
+  [
+    'scrollTo',
+    {
+      type: 'number'
+    }
+  ],
+  [
+    'selector',
+    {
+      type: 'string'
+    }
+  ],
+  [
+    'duration',
+    {
+      type: 'number'
+    }
+  ]
+])
+
+export const PageScrollToApiOptions: ApiOptions<PageScrollToOptions> = {
+  formatArgs: new Map<string, number>([
+    ['duration', 300]
+  ])
+}

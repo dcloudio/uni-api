@@ -4,6 +4,7 @@ import ConnectivityManager from 'android.net.ConnectivityManager';
 import TelephonyManager from 'android.telephony.TelephonyManager';
 import Build from 'android.os.Build';
 
+export { OnNetworkStatusChangeCallbackResult } from '../interface.uts'
 
 export const getNetworkType : GetNetworkType = function (options : GetNetworkTypeOptions) {
 	const context = UTSAndroid.getUniActivity()!!;

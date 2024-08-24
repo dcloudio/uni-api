@@ -1,11 +1,9 @@
 export interface Uni {
   /**
-    * ConnectSocket()
-    * @description 
     * 创建一个 WebSocket 连接。
-    * @param {ConnectSocketOptions} options
-    * @return {SocketTask}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#connectsocket
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#connectsocket
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -18,7 +16,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -37,12 +40,11 @@ export interface Uni {
     */
   connectSocket(options: ConnectSocketOptions): SocketTask;
   /**
-    * OnSocketOpen()
-    * @description 
+    * @description
     * 监听WebSocket连接打开事件。
-    * @param {OnSocketOpenCallback} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketopen
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketopen
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -55,7 +57,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -72,12 +79,10 @@ export interface Uni {
   onSocketOpen(options: OnSocketOpenCallback): void;
 
   /**
-    * OnSocketError()
-    * @description 
-    * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
-    * @param {OnSocketErrorCallback} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
+    * 监听WebSocket错误。
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketerror
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketerror
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -90,7 +95,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -107,12 +117,10 @@ export interface Uni {
   onSocketError(callback: OnSocketErrorCallback): void;
 
   /**
-    * SendSocketMessage()
-    * @description 
     * 通过 WebSocket 连接发送数据，需要先 uni.connectSocket，并在 uni.onSocketOpen 回调之后才能发送。
-    * @param {SendSocketMessageOptions} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#sendsocketmessage
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#sendsocketmessage
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -125,7 +133,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -141,12 +154,10 @@ export interface Uni {
     */
   sendSocketMessage(options: SendSocketMessageOptions): void;
   /**
-    * OnSocketMessage()
-    * @description 
     * 监听WebSocket接受到服务器的消息事件。
-    * @param {OnSocketMessageCallback} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketmessage
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketmessage
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -159,7 +170,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -175,12 +191,10 @@ export interface Uni {
     */
   onSocketMessage(callback: OnSocketMessageCallback): void;
   /**
-    * CloseSocket()
-    * @description 
     * 关闭 WebSocket 连接。
-    * @param {CloseSocketOptions} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#closesocket
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#closesocket
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -193,7 +207,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -207,12 +226,10 @@ export interface Uni {
     */
   closeSocket(options: CloseSocketOptions): void;
   /**
-    * OnSocketClose()
-    * @description 
     * 监听WebSocket关闭。
-    * @param {OnSocketCloseCallback} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketclose
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketclose
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -225,7 +242,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -256,7 +278,7 @@ export type ConnectSocketErrorCode = 600009;
 /**
  * 连接调用失败的错误回调参数
  */
-export interface ConnectSocketFail extends IUniError { 
+export interface ConnectSocketFail extends IUniError {
 	errCode: ConnectSocketErrorCode;
 };
 
@@ -278,6 +300,11 @@ export type ConnectSocketOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -298,6 +325,11 @@ export type ConnectSocketOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -347,15 +379,25 @@ export type GeneralCallbackResult = {
 };
 /**
  * 错误码
- * - 10001 发送数据超限，发送队列不能超过16M大小。
- * - 10002 websocket未连接
- * - 602001 websocket系统错误
  */
-export type SendSocketMessageErrorCode = 10001 | 10002 | 602001;
+export type SendSocketMessageErrorCode =
+/**
+ * 发送数据超限，发送队列不能超过16M大小。
+ */
+10001 |
+/**
+ * websocket未连接
+ */
+10002 |
+/**
+ * websocket系统错误
+ */
+602001;
+
 /**
  * 发送失败的错误回调参数
  */
-export interface SendSocketMessageFail extends IUniError { 
+export interface SendSocketMessageFail extends IUniError {
 	errCode: SendSocketMessageErrorCode;
 };
 export type SendSocketMessageOptions = {
@@ -375,6 +417,11 @@ export type SendSocketMessageOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -412,6 +459,11 @@ export type CloseSocketOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -432,6 +484,11 @@ export type CloseSocketOptions = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -468,6 +525,11 @@ export type OnSocketOpenCallbackResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -490,6 +552,11 @@ export type OnSocketMessageCallbackResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
+   * 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
    * 		}
    * 	}
    * }
@@ -498,12 +565,10 @@ export type OnSocketMessageCallbackResult = {
 };
 export interface SocketTask {
   /**
-    * send()
-    * @description 
     * 通过 WebSocket 连接发送数据
-    * @param {SendSocketMessageOptions} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#send
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#send
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -516,7 +581,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -530,12 +600,10 @@ export interface SocketTask {
     */
   send(options: SendSocketMessageOptions): void;
   /**
-    * close()
-    * @description 
     * 关闭 WebSocket 连接
-    * @param {CloseSocketOptions} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#close
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#close
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -548,7 +616,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -562,12 +635,10 @@ export interface SocketTask {
     */
   close(options: CloseSocketOptions): void;
   /**
-    * onOpen()
-    * @description 
     * 监听 WebSocket 连接打开事件
-    * @param {OnSocketOpenCallbackResult} options
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onopen
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onopen
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -580,7 +651,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -594,12 +670,10 @@ export interface SocketTask {
     */
   onOpen(callback: (result: OnSocketOpenCallbackResult) => void): void;
   /**
-    * onClose()
-    * @description 
     * 监听 WebSocket 连接关闭事件
-    * @param {(result : any) => void} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onclose
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onclose
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -612,7 +686,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -628,11 +707,11 @@ export interface SocketTask {
   onClose(callback: (result: any) => void): void;
   /**
     * onError()
-    * @description 
+    * @description
     * 监听 WebSocket 错误
-    * @param {(result : GeneralCallbackResult) => void} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onerror
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onerror
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -645,7 +724,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
+   * 		}
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -660,12 +744,10 @@ export interface SocketTask {
     */
   onError(callback: (result: GeneralCallbackResult) => void): void;
   /**
-    * onMessage()
-    * @description 
     * 监听 WebSocket 接受到服务器的消息事件
-    * @param {(result : OnSocketMessageCallbackResult) => void} callback
-    * @return {void}
-    * @tutorial https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
+    *  @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
+    *  @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onmessage
+    *  @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onmessage
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -678,7 +760,12 @@ export interface SocketTask {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+   * 		"harmony": {
+   * 			"osVer": "3.0",
+   * 			"uniVer": "4.23",
+   * 			"unixVer": "x"
+   * 		}
 	* 	},
     *   "web": {
     *      "uniVer": "√",
@@ -727,13 +814,18 @@ export type OnSocketCloseCallbackResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	}
    * }
    */
   code: number,
   /**
-   * 一个可读的字符串，表示连接被关闭的原因。	
+   * 一个可读的字符串，表示连接被关闭的原因。
    * @uniPlatform
    * {
    * 	"app": {
@@ -746,7 +838,12 @@ export type OnSocketCloseCallbackResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	}
    * }
    */

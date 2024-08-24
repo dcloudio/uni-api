@@ -1,19 +1,57 @@
+export type MediaOrientation =
+| 'up'
+| 'down'
+| 'left'
+| 'right'
+| 'up-mirrored'
+| 'down-mirrored'
+| 'left-mirrored'
+| 'right-mirrored'
 
 /**
  * 错误码
- * - 1101001 用户取消
- * - 1101002 urls至少包含一张图片地址
- * - 1101003 文件不存在
- * - 1101004 图片加载失败
- * - 1101005 未获取权限
- * - 1101006 图片或视频保存失败
- * - 1101007 图片裁剪失败
- * - 1101008 拍照或录像失败
- * - 1101009 图片压缩失败
- * - 1101010 其他错误
  */
-
-export type MediaErrorCode = 1101001 | 1101002 | 1101003 | 1101004 | 1101005 | 1101006 | 1101007 | 1101008 | 1101009 | 1101010;
+export type MediaErrorCode =
+/**
+ * 用户取消
+ */
+1101001 |
+/**
+ * urls至少包含一张图片地址
+ */
+1101002 |
+/**
+ * 文件不存在
+ */
+1101003 |
+/**
+ * 图片加载失败
+ */
+1101004 |
+/**
+ * 未获取权限
+ */
+1101005 |
+/**
+ * 图片或视频保存失败
+ */
+1101006 |
+/**
+ * 图片裁剪失败
+ */
+1101007 |
+/**
+ * 拍照或录像失败
+ */
+1101008 |
+/**
+ * 图片压缩失败
+ */
+1101009 |
+/**
+ * 其他错误
+ */
+1101010;
 
 /**
  * 图片或视频操作失败的错误回调
@@ -80,10 +118,17 @@ export type ChooseImageOptions = {
 	 * @type string | string []
 	 * @defaultValue ['original','compressed']
 	 * @uniPlatform {
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+	 * "app":{
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 * },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
 	 * }
 	 */
 	sizeType ?: (string[]) | null,
@@ -95,23 +140,35 @@ export type ChooseImageOptions = {
 	/**
 	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。仅H5支持
 	 * @uniPlatform {
-	 *	 "app": {
+	 *	"app": {
 	 *		"android": {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
-	 *		}
-	 *	}
+	 *		},
+	 *   "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+	 * 	 }
 	 * }
 	 */
 	extension ?: (string[]) | null,
 	/**
 	 * 图像裁剪参数，设置后 sizeType 失效。
 	 * @uniPlatform {
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+	 * "app":{
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 * },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
 	 * }
 	 */
 	crop ?: (ChooseImageCropOptions) | null,
@@ -192,13 +249,36 @@ export type PreviewImageOptions = {
 	 */
 	urls : Array<string.ImageURIString>,
 	/**
-	 * 图片指示器样式
-	 * - default: 底部圆点指示器
-	 * - number: 顶部数字指示器
-	 * - none: 不显示指示器
-	 * @type 'default' | 'number' | 'none'
+	 * 是否显示长按菜单
 	 */
-	indicator ?: string | null,
+	showmenu ?: boolean | null,
+	/**
+	 * 图片指示器样式
+	 *
+	 * @uniPlatform {
+	 *	 "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	}
+	 * }
+	 */
+	indicator ?:
+	/**
+	 * 底部圆点指示器
+	 */
+	'default' |
+	/**
+	 * 顶部数字指示器
+	 */
+	'number' |
+	/**
+	 * 不显示指示器
+	 */
+	'none' |
+	null,
 	/**
 	 * 是否可循环预览
 	 * @type boolean
@@ -212,7 +292,12 @@ export type PreviewImageOptions = {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
-	 *		}
+	 *		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
 	 *	}
 	 * }
 	 */
@@ -284,7 +369,7 @@ export type GetImageInfoSuccess = {
      *  }
 	 * }
 	 */
-	orientation : string | null,
+	orientation ?: MediaOrientation,
 	/**
 	 * 返回图片的格式
 	 * @uniPlatform {
@@ -457,16 +542,30 @@ export type ChooseVideoOptions = {
 	 * @type boolean
 	 * @default true
 	 * @uniPlatform {
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
 	 * }
 	 */
 	compressed ?: boolean | null,
 	/**
 	 * 拍摄视频最长拍摄时间，单位秒。最长支持 60 秒
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	},
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
@@ -476,17 +575,30 @@ export type ChooseVideoOptions = {
 	maxDuration ?: number | null,
 	/**
 	 * 摄像切换
-	 * - front: 前置摄像头
-	 * - back: 后置摄像头
-	 * @type 'front' | 'back'
+	 *
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	},
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
      *  }
 	 * }
 	 */
-	camera ?: string | null,
+	camera ?:
+	/**
+	 * 前置摄像头
+	 */
+	'front' |
+	/**
+	 * 后置摄像头
+	 */
+	'back' | null,
 	/**
 	 * 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。
 	 * @uniPlatform {
@@ -495,7 +607,12 @@ export type ChooseVideoOptions = {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 *	 }
 	 * }
 	 */
@@ -520,16 +637,30 @@ export type GetVideoInfoSuccess = {
 	/**
 	 * 画面方向
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 * },
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
      *  }
 	 * }
 	 */
-	orientation : string | null,
+	orientation ?: MediaOrientation,
 	/**
 	 * 视频格式
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 * },
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
@@ -556,6 +687,13 @@ export type GetVideoInfoSuccess = {
 	/**
 	 * 视频帧率
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 * },
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
@@ -566,6 +704,13 @@ export type GetVideoInfoSuccess = {
 	/**
 	 * 视频码率，单位 kbps
 	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 * },
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "x"
@@ -652,9 +797,7 @@ export type CompressVideoOptions = {
 	src : string.VideoURIString,
 	/**
 	 * 压缩质量
-	 * - low: 低
-	 * - medium: 中
-	 * - high: 高
+	 *
 	 * @type 'low' | 'medium' | 'high'
 	 */
 	quality ?: string | null,
@@ -719,12 +862,59 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
      *    "unixVer": "4.0"
-     *  }
+     *  },
+	 * "mp": {
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    }
+   *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -732,11 +922,13 @@ export interface Uni {
 	 * uni.chooseImage({
 	 *	count:3,
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	}
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=chooseimage
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#chooseimage
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/choose-image.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/choose-image.html
 	 * @autotest {
 	   generated:false
 	 }
@@ -756,12 +948,59 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
      *    "unixVer": "4.0"
-     *  }
+     *  },
+	 * "mp": {
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -769,11 +1008,13 @@ export interface Uni {
 	 * uni.previewImage({
 	 *	urls:['/static/a.jpg','/static/b.jpg'],
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	}
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=previewimage
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#unipreviewimageobject
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/preview-image.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/preview-image.html
 	 * @autotest {
 	   generated:false
 	 }
@@ -793,7 +1034,12 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
@@ -805,11 +1051,13 @@ export interface Uni {
 	 * ```typescript
 	 * uni.closePreviewImage({
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	}
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=closepreviewimage
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#closepreviewimage
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/preview-image.html#closepreviewimage
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/preview-image.html#closepreviewimage
 	 * @autotest {
 	   generated:false
 	 }
@@ -824,7 +1072,17 @@ export interface Uni {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.25"
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
@@ -837,11 +1095,13 @@ export interface Uni {
 	 * uni.getImageInfo({
 	 *	src:'/static/a.jpg',
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=getimageinfo
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#getimageinfo
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-image-info.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-image-info.html
 	 * @autotest {
 	   generated:false,
 	   case:[
@@ -866,7 +1126,12 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "x",
@@ -879,11 +1144,13 @@ export interface Uni {
 	 * uni.saveImageToPhotosAlbum({
 	 *	filePath:'/static/a.jpg',
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=saveimagetophotosalbum
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#saveimagetophotosalbum
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/save-image-to-photos-album.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/save-image-to-photos-album.html
 	 * @autotest {
 	   generated:false,
 	   case:[
@@ -903,11 +1170,21 @@ export interface Uni {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.25"
+	 *		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
+     *    "uniVer": "x",
+     *    "unixVer": "x"
      *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -917,11 +1194,13 @@ export interface Uni {
 	 *	src:'/static/a.jpg',
 	 * 	quality:80,
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/image?id=compressimage
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/image.html#compressimage
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/compress-image.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/compress-image.html
 	 * @autotest {
 	   generated:false,
 	   case:[
@@ -946,7 +1225,12 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
@@ -958,12 +1242,14 @@ export interface Uni {
 	 * ```typescript
 	 * uni.chooseVideo({
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=choosevideo
-	 * 
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/choose-video.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/choose-video.html
+	 *
 	 */
 	chooseVideo(options : ChooseVideoOptions) : void;
 	/**
@@ -975,7 +1261,17 @@ export interface Uni {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.25"
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "√",
@@ -988,11 +1284,13 @@ export interface Uni {
 	 * uni.GetVideoInfo({
 	 *  src:"/static/a.mp4",
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=getvideoinfo
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html#getvideoinfo
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-video-info.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-video-info.html
 	 *
 	 */
 	getVideoInfo(options : GetVideoInfoOptions) : void;
@@ -1010,7 +1308,12 @@ export interface Uni {
 	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 *	},
      *  "web": {
      *    "uniVer": "x",
@@ -1023,11 +1326,13 @@ export interface Uni {
 	 * uni.saveVideoToPhotosAlbum({
 	 *  filePath:"/static/a.mp4",
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=savevideotophotosalbum
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html#savevideotophotosalbum
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/save-video-to-photos-album.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/save-video-to-photos-album.html
 	 *
 	 */
 	saveVideoToPhotosAlbum(options : SaveVideoToPhotosAlbumOptions) : void;
@@ -1038,13 +1343,23 @@ export interface Uni {
 	 *	 "app": {
 	 *		"android": {
 	 *			"osVer": "5.0",
-	 *			"uniVer": "√",
+	 *			"uniVer": "3,1.10",
 	 *			"unixVer": "4.18"
-	 *		}
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.25"
+	 *		},
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
      *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
+     *    "uniVer": "x",
+     *    "unixVer": "x"
      *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -1054,11 +1369,13 @@ export interface Uni {
 	 *  src:"/static/a.mp4",
 	 *  quality:"low",
 	 *	success(e){
-	 *		console.log(JSON.stringify(e))	 
+	 *		console.log(JSON.stringify(e))
 	 * 	},
 	 * })
 	 * ```
-	 * @tutorial http://uniapp.dcloud.io/api/media/video?id=compressvideo
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html#compressvideo
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/compress-video.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/compress-video.html
 	 *
 	 */
 	compressVideo(options : CompressVideoOptions) : void;

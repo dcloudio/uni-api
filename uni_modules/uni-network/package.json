@@ -39,7 +39,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"uploadFile": {
@@ -47,7 +48,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"downloadFile": {
@@ -55,7 +57,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				}
 			}

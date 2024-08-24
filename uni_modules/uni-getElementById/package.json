@@ -31,6 +31,20 @@
         "npmurl": ""
     },
     "uni_modules": {
+		"uni-ext-api": {
+			"uni": {
+				"getElementById": {
+					"name": "getElementById",
+					"app": {
+						"js": false,
+                        "x-js": false,
+						"kotlin": false,
+						"swift": true,
+						"arkts": false
+					}
+				}
+			}
+		},
         "encrypt": [],
         "platforms": {
             "cloud": {

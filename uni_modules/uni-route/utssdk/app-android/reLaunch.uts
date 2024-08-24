@@ -7,6 +7,9 @@ import {
     navigate,
     parseUrl,
     removePages,
+    entryPageState,
+    reLaunchPagesBeforeEntryPages,
+    ReLaunchPage,
 } from '@dcloudio/uni-runtime'
 
 import { ReLaunchOptions, ReLaunchSuccess } from '../interface.uts'
@@ -16,6 +19,11 @@ import { ReLaunchFailImpl } from '../unierror.uts'
 export const reLaunch = defineAsyncApi<ReLaunchOptions, ReLaunchSuccess>(
     RE_LAUNCH,
     (options: ReLaunchOptions, res: ApiExecutor) => {
+        if (!entryPageState.handledBeforeEntryPageRoutes) {
+            reLaunchPagesBeforeEntryPages.push({ options } as ReLaunchPage)
+            return
+        }
+        const navigationStart = Date.now()
         const normalizeRouteOptionsResult = normalizeRouteOptions(
             APP_LAUNCH,
             options.url as string,
@@ -36,6 +44,7 @@ export const reLaunch = defineAsyncApi<ReLaunchOptions, ReLaunchSuccess>(
                     // TODO use 'reLaunch'
                     APP_LAUNCH,
                     () => removePages(0, -1),
+                    navigationStart
                 )
             } else {
                 changeTabBarIndex(selected, path, urlInfo.query, true)

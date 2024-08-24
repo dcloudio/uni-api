@@ -32,6 +32,19 @@
     },
     "uni_modules": {
         "encrypt": [],
+        "uni-ext-api": {
+            "uni": {
+                "createSelectorQuery": {
+                    "name": "createSelectorQuery",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": false
+                    }
+                }
+            }
+        },
         "platforms": {
             "cloud": {
                 "tcb": "u",

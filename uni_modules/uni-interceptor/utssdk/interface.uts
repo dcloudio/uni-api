@@ -1,5 +1,6 @@
 import { Interceptor } from '@dcloudio/uni-runtime'
 
+
 export type AddInterceptorOptions = Interceptor
 export type RemoveInterceptorOptions = Interceptor
 
@@ -18,6 +19,9 @@ export interface Uni {
      * 添加拦截器
      * @param name 需要拦截的 API 名称
      * @param interceptor 拦截器
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/interceptor.html
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -29,7 +33,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -84,6 +93,9 @@ export interface Uni {
      * 删除拦截器
      * @param name 需要删除拦截器的 API 名称
      * @param interceptor 拦截器
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/interceptor.html#removeinterceptor
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html#removeinterceptor
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html#removeinterceptor
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -95,7 +107,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {

@@ -2,6 +2,7 @@ import { GetAppAuthorizeSetting, GetAppAuthorizeSettingResult } from "../interfa
 import PackageManager from 'android.content.pm.PackageManager';
 import Manifest from 'android.Manifest';
 import NotificationManagerCompat from 'androidx.core.app.NotificationManagerCompat';
+import Build from 'android.os.Build';
 
 export const getAppAuthorizeSetting : GetAppAuthorizeSetting = function () : GetAppAuthorizeSettingResult {
 	const context = UTSAndroid.getUniActivity()!!;
@@ -28,7 +29,6 @@ export const getAppAuthorizeSetting : GetAppAuthorizeSetting = function () : Get
 	}
 
 	const recordAudioPermission = [Manifest.permission.RECORD_AUDIO];
-
 	const recordAudioGranted = UTSAndroid.checkSystemPermissionGranted(context, recordAudioPermission);
 	let recordAudioResult = recordAudioGranted ? "authorized" : "denied";
 	if (!recordAudioGranted && !hasDefinedInManifest(Manifest.permission.RECORD_AUDIO)) {
@@ -37,15 +37,57 @@ export const getAppAuthorizeSetting : GetAppAuthorizeSetting = function () : Get
 
 	const compat = NotificationManagerCompat.from(context);
 	const notificationResult = compat.areNotificationsEnabled() ? "authorized": "denied"
-
+	
+	
+	const albumPermission = ['android.permission.READ_MEDIA_IMAGES', 'android.permission.READ_MEDIA_VIDEO'];
+	const albumGranted = UTSAndroid.checkSystemPermissionGranted(context, albumPermission);
+	let albumResult = albumGranted ? "authorized" : "denied";
+	if (!albumGranted) {
+		if (Build.VERSION.SDK_INT >= 34) {
+			if(!hasDefinedInManifest('android.permission.READ_MEDIA_VISUAL_USER_SELECTED')){
+				if(!(hasDefinedInManifest('android.permission.READ_MEDIA_IMAGES') &&
+					hasDefinedInManifest('android.permission.READ_MEDIA_VIDEO'))){
+					albumResult = "config error";
+				}
+			}
+		}else if (Build.VERSION.SDK_INT >= 33) {
+			if(!(hasDefinedInManifest('android.permission.READ_MEDIA_IMAGES') &&
+				hasDefinedInManifest('android.permission.READ_MEDIA_VIDEO'))){
+				albumResult = "config error";
+			}
+		} else {
+			if(!hasDefinedInManifest(Manifest.permission.READ_EXTERNAL_STORAGE)){
+				albumResult = "config error";
+			}
+		}
+	}
+	
+	
+	const bluetoothPermission = ['android.permission.BLUETOOTH_SCAN', 'android.permission.BLUETOOTH_CONNECT'];
+	const blueToothGranted = UTSAndroid.checkSystemPermissionGranted(context, bluetoothPermission);
+	let blueToothResult = blueToothGranted ? "authorized" : "denied";
+	if (!blueToothGranted) {
+		if (Build.VERSION.SDK_INT >= 31) {
+			if(!(hasDefinedInManifest('android.permission.BLUETOOTH_SCAN') &&
+				hasDefinedInManifest('android.permission.BLUETOOTH_CONNECT'))){
+				blueToothResult = "config error";
+			}
+		} else {
+			if(!hasDefinedInManifest(Manifest.permission.ACCESS_FINE_LOCATION)){
+				blueToothResult = "config error";
+			}
+		}
+	}
+	
+	
 	let result : GetAppAuthorizeSettingResult = {
 		cameraAuthorized: cameraResult,
 		locationAuthorized: coarseLocationResult,
 		locationAccuracy: accuracy,
 		microphoneAuthorized: recordAudioResult,
 		notificationAuthorized: notificationResult,
-		albumAuthorized: null,
-		bluetoothAuthorized: null,
+		albumAuthorized: albumResult,
+		bluetoothAuthorized: blueToothResult,
 		locationReducedAccuracy: null,
 		notificationAlertAuthorized: null,
 		notificationBadgeAuthorized: null,

@@ -16,9 +16,17 @@
 		<data>
 		YqAdiVQXEX/sQGDVTemGbmiHLug=
 		</data>
+		<key>Headers/DCloudMediaImageCompress.h</key>
+		<data>
+		4ugY1Xw43zBBzuwysWU23TI7MfU=
+		</data>
 		<key>Headers/DCloudMediaPicker.h</key>
 		<data>
-		Jlm5qbrzLOzDONtckUdo/Y1ugjY=
+		FOa2V42y+1t8BYmX1yd0GslQvx0=
+		</data>
+		<key>Headers/DCloudMediaVideoCompress.h</key>
+		<data>
+		ACOUg8KiPvLAGIUM027Z1+H7pvk=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -68,15 +76,37 @@
 			o3Chvh0deKxbWa35QQk4Fmadx0U0PtDmUDlOjZ41NOI=
 			</data>
 		</dict>
+		<key>Headers/DCloudMediaImageCompress.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4ugY1Xw43zBBzuwysWU23TI7MfU=
+			</data>
+			<key>hash2</key>
+			<data>
+			8EmO9W5r3aJDIwFR8or2ZkoWWDgoSfQhCxpfXvLQN9A=
+			</data>
+		</dict>
 		<key>Headers/DCloudMediaPicker.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Jlm5qbrzLOzDONtckUdo/Y1ugjY=
+			FOa2V42y+1t8BYmX1yd0GslQvx0=
 			</data>
 			<key>hash2</key>
 			<data>
-			vrKf6pOLg0/BBfkQ///9flTTgusxadu5MQHtJn0mDOI=
+			892Md4HZ3OlfmSjMBnRQh6m7BrUxTvkv8bWlnbIN2KU=
+			</data>
+		</dict>
+		<key>Headers/DCloudMediaVideoCompress.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ACOUg8KiPvLAGIUM027Z1+H7pvk=
+			</data>
+			<key>hash2</key>
+			<data>
+			6t/ZSvRh0cxfGxX3saaLQvBLatqDHd6GGyJPxucCOQg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

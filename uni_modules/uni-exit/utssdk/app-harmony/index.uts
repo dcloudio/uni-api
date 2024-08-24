@@ -1,0 +1,14 @@
+import { UTSHarmony } from "@dcloudio/uni-runtime"
+import {
+    API_EXIT
+} from '../protocol.uts'
+import {
+    Exit
+} from '../interface.uts'
+
+export const exit: Exit = defineSyncApi<void>(
+    API_EXIT,
+    function () {
+        UTSHarmony.exit()
+    }
+) as Exit

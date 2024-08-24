@@ -31,6 +31,91 @@
         "npmurl": ""
     },
     "uni_modules": {
+        "uni-ext-api": {
+            "uni": {
+                "showTabBarRedDot": {
+                    "name": "showTabBarRedDot",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "hideTabBarRedDot": {
+                    "name": "hideTabBarRedDot",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "setTabBarBadge": {
+                    "name": "setTabBarBadge",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "removeTabBarBadge": {
+                    "name": "removeTabBarBadge",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "setTabBarItem": {
+                    "name": "setTabBarItem",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "setTabBarStyle": {
+                    "name": "setTabBarStyle",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "showTabBar": {
+                    "name": "showTabBar",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "hideTabBar": {
+                    "name": "hideTabBar",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "onTabBarMidButtonTap": {
+                    "name": "onTabBarMidButtonTap",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": false
+                    }
+                }
+            }
+        },
         "encrypt": [],
         "platforms": {
             "cloud": {

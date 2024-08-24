@@ -343,7 +343,7 @@ export type SaveFileOptions = {
 	/**
 	 * 要存储的文件路径 (本地路径)
 	 */
-	filePath : string.URIString | null,
+	filePath ?: string.URIString | null,
 
 	/**
 	 * 接口调用的回调函数
@@ -1351,6 +1351,7 @@ export interface FileSystemManager {
 	 *    "uniVer": "x",
 	 *    "unixVer": "x"
 	 *  }
+	 * 
 	 * }
 	 */
 	saveFile(options : SaveFileOptions) : void;
@@ -1787,6 +1788,8 @@ export type GetFileSystemManager = () => FileSystemManager;
 export interface Uni {
 	/**
 	 * 获取文件管理器
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-file-system-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-file-system-manager.html
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -1798,7 +1801,12 @@ export interface Uni {
 	 *            "osVer": "12.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.11"
-	 *   	  }
+	 *   	  },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 *    },
 	 *  "web": {
 	 *    "uniVer": "x",
@@ -1812,21 +1820,61 @@ export interface Uni {
 
 /**
  * 错误码
- * - 1200002  类型错误。仅支持 base64 / utf-8
- * - 1300002  未找到文件
- * - 1300013  无权限
- * - 1300021  是目录
- * - 1300022  参数无效
- * - 1300066  目录非空
- * - 1301003  对目录的非法操作
- * - 1301005  文件已存在
- * - 1300201  系统错误
- * - 1300202  超出文件存储限制的最大尺寸
- * - 1301111  brotli解压失败
- * - 1302003  标志无效
- * - 1300009  文件描述符错误
  */
-export type FileSystemManagerErrorCode = 1200002 | 1300002 | 1300013 | 1300021 | 1300022 | 1300066 | 1301003 | 1301005 | 1300201 | 1300202 | 1301111 | 1302003 | 1300009;
+export type FileSystemManagerErrorCode =
+/**
+ * 类型错误。仅支持 base64 / utf-8
+ */
+1200002 |
+/**
+ * 未找到文件
+ */
+1300002 |
+/**
+ * 无权限
+ */
+1300013 |
+/**
+ * 是目录
+ */
+1300021 |
+/**
+ * 参数无效
+ */
+1300022 |
+/**
+ * 目录非空
+ */
+1300066 |
+/**
+ * 对目录的非法操作
+ */
+1301003 |
+/**
+ * 文件已存在
+ */
+1301005 |
+/**
+ * 系统错误
+ */
+1300201 |
+/**
+ * 超出文件存储限制的最大尺寸
+ */
+1300202 |
+/**
+ * brotli解压失败
+ */
+1301111 |
+/**
+ * 标志无效
+ */
+1302003 |
+/**
+ * 文件描述符错误
+ */
+1300009;
+
 export type FileSystemManagerFail = IFileSystemManagerFail;
 export interface IFileSystemManagerFail extends IUniError {
 	errCode : FileSystemManagerErrorCode

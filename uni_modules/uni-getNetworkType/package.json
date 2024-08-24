@@ -39,7 +39,26 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+          "arkts": true
+				}
+			},
+			"onNetworkStatusChange": {
+				"name": "onNetworkStatusChange",
+				"app": {
+					"js": false,
+					"kotlin": false,
+					"swift": false,
+          "arkts": true
+				}
+			},
+			"offNetworkStatusChange": {
+				"name": "offNetworkStatusChange",
+				"app": {
+					"js": false,
+					"kotlin": false,
+					"swift": false,
+          "arkts": true
 				}
 			}
 		}
