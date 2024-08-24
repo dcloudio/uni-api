@@ -40,7 +40,14 @@ export const _navigateBack = (
         return
     }
     const currentPage = pages[pages.length - 1]
-    const onBackPressRes = invokePageOnBackPress(currentPage, from)
+    let onBackPressRes = invokePageOnBackPress(currentPage, from)
+    if (onBackPressRes !== true) {
+        const dialogPages = currentPage.$getDialogPages()
+        if (dialogPages.length > 0) {
+            const dialogPage = dialogPages[dialogPages.length - 1]
+            onBackPressRes = invokePageOnBackPress(dialogPage.$vm, from)
+        }
+    }
     if (onBackPressRes == true) {
         if (res !== null) {
             res.resolve(null)

@@ -37,7 +37,12 @@ export type PageScrollToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "x",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -75,7 +80,9 @@ export interface Uni {
     /**
      * 将页面滚动到目标位置
      *
-     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/page-scroll-to.html
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/scroll.html#pagescrollto
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/page-scroll-to.html#pagescrollto
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/page-scroll-to.html#pagescrollto
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -87,6 +94,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {

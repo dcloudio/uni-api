@@ -11,6 +11,11 @@ import {
 import I18n from '@ohos.i18n'
 import bundleManager from '@ohos.bundle.bundleManager'
 
+export {
+    GetAppBaseInfo,
+    GetAppBaseInfoResult,
+}
+
 function getBundleInfoOnce() {
     let bundleInfo: bundleManager.BundleInfo | null = null
     return (): bundleManager.BundleInfo => {

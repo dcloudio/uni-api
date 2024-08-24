@@ -1,0 +1,23 @@
+import webview from '@ohos.web.webview';
+
+export function getCookie(url: string): Promise<string> {
+    return webview.WebCookieManager.fetchCookie(url);
+}
+
+export function getCookieSync(url: string): string {
+    return webview.WebCookieManager.fetchCookieSync(url);
+}
+
+export function setCookie(url: string, cookies: string[]): Promise<void> {
+    return Promise.all(cookies.map(cookie => webview.WebCookieManager.configCookie(url, cookie))).then(() => {
+        return webview.WebCookieManager.saveCookieAsync();
+    });
+}
+
+export function setCookieSync(url: string, cookies: string[]): void {
+    cookies.forEach(cookie => {
+        webview.WebCookieManager.configCookieSync(url, cookie);
+    });
+    webview.WebCookieManager.saveCookieAsync();
+}
+

@@ -14,6 +14,14 @@ import {
   SelectorQueryNodeInfoCallback
 } from '../interface.uts'
 
+export {
+    CreateSelectorQuery,
+    NodeField,
+    NodesRef,
+    SelectorQuery,
+    SelectorQueryNodeInfoCallback
+}
+
 /* const ContextClasss = {
   canvas: CanvasContext,
   map: MapContext,
@@ -208,10 +216,10 @@ class SelectorQueryImpl implements SelectorQuery {
   }
 }
 
-export const createSelectorQuery = defineSyncApi<CreateSelectorQuery>('createSelectorQuery', (context?: ComponentInternalInstance | ComponentPublicInstance) => {
+export const createSelectorQuery = defineSyncApi<SelectorQuery>('createSelectorQuery', (context?: ComponentInternalInstance | ComponentPublicInstance) => {
   context = resolveComponentInstance(context)
   if (context && !getPageIdByVm(context)) {
     context = null
   }
   return new SelectorQueryImpl(context || getCurrentPageVm()!) as SelectorQuery
-})
+}) as CreateSelectorQuery

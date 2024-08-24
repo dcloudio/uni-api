@@ -7,8 +7,8 @@ export type GetAppBaseInfoOptions = {
 
 export type GetAppBaseInfoResult = {
   /**
-   * manifest.json 中应用appid，即DCloud appid。	
-   * 
+   * manifest.json 中应用appid，即DCloud appid。
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -21,7 +21,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -32,7 +37,7 @@ export type GetAppBaseInfoResult = {
   appId?: string,
   /**
    * `manifest.json` 中应用名称。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -45,7 +50,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -56,7 +66,7 @@ export type GetAppBaseInfoResult = {
   appName?: string,
   /**
    * `manifest.json` 中应用版本名称。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -69,7 +79,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -80,7 +95,7 @@ export type GetAppBaseInfoResult = {
   appVersion?: string,
   /**
    * `manifest.json` 中应用版本名号。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -93,7 +108,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -103,8 +123,8 @@ export type GetAppBaseInfoResult = {
    */
   appVersionCode?: string,
   /**
-   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es	
-   * 
+   * 应用设置的语言en、zh-Hans、zh-Hant、fr、es
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -117,7 +137,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -127,8 +152,8 @@ export type GetAppBaseInfoResult = {
    */
   appLanguage?: string,
   /**
-   * 应用设置的语言	
-   * 
+   * 应用设置的语言
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -141,7 +166,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -153,7 +183,7 @@ export type GetAppBaseInfoResult = {
   /**
    * 引擎版本号。已废弃，仅为了向下兼容保留
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -166,7 +196,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -176,8 +211,8 @@ export type GetAppBaseInfoResult = {
    */
   version?: string,
   /**
-   * 应用资源（wgt）的版本名称。	
-   * 
+   * 应用资源（wgt）的版本名称。
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -190,7 +225,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -200,8 +240,8 @@ export type GetAppBaseInfoResult = {
    */
   appWgtVersion?: string,
   /**
-   * 小程序宿主语言	
-   * 
+   * 小程序宿主语言
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -214,7 +254,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -225,7 +270,7 @@ export type GetAppBaseInfoResult = {
   hostLanguage?: string,
   /**
    * App、小程序宿主版本。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -238,7 +283,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -248,8 +298,8 @@ export type GetAppBaseInfoResult = {
    */
   hostVersion?: string,
   /**
-   * 小程序宿主名称	
-   * 
+   * 小程序宿主名称
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -262,7 +312,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -272,8 +327,8 @@ export type GetAppBaseInfoResult = {
    */
   hostName?: string,
   /**
-   * 小程序宿主包名	
-   * 
+   * 小程序宿主包名
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -286,7 +341,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -296,8 +356,8 @@ export type GetAppBaseInfoResult = {
    */
   hostPackageName?: string,
   /**
-   * uni小程序SDK版本、小程序客户端基础库版本	
-   * 
+   * uni小程序SDK版本、小程序客户端基础库版本
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -310,7 +370,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -321,7 +386,7 @@ export type GetAppBaseInfoResult = {
   hostSDKVersion?: string,
   /**
    * 系统当前主题，取值为light或dark。微信小程序全局配置"darkmode":true时才能获取，否则为 undefined （不支持小游戏）
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -334,7 +399,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -345,7 +415,7 @@ export type GetAppBaseInfoResult = {
   hostTheme?: string,
   /**
    * 是否uni-app x
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -358,7 +428,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -367,11 +442,11 @@ export type GetAppBaseInfoResult = {
    * }
    */
   isUniAppX ?: boolean,
-  
+
   /**
    * uni 编译器版本
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -384,7 +459,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
     *   "web": {
     *      "uniVer": "x",
@@ -395,7 +475,7 @@ export type GetAppBaseInfoResult = {
   uniCompileVersion ?: string,
   /**
    * uni 编译器版本
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -408,7 +488,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -419,7 +504,7 @@ export type GetAppBaseInfoResult = {
   uniCompilerVersion ?: string,
   /**
    * uni-app 运行平台。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -432,7 +517,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
     *   "web": {
     *      "uniVer": "√",
@@ -443,7 +533,7 @@ export type GetAppBaseInfoResult = {
   uniPlatform ?: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
    * uni 运行时版本
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -456,7 +546,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -468,7 +563,7 @@ export type GetAppBaseInfoResult = {
   /**
    * uni 编译器版本号
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -481,7 +576,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -492,7 +592,7 @@ export type GetAppBaseInfoResult = {
   uniCompileVersionCode?: number,
   /**
    * uni 编译器版本号
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -505,7 +605,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -516,7 +621,7 @@ export type GetAppBaseInfoResult = {
   uniCompilerVersionCode?: number,
   /**
    * uni 运行时版本号
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -529,7 +634,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -540,7 +650,7 @@ export type GetAppBaseInfoResult = {
   uniRuntimeVersionCode?: number,
   /**
    * Android的包名
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -553,7 +663,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -564,7 +679,7 @@ export type GetAppBaseInfoResult = {
   packageName?: string,
   /**
    * iOS的bundleId
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -577,7 +692,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -589,7 +709,7 @@ export type GetAppBaseInfoResult = {
   /**
    * Android: 应用签名证书的SHA1值（全部为小写，中间不包含“:”）。 为了保证应用的安全性，请使用自己生成的证书（不要使用公共测试证书）。
    * iOS: 应用签名证书中绑定的Bundle ID（AppleID）的md5值（全部为小写）。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -602,7 +722,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -613,7 +738,7 @@ export type GetAppBaseInfoResult = {
   signature?: string,
   /**
    * 当前App的主题
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -626,7 +751,12 @@ export type GetAppBaseInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.18"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
     *   "web": {
     *      "uniVer": "x",
@@ -646,11 +776,13 @@ export type GetAppBaseInfo = (options?: GetAppBaseInfoOptions | null) => GetAppB
 export interface Uni {
   /**
     * GetAppBaseInfo(Object object)
-    * @description 
+    * @description
     * 获取app基本信息
     * @param {GetAppBaseInfoOptions} options [options=包含所有字段的过滤对象]  过滤的字段对象, 不传参数默认为获取全部字段。
     * @return {object}
-    * @tutorial https://uniapp.dcloud.net.cn/api/system/getAppBaseInfo.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-app-base-info.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-app-base-info.html
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getAppBaseInfo.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -663,7 +795,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }}
 	* 	},
     *   "web": {
     *      "uniVer": "√",

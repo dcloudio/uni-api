@@ -1,11 +1,13 @@
 export interface Uni {
   /**
     * getSystemInfo()
-    * @description 
+    * @description
     * 异步获取系统信息
     * @param {GetSystemInfoOptions}  options
     * @return {void}
-    * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfo
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/info.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -18,7 +20,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.23",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *     "uniVer": "√",
@@ -41,11 +48,13 @@ export interface Uni {
 
   /**
     * getSystemInfoSync()
-    * @description 
+    * @description
     * 同步获取系统信息
-    * @param {void}  
+    * @param {void}
     * @return {GetSystemInfoResult}
-    * @tutorial http://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/info.html#getsysteminfosync
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -74,11 +83,13 @@ export interface Uni {
 
   /**
     * getWindowInfo()
-    * @description 
+    * @description
     * 同步获取窗口信息
-    * @param {void}  
+    * @param {void}
     * @return {GetWindowInfoResult} result
-    * @tutorial http://uniapp.dcloud.io/api/system/getWindowInfo.html
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getWindowInfo.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -112,7 +123,7 @@ export type GetWindowInfo = () => GetWindowInfoResult;
 export type SafeArea = {
   /**
    * 安全区域左上角横坐标，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -125,7 +136,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -136,7 +152,7 @@ export type SafeArea = {
   left: number,
   /**
    * 安全区域右下角横坐标，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -149,7 +165,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -160,7 +181,7 @@ export type SafeArea = {
   right: number,
   /**
    * 安全区域左上角纵坐标，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -173,7 +194,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -184,7 +210,7 @@ export type SafeArea = {
   top: number,
   /**
    * 安全区域右下角纵坐标，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -197,7 +223,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -208,7 +239,7 @@ export type SafeArea = {
   bottom: number,
   /**
    * 安全区域的宽度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -221,7 +252,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -232,7 +268,7 @@ export type SafeArea = {
   width: number,
   /**
    * 安全区域的高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -245,7 +281,12 @@ export type SafeArea = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -258,7 +299,7 @@ export type SafeArea = {
 export type SafeAreaInsets = {
   /**
    * 安全区域左侧插入位置（距离左边边界距离），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -271,7 +312,12 @@ export type SafeAreaInsets = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -282,7 +328,7 @@ export type SafeAreaInsets = {
   left: number,
   /**
    * 安全区域右侧插入位置（距离右边边界距离），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -295,7 +341,12 @@ export type SafeAreaInsets = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -306,7 +357,7 @@ export type SafeAreaInsets = {
   right: number,
   /**
    * 安全区顶部插入位置（距离顶部边界距离），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -319,7 +370,12 @@ export type SafeAreaInsets = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -330,7 +386,7 @@ export type SafeAreaInsets = {
   top: number,
   /**
    * 安全区域底部插入位置（距离底部边界距离），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -343,7 +399,12 @@ export type SafeAreaInsets = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -356,7 +417,7 @@ export type SafeAreaInsets = {
 export type GetSystemInfoResult = {
   /**
    * 客户端基础库版本
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -369,7 +430,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -380,7 +446,7 @@ export type GetSystemInfoResult = {
   SDKVersion: string,
   /**
    * `manifest.json` 中应用appid。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -393,7 +459,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -404,7 +475,7 @@ export type GetSystemInfoResult = {
   appId: string,
   /**
    * 应用设置的语言。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -417,7 +488,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -428,7 +504,7 @@ export type GetSystemInfoResult = {
   appLanguage: string,
   /**
    * `manifest.json` 中应用名称。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -441,7 +517,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -452,7 +533,7 @@ export type GetSystemInfoResult = {
   appName: string,
   /**
    * `manifest.json` 中应用版本名称。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -465,7 +546,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -476,7 +562,7 @@ export type GetSystemInfoResult = {
   appVersion: string,
   /**
    * `manifest.json` 中应用版本名号。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -489,7 +575,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -500,7 +591,7 @@ export type GetSystemInfoResult = {
   appVersionCode: string,
   /**
    * 应用资源（wgt）的版本名称。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -513,7 +604,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -525,7 +621,7 @@ export type GetSystemInfoResult = {
   /**
    * 手机品牌。
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -538,7 +634,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -549,7 +650,7 @@ export type GetSystemInfoResult = {
   brand: string,
   /**
    * 浏览器名称。`App` 端是系统 webview 的名字，比如 wkwebview、chrome。小程序端为空
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -562,7 +663,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -573,7 +679,7 @@ export type GetSystemInfoResult = {
   browserName: string,
   /**
    * 浏览器版本、webview 版本。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -586,7 +692,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -597,7 +708,7 @@ export type GetSystemInfoResult = {
   browserVersion: string,
   /**
    * 设备 ID
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -610,7 +721,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -621,7 +737,7 @@ export type GetSystemInfoResult = {
   deviceId: string,
   /**
    * 设备品牌。如：`apple`、`huawei`。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -634,7 +750,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -645,7 +766,7 @@ export type GetSystemInfoResult = {
   deviceBrand: string,
   /**
    * 设备型号
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -658,7 +779,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -669,7 +795,7 @@ export type GetSystemInfoResult = {
   deviceModel: string,
   /**
    * 设备类型。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -682,7 +808,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -693,7 +824,7 @@ export type GetSystemInfoResult = {
   deviceType: 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance',
   /**
    * 设备像素比
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -706,7 +837,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -717,8 +853,7 @@ export type GetSystemInfoResult = {
   devicePixelRatio: number,
   /**
    * 设备方向。
-   * @type 'portrait' | 'landscape'
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -731,7 +866,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -739,11 +879,19 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  deviceOrientation: 'portrait' | 'landscape',
+  deviceOrientation:
+  /**
+   * 纵向
+   */
+  'portrait' |
+  /**
+   * 横向
+   */
+  'landscape',
   /**
    * 程序设置的语言
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -756,7 +904,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -768,7 +921,7 @@ export type GetSystemInfoResult = {
   /**
    * 手机型号
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -781,7 +934,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -791,8 +949,8 @@ export type GetSystemInfoResult = {
    */
   model?: string,
   /**
-   * 系统名称	
-   * 
+   * 系统名称
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -805,7 +963,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -813,10 +976,10 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  osName: 'ios' | 'android' | 'harmony' | 'macos' | 'windows' | 'linux',
+  osName: 'ios' | 'android' | 'harmonyos' | 'macos' | 'windows' | 'linux',
   /**
    * 操作系统版本。如 ios 版本，andriod 版本
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -829,7 +992,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -840,7 +1008,7 @@ export type GetSystemInfoResult = {
   osVersion: string,
   /**
    * 操作系统语言
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -853,7 +1021,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -864,7 +1037,7 @@ export type GetSystemInfoResult = {
   osLanguage: string,
   /**
    * 操作系统主题
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -877,7 +1050,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -889,7 +1067,7 @@ export type GetSystemInfoResult = {
   /**
    * 设备像素比
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -902,7 +1080,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -914,7 +1097,7 @@ export type GetSystemInfoResult = {
   /**
    * 客户端平台
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -927,7 +1110,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -935,10 +1123,10 @@ export type GetSystemInfoResult = {
    *   }
    * }
    */
-  platform: 'ios' | 'android' | 'harmony' | 'mac' | 'windows' | 'linux',
+  platform: 'ios' | 'android' | 'harmonyos' | 'mac' | 'windows' | 'linux',
   /**
    * 屏幕宽度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -951,7 +1139,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -962,7 +1155,7 @@ export type GetSystemInfoResult = {
   screenWidth: number,
   /**
    * 屏幕高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -975,7 +1168,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -986,7 +1184,7 @@ export type GetSystemInfoResult = {
   screenHeight: number,
   /**
    * 状态栏的高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -999,7 +1197,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1011,7 +1214,7 @@ export type GetSystemInfoResult = {
   /**
    * 操作系统版本
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1024,7 +1227,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1035,7 +1243,7 @@ export type GetSystemInfoResult = {
   system: string,
   /**
    * 在竖屏正方向下的安全区域
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1048,7 +1256,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1059,7 +1272,7 @@ export type GetSystemInfoResult = {
   safeArea: SafeArea,
   /**
    * 在竖屏正方向下的安全区域插入位置
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1072,7 +1285,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1083,7 +1301,7 @@ export type GetSystemInfoResult = {
   safeAreaInsets: SafeAreaInsets,
   /**
    * 用户标识。小程序端为空
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1096,7 +1314,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1108,7 +1331,7 @@ export type GetSystemInfoResult = {
   /**
    * uni 编译器版本。
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1121,7 +1344,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1132,7 +1360,7 @@ export type GetSystemInfoResult = {
   uniCompileVersion: string,
   /**
    * uni 编译器版本。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1145,7 +1373,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1156,7 +1389,7 @@ export type GetSystemInfoResult = {
   uniCompilerVersion: string,
   /**
    * uni-app 运行平台，与条件编译平台相同。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1169,7 +1402,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1180,7 +1418,7 @@ export type GetSystemInfoResult = {
   uniPlatform: 'app' | 'web' | 'mp-weixin' | 'mp-alipay' | 'mp-baidu' | 'mp-toutiao' | 'mp-lark' | 'mp-qq' | 'mp-kuaishou' | 'mp-jd' | 'mp-360' | 'quickapp-webview' | 'quickapp-webview-union' | 'quickapp-webview-huawei',
   /**
    * uni 运行时版本。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1193,7 +1431,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1205,7 +1448,7 @@ export type GetSystemInfoResult = {
   /**
    * uni 编译器版本号。
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1218,7 +1461,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1229,7 +1477,7 @@ export type GetSystemInfoResult = {
   uniCompileVersionCode: number,
   /**
    * uni 编译器版本号。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1242,7 +1490,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1253,7 +1506,7 @@ export type GetSystemInfoResult = {
   uniCompilerVersionCode: number,
   /**
    * uni 运行时版本号。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1266,7 +1519,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1278,7 +1536,7 @@ export type GetSystemInfoResult = {
   /**
    * 引擎版本号。
    * @deprecated 已废弃，仅为了向下兼容保留
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1291,7 +1549,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1302,7 +1565,7 @@ export type GetSystemInfoResult = {
   version: string,
   /**
    * rom 名称。Android 部分机型获取不到值。iOS 恒为 `ios`
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1315,7 +1578,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1326,7 +1594,7 @@ export type GetSystemInfoResult = {
   romName: string,
   /**
    * rom 版本号。Android 部分机型获取不到值。iOS 为操作系统版本号（同 `osVersion`）。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1339,7 +1607,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1350,7 +1623,7 @@ export type GetSystemInfoResult = {
   romVersion: string,
   /**
    * 可使用窗口宽度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1363,7 +1636,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1374,7 +1652,7 @@ export type GetSystemInfoResult = {
   windowWidth: number,
   /**
    * 可使用窗口高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1387,7 +1665,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1398,7 +1681,7 @@ export type GetSystemInfoResult = {
   windowHeight: number,
   /**
    * 内容区域距离顶部的距离（同CSS变量 `--window-top`），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1411,7 +1694,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1422,7 +1710,7 @@ export type GetSystemInfoResult = {
   windowTop: number,
   /**
    * 内容区域距离底部的距离（同CSS变量 `--window-bottom`），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1435,7 +1723,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1446,7 +1739,7 @@ export type GetSystemInfoResult = {
   windowBottom: number,
   /**
    * Android 系统API库的版本。
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1459,7 +1752,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1470,7 +1768,7 @@ export type GetSystemInfoResult = {
   osAndroidAPILevel?: number | null,
   /**
    * 当前App的主题
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1483,7 +1781,12 @@ export type GetSystemInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "x",
    * 			"unixVer": "4.18"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "x",
@@ -1519,7 +1822,7 @@ export type GetSystemInfoOptions = {
 export type GetWindowInfoResult = {
   /**
    * 设备像素比
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1532,7 +1835,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1543,7 +1851,7 @@ export type GetWindowInfoResult = {
   pixelRatio: number,
   /**
    * 屏幕宽度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1556,7 +1864,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1567,7 +1880,7 @@ export type GetWindowInfoResult = {
   screenWidth: number,
   /**
    * 屏幕高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1580,7 +1893,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1591,7 +1909,7 @@ export type GetWindowInfoResult = {
   screenHeight: number,
   /**
    * 可使用窗口宽度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1604,7 +1922,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1615,7 +1938,7 @@ export type GetWindowInfoResult = {
   windowWidth: number,
   /**
    * 可使用窗口高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1628,14 +1951,19 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	}
    * }
    */
   windowHeight: number,
   /**
    * 状态栏的高度，单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1648,7 +1976,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1659,7 +1992,7 @@ export type GetWindowInfoResult = {
   statusBarHeight: number,
   /**
    * 内容区域距离顶部的距离（同CSS变量 `--window-top`），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1672,7 +2005,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1683,7 +2021,7 @@ export type GetWindowInfoResult = {
   windowTop: number,
   /**
    * 内容区域距离底部的距离（同CSS变量 `--window-bottom`），单位为px
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1696,7 +2034,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1707,7 +2050,7 @@ export type GetWindowInfoResult = {
   windowBottom: number,
   /**
    * 安全区域在屏幕中的位置信息
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1720,7 +2063,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1731,7 +2079,7 @@ export type GetWindowInfoResult = {
   safeArea: SafeArea,
   /**
    * 安全区域插入位置（与屏幕边界的距离）信息
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -1744,7 +2092,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",
@@ -1755,8 +2108,9 @@ export type GetWindowInfoResult = {
   safeAreaInsets: SafeAreaInsets,
   /**
    * 窗口上边缘的 y 值，单位为px
-   * 
+   *
    * @uniPlatform
+   * @deprecated 已废弃，仅为了向下兼容保留
    * {
    * 	"app": {
    * 		"android": {
@@ -1768,7 +2122,12 @@ export type GetWindowInfoResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
    * 	},
    *   "web": {
    *     "uniVer": "√",

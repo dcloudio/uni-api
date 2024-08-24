@@ -1,0 +1,174 @@
+export type SaveFileSuccess = {
+    savedFilePath: string;
+};
+export type SaveFileSuccessCallback = (res: SaveFileSuccess) => void;
+export type SaveFileFail = {};
+export type SaveFileFailCallback = (res: SaveFileFail) => void;
+export type SaveFileCompleteCallback = (res: any) => void;
+export type SaveFileOptions = {
+    tempFilePath: string;
+    success?: SaveFileSuccessCallback | null;
+    fail?: SaveFileFailCallback | null;
+    complete?: SaveFileCompleteCallback | null;
+};
+
+export type GetFileInfoSuccess = {
+    digest: string;
+    size: number;
+};
+export type GetFileInfoSuccessCallback = (res: GetFileInfoSuccess) => void;
+export type GetFileInfoFail = {};
+export type GetFileInfoFailCallback = (res: GetFileInfoFail) => void;
+export type GetFileInfoCompleteCallback = (res: any) => void;
+export type GetFileInfoOptions = {
+    filePath: string;
+    digestAlgorithm?: string | null;
+    success?: GetFileInfoSuccessCallback | null;
+    fail?: GetFileInfoFailCallback | null;
+    complete?: GetFileInfoCompleteCallback | null;
+};
+
+export type GetSavedFileInfoSuccess = {
+    size: number;
+    createTime: number;
+};
+export type GetSavedFileInfoSuccessCallback = (res: GetSavedFileInfoSuccess) => void;
+export type GetSavedFileInfoFail = {};
+export type GetSavedFileInfoFailCallback = (res: GetSavedFileInfoFail) => void;
+export type GetSavedFileInfoCompleteCallback = (res: any) => void;
+export type GetSavedFileInfoOptions = {
+    filePath: string;
+    success?: GetSavedFileInfoSuccessCallback | null;
+    fail?: GetSavedFileInfoFailCallback | null;
+    complete?: GetSavedFileInfoCompleteCallback | null;
+};
+
+export type RemoveSavedFileSuccess = {};
+export type RemoveSavedFileSuccessCallback = (res: RemoveSavedFileSuccess) => void;
+export type RemoveSavedFileFail = {};
+export type RemoveSavedFileFailCallback = (res: RemoveSavedFileFail) => void;
+export type RemoveSavedFileCompleteCallback = (res: any) => void;
+export type RemoveSavedFileOptions = {
+    filePath: string;
+    success?: RemoveSavedFileSuccessCallback | null;
+    fail?: RemoveSavedFileFailCallback | null;
+    complete?: RemoveSavedFileCompleteCallback | null;
+};
+
+export type SavedFileListItem = {
+    filePath: string;
+    size: number;
+    createTime: number;
+};
+export type GetSavedFileListSuccess = {
+    fileList: SavedFileListItem[];
+};
+export type GetSavedFileListSuccessCallback = (res: GetSavedFileListSuccess) => void;
+export type GetSavedFileListFail = {};
+export type GetSavedFileListFailCallback = (res: GetSavedFileListFail) => void;
+export type GetSavedFileListCompleteCallback = (res: any) => void;
+export type GetSavedFileListOptions = {
+    success?: GetSavedFileListSuccessCallback | null;
+    fail?: GetSavedFileListFailCallback | null;
+    complete?: GetSavedFileListCompleteCallback | null;
+};
+
+export type SaveFile = (options?: SaveFileOptions | null) => void;
+export type GetFileInfo = (options?: GetFileInfoOptions | null) => void;
+export type GetSavedFileInfo = (options?: GetSavedFileInfoOptions | null) => void;
+export type RemoveSavedFile = (options?: RemoveSavedFileOptions | null) => void;
+export type GetSavedFileList = (options?: GetSavedFileListOptions | null) => void;
+
+
+export interface Uni {
+    /**
+     * 保存文件
+     * @uniPlatform {
+     *    "app": {
+     *      "harmony": {
+     *        "osVer": "3.0",
+     *        "uniVer": "4.25",
+     *        "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+     * }
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    saveFile(options?: SaveFileOptions | null): void;
+    /**
+     * 获取本地已保存的文件列表
+     * @uniPlatform {
+     *    "app": {
+     *      "harmony": {
+     *        "osVer": "3.0",
+     *        "uniVer": "4.25",
+     *        "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+     * }
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    getSavedFileList(options?: GetSavedFileListOptions | null): void;
+    /**
+     * 获取已保存到本地的文件信息
+     * @uniPlatform {
+     *    "app": {
+     *      "harmony": {
+     *        "osVer": "3.0",
+     *        "uniVer": "4.25",
+     *        "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+     * }
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    getSavedFileInfo(options?: GetSavedFileInfoOptions | null): void;
+    /**
+     * 删除已保存的文件
+     * @uniPlatform {
+     *    "app": {
+     *      "harmony": {
+     *        "osVer": "3.0",
+     *        "uniVer": "4.25",
+     *        "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+     * }
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    removeSavedFile(options?: RemoveSavedFileOptions | null): void;
+    /**
+     * 获取文件信息
+     * @uniPlatform {
+     *    "app": {
+     *      "harmony": {
+     *        "osVer": "3.0",
+     *        "uniVer": "4.25",
+     *        "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+     * }
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    getFileInfo(options?: GetFileInfoOptions | null): void;
+}

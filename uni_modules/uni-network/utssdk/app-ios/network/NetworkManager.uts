@@ -5,6 +5,9 @@ import { UploadController } from './upload/UploadController.uts';
 import { DownloadController } from './download/DownloadController.uts';
 
 class NetworkRequestListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	
 	public onStart() : void { }
 
 	public onHeadersReceived(statusCode : number, headers : Map<string, any>) : void { }
@@ -16,20 +19,24 @@ class NetworkRequestListener {
 	public onFail(error : NSError) : void { }
 }
 
-interface NetworkUploadFileListener {
-	progressListeners: Array<UploadFileProgressUpdateCallback>;
-	onProgress(progressUpdate: OnProgressUpdateResult): void;
-	onDataReceived(data : Data) : void;
-	onFinished(response : HTTPURLResponse) : void;
-	onFail(error : NSError) : void;
+class NetworkUploadFileListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	public progressListeners : Array<UploadFileProgressUpdateCallback> = new Array<UploadFileProgressUpdateCallback>();
+	public onProgress(progressUpdate : OnProgressUpdateResult) : void { };
+	public onDataReceived(data : Data) : void { };
+	public onFinished(response : HTTPURLResponse) : void { };
+	public onFail(error : NSError) : void { };
 }
 
-interface NetworkDownloadFileListener {
-	options : DownloadFileOptions | null;
-	progressListeners: Array<DownloadFileProgressUpdateCallback>;
-	onProgress(progressUpdate: OnProgressDownloadResult): void;
-	onFinished(response : HTTPURLResponse, filePath: string) : void;
-	onFail(error : NSError) : void;
+class NetworkDownloadFileListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	public options : DownloadFileOptions | null = null;
+	public progressListeners : Array<DownloadFileProgressUpdateCallback> = new Array<DownloadFileProgressUpdateCallback>();
+	public onProgress(progressUpdate : OnProgressDownloadResult) : void { };
+	public onFinished(response : HTTPURLResponse, filePath : string) : void { };
+	public onFail(error : NSError) : void { };
 }
 
 
@@ -42,6 +49,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 
 	public abort() {
 		this.task?.cancel()
+		UTSiOS.destroyInstance(this)
 	}
 }
 
@@ -65,7 +73,9 @@ class NetworkManager implements URLSessionDataDelegate {
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
 			listener.onFail(error);
-			return new NetworkRequestTaskImpl(null);
+			let task = new NetworkRequestTaskImpl(null);
+			listener.task = task;
+			return task;
 		}
 
 		if (this.session == null) {
@@ -79,14 +89,15 @@ class NetworkManager implements URLSessionDataDelegate {
 			this.taskMap.set(task!, listener);
 		}
 		let requestTask = new NetworkRequestTaskImpl(task);
+		listener.task = requestTask;
 		return requestTask;
 	}
-	
-	public uploadFile(options: UploadFileOptions, listener: NetworkUploadFileListener): UploadTask {
+
+	public uploadFile(options : UploadFileOptions, listener : NetworkUploadFileListener) : UploadTask {
 		return UploadController.getInstance().uploadFile(options, listener);
 	}
-	
-	public downloadFile(options: DownloadFileOptions, listener: NetworkDownloadFileListener): DownloadTask {
+
+	public downloadFile(options : DownloadFileOptions, listener : NetworkDownloadFileListener) : DownloadTask {
 		return DownloadController.getInstance().downloadFile(options, listener);
 	}
 
@@ -129,9 +140,9 @@ class NetworkManager implements URLSessionDataDelegate {
 				let valueStr = "";
 				if (value instanceof UTSJSONObject) {
 					valueStr = JSON.stringify(value) ?? ""
-				}else if(value instanceof Map<string, any>){
+				} else if (value instanceof Map<string, any>) {
 					valueStr = JSON.stringify(new UTSJSONObject(value)) ?? ""
-				}else{
+				} else {
 					valueStr = `${value}`
 				}
 				request.setValue(valueStr, forHTTPHeaderField = key);
@@ -151,7 +162,7 @@ class NetworkManager implements URLSessionDataDelegate {
 					json = JSON.parseObject(data as string);
 				} else if (data instanceof UTSJSONObject) {
 					json = data as UTSJSONObject;
-				} else if(data instanceof Map<string, any>){
+				} else if (data instanceof Map<string, any>) {
 					json = new UTSJSONObject(data!)
 				}
 				if (json != null) {
@@ -181,6 +192,23 @@ class NetworkManager implements URLSessionDataDelegate {
 					}
 					bodyData = body?.data(using = String.Encoding.utf8);
 				}
+			} else if (param.data instanceof UTSJSONObject) {
+				let body : string | null = "";
+				const contentType = request.value(forHTTPHeaderField = "Content-Type")
+				if (contentType != null) {
+					if (contentType!.indexOf("application/x-www-form-urlencoded") == 0) {
+						const data = param.data as UTSJSONObject;
+						const map : Map<string, any | null> = data.toMap();
+						const bodyArray = new Array<string>();
+						map.forEach((value, key) => {
+							bodyArray.push(key + "=" + `${value ?? "null"}`);
+						})
+						body = bodyArray.join("&");
+					} else {
+						body = JSON.stringify(param.data);
+					}
+					bodyData = body?.data(using = String.Encoding.utf8);
+				}
 			}
 			if (bodyData == null) {
 				return null;
@@ -188,7 +216,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 			request.httpBody = bodyData;
 		}
-		
+
 		return request;
 	}
 
@@ -211,7 +239,7 @@ class NetworkManager implements URLSessionDataDelegate {
 		newUrl = str[0]   // http:xxx/xxx
 		const pairs = query.split('&')
 		const queryMap = new Map<string, string>();
-		pairs.forEach((item: string, index: number) => {
+		pairs.forEach((item : string, index : number) => {
 			const temp = item.split('=')
 			if (temp.length > 1) {
 				queryMap[temp[0]] = temp[1]
@@ -219,15 +247,15 @@ class NetworkManager implements URLSessionDataDelegate {
 		});
 		const dataMap : Map<string, any | null> = data.toMap();
 		dataMap.forEach((value, key) => {
-			if(value == null){
+			if (value == null) {
 				value = "";
 			}
 			let encodeKey = encodeURIComponent(key)!
-			if (value instanceof UTSJSONObject || value instanceof Array<any|null>){
+			if (value instanceof UTSJSONObject || value instanceof Array<any | null>) {
 				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(value)!)!
-			} else if(value instanceof Map<string, any>){
+			} else if (value instanceof Map<string, any>) {
 				queryMap[encodeKey] = encodeURIComponent(JSON.stringify(new UTSJSONObject(value))!)!
-			} else{
+			} else {
 				queryMap[encodeKey] = encodeURIComponent(`${value!}`)!;
 			}
 		})
@@ -235,7 +263,7 @@ class NetworkManager implements URLSessionDataDelegate {
 		queryMap.forEach((value, key) => {
 			queryStr += key + "=" + value + "&"
 		});
-		
+
 		queryStr = queryStr.slice(0, -1);
 		if (queryStr.length > 0) {
 			newUrl += "?" + queryStr;
@@ -245,10 +273,10 @@ class NetworkManager implements URLSessionDataDelegate {
 		}
 		return newUrl;
 	}
-	
-	private percentEscapedString(str: string): string {
+
+	private percentEscapedString(str : string) : string {
 		//如果url已经有部分经过encode，那么需要先decode再encode。
-		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
+		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters = CharacterSet.urlQueryAllowed) ?? str
 	}
 
 

@@ -15,12 +15,22 @@ import {
 } from '../protocol.uts'
 import {
     UTSHarmony,
-    getCurrentPage,
+    getWindowInfo as internalGetWindowInfo,
+    getDeviceId,
 } from '@dcloudio/uni-runtime'
 import I18n from '@ohos.i18n'
 import deviceInfo from '@ohos.deviceInfo';
-import display from '@ohos.display';
-import harmonyWindow from '@ohos.window';
+
+export {
+    GetWindowInfo,
+    GetWindowInfoResult,
+    GetSystemInfo,
+    GetSystemInfoOptions,
+    GetSystemInfoSync,
+    GetSystemInfoResult,
+    SafeAreaInsets,
+    SafeArea,
+}
 
 /**
  * TODO 
@@ -47,72 +57,10 @@ function parseDeviceType(deviceType: string): 'phone' | 'pad' | 'tv' | 'watch' |
     }
 }
 
-function internalGetWindowInfo(): GetWindowInfoResult {
-    const pixelRatio = vp2px(1)
-    const windowStage: harmonyWindow.WindowStage = UTSHarmony.getWindowStage()
-    // TODO 时机过早的时候无法获取安全区信息，模拟一份返回
-    let topRect: harmonyWindow.Rect = { top: 0, left: 0, width: 0, height: 136 }
-    let bottomRect: harmonyWindow.Rect = { top: 0, left: 0, width: 0, height: 98 }
-    if (windowStage) {
-        const mainWindow = windowStage.getMainWindowSync()
-        topRect = mainWindow.getWindowAvoidArea(harmonyWindow.AvoidAreaType.TYPE_SYSTEM).topRect
-        bottomRect = mainWindow.getWindowAvoidArea(harmonyWindow.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect
-    }
-    const defaultDisplay = display.getDefaultDisplaySync()
-
-    // TODO 未考虑小窗模式
-    // TODO 动态获取navigationBarHeight、tabBarHeight
-
-    const currentPage: ESObject = getCurrentPage()
-
-    const navigationBarHeight = currentPage && currentPage.$page.meta.navigationBar.type === 'default' ? 58 : 0
-    const tabBarHeight = currentPage && currentPage.$.__isTabBar ? 50 : 0
-
-    const screenWidth = px2vp(defaultDisplay.width)
-    const screenHeight = px2vp(defaultDisplay.height)
-    // TODO px2vp可能返回小数，暂未处理
-    // TODO 时机过早的时候无法获取安全区信息
-    const statusBarHeight = px2vp(topRect.top + topRect.height)
-    const safeAreaTopSize = statusBarHeight + navigationBarHeight
-    const safeAreaBottomSize = px2vp(bottomRect.height) + tabBarHeight
-    const safeAreaLeftSize = 0
-    const safeAreaRightSize = 0
-
-    const safeAreaInsets: SafeAreaInsets = {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-    }
-    const windowWidth = screenWidth - safeAreaLeftSize - safeAreaRightSize
-    const windowHeight = screenHeight - safeAreaTopSize - safeAreaBottomSize
-    const safeArea: SafeArea = {
-        top: 0,
-        right: windowWidth,
-        bottom: windowHeight,
-        left: 0,
-        width: windowWidth,
-        height: windowHeight,
-    }
-    return {
-        pixelRatio,
-        screenTop: 0,
-        screenWidth,
-        screenHeight,
-        windowTop: 0,
-        windowBottom: 0,
-        windowWidth: safeArea.width,
-        windowHeight: safeArea.height,
-        safeAreaInsets,
-        safeArea,
-        statusBarHeight,
-    }
-}
-
 export const getWindowInfo: GetWindowInfo = defineSyncApi<GetWindowInfoResult>(
     API_GET_WINDOW_INFO,
     (): GetWindowInfoResult => {
-        return internalGetWindowInfo()
+        return internalGetWindowInfo() as GetWindowInfoResult
     }
 ) as GetWindowInfo
 
@@ -127,7 +75,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
     const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion()
     const uniCompilerVersionCode: number = parseFloat(uniCompilerVersion)
     const uniRuntimeVersion: string = UTSHarmony.getUniRuntimeVersion()
-    const windowInfo = internalGetWindowInfo()
+    const windowInfo = internalGetWindowInfo() as GetWindowInfoResult
     const pixelRatio = windowInfo.pixelRatio
     const safeArea = windowInfo.safeArea
     const safeAreaInsets = windowInfo.safeAreaInsets
@@ -156,7 +104,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
 
         // deviceInfo
         deviceBrand: deviceInfo.brand,
-        deviceId: '', // TODO 生成一个唯一标识
+        deviceId: getDeviceId(),
         deviceModel: deviceInfo.productModel,
         deviceOrientation: 'portrait', // 暂未找到同步获取方法，可能需要监听窗口变化
         devicePixelRatio: vp2px(1),
@@ -164,7 +112,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         osLanguage: I18n.System.getSystemLanguage(),
         osTheme: UTSHarmony.getOsTheme() as string,
         osVersion: deviceInfo.buildVersion + '',
-        osName: 'harmony',
+        osName: 'harmonyos',
         romName: deviceInfo.distributionOSName, // TODO 应为此值，但实际上是空字符串，待确认
         romVersion: deviceInfo.distributionOSVersion,
         system: deviceInfo.osFullName,
@@ -192,7 +140,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         language: appLanguage,
         brand: deviceInfo.brand,
         model: '',
-        platform: 'harmony',
+        platform: 'harmonyos',
         uniCompileVersion: uniCompilerVersion,
         uniCompileVersionCode: uniCompilerVersionCode,
         version: ''

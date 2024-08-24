@@ -1,6 +1,5 @@
 import {
     getOSRuntime,
-    getCurrentPage
 } from '@dcloudio/uni-runtime'
 import {
     PreviewImageOptions,
@@ -17,7 +16,8 @@ import {
     API_CLOSE_PREVIEW_IMAGE
 } from '../../protocol.uts'
 import {
-    getRealPath
+    getRealPath,
+    waitForCurrentNativePage
 } from '@dcloudio/uni-runtime'
 
 interface IPreviewImageOptions {
@@ -29,22 +29,21 @@ interface IPreviewImageOptions {
 export const previewImage: PreviewImage = defineAsyncApi<PreviewImageOptions, PreviewImageSuccess>(
     API_PREVIEW_IMAGE,
     function (options: PreviewImageOptions, exec: ApiExecutor<PreviewImageSuccess>) {
-        interface Page {
-            $getAppWebview: Function
-        }
-        const currentPage = getCurrentPage() as Page
-        getOSRuntime().previewImage(
-            {
-                urls: options.urls.map(url => getRealPath(url) as string),
-                current: options.current || '',
-                showmenu: options.showmenu === false ? false : true,
-            } as IPreviewImageOptions,
-            currentPage.$getAppWebview().page as Object
-        )
-        exec.resolve({
-            errSubject: 'uni-previewImage',
-            errMsg: ''
-        } as PreviewImageSuccess)
+        const currentUrl = typeof options.current === 'number' ? options.urls[options.current ?? 0] : options.current as string
+        waitForCurrentNativePage().then((nativePage: Object) => {
+            getOSRuntime().previewImage(
+                {
+                    urls: options.urls.map(url => getRealPath(url) as string),
+                    current: getRealPath(currentUrl || ''),
+                    showmenu: options.showmenu === false ? false : true,
+                } as IPreviewImageOptions,
+                nativePage
+            )
+            exec.resolve({
+                errSubject: 'uni-previewImage',
+                errMsg: ''
+            } as PreviewImageSuccess)
+        })
     },
     PreviewImageApiProtocol,
     PreviewImageApiOptions
@@ -53,9 +52,11 @@ export const previewImage: PreviewImage = defineAsyncApi<PreviewImageOptions, Pr
 export const closePreviewImage: ClosePreviewImage = defineAsyncApi<ClosePreviewImageOptions, ClosePreviewImageSuccess>(
     API_CLOSE_PREVIEW_IMAGE,
     function (options: ClosePreviewImageOptions, exec: ApiExecutor<ClosePreviewImageSuccess>) {
-        getOSRuntime().closePreviewImage()
-        exec.resolve({
-            errMsg: ''
-        } as ClosePreviewImageSuccess)
+        waitForCurrentNativePage().then((nativePage: Object) => {
+            getOSRuntime().closePreviewImage()
+            exec.resolve({
+                errMsg: ''
+            } as ClosePreviewImageSuccess)
+        })
     }
 ) as ClosePreviewImage

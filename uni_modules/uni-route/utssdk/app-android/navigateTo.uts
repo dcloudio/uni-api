@@ -5,6 +5,9 @@ import {
     ON_HIDE,
     invokeCurrentPageHook,
     navigate,
+    entryPageState,
+    navigateToPagesBeforeEntryPages,
+    NavigateToPage
 } from '@dcloudio/uni-runtime'
 import { normalizeRouteOptions } from '../protocols.uts'
 import {
@@ -17,6 +20,11 @@ import { NavigateToFailImpl } from '../unierror.uts'
 export const navigateTo = defineAsyncApi<NavigateToOptions, NavigateToSuccess>(
     NAVIGATE_TO,
     (options: NavigateToOptions, res: ApiExecutor) => {
+        if (!entryPageState.handledBeforeEntryPageRoutes) {
+            navigateToPagesBeforeEntryPages.push({ options } as NavigateToPage)
+            return
+        }
+        const navigationStart = Date.now()
         // TODO 一系列前置判断
         const normalizeRouteOptionsResult = normalizeRouteOptions(
             NAVIGATE_TO,
@@ -45,6 +53,7 @@ export const navigateTo = defineAsyncApi<NavigateToOptions, NavigateToSuccess>(
                 ]),
                 NAVIGATE_TO,
                 null,
+                navigationStart,
             )
             res.resolve(null)
         }, 0)

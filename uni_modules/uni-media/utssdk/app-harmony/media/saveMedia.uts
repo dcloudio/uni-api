@@ -16,15 +16,17 @@ import {
     MediaUniErrors
 } from '../../unierror.uts'
 import {
-    getResourceStr
+    getResourceStr,
+    getAbilityContext
 } from '@dcloudio/uni-runtime'
 import picker from '@ohos.file.picker';
 import fs from '@ohos.file.fs';
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
+import common from '@ohos.app.ability.common';
 
 async function requestPermission(): Promise<boolean> {
-    const context = getContext()
+    const context = getAbilityContext() as common.UIAbilityContext
     const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     const permissionRequestResult = await atManager.requestPermissionsFromUser(context, [
         'ohos.permission.WRITE_IMAGEVIDEO'
@@ -34,7 +36,7 @@ async function requestPermission(): Promise<boolean> {
 }
 
 async function saveResource(src: Resource, dest: string) {
-    const context = getContext()
+    const context = getAbilityContext() as common.UIAbilityContext
     const resourceManager = context.resourceManager
     const srcPath: string = src.params?.[0] as string
     const destFile = fs.openSync(dest, fs.OpenMode.WRITE_ONLY)
@@ -61,7 +63,7 @@ async function saveUri(src: string, dest: string) {
  */
 async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promise<string> {
     const realPath = getResourceStr(fromUri) as string | Resource
-    const context = getContext()
+    const context = getAbilityContext() as common.UIAbilityContext
     let fileName = Date.now() + (type === 'image' ? '.png' : '.mp4')
     const isResource = typeof realPath !== 'string'
     if (isResource) {
@@ -98,7 +100,6 @@ export const saveImageToPhotosAlbum: SaveImageToPhotosAlbum =
                     const errMsg = MediaUniErrors.get(errCode)
                     res.reject(errMsg, {
                         errCode,
-                        errMsg
                     } as ApiError)
                     return
                 }
@@ -125,7 +126,6 @@ export const saveVideoToPhotosAlbum: SaveVideoToPhotosAlbum =
                     const errMsg = MediaUniErrors.get(errCode)
                     res.reject(errMsg, {
                         errCode,
-                        errMsg
                     } as ApiError)
                     return
                 }

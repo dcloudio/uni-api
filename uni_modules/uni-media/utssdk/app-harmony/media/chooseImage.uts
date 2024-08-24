@@ -1,4 +1,6 @@
-import picker from '@ohos.file.picker'
+import photoAccessHelper from '@ohos.file.photoAccessHelper'
+import { window } from '@kit.ArkUI';
+import { promptAction } from '@kit.ArkUI';
 import { _chooseMedia, ChooseMediaOptions } from './media.uts'
 import {
     ChooseImageOptions,
@@ -13,45 +15,91 @@ import {
 import {
     MediaUniErrors
 } from '../../unierror.uts'
+import { takePhoto } from './camera.uts'
+import { getAbilityContext } from '@dcloudio/uni-runtime';
 
 interface TempFileItem {
     path: string
     size: number
 }
 
+const errSubject = 'uni-chooseImage'
+
+const _chooseImage = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) => {
+    _chooseMedia({
+        mimeType: photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE,
+        sourceType: ["album"],
+        count: options.count!,
+    } as ChooseMediaOptions)
+        .then((chooseMediaRes) => {
+            const tempFiles = chooseMediaRes.tempFiles
+            if (tempFiles.length === 0) {
+                const errCode = 1101001
+                const errMsg = MediaUniErrors.get(1101001) as string
+                res.reject(errMsg, {
+                    errCode
+                } as ApiError);
+                return;
+            }
+            res.resolve({
+                errMsg: '',
+                errSubject,
+                tempFilePaths: chooseMediaRes.tempFiles.map((file) => file.tempFilePath),
+                tempFiles: chooseMediaRes.tempFiles.map((file) => {
+                    return {
+                        path: file.tempFilePath,
+                        size: file.size,
+                    } as TempFileItem
+                }),
+            } as ChooseImageSuccess)
+        }, (err: Error) => {
+            res.reject(err.message)
+        })
+}
+
+const _takePhoto = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) => {
+    takePhoto().then(photo => {
+        res.resolve({
+            errMsg: '',
+            errSubject,
+            tempFilePaths: photo.tempFiles.map((file) => file.tempFilePath),
+            tempFiles: photo.tempFiles
+        } as ChooseImageSuccess)
+    }).catch((err: Error) => {
+        res.reject(err.message)
+    })
+}
+
 export const chooseImage: ChooseImage =
     defineAsyncApi<ChooseImageOptions, ChooseImageSuccess>(
         API_CHOOSE_IMAGE,
-        function (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) {
-            _chooseMedia({
-                mimeType: picker.PhotoViewMIMETypes.IMAGE_TYPE,
-                count: options.count!,
-            } as ChooseMediaOptions)
-                .then((chooseMediaRes) => {
-                    const tempFiles = chooseMediaRes.tempFiles
-                    if (tempFiles.length === 0) {
-                        const errCode = 1101001
-                        const errMsg = MediaUniErrors.get(1101001) as string
-                        res.reject(errMsg, {
-                            errCode,
-                            errMsg
-                        } as ApiError);
-                        return;
-                    }
-                    res.resolve({
-                        errMsg: '',
-                        errSubject: 'uni-chooseImage',
-                        tempFilePaths: chooseMediaRes.tempFiles.map((file) => file.tempFilePath),
-                        tempFiles: chooseMediaRes.tempFiles.map((file) => {
-                            return {
-                                path: file.tempFilePath,
-                                size: file.size,
-                            } as TempFileItem
-                        }),
-                    } as ChooseImageSuccess)
-                }, (err: Error) => {
-                    res.reject(err.message)
-                })
+        async function (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) {
+            if (options.sourceType?.length === 1 && options.sourceType[0] === 'camera') {
+                _takePhoto(options, res)
+            } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
+                _chooseImage(options, res)
+            } else {
+                const lastWindow = await window.getLastWindow(getAbilityContext()!)
+                const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
+                const { index } = await UIContextPromptAction.showActionMenu({
+                    buttons: [
+                        {
+                            text: '拍照',
+                            color: '#000000'
+                        },
+                        {
+                            text: '从相册选择',
+                            color: '#000000'
+                        }
+                    ],
+                } as promptAction.ActionMenuOptions)
+
+                if (index === 0) {
+                    _takePhoto(options, res)
+                } else if (index === 1) {
+                    _chooseImage(options, res)
+                }
+            }
         },
         ChooseImageApiProtocol,
         ChooseImageApiOptions

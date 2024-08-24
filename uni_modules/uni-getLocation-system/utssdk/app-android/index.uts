@@ -1,35 +1,53 @@
-import { GetLocation, GetLocationOptions, GetLocationSuccess } from "../interface.uts"
-import { GetLocationFailImpl, getSystemLocationErrcode } from '../unierror';
 import Context from 'android.content.Context';
 import LocationManager from 'android.location.LocationManager';
 import Criteria from 'android.location.Criteria';
 import Location from 'android.location.Location';
 import LocationListener from 'android.location.LocationListener';
+import { UniLocationSystemProvider } from '../interface';
+import Bundle from 'android.os.Bundle';
 
 
+export class UniLocationSystemProviderImpl implements UniLocationSystemProvider, io.dcloud.uts.json.IJsonStringify {
 
-/**
- * 对外的函数接口
- */
-export const getLocation : GetLocation = function (options : GetLocationOptions) {
+	override id : String = 'system'
+
+	override description : String = "系统定位"
 
 	/**
-	 * 准备权限
+	 * @deprecated
 	 */
-	let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"]
-	UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight:boolean,_:string[]) {
-		if (allRight) {
-			// 交给目前的location 引擎，真实执行
-			getLocationImpl(options)
-		}
+	override isAppExist : boolean | null = null
 
-	}, function (_:boolean,_:string[]) {
-		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505004));
-		options.fail?.(err)
-		options.complete?.(err)
-	})
+	override getLocation(options : GetLocationOptions) {
+		/**
+		 * 准备权限
+		 */
+		let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"]
+		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight : boolean, _ : string[]) {
+			if (allRight) {
+				// 交给目前的location 引擎，真实执行
+				getLocationImpl(options)
+			}
 
+		}, function (_ : boolean, _ : string[]) {
+			let err = new GetLocationFailImpl(1505004);
+			options.fail?.(err)
+			options.complete?.(err)
+		})
+	}
+
+	constructor() {
+	}
+
+	override toJSON() : any | null {
+		let jsonRet = new UTSJSONObject()
+		jsonRet.set("id", this.id)
+		jsonRet.set("description", this.description)
+		jsonRet.set("isAppExist", this.isAppExist)
+		return jsonRet
+	}
 }
+
 
 /****************************************内部功能实现****************************************************/
 
@@ -38,22 +56,17 @@ export const getLocation : GetLocation = function (options : GetLocationOptions)
  */
 class CustomSystemLocationListener extends LocationListener {
 
-	hostRequest:LocationRequest
-	constructor(request:LocationRequest){
+	hostRequest : LocationRequest
+	constructor(request : LocationRequest) {
 		super()
 		this.hostRequest = request
 	}
-
-  override onStatusChanged(provider : string, status : Int, extras : Bundle) {
-    // Handle status change
-  }
-
 
 	override onLocationChanged(location : Location) : void {
 
 		this.hostRequest.hostLocationManager.removeUpdates(this)
 
-		if(this.hostRequest.hasSuccessDone == true){
+		if (this.hostRequest.hasSuccessDone == true) {
 			/**
 			 * 已经成功返回了，则不需要继续
 			 */
@@ -75,21 +88,24 @@ class CustomSystemLocationListener extends LocationListener {
 		this.hostRequest.hostOption.complete?.(ret)
 		this.hostRequest.hasSuccessDone = true
 	}
+	override onStatusChanged(provider : string, status : Int, extras : Bundle) {
+		// Handle status change
+	}
 }
 
 /**
  * 延迟请求
  */
-class LocationRequest{
+class LocationRequest {
 
 	/**
 	 * 标记本次请求是否已经提前结束
 	 */
-	hasSuccessDone:boolean = false
-	hostOption:GetLocationOptions
-	hostLocationManager:LocationManager
+	hasSuccessDone : boolean = false
+	hostOption : GetLocationOptions
+	hostLocationManager : LocationManager
 
-	constructor(options:GetLocationOptions,locationManager:LocationManager){
+	constructor(options : GetLocationOptions, locationManager : LocationManager) {
 		this.hostOption = options
 		this.hostLocationManager = locationManager
 	}
@@ -97,7 +113,7 @@ class LocationRequest{
 	/**
 	 * 存在预期的缓存，直接返回
 	 */
-	returnLastLocation(lastLocation:Location){
+	returnLastLocation(lastLocation : Location) {
 		let ret : GetLocationSuccess = {
 			latitude: lastLocation.getLatitude(),
 			longitude: lastLocation.getLongitude(),
@@ -116,10 +132,10 @@ class LocationRequest{
 	/**
 	 * 不存在预期的缓存，需要等待provider的位置更新
 	 */
-	returnProviderUpdate(providerName:string,timeoutMill:number){
+	returnProviderUpdate(providerName : string, timeoutMill : number) {
 		let systemListener = new CustomSystemLocationListener(this)
 		/**
-		 * TODO
+		 * TODO 
 		 * 1 0.0/2000 是否合理
 		 * 2 providerName
 		 */
@@ -131,10 +147,10 @@ class LocationRequest{
 			this.hostLocationManager.removeUpdates(systemListener)
 			if (!this.hasSuccessDone) {
 				// 超过6s/或者设定的超时时间，尚未成功返回，则需要返回错误
-				let err = new GetLocationFailImpl(getSystemLocationErrcode(-4));
+				let err = new GetLocationFailImpl(1505600);
 				this.hostOption.fail?.(err)
 				this.hostOption.complete?.(err)
-			}else{
+			} else {
 				// 已经成功返回了， 则不需要处理
 			}
 
@@ -153,25 +169,25 @@ function getLocationImpl(options : GetLocationOptions) {
 	/**
 	 * add since 2023-09-14 增加默认值兼容逻辑
 	 */
-	if(options.type == null){
+	if (options.type == null) {
 		options.type = 'wgs84'
 	}
-	if(options.highAccuracyExpireTime == null){
+	if (options.highAccuracyExpireTime == null) {
 		options.highAccuracyExpireTime = 3000
 	}
 
 
-	if(options.type != 'wgs84'){
+	if (options.type != 'wgs84') {
 		// 系统定位只支持wgs84，如果不是则报错
-		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505022));
+		let err = new GetLocationFailImpl(1505601);
 		options.fail?.(err)
 		options.complete?.(err)
 		return
 	}
 
-	if(options.geocode != null && options.geocode == true){
+	if (options.geocode != null && options.geocode == true) {
 		// 系统定位不支持逆地理编码
-		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505023));
+		let err = new GetLocationFailImpl(1505700);
 		options.fail?.(err)
 		options.complete?.(err)
 		return
@@ -189,7 +205,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	// 设置精度
 	if (options.isHighAccuracy != null && options.isHighAccuracy == true) {
 		criteria.setAccuracy(Criteria.ACCURACY_FINE)
-	} else{
+	} else {
 		criteria.setAccuracy(Criteria.ACCURACY_COARSE)
 	}
 
@@ -199,14 +215,14 @@ function getLocationImpl(options : GetLocationOptions) {
 	/**
 	 * 如果存在gps，那么优先gps，这样才有高度信息
 	 */
-	let providerName:string|null = "gps"
-	if(!locationManager.getProviders(criteria, true).contains("gps")){
+	let providerName : string | null = "gps"
+	if (!locationManager.getProviders(criteria, true).contains("gps")) {
 		providerName = locationManager.getBestProvider(criteria, true)
 	}
 
 	if (providerName == null) {
 		// 没有找到合法的系统定位能力提供者，错误的逻辑 todo
-		let err = new GetLocationFailImpl(getSystemLocationErrcode(1505024));
+		let err = new GetLocationFailImpl(1505701);
 		options.fail?.(err)
 		options.complete?.(err)
 		return;
@@ -214,12 +230,12 @@ function getLocationImpl(options : GetLocationOptions) {
 
 
 	// 默认超时6000ms
-	let timeoutMill:number = 6000;
+	let timeoutMill : number = 6000;
 	/**
 	 * 只有设置超出3000ms 才会认为有效
 	 * https://uniapp.dcloud.net.cn/api/location/location.html#getlocation
 	 */
-	if(options.highAccuracyExpireTime != null && options.highAccuracyExpireTime! >= 3000 && options.isHighAccuracy == true){
+	if (options.highAccuracyExpireTime != null && options.highAccuracyExpireTime! >= 3000 && options.isHighAccuracy == true) {
 		timeoutMill = options.highAccuracyExpireTime!
 	}
 
@@ -228,7 +244,7 @@ function getLocationImpl(options : GetLocationOptions) {
 	 * todo 是否要考虑缓存过期时间elapsedRealtimeAgeMillis
 	 */
 	let lastLocation = locationManager.getLastKnownLocation(providerName)
-	let locationRequest:LocationRequest = new LocationRequest(options,locationManager)
+	let locationRequest : LocationRequest = new LocationRequest(options, locationManager)
 	if (lastLocation != null) {
 
 		// 存在预期的缓存，直接返回，即使返回缓存，也要继续走位置更新
@@ -237,6 +253,6 @@ function getLocationImpl(options : GetLocationOptions) {
 	/**
 	 * 没有预期中的缓存，则等待位置更新
 	 */
-	locationRequest.returnProviderUpdate(providerName,timeoutMill)
+	locationRequest.returnProviderUpdate(providerName, timeoutMill)
 
 }

@@ -10,7 +10,7 @@
 		<string>允许仅在app运行期间使用定位权限</string>
 		<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 		<dict>
-			<key>YourPurposeKey</key>
+			<key>PurposeKey</key>
 			<string>这里需要您临时授权高精度定位权限,一次临时授权时效仅app一个周期内, 每次硬启动都需要临时授权</string>
 		</dict>
 	</dict>

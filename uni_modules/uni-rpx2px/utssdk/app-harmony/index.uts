@@ -9,6 +9,8 @@ import {
 } from '@dcloudio/uni-runtime'
 import harmonyWindow from '@ohos.window'
 
+export { Rpx2px }
+
 const EPS = 1e-4
 const BASE_DEVICE_WIDTH = 750
 

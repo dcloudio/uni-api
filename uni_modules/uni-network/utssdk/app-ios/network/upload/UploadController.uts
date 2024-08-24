@@ -15,6 +15,7 @@ class NetworkUploadTaskImpl implements UploadTask {
 
 	public abort() {
 		this.task?.cancel()
+		UTSiOS.destroyInstance(this)
 	}
 
 	public onProgressUpdate(option : UploadFileProgressUpdateCallback) {
@@ -44,7 +45,9 @@ class UploadController implements URLSessionDataDelegate {
 		let boundary = `----${new UUID().uuidString}`
 		let request = this.createRequest(options, listener, boundary);
 		if (request == null) {
-			return new NetworkUploadTaskImpl(null, listener);
+			const task = new NetworkUploadTaskImpl(null, listener)
+			listener.task = task
+			return task;
 		}
 
 		if (this.session == null) {
@@ -55,7 +58,9 @@ class UploadController implements URLSessionDataDelegate {
 
 		const bodyData = this.createBody(boundary, options, listener);
 		if (bodyData == null) {
-			return new NetworkUploadTaskImpl(null, listener);
+			const task = new NetworkUploadTaskImpl(null, listener);
+			listener.task = task
+			return task
 		}
 		let task = this.session?.uploadTask(with = request!, from = bodyData!);
 		task?.resume();
@@ -63,6 +68,7 @@ class UploadController implements URLSessionDataDelegate {
 			this.taskMap.set(task!, listener);
 		}
 		let requestTask = new NetworkUploadTaskImpl(task, listener);
+		listener.task = requestTask
 		return requestTask;
 	}
 

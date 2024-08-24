@@ -8,11 +8,11 @@ export const rpx2px : Rpx2px = (number : number) : number => {
     return 0
   }
 
-  const displayMetrics = UTSAndroid.getUniActivity()?.resources?.displayMetrics;
-  const pixelRatio = displayMetrics!.scaledDensity as number;
+  const displayMetrics = UTSAndroid.getUniActivity()?.resources?.displayMetrics!;
+  const pixelRatio = displayMetrics.scaledDensity;
   // TODO 暂不支持 横屏
-  const resolutionWidth = displayMetrics!.widthPixels;
-  const windowWidth = Math.round(resolutionWidth / pixelRatio)
+  const resolutionWidth = displayMetrics.widthPixels;
+  const windowWidth = Math.ceil(resolutionWidth / pixelRatio)
 
   let result = (number / BASE_DEVICE_WIDTH) * windowWidth
   if (result < 0) {
@@ -20,7 +20,7 @@ export const rpx2px : Rpx2px = (number : number) : number => {
   }
   result = Math.floor(result + EPS)
   if (result == 0) {
-    if (pixelRatio == 1) {
+    if ((pixelRatio as number) == 1) {
       result = 1
     } else {
       result = 0.5

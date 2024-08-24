@@ -65,7 +65,7 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false,
+						"swift": true,
 						"arkts": true
 					}
 				},
@@ -83,8 +83,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false,
-						"arkts": false
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"chooseVideo": {
@@ -110,7 +110,7 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false,
+						"swift": true,
 						"arkts": true
 					}
 				},
@@ -119,8 +119,17 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false,
+						"swift": true,
 						"arkts": false
+					}
+				},
+				"chooseFile": {
+					"name": "chooseFile",
+					"app": {
+						"js": false,
+						"kotlin": false,
+						"swift": false,
+						"arkts": true
 					}
 				}
 			}

@@ -96,14 +96,6 @@ export const RequestApiOptions: ApiOptions<RequestOptions<any>> = {
             }
         ],
         [
-            'data',
-            function (data: object, params: RequestOptions<any>) {
-                if (data == null) {
-                    params.data = ''
-                }
-            }
-        ],
-        [
             'method',
             function (method: string, params: RequestOptions<any>) {
                 params.method = (method || 'GET').toUpperCase() as RequestMethod

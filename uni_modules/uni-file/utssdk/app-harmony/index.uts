@@ -1,0 +1,221 @@
+import {
+    API_SAVE_FILE,
+    API_GET_SAVED_FILE_LIST,
+    API_GET_SAVED_FILE_INFO,
+    API_REMOVE_SAVED_FILE,
+    API_GET_FILE_INFO
+} from '../protocol.uts'
+import {
+    SaveFile,
+    SaveFileOptions,
+    SaveFileSuccess,
+    SaveFileFail,
+    GetSavedFileList,
+    GetSavedFileListOptions,
+    SavedFileListItem,
+    GetSavedFileListSuccess,
+    GetSavedFileListFail,
+    GetSavedFileInfo,
+    GetSavedFileInfoOptions,
+    GetSavedFileInfoSuccess,
+    GetSavedFileInfoFail,
+    RemoveSavedFile,
+    RemoveSavedFileOptions,
+    RemoveSavedFileSuccess,
+    RemoveSavedFileFail,
+    GetFileInfo,
+    GetFileInfoOptions,
+    GetFileInfoSuccess,
+    GetFileInfoFail
+} from '../interface.uts'
+import {
+    getEnv,
+    getRealPath,
+} from '@dcloudio/uni-runtime'
+import fs from '@ohos.file.fs'
+import { ListFileOptions } from '@ohos.file.fs'
+import Hash from '@ohos.file.hash';
+
+export {
+    SaveFile,
+    SaveFileOptions,
+    SaveFileSuccess,
+    SaveFileFail,
+    GetSavedFileList,
+    SavedFileListItem,
+    GetSavedFileListOptions,
+    GetSavedFileListSuccess,
+    GetSavedFileListFail,
+    GetSavedFileInfo,
+    GetSavedFileInfoOptions,
+    GetSavedFileInfoSuccess,
+    GetSavedFileInfoFail,
+    RemoveSavedFile,
+    RemoveSavedFileOptions,
+    RemoveSavedFileSuccess,
+    RemoveSavedFileFail,
+    GetFileInfo,
+    GetFileInfoOptions,
+    GetFileInfoSuccess,
+    GetFileInfoFail
+}
+
+function getSavedDir() {
+    return getEnv().USER_DATA_PATH + '/saved'
+}
+
+let savedIndex: [string, number] = ['0', 0]
+function getSavedFileName(filePath: string) {
+    const ext = filePath.split('/').pop()?.split('.').slice(1).join('.')
+    let fileName = Date.now() + ''
+    if (savedIndex[0] === fileName) {
+        savedIndex[1]++
+        if (savedIndex[1] > 0) {
+            fileName += '-' + savedIndex[1]
+        }
+    } else {
+        savedIndex[0] = fileName
+        savedIndex[1] = 0
+    }
+    if (ext) {
+        fileName += '.' + ext
+    }
+    return fileName
+}
+
+function getFsPath(filePath: string) {
+    filePath = getRealPath(filePath) as string
+    if (!/^file:/.test(filePath)) {
+        return filePath 
+    }
+    const rawPath = filePath.replace(/^file:\/\//, '')
+    if (rawPath[0] === '/') {
+        return rawPath
+    }
+    return filePath
+}
+
+export const saveFile: SaveFile = defineAsyncApi<SaveFileOptions, SaveFileSuccess>(
+    API_SAVE_FILE,
+    function (options: SaveFileOptions, exec: ApiExecutor<SaveFileSuccess>) {
+        const tempFilePath = getRealPath(options.tempFilePath) as string;
+        const savedPath = getSavedDir()
+        if (!fs.accessSync(savedPath)) {
+            fs.mkdirSync(savedPath, true)
+        }
+        let srcFile: fs.File
+        try {
+            srcFile = fs.openSync(tempFilePath, fs.OpenMode.READ_ONLY)
+        } catch (error) {
+            exec.reject((error as Error).message)
+            return
+        }
+        const savedFilePath = savedPath + '/' + getSavedFileName(tempFilePath);
+        fs.copyFile(srcFile.fd, savedFilePath, (err) => {
+            fs.closeSync(srcFile)
+            if (err) {
+                exec.reject(err.message)
+            } else {
+                exec.resolve({
+                    savedFilePath: 'file://' + savedFilePath
+                } as SaveFileSuccess)
+            }
+        })
+    }
+) as SaveFile
+
+export const getSavedFileList: GetSavedFileList = defineAsyncApi<GetSavedFileListOptions, GetSavedFileListSuccess>(
+    API_GET_SAVED_FILE_LIST,
+    function (options: GetSavedFileListOptions, exec: ApiExecutor<GetSavedFileListSuccess>) {
+        const savedPath = getSavedDir()
+        if (!fs.accessSync(savedPath)) {
+            exec.resolve({
+                fileList: []
+            } as GetSavedFileListSuccess)
+        }
+        fs.listFile(savedPath, {} as ListFileOptions, (err, fileList) => {
+            if (err) {
+                exec.reject(err.message)
+            } else {
+                exec.resolve({
+                    fileList: fileList.map((filePath: string) => {
+                        const fullPath = savedPath + '/' + filePath
+                        const stat = fs.statSync(fullPath)
+                        if (!stat.isFile()) {
+                            return null
+                        }
+                        return {
+                            filePath: 'file://' + fullPath,
+                            size: stat.size,
+                            createTime: stat.ctime
+                        } as SavedFileListItem
+                    }).filter((item) => !!item)
+                } as GetSavedFileListSuccess)
+            }
+        })
+    }
+) as GetSavedFileList
+
+export const getSavedFileInfo: GetSavedFileInfo = defineAsyncApi<GetSavedFileInfoOptions, GetSavedFileInfoSuccess>(
+    API_GET_SAVED_FILE_INFO,
+    function (options: GetSavedFileInfoOptions, exec: ApiExecutor<GetSavedFileInfoSuccess>) {
+        const savedFilePath = getFsPath(options.filePath);
+        if (!fs.accessSync(savedFilePath)) {
+            exec.reject('file not exist')
+            return
+        }
+        const stat = fs.statSync(savedFilePath)
+        if (!stat.isFile()) {
+            exec.reject('file not exist')
+        }
+        exec.resolve({
+            size: stat.size,
+            createTime: stat.ctime
+        } as GetSavedFileInfoSuccess)
+    }
+) as GetSavedFileInfo
+
+export const removeSavedFile: RemoveSavedFile = defineAsyncApi<RemoveSavedFileOptions, RemoveSavedFileSuccess>(
+    API_REMOVE_SAVED_FILE,
+    function (options: RemoveSavedFileOptions, exec: ApiExecutor<RemoveSavedFileSuccess>) {
+        const savedFilePath = getFsPath(options.filePath);
+        if (!fs.accessSync(savedFilePath)) {
+            exec.reject('file not exist')
+            return
+        }
+        fs.unlink(savedFilePath, (err) => {
+            if (err) {
+                exec.reject(err.message)
+            } else {
+                exec.resolve()
+            }
+        })
+    }
+) as RemoveSavedFile
+
+const SupportedHashAlgorithm = ['md5', 'sha1']
+export const getFileInfo: GetFileInfo = defineAsyncApi<GetFileInfoOptions, GetFileInfoSuccess>(
+    API_GET_FILE_INFO,
+    function (options: GetFileInfoOptions, exec: ApiExecutor<GetFileInfoSuccess>) {
+        const filePath = getFsPath(options.filePath);
+        const digestAlgorithm = options.digestAlgorithm && SupportedHashAlgorithm.includes(options.digestAlgorithm) ? options.digestAlgorithm : 'md5'
+        if (!fs.accessSync(filePath)) {
+            exec.reject('file not exist')
+            return
+        }
+        const stat = fs.statSync(filePath)
+        if (!stat.isFile()) {
+            exec.reject('file not exist')
+        }
+        Hash.hash(filePath, digestAlgorithm, (err, hash) => {
+            if (err) {
+                exec.reject(err.message)
+            } else {
+                exec.resolve({
+                    size: stat.size,
+                    digest: hash
+                } as GetFileInfoSuccess)
+            }
+        })
+    }
+) as GetFileInfo

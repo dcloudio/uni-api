@@ -52,6 +52,10 @@ export type NodeInfo = {
      */
     scrollWidth: number | null
     /**
+     * 元素 UniElement
+     */
+    node: any | null
+    /**
      * 节点对应的 Context 对象
      * @type MapContext | CanvasContext | VideoContext | EditorContext
      * @uniPlatform {
@@ -240,10 +244,28 @@ export interface NodesRef {
 
     /**
      * 获取节点的相关信息，需要获取的字段在fields中指定
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "4.25"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "4.25"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
      */
     fields(
         fields: NodeField,
-        callback: SelectorQueryNodeInfoCallback,
+        callback: SelectorQueryNodeInfoCallback | null,
     ): SelectorQuery
 
     /**
@@ -313,6 +335,25 @@ export interface NodesRef {
 
     /**
      * 获取 Node 节点实例。目前支持 Canvas 的获取。
+     * 获取节点的相关信息，需要获取的字段在fields中指定
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "4.25"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "4.25"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
      */
     node(callback: (result: any) => void): SelectorQuery
 }
@@ -350,7 +391,9 @@ export interface Uni {
     /**
      * 返回一个SelectorQuery对象实例
      *
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/nodes-info.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/nodes-info.html
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/nodes-info.html#createselectorquery
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -362,6 +405,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {

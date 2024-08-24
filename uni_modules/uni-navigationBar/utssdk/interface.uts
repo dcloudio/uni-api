@@ -22,7 +22,12 @@ export type SetNavigationBarColorOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -95,7 +100,12 @@ export type SetNavigationBarColorOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -381,7 +391,12 @@ export type SetNavigationBarTitleOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -653,10 +668,45 @@ export type SetNavigationBarTitle = (
     options: SetNavigationBarTitleOptions,
 ) => void
 
+
+
+export type ShowNavigationBarLoadingSuccess = AsyncApiSuccessResult
+export type ShowNavigationBarLoadingSuccessCallback = (
+    result: ShowNavigationBarLoadingSuccess,
+) => void
+export interface ShowNavigationBarLoadingFail extends IUniError {}
+export type ShowNavigationBarLoadingFailCallback = (
+    error: ShowNavigationBarLoadingFail,
+) => void
+export type ShowNavigationBarLoadingOptions = {
+    success?: ShowNavigationBarLoadingSuccessCallback
+    fail?: ShowNavigationBarLoadingFailCallback
+    complete?: () => void
+}
+export type ShowNavigationBarLoading = (options?: ShowNavigationBarLoadingOptions | null) => void;
+
+
+export type HideNavigationBarLoadingSuccess = AsyncApiSuccessResult
+export type HideNavigationBarLoadingSuccessCallback = (
+    result: HideNavigationBarLoadingSuccess,
+) => void
+export interface HideNavigationBarLoadingFail extends IUniError {}
+export type HideNavigationBarLoadingFailCallback = (
+    error: HideNavigationBarLoadingFail,
+) => void
+export type HideNavigationBarLoadingOptions = {
+    success?: HideNavigationBarLoadingSuccessCallback
+    fail?: HideNavigationBarLoadingFailCallback
+    complete?: () => void
+}
+export type HideNavigationBarLoading = (options?: HideNavigationBarLoadingOptions| null) => void;
+
 export interface Uni {
     /**
      * 设置导航条、状态栏颜色
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbarcolor
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-color.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-color.html
      * @uniPlatform {
      *  "app": {
@@ -669,7 +719,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -726,6 +781,8 @@ export interface Uni {
     /**
      * 动态设置当前页面的标题
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbartitle
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-title.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-title.html
      * @uniPlatform {
      *  "app": {
@@ -738,7 +795,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -791,4 +853,150 @@ export interface Uni {
     setNavigationBarTitle(
         options: SetNavigationBarTitleOptions,
     ): Promise<SetNavigationBarTitleSuccess> | null
+
+    /**
+     * 在当前页面显示导航条加载动画
+     *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#shownavigationbarloading
+     * @tutorial https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#shownavigationbarloading
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *      },
+     *      "ios": {
+     *          "osVer": "12.0",
+     *          "uniVer": "√",
+     *          "unixVer": "x"
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.24",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "alipay": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "baidu": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "toutiao": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "lark": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "qq": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "kuaishou": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "jd": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *      "uniVer": "√",
+     *      "unixVer": "4.0"
+     *  }
+     * }
+     */
+    showNavigationBarLoading: ShowNavigationBarLoading;
+
+    /**
+     * 隐藏导航条加载动画
+     *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#hidenavigationbarloading
+     * @tutorial https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#hidenavigationbarloading
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *      },
+     *      "ios": {
+     *          "osVer": "12.0",
+     *          "uniVer": "√",
+     *          "unixVer": "x"
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.24",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "alipay": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "baidu": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "toutiao": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "lark": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "qq": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "kuaishou": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    },
+     *    "jd": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *      "uniVer": "√",
+     *      "unixVer": "4.0"
+     *  }
+     * }
+     */
+    hideNavigationBarLoading: HideNavigationBarLoading;
 }

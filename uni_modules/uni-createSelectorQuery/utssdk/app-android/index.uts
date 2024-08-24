@@ -69,7 +69,7 @@ class NodesRefImpl implements NodesRef {
 
     fields(
         fields: NodeField,
-        callback: SelectorQueryNodeInfoCallback,
+        callback: SelectorQueryNodeInfoCallback | null,
     ): SelectorQuery {
         this._selectorQuery._push(
             this._selector,
@@ -109,7 +109,16 @@ class NodesRefImpl implements NodesRef {
         return this._selectorQuery
     }
 
-    node(_callback: (result: any) => void): SelectorQuery {
+    node(callback: (result: any) => void): SelectorQuery {
+        this._selectorQuery._push(
+            this._selector,
+            this._component,
+            this._single,
+            {
+                node: true,
+            } as NodeField,
+            callback,
+        )
         return this._selectorQuery
     }
 }
@@ -216,17 +225,20 @@ class SelectorQueryImpl implements SelectorQuery {
 
 class QuerySelectorHelper {
     _element: Element
+    _fields: NodeField
 
-    constructor(element: Element) {
+    constructor(element: Element, fields: NodeField) {
         this._element = element
+        this._fields = fields
     }
 
     static queryElement(
         element: Element,
         selector: string,
         all: boolean,
+        fields: NodeField,
     ): any | null {
-        return new QuerySelectorHelper(element).query(selector, all)
+        return new QuerySelectorHelper(element, fields).query(selector, all)
     }
 
     query(selector: string, all: boolean): any | null {
@@ -248,7 +260,7 @@ class QuerySelectorHelper {
         }
 
         if (all) {
-            const result1: Array<NodeInfo> = []
+            const result1: Array<any> = []
             while (true) {
                 const queryResult = this.querySelectorAll(current!, selector)
                 if (queryResult != null) {
@@ -261,7 +273,7 @@ class QuerySelectorHelper {
             }
             return result1
         } else {
-            let result2: NodeInfo | null = null
+            let result2: any | null = null
             while (true) {
                 result2 = this.querySelector(current!, selector)
                 current = current.nextSibling
@@ -325,6 +337,17 @@ class QuerySelectorHelper {
     }
 
     getNodeInfo(element: Element): NodeInfo {
+        if (this._fields.node == true) {
+            const nodeInfo = {
+                node: element
+            } as NodeInfo
+            if (this._fields.size == true) {
+                const rect = element.getBoundingClientRect()
+                nodeInfo.width = rect.width
+                nodeInfo.height = rect.height
+            }
+            return nodeInfo
+        }
         const rect = element.getBoundingClientRect()
         const nodeInfo = {
             id: element.getAttribute('id')?.toString(),
@@ -353,6 +376,7 @@ function requestComponentInfo(
                 el,
                 item.selector,
                 !item.single,
+                item.fields,
             )
             if (queryResult != null) {
                 result.push(queryResult)

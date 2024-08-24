@@ -126,7 +126,7 @@ function getWindowInfoResult() : GetWindowInfoResult {
 		height: safeAreaHeight
 	}
 
-	const screenTop = screenHeight - windowHeight
+	const screenTop = 0;
 	
 	const result : GetWindowInfoResult = {
 		pixelRatio: Number.from(UIScreen.main.scale),

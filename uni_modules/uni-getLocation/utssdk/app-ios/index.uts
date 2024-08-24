@@ -1,0 +1,23 @@
+import { UniLocationProvider, GetLocation, GetLocationOptions, GetLocationFailImpl } from "./interface.uts"
+import { UTSiOS } from "DCloudUTSFoundation";
+
+export const getLocation : GetLocation = function (options : GetLocationOptions) {
+	let providerName = 'system'
+	if (options.provider != null) {
+		providerName = options.provider!
+	} else {
+		if (options.type == 'wgs84') {//默认使用系统定位
+			providerName = 'system'
+		} else if (options.type == 'gcj02') {//默认使用腾讯定位
+			providerName = 'tencent'
+		}
+	}
+	const provider = UTSiOS.getProvider<UniLocationProvider>("location", providerName, UniLocationProvider.self)
+	if(provider != null){
+		provider!.getLocation(options) 
+	} else {
+		const err = new GetLocationFailImpl(1505604);
+		options.fail?.(err) 
+		options.complete?.(err)
+	}
+}

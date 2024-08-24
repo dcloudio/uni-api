@@ -2,7 +2,7 @@ import { GetNetworkTypeOptions, GetNetworkType, GetNetworkTypeSuccess } from "..
 import { CTRadioAccessTechnologyNR, CTRadioAccessTechnologyNRNSA, CTTelephonyNetworkInfo } from 'CoreTelephony';
 import { SCNetworkReachability, SCNetworkReachabilityCreateWithAddress, SCNetworkReachabilityFlags, SCNetworkReachabilityGetFlags } from 'SystemConfiguration';
 
-
+export { OnNetworkStatusChangeCallbackResult } from '../interface.uts'
 
 export const getNetworkType : GetNetworkType = function (options : GetNetworkTypeOptions) {
 	const networkType = getInternalNetworkType()

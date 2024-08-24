@@ -4,10 +4,17 @@ export type SetTabBarBadgeSuccessCallback = (
 ) => void
 /**
  * 错误码
- * - 100: TabBar 不存在
- * - 200: 参数错误
  */
-export type SetTabBarErrorCode = 100 | 200
+export type SetTabBarErrorCode =
+/**
+ * TabBar 不存在
+ */
+100 |
+/**
+ * 参数错误
+ */
+200;
+
 export interface SetTabBarFail extends IUniError {
     errCode: SetTabBarErrorCode
 }
@@ -229,14 +236,51 @@ export type SetTabBarStyleOptions = {
     backgroundImage?: string
     /**
      * 背景图平铺方式
-     * - repeat: 背景图片在垂直方向和水平方向平铺
-     * - repeat-x: 背景图片在水平方向平铺，垂直方向拉伸
-     * - repeat-y: 背景图片在垂直方向平铺，水平方向拉伸
-     * - no-repeat: 背景图片在垂直方向和水平方向都拉伸
      */
-    backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat'
+    backgroundRepeat?:
     /**
-     * tabbar上边框的颜色
+    * 背景图片在垂直方向和水平方向平铺
+    */
+    'repeat' |
+    /**
+    * 背景图片在水平方向平铺，垂直方向拉伸
+    */
+    'repeat-x' |
+    /**
+    * 背景图片在垂直方向平铺，水平方向拉伸
+    */
+    'repeat-y' |
+    /**
+    * 背景图片在垂直方向和水平方向都拉伸
+    */
+    'no-repeat'
+
+    /**
+     * tabbar上边框的颜色（优先级高于 borderStyle）
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarstyle
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "x",
+     *      "unixVer": "4.23"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "4.23"
+     *  }
+     * }
      */
     borderColor?: string | string.ColorString
     /**
@@ -376,10 +420,22 @@ export type HideTabBarRedDotOptions = {
 
 export type OnTabBarMidButtonTapCallback = () => void
 
+
+export type SetTabBarBadge = (options: SetTabBarBadgeOptions) => void
+export type RemoveTabBarBadge = (options: RemoveTabBarBadgeOptions) => void
+export type SetTabBarItem = (options: SetTabBarItemOptions) => void
+export type SetTabBarStyle = (options: SetTabBarStyleOptions) => void
+export type ShowTabBar = (options?: ShowTabBarOptions | null) => void
+export type HideTabBar = (options?: HideTabBarOptions | null) => void
+export type ShowTabBarRedDot = (options: ShowTabBarRedDotOptions) => void
+export type HideTabBarRedDot = (options: HideTabBarRedDotOptions) => void
+
 export interface Uni {
     /**
      * 为 tabBar 某一项的右上角添加文本
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#settabbarbadge
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarbadge
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarbadge
      * @uniPlatform {
      *  "app": {
@@ -392,6 +448,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -448,6 +509,8 @@ export interface Uni {
     /**
      * 移除 tabBar 某一项右上角的文本
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#removetabbarbadge
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#removetabbarbadge
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#removetabbarbadge
      * @uniPlatform {
      *  "app": {
@@ -460,6 +523,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -516,6 +584,8 @@ export interface Uni {
     /**
      * 动态设置 tabBar 某一项的内容
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#settabbaritem
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbaritem
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbaritem
      * @uniPlatform {
      *  "app": {
@@ -528,6 +598,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -584,6 +659,8 @@ export interface Uni {
     /**
      * 动态设置 tabBar 的整体样式
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#settabbarstyle
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarstyle
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#settabbarstyle
      * @uniPlatform {
      *  "app": {
@@ -596,6 +673,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -652,6 +734,8 @@ export interface Uni {
     /**
      * 隐藏 tabBar
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#hidetabbar
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#hidetabbar
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#hidetabbar
      * @uniPlatform {
      *  "app": {
@@ -664,6 +748,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -720,6 +809,8 @@ export interface Uni {
     /**
      * 显示 tabBar
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#showtabbar
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#showtabbar
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#showtabbar
      * @uniPlatform {
      *  "app": {
@@ -732,6 +823,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -788,6 +884,8 @@ export interface Uni {
     /**
      * 显示 tabBar 某一项的右上角的红点
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#showtabbarreddot
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#showtabbarreddot
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#showtabbarreddot
      * @uniPlatform {
      *  "app": {
@@ -800,6 +898,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -856,6 +959,8 @@ export interface Uni {
     /**
      * 隐藏 tabBar 某一项的右上角的红点
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#hidetabbarreddot
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#hidetabbarreddot
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-tabbar.html#hidetabbarreddot
      * @uniPlatform {
      *  "app": {
@@ -868,6 +973,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -923,7 +1033,8 @@ export interface Uni {
     ): Promise<HideTabBarRedDotSuccess> | null
     /**
      * 监听中间按钮的点击事件
-     *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/tabbar.html#ontabbarmidbuttontap
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/on-tab-bar-mid-button-tap.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/on-tab-bar-mid-button-tap.html
      * @uniPlatform {
      *  "app": {
@@ -935,6 +1046,11 @@ export interface Uni {
      *    "ios": {
      *      "osVer": "12.0",
      *      "uniVer": "√",
+     *      "unixVer": "x"
+     *    },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
      *  },

@@ -1,0 +1,69 @@
+import {
+    API_OPEN_DOCUMENT
+} from '../protocol.uts'
+import {
+    OpenDocumentFail,
+    OpenDocumentSuccess,
+    OpenDocumentOptions,
+    OpenDocument
+} from '../interface.uts'
+import {
+    getAbilityContext
+} from '@dcloudio/uni-runtime'
+import fileUri from '@ohos.file.fileuri';
+import Want from '@ohos.app.ability.Want';
+import wantConstant from '@ohos.app.ability.wantConstant';
+import common from '@ohos.app.ability.common';
+
+export {
+    OpenDocumentFail,
+    OpenDocumentSuccess,
+    OpenDocumentOptions,
+}
+
+function getContentType(filePath: string, fileType?: string | null): string | void {
+    const suffix = fileType || filePath.split('.').pop();
+    if (!suffix) {
+        return;
+    }
+    switch (suffix) {
+        case 'doc':
+        case 'docx':
+            return 'application/msword';
+        case 'xls':
+        case 'xlsx':
+            return 'application/vnd.ms-excel';
+        case 'ppt':
+        case 'pptx':
+            return 'application/vnd.ms-powerpoint';
+        case 'pdf':
+            return 'application/pdf';
+        default:
+            return;
+    }
+}
+
+export const openDocument: OpenDocument = defineAsyncApi<OpenDocumentOptions, OpenDocumentSuccess>(
+    API_OPEN_DOCUMENT,
+    function (options: OpenDocumentOptions, exec: ApiExecutor<OpenDocumentSuccess>) {
+        const filePath = options.filePath
+        const uri = fileUri.getUriFromPath(filePath.replace(/^file:\/\//, ''));
+        const fileContentType = getContentType(filePath, options.fileType);
+        if (!fileContentType) {
+            exec.reject('file type not supported');
+            return
+        }
+        const want: Want = {
+            flags: wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_PERSISTABLE_URI_PERMISSION,
+            action: 'ohos.want.action.sendData',
+            uri: uri,
+            type: fileContentType as string
+        }
+        const abilityContext = getAbilityContext() as common.UIAbilityContext
+        abilityContext.startAbility(want).then(() => {
+            exec.resolve({} as OpenDocumentSuccess)
+        }, (err: Error) => {
+            exec.reject(err.message);
+        })
+    }
+) as OpenDocument

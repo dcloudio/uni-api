@@ -30,14 +30,31 @@ export interface Uni {
 	/**
 	 * 创建一个监听权限申请的对象。
 	 * @description 创建一个监听权限申请的对象。
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/create-request-permission-listener.html
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/create-request-permission-listener.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/create-request-permission-listener.html
 	 * @uniPlatform {
-	 *	 "app": {
+	 *  "app": {
 	 *		"android": {
 	 *			"osVer": "5.0",
 	 *			"uniVer": "4.0+",
 	 *			"unixVer": "4.0+"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "12.0",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *		"harmony": {
+	 *			"osVer": "x",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
 	 *		}
-	 *	}
+	 *	},
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
 	 * }
 	 */
 	createRequestPermissionListener : CreateRequestPermissionListener

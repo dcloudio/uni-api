@@ -1,4 +1,4 @@
-import picker from '@ohos.file.picker'
+import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import fs from '@ohos.file.fs'
 import { ReadOptions } from '@ohos.file.fs'
 import media from '@ohos.multimedia.media'
@@ -21,9 +21,10 @@ export interface MediaFile {
 
 export interface ChooseMediaOptions {
     mimeType:
-    | picker.PhotoViewMIMETypes.VIDEO_TYPE
-    | picker.PhotoViewMIMETypes.IMAGE_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
     count?: number
+    sourceType?: ('album' | 'camera')[]
 }
 
 export interface chooseMediaSuccessCallbackResult {
@@ -76,9 +77,16 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
     const file = await fs.open(uri, fs.OpenMode.READ_ONLY)
     const imageSource = image.createImageSource(file.fd)
     const imageInfo = await imageSource.getImageInfo()
-    const orientation = await imageSource.getImageProperty(
-        image.PropertyKey.ORIENTATION
-    )
+    let orientation: string = ''
+    try {
+        orientation = await imageSource.getImageProperty(
+            image.PropertyKey.ORIENTATION
+        )
+    } catch (error) {
+        // do nothing
+    }
+    await imageSource.release()
+    await fs.close(file.fd)
     let orientationNum = 0
     if (typeof orientation === 'string') {
         const matched = orientation.match(/^Unknown value (\d)$/)
@@ -149,16 +157,18 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
 export async function _chooseMedia(
     options: ChooseMediaOptions
 ): Promise<chooseMediaSuccessCallbackResult> {
-    const photoSelectOptions = new picker.PhotoSelectOptions()
+    const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions()
     const mimeType = options.mimeType
     photoSelectOptions.MIMEType = mimeType
     photoSelectOptions.maxSelectNumber = options.count || 9
-    const photoPicker = new picker.PhotoViewPicker()
+    // 仅支持移除相机选项
+    photoSelectOptions.isPhotoTakingSupported = !(options.sourceType && !options.sourceType.includes('camera'))
+    const photoPicker = new photoAccessHelper.PhotoViewPicker()
     const photoSelectResult = await photoPicker.select(photoSelectOptions)
 
     const uris = photoSelectResult.photoUris
 
-    if (mimeType !== picker.PhotoViewMIMETypes.VIDEO_TYPE) {
+    if (mimeType !== photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE) {
         return {
             tempFiles: uris.map((uri) => {
                 const file = fs.openSync(uri, fs.OpenMode.READ_ONLY)

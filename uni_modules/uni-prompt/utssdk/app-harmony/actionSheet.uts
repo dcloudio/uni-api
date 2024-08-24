@@ -1,3 +1,6 @@
+import { getAbilityContext } from '@dcloudio/uni-runtime';
+import { window } from '@kit.ArkUI';
+import { BusinessError } from '@ohos.base';
 import promptAction from '@ohos.promptAction';
 import { ShowActionSheet, ShowActionSheetOptions, ShowActionSheetSuccess } from '../interface.uts';
 import { ShowActionSheetApiOptions, ShowActionSheetProtocol, API_SHOW_ACTION_SHEET } from '../protocol.uts';
@@ -23,20 +26,28 @@ export const showActionSheet: ShowActionSheet = defineAsyncApi<ShowActionSheetOp
         color: options.itemColor!
       } as promptAction.Button);
     })
-    promptAction.showActionMenu({
-      title: options.title,
-      buttons: actionMenuButtons,
-    } as promptAction.ActionMenuOptions)
-      .then(showACtionSheetRes => {
-        res.resolve({ tapIndex: showACtionSheetRes.index } as ShowActionSheetSuccess)
-      })
-      .catch((e: Error) => {
-        if (e.message === 'cancel') {
-          res.reject('cancel')
-          return;
-        }
-        res.reject(e.message)
-      })
+
+    window.getLastWindow(getAbilityContext()!, (err: BusinessError, window: window.Window) => {
+      const errCode: number = err.code;
+      if (errCode) {
+        console.error(`Failed to obtain the top window. Cause code: ${err.code}, message: ${err.message}`);
+        return;
+      }
+      window.getUIContext().getPromptAction().showActionMenu({
+        title: options.title,
+        buttons: actionMenuButtons,
+      } as promptAction.ActionMenuOptions)
+        .then(showACtionSheetRes => {
+          res.resolve({ tapIndex: showACtionSheetRes.index } as ShowActionSheetSuccess)
+        })
+        .catch((e: Error) => {
+          if (e.message === 'cancel') {
+            res.reject('cancel')
+            return;
+          }
+          res.reject(e.message)
+        })
+    })
   },
   ShowActionSheetProtocol,
   ShowActionSheetApiOptions

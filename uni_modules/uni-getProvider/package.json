@@ -39,9 +39,19 @@
           "app": {
             "js": false,
             "kotlin": true,
-            "swift": false
+            "swift": true,
+            "arkts": true
           }
-        }
+        },
+		"getProviderSync": {
+		  "name": "getProviderSync",
+		  "app": {
+		    "js": false,
+		    "kotlin": true,
+		    "swift": true,
+		    "arkts": true
+		  }
+		}
       }
     },
     "encrypt": [],

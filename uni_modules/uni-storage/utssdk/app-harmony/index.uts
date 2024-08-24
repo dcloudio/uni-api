@@ -1,3 +1,5 @@
+import dataPreferences from '@ohos.data.preferences';
+import common from '@ohos.app.ability.common';
 import {
     SetStorage,
     SetStorageSync,
@@ -20,7 +22,6 @@ import {
     ClearStorageOptions,
     ClearStorageSuccess,
 } from "../interface.uts";
-import dataPreferences from '@ohos.data.preferences';
 import {
     API_GET_STORAGE,
     API_GET_STORAGE_SYNC,
@@ -33,6 +34,32 @@ import {
     API_GET_STORAGE_INFO,
     API_GET_STORAGE_INFO_SYNC,
 } from '../protocol.uts'
+import {
+    getAbilityContext
+} from '@dcloudio/uni-runtime'
+
+export {
+    SetStorage,
+    SetStorageSync,
+    SetStorageOptions,
+    SetStorageSuccess,
+    GetStorage,
+    GetStorageSync,
+    GetStorageOptions,
+    GetStorageSuccess,
+    GetStorageInfo,
+    GetStorageInfoSync,
+    GetStorageInfoOptions,
+    GetStorageInfoSuccess,
+    RemoveStorage,
+    RemoveStorageSync,
+    RemoveStorageOptions,
+    RemoveStorageSuccess,
+    ClearStorage,
+    ClearStorageSync,
+    ClearStorageOptions,
+    ClearStorageSuccess,
+} from '../interface.uts'
 
 function parseStorageValue(value: string): any {
     try {
@@ -51,7 +78,7 @@ function createStore() : dataPreferences.Preferences {
     if (store) {
         return store
     }
-    store = dataPreferences.getPreferencesSync(getContext(), {
+    store = dataPreferences.getPreferencesSync(getAbilityContext() as common.UIAbilityContext, {
         name: `storage.${APP_ID}`
     } as dataPreferences.Options)
     return store
@@ -100,12 +127,16 @@ const setStorageSync = defineSyncApi<void>(
 const setStorage = defineAsyncApi<SetStorageOptions, SetStorageSuccess>(
     API_SET_STORAGE,
     (args: SetStorageOptions, exec: ApiExecutor<SetStorageSuccess>) => {
-        createStore().put(args.key, stringifyStorageValue(args.data)).then(() => {
-            createStore().flush()
-            exec.resolve({} as ESObject)
-        }, (error: Error) => {
-            exec.reject(error.message)
-        })
+        try {
+            createStore().put(args.key, stringifyStorageValue(args.data)).then(() => {
+                createStore().flush()
+                exec.resolve({} as ESObject)
+            }, (error: Error) => {
+                exec.reject(error.message)
+            })
+        } catch (error) {
+            exec.reject((error as Error).message)
+        }
     }
 ) as SetStorage
 

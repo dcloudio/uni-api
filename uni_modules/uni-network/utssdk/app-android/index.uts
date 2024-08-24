@@ -13,6 +13,7 @@ import Handler from 'android.os.Handler';
 import Looper from 'android.os.Looper';
 import Class from 'java.lang.Class';
 import Type from 'java.lang.reflect.Type';
+import Gson from "io.dcloud.uts.gson.Gson";
 
 let charsetPattern = Pattern.compile('charset=([a-z0-9-]+)')
 
@@ -101,16 +102,10 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 					errMsg = "time out";
 				} else if (cause.contains("Connection refused")) {
 					errCode = 1000;
-					errMsg = "server system error";
 				} else if (cause.contains("Network is unreachable")) {
 					errCode = 600003;
-					errMsg = "network interrupted error";
 				} else if (cause.contains("invalid URL")) {
 					errCode = 600009;
-					errMsg = "invalid URL";
-				} else {
-					errCode = 602001;
-					errMsg = "request system error";
 				}
 
 				let failResult = new RequestFailImpl(getErrcode(errCode));
@@ -268,8 +263,16 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				let tmp = data.substring(start, end);
 				return JSON.parse(tmp);
 			} else {
-				return data;
+				let jsonData: any | null = null;
+				try{
+					const gson = new Gson();
+					jsonData = gson.fromJson<any>(data, this.type);
+				}catch(e){
+				}
+				return jsonData ?? data;
 			}
+		} else if ("java.lang.String".equals(this.clzName, true)){
+			return data;
 		} else {
 			return JSON.parse<T>(data, this.type);
 		}

@@ -31,6 +31,10 @@ const NetWorkUniErrors : Map<RequestErrorCode, string> = new Map([
 	 */
 	[600003, 'network interrupted error'],
 	/**
+	 * data参数类型不合法
+	 */
+	[600008, 'the data parameter type is invalid'],
+	/**
 	 * URL 格式不合法
 	 */
 	[600009, 'invalid URL'],

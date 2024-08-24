@@ -38,7 +38,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+					"arkts": true
 				}
 			},
 			"setStorageSync": {
@@ -46,7 +47,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+					"arkts": true
 				}
 			},
 			"getStorage": {
@@ -54,7 +56,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"getStorageSync": {
@@ -62,7 +65,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"getStorageInfo": {
@@ -70,15 +74,17 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
-			}, 
+			},
 			"getStorageInfoSync": {
 				"name": "getStorageInfoSync",
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"removeStorage": {
@@ -86,7 +92,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"removeStorageSync": {
@@ -94,7 +101,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"clearStorage": {
@@ -102,7 +110,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			},
 			"clearStorageSync": {
@@ -110,7 +119,8 @@
 				"app": {
 					"js": false,
 					"kotlin": true,
-					"swift": true
+					"swift": true,
+            "arkts": true
 				}
 			}
 		}

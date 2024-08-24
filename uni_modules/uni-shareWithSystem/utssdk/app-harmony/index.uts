@@ -1,0 +1,73 @@
+import common from '@ohos.app.ability.common';
+import { uniformTypeDescriptor } from '@kit.ArkData';
+import { systemShare } from '@kit.ShareKit';
+import {
+    ShareWithSystem,
+    ShareWithSystemOptions,
+    ShareWithSystemSuccess,
+    ShareWithSystemFail,
+} from "../interface.uts";
+import {
+    API_SHARE_WITH_SYSTEM
+} from '../protocol.uts'
+import {
+    getAbilityContext
+} from '@dcloudio/uni-runtime'
+
+export {
+    ShareWithSystem,
+    ShareWithSystemOptions,
+    ShareWithSystemSuccess,
+    ShareWithSystemFail,
+} from '../interface.uts'
+
+const shareWithSystem = defineAsyncApi<ShareWithSystemOptions, ShareWithSystemSuccess>(
+    API_SHARE_WITH_SYSTEM,
+    (args: ShareWithSystemOptions, exec: ApiExecutor<ShareWithSystemSuccess>) => {
+        const href = args.href
+        const imageUrl = args.imageUrl
+        const summary = args.summary
+        let type: uniformTypeDescriptor.UniformDataType = uniformTypeDescriptor.UniformDataType.TEXT
+        const shareRecords: systemShare.SharedRecord[] = []
+        if (href) {
+            shareRecords.push({
+                utd: uniformTypeDescriptor.UniformDataType.HYPERLINK,
+                content: href
+            } as systemShare.SharedRecord)
+        }
+        if (imageUrl) {
+            shareRecords.push({
+                utd: uniformTypeDescriptor.UniformDataType.IMAGE,
+                uri: imageUrl
+            } as systemShare.SharedRecord)
+        }
+        if (summary) {
+            shareRecords.push({
+                utd: uniformTypeDescriptor.UniformDataType.TEXT,
+                content: summary
+            } as systemShare.SharedRecord)
+        }
+        if (shareRecords.length === 0) {
+            exec.reject('No share data')
+            return
+        }
+        const shareData = new systemShare.SharedData(shareRecords[0])
+        for (let index = 1; index < shareRecords.length; index++) {
+            shareData.addRecord(shareRecords[index])
+        }
+        const shareController: systemShare.ShareController = new systemShare.ShareController(shareData);
+        shareController.show(getAbilityContext() as common.UIAbilityContext, {} as systemShare.ShareControllerOptions)
+        const onDismiss = () => {
+            shareController.off('dismiss', onDismiss)
+            exec.resolve({} as ShareWithSystemSuccess)
+        }
+        shareController.on('dismiss', onDismiss)
+    }
+) as ShareWithSystem
+
+export {
+    shareWithSystem
+}
+
+
+

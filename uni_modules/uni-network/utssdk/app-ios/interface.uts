@@ -10,7 +10,7 @@ export type RequestOptions<T> = {
    */
   url: string,
   /**
-   * 请求的参数 Object|String类型
+   * 请求的参数 在`app-android`端，参数类型只能为`UTSJSONObject`或者`string`类型
    * @type {RequestDataOptions}
    * @defaultValue null
    */
@@ -21,7 +21,7 @@ export type RequestOptions<T> = {
    */
   header?: UTSJSONObject | null,
   /**
-   * 请求类型 默认值GET	
+   * 请求类型 默认值GET
    * GET|POST|PUT|DELETE|HEAD|OPTIONS
    * @type {RequestMethod}
    * @defaultValue "GET"
@@ -41,7 +41,7 @@ export type RequestOptions<T> = {
   dataType?: string | null,
   /**
    * 设置响应的数据类型。
-   * 
+   *
    * @deprecated 不支持
    * @autodoc false
    */
@@ -54,7 +54,7 @@ export type RequestOptions<T> = {
   sslVerify?: boolean | null,
   /**
    * 跨域请求时是否携带凭证（cookies）
-   * 
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -115,27 +115,75 @@ export type RequestSuccess<T> = {
 
 /**
  * 请求方法
- * - GET  GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
- * - POST  POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
- * - PUT  PUT方法用有效载荷请求替换目标资源的所有当前表示。
- * - PATCH  PATCH方法用于对资源应用部分修改。
- * - DELETE  DELETE方法删除指定的资源。
- * - HEAD  HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。 
- * - OPTIONS  OPTIONS 方法用于描述目标资源的通信选项。
  */
-export type RequestMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS";
+export type RequestMethod =
+/**
+ * GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
+ */
+"GET" |
+/**
+ * POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
+ */
+"POST" |
+/**
+ * PUT方法用有效载荷请求替换目标资源的所有当前表示。
+ */
+"PUT" |
+/**
+ * PATCH方法用于对资源应用部分修改。
+ */
+"PATCH" |
+/**
+ * DELETE方法删除指定的资源。
+ */
+"DELETE" |
+/**
+ * HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。
+ */
+"HEAD" |
+/**
+ * OPTIONS 方法用于描述目标资源的通信选项。
+ */
+"OPTIONS";
+
 
 /**
  * 错误码
- * - 5 接口超时
- * - 1000 服务端系统错误
- * - 100001 json数据解析错误
- * - 100002 错误信息json解析失败
- * - 600003 网络中断
- * - 600009 URL格式不合法
- * - 602001 request系统错误
  */
-export type RequestErrorCode = 5 | 1000 | 100001 | 100002 | 600003 | 600009 | 602001;
+export type RequestErrorCode =
+/**
+ * 接口超时
+ */
+5 |
+/**
+ * 服务端系统错误
+ */
+1000 |
+/**
+ * json数据解析错误
+ */
+100001 |
+/**
+ * 错误信息json解析失败
+ */
+100002 |
+/**
+ * 网络中断
+ */
+600003 |
+/**
+ * data参数类型不合法
+ */
+600008 |
+/**
+ * URL格式不合法
+ */
+600009 |
+/**
+ * request系统错误
+ */
+602001;
+
 
 
 // export type RequestFail = UniError;
@@ -153,10 +201,8 @@ export type RequestCompleteCallback = (option: any) => void;
 
 export interface RequestTask {
   /**
-    * abort()
-    * @description 
     * 中断网络请求。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#request
     * @uniPlatform {
@@ -201,7 +247,7 @@ export type UploadFileOptionFiles = {
   uri: string,
   /**
    * 要上传的文件对象，仅H5（2.6.15+）支持
-   * 
+   *
    * @uniPlatform {
    *    "app": {
    *        "android": {
@@ -310,9 +356,9 @@ export type UploadFileProgressUpdateCallback = (result: OnProgressUpdateResult) 
 export interface UploadTask {
   /**
     * abort()
-    * @description 
+    * @description
     * 中断上传任务。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
     * @uniPlatform {
@@ -341,7 +387,7 @@ export interface UploadTask {
   abort(): void,
   /**
     * onProgressUpdate()
-    * @description 
+    * @description
     * 监听上传进度变化。
     * @param {UploadFileProgressUpdateCallback}  callback
     * @return {void}
@@ -455,9 +501,9 @@ export type DownloadFileProgressUpdateCallback = (result: OnProgressDownloadResu
 export interface DownloadTask {
   /**
     * abort()
-    * @description 
+    * @description
     * 中断下载任务。
-    * @param {void} 
+    * @param {void}
     * @return {void}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
     * @uniPlatform {
@@ -486,7 +532,7 @@ export interface DownloadTask {
   abort(): void,
   /**
     * onProgressUpdate()
-    * @description 
+    * @description
     * 监听下载进度变化。
     * @param {DownloadFileProgressUpdateCallback}  callback
     * @return {void}
@@ -521,10 +567,10 @@ export interface DownloadTask {
 export interface Uni {
   /**
     * Request()
-    * @description 
+    * @description
     * 发起网络请求。
     * @param {RequestOptions} options
-    * @return {RequestTask} 
+    * @return {RequestTask}
     * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html
     * @uniPlatform {
     *    "app": {
@@ -572,7 +618,7 @@ export interface Uni {
   request<T>(param: RequestOptions<T>): RequestTask;
   /**
     * UploadFile()
-    * @description 
+    * @description
     * 将本地资源上传到开发者服务器。
     * @param {UploadFileOptions} options
     * @return {UploadTask}
@@ -609,7 +655,7 @@ export interface Uni {
   uploadFile: UploadFile;
   /**
     * DownloadFile()
-    * @description 
+    * @description
     * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
     * @param {DownloadFileOptions} options
     * @return {DownloadTask}

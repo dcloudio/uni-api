@@ -1,40 +1,106 @@
 export interface Uni {
   /**
-    * getNetworkType()
-    * @description 
-    * 获取网络类型
-    * @param {GetNetworkTypeOptions} options
-    * @return {void}
-    * @tutorial http://uniapp.dcloud.io/api/system/network?id=getnetworktype
-    * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		}
-	* 	},
-  *   "web": {
-  *     "uniVer": "√",
-  *     "unixVer": "4.0"
-  *   }
-	* }
-    * @example
-     ```typescript
-       uni.getNetworkType({
-          success(res){
-            console.log(res);
-          }
-       });
-     ```
-    */
+   * getNetworkType()
+   * @description
+   * 获取网络类型
+   * @param {GetNetworkTypeOptions} options
+   * @return {void}
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/network.html#getnetworktype
+   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-network-type.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-network-type.html
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.24",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   * @example
+   * ```typescript
+   *   uni.getNetworkType({
+   *     success(res){
+   *       console.log(res);
+   *     }
+   *   });
+   * ```
+   */
   getNetworkType(options: GetNetworkTypeOptions): void;
+  /**
+   * 监听网络状态变化
+   *
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/network.html#onnetworkstatuschange
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/network.html#onnetworkstatuschange
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.24",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  onNetworkStatusChange: OnNetworkStatusChange;
+  /**
+   * 取消监听网络状态变化
+   *
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/network.html#offnetworkstatuschange
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/network.html#offnetworkstatuschange
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "3.9+"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.24",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  offNetworkStatusChange: OffNetworkStatusChange;
 }
 
 export type GetNetworkType = (options: GetNetworkTypeOptions) => void;
@@ -66,3 +132,17 @@ export type GetNetworkTypeOptions = {
    */
   complete?: GetNetworkTypeCompleteCallback | null
 };
+export type OnNetworkStatusChangeCallbackResult = {
+  /**
+   * 当前是否有网络连接
+   * @type boolean
+   */
+  isConnected: boolean,
+  /**
+   * 网络类型
+   */
+  networkType: string
+};
+export type OnNetworkStatusChangeCallback = (result: OnNetworkStatusChangeCallbackResult) => void;
+export type OnNetworkStatusChange = (callback: OnNetworkStatusChangeCallback) => void;
+export type OffNetworkStatusChange = (callback: (result: any) => void) => void;

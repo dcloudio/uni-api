@@ -3,7 +3,9 @@ import {
     ChooseImageOptions,
     GetVideoInfoOptions,
     ChooseVideoOptions,
-    PreviewImageOptions
+    PreviewImageOptions,
+    CompressImageOptions,
+    ChooseFileOptions
 } from './interface.uts'
 import {
     getRealPath,
@@ -111,7 +113,7 @@ export const GetVideoInfoApiProtocol = new Map<string, ProtocolOptions>([
             type: 'string',
             required: true
         }
-    ]    
+    ]
 ])
 export const GetVideoInfoApiOptions: ApiOptions<GetVideoInfoOptions> = {
     formatArgs: new Map<string, Function>([
@@ -161,10 +163,10 @@ export const ChooseVideoApiProtocol = new Map<string, ProtocolOptions>([
             type: 'array',
             required: false
         }
-    
+
     ]
 ])
-export const ChooseVideoApiOptions : ApiOptions<ChooseVideoOptions> = {
+export const ChooseVideoApiOptions: ApiOptions<ChooseVideoOptions> = {
     formatArgs: new Map<string, Function>([
         [
             'sourceType',
@@ -260,3 +262,123 @@ export const SaveVideoToPhotosAlbumApiProtocol = new Map<string, ProtocolOptions
         }
     ]
 ])
+
+// #region compressImage
+export const API_COMPRESS_IMAGE = 'compressImage'
+export const CompressImageApiOptions: ApiOptions<CompressImageOptions> = {
+    formatArgs: new Map<string, Function>([
+        [
+            'src',
+            function (src: string, params: CompressImageOptions) {
+                if (src) params.src = getRealPath(src)
+            }
+        ],
+        [
+            'quality',
+            function (quality: number, params: CompressImageOptions) {
+                if (quality == null) {
+                    params.quality = 80
+                }
+            }
+        ]
+    ])
+}
+export const CompressImageApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'src',
+        {
+            type: 'string',
+            required: true
+        }
+    ],
+    [
+        'quality',
+        {
+            type: 'number'
+        }
+    ]
+])
+// #endregion
+
+// #region chooseFile
+export const API_CHOOSE_FILE = 'chooseFile'
+const CHOOSE_MEDIA_TYPE: string[] = [
+    'all',
+    'image',
+    'video',
+]
+const CHOOSE_FILE_SOURCE_TYPE: string[] = [
+    'album',
+    'camera'
+]
+
+export const ChooseFileApiOptions: ApiOptions<ChooseFileOptions> = {
+    formatArgs: new Map<string, Function>([
+        [
+            'count',
+            function (count: number, params: ChooseFileOptions) {
+                if (!count || count <= 0) {
+                    params.count = 100
+                }
+                return undefined
+            }
+        ],
+        [
+            'sourceType',
+            function (sourceType: string[] = [], params: ChooseFileOptions) {
+                sourceType = sourceType.filter((type) => CHOOSE_FILE_SOURCE_TYPE.includes(type))
+                if (!sourceType.length) {
+                    params.sourceType = ['album', 'camera']
+                }
+                return undefined
+            }
+        ],
+        [
+            'type',
+            function (type: string = 'all', params: ChooseFileOptions) {
+                if (!CHOOSE_MEDIA_TYPE.includes(type)) {
+                    params.type = 'all'
+                }
+                return undefined
+            }
+        ],
+        [
+            'extension',
+            function (extension: string[], params: ChooseFileOptions) {
+                if (extension instanceof Array && extension.length === 0) {
+                    return 'param extension should not be empty.'
+                }
+                if (!extension) params.extension = ['']
+                return undefined
+            }
+        ]
+    ])
+}
+
+export const ChooseFileApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'count',
+        {
+            type: 'number'
+        }
+    ],
+    [
+        'sourceType',
+        {
+            type: 'array'
+        }
+    ],
+    [
+        'type',
+        {
+            'type': 'string'
+        }
+    ],
+    [
+        'extension',
+        {
+            type: 'array'
+        }
+    ]
+])
+// #endregion

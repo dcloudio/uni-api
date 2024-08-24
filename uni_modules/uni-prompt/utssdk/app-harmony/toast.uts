@@ -1,5 +1,7 @@
-import promptAction from '@ohos.promptAction';
+import { getAbilityContext } from '@dcloudio/uni-runtime';
+import { window } from '@kit.ArkUI';
 import { BusinessError } from '@ohos.base';
+import { promptAction } from '@kit.ArkUI';
 import { ShowToast, ShowToastOptions, ShowToastSuccess, HideToast } from '../interface.uts'
 import { API_SHOW_TOAST, ShowToastProtocol, ShowToastApiOptions, API_HIDE_TOAST } from '../protocol.uts'
 
@@ -7,11 +9,30 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
   API_SHOW_TOAST,
   function (options: ShowToastOptions, res: ApiExecutor<ShowToastSuccess>) {
     try {
-      promptAction.showToast({
+      const showToastOptions: promptAction.ShowToastOptions = {
         message: options.title,
-        duration: options.duration!
-      } as promptAction.ShowToastOptions);
-      res.resolve({} as ShowToastSuccess)
+        duration: options.duration!,
+        alignment: Alignment.Center
+      }
+      if (options.position) {
+        switch (options.position) {
+          case 'top':
+            showToastOptions.alignment = Alignment.Top
+            break
+          case 'bottom':
+            showToastOptions.alignment = Alignment.Bottom
+            break
+        }
+      }
+      window.getLastWindow(getAbilityContext()!, (err: BusinessError, window: window.Window) => {
+        const errCode: number = err.code;
+        if (errCode) {
+          console.error(`Failed to obtain the top window. Cause code: ${err.code}, message: ${err.message}`);
+          return;
+        }
+        window.getUIContext().getPromptAction().showToast(showToastOptions)
+        res.resolve({} as ShowToastSuccess)
+      })
     } catch (error) {
       let message = (error as BusinessError).message
       res.reject(message)

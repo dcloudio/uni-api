@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/DCloudMediaVideoCompress.h</key>
 		<data>
-		vNG5gm0GhRzIY8uOnq0u3ya0lAo=
+		ACOUg8KiPvLAGIUM027Z1+H7pvk=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -102,11 +102,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vNG5gm0GhRzIY8uOnq0u3ya0lAo=
+			ACOUg8KiPvLAGIUM027Z1+H7pvk=
 			</data>
 			<key>hash2</key>
 			<data>
-			DUdTe4bBsiJtDWIuSSASXUUNAGRpB2u3lndOEBpSFik=
+			6t/ZSvRh0cxfGxX3saaLQvBLatqDHd6GGyJPxucCOQg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -1,4 +1,7 @@
-import picker from '@ohos.file.picker'
+import photoAccessHelper from '@ohos.file.photoAccessHelper'
+import { window } from '@kit.ArkUI';
+import { promptAction } from '@kit.ArkUI';
+import { getAbilityContext } from '@dcloudio/uni-runtime'
 import { _chooseMedia, ChooseMediaOptions } from './media.uts'
 import {
     ChooseVideoOptions,
@@ -13,35 +16,83 @@ import {
 import {
     MediaUniErrors
 } from '../../unierror.uts'
+import { CameraPosition, takeVideo, TakeVideoOptions } from './camera.uts'
+
+const _chooseVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) => {
+    _chooseMedia({
+        mimeType: photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE,
+        sourceType: ["album"],
+    } as ChooseMediaOptions)
+        .then((chooseMediaRes) => {
+            const file = chooseMediaRes.tempFiles[0]
+            if (!file) {
+                const errCode = 1101001
+                const errMsg = MediaUniErrors.get(1101001) as string
+                res.reject(errMsg, {
+                    errCode,
+                } as ApiError);
+                return;
+            }
+            res.resolve({
+                tempFilePath: file.tempFilePath,
+                duration: file.duration,
+                size: file.size,
+                width: file.width,
+                height: file.height,
+            } as ChooseVideoSuccess)
+        }, (err: Error) => {
+            res.reject(err.message)
+        })
+}
+
+const _takeVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) => {
+    const takeVideoOptions: TakeVideoOptions = {
+        cameraType: options.camera! as CameraPosition,
+        videoDuration: options.maxDuration!,
+    }
+    takeVideo(takeVideoOptions).then(video => {
+        res.resolve({
+            tempFilePath: video.path,
+            duration: video.duration,
+            size: video.size,
+            width: video.width,
+            height: video.height,
+        } as ChooseVideoSuccess)
+    }).catch((err: Error) => {
+        res.reject(err.message)
+    })
+}
 
 export const chooseVideo: ChooseVideo =
     defineAsyncApi<ChooseVideoOptions, ChooseVideoSuccess>(
         API_CHOOSE_VIDEO,
-        function (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) {
-            _chooseMedia({
-                mimeType: picker.PhotoViewMIMETypes.VIDEO_TYPE,
-            } as ChooseMediaOptions)
-                .then((chooseMediaRes) => {
-                    const file = chooseMediaRes.tempFiles[0]
-                    if (!file) {
-                        const errCode = 1101001
-                        const errMsg = MediaUniErrors.get(1101001) as string
-                        res.reject(errMsg, {
-                            errCode,
-                            errMsg
-                        } as ApiError);
-                        return;
-                    }
-                    res.resolve({
-                        tempFilePath: file.tempFilePath,
-                        duration: file.duration,
-                        size: file.size,
-                        width: file.width,
-                        height: file.height,
-                    } as ChooseVideoSuccess)
-                }, (err: Error) => {
-                    res.reject(err.message)
-                })
+        async function (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) {
+            if (options.sourceType?.length === 1 && options.sourceType[0] === 'camera') {
+                _takeVideo(options, res)
+            } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
+                _chooseVideo(options, res)
+            } else {
+                const lastWindow = await window.getLastWindow(getAbilityContext()!)
+                const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
+                const { index } = await UIContextPromptAction.showActionMenu({
+                    buttons: [
+                        {
+                            text: '拍摄',
+                            color: '#000000'
+                        },
+                        {
+                            text: '从相册选择',
+                            color: '#000000'
+                        }
+                    ],
+                } as promptAction.ActionMenuOptions)
+
+                if (index === 0) {
+                    _takeVideo(options, res)
+                } else if (index === 1) {
+                    _chooseVideo(options, res)
+                }
+            }
         },
         ChooseVideoApiProtocol,
         ChooseVideoApiOptions

@@ -1,4 +1,4 @@
-import { Emitter } from '../Emitter.uts'
+import { Emitter } from '@dcloudio/uni-runtime'
 import { $Emit, $Off, $On, $Once } from '../interface.uts'
 
 const emitter = new Emitter()

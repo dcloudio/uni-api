@@ -1,0 +1,32 @@
+import harmonyUrl from '@ohos.url'
+
+/**
+ * 鸿蒙url内包含中文时处理有问题
+ * 例如 /code/version/11?subject=中文测试 在部分服务器上会收到 /code/version/11?subject=éå¾·ä¸æ³
+ * 如下看起来很怪异的代码仅仅是为了绕过此Bug，待鸿蒙修复后可删除
+ */
+
+function needsEncoding(str: string) {
+    const decoded = decodeURIComponent(str);
+    if (decoded !== str) {
+        if (encodeURIComponent(decoded) === str) {
+            return false;
+        }
+    }
+    return encodeURIComponent(decoded) !== decoded;
+}
+
+export function parseUrl(url: string) {
+    const urlObj = harmonyUrl.URL.parseURL(url);
+    urlObj.params.forEach((value, key) => {
+        if (needsEncoding(value)) {
+            urlObj.params.set(key, value);
+        }
+    })
+    return urlObj.toString()
+}
+
+export interface UniNetworkMP {
+    on: Function
+    off: Function
+}
