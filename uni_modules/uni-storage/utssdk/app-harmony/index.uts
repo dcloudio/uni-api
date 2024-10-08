@@ -35,7 +35,8 @@ import {
     API_GET_STORAGE_INFO_SYNC,
 } from '../protocol.uts'
 import {
-    getAbilityContext
+    getAbilityContext,
+    getCurrentMP
 } from '@dcloudio/uni-runtime'
 
 export {
@@ -73,14 +74,21 @@ function stringifyStorageValue(value: any): string {
     return JSON.stringify({ type: typeof value, data: value } as ESObject);
 }
 
-let store: dataPreferences.Preferences | null = null;
+interface UniStorageMP {
+    id: string
+}
+
+// TODO 回收Preference
+const stores = new Map<string, dataPreferences.Preferences>()
 function createStore() : dataPreferences.Preferences {
-    if (store) {
-        return store
+    const appId = (getCurrentMP() as UniStorageMP).id
+    if (stores.has(appId)) {
+        return stores.get(appId)!
     }
-    store = dataPreferences.getPreferencesSync(getAbilityContext() as common.UIAbilityContext, {
-        name: `storage.${APP_ID}`
+    const store = dataPreferences.getPreferencesSync(getAbilityContext() as common.UIAbilityContext, {
+        name: `storage.${appId}`
     } as dataPreferences.Options)
+    stores.set(appId, store)
     return store
 }
 

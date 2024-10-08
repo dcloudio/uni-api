@@ -20,7 +20,7 @@ export interface Uni {
    * 		},
    *    "harmony": {
    *      "osVer": "3.0",
-   *      "uniVer": "4.25",
+   *      "uniVer": "4.31",
    *      "unixVer": "x"
    *    }
    * 	},

@@ -21,8 +21,9 @@ import {
     lookupContentTypeWithUri
 } from './mime.uts'
 import {
+    getClientCertificate,
     parseUrl,
-    UniNetworkMP
+    IUniNetworkMP
 } from './utils.uts'
 import {
     getCookieSync,
@@ -154,7 +155,11 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
         }
 
         const httpRequest = http.createHttp()
-        const mp = getCurrentMP() as UniNetworkMP
+        const mp = getCurrentMP() as IUniNetworkMP
+        const userAgent = mp.userAgent.fullUserAgent
+        if (userAgent && !headers['User-Agent'] && !headers['user-agent']) {
+            headers['User-Agent'] = userAgent
+        }
         const emitter = new Emitter() as IUniUploadFileEmitter
         const uploadTask: IUploadTask = {
             abort() {
@@ -208,6 +213,7 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                 readTimeout: timeout ? timeout : undefined,
                 multiFormDataList,
                 expectDataType: http.HttpDataType.STRING,
+                clientCert: getClientCertificate(url)
             } as http.HttpRequestOptions,
             (err, res) => {
                 if (err) {

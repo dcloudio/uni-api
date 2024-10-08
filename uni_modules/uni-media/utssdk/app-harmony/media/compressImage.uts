@@ -3,7 +3,7 @@ import { API_CHOOSE_IMAGE, CompressImageApiOptions, CompressImageApiProtocol } f
 import { image } from '@kit.ImageKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
-import { getEnv } from '@dcloudio/uni-runtime';
+import { getEnv, UTSHarmony } from '@dcloudio/uni-runtime';
 
 export interface _CompressImageSuccess {
   size: number,
@@ -21,8 +21,11 @@ export function _compressImage(args: CompressImageOptions) {
   const imageName = getFileName(args.src)
   const imageExt = imageName.split('.').slice(-1)[0];
   const imagePacker: image.ImagePacker = image.createImagePacker();
+  const file2 = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY);
 
-  const file2 = fileIo.openSync(args.src, fileIo.OpenMode.READ_WRITE);
+  if (!file2) {
+    throw new Error('open file failed')
+  }
 
   const imageSource: image.ImageSource = image.createImageSource(file2.fd);
 
@@ -43,10 +46,9 @@ export function _compressImage(args: CompressImageOptions) {
   const pixelMap = imageSource.createPixelMapSync(decodingOptions);
 
   let format: string = ''
-  if (['jpg', 'jpe', 'jpeg'].includes(imageExt)) {
+  if (['jpg', 'jpe', 'jpeg', 'png'].includes(imageExt)) {
     format = 'image/jpeg'
   }
-  if (imageExt === 'png') format = 'image/png'
   if (imageExt === 'webp') format = 'image/webp'
 
   if (!format.length) {
@@ -69,6 +71,7 @@ export function _compressImage(args: CompressImageOptions) {
   return imagePacker.packToFile(pixelMap, file.fd, packOptions).then(_ => {
     const size = fileIo.statSync(file.fd).size
     fileIo.closeSync(file.fd)
+    pixelMap.release()
     return {
       size,
       tempFilePath

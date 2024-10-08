@@ -16,7 +16,28 @@ export function setCookie(url: string, cookies: string[]): Promise<void> {
 
 export function setCookieSync(url: string, cookies: string[]): void {
     cookies.forEach(cookie => {
-        webview.WebCookieManager.configCookieSync(url, cookie);
+        let hasSecure = false;
+        let hasSameSite = false;
+        let savedCookie = cookie.split(';').map(cookieItem => {
+            const pair = cookieItem.split('=').map(item => item.trim())
+            const keyLower = pair[0].toLowerCase();
+            if (keyLower === 'secure') {
+                hasSecure = true;
+                return cookieItem;
+            }
+            if (keyLower === 'samesite') {
+                hasSameSite = true;
+                return 'samesite=none';
+            }
+            return cookieItem
+        }).join(';');
+        if (!hasSecure) {
+            savedCookie += '; secure';
+        }
+        if (!hasSameSite) {
+            savedCookie += '; samesite=none';
+        }
+        webview.WebCookieManager.configCookieSync(url, savedCookie);
     });
     webview.WebCookieManager.saveCookieAsync();
 }

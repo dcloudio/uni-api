@@ -1,9 +1,13 @@
-import { UIPopoverArrowDirection , UIDevice , UIUserInterfaceIdiom, CGRect } from "UIKit"
+import { UIPopoverArrowDirection , UIDevice , UIUserInterfaceIdiom, CGRect, UIInterfaceOrientationMask } from "UIKit"
 import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
 import { DCActionSheetController, DCAlertAction, DCAlertActionStyle } from "DCloudAlertController" assert { type: "implementationOnly" };
 import { ShowActionSheetOptions, ShowActionSheetSuccess, ShowActionSheetFail } from '../interface.uts'
 import { PromptErrorImpl } from "../unierror.uts"
+// #ifdef UNI-APP-X
+import { UniSDKEngine } from "DCloudUniappRuntime"
+// #endif
+
 
 export function actionSheet(options : ShowActionSheetOptions) {
 	const itemList = options.itemList!
@@ -27,7 +31,13 @@ export function actionSheet(options : ShowActionSheetOptions) {
 	// uts方法默认会在子线程中执行，涉及 UI 操作必须在主线程中运行，通过 DispatchQueue.main.async 方法可将代码在主线程中运行
 	DispatchQueue.main.async(execute = () : void => {
 		// 初始化actionSheet的实例
-		let actionSheet = DCActionSheetController.init(noticeTitle = options.title ?? "")
+		
+		let supportedInterfaceOrientations : UIInterfaceOrientationMask | null = null
+		// #ifdef UNI-APP-X
+		supportedInterfaceOrientations = UniSDKEngine.shared.getAppManager()?.getCurrentApp()?.appConfig.supportedInterfaceOrientations
+		// #endif
+		
+		let actionSheet = DCActionSheetController.init(noticeTitle = options.title ?? "", supportedInterfaceOrientations = supportedInterfaceOrientations)
 		 
 		// 创建普通按钮
 		itemList.forEach((item : string, index : number) => {

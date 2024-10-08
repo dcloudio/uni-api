@@ -1,0 +1,171 @@
+import { ChooseImageOptions, ChooseMedia, ChooseMediaOptions, ChooseMediaSuccess, ChooseMediaTempFile, ChooseImageTempFile, IMediaError, ChooseVideoOptions } from '../../interface.uts';
+import { ChooseMediaApiOptions, ChooseMediaApiProtocol, API_CHOOSE_MEDIA } from '../../protocol.uts';
+import { chooseImage } from './chooseImage.uts';
+import { chooseVideo } from './chooseVideo.uts';
+
+import { getAbilityContext, getCurrentWindow } from '@dcloudio/uni-runtime'
+import { window } from '@kit.ArkUI';
+
+import { _getVideoInfo, _getImageInfo, _chooseMedia, _ChooseMediaOptions } from './media.uts'
+import { cameraPicker } from '@kit.CameraKit'
+import { getHMCameraPosition } from './camera.uts';
+import photoAccessHelper from '@ohos.file.photoAccessHelper';
+import promptAction from '@ohos.promptAction';
+import { BusinessError } from '@ohos.base';
+
+type UNI_MEDIA_TYPE = 'image' | 'video' | 'mix'
+
+function getCameraPickerMediaTypes(UniMediaTypes: UNI_MEDIA_TYPE[]): cameraPicker.PickerMediaType[] {
+  let mediaTypes: Array<cameraPicker.PickerMediaType> = []
+  if (UniMediaTypes.includes('mix')) {
+    mediaTypes.push(cameraPicker.PickerMediaType.PHOTO, cameraPicker.PickerMediaType.VIDEO)
+  } else {
+    if (UniMediaTypes.includes('image')) {
+      mediaTypes.push(cameraPicker.PickerMediaType.PHOTO)
+    }
+    if (UniMediaTypes.includes('video')) {
+      mediaTypes.push(cameraPicker.PickerMediaType.VIDEO)
+    }
+  }
+  return mediaTypes
+}
+
+const _takeCamera = async (args: ChooseMediaOptions, executor: ApiExecutor<ChooseMediaSuccess>) => {
+  try {
+    let pickerProfile: cameraPicker.PickerProfile = {
+      cameraPosition: getHMCameraPosition(args?.camera ?? 'back'),
+      videoDuration: args?.maxDuration ?? 10
+    };
+    const mediaTypes = getCameraPickerMediaTypes((args.mediaType ?? []) as UNI_MEDIA_TYPE[])
+    const res = await cameraPicker.pick(getAbilityContext()!, mediaTypes, pickerProfile)
+    executor.resolve({
+      type: 'mix',
+      tempFiles: [{
+        tempFilePath: res.resultUri,
+        fileType: res.mediaType === cameraPicker.PickerMediaType.PHOTO ? 'image' : 'video',
+      }]
+    } as ChooseMediaSuccess)
+  } catch (error) {
+    const err = error as BusinessError
+    executor.reject(err.message, { errCode: err.code } as ApiError)
+  }
+}
+
+const __chooseMedia = async (args: ChooseMediaOptions, executor: ApiExecutor<ChooseMediaSuccess>) => (
+  _chooseMedia({
+    mimeType: photoAccessHelper.PhotoViewMIMETypes.IMAGE_VIDEO_TYPE,
+    sourceType: ["album"],
+    count: args.count!,
+    isOriginalSupported: args.sizeType?.includes('original') !== false,
+  } as _ChooseMediaOptions)
+    .then(res => {
+      executor.resolve({
+        type: 'mix',
+        tempFiles: res.tempFiles.map((tempFile): ChooseMediaTempFile => {
+          if (tempFile.fileType === 'image') {
+            return {
+              fileType: tempFile.fileType,
+              tempFilePath: tempFile.tempFilePath,
+              size: tempFile.size
+            } as ChooseMediaTempFile
+          }
+          return {
+            tempFilePath: tempFile.tempFilePath,
+            duration: tempFile.duration,
+            size: tempFile.size,
+            height: tempFile.height,
+            width: tempFile.width,
+            fileType: tempFile.fileType,
+          } as ChooseMediaTempFile
+        })
+      } as ChooseMediaSuccess)
+    })
+    .catch((err: Error) => {
+      executor.reject(err.message)
+    })
+)
+
+export const chooseMedia: ChooseMedia = defineAsyncApi<ChooseMediaOptions, ChooseMediaSuccess>(
+  API_CHOOSE_MEDIA,
+  async (args: ChooseMediaOptions, executor: ApiExecutor<ChooseMediaSuccess>) => {
+    if (args.mediaType?.length === 1 && args.mediaType[0] === 'image') {
+      chooseImage({
+        count: args.count,
+        sizeType: args.sizeType,
+        sourceType: args.sourceType,
+        success(res) {
+          executor.resolve({
+            type: 'image',
+            tempFiles: res.tempFiles.map((tempFile: ChooseImageTempFile) => {
+              return {
+                fileType: 'image',
+                tempFilePath: tempFile.path,
+                size: tempFile.size
+              } as ChooseMediaTempFile
+            })
+          } as ChooseMediaSuccess)
+        },
+        fail(err: IMediaError) {
+          executor.reject(err.errMsg, { errCode: err.errCode } as ApiError)
+        }
+      } as ChooseImageOptions)
+      return
+    }
+
+    if (args.mediaType?.length === 1 && args.mediaType[0] === 'video') {
+      chooseVideo({
+        sourceType: args.sourceType,
+        maxDuration: args.maxDuration,
+        camera: args.camera,
+        success(res) {
+          executor.resolve({
+            type: 'video',
+            tempFiles: [{
+              tempFilePath: res.tempFilePath,
+              duration: res.duration,
+              size: res.size,
+              height: res.height,
+              width: res.width,
+              fileType: 'video'
+            }]
+          } as ChooseMediaSuccess)
+        },
+        fail(err: IMediaError) {
+          executor.reject(err.errMsg, { errCode: err.errCode } as ApiError)
+        }
+      } as ChooseVideoOptions)
+      return
+    }
+
+    if (args.sourceType?.length === 1 && args.sourceType[0] === 'camera') {
+      _takeCamera(args, executor)
+    } else {
+      const lastWindow = getCurrentWindow() as window.Window
+      const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
+      UIContextPromptAction.showActionMenu({
+        buttons: [
+          {
+            text: '拍摄',
+            color: '#000000'
+          },
+          {
+            text: '从相册选择',
+            color: '#000000'
+          }
+        ],
+      } as promptAction.ActionMenuOptions, (err, { index }) => {
+        if (err) {
+          executor.reject('cancel')
+        } else {
+          if (index === 0) {
+            _takeCamera(args, executor)
+          } else if (index === 1) {
+            __chooseMedia(args, executor)
+          }
+        }
+      })
+    }
+  },
+  ChooseMediaApiProtocol,
+  ChooseMediaApiOptions
+) as ChooseMedia

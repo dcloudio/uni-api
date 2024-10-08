@@ -90,9 +90,9 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 		 */
 		const pages = getCurrentPages();
 		if (pages.length > 0) {
-		    const page = pages[pages.length - 1]
-		    const instance = page.$
-		    if (page.$isReady) {
+			const page = pages[pages.length - 1].vm!
+			const instance = page.$
+			if (page.$isReady) {
 				if(UTSAndroid.getTopPageActivity() == null){
 					return 
 				}

@@ -38,7 +38,12 @@ export type GetProviderSuccess = {
 	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
-	 *    }
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 * 		}
 	 *  },
 	 *  "web": {
 	 *    "uniVer": "x",
@@ -46,7 +51,34 @@ export type GetProviderSuccess = {
 	 *  }
 	 * }
 	 */
-	'payment',
+	'payment' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 得到的服务供应商
 	 * @type PlusShareShareService['id'][] | PlusPushClientInfo['id'][] | PlusOauthAuthService['id'][] | PlusPaymentPaymentChannel['id'][]
@@ -172,7 +204,34 @@ export type GetProviderSyncSuccess = {
 	 *  }
 	 * }
 	 */
-	'location',
+	'location' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 得到的服务供应商
 	 * @type PlusShareShareService['id'][] | PlusPushClientInfo['id'][] | PlusOauthAuthService['id'][] | PlusPaymentPaymentChannel['id'][]
@@ -298,7 +357,34 @@ export type GetProviderSyncOptions = {
 	 *  }
 	 * }
 	 */
-	'location',
+	'location' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 };
 
 export type GetProviderSuccessCallback = (result : GetProviderSuccess) => void;
@@ -351,7 +437,34 @@ export type GetProviderOptions = {
 	 *  }
 	 * }
 	 */
-	'payment',
+	'payment' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 接口调用成功的回调
 	 * @uniPlatform {

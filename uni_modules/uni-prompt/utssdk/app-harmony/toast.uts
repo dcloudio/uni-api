@@ -1,4 +1,4 @@
-import { getAbilityContext } from '@dcloudio/uni-runtime';
+import { getCurrentWindow } from '@dcloudio/uni-runtime';
 import { window } from '@kit.ArkUI';
 import { BusinessError } from '@ohos.base';
 import { promptAction } from '@kit.ArkUI';
@@ -24,15 +24,9 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
             break
         }
       }
-      window.getLastWindow(getAbilityContext()!, (err: BusinessError, window: window.Window) => {
-        const errCode: number = err.code;
-        if (errCode) {
-          console.error(`Failed to obtain the top window. Cause code: ${err.code}, message: ${err.message}`);
-          return;
-        }
-        window.getUIContext().getPromptAction().showToast(showToastOptions)
-        res.resolve({} as ShowToastSuccess)
-      })
+      const window = getCurrentWindow() as window.Window;
+      window.getUIContext().getPromptAction().showToast(showToastOptions)
+      res.resolve({} as ShowToastSuccess)
     } catch (error) {
       let message = (error as BusinessError).message
       res.reject(message)

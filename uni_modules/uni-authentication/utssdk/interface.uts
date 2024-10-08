@@ -3,19 +3,94 @@ export interface Uni {
   /**
    * 开始 SOTER 生物认证
    *
-   * 文档: [http://uniapp.dcloud.io/api/system/authentication?id=startsoterauthentication](http://uniapp.dcloud.io/api/system/authentication?id=startsoterauthentication)
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/authentication.html#startsoterauthentication
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/authentication.html#startsoterauthentication
+   *
+   * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.31",
+   *      "unixVer": "x"
+   *    }
+	 * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+	 * }
    */
   startSoterAuthentication: StartSoterAuthentication;
   /**
    * 获取本机支持的 SOTER 生物认证方式
    *
-   * 文档: [http://uniapp.dcloud.io/api/system/authentication?id=checkissupportsoterauthentication](http://uniapp.dcloud.io/api/system/authentication?id=checkissupportsoterauthentication)
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/authentication.html#checkissupportsoterauthentication
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/authentication.html#checkissupportsoterauthentication
+   *
+   * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.31",
+   *      "unixVer": "x"
+   *    }
+	 * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+	 * }
    */
   checkIsSupportSoterAuthentication: CheckIsSupportSoterAuthentication;
   /**
    * 获取设备内是否录入如指纹等生物信息
    *
-   * 文档: [http://uniapp.dcloud.io/api/system/authentication?id=checkissoterenrolledindevice](http://uniapp.dcloud.io/api/system/authentication?id=checkissoterenrolledindevice)
+   * @tutorial https://uniapp.dcloud.net.cn/api/system/authentication.html#checkissoterenrolledindevice
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/authentication.html#checkissoterenrolledindevice
+   *
+   * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "x"
+	 * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.31",
+   *      "unixVer": "x"
+   *    }
+	 * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+	 * }
    */
   checkIsSoterEnrolledInDevice: CheckIsSoterEnrolledInDevice;
 }

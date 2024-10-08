@@ -121,10 +121,14 @@ export const chooseFile: ChooseFile = defineAsyncApi<ChooseFileOptions, ChooseFi
         documentPicker.select(documentSelectOptions)
           .then((documentSelectResult: Array<string>) => {
             let tempFiles = documentSelectResult.map((url): IFile => getFile(url))
-            executor.resolve({
-              tempFilePaths: documentSelectResult,
-              tempFiles
-            } as ChooseFileSuccess)
+            if (tempFiles.length !== 0) {
+              executor.resolve({
+                tempFilePaths: documentSelectResult,
+                tempFiles
+              } as ChooseFileSuccess)
+            } else {
+              executor.reject('cancel')
+            }
           })
           .catch((err: BusinessError) => {
             executor.reject(err.message, { errCode: err.code } as ApiError)

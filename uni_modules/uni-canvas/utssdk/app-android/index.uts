@@ -53,7 +53,7 @@ class CanvasContextImpl implements CanvasContext {
 
 export const createCanvasContextAsync =
     function (options: CreateCanvasContextAsyncOptions) {
-        const currentPage: ComponentPublicInstance = options.component ?? (getCurrentPages()[getCurrentPages().length - 1])
+      const currentPage: ComponentPublicInstance = options.component ?? (getCurrentPages()[getCurrentPages().length - 1]).vm as ComponentPublicInstance
         if (currentPage != null) {
             const element = currentPage.$el?.querySelector('#' + options.id)
             if (element != null) {

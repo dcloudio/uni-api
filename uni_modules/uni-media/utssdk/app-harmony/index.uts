@@ -20,8 +20,16 @@ import {
 } from './media/saveMedia.uts'
 import { compressImage } from './media/compressImage.uts';
 import { chooseFile } from './media/chooseFile.uts';
+import { chooseMedia } from './media/chooseMedia.uts';
+import { compressVideo } from './media/compressVideo.uts';
 
 export {
+    CompressVideo,
+    CompressVideoOptions,
+    CompressVideoSuccess,
+    ChooseMediaOptions,
+    ChooseMediaSuccess,
+    ChooseMedia,
     ChooseFileOptions,
     ChooseFileSuccess,
     ChooseFile,
@@ -61,5 +69,7 @@ export {
     saveImageToPhotosAlbum,
     saveVideoToPhotosAlbum,
     compressImage,
-    chooseFile
+    chooseFile,
+    chooseMedia,
+    compressVideo
 }

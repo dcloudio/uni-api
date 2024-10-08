@@ -38,10 +38,12 @@ export {
  * - [atomicService（融合场景化API）](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/scenario-fusion-atomicservice-V5)
  */
 
-function parseDeviceType(deviceType: string): 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'undefined' | 'car' | 'vr' | 'appliance' {
+function parseDeviceType(deviceType: string): 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'unknown' | 'car' | 'vr' | 'appliance' {
     switch (deviceType) {
         case 'phone':
             return 'phone'
+        case 'wearable':
+            return 'watch'
         case 'tablet':
             return 'pad'
         case '2in1':
@@ -50,10 +52,10 @@ function parseDeviceType(deviceType: string): 'phone' | 'pad' | 'tv' | 'watch' |
             return 'tv'
         case 'car':
             return 'car'
-        case 'wearable':
-            return 'watch'
+        case 'smartVision':
+            return 'vr'
         default:
-            return 'undefined'
+            return 'unknown'
     }
 }
 
@@ -103,7 +105,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         uniPlatform: 'app',
 
         // deviceInfo
-        deviceBrand: deviceInfo.brand,
+        deviceBrand: deviceInfo.brand.toLowerCase(),
         deviceId: getDeviceId(),
         deviceModel: deviceInfo.productModel,
         deviceOrientation: 'portrait', // 暂未找到同步获取方法，可能需要监听窗口变化
@@ -111,7 +113,7 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         deviceType: parseDeviceType(deviceInfo.deviceType),
         osLanguage: I18n.System.getSystemLanguage(),
         osTheme: UTSHarmony.getOsTheme() as string,
-        osVersion: deviceInfo.buildVersion + '',
+        osVersion: deviceInfo.majorVersion + '.' + deviceInfo.seniorVersion + '.' + deviceInfo.featureVersion + '.' + deviceInfo.buildVersion,
         osName: 'harmonyos',
         romName: deviceInfo.distributionOSName, // TODO 应为此值，但实际上是空字符串，待确认
         romVersion: deviceInfo.distributionOSVersion,

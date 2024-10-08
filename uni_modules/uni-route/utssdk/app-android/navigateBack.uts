@@ -4,6 +4,7 @@ import {
     NAVIGATE_BACK,
     ON_LAST_PAGE_BACK_PRESS,
     ON_SHOW,
+    Page,
     invokeAfterRouteHooks,
     invokeBeforeRouteHooks,
     invokeCurrentAppHook,
@@ -40,12 +41,12 @@ export const _navigateBack = (
         return
     }
     const currentPage = pages[pages.length - 1]
-    let onBackPressRes = invokePageOnBackPress(currentPage, from)
+    let onBackPressRes = invokePageOnBackPress(currentPage.vm!, from)
     if (onBackPressRes !== true) {
-        const dialogPages = currentPage.$getDialogPages()
+        const dialogPages = currentPage.getDialogPages()
         if (dialogPages.length > 0) {
             const dialogPage = dialogPages[dialogPages.length - 1]
-            onBackPressRes = invokePageOnBackPress(dialogPage.$vm, from)
+            onBackPressRes = invokePageOnBackPress(dialogPage.$vm as Page, from)
         }
     }
     if (onBackPressRes == true) {
@@ -55,9 +56,9 @@ export const _navigateBack = (
         return
     }
     invokeBeforeRouteHooks(NAVIGATE_BACK)
-    if (isDirectPage(currentPage)) {
+    if (isDirectPage(currentPage.vm!)) {
         reLaunchEntryPage()
-    } else if (isTabPage(currentPage) || pages.length == 1) {
+    } else if (isTabPage(currentPage.vm!) || pages.length == 1) {
         quit()
     } else {
         if (options?.delta !== null && options?.delta! > 1) {
@@ -70,12 +71,12 @@ export const _navigateBack = (
             )
             deltaPages.reverse()
             deltaPages.forEach(deltaPage => {
-                deltaPage.$close(
+                deltaPage.vm!.$close(
                     new Map<string, any | null>([[ANIMATION_TYPE, 'none']]),
                 )
             })
         }
-        currentPage.$close(
+        currentPage.vm!.$close(
             new Map<string, any | null>([
                 [
                     ANIMATION_TYPE,

@@ -765,6 +765,36 @@ export type GetAppBaseInfoResult = {
    * }
    */
   appTheme?: 'light' | 'dark' | 'auto' | null,
+
+  /**
+   * 当前应用分发的渠道
+   *
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.28"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.31"
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+   * 	},
+    *   "web": {
+    *      "uniVer": "x",
+    *      "unixVer": "x"
+    *   }
+   * }
+   */
+  channel?: string,
 }
 
 /**

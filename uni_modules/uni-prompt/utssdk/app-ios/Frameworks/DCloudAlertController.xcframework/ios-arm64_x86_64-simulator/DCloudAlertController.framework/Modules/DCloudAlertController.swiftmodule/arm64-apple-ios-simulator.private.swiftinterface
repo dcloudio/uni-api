@@ -9,15 +9,17 @@ import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+public let ActionSheetNotificationNameViewWillRotate: Swift.String
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class DCActionSheetController : UIKit.UIViewController {
-  @_Concurrency.MainActor(unsafe) public init(noticeTitle: Swift.String)
+  @_Concurrency.MainActor(unsafe) public init(noticeTitle: Swift.String, supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask? = nil)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func loadView()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillTransition(to size: CoreFoundation.CGSize, with coordinator: any UIKit.UIViewControllerTransitionCoordinator)
+  @objc deinit
   @_Concurrency.MainActor(unsafe) public func addAction(_ action: DCloudAlertController.DCAlertAction)
   @_Concurrency.MainActor(unsafe) public func addAction(_ title: Swift.String, _ style: DCloudAlertController.DCAlertActionStyle, _ handler: @escaping (_ action: DCloudAlertController.DCAlertAction) -> Swift.Void) -> DCloudAlertController.DCAlertAction
   @_Concurrency.MainActor(unsafe) public func show()
-  @objc deinit
 }
 extension DCloudAlertController.DCActionSheetController : UIKit.UITableViewDelegate, UIKit.UITableViewDataSource {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int

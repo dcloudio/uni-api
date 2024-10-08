@@ -1,5 +1,6 @@
 import http from '@ohos.net.http'
 import fs from '@ohos.file.fs'
+import harmonyUrl from '@ohos.url'
 import {
     getEnv,
     Emitter,
@@ -21,8 +22,9 @@ import {
     lookupExt
 } from './mime.uts'
 import {
+    getClientCertificate,
     parseUrl,
-    UniNetworkMP
+    IUniNetworkMP
 } from './utils.uts'
 import {
     getCookieSync,
@@ -51,12 +53,13 @@ function getPossibleExt(contentType: string, contentDisposition: string, url: st
     if (contentDispositionExt) {
         return contentDispositionExt
     }
-    const contentTypeExt = lookupExt(contentType)
-    const urlExt = url.split('?')[0].split('/').pop()?.split('.')[1] || ''
-    if (contentTypeExt && contentTypeExt.length > 0) {
-        return contentTypeExt.includes(urlExt.toLowerCase()) ? urlExt : contentTypeExt[0]
+    const urlPath = harmonyUrl.URL.parseURL(url).pathname
+    const urlExt = urlPath.split('/').pop()?.split('.')[1] || ''
+    if (urlExt) {
+        return urlExt
     }
-    return urlExt || ''
+    const contentTypeExt = lookupExt(contentType)
+    return contentTypeExt || ''
 }
 
 /**
@@ -118,7 +121,11 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
         }
 
         const httpRequest = http.createHttp()
-        const mp = getCurrentMP() as UniNetworkMP
+        const mp = getCurrentMP()! as IUniNetworkMP
+        const userAgent = mp.userAgent.fullUserAgent
+        if (userAgent && !header!['User-Agent'] && !header!['user-agent']) {
+            header!['User-Agent'] = userAgent
+        }
         const emitter = new Emitter() as IUniDownloadFileEmitter
         const downloadTask: IDownloadTask = {
             abort() {
@@ -192,7 +199,6 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
         httpRequest.on('dataReceive', (data) => {
             if (!stream) {
                 const ext = getPossibleExt(responseContentType, responseContentDisposition, url)
-                // TODO 鸿蒙未暴露文件后缀与contentType的映射关系，目前自行处理
                 tempFilePath = filePath ? filePath.replace(/^file:\/\//, '') : downloadPath + '/' + getDownloadFileName(ext)
                 stream = fs.createStreamSync(tempFilePath, 'w+')
             }
@@ -205,9 +211,11 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
                 method: http.RequestMethod.GET,
                 connectTimeout: timeout ? timeout : undefined, // 不支持仅设置一个timeout
                 readTimeout: timeout ? timeout : undefined,
+                clientCert: getClientCertificate(url)
             } as http.HttpRequestOptions,
             (err, statusCode) => {
                 // 此回调先于dataEnd回调执行
+                let finishPromise: Promise<void> = Promise.resolve()
                 if (err) {
                     /**
                      * TODO abort后此处收到如下错误，待确认是否直接将此错误码转为abort错误
@@ -215,19 +223,23 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
                      */
                     exec.reject(err.message)
                 } else {
-                    writePromise.then(() => {
-                        stream.flushSync()
-                        stream.closeSync()
+                    finishPromise = writePromise.then(async () => {
+                        await stream.flush()
+                        await stream.close()
                         exec.resolve({
                             tempFilePath: 'file://' + tempFilePath,
                             statusCode,
                         } as UniDownloadFileSuccess)
+                    }).catch((err: Error) => {
+                        exec.reject(err.message)
                     })
                 }
-                downloadTask.offHeadersReceived()
-                downloadTask.offProgressUpdate()
-                httpRequest.destroy() // 调用完毕后必须调用destroy方法
-                mp.off('beforeClose', destroy)
+                finishPromise.then(() => {
+                    downloadTask.offHeadersReceived()
+                    downloadTask.offProgressUpdate()
+                    httpRequest.destroy() // 调用完毕后必须调用destroy方法
+                    mp.off('beforeClose', destroy)
+                })
             }
         )
         return new DownloadTask(downloadTask)

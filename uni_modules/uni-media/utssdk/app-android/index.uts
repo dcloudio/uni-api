@@ -11,13 +11,14 @@ import {
 	SaveVideoToPhotosAlbum, SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccess,
 	CompressVideo, CompressVideoOptions,
 } from "../interface.uts"
+export { ChooseFileSuccess, ChooseFileOptions, ChooseMediaFileType, ChooseMediaTempFile, ChooseMediaSuccess, ChooseMediaOptions, ChooseFileFail, ChooseFileComplete, ChooseMediaFail } from '../interface.uts';
 import {
 	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
 	MediaErrorImpl
 } from "../unierror.uts"
 import { chooseMediaImage, chooseMediaVideo } from "./utils/ChooseMediaUtils.uts"
 import { transcodeImage, transcodeVideo } from './utils/CompressUtils.uts'
-import { getVideoMetadata } from "./utils/MediaUtils.uts"
+import { getVideoMetadata, copyFile } from "./utils/MediaUtils.uts"
 import Intent from 'android.content.Intent';
 import Manifest from 'android.Manifest';
 import Build from 'android.os.Build';
@@ -258,10 +259,16 @@ class ImageInfoTarget extends CustomTarget<File> {
 
 function getExif(src : string, options : GetImageInfoOptions, bitmapOption : BitmapFactory.Options | null) {
 	var exifInfo : ExifInterface | null = null
+	if(bitmapOption == null) {
+		bitmapOption = new BitmapFactory.Options();
+		bitmapOption.inJustDecodeBounds = true;
+	}
 	if (src.startsWith(ASSETS_PATH)) {
 		exifInfo = new ExifInterface(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")));
+		BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")), null, bitmapOption)
 	} else if (new File(src).exists()) {
 		exifInfo = new ExifInterface(src)
+		BitmapFactory.decodeFile(src, bitmapOption)
 	} else {
 		let imageInfoCallback = new MediaErrorImpl(1101003, UniError_GetImageInfo);
 		options.fail?.(imageInfoCallback)
@@ -269,11 +276,6 @@ function getExif(src : string, options : GetImageInfoOptions, bitmapOption : Bit
 		return
 	}
 	try {
-		if (bitmapOption == null) {
-			bitmapOption = new BitmapFactory.Options();
-			bitmapOption.inJustDecodeBounds = true;
-			BitmapFactory.decodeFile(src, bitmapOption)
-		}
 		let width = bitmapOption!.outWidth
 		let height = bitmapOption!.outHeight
 		let mimeType : string = bitmapOption!.outMimeType
@@ -326,53 +328,6 @@ function getExif(src : string, options : GetImageInfoOptions, bitmapOption : Bit
 	}
 }
 
-
-function copyFile(fromFilePath : string, toFilePath : string) : boolean {
-	var fis : InputStream | null = null
-	try {
-		if (fromFilePath.startsWith(ASSETS_PATH)) {
-			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
-		} else {
-			let fromFile = new File(fromFilePath)
-			if (!fromFile.exists()) {
-				return false;
-			}
-			if (!fromFile.isFile()) {
-				return false
-			}
-			if (!fromFile.canRead()) {
-				return false;
-			}
-			fis = new FileInputStream(fromFile);
-		}
-		if (fis == null) {
-			return false
-		}
-	} catch (e) {
-		return false;
-	}
-	let toFile = new File(toFilePath)
-	if (!toFile.getParentFile().exists()) {
-		toFile.getParentFile().mkdirs()
-	}
-	if (!toFile.exists()) {
-		toFile.createNewFile()
-	}
-	try {
-		let fos = new FileOutputStream(toFile)
-		let byteArrays = ByteArray(1024)
-		var c = fis!!.read(byteArrays)
-		while (c > 0) {
-			fos.write(byteArrays, 0, c)
-			c = fis!!.read(byteArrays)
-		}
-		fis!!.close()
-		fos.close()
-		return true
-	} catch (e) {
-		return false;
-	}
-}
 export const saveImageToPhotosAlbum : SaveImageToPhotosAlbum = function (options : SaveImageToPhotosAlbumOptions) {
 	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 		let requestPermissionList : Array<string> = [Manifest.permission.WRITE_EXTERNAL_STORAGE]

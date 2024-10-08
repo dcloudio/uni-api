@@ -179,7 +179,7 @@ export type Icon =
 /**
  * position值说明。纯文本轻提示显示位置，填写有效值后只有 title 属性生效，且不支持通过 uni.hideToast 隐藏。
  */
-export type Position =
+export type ShowToastPosition =
 /**
  * 居上显示
  * @uniPlatform {
@@ -386,7 +386,7 @@ export type ShowToastOptions = {
    *    }
    * }
    */
-  position?: Position | null,
+  position?: ShowToastPosition | null,
   /**
    * 接口调用成功的回调函数
    * @uniPlatform {

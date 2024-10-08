@@ -19,12 +19,14 @@ export interface MediaFile {
     thumbTempFilePath?: string
 }
 
-export interface ChooseMediaOptions {
+export interface _ChooseMediaOptions {
     mimeType:
     | photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE
     | photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.IMAGE_VIDEO_TYPE
     count?: number
     sourceType?: ('album' | 'camera')[]
+    isOriginalSupported?: boolean
 }
 
 export interface chooseMediaSuccessCallbackResult {
@@ -155,12 +157,13 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
  */
 
 export async function _chooseMedia(
-    options: ChooseMediaOptions
+    options: _ChooseMediaOptions
 ): Promise<chooseMediaSuccessCallbackResult> {
     const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions()
     const mimeType = options.mimeType
     photoSelectOptions.MIMEType = mimeType
     photoSelectOptions.maxSelectNumber = options.count || 9
+    photoSelectOptions.isOriginalSupported = options.isOriginalSupported
     // 仅支持移除相机选项
     photoSelectOptions.isPhotoTakingSupported = !(options.sourceType && !options.sourceType.includes('camera'))
     const photoPicker = new photoAccessHelper.PhotoViewPicker()

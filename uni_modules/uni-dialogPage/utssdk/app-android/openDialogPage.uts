@@ -3,14 +3,13 @@ import {
     ANIMATION_TYPE,
     NAVIGATE_TO,
     navigateDialogPage,
-    UniDialogPage,
-    Emitter,
 } from '@dcloudio/uni-runtime'
 import { normalizeRouteOptions } from '../protocols.uts'
 import {
     DEFAULT_ANIMATION_DURATION,
     DEFAULT_ANIMATION_IN,
 } from '../constants.uts'
+
 import { OpenDialogPageOptions } from '../interface.uts'
 import { OpenDialogPageSuccessImpl, OpenDialogPageFailImpl } from '../unierror.uts'
 
@@ -60,7 +59,6 @@ export const openDialogPage = (options: OpenDialogPageOptions): UniDialogPage | 
         new Map([
             ['disableEscBack', options.disableEscBack],
             ['parentPage', options.parentPage],
-            ['emitter', new Emitter()]
         ]),
     )
     options.success?.(new OpenDialogPageSuccessImpl())

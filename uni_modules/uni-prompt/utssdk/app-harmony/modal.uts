@@ -1,6 +1,5 @@
-import { getAbilityContext } from '@dcloudio/uni-runtime';
+import { getCurrentWindow } from '@dcloudio/uni-runtime';
 import { window } from '@kit.ArkUI';
-import { BusinessError } from '@ohos.base';
 import { ShowModal, ShowModalSuccess, ShowModalOptions } from '../interface.uts';
 import { ShowModalApiOptions, ShowModalProtocol, API_SHOW_MODAL } from '../protocol.uts';
 
@@ -27,26 +26,19 @@ export const showModal: ShowModal = defineAsyncApi<ShowModalOptions, ShowModalSu
         buttons.push(cancelButton);
       }
       buttons.push(confirmButton);
-
-      window.getLastWindow(getAbilityContext()!, (err: BusinessError, window: window.Window) => {
-        const errCode: number = err.code;
-        if (errCode) {
-          console.error(`Failed to obtain the top window. Cause code: ${err.code}, message: ${err.message}`);
-          return;
-        }
-        window.getUIContext().showAlertDialog(
-          {
-            title: args.title ?? '',
-            message: args.content ?? '',
-            autoCancel: false,
-            alignment: DialogAlignment.Center,
-            buttons,
-            cancel: () => {
-              resolve({ 'cancel': true } as ShowModalSuccess)
-            }
-          } as AlertDialogParamWithOptions
-        )
-      })
+      const window = getCurrentWindow() as window.Window;
+      window.getUIContext().showAlertDialog(
+        {
+          title: args.title ?? '',
+          message: args.content ?? '',
+          autoCancel: false,
+          alignment: DialogAlignment.Center,
+          buttons,
+          cancel: () => {
+            resolve({ 'cancel': true } as ShowModalSuccess)
+          }
+        } as AlertDialogParamWithOptions
+      )
     });
     if (modalRes.confirm) {
       modalRes.cancel = false

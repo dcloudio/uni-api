@@ -7,6 +7,10 @@ import {
 import {
     downloadFile
 } from './network/downloadFile.uts'
+import {
+    configMTLS
+} from './network/configMTLS.uts'
+
 
 export {
     RequestTask,
@@ -22,11 +26,15 @@ export {
     DownloadFileOptions,
     DownloadFileSuccess,
     OnProgressDownloadResult,
-    DownloadFile
+    DownloadFile,
+    ConfigMTLSOptions,
+    ConfigMTLSSuccess,
+    ConfigMTLS
 } from '../interface.uts'
 
 export {
     request,
     uploadFile,
-    downloadFile
+    downloadFile,
+    configMTLS
 }

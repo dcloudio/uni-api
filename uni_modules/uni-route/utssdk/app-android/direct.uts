@@ -1,6 +1,6 @@
 import { Page, __uniConfig, getRealPath, parseUrl } from '@dcloudio/uni-runtime'
-import { ReLaunchOptions, reLaunch } from '../interface.uts'
-
+import { ReLaunchOptions } from '../interface.uts'
+import { reLaunch } from './reLaunch.uts'
 // 是否处于直达页面
 export function isDirectPage(page: Page): boolean {
     return (

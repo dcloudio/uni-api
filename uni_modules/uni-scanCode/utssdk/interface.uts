@@ -3,7 +3,7 @@
  */
 export type ScanCodeSuccess = {
     result: string,
-    scanType: ScanCodeSupportedTypes
+    scanType: string
 }
 
 export type ScanCodeFail = {}

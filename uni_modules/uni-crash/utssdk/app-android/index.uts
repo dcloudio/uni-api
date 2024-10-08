@@ -1,0 +1,192 @@
+import type { AppCrashInfo, DeleteAppCrashInfo, GetAppCrashInfo, OffAppCrash, OnAppCrash, OnAppCrashCallback } from '../interface';
+import UncaughtExceptionHandler from 'java.lang.Thread.UncaughtExceptionHandler';
+import File from 'java.io.File';
+import FileOutputStream from 'java.io.FileOutputStream';
+import StringWriter from 'java.io.StringWriter';
+import PrintWriter from 'java.io.PrintWriter';
+import MessageDigest from 'java.security.MessageDigest';
+import Process from 'android.os.Process';
+import RelativeLayout from 'android.widget.RelativeLayout';
+import ViewGroup from 'android.view.ViewGroup';
+
+const javaCrashPath = new File(UTSAndroid.getUniActivity()!.externalCacheDir, "uni-crash/uts")
+const cCrashPath = new File(UTSAndroid.getUniActivity()!.externalCacheDir, "uni-crash/c")
+
+var appCrashOnCallbacks = new Array<OnAppCrashCallback>()
+var crashWatch : AppCrashWatch | null = null
+
+/**
+ * 如果没有开通uni统计，则所有的监听都不生效，get返回空数组
+ */
+export const __onAppCrash : OnAppCrash = function (callback : OnAppCrashCallback) {
+	if (!isOpenStatic()) {
+		return
+	}
+	if (crashWatch == null) {
+		crashWatch = new AppCrashWatch()
+		crashWatch!.watch()
+	}
+	// 保存监听状态
+	appCrashOnCallbacks.add(callback)
+}
+
+// 通过在子线程中添加view制造崩溃
+class innerRunnable implements Runnable {
+	override run() {
+		var activityRootView = UTSAndroid.getUniActivity()!.getWindow().getDecorView().findViewById(android.R.id.content) as ViewGroup;
+		activityRootView.addView(new RelativeLayout(UTSAndroid.getUniActivity()!))
+	}
+}
+
+export function __creatAppCrash() {
+	new Thread(new innerRunnable()).start()
+}
+
+export const __offAppCrash : OffAppCrash = function () {
+	appCrashOnCallbacks = new Array<OnAppCrashCallback>()
+}
+
+export const __getAppCrashInfo : GetAppCrashInfo = function () : Array<AppCrashInfo> {
+	var arrays : Array<AppCrashInfo> = new Array<AppCrashInfo>()
+	if (!isOpenStatic()) {
+		return arrays
+	}
+	if (javaCrashPath.exists()) {
+		var crashList = javaCrashPath.listFiles()
+		crashList.forEach((value : File) => {
+			var key = getMD5(value.getAbsolutePath())
+			uni.setStorage({
+				"key": key,
+				"data": value.getAbsolutePath()
+			})
+			var info : AppCrashInfo = {
+				id: key,
+				file: value.getAbsolutePath(),
+				time: value.lastModified().toString()
+			}
+			arrays.add(info)
+		})
+	}
+	if (cCrashPath.exists()) {
+		var crashList = cCrashPath.listFiles()
+		crashList.forEach((value : File) => {
+			var key = getMD5(value.getAbsolutePath())
+			uni.setStorage({
+				"key": key,
+				"data": value.getAbsolutePath()
+			})
+			var info : AppCrashInfo = {
+				id: key,
+				file: value.getAbsolutePath(),
+				time: value.lastModified().toString()
+			}
+			arrays.add(info)
+		})
+	}
+	return arrays
+}
+
+export const __deleteAppCrashInfo : DeleteAppCrashInfo = function (id : string | null) {
+	if (!isOpenStatic())
+		return
+	if (id != null) {
+		var fileName = uni.getStorageSync(id);
+		if (fileName != null) {
+			new File(fileName.toString()).delete()
+		}
+	} else {
+		if (javaCrashPath.exists()) {
+			javaCrashPath.listFiles().forEach((value : File) => {
+				value.delete()
+			})
+		}
+		if (cCrashPath.exists()) {
+			cCrashPath.listFiles().forEach((value : File) => {
+				value.delete()
+			})
+		}
+	}
+}
+
+function getMD5(input : string) : string {
+	try {
+		var digest = MessageDigest.getInstance("MD5")
+		digest.update(input.toByteArray())
+		var messageDigest = digest.digest()
+		var hex : string = ""
+		messageDigest.forEach((value : Byte) => {
+			var h = Integer.toHexString(0xFF & value.toInt())
+			while (h.length < 2) { h = "0" + h }
+			hex = hex + h
+		})
+		return hex
+	} catch (e) {
+	}
+	return ""
+}
+
+function isOpenStatic() : boolean {
+	var appid = UTSAndroid.getAppId()
+	if (appid.startsWith("__UNI__")) {
+		appid = appid.replace("__UNI__", "UNI")
+	}
+	try {
+		var config = Class.forName("uni." + appid + ".UniAppConfig")
+		var uniStatistics = (config.getSuperclass().getDeclaredField("uniStatistics"))
+		if (uniStatistics != null) {
+			uniStatistics!.isAccessible = true
+			var enable = (uniStatistics!.get(config.getConstructor().newInstance()) as UTSJSONObject).get("enable")
+			return enable != null && enable!.toString() == "true"
+		}
+	} catch (e) {
+	}
+	return false
+}
+
+class AppCrashWatch implements UncaughtExceptionHandler {
+	override uncaughtException(param0 : Thread, param1 : Throwable) {
+		if (!javaCrashPath.exists()) {
+			javaCrashPath.mkdirs()
+		}
+		var name = System.currentTimeMillis() + ""
+		var crashFile = new File(javaCrashPath, name)
+		try {
+			var fos = new FileOutputStream(crashFile)
+			fos.write(this.getStackTrace(param1).toByteArray())
+			fos.close()
+			appCrashOnCallbacks.forEach((value : OnAppCrashCallback) => {
+				value()
+			})
+			Thread.sleep(500)
+		} catch (e) {
+		}
+		Process.killProcess(Process.myPid())
+	}
+
+	private getStackTrace(e : Throwable) : string {
+		try {
+			var sw = new StringWriter()
+			var pw = new PrintWriter(sw)
+			e.printStackTrace(pw)
+			var cause = e.cause
+			while (cause != null) {
+				cause.printStackTrace(pw)
+				cause = cause.cause
+			}
+			pw.flush()
+			sw.flush()
+			return sw.toString()
+		} catch (e) {
+
+		}
+		return ""
+	}
+
+	watch() {
+		Thread.setDefaultUncaughtExceptionHandler(this);
+	}
+
+	isWatched() : boolean {
+		return Thread.getDefaultUncaughtExceptionHandler() == this
+	}
+}

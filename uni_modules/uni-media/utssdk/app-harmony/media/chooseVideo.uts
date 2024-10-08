@@ -1,8 +1,8 @@
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import { window } from '@kit.ArkUI';
 import { promptAction } from '@kit.ArkUI';
-import { getAbilityContext } from '@dcloudio/uni-runtime'
-import { _chooseMedia, ChooseMediaOptions } from './media.uts'
+import { getCurrentWindow } from '@dcloudio/uni-runtime'
+import { _chooseMedia, _ChooseMediaOptions } from './media.uts'
 import {
     ChooseVideoOptions,
     ChooseVideoSuccess,
@@ -22,7 +22,8 @@ const _chooseVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoS
     _chooseMedia({
         mimeType: photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE,
         sourceType: ["album"],
-    } as ChooseMediaOptions)
+        isOriginalSupported: options.compressed === false,
+    } as _ChooseMediaOptions)
         .then((chooseMediaRes) => {
             const file = chooseMediaRes.tempFiles[0]
             if (!file) {
@@ -72,9 +73,9 @@ export const chooseVideo: ChooseVideo =
             } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
                 _chooseVideo(options, res)
             } else {
-                const lastWindow = await window.getLastWindow(getAbilityContext()!)
+                const lastWindow = getCurrentWindow() as window.Window
                 const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
-                const { index } = await UIContextPromptAction.showActionMenu({
+                UIContextPromptAction.showActionMenu({
                     buttons: [
                         {
                             text: '拍摄',
@@ -85,13 +86,17 @@ export const chooseVideo: ChooseVideo =
                             color: '#000000'
                         }
                     ],
-                } as promptAction.ActionMenuOptions)
-
-                if (index === 0) {
-                    _takeVideo(options, res)
-                } else if (index === 1) {
-                    _chooseVideo(options, res)
-                }
+                } as promptAction.ActionMenuOptions, (err, { index }) => {
+                    if (err) {
+                        res.reject('cancel')
+                    } else {
+                        if (index === 0) {
+                            _takeVideo(options, res)
+                        } else if (index === 1) {
+                            _chooseVideo(options, res)
+                        }
+                    }
+                })
             }
         },
         ChooseVideoApiProtocol,

@@ -48,7 +48,7 @@
         },
         "dependencies": [
             "app-android:framework",
-            "app-android:uni-canvas"
+            "app-android:uni-canvas-component"
         ],
         "platforms": {
             "cloud": {

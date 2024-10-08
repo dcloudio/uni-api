@@ -1,0 +1,73 @@
+import { UIApplication } from "UIKit";
+import { UTSiOSHookProxy, UTSCallback } from "DCloudUniappRuntime";
+import { AppCrashInfo, OnAppCrashCallback } from '../interface.uts'
+
+@UTSJS.keepAlive
+export function __onAppCrash(callback : OnAppCrashCallback) : void {
+	CrashManager.onAppCrashCallback(callback)
+}
+
+export function __offAppCrash() : void {
+	UniCrashManager.offAppCrash = true
+}
+
+export function __getAppCrashInfo() : Array<Map<string, any>> | null {
+	return CrashManager.getCrashInfo()
+}
+
+export function __deleteAppCrashInfo(id : String) : void {
+	CrashManager.deleteCrashInfo(id)
+}
+
+export function __creatAppCrash() : void {
+	UniCrashManager.creatAppCrash()
+}
+
+export class CrashManagerHookProxy implements UTSiOSHookProxy {
+	// 应用正常启动时 (不包括已在后台转到前台的情况)的回调函数。
+	applicationDidFinishLaunchingWithOptions(application : UIApplication | null, launchOptions : Map<UIApplication.LaunchOptionsKey, any> | null = null) : boolean {
+		CrashManager.initCrash()
+		return false
+	}
+}
+
+class CrashManager {
+	@UTSiOS.keyword("fileprivate")
+	static initCrash() {
+		UniCrashManager.initCrash()
+	}
+	
+	@UTSiOS.keyword("fileprivate")
+	static onAppCrashCallback(callback : OnAppCrashCallback) : void {
+		UniCrashManager.offAppCrash = true
+		
+		UniCrashManager.onCrash = callback
+	}
+	
+	@UTSiOS.keyword("fileprivate")
+	static getCrashInfo() : Array<Map<string, any>> | null {
+		let array = UniCrashManager.getCrashReports()
+		if (array != null && array!.length > 0) {
+			let tempArray : Array<Map<string, any>> = new Array()
+			
+			array!.forEach(function (e : UniAppCrashInfo) {
+				let crashInfo : Map<string, any> = new Map()
+			
+				crashInfo.set("id", e.id)
+				crashInfo.set("file", e.file)
+				crashInfo.set("time", e.time)
+			
+				tempArray.push(crashInfo)
+			})
+			
+			return tempArray
+		} else {
+			return null
+		}
+	}
+	
+	@UTSiOS.keyword("fileprivate")
+	static deleteCrashInfo(id : String) {
+		const isSuccess = UniCrashManager.deleteCrashReport(reportID = id)
+	}
+}

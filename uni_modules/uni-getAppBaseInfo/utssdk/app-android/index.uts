@@ -41,6 +41,7 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"packageName",
 			"signature",
 			"appTheme",
+			"channel"
 		];
 		filter = defaultFilter;
 	}
@@ -139,6 +140,10 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	
 	if (filterArray.indexOf("appTheme") != -1) {
 		result.appTheme = UTSAndroid.getAppTheme();
+	}
+	
+	if (filterArray.indexOf("channel") != -1) {
+		result.channel = AppBaseInfoDeviceUtil.getChannel(activity);
 	}
 
 	return result;

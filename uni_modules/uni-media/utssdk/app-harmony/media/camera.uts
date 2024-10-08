@@ -8,7 +8,7 @@ import { MediaOrientation } from '../../interface.uts'
 
 export type CameraPosition = 'back' | 'front'
 
-function getHMCameraPosition(cameraType: CameraPosition) {
+export function getHMCameraPosition(cameraType: CameraPosition) {
   switch (cameraType) {
     case 'back':
       return camera.CameraPosition.CAMERA_POSITION_BACK

@@ -1,11 +1,10 @@
 type $OnCallback = Function
-export type $On = (eventName: string, callback: $OnCallback) => void
+export type $On = (eventName: string, callback: $OnCallback) => number
 
 type $OnceCallback = Function
-export type $Once = (eventName: string, callback: $OnceCallback) => void
+export type $Once = (eventName: string, callback: $OnceCallback) => number
 
-type $OffCallback = Function
-export type $Off = (eventName: string, callback?: $OffCallback | null) => void
+export type $Off = (eventName: string, callback?: any | null) => void
 
 export type $Emit = (eventName: string, args: any | null) => void
 
@@ -82,7 +81,7 @@ export interface Uni {
      *  }
      * }
      */
-    $on(eventName: string, callback: $OnCallback): void
+    $on(eventName: string, callback: $OnCallback): number
     /**
      * 移除自定义事件监听器。如果提供了事件名和回调，则只移除这个回调的监听器。
      * 4.13+ 开始支持第二个参数为可选，如果仅提供事件名，则移除该事件的所有监听器。
@@ -155,7 +154,7 @@ export interface Uni {
      *  }
      * }
      */
-    $off(eventName: string, callback?: $OffCallback | null): void
+    $off(eventName: string, callback?: any | null): void
     /**
      * 监听一个自定义事件。事件只触发一次，在第一次触发之后移除事件监听器。
      *
@@ -228,7 +227,7 @@ export interface Uni {
      *  }
      * }
      */
-    $once(eventName: string, callback: $OnceCallback): void
+    $once(eventName: string, callback: $OnceCallback): number
     /**
      * 触发自定义事件，附加的参数会传递给事件监听器。
      *

@@ -1,54 +1,46 @@
-import { getAbilityContext } from '@dcloudio/uni-runtime';
+import { getCurrentWindow } from '@dcloudio/uni-runtime';
 import { window } from '@kit.ArkUI';
-import { BusinessError } from '@ohos.base';
 import promptAction from '@ohos.promptAction';
 import { ShowActionSheet, ShowActionSheetOptions, ShowActionSheetSuccess } from '../interface.uts';
 import { ShowActionSheetApiOptions, ShowActionSheetProtocol, API_SHOW_ACTION_SHEET } from '../protocol.uts';
 
 export const showActionSheet: ShowActionSheet = defineAsyncApi<ShowActionSheetOptions, ShowActionSheetSuccess>(
-  API_SHOW_ACTION_SHEET,
-  async function (options: ShowActionSheetOptions, res: ApiExecutor<ShowActionSheetSuccess>) {
-    const actionItemList = options.itemList.filter(Boolean);
-    if (actionItemList.length === 0) {
-      return;
-    }
-    type ActionMenuButtons = [promptAction.Button, promptAction.Button?, promptAction.Button?, promptAction.Button?, promptAction.Button?, promptAction.Button?]
-    const actionMenuButtons: ActionMenuButtons = [
-      {
-        text: actionItemList[0],
-        color: options.itemColor!
-      }
-    ];
-
-    actionItemList.slice(1).forEach(item => {
-      actionMenuButtons.push({
-        text: item,
-        color: options.itemColor!
-      } as promptAction.Button);
-    })
-
-    window.getLastWindow(getAbilityContext()!, (err: BusinessError, window: window.Window) => {
-      const errCode: number = err.code;
-      if (errCode) {
-        console.error(`Failed to obtain the top window. Cause code: ${err.code}, message: ${err.message}`);
-        return;
-      }
-      window.getUIContext().getPromptAction().showActionMenu({
-        title: options.title,
-        buttons: actionMenuButtons,
-      } as promptAction.ActionMenuOptions)
-        .then(showACtionSheetRes => {
-          res.resolve({ tapIndex: showACtionSheetRes.index } as ShowActionSheetSuccess)
-        })
-        .catch((e: Error) => {
-          if (e.message === 'cancel') {
-            res.reject('cancel')
+    API_SHOW_ACTION_SHEET,
+    async function (options: ShowActionSheetOptions, res: ApiExecutor<ShowActionSheetSuccess>) {
+        const actionItemList = options.itemList.filter(Boolean);
+        if (actionItemList.length === 0) {
             return;
-          }
-          res.reject(e.message)
+        }
+        type ActionMenuButtons = [promptAction.Button, promptAction.Button?, promptAction.Button?, promptAction.Button?, promptAction.Button?, promptAction.Button?]
+        const actionMenuButtons: ActionMenuButtons = [
+            {
+                text: actionItemList[0],
+                color: options.itemColor!
+            }
+        ];
+
+        actionItemList.slice(1).forEach(item => {
+            actionMenuButtons.push({
+                text: item,
+                color: options.itemColor!
+            } as promptAction.Button);
         })
-    })
-  },
-  ShowActionSheetProtocol,
-  ShowActionSheetApiOptions
+        const window = getCurrentWindow() as window.Window;
+        window.getUIContext().getPromptAction().showActionMenu({
+            title: options.title,
+            buttons: actionMenuButtons,
+        } as promptAction.ActionMenuOptions)
+            .then(showACtionSheetRes => {
+                res.resolve({ tapIndex: showACtionSheetRes.index } as ShowActionSheetSuccess)
+            })
+            .catch((e: Error) => {
+                if (e.message === 'cancel') {
+                    res.reject('cancel')
+                    return;
+                }
+                res.reject(e.message)
+            })
+    },
+    ShowActionSheetProtocol,
+    ShowActionSheetApiOptions
 ) as ShowActionSheet

@@ -1,8 +1,3 @@
-import {
-  Page,
-  UniDialogPage,
-} from '@dcloudio/uni-runtime'
-
 /**
  * 路由错误码
  * - 4: 框架内部异常
@@ -31,12 +26,12 @@ export type OpenDialogPageOptions = {
    *   "android": {
    *     "osVer": "5.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.27"
+  *     "unixVer": "4.31"
    *   },
    *   "ios": {
    *       "osVer": "12.0",
    *       "uniVer": "x",
-   *       "unixVer": "4.27"
+  *       "unixVer": "4.31"
    *   },
    *   "harmony": {
    *     "osVer": "3.0",
@@ -88,7 +83,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+  *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -101,12 +96,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -158,7 +153,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -206,12 +201,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -263,7 +258,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -275,12 +270,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -332,7 +327,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -345,12 +340,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -402,11 +397,11 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
-  parentPage ?: Page | null
+  parentPage?: UniPage | null
 
   /**
    * 页面间通信接口，用于监听被打开页面发送到当前页面的数据
@@ -415,12 +410,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *        "osVer": "5.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *      },
    *      "ios": {
    *          "osVer": "12.0",
    *          "uniVer": "x",
-   *          "unixVer": "4.27"
+   *          "unixVer": "4.31"
    *      },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -472,7 +467,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -484,12 +479,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -541,7 +536,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -553,12 +548,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -610,7 +605,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -622,12 +617,12 @@ export type OpenDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -679,7 +674,7 @@ export type OpenDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -704,12 +699,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *       "osVer": "5.0",
    *       "uniVer": "x",
-   *       "unixVer": "4.27"
+  *       "unixVer": "4.31"
    *   },
    *   "ios": {
    *      "osVer": "12.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+  *      "unixVer": "4.31"
    *   },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -761,7 +756,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+  *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -783,12 +778,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -840,7 +835,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -888,12 +883,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -945,7 +940,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -957,12 +952,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1014,7 +1009,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -1026,12 +1021,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1083,7 +1078,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -1095,12 +1090,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1152,7 +1147,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -1164,12 +1159,12 @@ export type CloseDialogPageOptions = {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1221,7 +1216,7 @@ export type CloseDialogPageOptions = {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -1231,19 +1226,19 @@ export type CloseDialogPageOptions = {
 export interface Uni {
   /**
    * 打开模态弹窗页面
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateto
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateto
+   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
    * @uniPlatform {
    *  "app": {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1295,7 +1290,7 @@ export interface Uni {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */
@@ -1303,19 +1298,19 @@ export interface Uni {
   /**
    * 关闭模态弹窗页面
    *
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#redirectto
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#redirectto
+   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
    * @uniPlatform {
    *  "app": {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *    },
    *    "ios": {
    *        "osVer": "12.0",
    *        "uniVer": "x",
-   *        "unixVer": "4.27"
+   *        "unixVer": "4.31"
    *    },
    *    "harmony": {
    *      "osVer": "3.0",
@@ -1367,7 +1362,7 @@ export interface Uni {
    *  },
    *  "web": {
    *      "uniVer": "x",
-   *      "unixVer": "4.27"
+   *      "unixVer": "4.31"
    *  }
    * }
    */

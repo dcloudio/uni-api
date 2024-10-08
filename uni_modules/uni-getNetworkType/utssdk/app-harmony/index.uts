@@ -1,4 +1,4 @@
-import { UTSHarmony, Emitter, waitForCurrentNativePage } from '@dcloudio/uni-runtime';
+import { UTSHarmony, Emitter, onNativePageReady } from '@dcloudio/uni-runtime';
 import radio from '@ohos.telephony.radio'
 import { GetNetworkType, GetNetworkTypeOptions, GetNetworkTypeSuccess, OnNetworkStatusChange, OffNetworkStatusChange, OnNetworkStatusChangeCallbackResult } from '../interface.uts';
 import { API_GET_NETWORK_TYPE } from '../protocol.uts';
@@ -182,7 +182,7 @@ class Network {
 
 new Network()
 
-waitForCurrentNativePage().then(() => {
+onNativePageReady().then(() => {
   Network.ohoSubscribe()
 })
 

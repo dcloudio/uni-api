@@ -104,7 +104,7 @@ export interface Uni {
      *         },
      *         "harmony": {
      *             "osVer": "3.0",
-     *             "uniVer": "4.26",
+     *             "uniVer": "4.31",
      *             "unixVer": "x"
      *         }
      *     },
