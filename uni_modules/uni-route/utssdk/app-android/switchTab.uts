@@ -6,6 +6,9 @@ import {
     getTabBarIndex,
     isTabPage,
     parseUrl,
+    entryPageState,
+    switchTabPagesBeforeEntryPages,
+    SwitchTabPage,
 } from '@dcloudio/uni-runtime'
 import { SwitchTabOptions, SwitchTabSuccess } from '../interface.uts'
 
@@ -14,6 +17,10 @@ import { SwitchTabFailImpl } from '../unierror.uts'
 export const switchTab = defineAsyncApi<SwitchTabOptions, SwitchTabSuccess>(
     SWITCH_TAB,
     (options: SwitchTabOptions, res: ApiExecutor) => {
+        if (!entryPageState.handledBeforeEntryPageRoutes) {
+            switchTabPagesBeforeEntryPages.push({ options } as SwitchTabPage)
+            return
+        }
         const url = options.url
         const info = parseUrl(url as string)
         const path = info.path

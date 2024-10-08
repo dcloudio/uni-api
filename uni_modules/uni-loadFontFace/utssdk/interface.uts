@@ -5,24 +5,41 @@ export type LoadFontFaceOptionDesc = {
 }
 /**
  * 错误码
- * - 4: 框架内部异常
- * - 99: page is not ready
- * - 101: 参数错误
- * - 100001: family is null
- * - 100002: source is null
- * - 200001: local font not found
- * - 300001: same source task is loading
- * - 300002: download fail
  */
 export type LoadFontFaceErrCode =
-    | 4
-    | 99
-    | 101
-    | 100001
-    | 100002
-    | 200001
-    | 300001
-    | 300002
+/**
+ * 框架内部异常
+ */
+4 |
+/**
+ * page is not ready
+ */
+99 |
+/**
+ * 参数错误
+ */
+101 |
+/**
+ * family is null
+ */
+100001 |
+/**
+ * source is null
+ */
+100002 |
+/**
+ * local font not found
+ */
+200001 |
+/**
+ * same source task is loading
+ */
+300001 |
+/**
+ * download fail
+ */
+300002;
+
 export interface LoadFontFaceFail extends IUniError {
     errCode: LoadFontFaceErrCode
 }
@@ -489,6 +506,8 @@ export interface Uni {
     /**
      * 动态加载网络字体
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/font.html#loadfontface
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/load-font-face.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/load-font-face.html
      * @uniPlatform {
      *  "app": {
@@ -501,7 +520,12 @@ export interface Uni {
      *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "4.10"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {

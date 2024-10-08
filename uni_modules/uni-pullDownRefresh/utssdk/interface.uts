@@ -33,6 +33,7 @@ export type StartPullDownRefreshComplete = AsyncApiResult
 export type StartPullDownRefreshCompleteCallback = (
     result: StartPullDownRefreshComplete,
 ) => void
+export type StartPullDownRefresh = (options: StartPullDownRefreshOptions) => void
 
 export type StopPullDownRefresh = () => void
 
@@ -40,7 +41,9 @@ export interface Uni {
     /**
      * 开始下拉刷新
      *
-     * @tutorial https://uniapp.dcloud.io/uni-app-x/api/pull-down-refresh.html#startpulldownrefresh
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/pulldown.html#startpulldownrefresh
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/pull-down-refresh.html#startpulldownrefresh
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/pull-down-refresh.html#startpulldownrefresh
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -52,6 +55,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -108,6 +116,8 @@ export interface Uni {
     /**
      * 停止当前页面下拉刷新
      *
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/pulldown.html#stoppulldownrefresh
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/pull-down-refresh.html#stoppulldownrefresh
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/pull-down-refresh.html#stoppulldownrefresh
      * @uniPlatform {
      *  "app": {
@@ -120,6 +130,11 @@ export interface Uni {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
+     *    },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp": {

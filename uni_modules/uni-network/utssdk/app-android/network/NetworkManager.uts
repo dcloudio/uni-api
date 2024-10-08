@@ -92,6 +92,20 @@ class NetworkManager {
 
 
 	public request<T>(param: RequestOptions<T>, listener: NetworkRequestListener): RequestTask {
+		if(param.data != null){
+			const isValidateData = param.data instanceof UTSJSONObject || typeof(param.data) == 'string'
+			if(!isValidateData){
+				let option = {};
+				option['statusCode'] = '-1';
+				option['errorCode'] = '600008';
+				option['errorMsg'] = "the data parameter type is invalid";
+				option['cause'] = new Exception("he data parameter type is invalid");
+				if (listener != null) {
+					listener.onComplete(option);
+				}
+				return new NetworkRequestTaskImpl(null);
+			}
+		}
 		if (listener != null) {
 			listener.onStart();
 		}

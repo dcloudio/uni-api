@@ -1,0 +1,143 @@
+import {
+    API_SAVE_IMAGE_TO_PHOTOS_ALBUM,
+    SaveImageToPhotosAlbumApiProtocol,
+    API_SAVE_VIDEO_TO_PHOTOS_ALBUM,
+    SaveVideoToPhotosAlbumApiProtocol,
+} from '../../protocol.uts'
+import {
+    SaveImageToPhotosAlbumOptions,
+    SaveVideoToPhotosAlbumOptions,
+    SaveImageToPhotosAlbumSuccess,
+    SaveVideoToPhotosAlbumSuccess,
+    SaveImageToPhotosAlbum,
+    SaveVideoToPhotosAlbum,
+} from '../../interface.uts'
+import {
+    MediaUniErrors
+} from '../../unierror.uts'
+import {
+    getResourceStr,
+    getAbilityContext
+} from '@dcloudio/uni-runtime'
+import picker from '@ohos.file.picker';
+import fs from '@ohos.file.fs';
+import photoAccessHelper from '@ohos.file.photoAccessHelper'
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
+import common from '@ohos.app.ability.common';
+
+async function requestPermission(): Promise<boolean> {
+    const context = getAbilityContext() as common.UIAbilityContext
+    const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+    const permissionRequestResult = await atManager.requestPermissionsFromUser(context, [
+        'ohos.permission.WRITE_IMAGEVIDEO'
+    ])
+    const isGranted = permissionRequestResult.authResults[0] === 0
+    return isGranted
+}
+
+async function saveResource(src: Resource, dest: string) {
+    const context = getAbilityContext() as common.UIAbilityContext
+    const resourceManager = context.resourceManager
+    const srcPath: string = src.params?.[0] as string
+    const destFile = fs.openSync(dest, fs.OpenMode.WRITE_ONLY)
+    const content = await resourceManager.getRawFileContent(srcPath)
+    await fs.write(destFile.fd, content.buffer)
+    await fs.close(destFile)
+}
+
+async function saveUri(src: string, dest: string) {
+    const srcFile = fs.openSync(src, fs.OpenMode.READ_ONLY)
+    const destFile = fs.openSync(dest, fs.OpenMode.WRITE_ONLY)
+    await fs.copyFile(srcFile.fd, destFile.fd)
+    await fs.close(srcFile)
+    await fs.close(destFile)
+}
+
+/**
+ * MediaLibrary.storeMediaAsset保存媒体资源接口已废弃，推荐使用PhotoViewPicker.save方法替代
+ * PhotoViewPicker.save方法无需申请权限，但是会弹窗供用户选择保存位置
+ * phAccessHelper.applyChanges需要申请ohos.permission.WRITE_IMAGEVIDEO权限
+ * 相关文档：
+ * - [MediaLibrary.storeMediaAsset](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-medialibrary-0000001774281638)
+ * - [PhotoViewPicker.save](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/js-apis-file-picker-0000001774121766#ZH-CN_TOPIC_0000001857916013__save-1)
+ */
+async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promise<string> {
+    const realPath = getResourceStr(fromUri) as string | Resource
+    const context = getAbilityContext() as common.UIAbilityContext
+    let fileName = Date.now() + (type === 'image' ? '.png' : '.mp4')
+    const isResource = typeof realPath !== 'string'
+    if (isResource) {
+        // Resource类型
+        if (typeof realPath.params?.[0] === 'string') {
+            fileName = realPath.params?.[0].split('/').pop() || fileName
+        }
+    } else {
+        fileName = realPath.split('/').pop() || fileName
+    }
+    const photoSaveOptions = new picker.PhotoSaveOptions();
+    photoSaveOptions.newFileNames = [fileName];
+    const photoPicker = new picker.PhotoViewPicker();
+    const photoSaveResult = await photoPicker.save(photoSaveOptions)
+    const destUri = photoSaveResult[0]
+    if (isResource) {
+        await saveResource(realPath as Resource, destUri)
+    } else {
+        await saveUri(realPath as string, destUri)
+    }
+    const phAccessHelper = photoAccessHelper.getPhotoAccessHelper(context);
+    const assetChangeRequest: photoAccessHelper.MediaAssetChangeRequest = photoAccessHelper.MediaAssetChangeRequest.createImageAssetRequest(context, destUri);
+    await phAccessHelper.applyChanges(assetChangeRequest);
+    return destUri
+}
+
+export const saveImageToPhotosAlbum: SaveImageToPhotosAlbum =
+    defineAsyncApi<SaveImageToPhotosAlbumOptions, SaveImageToPhotosAlbumSuccess>(
+        API_SAVE_IMAGE_TO_PHOTOS_ALBUM,
+        function (options: SaveImageToPhotosAlbumOptions, res: ApiExecutor<SaveImageToPhotosAlbumSuccess>) {
+            requestPermission().then((isGranted) => {
+                if (!isGranted) {
+                    const errCode = 1101005
+                    const errMsg = MediaUniErrors.get(errCode)
+                    res.reject(errMsg, {
+                        errCode,
+                    } as ApiError)
+                    return
+                }
+                saveMediaToAlbum(options.filePath, 'image')
+                    .then((uri) => {
+                        res.resolve({
+                            path: uri,
+                        } as SaveImageToPhotosAlbumSuccess)
+                    }, (err: Error) => {
+                        res.reject(err.message)
+                    })
+            })
+        },
+        SaveImageToPhotosAlbumApiProtocol
+    ) as SaveImageToPhotosAlbum
+
+export const saveVideoToPhotosAlbum: SaveVideoToPhotosAlbum =
+    defineAsyncApi<SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccess>(
+        API_SAVE_VIDEO_TO_PHOTOS_ALBUM,
+        function (options: SaveVideoToPhotosAlbumOptions, res: ApiExecutor<SaveVideoToPhotosAlbumSuccess>) {
+            requestPermission().then((isGranted) => {
+                if (!isGranted) {
+                    const errCode = 1101005
+                    const errMsg = MediaUniErrors.get(errCode)
+                    res.reject(errMsg, {
+                        errCode,
+                    } as ApiError)
+                    return
+                }
+                saveMediaToAlbum(options.filePath, 'video')
+                    .then((uri) => {
+                        res.resolve({
+                        } as SaveVideoToPhotosAlbumSuccess)
+                    }, (err: Error) => {
+                        res.reject(err.message)
+                    })
+            })
+        },
+        SaveVideoToPhotosAlbumApiProtocol
+    ) as SaveVideoToPhotosAlbum
+

@@ -1,11 +1,9 @@
 export interface Uni {
   /**
-    * getAppAuthorizeSetting()
-    * @description 
     * 获取 APP 授权设置。
-    * @param {void}  
-    * @return {GetAppAuthorizeSettingResult}
-    * @tutorial http://uniapp.dcloud.io/api/system/getappauthorizesetting
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getappauthorizesetting.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-app-authorize-setting.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-app-authorize-setting.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -18,7 +16,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "x",
+  *      "uniVer": "x",
+  *      "unixVer": "x"
+  *    }
 	* 	},
     *   "web": {
     *     "uniVer": "x",
@@ -37,43 +40,15 @@ export interface Uni {
 export type GetAppAuthorizeSetting = () => GetAppAuthorizeSettingResult;
 export type GetAppAuthorizeSettingResult = {
   /**
-   * 允许 App 使用相册的开关（仅 iOS 支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: 当前应用没有配置相册权限描述
-   * @type 'authorized' | 'denied' | 'not determined' |  'config error'
-   * @uniPlatform 
-   * {
-   * 	"app": {
-   * 		"android": {
-   * 			"osVer": "x",
-   * 			"uniVer": "x",
-   * 			"unixVer": "x"
-   * 		},
-   * 		"ios": {
-   * 			"osVer": "12.0",
-   * 			"uniVer": "√",
-   * 			"unixVer": "4.11"
-   * 		}
-   * 	}
-   * }
-   */
-  albumAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
-  /**
-   * 允许 App 使用蓝牙的开关（仅 iOS 支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台没有该值；iOS平台：当前应用没有配置蓝牙权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   * 允许 App 使用相册的开关
+   *
    * @uniPlatform
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
+   * 			"osVer": "5.0",
    * 			"uniVer": "x",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.25"
    * 		},
    * 		"ios": {
    * 			"osVer": "12.0",
@@ -83,14 +58,62 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  bluetoothAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
+  albumAuthorized :
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台：表示没有配置[相册相关权限](https://doc.dcloud.net.cn/uni-app-x/native/permission/android_permission_adapter.html)，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置相册权限描述
+   */
+  'config error',
+  /**
+   * 允许 App 使用蓝牙的开关
+   *
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.25"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "√",
+   * 			"unixVer": "4.11"
+   * 		}
+   * 	}
+   * }
+   */
+  bluetoothAuthorized :
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台：表示没有配置[蓝牙相关权限](https://doc.dcloud.net.cn/uni-app-x/native/permission/android_permission_adapter.html)，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置蓝牙权限描述
+   */
+  'config error',
   /**
    * 允许 App 使用摄像头的开关
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有配置 `android.permission.CAMERA` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置相机权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -107,14 +130,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  cameraAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
+  cameraAuthorized:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台：表示没有配置 `android.permission.CAMERA` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置相机权限描述
+   */
+  'config error',
   /**
    * 允许 App 使用定位的开关
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有配置 `android.permission.ACCESS_COARSE_LOCATION` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置定位权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -131,13 +166,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  locationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
+  locationAuthorized:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台：表示没有配置 `android.permission.ACCESS_COARSE_LOCATION` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置定位权限描述
+   */
+  'config error',
   /**
    * 定位准确度。
-   * - reduced: 模糊定位
-   * - full: 精准定位
-   * - unsupported: 不支持（包括用户拒绝定位权限和没有包含定位权限描述）
-   * @type 'reduced' | 'full' | 'unsupported'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -154,7 +202,19 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  locationAccuracy?: 'reduced' | 'full' | 'unsupported' | null,
+  locationAccuracy?:
+  /**
+   * 模糊定位
+   */
+  'reduced' |
+  /**
+   * 精准定位
+   */
+  'full' |
+  /**
+   * 不支持（包括用户拒绝定位权限和没有包含定位权限描述）
+   */
+  'unsupported' | null,
   /**
    * 定位准确度（推荐使用 locationAccuracy 属性）。true 表示模糊定位，false 表示精确定位（仅 iOS 支持）
    * @type boolean
@@ -177,11 +237,7 @@ export type GetAppAuthorizeSettingResult = {
   locationReducedAccuracy?: boolean | null,
   /**
    * 允许 App 使用麦克风的开关
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台：表示没有配置 `android.permission.RECORD_AUDIO` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置麦克风权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -198,14 +254,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  microphoneAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
+  microphoneAuthorized:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台：表示没有配置 `android.permission.RECORD_AUDIO` 权限，[权限配置详情](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-android.html#permissions)；iOS平台：当前应用没有配置麦克风权限描述
+   */
+  'config error',
   /**
    * 允许 App 通知的开关
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: Android平台没有该值；iOS平台：没有包含推送权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -222,14 +290,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  notificationAuthorized: 'authorized' | 'denied' | 'not determined' | 'config error',
+  notificationAuthorized:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * Android平台没有该值；iOS平台：没有包含推送权限描述
+   */
+  'config error',
   /**
    * 允许 App 通知带有提醒的开关（仅 iOS 支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: 当前应用没有配置推送权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -246,14 +326,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  notificationAlertAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
+  notificationAlertAuthorized?:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * 当前应用没有配置推送权限描述
+   */
+  'config error' | null,
   /**
    * 允许 App 通知带有标记的开关（仅 iOS 支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: 当前应用没有配置推送权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -270,14 +362,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  notificationBadgeAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
+  notificationBadgeAuthorized?:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * 当前应用没有配置推送权限描述
+   */
+  'config error' | null,
   /**
    * 允许 App 通知带有声音的开关（仅 iOS 支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * - config error: 当前应用没有配置推送权限描述
-   * @type 'authorized' | 'denied' | 'not determined' | 'config error'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -294,13 +398,26 @@ export type GetAppAuthorizeSettingResult = {
    * 	}
    * }
    */
-  notificationSoundAuthorized?: 'authorized' | 'denied' | 'not determined' | 'config error' | null,
+  notificationSoundAuthorized?:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+   */
+  'denied' |
+  /**
+   *  尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' |
+  /**
+   * 当前应用没有配置推送权限描述
+   */
+  'config error' | null,
   /**
    * 允许读写日历的开关（仅微信小程序支持）
-   * - authorized: 已经获得授权，无需再次请求授权
-   * - denied: 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
-   * - not determined: 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
-   * @type 'authorized' | 'denied' | 'not determined'
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -313,9 +430,26 @@ export type GetAppAuthorizeSettingResult = {
    * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
    * 	}
    * }
    */
-  phoneCalendarAuthorized?: 'authorized' | 'denied' | 'not determined' | null
+  phoneCalendarAuthorized?:
+  /**
+   * 已经获得授权，无需再次请求授权
+   */
+  'authorized' |
+  /**
+   * 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
+   */
+  'denied' |
+  /**
+   * 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+   */
+  'not determined' | null
 };

@@ -1,0 +1,58 @@
+import {
+    chooseImage
+} from './media/chooseImage.uts'
+import {
+    chooseVideo
+} from './media/chooseVideo.uts'
+import {
+    getImageInfo
+} from './media/getImageInfo.uts'
+import {
+    getVideoInfo
+} from './media/getVideoInfo.uts'
+import {
+    previewImage,
+    closePreviewImage
+} from './media/previewImage.uts'
+import {
+    saveImageToPhotosAlbum,
+    saveVideoToPhotosAlbum
+} from './media/saveMedia.uts'
+
+export {
+    ChooseImageOptions,
+    ChooseImageSuccess,
+    ChooseImage,
+    ChooseVideoOptions,
+    ChooseVideoSuccess,
+    ChooseVideo,
+    GetImageInfoOptions,
+    GetImageInfoSuccess,
+    GetImageInfo,
+    GetVideoInfoOptions,
+    GetVideoInfoSuccess,
+    GetVideoInfo,
+    PreviewImageOptions,
+    PreviewImageSuccess,
+    PreviewImage,
+    ClosePreviewImageOptions,
+    ClosePreviewImageSuccess,
+    ClosePreviewImage,
+    SaveImageToPhotosAlbumOptions,
+    SaveVideoToPhotosAlbumOptions,
+    SaveImageToPhotosAlbumSuccess,
+    SaveVideoToPhotosAlbumSuccess,
+    SaveImageToPhotosAlbum,
+    SaveVideoToPhotosAlbum,
+} from '../interface.uts'
+
+export {
+    chooseImage,
+    chooseVideo,
+    getImageInfo,
+    getVideoInfo,
+    previewImage,
+    closePreviewImage,
+    saveImageToPhotosAlbum,
+    saveVideoToPhotosAlbum
+}

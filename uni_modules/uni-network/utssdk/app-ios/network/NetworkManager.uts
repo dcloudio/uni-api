@@ -5,6 +5,9 @@ import { UploadController } from './upload/UploadController.uts';
 import { DownloadController } from './download/DownloadController.uts';
 
 class NetworkRequestListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	
 	public onStart() : void { }
 
 	public onHeadersReceived(statusCode : number, headers : Map<string, any>) : void { }
@@ -16,20 +19,24 @@ class NetworkRequestListener {
 	public onFail(error : NSError) : void { }
 }
 
-interface NetworkUploadFileListener {
-	progressListeners : Array<UploadFileProgressUpdateCallback>;
-	onProgress(progressUpdate : OnProgressUpdateResult) : void;
-	onDataReceived(data : Data) : void;
-	onFinished(response : HTTPURLResponse) : void;
-	onFail(error : NSError) : void;
+class NetworkUploadFileListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	public progressListeners : Array<UploadFileProgressUpdateCallback> = new Array<UploadFileProgressUpdateCallback>();
+	public onProgress(progressUpdate : OnProgressUpdateResult) : void { };
+	public onDataReceived(data : Data) : void { };
+	public onFinished(response : HTTPURLResponse) : void { };
+	public onFail(error : NSError) : void { };
 }
 
-interface NetworkDownloadFileListener {
-	options : DownloadFileOptions | null;
-	progressListeners : Array<DownloadFileProgressUpdateCallback>;
-	onProgress(progressUpdate : OnProgressDownloadResult) : void;
-	onFinished(response : HTTPURLResponse, filePath : string) : void;
-	onFail(error : NSError) : void;
+class NetworkDownloadFileListener {
+	@UTSiOS.keyword("weak")
+	public task: AnyObject | null = null;
+	public options : DownloadFileOptions | null = null;
+	public progressListeners : Array<DownloadFileProgressUpdateCallback> = new Array<DownloadFileProgressUpdateCallback>();
+	public onProgress(progressUpdate : OnProgressDownloadResult) : void { };
+	public onFinished(response : HTTPURLResponse, filePath : string) : void { };
+	public onFail(error : NSError) : void { };
 }
 
 
@@ -42,6 +49,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 
 	public abort() {
 		this.task?.cancel()
+		UTSiOS.destroyInstance(this)
 	}
 }
 
@@ -65,7 +73,9 @@ class NetworkManager implements URLSessionDataDelegate {
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
 			listener.onFail(error);
-			return new NetworkRequestTaskImpl(null);
+			let task = new NetworkRequestTaskImpl(null);
+			listener.task = task;
+			return task;
 		}
 
 		if (this.session == null) {
@@ -79,6 +89,7 @@ class NetworkManager implements URLSessionDataDelegate {
 			this.taskMap.set(task!, listener);
 		}
 		let requestTask = new NetworkRequestTaskImpl(task);
+		listener.task = requestTask;
 		return requestTask;
 	}
 

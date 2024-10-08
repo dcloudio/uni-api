@@ -1,0 +1,228 @@
+import webSocket from '@ohos.net.webSocket';
+import {
+    ConnectSocket,
+    ConnectSocketOptions,
+    SocketTask as UniSocketTask,
+    SendSocketMessageOptions,
+    CloseSocketOptions,
+    GeneralCallbackResult,
+    OnSocketMessageCallbackResult,
+    ConnectSocketSuccess,
+    OnSocketErrorCallbackResult,
+    CloseSocket,
+    SendSocketMessage,
+    OnSocketMessage,
+    OnSocketOpen,
+    OnSocketClose,
+    OnSocketError,
+} from '../interface.uts'
+import {
+    API_CONNECT_SOCKET,
+    ConnectSocketApiProtocol,
+    ConnectSocketApiOptions,
+    API_SEND_SOCKET_MESSAGE,
+    API_CLOSE_SOCKET,
+} from '../protocol.uts'
+import {
+    Emitter
+} from '@dcloudio/uni-runtime'
+
+export {
+    ConnectSocket,
+    ConnectSocketOptions,
+    UniSocketTask as SocketTask,
+    SendSocketMessageOptions,
+    CloseSocketOptions,
+    OnSocketMessageCallbackResult,
+    ConnectSocketSuccess,
+    OnSocketErrorCallbackResult
+}
+
+function tryExec(fn: Function | null | undefined, ...args: any[]) {
+    if (!fn) {
+        return
+    }
+    try {
+        fn(...args)
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+interface IUniWebsocketEmitter {
+    on: Function,
+    off: Function,
+    emit: Function,
+}
+
+const GlobalWebsocketEvent: IUniWebsocketEmitter = new Emitter() as IUniWebsocketEmitter
+
+class SocketTask implements UniSocketTask {
+    private _ws: webSocket.WebSocket;
+    private _emitter: IUniWebsocketEmitter = new Emitter()
+    constructor(ws: webSocket.WebSocket) {
+        this._ws = ws;
+        this._ws.on('message', (_, data) => {
+            const message = {
+                data
+            } as OnSocketMessageCallbackResult
+            this._emitter.emit('message', message)
+            if (this === socketTasks[0]) {
+                GlobalWebsocketEvent.emit('message', message)
+            }
+        })
+        this._ws.on('open', (_, data) => {
+            this._emitter.emit('open', data)
+            if (this === socketTasks[0]) {
+                GlobalWebsocketEvent.emit('open', data)
+            }
+        })
+        this._ws.on('error', (error) => {
+            const message = {
+                errMsg: error.message
+            } as OnSocketErrorCallbackResult
+            this._emitter.emit('error', message)
+            if (this === socketTasks[0]) {
+                GlobalWebsocketEvent.emit('error', message)
+            }
+
+            const index = socketTasks.indexOf(this)
+            if (index >= 0) {
+                socketTasks.splice(index, 1)
+            }
+        })
+        this._ws.on('close', (_, data) => {
+            this._emitter.emit('close', data)
+            if (this === socketTasks[0]) {
+                GlobalWebsocketEvent.emit('close', data)
+            }
+
+            const index = socketTasks.indexOf(this)
+            if (index >= 0) {
+                socketTasks.splice(index, 1)
+            }
+        })
+    }
+
+    send(options: SendSocketMessageOptions) {
+        this._ws.send(options.data as string | ArrayBuffer).then((success: boolean) => {
+            if (success) {
+                tryExec(options.success, {} as GeneralCallbackResult)
+            } else {
+                tryExec(options.fail, new UniError('send message failed'))
+            }
+        }, (err: Error) => {
+            tryExec(options.fail, new UniError(err.message))
+        })
+    }
+
+    close(options?: CloseSocketOptions) {
+        this._ws.close({
+            code: typeof options?.code === 'number' ? options.code : 1000,
+            reason: typeof options?.reason === 'string' ? options.reason : '',
+        } as webSocket.WebSocketCloseOptions).then((success: boolean) => {
+            if (success) {
+                tryExec(options?.success, {} as GeneralCallbackResult)
+            } else {
+                tryExec(options?.fail, new UniError('close socket failed'))
+            }
+        }, (err: Error) => {
+            tryExec(options?.fail, new UniError(err.message))
+        })
+    }
+
+    onMessage(callback: Function) {
+        this._emitter.on('message', callback)
+    }
+
+    onOpen(callback: Function) {
+        this._emitter.on('open', callback)
+    }
+
+    onError(callback: Function) {
+        this._emitter.on('error', callback)
+    }
+
+    onClose(callback: Function) {
+        this._emitter.on('close', callback)
+    }
+}
+
+const socketTasks: SocketTask[] = []
+
+export const connectSocket = defineTaskApi<ConnectSocketOptions, ConnectSocketSuccess, UniSocketTask>(
+    API_CONNECT_SOCKET,
+    function (args: ConnectSocketOptions, exec: ApiExecutor<ConnectSocketSuccess>) {
+        const ws = webSocket.createWebSocket();
+        ws.connect(args.url, {
+            header: args.header ? args.header as Object : undefined,
+            protocol: args.protocols ?
+                Array.isArray(args.protocols) ?
+                    args.protocols.join(',') :
+                    args.protocols :
+                undefined,
+        } as webSocket.WebSocketRequestOptions);
+        const task = new SocketTask(ws);
+        socketTasks.push(task)
+        return task
+    },
+    ConnectSocketApiProtocol,
+    ConnectSocketApiOptions
+) as ConnectSocket
+
+export const onSocketMessage: OnSocketMessage = function (callback: Function) {
+    GlobalWebsocketEvent.on('message', callback)
+}
+
+export const onSocketOpen: OnSocketOpen = function (callback: Function) {
+    GlobalWebsocketEvent.on('open', callback)
+}
+
+export const onSocketError: OnSocketError = function (callback: Function) {
+    GlobalWebsocketEvent.on('error', callback)
+}
+
+export const onSocketClose: OnSocketClose = function (callback: Function) {
+    GlobalWebsocketEvent.on('close', callback)
+}
+
+export const sendSocketMessage = defineAsyncApi<SendSocketMessageOptions, GeneralCallbackResult>(
+    API_SEND_SOCKET_MESSAGE,
+    function (args: SendSocketMessageOptions, exec: ApiExecutor<GeneralCallbackResult>) {
+        const task = socketTasks[0]
+        if (task) {
+            task.send({
+                data: args.data,
+                success(res) {
+                    exec.resolve(res)
+                },
+                fail(err) {
+                    exec.reject('sendSocketMessage:fail')
+                },
+            } as SendSocketMessageOptions)
+        } else {
+            exec.reject('WebSocket is not connected')
+        }
+    }
+) as SendSocketMessage
+
+export const closeSocket = defineAsyncApi<CloseSocketOptions, GeneralCallbackResult>(
+    API_CLOSE_SOCKET,
+    function (args: CloseSocketOptions, exec: ApiExecutor<GeneralCallbackResult>) {
+        const task = socketTasks[0]
+        if (task) {
+            task.close({
+                code: args.code,
+                reason: args.reason,
+                success(res) {
+                    exec.resolve(res)
+                },
+                fail(err) {
+                    exec.reject('closeSocket:fail')
+                },
+            } as CloseSocketOptions)
+        } else {
+            exec.reject('WebSocket is not connected')
+        }
+    }
+) as CloseSocket

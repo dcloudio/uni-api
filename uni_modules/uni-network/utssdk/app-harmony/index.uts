@@ -1,0 +1,32 @@
+import {
+    request
+} from './network/request.uts'
+import {
+    uploadFile
+} from './network/uploadFile.uts'
+import {
+    downloadFile
+} from './network/downloadFile.uts'
+
+export {
+    RequestTask,
+    RequestOptions,
+    RequestSuccess,
+    Request,
+    UploadTask,
+    UploadFileOptions,
+    UploadFileSuccess,
+    OnProgressUpdateResult,
+    UploadFile,
+    DownloadTask,
+    DownloadFileOptions,
+    DownloadFileSuccess,
+    OnProgressDownloadResult,
+    DownloadFile
+} from '../interface.uts'
+
+export {
+    request,
+    uploadFile,
+    downloadFile
+}

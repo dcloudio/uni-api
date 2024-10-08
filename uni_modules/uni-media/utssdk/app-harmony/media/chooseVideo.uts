@@ -1,0 +1,47 @@
+import picker from '@ohos.file.picker'
+import { _chooseMedia, ChooseMediaOptions } from './media.uts'
+import {
+    ChooseVideoOptions,
+    ChooseVideoSuccess,
+    ChooseVideo
+} from '../../interface.uts'
+import {
+    API_CHOOSE_VIDEO,
+    ChooseVideoApiProtocol,
+    ChooseVideoApiOptions,
+} from '../../protocol.uts'
+import {
+    MediaUniErrors
+} from '../../unierror.uts'
+
+export const chooseVideo: ChooseVideo =
+    defineAsyncApi<ChooseVideoOptions, ChooseVideoSuccess>(
+        API_CHOOSE_VIDEO,
+        function (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) {
+            _chooseMedia({
+                mimeType: picker.PhotoViewMIMETypes.VIDEO_TYPE,
+            } as ChooseMediaOptions)
+                .then((chooseMediaRes) => {
+                    const file = chooseMediaRes.tempFiles[0]
+                    if (!file) {
+                        const errCode = 1101001
+                        const errMsg = MediaUniErrors.get(1101001) as string
+                        res.reject(errMsg, {
+                            errCode,
+                        } as ApiError);
+                        return;
+                    }
+                    res.resolve({
+                        tempFilePath: file.tempFilePath,
+                        duration: file.duration,
+                        size: file.size,
+                        width: file.width,
+                        height: file.height,
+                    } as ChooseVideoSuccess)
+                }, (err: Error) => {
+                    res.reject(err.message)
+                })
+        },
+        ChooseVideoApiProtocol,
+        ChooseVideoApiOptions
+    ) as ChooseVideo

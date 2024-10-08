@@ -1,10 +1,8 @@
 export interface Uni {
 	/**
-	  * installApk()
-	  * @description 
 	  * 安装apk
-	  * @param {InstallApkOptions} 
-	  * @return {void} 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/install-apk.html
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/install-apk.html
 	  * @uniPlatform {
 	  *    "app": {
 	  *        "android": {
@@ -16,7 +14,12 @@ export interface Uni {
 	  *            "osVer": "x",
 	  *  		  	 "uniVer": "x",
 	  * 			 "unixVer": "x"
-	  *        }
+	  *        },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	  *    },
 	  *  "web": {
       *    "uniVer": "x",

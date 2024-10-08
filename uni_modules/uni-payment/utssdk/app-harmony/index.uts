@@ -1,0 +1,44 @@
+import {
+    UniPaymentProvider,
+    RequestPayment,
+    RequestPaymentOptions,
+    RequestPaymentFail,
+    RequestPaymentSuccess
+} from '../interface.uts'
+import {
+    RequestPaymentUniErrors
+} from '../unierror.uts'
+import {
+    API_REQUEST_PAYMENT
+} from '../protocol.uts'
+
+export {
+    RequestPayment,
+    RequestPaymentOptions,
+    RequestPaymentFail,
+    RequestPaymentSuccess,
+    UniPaymentProvider
+}
+
+export const requestPayment: RequestPayment = defineAsyncApi<RequestPaymentOptions, RequestPaymentSuccess>(
+    API_REQUEST_PAYMENT,
+    (options: RequestPaymentOptions, exec: ApiExecutor<RequestPaymentSuccess>): void => {
+        const provider = getUniProvider<UniPaymentProvider>('payment', options.provider)
+        if (!provider) {
+            exec.reject('Provider not found.')
+            return
+        }
+        provider.requestPayment({
+            orderInfo: options.orderInfo,
+            success: (result: RequestPaymentSuccess) => {
+                exec.resolve(result)
+            },
+            fail: (error: RequestPaymentFail) => {
+                const errMsg = RequestPaymentUniErrors.get(error.errCode) ?? ""
+                exec.reject(errMsg, {
+                    errCode: error.errCode
+                } as ApiError)
+            }
+        } as RequestPaymentOptions)
+    }
+) as RequestPayment

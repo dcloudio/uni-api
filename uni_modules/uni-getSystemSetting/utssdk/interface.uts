@@ -3,7 +3,7 @@
 export type GetSystemSettingResult = {
   /**
    * 蓝牙是否开启
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -23,7 +23,7 @@ export type GetSystemSettingResult = {
   bluetoothEnabled?: boolean,
   /**
    * 蓝牙的报错信息
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -43,7 +43,7 @@ export type GetSystemSettingResult = {
   bluetoothError?: string,
   /**
    * 位置是否开启
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -63,7 +63,7 @@ export type GetSystemSettingResult = {
   locationEnabled : boolean,
   /**
    * wifi是否开启
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -83,7 +83,7 @@ export type GetSystemSettingResult = {
   wifiEnabled?: boolean,
   /**
    * wifi的报错信息
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -103,7 +103,7 @@ export type GetSystemSettingResult = {
   wifiError?: string,
   /**
    * 设备方向
-   * 
+   *
    * @uniPlatform
    * {
    * 	"app": {
@@ -120,7 +120,15 @@ export type GetSystemSettingResult = {
    * 	}
    * }
    */
-  deviceOrientation : 'portrait' | 'landscape',
+  deviceOrientation :
+  /**
+   * 纵向
+   */
+  'portrait' |
+  /**
+   * 横向
+   */
+  'landscape',
 }
 
 
@@ -130,10 +138,12 @@ export type GetSystemSetting = () => GetSystemSettingResult
 export interface Uni {
   /**
     * GetSystemSetting()
-    * @description 
+    * @description
     * 获取系统设置
     * @return {object}
-    * @tutorial https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
+    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
+    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
+    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
     * @uniPlatform
 	* {
 	* 	"app": {
@@ -146,8 +156,17 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "4.11"
-	* 		}
-	* 	}
+	* 		},
+  *    "harmony": {
+  *      "osVer": "x",
+  *      "uniVer": "x",
+  *      "unixVer": "x"
+  *    }
+	* 	},
+  *   "web": {
+  *     "uniVer": "x",
+  *     "unixVer": "x"
+  *   }
 	* }
     * @example
      ```typescript

@@ -1,5 +1,6 @@
 {
 	"frameworks": [
-		"libz.1.2.5.tbd" 
-	],"deploymentTarget": "12"
+		"libz.1.2.5.tbd"
+	]
 }
+

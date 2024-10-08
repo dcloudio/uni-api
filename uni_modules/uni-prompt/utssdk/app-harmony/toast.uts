@@ -1,0 +1,29 @@
+import promptAction from '@ohos.promptAction';
+import { BusinessError } from '@ohos.base';
+import { ShowToast, ShowToastOptions, ShowToastSuccess, HideToast } from '../interface.uts'
+import { API_SHOW_TOAST, ShowToastProtocol, ShowToastApiOptions, API_HIDE_TOAST } from '../protocol.uts'
+
+export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSuccess>(
+  API_SHOW_TOAST,
+  function (options: ShowToastOptions, res: ApiExecutor<ShowToastSuccess>) {
+    try {
+      promptAction.showToast({
+        message: options.title,
+        duration: options.duration!
+      } as promptAction.ShowToastOptions);
+      res.resolve({} as ShowToastSuccess)
+    } catch (error) {
+      let message = (error as BusinessError).message
+      res.reject(message)
+    }
+  },
+  ShowToastProtocol,
+  ShowToastApiOptions
+) as ShowToast
+
+export const hideToast: HideToast = defineAsyncApi(
+  API_HIDE_TOAST,
+  function (_, res: ApiExecutor<any>) {
+    res.reject('hideToast is not supported on HarmonyOS')
+  }
+) as HideToast

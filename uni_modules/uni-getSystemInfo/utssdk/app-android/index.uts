@@ -5,6 +5,7 @@ import { DeviceUtil } from './device/SystemInfoDeviceUtil.uts'
 import CountDownLatch from 'java.util.concurrent.CountDownLatch';
 import Looper from 'android.os.Looper';
 import Handler from 'android.os.Handler';
+import ViewGroup from "android.view.ViewGroup";
 
 export const getSystemInfo : GetSystemInfo = function (options : GetSystemInfoOptions) {
 	const result = getSystemInfoSync();
@@ -56,25 +57,27 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 			const version = UTSAndroid.getInnerVersion();
 			const romName = DeviceUtil.getRomName();
 			const romVersion = DeviceUtil.getRomVersion();
-			const windowWidth = screenWidth;
+			const windowWidth = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).width / pixelRatio)
 			const windowHeight = UTSAndroid.getWindowHeight();
 			const windowTop = 0;
 			const windowBottom = 0;
-			const safeAreaInsetsTop = UTSAndroid.getSafeAreaInsets()["top"].toString().toInt();
+			const safeAreaInsetsTop = statusBarHeight;
 			const safeAreaInsets : SafeAreaInsets = {
 				left: 0,
 				top: safeAreaInsetsTop,
 				right: 0,
 				bottom: 0
 			}
+
+			const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
 			
 			const safeArea : SafeArea = {
 				left: safeAreaInsets.left,
 				right: windowWidth - safeAreaInsets.right,
 				top: safeAreaInsets.top,
-				bottom: windowHeight - safeAreaInsets.bottom,
+				bottom: contentHeight - safeAreaInsets.bottom,
 				width: windowWidth - safeAreaInsets.left - safeAreaInsets.right,
-				height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
+				height: contentHeight - safeAreaInsets.top - safeAreaInsets.bottom
 			}
 			const osAndroidAPILevel = Build.VERSION.SDK_INT;
 			const appTheme = UTSAndroid.getAppTheme();
@@ -159,24 +162,27 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 	const screenWidth = DeviceUtil.getScreenWidth();
 	const screenHeight = DeviceUtil.getScreenHeight();
 	const statusBarHeight = DeviceUtil.getStatusBarHeight();
-	const windowWidth = screenWidth;
+	const windowWidth = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).width / pixelRatio)
 	const windowHeight = UTSAndroid.getWindowHeight();
 	const windowTop = 0;
 	const windowBottom = 0;
-	const safeAreaInsetsTop = UTSAndroid.getSafeAreaInsets()["top"] as Int;
+	const safeAreaInsetsTop = statusBarHeight;
 	const safeAreaInsets : SafeAreaInsets = {
 		left: 0,
 		top: safeAreaInsetsTop,
 		right: 0,
 		bottom: 0
 	}
+	
+	const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
+	
 	const safeArea : SafeArea = {
 		left: safeAreaInsets.left,
 		right: windowWidth - safeAreaInsets.right,
 		top: safeAreaInsets.top,
-		bottom: windowHeight - safeAreaInsets.bottom,
+		bottom: contentHeight - safeAreaInsets.bottom,
 		width: windowWidth - safeAreaInsets.left - safeAreaInsets.right,
-		height: windowHeight - safeAreaInsets.top - safeAreaInsets.bottom
+		height: contentHeight - safeAreaInsets.top - safeAreaInsets.bottom
 	}
 	const screenTop = windowTop;
 	

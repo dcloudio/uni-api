@@ -38,7 +38,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"previewImage": {
@@ -46,7 +47,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"closePreviewImage": {
@@ -54,7 +56,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"getImageInfo": {
@@ -62,7 +65,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"saveImageToPhotosAlbum": {
@@ -70,7 +74,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"compressImage": {
@@ -78,7 +83,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+						"arkts": false
 					}
 				},
 				"chooseVideo": {
@@ -86,7 +92,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"saveVideoToPhotosAlbum": {
@@ -94,7 +101,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"getVideoInfo": {
@@ -102,7 +110,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+						"arkts": true
 					}
 				},
 				"compressVideo": {
@@ -110,7 +119,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+						"arkts": false
 					}
 				}
 			}

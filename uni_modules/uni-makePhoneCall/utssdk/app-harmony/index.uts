@@ -1,0 +1,54 @@
+import { UTSHarmony } from '@dcloudio/uni-runtime';
+import { BusinessError } from '@kit.BasicServicesKit'
+import call from '@ohos.telephony.call'
+import { MakePhoneCall, MakePhoneCallOptions, MakePhoneCallSuccess } from '../interface.uts';
+import { API_MAKE_PHONE_CALL, MakePhoneCallProtocol } from '../protocol.uts';
+
+export { MakePhoneCall, MakePhoneCallOptions, MakePhoneCallSuccess }
+
+function isPromise(res: any) {
+  if ((typeof res === "object" || typeof res === "function") && typeof (res as Promise<void>).then === "function") {
+    return true;
+  }
+  return false
+}
+
+function dial(number: string, confirm = true) {
+  if (!confirm && typeof call.dial === 'function') {
+    return new Promise<void>((resolve, reject) => {
+      UTSHarmony.requestSystemPermission(['ohos.permission.PLACE_CALL'], (allRight: boolean) => {
+        if (allRight) {
+          call
+            .dial(number)
+            .then(() => {
+              resolve()
+            })
+            .catch(reject)
+        } else {
+          reject('permission denied')
+        }
+      }, () => {
+        reject('permission denied')
+      })
+    })
+  } else {
+    return call.makeCall(number)
+  }
+}
+
+export const makePhoneCall: MakePhoneCall = defineAsyncApi<MakePhoneCallOptions, MakePhoneCallSuccess>(
+  API_MAKE_PHONE_CALL,
+  (options: MakePhoneCallOptions, res: ApiExecutor<MakePhoneCallSuccess>) => {
+    const dialRes = dial(options.phoneNumber) as unknown as Promise<void>
+    if (isPromise(dialRes)) {
+      dialRes
+        .then(res.resolve)
+        .catch((err: BusinessError<void>) => {
+          res.reject(err.message)
+        })
+    } else {
+      res.resolve()
+    }
+  },
+  MakePhoneCallProtocol
+) as MakePhoneCall

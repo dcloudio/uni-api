@@ -1,11 +1,8 @@
 export interface Uni {
 	/**
-		* @description
 		* 开启监听系统主题变化
-		* 
-		* @param {OnOsThemeChangeCallback} callback
-		* @return {number}
-		* @tutorial 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onosthemechange
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onosthemechange
 		* @uniPlatform
 	* {
 	* 	"app": {
@@ -18,7 +15,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "x",
 	* 			"unixVer": "4.18"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	* 	},
 	*   "web": {
 	*     "uniVer": "x",
@@ -35,12 +37,9 @@ export interface Uni {
 	onOsThemeChange(callback : OnOsThemeChangeCallback): number
 
 	/**
-		* @description
 		* 取消监听系统主题变化
-		* 
-		* @param {number} id
-		* @return {void}
-		* @tutorial 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offosthemechange
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offosthemechange
 		* @uniPlatform
 	* {
 	* 	"app": {
@@ -53,7 +52,12 @@ export interface Uni {
 	* 			"osVer": "12.0",
 	* 			"uniVer": "x",
 	* 			"unixVer": "4.18"
-	* 		}
+	* 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	* 	},
 	*   "web": {
 	*     "uniVer": "x",
@@ -66,14 +70,11 @@ export interface Uni {
 		 ```
 		*/
 	offOsThemeChange(id : number): void
-	
+
 	/**
-		* @description
 		* 设置应用主题
-		* 
-		* @param {SetAppThemeOptions} options
-		* @return {void}
-		* @tutorial 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#setapptheme
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#setapptheme
 		* @uniPlatform
 	* {
 	* 	"app": {
@@ -110,14 +111,11 @@ export interface Uni {
 		 ```
 		*/
 	setAppTheme(options : SetAppThemeOptions): void
-	
+
 	/**
-		* @description
 		* 开启监听应用主题变化
-		* 
-		* @param {OnAppThemeChangeCallback} callback
-		* @return {number}
-		* @tutorial 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onappthemechange
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onappthemechange
 		* @uniPlatform
 	* {
 	* 	"app": {
@@ -145,14 +143,11 @@ export interface Uni {
 		 ```
 		*/
 	onAppThemeChange(callback : OnAppThemeChangeCallback): number
-	
+
 	/**
-		* @description
 		* 取消监听应用主题变化
-		* 
-		* @param {number} id
-		* @return {void}
-		* @tutorial 
+		* @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offappthemechange
+		* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offappthemechange
 		* @uniPlatform
 	* {
 	* 	"app": {
@@ -193,7 +188,12 @@ export interface Uni {
  * 			"osVer": "12.0",
  * 			"uniVer": "x",
  * 			"unixVer": "4.18"
- * 		}
+ * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
  * 	},
  *   "web": {
  *     "uniVer": "x",
@@ -216,7 +216,12 @@ export type OsThemeChangeResult = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -240,7 +245,12 @@ export type OsThemeChangeResult = {
  * 			"osVer": "12.0",
  * 			"uniVer": "x",
  * 			"unixVer": "4.18"
- * 		}
+ * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
  * 	},
  *   "web": {
  *     "uniVer": "x",
@@ -263,7 +273,12 @@ export type AppThemeChangeResult = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -274,14 +289,14 @@ export type AppThemeChangeResult = {
 	appTheme : string
 }
 
-/* 
+/*
  * 系统主题相关类型定义
  */
 export type OnOsThemeChangeCallback = (res : OsThemeChangeResult) => void
 export type OnOsThemeChange = (callback : OnOsThemeChangeCallback) => number
 export type OffOsThemeChange = (id : number) => void
 
-/* 
+/*
  * 应用主题相关类型定义
  */
 export type SetAppTheme = (options : SetAppThemeOptions) => void
@@ -308,7 +323,12 @@ export type SetAppThemeCompleteCallback = (result : any) => void;
  * 			"osVer": "12.0",
  * 			"uniVer": "x",
  * 			"unixVer": "4.18"
- * 		}
+ * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
  * 	},
  *   "web": {
  *     "uniVer": "x",
@@ -331,7 +351,12 @@ export type SetAppThemeOptions = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -355,7 +380,12 @@ export type SetAppThemeOptions = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -379,7 +409,12 @@ export type SetAppThemeOptions = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -403,7 +438,12 @@ export type SetAppThemeOptions = {
 	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.18"
-	 * 		}
+	 * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
 	 * 	},
 	 *   "web": {
 	 *     "uniVer": "x",
@@ -430,7 +470,12 @@ export type SetAppThemeOptions = {
  * 			"osVer": "12.0",
  * 			"uniVer": "x",
  * 			"unixVer": "4.18"
- * 		}
+ * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
  * 	},
  *   "web": {
  *     "uniVer": "x",
@@ -453,7 +498,12 @@ export type AppThemeFail = IAppThemeFail;
  * 			"osVer": "12.0",
  * 			"uniVer": "x",
  * 			"unixVer": "4.18"
- * 		}
+ * 		},
+ *    "harmony": {
+ *      "osVer": "x",
+ *      "uniVer": "x",
+ *      "unixVer": "x"
+ *    }
  * 	},
  *   "web": {
  *     "uniVer": "x",

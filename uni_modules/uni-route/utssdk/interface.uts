@@ -31,7 +31,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -84,17 +89,7 @@ export type NavigateToOptions = {
     url: string | string.PageURIString
     /**
      * 窗口显示的动画类型
-     * - auto: 自动选择动画效果
-     * - none: 无动画效果
-     * - slide-in-right: 从右侧横向滑动效果
-     * - slide-in-left: 左侧横向滑动效果
-     * - slide-in-top: 从上侧竖向滑动效果
-     * - slide-in-bottom: 从下侧竖向滑动效果
-     * - fade-in: 从透明到不透明逐渐显示效果
-     * - zoom-out: 从小到大逐渐放大显示效果
-     * - zoom-fade-out: 从小到大逐渐放大并且从透明到不透明逐渐显示效果
-     * - pop-in: 从右侧平移入栈动画效果
-     * - UnionType => 'auto' | 'none' | 'slide-in-right' | 'slide-in-left' | 'slide-in-top' | 'slide-in-bottom' | 'fade-in' | 'zoom-out' | 'zoom-fade-out' | 'pop-in'
+     *
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -105,8 +100,13 @@ export type NavigateToOptions = {
      *      "ios": {
      *          "osVer": "12.0",
      *          "uniVer": "√",
-     *          "unixVer": "x"
-     *      }
+     *          "unixVer": "4.25"
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -156,7 +156,287 @@ export type NavigateToOptions = {
      *  }
      * }
      */
-    animationType?: string | null
+    animationType?:
+    /**
+     * 自动选择动画效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'auto' |
+    /**
+     * 无动画效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "4.23",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'none' |
+    /**
+     * 从右侧横向滑动效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-in-right' |
+    /**
+     * 从左侧横向滑动效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-in-left' |
+    /**
+     * 从上侧竖向滑动效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-in-top' |
+    /**
+     * 从下侧竖向滑动效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-in-bottom' |
+    /**
+     * 从完全透明到不透明逐渐显示
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'fade-in' |
+    /**
+     * 在屏幕中间从小到大逐渐放大显示
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'zoom-out' |
+    /**
+     * 从大逐渐缩小并且从不透明到透明逐渐隐藏关闭动画
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'zoom-fade-out' |
+    /**
+     * 从右侧平移出栈动画效果
+     *
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'pop-in' | null
     /**
      * 窗口显示动画的持续时间，单位为 ms
      * @uniPlatform {
@@ -170,7 +450,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -234,7 +519,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -298,7 +588,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -362,7 +657,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -426,7 +726,12 @@ export type NavigateToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -500,7 +805,12 @@ export type RedirectToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -564,7 +874,12 @@ export type RedirectToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -628,7 +943,12 @@ export type RedirectToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -692,7 +1012,12 @@ export type RedirectToOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -766,7 +1091,12 @@ export type ReLaunchOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -830,7 +1160,12 @@ export type ReLaunchOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -894,7 +1229,12 @@ export type ReLaunchOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -958,7 +1298,12 @@ export type ReLaunchOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1034,7 +1379,12 @@ export type SwitchTabOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1098,7 +1448,12 @@ export type SwitchTabOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1162,7 +1517,12 @@ export type SwitchTabOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1226,7 +1586,12 @@ export type SwitchTabOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1300,7 +1665,12 @@ export type NavigateBackOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1353,17 +1723,7 @@ export type NavigateBackOptions = {
     delta?: number | null
     /**
      * 窗口关闭的动画类型
-     * - auto: 自动选择动画效果
-     * - none: 无动画效果
-     * - slide-out-right: 横向向右侧滑出屏幕动画
-     * - slide-out-left: 横向向左侧滑出屏幕动画
-     * - slide-out-top: 竖向向上侧滑出屏幕动画
-     * - slide-out-bottom: 竖向向下侧滑出屏幕动画
-     * - fade-out: 从不透明到透明逐渐隐藏动画
-     * - zoom-in: 从大逐渐缩小关闭动画
-     * - zoom-fade-in: 从大逐渐缩小并且从不透明到透明逐渐隐藏关闭动画
-     * - pop-out: 从右侧平移出栈动画效果
-     * - UnionType => 'auto' | 'none' | 'slide-out-right' | 'slide-out-left' | 'slide-out-top' | 'slide-out-bottom' | 'fade-out' | 'zoom-in' | 'zoom-fade-in' | 'pop-out'
+     *
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1374,7 +1734,7 @@ export type NavigateBackOptions = {
      *      "ios": {
      *          "osVer": "12.0",
      *          "uniVer": "√",
-     *          "unixVer": "x"
+     *          "unixVer": "4.25"
      *      }
      *  },
      *  "mp": {
@@ -1425,7 +1785,277 @@ export type NavigateBackOptions = {
      *  }
      * }
      */
-    animationType?: string | null
+    animationType?:
+    /**
+     * 自动选择动画效果
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'auto' |
+    /**
+     * 无动画效果
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "4.23",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'none' |
+    /**
+     * 横向向右侧滑出屏幕动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-out-right' |
+    /**
+     * 横向向左侧滑出屏幕动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-out-left' |
+    /**
+     * 竖向向上侧滑出屏幕动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-out-top' |
+    /**
+     * 竖向向下侧滑出屏幕动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'slide-out-bottom' |
+    /**
+     * 从不透明到透明逐渐隐藏动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'fade-out' |
+    /**
+     * 从大逐渐缩小关闭动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'zoom-in' |
+    /**
+     * 从大逐渐缩小并且从不透明到透明逐渐隐藏关闭动画
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'zoom-fade-in' |
+    /**
+     * 从右侧平移出栈动画效果
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.18"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "√",
+     *       "unixVer": "4.25"
+     *     },
+     *     "harmony": {
+     *       "osVer": "3.0",
+     *       "uniVer": "4.23",
+     *       "unixVer": "x"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+     * }
+     */
+    'pop-out' | null
     /**
      * 窗口关闭动画的持续时间，单位为 ms
      * @uniPlatform {
@@ -1567,7 +2197,12 @@ export type NavigateBackOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1631,7 +2266,12 @@ export type NavigateBackOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1688,7 +2328,9 @@ export interface Uni {
     /**
      * 保留当前页面，跳转到应用内的某个页面
      *
-     * @tutorial http://uniapp.dcloud.io/api/router?id=navigateto
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/router.html#navigateto
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateto
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateto
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1700,7 +2342,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1754,7 +2401,9 @@ export interface Uni {
     /**
      * 关闭当前页面，跳转到应用内的某个页面
      *
-     * @tutorial http://uniapp.dcloud.io/api/router?id=redirectto
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/router.html#redirectto
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#redirectto
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#redirectto
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1766,7 +2415,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1820,7 +2474,9 @@ export interface Uni {
     /**
      * 关闭所有页面，打开到应用内的某个页面
      *
-     * @tutorial http://uniapp.dcloud.io/api/router?id=relaunch
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/router.html#relaunch
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#relaunch
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#relaunch
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1832,7 +2488,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1886,7 +2547,9 @@ export interface Uni {
     /**
      * 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
      *
-     * @tutorial http://uniapp.dcloud.io/api/router?id=switchtab
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/router.html#switchtab
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#switchtab
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#switchtab
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1898,7 +2561,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -1952,7 +2620,9 @@ export interface Uni {
     /**
      * 关闭当前页面，返回上一页面或多级页面
      *
-     * @tutorial http://uniapp.dcloud.io/api/router?id=navigateback
+     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/router.html#navigateback
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateback
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/navigator.html#navigateback
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -1964,7 +2634,12 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {

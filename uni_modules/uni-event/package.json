@@ -31,6 +31,46 @@
         "npmurl": ""
     },
     "uni_modules": {
+        "uni-ext-api": {
+            "uni": {
+                "$on": {
+                    "name": "$on",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "$once": {
+                    "name": "$once",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "$off": {
+                    "name": "$off",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                },
+                "$emit": {
+                    "name": "$emit",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                }
+            }
+        },
         "encrypt": [],
         "platforms": {
             "cloud": {

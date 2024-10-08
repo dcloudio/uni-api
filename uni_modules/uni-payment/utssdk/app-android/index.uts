@@ -7,7 +7,7 @@ export const requestPayment : RequestPayment = function (options : RequestPaymen
 	if (provider != null) {
 		provider.requestPayment(options)
 	} else {
-		let err = new RequestPaymentFailImpl(700000);
+		let err = new RequestPaymentFailImpl(700605);
 		options.fail?.(err)
 		options.complete?.(err)
 	}

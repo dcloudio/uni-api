@@ -105,6 +105,8 @@ export interface WebviewContext {
 export interface Uni {
 	/**
 	 * @description 创建 web-view 组件的上下文对象，用于操作 web-view 的行为。
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/create-webview-context.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/create-webview-context.html
 	 * @uniPlatform {
 	 *  "app": {
 	 *    "android": {
@@ -112,11 +114,16 @@ export interface Uni {
 	 *      "uniVer": "x",
 	 *      "unixVer": "3.9.0"
 	 *    },
-     *    "ios": {
-     *      "osVer": "12.0",
-     *      "uniVer": "√",
-     *      "unixVer": "4.11"
-     *    }
+   *    "ios": {
+   *      "osVer": "12.0",
+   *      "uniVer": "√",
+   *      "unixVer": "4.11"
+   *    },
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
 	 *  },
      *  "web": {
      *    "uniVer": "x",

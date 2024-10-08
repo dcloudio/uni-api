@@ -39,7 +39,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"sendSocketMessage": {
@@ -47,7 +48,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"closeSocket": {
@@ -55,7 +57,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"onSocketOpen": {
@@ -63,7 +66,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"onSocketMessage": {
@@ -71,7 +75,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"onSocketClose": {
@@ -79,7 +84,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				},
 				"onSocketError": {
@@ -87,7 +93,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": false
+						"swift": true,
+                        "arkts": true
 					}
 				}
 			}

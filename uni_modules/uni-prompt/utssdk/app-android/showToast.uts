@@ -181,7 +181,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 		
 		toastType = type
 		if (["top", "center", "bottom"].indexOf(style.position) >= 0) {
-			androidToast = Toast.makeText(UTSAndroid.getTopPageActivity(), style.title, Toast.LENGTH_SHORT);
+			androidToast = Toast.makeText(UTSAndroid.getAppContext(), style.title, Toast.LENGTH_SHORT);
 			switch (style.position) {
 				case "top": {
 					// 修复bottom/top 与 前端api位置不一致的问题

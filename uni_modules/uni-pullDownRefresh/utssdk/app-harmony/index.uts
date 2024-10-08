@@ -1,0 +1,34 @@
+import {
+    startPullDownRefresh as internalStartPullDownRefresh,
+    stopPullDownRefresh as internalStopPullDownRefresh,
+} from '@dcloudio/uni-runtime'
+import {
+    StartPullDownRefresh,
+    StartPullDownRefreshOptions,
+    StartPullDownRefreshSuccess,
+    StopPullDownRefresh,
+} from '../interface.uts'
+import {
+    API_START_PULL_DOWN_REFRESH,
+    API_STOP_PULL_DOWN_REFRESH
+} from '../protocol.uts'
+
+export {
+    StartPullDownRefreshOptions,
+    StartPullDownRefreshSuccess,
+}
+
+export const startPullDownRefresh = defineAsyncApi<
+    StartPullDownRefreshOptions,
+    StartPullDownRefreshSuccess
+>(API_START_PULL_DOWN_REFRESH, (_, res) => {
+    internalStartPullDownRefresh()
+    res.resolve()
+}) as StartPullDownRefresh
+
+export const stopPullDownRefresh = defineSyncApi<void>(
+    API_STOP_PULL_DOWN_REFRESH,
+    () => {
+        internalStopPullDownRefresh()
+    },
+) as StopPullDownRefresh

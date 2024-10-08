@@ -16,6 +16,7 @@ class NetworkDownloadTaskImpl implements DownloadTask {
 
 	public abort() {
 		this.task?.cancel()
+		UTSiOS.destroyInstance(this)
 	}
 
 	public onProgressUpdate(option : DownloadFileProgressUpdateCallback) {
@@ -45,7 +46,9 @@ export class DownloadController implements URLSessionDownloadDelegate {
 	public downloadFile(options : DownloadFileOptions, listener : NetworkDownloadFileListener) : DownloadTask {
 		let request = this.createDownloadRequest(options, listener);
 		if (request == null) {
-			return new NetworkDownloadTaskImpl(null, listener);
+			const task = new NetworkDownloadTaskImpl(null, listener)
+			listener.task = task;
+			return task;
 		}
 
 		if (this.session == null) {
@@ -61,7 +64,7 @@ export class DownloadController implements URLSessionDownloadDelegate {
 			this.taskMap.set(task!, listener);
 		}
 		let requestTask = new NetworkDownloadTaskImpl(task, listener);
-
+		listener.task = requestTask
 		return requestTask;
 	}
 	

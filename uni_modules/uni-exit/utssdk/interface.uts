@@ -7,10 +7,16 @@ export type ExitSuccess = {
 
 /**
  * 错误码
- * - 12001: 系统不支持
- * - 12002: 未知错误
  */
-export type ExitErrorCode = 12001 | 12002
+export type ExitErrorCode =
+/**
+ * 系统不支持
+ */
+12001 |
+/**
+ * 未知错误
+ */
+12002
 
 /**
  * uni.exit失败回调参数
@@ -71,7 +77,12 @@ export interface Uni {
    *            "uniUtsPlugin": "x",
    *            "unixVer": "x",
    *            "unixUtsPlugin": "x"
-   *   	  }
+   *   	  },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
    *    },
    *  "web": {
    *    "uniVer": "x",

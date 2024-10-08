@@ -9,6 +9,8 @@
 #import <DCloudMediaPicker/DCloudMediaCamera.h>
 #import <DCloudMediaPicker/DCloudMediaAlbum.h>
 #import <DCloudMediaPicker/DCloudImageBrowser.h>
+#import <DCloudMediaPicker/DCloudMediaImageCompress.h>
+#import <DCloudMediaPicker/DCloudMediaVideoCompress.h>
 //! Project version number for DCloudMediaPicker.
 FOUNDATION_EXPORT double DCloudMediaPickerVersionNumber;
 

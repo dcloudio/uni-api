@@ -4,10 +4,7 @@ export type GetAccessibilityInfo = () => UTSJSONObject;
 
 export interface Uni {
   /**
-   * GetAccessibilityInfo()
-   * @description 
    * 获取app基本信息
-   * @return {object}
    * @uniPlatform
    * {
    * 	"app": {
@@ -20,13 +17,19 @@ export interface Uni {
    * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
    * 	}
    * }
    * @example
    ```typescript
     uni.getAccessibilityInfo()
    ```
+   * @return {object}
    */
   getAccessibilityInfo(): UTSJSONObject;
 }
