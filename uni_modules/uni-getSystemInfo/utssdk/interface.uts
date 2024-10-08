@@ -2109,8 +2109,8 @@ export type GetWindowInfoResult = {
   /**
    * 窗口上边缘的 y 值，单位为px
    *
-   * @uniPlatform
    * @deprecated 已废弃，仅为了向下兼容保留
+   * @uniPlatform
    * {
    * 	"app": {
    * 		"android": {

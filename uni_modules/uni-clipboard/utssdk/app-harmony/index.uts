@@ -1,0 +1,35 @@
+import { clipboard } from '@dcloudio/uni-runtime';
+import { SetClipboardData, GetClipboardData, SetClipboardDataOptions, SetClipboardDataSuccess, GetClipboardDataOptions, GetClipboardDataSuccess } from '../interface.uts';
+import { API_GET_CLIPBOARD_DATA, API_SET_CLIPBOARD_DATA, SetClipboardDataApiOptions, SetClipboardDataProtocol } from '../protocol.uts';
+
+export { SetClipboardData, GetClipboardData, SetClipboardDataOptions, SetClipboardDataSuccess, GetClipboardDataOptions, GetClipboardDataSuccess }
+
+interface ClipboardModuleGetStringOptions {
+  result: string
+  data: string
+}
+
+export const getClipboardData: GetClipboardData = defineAsyncApi<GetClipboardDataOptions, GetClipboardDataSuccess>(
+  API_GET_CLIPBOARD_DATA,
+  (_: GetClipboardDataOptions, res: ApiExecutor<GetClipboardDataSuccess>) => {
+    clipboard.getString((ret: ClipboardModuleGetStringOptions) => {
+      if (ret.result === 'success') {
+        res.resolve({
+          data: ret.data,
+        } as GetClipboardDataSuccess)
+      } else {
+        res.reject('getClipboardData:fail')
+      }
+    })
+  }
+) as GetClipboardData
+
+export const setClipboardData: SetClipboardData = defineAsyncApi<SetClipboardDataOptions, SetClipboardDataSuccess>(
+  API_SET_CLIPBOARD_DATA,
+  (options: SetClipboardDataOptions, res: ApiExecutor<SetClipboardDataSuccess>) => {
+    clipboard.setString(options.data)
+    res.resolve()
+  },
+  SetClipboardDataProtocol,
+  SetClipboardDataApiOptions
+) as SetClipboardData

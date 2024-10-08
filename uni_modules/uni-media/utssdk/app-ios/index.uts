@@ -175,9 +175,15 @@ export const getImageInfo : GetImageInfo = function (options : GetImageInfoOptio
 	if (options.src.length > 0) {
 		if (isNetUrl(options.src)) {
 			UTSiOS.loadImage(options.src, (image, data) => {
-				if (data != null && image != null) {
-					const type = getImageFormat(data!);
-					const path = saveImage(data!, type);
+				if (image != null) {
+					let imageData : Data | null = null;
+					if(data != null){
+						imageData = data;
+					}else{
+						imageData = image!.jpegData(compressionQuality= 1.0);
+					}
+					const type = getImageFormat(imageData!);
+					const path = saveImage(imageData!, type);
 					if (path.count > 0) {
 						DispatchQueue.main.async(execute = () : void => {
 							let successCallback : GetImageInfoSuccess = {

@@ -5,12 +5,18 @@ import {
 	UniError_GetVideoInfo,
 	MediaErrorImpl
 } from "../../unierror.uts"
+
 import File from 'java.io.File';
 import MediaMetadataRetriever from 'android.media.MediaMetadataRetriever';
 import BigDecimal from 'java.math.BigDecimal';
 import MediaExtractor from 'android.media.MediaExtractor';
 import MediaFormat from 'android.media.MediaFormat';
 import TextUtils from 'android.text.TextUtils';
+import FileOutputStream from 'java.io.FileOutputStream';
+import FileInputStream from 'java.io.FileInputStream';
+import InputStream from 'java.io.InputStream';
+
+const ASSETS_PATH = '/android_asset/'
 
 export function getVideoMetadata(src : string) : any {
 	let videoInfo : GetVideoInfoSuccess = {
@@ -19,7 +25,16 @@ export function getVideoMetadata(src : string) : any {
 		height: 0,
 		width: 0
 	}
-	let path = UTSAndroid.convert2AbsFullPath(src)
+	var path = UTSAndroid.convert2AbsFullPath(src)
+	if (path.startsWith("/android_asset/")) {
+		var mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/_" + System.currentTimeMillis()
+		if (copyFile(path, mediaCachePath)) {
+			path = mediaCachePath
+		} else {
+			let error = new MediaErrorImpl(1101010, UniError_GetVideoInfo);
+			return error
+		}
+	}
 	let videoFile = new File(path)
 	if (!videoFile.exists()) {
 		let error = new MediaErrorImpl(1101003, UniError_GetVideoInfo);
@@ -96,5 +111,53 @@ export function getVideoMetadata(src : string) : any {
 	} catch (e) {
 		let error = new MediaErrorImpl(1101010, UniError_GetVideoInfo);
 		return error
+	}
+}
+
+
+export function copyFile(fromFilePath : string, toFilePath : string) : boolean {
+	var fis : InputStream | null = null
+	try {
+		if (fromFilePath.startsWith(ASSETS_PATH)) {
+			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+		} else {
+			let fromFile = new File(fromFilePath)
+			if (!fromFile.exists()) {
+				return false;
+			}
+			if (!fromFile.isFile()) {
+				return false
+			}
+			if (!fromFile.canRead()) {
+				return false;
+			}
+			fis = new FileInputStream(fromFile);
+		}
+		if (fis == null) {
+			return false
+		}
+	} catch (e) {
+		return false;
+	}
+	let toFile = new File(toFilePath)
+	if (!toFile.getParentFile().exists()) {
+		toFile.getParentFile().mkdirs()
+	}
+	if (!toFile.exists()) {
+		toFile.createNewFile()
+	}
+	try {
+		let fos = new FileOutputStream(toFile)
+		let byteArrays = ByteArray(1024)
+		var c = fis!!.read(byteArrays)
+		while (c > 0) {
+			fos.write(byteArrays, 0, c)
+			c = fis!!.read(byteArrays)
+		}
+		fis!!.close()
+		fos.close()
+		return true
+	} catch (e) {
+		return false;
 	}
 }

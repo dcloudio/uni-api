@@ -115,7 +115,6 @@ export type ChooseImageOptions = {
 	count ?: (number) | null,
 	/**
 	 * original 原图，compressed 压缩图，默认二者都有
-	 * @type string | string []
 	 * @defaultValue ['original','compressed']
 	 * @uniPlatform {
 	 * "app":{
@@ -250,6 +249,30 @@ export type PreviewImageOptions = {
 	urls : Array<string.ImageURIString>,
 	/**
 	 * 是否显示长按菜单
+	 *
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+	 *	"web": {
+	 *		"uniVer": "√",
+	 *		"unixVer": "4.0"
+	 *	}
+	 * }
 	 */
 	showmenu ?: boolean | null,
 	/**
