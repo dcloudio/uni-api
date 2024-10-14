@@ -1,7 +1,7 @@
 {
 	"id": "uni-usercapturescreen",
 	"displayName": "uni-usercapturescreen",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "用户主动截屏事件监听",
 	"keywords": [
         "截屏"
@@ -50,7 +50,8 @@
 		"platforms": {
 			"cloud": {
 				"tcb": "y",
-				"aliyun": "y"
+                "aliyun": "y",
+                "alipay": "n"
 			},
 			"client": {
 				"Vue": {
@@ -59,7 +60,8 @@
 				},
 				"App": {
 					"app-android": "y",
-					"app-ios": "y"
+                    "app-ios": "y",
+                    "app-harmony": "y"
 				},
 				"H5-mobile": {
 					"Safari": "n",
