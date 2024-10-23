@@ -1,0 +1,20 @@
+export type ChooseSystemImageSuccessResult = {
+	filePaths : Array<string>
+}
+export type ImageErrorCode = 2101001 | 2101010 | 2101002
+export interface ChooseSystemImageError extends IUniError {
+	errCode : ImageErrorCode
+};
+export type ChooseSystemImageSuccessCallback = (result : ChooseSystemImageSuccessResult) => void
+export type ChooseSystemImageFailResult = ChooseSystemImageError
+export type ChooseSystemImageFailCallback = (result : ChooseSystemImageFailResult) => void
+export type ChooseSystemImageCompleteCallback = (callback : any) => void
+
+export type ChooseSystemImageOptions = {
+	count : number,
+	success ?: ChooseSystemImageSuccessCallback | null,
+	fail ?: ChooseSystemImageFailCallback | null,
+	complete ?: ChooseSystemImageCompleteCallback | null
+}
+
+export type ChooseSystemImage = (options : ChooseSystemImageOptions) => void
