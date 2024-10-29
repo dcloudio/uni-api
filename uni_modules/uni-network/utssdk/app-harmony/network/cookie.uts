@@ -1,0 +1,44 @@
+import webview from '@ohos.web.webview';
+
+export function getCookie(url: string): Promise<string> {
+    return webview.WebCookieManager.fetchCookie(url);
+}
+
+export function getCookieSync(url: string): string {
+    return webview.WebCookieManager.fetchCookieSync(url);
+}
+
+export function setCookie(url: string, cookies: string[]): Promise<void> {
+    return Promise.all(cookies.map(cookie => webview.WebCookieManager.configCookie(url, cookie))).then(() => {
+        return webview.WebCookieManager.saveCookieAsync();
+    });
+}
+
+export function setCookieSync(url: string, cookies: string[]): void {
+    cookies.forEach(cookie => {
+        let hasSecure = false;
+        let hasSameSite = false;
+        let savedCookie = cookie.split(';').map(cookieItem => {
+            const pair = cookieItem.split('=').map(item => item.trim())
+            const keyLower = pair[0].toLowerCase();
+            if (keyLower === 'secure') {
+                hasSecure = true;
+                return cookieItem;
+            }
+            if (keyLower === 'samesite') {
+                hasSameSite = true;
+                return 'samesite=none';
+            }
+            return cookieItem
+        }).join(';');
+        if (!hasSecure) {
+            savedCookie += '; secure';
+        }
+        if (!hasSameSite) {
+            savedCookie += '; samesite=none';
+        }
+        webview.WebCookieManager.configCookieSync(url, savedCookie);
+    });
+    webview.WebCookieManager.saveCookieAsync();
+}
+

@@ -9,9 +9,6 @@ import {
 import Want from '@ohos.app.ability.Want'
 import bundleManager from '@ohos.bundle.bundleManager';
 import common from '@ohos.app.ability.common';
-import {
-    getAbilityContext
-} from '@dcloudio/uni-runtime'
 
 export {
     OpenAppAuthorizeSetting,
@@ -30,7 +27,7 @@ export const openAppAuthorizeSetting: OpenAppAuthorizeSetting = defineAsyncApi<O
                 pushParams: bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT).name
             }
         } as Want
-        const context = getAbilityContext() as common.UIAbilityContext
+        const context = UTSHarmony.getUIAbilityContext() as common.UIAbilityContext
         context.startAbility(want).then(() => {
             exec.resolve({
                 errMsg: ''

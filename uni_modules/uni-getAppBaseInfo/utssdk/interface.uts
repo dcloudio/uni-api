@@ -707,7 +707,7 @@ export type GetAppBaseInfoResult = {
    */
   bundleId?: string,
   /**
-   * Android: 应用签名证书的SHA1值（全部为小写，中间不包含“:”）。 为了保证应用的安全性，请使用自己生成的证书（不要使用公共测试证书）。
+   * Android: 应用签名证书的SHA1值（全部为小写，中间不包含“:”）。
    * iOS: 应用签名证书中绑定的Bundle ID（AppleID）的md5值（全部为小写）。
    *
    * @uniPlatform
@@ -765,6 +765,36 @@ export type GetAppBaseInfoResult = {
    * }
    */
   appTheme?: 'light' | 'dark' | 'auto' | null,
+
+  /**
+   * 当前应用分发的渠道
+   *
+   * @uniPlatform
+   * {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "5.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.28"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "12.0",
+   * 			"uniVer": "x",
+   * 			"unixVer": "4.31"
+   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+   * 	},
+    *   "web": {
+    *      "uniVer": "x",
+    *      "unixVer": "x"
+    *   }
+   * }
+   */
+  channel?: string,
 }
 
 /**
@@ -800,7 +830,7 @@ export interface Uni {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
    *      "unixVer": "x"
-   *    }}
+   *    }
 	* 	},
     *   "web": {
     *      "uniVer": "√",

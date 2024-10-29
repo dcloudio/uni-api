@@ -1,0 +1,120 @@
+/**
+ * uni.shareWithSystem成功回调参数
+ */
+export type ShareWithSystemSuccess = {
+
+}
+
+/**
+ * uni.shareWithSystem失败回调参数
+ */
+export type ShareWithSystemFail = {
+
+}
+
+/**
+ * uni.shareWithSystem成功回调函数定义
+ */
+export type ShareWithSystemSuccessCallback = (res: ShareWithSystemSuccess) => void
+/**
+ * uni.shareWithSystem失败回调函数定义
+ */
+export type ShareWithSystemFailCallback = (res: ShareWithSystemFail) => void
+/**
+ * uni.shareWithSystem完成回调函数定义
+ */
+export type ShareWithSystemCallback = (res: any) => void
+/**
+ * uni.shareWithSystem参数定义
+ */
+export type ShareWithSystemOptions = {
+    /**
+     * 分享类型，只支持text，image，默认为text。
+     * harmonyOS不支持此参数，如果传了多个类型的数据，分享弹框上可以由用户选择分享什么类型。类型优先级：href > imageUrl > summary，优先级最高的类型会成为默认类型。
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "x"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "x"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
+     */
+    type?: 'text' | 'image',
+    /**
+     * 分享的文字内容
+     */
+    summary?: string,
+    /**
+     * 分享链接
+     */
+    href?: string,
+    /**
+     * 分享图片，仅支持本地路径
+     */
+    imageUrl?: string,
+    /**
+     * 接口调用成功的回调函数
+     */
+    success?: ShareWithSystemSuccessCallback | null,
+    /**
+     * 接口调用失败的回调函数
+     */
+    fail?: ShareWithSystemFailCallback | null,
+    /**
+     * 接口调用结束的回调函数（调用成功、失败都会执行）
+     */
+    complete?: ShareWithSystemCallback | null
+}
+
+export type ShareWithSystem = (options: ShareWithSystemOptions) => void
+
+export interface Uni {
+    /**
+     * uni.shareWithSystem函数定义
+     * 使用系统分享。harmonyOS
+     *
+     * @param {ShareWithSystemOptions} options
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "x"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "x"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "4.31",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
+     * @uniVersion 2.0.3
+     * @uniVueVersion 2,3  //支持的vue版本
+     */
+    shareWithSystem(options: ShareWithSystemOptions): void,
+}

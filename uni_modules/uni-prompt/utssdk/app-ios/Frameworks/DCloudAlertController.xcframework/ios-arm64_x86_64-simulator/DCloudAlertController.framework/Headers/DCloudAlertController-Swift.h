@@ -301,6 +301,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 @class NSCoder;
+@protocol UIViewControllerTransitionCoordinator;
 @class NSString;
 @class NSBundle;
 
@@ -310,6 +311,7 @@ SWIFT_CLASS("_TtC21DCloudAlertController23DCActionSheetController")
 - (void)loadView;
 - (void)viewDidLoad;
 - (void)viewDidLayoutSubviews;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -367,6 +369,8 @@ SWIFT_CLASS("_TtC21DCloudAlertController14DCRIButtonItem")
 @interface DCRIButtonItem : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 
@@ -683,6 +687,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 @class NSCoder;
+@protocol UIViewControllerTransitionCoordinator;
 @class NSString;
 @class NSBundle;
 
@@ -692,6 +697,7 @@ SWIFT_CLASS("_TtC21DCloudAlertController23DCActionSheetController")
 - (void)loadView;
 - (void)viewDidLoad;
 - (void)viewDidLayoutSubviews;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -749,6 +755,8 @@ SWIFT_CLASS("_TtC21DCloudAlertController14DCRIButtonItem")
 @interface DCRIButtonItem : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
 
 
 

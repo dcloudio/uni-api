@@ -25,6 +25,51 @@
         ]
       },
       {
+        "kind": "Var",
+        "name": "ActionSheetNotificationNameViewWillRotate",
+        "printedName": "ActionSheetNotificationNameViewWillRotate",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "usr": "s:SS"
+          }
+        ],
+        "declKind": "Var",
+        "usr": "s:21DCloudAlertController41ActionSheetNotificationNameViewWillRotateSSvp",
+        "mangledName": "$s21DCloudAlertController41ActionSheetNotificationNameViewWillRotateSSvp",
+        "moduleName": "DCloudAlertController",
+        "declAttributes": [
+          "HasInitialValue",
+          "HasStorage",
+          "AccessControl"
+        ],
+        "isLet": true,
+        "hasStorage": true,
+        "accessors": [
+          {
+            "kind": "Accessor",
+            "name": "Get",
+            "printedName": "Get()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Accessor",
+            "usr": "s:21DCloudAlertController41ActionSheetNotificationNameViewWillRotateSSvg",
+            "mangledName": "$s21DCloudAlertController41ActionSheetNotificationNameViewWillRotateSSvg",
+            "moduleName": "DCloudAlertController",
+            "implicit": true,
+            "accessorKind": "get"
+          }
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "DCActionSheetController",
         "printedName": "DCActionSheetController",
@@ -32,7 +77,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(noticeTitle:)",
+            "printedName": "init(noticeTitle:supportedInterfaceOrientations:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -45,11 +90,26 @@
                 "name": "String",
                 "printedName": "Swift.String",
                 "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIInterfaceOrientationMask?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIInterfaceOrientationMask",
+                    "printedName": "UIKit.UIInterfaceOrientationMask",
+                    "usr": "c:@E@UIInterfaceOrientationMask"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:21DCloudAlertController013DCActionSheetC0C11noticeTitleACSS_tcfc",
-            "mangledName": "$s21DCloudAlertController013DCActionSheetC0C11noticeTitleACSS_tcfc",
+            "usr": "s:21DCloudAlertController013DCActionSheetC0C11noticeTitle30supportedInterfaceOrientationsACSS_So26UIInterfaceOrientationMaskVSgtcfc",
+            "mangledName": "$s21DCloudAlertController013DCActionSheetC0C11noticeTitle30supportedInterfaceOrientationsACSS_So26UIInterfaceOrientationMaskVSgtcfc",
             "moduleName": "DCloudAlertController",
             "declAttributes": [
               "Custom",
@@ -126,6 +186,44 @@
             "moduleName": "DCloudAlertController",
             "overriding": true,
             "objc_name": "viewDidLayoutSubviews",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewWillTransition",
+            "printedName": "viewWillTransition(to:with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGSize",
+                "printedName": "CoreFoundation.CGSize",
+                "usr": "c:@S@CGSize"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIViewControllerTransitionCoordinator",
+                "printedName": "UIKit.UIViewControllerTransitionCoordinator",
+                "usr": "c:objc(pl)UIViewControllerTransitionCoordinator"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@DCloudAlertController@objc(cs)DCActionSheetController(im)viewWillTransitionToSize:withTransitionCoordinator:",
+            "mangledName": "$s21DCloudAlertController013DCActionSheetC0C18viewWillTransition2to4withySo6CGSizeV_So06UIViewcH11Coordinator_ptF",
+            "moduleName": "DCloudAlertController",
+            "overriding": true,
+            "objc_name": "viewWillTransitionToSize:withTransitionCoordinator:",
             "declAttributes": [
               "Dynamic",
               "ObjC",
@@ -6547,267 +6645,316 @@
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "StringLiteral",
+      "offset": 177,
+      "length": 43,
+      "value": "\"ActionSheetNotificationNameViewWillRotate\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "BooleanLiteral",
-      "offset": 257,
+      "offset": 432,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "Array",
-      "offset": 297,
+      "offset": 472,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "StringLiteral",
-      "offset": 692,
+      "offset": 1030,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1423,
-      "length": 2,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1435,
-      "length": 2,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "FloatLiteral",
-      "offset": 1704,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "FloatLiteral",
-      "offset": 1748,
-      "length": 3,
-      "value": "0.0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1791,
-      "length": 2,
-      "value": "55"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2173,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2222,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2396,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2402,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2602,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "StringLiteral",
-      "offset": 135,
-      "length": 23,
-      "value": "\"DCloudAlertController.DCActionSheetController\""
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3811,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3943,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3991,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3994,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4038,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4042,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4046,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4345,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4473,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4839,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5047,
+      "offset": 1580,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5198,
+      "offset": 2055,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2067,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2842,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "FloatLiteral",
+      "offset": 2886,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2929,
+      "length": 2,
+      "value": "55"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3306,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "FloatLiteral",
+      "offset": 3966,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "FloatLiteral",
+      "offset": 4041,
+      "length": 3,
+      "value": "0.1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4375,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5572,
+      "offset": 4487,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4639,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4645,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4835,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5045,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5051,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "StringLiteral",
+      "offset": 235,
+      "length": 23,
+      "value": "\"DCloudAlertController.DCActionSheetController\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6073,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6205,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6253,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6256,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6300,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6304,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6308,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6607,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 6735,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7101,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7309,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7460,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 7834,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 5595,
+      "offset": 7857,
       "length": 3,
       "value": "5.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 5624,
+      "offset": 7886,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "IntegerLiteral",
-      "offset": 5763,
+      "offset": 8025,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6063,
+      "offset": 8325,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6103,
+      "offset": 8365,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6386,
+      "offset": 8648,
       "length": 4,
       "value": "16.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6393,
+      "offset": 8655,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6438,
+      "offset": 8700,
       "length": 4,
       "value": "30.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "IntegerLiteral",
-      "offset": 6508,
+      "offset": 8770,
       "length": 2,
       "value": "35"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6543,
+      "offset": 8805,
       "length": 4,
       "value": "55.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetController.swift",
       "kind": "FloatLiteral",
-      "offset": 6583,
+      "offset": 8845,
       "length": 4,
       "value": "55.0"
     },
@@ -7010,364 +7157,371 @@
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 787,
+      "offset": 785,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "IntegerLiteral",
-      "offset": 828,
+      "offset": 826,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1064,
+      "offset": 1062,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1323,
+      "offset": 1321,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1361,
+      "offset": 1359,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 1509,
+      "offset": 1507,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 1521,
+      "offset": 1519,
       "length": 3,
       "value": "0.6"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2224,
+      "offset": 2222,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2980,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "StringLiteral",
-      "offset": 2832,
+      "offset": 3052,
       "length": 39,
       "value": "\"init(coder:) has not been implemented\""
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3201,
+      "offset": 3421,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 3281,
+      "offset": 3501,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 3330,
+      "offset": 3550,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 3549,
-      "length": 4,
-      "value": "0.25"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3605,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
-      "kind": "FloatLiteral",
-      "offset": 3716,
+      "offset": 3769,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 3768,
+      "offset": 3825,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 4528,
+      "offset": 3936,
+      "length": 4,
+      "value": "0.25"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3988,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
+      "kind": "FloatLiteral",
+      "offset": 4748,
       "length": 3,
       "value": "5.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4577,
+      "offset": 4797,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4684,
+      "offset": 4904,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4732,
+      "offset": 4952,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5236,
+      "offset": 5456,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 5634,
+      "offset": 5854,
       "length": 5,
       "value": "440.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 6146,
+      "offset": 6366,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6186,
+      "offset": 6406,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6298,
+      "offset": 6518,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6403,
+      "offset": 6623,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6448,
+      "offset": 6668,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6587,
+      "offset": 6807,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6747,
+      "offset": 6967,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6859,
+      "offset": 7079,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 6964,
+      "offset": 7184,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 7009,
+      "offset": 7229,
       "length": 3,
       "value": "2.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 7148,
+      "offset": 7368,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7813,
+      "offset": 8033,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7976,
+      "offset": 8196,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8091,
+      "offset": 8311,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8239,
+      "offset": 8459,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8575,
+      "offset": 8795,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 8788,
+      "offset": 9008,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "FloatLiteral",
-      "offset": 9311,
+      "offset": 9531,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9927,
+      "offset": 10147,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "StringLiteral",
-      "offset": 9934,
+      "offset": 10154,
       "length": 17,
       "value": "\"错误的视图\""
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10322,
+      "offset": 10542,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10562,
+      "offset": 10782,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10659,
+      "offset": 10879,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10856,
+      "offset": 11076,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11490,
+      "offset": 11710,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11543,
+      "offset": 11763,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11640,
+      "offset": 11860,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11838,
+      "offset": 12058,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "BooleanLiteral",
-      "offset": 12656,
+      "offset": 12876,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCBottomMenuController.swift",
       "kind": "StringLiteral",
-      "offset": 8838,
+      "offset": 9058,
       "length": 30,
       "value": "\"DCloudAlertController.DCBottomMenuControllerAnimator\""
     },
@@ -7377,6 +7531,223 @@
       "offset": 124,
       "length": 3,
       "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4456,
+      "length": 5,
+      "value": "568.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4577,
+      "length": 5,
+      "value": "568.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4602,
+      "length": 5,
+      "value": "667.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4727,
+      "length": 5,
+      "value": "667.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4752,
+      "length": 5,
+      "value": "736.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4889,
+      "length": 5,
+      "value": "812.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4913,
+      "length": 5,
+      "value": "375.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 4937,
+      "length": 3,
+      "value": "2.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5057,
+      "length": 5,
+      "value": "736.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5082,
+      "length": 5,
+      "value": "812.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5224,
+      "length": 5,
+      "value": "812.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5249,
+      "length": 5,
+      "value": "844.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5379,
+      "length": 5,
+      "value": "844.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5404,
+      "length": 5,
+      "value": "896.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5552,
+      "length": 5,
+      "value": "896.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5576,
+      "length": 5,
+      "value": "414.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5600,
+      "length": 3,
+      "value": "2.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5716,
+      "length": 5,
+      "value": "896.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5740,
+      "length": 5,
+      "value": "414.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5764,
+      "length": 3,
+      "value": "3.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 5880,
+      "length": 5,
+      "value": "896.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 6016,
+      "length": 5,
+      "value": "852.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "FloatLiteral",
+      "offset": 6041,
+      "length": 5,
+      "value": "932.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6561,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6648,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6705,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6937,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7016,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7071,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7130,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/UIView.Layout.swift",
+      "kind": "BooleanLiteral",
+      "offset": 7175,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCAlertControllerUtil.swift",
@@ -7767,188 +8138,258 @@
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "BooleanLiteral",
       "offset": 693,
-      "length": 5,
-      "value": "false"
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 815,
+      "offset": 814,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 956,
+      "offset": 955,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1197,
+      "offset": 1196,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 1357,
+      "offset": 1356,
       "length": 4,
       "value": "30.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1456,
+      "offset": 1455,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 1461,
+      "offset": 1460,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1672,
+      "offset": 1671,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 1677,
+      "offset": 1676,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 1708,
+      "offset": 1707,
       "length": 4,
       "value": "18.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1857,
+      "offset": 1856,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1864,
+      "offset": 1863,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "BooleanLiteral",
-      "offset": 1921,
+      "offset": 1920,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 1966,
+      "offset": 1965,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "StringLiteral",
-      "offset": 728,
+      "offset": 727,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 2374,
+      "offset": 2908,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
-      "kind": "StringLiteral",
-      "offset": 2518,
-      "length": 39,
-      "value": "\"init(coder:) has not been implemented\""
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
-      "kind": "FloatLiteral",
-      "offset": 2688,
+      "kind": "BooleanLiteral",
+      "offset": 3053,
       "length": 4,
-      "value": "30.0"
+      "value": "true"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 2717,
+      "offset": 3087,
       "length": 4,
       "value": "40.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 2747,
+      "offset": 3121,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 2868,
+      "offset": 3282,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 2873,
+      "offset": 3287,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "IntegerLiteral",
-      "offset": 3020,
+      "offset": 3442,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 3025,
+      "offset": 3447,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 3056,
+      "offset": 3478,
+      "length": 4,
+      "value": "18.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3570,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3577,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "StringLiteral",
+      "offset": 3678,
+      "length": 39,
+      "value": "\"init(coder:) has not been implemented\""
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "FloatLiteral",
+      "offset": 3848,
+      "length": 4,
+      "value": "30.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "FloatLiteral",
+      "offset": 3877,
+      "length": 4,
+      "value": "40.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3907,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4028,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "FloatLiteral",
+      "offset": 4033,
+      "length": 4,
+      "value": "25.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4180,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "FloatLiteral",
+      "offset": 4185,
+      "length": 4,
+      "value": "25.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
+      "kind": "FloatLiteral",
+      "offset": 4216,
       "length": 4,
       "value": "18.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "FloatLiteral",
-      "offset": 3130,
+      "offset": 4290,
       "length": 5,
       "value": "0.001"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetHeader.swift",
       "kind": "StringLiteral",
-      "offset": 3212,
+      "offset": 4372,
       "length": 21,
       "value": "\"DCActionSheetHeader\""
     },
@@ -8550,112 +8991,189 @@
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2190,
+      "offset": 2299,
       "length": 4,
       "value": "16.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2197,
+      "offset": 2306,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 2271,
+      "offset": 2380,
       "length": 2,
       "value": "35"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2293,
+      "offset": 2402,
       "length": 4,
       "value": "55.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2320,
+      "offset": 2429,
       "length": 4,
       "value": "55.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 2391,
+      "offset": 2500,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 2398,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2458,
+      "offset": 2507,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2591,
+      "offset": 2677,
+      "length": 6,
+      "value": "-200.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 2732,
+      "length": 5,
+      "value": "200.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 2977,
+      "length": 5,
+      "value": "115.5"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3077,
       "length": 4,
-      "value": "55.0"
+      "value": "93.5"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2654,
+      "offset": 3178,
+      "length": 4,
+      "value": "84.5"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3252,
+      "length": 4,
+      "value": "97.5"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3358,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3450,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3508,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3557,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3889,
+      "length": 3,
+      "value": "0.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 3915,
       "length": 4,
       "value": "30.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2789,
+      "offset": 5085,
+      "length": 4,
+      "value": "55.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 5148,
+      "length": 4,
+      "value": "30.0"
+    },
+    {
+      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 5283,
       "length": 4,
       "value": "16.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2796,
+      "offset": 5290,
       "length": 4,
       "value": "25.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 2870,
+      "offset": 5364,
       "length": 2,
       "value": "35"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2892,
+      "offset": 5386,
       "length": 4,
       "value": "55.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "FloatLiteral",
-      "offset": 2919,
+      "offset": 5413,
       "length": 4,
       "value": "55.0"
     },
     {
       "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCloudAlertController\/DCloudAlertController\/DCActionSheetActionCell.swift",
       "kind": "StringLiteral",
-      "offset": 3041,
+      "offset": 5535,
       "length": 25,
       "value": "\"DCActionSheetActionCell\""
     },

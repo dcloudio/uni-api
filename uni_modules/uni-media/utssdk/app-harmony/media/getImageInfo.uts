@@ -9,13 +9,47 @@ import {
     GetImageInfoApiOptions,
     GetImageInfoApiProtocol,
 } from '../../protocol.uts'
+import { uni } from '@dcloudio/uni-runtime'
 
-// TODO 网络图片
+interface IGetImageInfoDownloadOptions {
+    url: string
+    success: (res: IGetImageInfoDownloadSuccess) => void
+    fail: (err: IGetImageInfoDownloadFail) => void
+}
+
+interface IGetImageInfoDownloadSuccess {
+    tempFilePath: string
+}
+
+interface IGetImageInfoDownloadFail {
+    errMsg: string
+}
+
 export const getImageInfo: GetImageInfo =
     defineAsyncApi<GetImageInfoOptions, GetImageInfoSuccess>(
         API_GET_IMAGE_INFO,
-        function (options: GetImageInfoOptions, res: ApiExecutor<GetImageInfoSuccess>) {
-            _getImageInfo(options.src).then((getImageInfoRes) => {
+        async function (options: GetImageInfoOptions, res: ApiExecutor<GetImageInfoSuccess>) {
+            let src = options.src
+            if (src.startsWith('http:') || src.startsWith('https:')) {
+                try {
+                    src = await new Promise<string>((resolve, reject) => {
+                        uni.downloadFile({
+                            url: options.src,
+                            success: (res: IGetImageInfoDownloadSuccess) => {
+                                resolve(res.tempFilePath)
+                            },
+                            fail: (err: IGetImageInfoDownloadFail) => {
+                                reject(err)
+                            }
+                        } as IGetImageInfoDownloadOptions)
+                    })
+                } catch (err) {
+                    const error  = err as IGetImageInfoDownloadFail
+                    res.reject(error.errMsg)
+                    return
+                }
+            }
+            _getImageInfo(src).then((getImageInfoRes) => {
                 res.resolve(getImageInfoRes)
             }, (err: Error) => {
                 res.reject(err.message)

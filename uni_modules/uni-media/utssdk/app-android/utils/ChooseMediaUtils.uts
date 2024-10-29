@@ -1,6 +1,6 @@
 import {
 	ChooseImageOptions, ChooseImageSuccess, ChooseImageCropOptions,
-	ChooseVideoOptions, ChooseVideoSuccess,
+	ChooseVideoOptions, ChooseVideoSuccess, ChooseImageTempFile,
 	GetVideoInfoSuccess,
 } from "../../interface.uts"
 import {
@@ -27,7 +27,7 @@ import CompressUtil from 'io.dcloud.uts.util.CompressUtil';
 
 const GALLERY_MEDIA_PICKER_RESULT = 1004;
 
-const mediaCachePath = UTSAndroid.getAppCachePath()+"uni-media/"
+const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
 
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
@@ -88,7 +88,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 						"errSubject": "uni-chooseImage",
 						"tempFilePaths": ["file://" + cameraPath],
 						"errMsg": "chooseImage:ok",
-						"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() }]
+						"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() } as ChooseImageTempFile]
 					}
 					option.success?.(success)
 					option.complete?.(success)
@@ -133,7 +133,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 								"errSubject": "uni-chooseImage",
 								"tempFilePaths": ["file://" + cameraPath],
 								"errMsg": "chooseImage:ok",
-								"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() }]
+								"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() } as ChooseImageTempFile]
 							}
 							option.success?.(success)
 							option.complete?.(success)
@@ -174,19 +174,17 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 		if (requestCode == GALLERY_MEDIA_PICKER_RESULT) {
 			UTSAndroid.offAppActivityResult(albumFunction!)
 			let picPaths : Array<string> = []
-			let picTempPathJson : Array<UTSJSONObject> = []
+			let picTempPathJson : Array<ChooseImageTempFile> = []
 			if (data != null) {
 				let selectMediaResult : kotlin.collections.ArrayList<Parcelable> | null = data!!.getParcelableArrayListExtra("select_result");
 				if (selectMediaResult != null) {
 					selectMediaResult.forEach((current) => {
 						let path = (current as Media).path;
 						picPaths.push("file://" + (current as Media).path);
-						let tempPathJson = {}
-						tempPathJson["path"] = "file://" + path
 						try {
-							tempPathJson["size"] = new File(path).length()
+							let tempPathJson : ChooseImageTempFile = {"path":"file://" + path,"size":new File(path).length()}
+							picTempPathJson.push(tempPathJson)
 						} catch (e) { }
-						picTempPathJson.push(tempPathJson)
 					})
 				}
 			}

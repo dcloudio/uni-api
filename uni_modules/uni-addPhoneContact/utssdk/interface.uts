@@ -75,13 +75,6 @@ export interface Uni {
 
 export type AddPhoneContact = (options: AddPhoneContactOptions) => void;
 export type AddPhoneContactSuccess = {};
-export type UniError = {
-  errSubject: string,
-  errCode: number,
-  errMsg: string,
-  data?: object | null,
-  cause?: any | null
-};
 export type AddPhoneContactSuccessCallback = (result: AddPhoneContactSuccess) => void;
 export type AddPhoneContactFail = UniError;
 export type AddPhoneContactFailCallback = (result: AddPhoneContactFail) => void;

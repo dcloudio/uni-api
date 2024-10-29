@@ -1,15 +1,11 @@
 import {
     RequestMethod,
     RequestOptions,
-    RequestTask,
     UploadFileOptions,
-    UploadTask,
     DownloadFileOptions,
-    DownloadTask,
+    Certificate,
+    ConfigMTLSOptions,
 } from './interface.uts'
-import {
-    getRealPath,
-} from '@dcloudio/uni-runtime'
 
 // request
 export const API_REQUEST = 'request';
@@ -204,7 +200,7 @@ export const UploadFileApiProtocol = new Map<string, ProtocolOptions>([
         'filePath',
         {
             type: 'string',
-            required: true
+            required: false
         }
     ],
     [
@@ -235,7 +231,6 @@ export const UploadFileApiProtocol = new Map<string, ProtocolOptions>([
             required: false
         }
     ],
-    
 ])
 export const UploadFileApiOptions: ApiOptions<UploadFileOptions> = {
     formatArgs: new Map<string, Function>([
@@ -248,15 +243,6 @@ export const UploadFileApiOptions: ApiOptions<UploadFileOptions> = {
             }
         ],
         [
-            'filePath',
-            function (filePath: string, params: UploadFileOptions) {
-                if (filePath == null) {
-                    throw new Error('filePath is required')
-                }
-                params.filePath = getRealPath(filePath)
-            }
-        ],
-        [
             'name',
             function (name: string, params: UploadFileOptions) {
                 if (name == null) {
@@ -266,3 +252,31 @@ export const UploadFileApiOptions: ApiOptions<UploadFileOptions> = {
         ],
     ]),
 }
+
+// #region configMTLS
+export const API_CONFIG_MTLS = 'configMTLS'
+export const ConfigMTLSApiProtocol = new Map<string, ProtocolOptions>([
+    [
+        'certificates',
+        {
+            type: 'array',
+            required: true,
+        }
+    ]
+])
+export const ConfigMTLSApiOptions: ApiOptions<ConfigMTLSOptions> = {
+    formatArgs: new Map<string, Function>(
+        [
+            [
+                'certificates',
+                function (certificates?: Certificate[]) {
+                    if (!certificates || certificates.some((item) => typeof item.host !== 'string')) {
+                        return '参数 certificates 配置错误，请确认后重试'
+                    }
+                    return undefined
+                }
+            ]
+        ]
+    )
+}
+// #endregion

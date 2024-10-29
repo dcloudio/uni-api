@@ -11,6 +11,7 @@ import {
 	SaveVideoToPhotosAlbum, SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccess,
 	CompressVideo, CompressVideoOptions,
 } from "../interface.uts"
+export { ChooseFileSuccess, ChooseFileOptions, ChooseMediaFileType, ChooseMediaTempFile, ChooseMediaSuccess, ChooseMediaOptions, ChooseFileFail, ChooseFileComplete, ChooseMediaFail } from '../interface.uts';
 import {
 	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
 	MediaErrorImpl

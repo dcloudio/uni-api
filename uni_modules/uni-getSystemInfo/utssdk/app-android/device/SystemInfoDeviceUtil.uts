@@ -12,6 +12,12 @@ import TextUtils from 'android.text.TextUtils';
 import BufferedReader from 'java.io.BufferedReader';
 import InputStreamReader from 'java.io.InputStreamReader';
 
+// #ifdef UNI-APP-X
+import ViewCompat from 'androidx.core.view.ViewCompat';
+import WindowInsetsCompat from 'androidx.core.view.WindowInsetsCompat';
+import Settings from 'android.provider.Settings';
+// #endif
+
 
 export class DeviceUtil {
 
@@ -324,5 +330,65 @@ export class DeviceUtil {
 		} catch (e : Exception) {
 		}
 		return value;
+	}
+
+	public static getNavigationBarHeight(activity : Activity) : number {
+		let result = 0;
+		const resourceId = activity.resources.getIdentifier("navigation_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = Math.round(activity.resources.getDimensionPixelSize(resourceId) / DeviceUtil.getScaledDensity(activity));
+		}
+		return result;
+	}
+	
+	// #ifdef UNI-APP-X
+	public static isGestureNavigationIndicator(activity : Activity) : boolean {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			const insets = ViewCompat.getRootWindowInsets(activity.getWindow().getDecorView());
+			if (insets == null) return false;
+			const navigationBarsInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+			const systemGesturesInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures());
+			let navigationMode = 0;
+			try {
+				navigationMode = Settings.Secure.getInt(activity.getContentResolver(), "navigation_mode");
+			} catch (e : Settings.SettingNotFoundException) { }
+			return navigationBarsInsets.bottom != 0 && (navigationBarsInsets.bottom != systemGesturesInsets.bottom || navigationMode == 2);
+		}
+		return false;
+	}
+	// #endif
+	
+	public static isInMultiWindowMode(activity : Activity) : boolean {
+		if (Build.BRAND.equals("OPPO", true)) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+				const windowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager;
+				const currentMetrics = windowManager.getCurrentWindowMetrics();
+				const displayMetrics = new DisplayMetrics();
+				windowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+				return currentMetrics.getBounds().width() != displayMetrics.widthPixels || currentMetrics.getBounds().height() != displayMetrics.heightPixels;
+			}
+			return false;
+		} else {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+				return activity.isInMultiWindowMode();
+			}
+			return false;
+		}
+	}
+	
+	/**
+	 * 当前应用分屏状态
+	 * top表示分屏处于顶部
+	 * other表示分屏处于底部或左右两侧
+	 */
+	public static getSplitScreenPosition(activity : Activity) : string {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			const windowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager;
+			const currentMetrics = windowManager.getCurrentWindowMetrics();
+			const displayMetrics = new DisplayMetrics();
+			windowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+			return currentMetrics.getBounds().top == 0 && currentMetrics.getBounds().left == 0 && currentMetrics.getBounds().right == displayMetrics.widthPixels ? 'top' : 'other';
+		}
+		return 'other';
 	}
 }

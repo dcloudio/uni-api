@@ -60,8 +60,8 @@ export {
     GetFileInfoFail
 }
 
-function getSavedDir(appId: string) {
-    return getEnv().USER_DATA_PATH + '/' + appId + '/saved'
+function getSavedDir() {
+    return getEnv().USER_DATA_PATH + '/saved'
 }
 
 let savedIndex: [string, number] = ['0', 0]
@@ -99,7 +99,7 @@ export const saveFile: SaveFile = defineAsyncApi<SaveFileOptions, SaveFileSucces
     API_SAVE_FILE,
     function (options: SaveFileOptions, exec: ApiExecutor<SaveFileSuccess>) {
         const tempFilePath = getRealPath(options.tempFilePath) as string;
-        const savedPath = getSavedDir(APP_ID)
+        const savedPath = getSavedDir()
         if (!fs.accessSync(savedPath)) {
             fs.mkdirSync(savedPath, true)
         }
@@ -117,7 +117,7 @@ export const saveFile: SaveFile = defineAsyncApi<SaveFileOptions, SaveFileSucces
                 exec.reject(err.message)
             } else {
                 exec.resolve({
-                    savedFilePath: 'file://' + savedFilePath
+                    savedFilePath
                 } as SaveFileSuccess)
             }
         })
@@ -127,7 +127,7 @@ export const saveFile: SaveFile = defineAsyncApi<SaveFileOptions, SaveFileSucces
 export const getSavedFileList: GetSavedFileList = defineAsyncApi<GetSavedFileListOptions, GetSavedFileListSuccess>(
     API_GET_SAVED_FILE_LIST,
     function (options: GetSavedFileListOptions, exec: ApiExecutor<GetSavedFileListSuccess>) {
-        const savedPath = getSavedDir(APP_ID)
+        const savedPath = getSavedDir()
         if (!fs.accessSync(savedPath)) {
             exec.resolve({
                 fileList: []
@@ -145,7 +145,7 @@ export const getSavedFileList: GetSavedFileList = defineAsyncApi<GetSavedFileLis
                             return null
                         }
                         return {
-                            filePath: 'file://' + fullPath,
+                            filePath: fullPath,
                             size: stat.size,
                             createTime: stat.ctime
                         } as SavedFileListItem

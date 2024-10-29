@@ -60,7 +60,24 @@ export interface IMediaError extends IUniError {
 	errCode : MediaErrorCode
 };
 
-
+export type ChooseImageTempFile = {
+	/**
+	 * 本地文件路径
+	 */
+	path: string,
+	/**
+	 * 本地文件大小，单位：B
+	 */
+	size: number,
+	/**
+	 * 包含扩展名的文件名称，仅H5支持
+	 */
+	name?: string | null,
+	/**
+	 * 文件类型，仅H5支持
+	 */
+	type?: string | null
+}
 export type ChooseImageSuccess = {
 	/**
 	 * 调用API的名称
@@ -78,7 +95,7 @@ export type ChooseImageSuccess = {
 	/**
 	 * 图片的本地文件列表
 	 */
-	tempFiles : any
+	tempFiles : ChooseImageTempFile[]
 }
 
 export type ChooseImageFail = IMediaError;
@@ -99,12 +116,12 @@ export type ChooseImageCropOptions = {
 	 * 取值范围为1-100，数值越小，质量越低（仅对jpg格式有效）。默认值为80。
 	 * @defaultValue 80
 	 */
-	quality : (number) | null;
+	quality ?: (number) | null;
 	/**
 	 * 是否将width和height作为裁剪保存图片真实的像素值。默认值为true。注：设置为false时在裁剪编辑界面显示图片的像素值，设置为true时不显示。
 	 * @type boolean
 	 */
-	resize : (boolean) | null;
+	resize ?: (boolean) | null;
 }
 
 export type ChooseImageOptions = {
@@ -146,11 +163,15 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "x"
 	 *		},
 	 *   "harmony": {
-   *        "osVer": "3.0",
-   *        "uniVer": "4.23",
+   *        "osVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *      }
-	 * 	 }
+	 * 	 },
+	 * "web": {
+	 *		"uniVer": "2.9.9",
+	 *		"unixVer": "4.0"
+	 * 	}
 	 * }
 	 */
 	extension ?: (string[]) | null,
@@ -159,8 +180,8 @@ export type ChooseImageOptions = {
 	 * @uniPlatform {
 	 * "app":{
    *    "harmony": {
-   *      "osVer": "3.0",
-   *      "uniVer": "4.23",
+   *      "osVer": "x",
+   *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
 	 * },
@@ -584,8 +605,8 @@ export type ChooseVideoOptions = {
 	 * @uniPlatform {
 	 * "app": {
    *    "harmony": {
-   *      "osVer": "x",
-   *      "uniVer": "x",
+   *      "osVer": "3.0",
+   *      "uniVer": "4.25",
    *      "unixVer": "x"
    *    }
 	 *	},
@@ -602,8 +623,8 @@ export type ChooseVideoOptions = {
 	 * @uniPlatform {
 	 * "app": {
    *    "harmony": {
-   *      "osVer": "x",
-   *      "uniVer": "x",
+   *      "osVer": "3.0",
+   *      "uniVer": "4.25",
    *      "unixVer": "x"
    *    }
 	 *	},
@@ -869,6 +890,199 @@ export type CompressVideoOptions = {
 };
 
 export type CompressVideo = (options : CompressVideoOptions) => void;
+
+export type ChooseFile = (options: ChooseFileOptions) => void;
+export type ChooseFileSuccess = {
+    /**
+     * 文件的本地文件路径列表
+     * @type string | string []
+     */
+    tempFilePaths: string[],
+    /**
+     * 文件的本地文件列表，每一项是一个 File 对象
+     * @type ChooseFileSuccessCallbackResultFile | ChooseFileSuccessCallbackResultFile [] | File | File []
+     */
+    tempFiles: any
+};
+export type ChooseFileSuccessCallback = (result: ChooseFileSuccess) => void;
+export type ChooseFileFail = IMediaError;
+export type ChooseFileFailCallback = (result: ChooseFileFail) => void;
+export type ChooseFileComplete = any;
+export type ChooseFileCompleteCallback = (result: ChooseFileComplete) => void;
+export type ChooseFileOptions = {
+    /**
+     * 最多可以选择的文件数，默认100
+     */
+    count?: number | null,
+    /**
+     * 选择文件的类型，默认all，可选image、video
+     * - image: 选择图片文件
+     * - video: 选择视频文件
+     * - all: 默认值，选择本地文件，包含图片和视频
+     */
+    type?: 'image' | 'video' | 'all' | null,
+    /**
+     * 选择文件的后缀名，暂只支持.zip、.png等，不支持application/msword等值
+     */
+    extension?: (string[]) | null,
+    /**
+     * original 原图，compressed 压缩图，默认二者都有
+     * @type string | string []
+     */
+    sizeType?: any | null,
+    /**
+     * album 从相册选图，camera 使用相机，默认二者都有
+     */
+    sourceType?: (string[]) | null,
+    /**
+     * 成功则返回图片的本地文件路径列表 tempFilePaths、tempFiles
+     */
+    success?: ChooseFileSuccessCallback | null,
+    /**
+     * 接口调用失败的回调函数
+     */
+    fail?: ChooseFileFailCallback | null,
+    /**
+     * 接口调用结束的回调函数（调用成功、失败都会执行）
+     */
+    complete?: ChooseFileCompleteCallback | null
+};
+
+
+export type ChooseMediaFileType = 'image' | 'video'
+export type ChooseMediaTempFile = {
+	/**
+	 * 选定视频的临时文件路径
+	 */
+	tempFilePath : string,
+	/**
+	 * 文件类型
+	 */
+	fileType: ChooseMediaFileType
+	/**
+	 * 选定视频的数据量大小
+	 */
+	size : number,
+	/**
+	 * 选定视频的时间长度
+	 */
+	duration ?: number | null,
+	/**
+	 * 返回选定视频的长
+	 */
+	height ?: number | null,
+	/**
+	 * 返回选定视频的宽
+	 */
+	width ?: number | null,
+	/**
+	 * 视频缩略图临时文件路径
+	 */
+	thumbTempFilePath?: string | null
+}
+export type ChooseMediaSuccess = {
+	tempFiles: ChooseMediaTempFile[],
+	type: 'image' | 'video' | 'mix'
+};
+
+export type ChooseMediaFail = IMediaError;
+export type ChooseMediaSuccessCallback = (callback : ChooseMediaSuccess) => void
+export type ChooseMediaFailCallback = (callback : ChooseMediaFail) => void
+export type ChooseMediaCompleteCallback = ChooseImageCompleteCallback
+
+export type ChooseMediaOptions = {
+	/**
+	 * 最多可以选择的文件个数
+	 * @defaultValue 9
+	 */
+	count?: number | null
+	/**
+	 * album 从相册选视频，camera 使用相机拍摄，合法值：'image'、'video'、'mix'
+	 * @defaultValue 	['image', 'video']
+	 */
+	mediaType ?: (string[]) | null,
+	/**
+	 * album 从相册选视频，camera 使用相机拍摄
+	 * @defaultValue ['album', 'camera']
+	 */
+	sourceType ?: (string[]) | null,
+	/**
+	 * 仅对 mediaType 为 image 时有效，是否压缩所选文件
+	 * @defaultValue ['original','compressed']
+	 * @uniPlatform {
+	 * "app":{
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "x"
+   *    }
+	 * },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
+	 * }
+	 */
+	sizeType ?: (string[]) | null,
+	/**
+	 * 拍摄视频最长拍摄时间，单位秒。时间范围为 3s 至 30s 之间
+	 * @defaultValue 10
+	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.31",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
+	 * }
+	 */
+	maxDuration ?: number | null,
+	/**
+	 * 仅在 sourceType 为 camera 时生效，使用前置或后置摄像头
+	 *
+	 * @uniPlatform {
+	 * "app": {
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.25",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
+	 * }
+	 */
+	camera ?:
+	/**
+	 * 前置摄像头
+	 */
+	'front' |
+	/**
+	 * 后置摄像头
+	 */
+	'back' | null,
+	/**
+	 * 接口调用成功，返回视频文件的临时文件路径，详见返回参数说明
+	 */
+	success ?: (ChooseMediaSuccessCallback) | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: (ChooseMediaFailCallback) | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: (ChooseMediaCompleteCallback) | null
+};
+
+export type ChooseMedia = (options : ChooseMediaOptions) => void;
 
 export interface Uni {
 	/**
@@ -1200,8 +1414,8 @@ export interface Uni {
 	 *			"unixVer": "4.25"
 	 *		},
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
+     *      "osVer": "3.0",
+     *      "uniVer": "4.31",
      *      "unixVer": "x"
      *    }
 	 *	},
@@ -1375,8 +1589,8 @@ export interface Uni {
 	 *			"unixVer": "4.25"
 	 *		},
 	 *    "harmony": {
-	 *      "osVer": "x",
-	 *      "uniVer": "x",
+	 *      "osVer": "3,0",
+	 *      "uniVer": "4.31",
 	 *      "unixVer": "x"
 	 *    }
 	 *	},
@@ -1402,4 +1616,65 @@ export interface Uni {
 	 *
 	 */
 	compressVideo(options : CompressVideoOptions) : void;
+	/**
+	 * 从本地选择文件（仅支持H5）
+	 *
+	 * @tutorial https://uniapp.dcloud.net.cn/api/media/file.html#choosefile
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/file.html#choosefile
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "x",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "x",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.31",
+	 *      "unixVer": "x"
+	 *    }
+	 *	},
+   *  "web": {
+   *    "uniVer": "2.9.9",
+   *    "unixVer": "4.0"
+   *  }
+	 * }
+	 */
+	chooseFile: ChooseFile;
+	/**
+	 * 拍摄或从手机相册中选择图片或视频。
+	 *
+	 * @tutorial https://uniapp.dcloud.net.cn/api/media/video.html#choosemedia
+	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html#choosemedia
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "x",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "x",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.31",
+	 *      "unixVer": "x"
+	 *    }
+	 *	},
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "x"
+   *  }
+	 * }
+	 */
+	chooseMedia: ChooseMedia;
+
 }

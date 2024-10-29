@@ -43,24 +43,6 @@ class InnerStats implements Stats {
 	isFile() : boolean {
 		return this.mIsFile
 	}
-	/**
-	 * @internal
-	 */
-	override toLog() : any | null {
-		return this.toJSON()
-	}
-	/**
-	 * @internal
-	 */
-	override toJSON() : any | null {
-		let jsonRet = new UTSJSONObject()
-		jsonRet.set("mode", this.mode)
-		jsonRet.set("size", this.size)
-		jsonRet.set("lastAccessedTime", this.lastAccessedTime)
-		jsonRet.set("lastModifiedTime", this.lastModifiedTime)
-		return jsonRet
-	}
-
 }
 
 function wrapFileStats(nativeStats) : FileStats {

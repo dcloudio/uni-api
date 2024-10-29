@@ -1,4 +1,4 @@
-import { RequestPaymentErrorCode, IRequestPaymentFail,errorCode } from "./interface.uts"
+import { RequestPaymentErrorCode, IRequestPaymentFail } from "./interface.uts"
 
 /**
  * 错误主题
@@ -8,7 +8,7 @@ export const RequestPaymentUniErrorSubject = 'uni-requestPayment';
  * 错误码
  * @UniError
  */
-const RequestPaymentUniErrors : Map<RequestPaymentErrorCode, string> = new Map([
+export const RequestPaymentUniErrors : Map<RequestPaymentErrorCode, string> = new Map([
 	/**
 	 * 正在处理中，支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
 	 */
@@ -33,6 +33,15 @@ const RequestPaymentUniErrors : Map<RequestPaymentErrorCode, string> = new Map([
 	 * 支付结果未知（有可能已经支付成功），请查询商家订单列表中订单的支付状态。
 	 */
 	[700603, 'Payment result unknown (may have been successfully paid), please check the payment status of the order in the merchant order list.'],
+	/**
+	 * 支付未完成，支付宝支付6007错误。
+	 */
+	[700607, 'Payment not completed.'],
+	/**
+	 * 参数错误，支付宝支付4001错误。
+	 */
+	[700608, 'Parameter error.'],
+	
 	/**
 	 * 其它支付错误。
 	 */
@@ -60,7 +69,7 @@ export class RequestPaymentFailImpl extends UniError implements IRequestPaymentF
 		super();
 		this.errSubject = RequestPaymentUniErrorSubject;
 		this.errCode = errCode;
-		this.errMsg = RequestPaymentUniErrors[errCode] ?? "";
+		this.errMsg = RequestPaymentUniErrors.get(errCode) ?? "";
 	}
 }
 

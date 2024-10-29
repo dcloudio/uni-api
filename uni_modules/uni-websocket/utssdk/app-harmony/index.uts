@@ -24,7 +24,8 @@ import {
     API_CLOSE_SOCKET,
 } from '../protocol.uts'
 import {
-    Emitter
+    Emitter,
+    getCurrentMP,
 } from '@dcloudio/uni-runtime'
 
 export {
@@ -38,6 +39,19 @@ export {
     OnSocketErrorCallbackResult
 }
 
+interface UniWebsocketMP {
+    id: string
+    on: Function
+    off: Function
+}
+
+interface IUniWebsocketEmitter {
+    on: (eventName: string, callback: Function) => void
+    once: (eventName: string, callback: Function) => void
+    off: (eventName: string, callback?: Function | null) => void
+    emit: (eventName: string, ...args: (Object | undefined | null)[]) => void
+}
+
 function tryExec(fn: Function | null | undefined, ...args: any[]) {
     if (!fn) {
         return
@@ -49,32 +63,37 @@ function tryExec(fn: Function | null | undefined, ...args: any[]) {
     }
 }
 
-interface IUniWebsocketEmitter {
-    on: Function,
-    off: Function,
-    emit: Function,
+const GlobalWebsocketEmitter = new Emitter() as IUniWebsocketEmitter
+
+function destroySocketTaskEmitter(emitter: IUniWebsocketEmitter) {
+    emitter.off('message')
+    emitter.off('open')
+    emitter.off('error')
+    emitter.off('close')
 }
 
-const GlobalWebsocketEvent: IUniWebsocketEmitter = new Emitter() as IUniWebsocketEmitter
-
 class SocketTask implements UniSocketTask {
+    _destroy: Function
     private _ws: webSocket.WebSocket;
-    private _emitter: IUniWebsocketEmitter = new Emitter()
+    private _emitter: IUniWebsocketEmitter = new Emitter() as IUniWebsocketEmitter
     constructor(ws: webSocket.WebSocket) {
+        const mp = getCurrentMP() as UniWebsocketMP
         this._ws = ws;
         this._ws.on('message', (_, data) => {
             const message = {
                 data
             } as OnSocketMessageCallbackResult
             this._emitter.emit('message', message)
+            const socketTasks = getSocketTasks(mp.id)
             if (this === socketTasks[0]) {
-                GlobalWebsocketEvent.emit('message', message)
+                GlobalWebsocketEmitter.emit('message', message)
             }
         })
         this._ws.on('open', (_, data) => {
             this._emitter.emit('open', data)
+            const socketTasks = getSocketTasks(mp.id)
             if (this === socketTasks[0]) {
-                GlobalWebsocketEvent.emit('open', data)
+                GlobalWebsocketEmitter.emit('open', data)
             }
         })
         this._ws.on('error', (error) => {
@@ -82,26 +101,26 @@ class SocketTask implements UniSocketTask {
                 errMsg: error.message
             } as OnSocketErrorCallbackResult
             this._emitter.emit('error', message)
+            const socketTasks = getSocketTasks(mp.id)
             if (this === socketTasks[0]) {
-                GlobalWebsocketEvent.emit('error', message)
-            }
-
-            const index = socketTasks.indexOf(this)
-            if (index >= 0) {
-                socketTasks.splice(index, 1)
+                GlobalWebsocketEmitter.emit('error', message)
             }
         })
         this._ws.on('close', (_, data) => {
             this._emitter.emit('close', data)
+            const socketTasks = getSocketTasks(mp.id)
             if (this === socketTasks[0]) {
-                GlobalWebsocketEvent.emit('close', data)
+                GlobalWebsocketEmitter.emit('close', data)
             }
-
             const index = socketTasks.indexOf(this)
             if (index >= 0) {
                 socketTasks.splice(index, 1)
             }
         })
+        this._destroy = () => {
+            destroySocketTaskEmitter(this._emitter)
+            this.close()
+        }
     }
 
     send(options: SendSocketMessageOptions) {
@@ -148,22 +167,49 @@ class SocketTask implements UniSocketTask {
     }
 }
 
-const socketTasks: SocketTask[] = []
+const socketTasksMap: Map<string, SocketTask[]> = new Map()
+
+function addSocketTask(task: SocketTask) {
+    const mp = getCurrentMP() as UniWebsocketMP
+    mp.on('beforeClose', task._destroy)
+    task.onClose(() => {
+        mp.off('beforeClose', task._destroy)
+    })
+    const id = mp.id
+    if (!socketTasksMap.has(id)) {
+        socketTasksMap.set(id, [])
+    }
+    const socketTasks = socketTasksMap.get(id) as SocketTask[]
+    socketTasks.push(task)
+}
+
+function getSocketTasks(id?: string) {
+    if (!id) {
+        const mp = getCurrentMP() as UniWebsocketMP
+        id = mp.id
+    }
+    return socketTasksMap.get(id) || []
+}
 
 export const connectSocket = defineTaskApi<ConnectSocketOptions, ConnectSocketSuccess, UniSocketTask>(
     API_CONNECT_SOCKET,
     function (args: ConnectSocketOptions, exec: ApiExecutor<ConnectSocketSuccess>) {
         const ws = webSocket.createWebSocket();
+        const mp = getCurrentMP() as UniWebsocketMP
         ws.connect(args.url, {
             header: args.header ? args.header as Object : undefined,
             protocol: args.protocols ?
                 Array.isArray(args.protocols) ?
                     args.protocols.join(',') :
                     args.protocols :
-                undefined,
+                '',
         } as webSocket.WebSocketRequestOptions);
         const task = new SocketTask(ws);
-        socketTasks.push(task)
+        mp.on('beforeClose', task._destroy)
+        task.onClose(() => {
+            mp.off('beforeClose', task._destroy)
+        })
+        addSocketTask(task)
         return task
     },
     ConnectSocketApiProtocol,
@@ -171,24 +217,25 @@ export const connectSocket = defineTaskApi<ConnectSocketOptions, ConnectSocketSu
 ) as ConnectSocket
 
 export const onSocketMessage: OnSocketMessage = function (callback: Function) {
-    GlobalWebsocketEvent.on('message', callback)
+    GlobalWebsocketEmitter.on('message', callback)
 }
 
 export const onSocketOpen: OnSocketOpen = function (callback: Function) {
-    GlobalWebsocketEvent.on('open', callback)
+    GlobalWebsocketEmitter.on('open', callback)
 }
 
 export const onSocketError: OnSocketError = function (callback: Function) {
-    GlobalWebsocketEvent.on('error', callback)
+    GlobalWebsocketEmitter.on('error', callback)
 }
 
 export const onSocketClose: OnSocketClose = function (callback: Function) {
-    GlobalWebsocketEvent.on('close', callback)
+    GlobalWebsocketEmitter.on('close', callback)
 }
 
 export const sendSocketMessage = defineAsyncApi<SendSocketMessageOptions, GeneralCallbackResult>(
     API_SEND_SOCKET_MESSAGE,
     function (args: SendSocketMessageOptions, exec: ApiExecutor<GeneralCallbackResult>) {
+        const socketTasks = getSocketTasks()
         const task = socketTasks[0]
         if (task) {
             task.send({
@@ -209,6 +256,7 @@ export const sendSocketMessage = defineAsyncApi<SendSocketMessageOptions, Genera
 export const closeSocket = defineAsyncApi<CloseSocketOptions, GeneralCallbackResult>(
     API_CLOSE_SOCKET,
     function (args: CloseSocketOptions, exec: ApiExecutor<GeneralCallbackResult>) {
+        const socketTasks = getSocketTasks()
         const task = socketTasks[0]
         if (task) {
             task.close({

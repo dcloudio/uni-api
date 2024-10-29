@@ -37,6 +37,7 @@ export const getAppBaseInfo : GetAppBaseInfo = (config : GetAppBaseInfoOptions |
 			"uniCompilerVersionCode",
 			"uniRuntimeVersionCode",
 			"appTheme",
+			"channel",
 		];
 		filter = defaultFilter;
 	}
@@ -120,6 +121,10 @@ function getBaseInfo(filterArray : Array<string>) : GetAppBaseInfoResult {
 	
 	if (filterArray.indexOf("appTheme") != -1) {
 		result.appTheme = UTSiOS.getAppTheme();
+	}
+	
+	if (filterArray.indexOf("channel") != -1) {
+		result.channel = UTSiOS.getChannel();
 	}
 
 	return result;

@@ -37,8 +37,9 @@
                     "name": "$on",
                     "app": {
                         "js": false,
+                        "x-js": false,
                         "kotlin": false,
-                        "swift": false,
+                        "swift": true,
                         "arkts": true
                     }
                 },
@@ -46,8 +47,9 @@
                     "name": "$once",
                     "app": {
                         "js": false,
+                        "x-js": false,
                         "kotlin": false,
-                        "swift": false,
+                        "swift": true,
                         "arkts": true
                     }
                 },
@@ -55,8 +57,9 @@
                     "name": "$off",
                     "app": {
                         "js": false,
+                        "x-js": false,
                         "kotlin": false,
-                        "swift": false,
+                        "swift": true,
                         "arkts": true
                     }
                 },
@@ -64,8 +67,9 @@
                     "name": "$emit",
                     "app": {
                         "js": false,
+                        "x-js": false,
                         "kotlin": false,
-                        "swift": false,
+                        "swift": true,
                         "arkts": true
                     }
                 }

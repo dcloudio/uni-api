@@ -7,9 +7,6 @@ import {
     OpenDocumentOptions,
     OpenDocument
 } from '../interface.uts'
-import {
-    getAbilityContext
-} from '@dcloudio/uni-runtime'
 import fileUri from '@ohos.file.fileuri';
 import Want from '@ohos.app.ability.Want';
 import wantConstant from '@ohos.app.ability.wantConstant';
@@ -59,7 +56,7 @@ export const openDocument: OpenDocument = defineAsyncApi<OpenDocumentOptions, Op
             uri: uri,
             type: fileContentType as string
         }
-        const abilityContext = getAbilityContext() as common.UIAbilityContext
+        const abilityContext = UTSHarmony.getUIAbilityContext() as common.UIAbilityContext
         abilityContext.startAbility(want).then(() => {
             exec.resolve({} as OpenDocumentSuccess)
         }, (err: Error) => {

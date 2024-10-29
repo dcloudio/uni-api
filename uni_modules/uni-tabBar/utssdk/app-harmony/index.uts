@@ -71,13 +71,24 @@ export {
     HideTabBarRedDot,
 }
 
+interface ITabBar {
+    setTabBarBadge: (options: SetTabBarBadgeOptions) => void
+    removeTabBarBadge: (options: RemoveTabBarBadgeOptions) => void
+    setTabBarItem: (options: SetTabBarItemOptions) => void
+    setTabBarStyle: (options: SetTabBarStyleOptions) => void
+    hideTabBar: () => void
+    showTabBar: () => void
+    showTabBarRedDot: (options: ShowTabBarRedDotOptions) => void
+    hideTabBarRedDot: (options: HideTabBarRedDotOptions) => void
+}
+
 export const setTabBarBadge = defineAsyncApi<
     SetTabBarBadgeOptions,
     SetTabBarBadgeSuccess
 >(
     API_SET_TAB_BAR_BADGE,
     (options: SetTabBarBadgeOptions, exec: ApiExecutor<SetTabBarBadgeSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar === null) {
             exec.reject('tabBar is not exist')
             return
@@ -94,7 +105,7 @@ export const removeTabBarBadge = defineAsyncApi<
 >(
     API_REMOVE_TAB_BAR_BADGE,
     (options: RemoveTabBarBadgeOptions, exec: ApiExecutor<RemoveTabBarBadgeSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return
@@ -111,7 +122,7 @@ export const setTabBarItem = defineAsyncApi<
 >(
     API_SET_TAB_BAR_ITEM,
     (options: SetTabBarItemOptions, res: ApiExecutor<SetTabBarItemSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             res.reject('tabBar is not exist')
             return
@@ -128,7 +139,7 @@ export const setTabBarStyle = defineAsyncApi<
 >(
     API_SET_TAB_BAR_STYLE,
     (options: SetTabBarStyleOptions, exec: ApiExecutor<SetTabBarStyleSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return
@@ -145,7 +156,7 @@ export const hideTabBar = defineAsyncApi<
 >(
     API_HIDE_TAB_BAR,
     (options: HideTabBarOptions | null, exec: ApiExecutor<HideTabBarSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return
@@ -161,7 +172,7 @@ export const showTabBar = defineAsyncApi<
 >(
     API_SHOW_TAB_BAR,
     (options: ShowTabBarOptions, exec: ApiExecutor<ShowTabBarSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return
@@ -177,7 +188,7 @@ export const showTabBarRedDot = defineAsyncApi<
 >(
     API_SHOW_TAB_BAR_RED_DOT,
     (options: ShowTabBarRedDotOptions, exec: ApiExecutor<ShowTabBarRedDotSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return
@@ -194,7 +205,7 @@ export const hideTabBarRedDot = defineAsyncApi<
 >(
     API_HIDE_TAB_BAR_RED_DOT,
     (options: HideTabBarRedDotOptions, exec: ApiExecutor<HideTabBarRedDotSuccess>) => {
-        const tabBar = getTabBar()
+        const tabBar = getTabBar() as ITabBar
         if (tabBar == null) {
             exec.reject('tabBar is not exist')
             return

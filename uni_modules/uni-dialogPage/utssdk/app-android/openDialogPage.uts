@@ -1,0 +1,53 @@
+import {
+    ANIMATION_DURATION,
+    ANIMATION_TYPE,
+    NAVIGATE_TO,
+    navigateDialogPage,
+} from '@dcloudio/uni-runtime'
+import { normalizeRouteOptions } from '../protocols.uts'
+import { OpenDialogPageOptions } from '../interface.uts'
+import { OpenDialogPageSuccessImpl, OpenDialogPageFailImpl } from '../unierror.uts'
+
+export const openDialogPage = (options: OpenDialogPageOptions): UniPage | null => {
+    const navigationStart = Date.now()
+
+    const normalizeRouteOptionsResult = normalizeRouteOptions(
+        NAVIGATE_TO,
+        options.url as string,
+    )
+    if (normalizeRouteOptionsResult.errMsg.length > 0) {
+        const res = new OpenDialogPageFailImpl(normalizeRouteOptionsResult.errMsg)
+        options.fail?.(res)
+        options.complete?.(res)
+        return null
+    }
+
+    if (options.parentPage !== null) {
+        const pages = getCurrentPages()
+        if (pages.indexOf(options.parentPage) === -1) {
+            const res = new OpenDialogPageFailImpl('parentPage is not a valid page')
+            options.fail?.(res)
+            options.complete?.(res)
+            return null
+        }
+    }
+
+    options.url = normalizeRouteOptionsResult.url
+
+    const dialogPage = navigateDialogPage(
+        options.url as string,
+        new Map<string, any | null>([
+            [ANIMATION_TYPE, 'none'],
+            [ANIMATION_DURATION, 0],
+        ]),
+        NAVIGATE_TO,
+        navigationStart,
+        new Map([
+            ['disableEscBack', options.disableEscBack],
+            ['parentPage', options.parentPage],
+        ]),
+    )
+    options.success?.(new OpenDialogPageSuccessImpl())
+    options.complete?.(new OpenDialogPageSuccessImpl())
+    return dialogPage
+}

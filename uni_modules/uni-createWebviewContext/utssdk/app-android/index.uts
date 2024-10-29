@@ -5,7 +5,7 @@ export const createWebviewContext : CreateWebviewContext = function (webviewId :
 	if (component == null) {
 		const pages = getCurrentPages();
 		if (pages.length > 0) {
-			webviewElement = pages[pages.length - 1].$el?.parentNode?.querySelector('#' + webviewId);
+			webviewElement = pages[pages.length - 1].vm!.$el?.parentNode?.querySelector('#' + webviewId);
 		}
 	} else {
 		webviewElement = component.$el?.parentNode?.querySelector('#' + webviewId);

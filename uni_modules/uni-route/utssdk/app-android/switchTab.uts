@@ -1,14 +1,14 @@
 import {
     ANIMATION_TYPE,
     SWITCH_TAB,
+    SwitchTabPage,
     __uniConfig,
     changeTabBarIndex,
+    entryPageState,
     getTabBarIndex,
     isTabPage,
     parseUrl,
-    entryPageState,
     switchTabPagesBeforeEntryPages,
-    SwitchTabPage,
 } from '@dcloudio/uni-runtime'
 import { SwitchTabOptions, SwitchTabSuccess } from '../interface.uts'
 
@@ -35,10 +35,10 @@ export const switchTab = defineAsyncApi<SwitchTabOptions, SwitchTabSuccess>(
             changeTabBarIndex(selected, path, query)
             for (let index = pages.length - 1; index >= 0; index--) {
                 const page = pages[index]
-                if (isTabPage(page)) {
+                if (isTabPage(page.vm!)) {
                     break
                 }
-                page.$close(
+                page.vm!.$close(
                     new Map<string, any | null>([[ANIMATION_TYPE, 'none']]),
                 )
             }

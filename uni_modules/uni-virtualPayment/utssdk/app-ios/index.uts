@@ -62,7 +62,7 @@ class IapManager {
 	@UTSiOS.keyword("fileprivate")
 	restoreTransactions(options : AppleIAPRestoreOptions) {
 		if (UTSiOS.available("iOS 15.0, *")) {
-			UniStoreKit.shared.restorePurchase(@escaping success = (res : UniPurchase[]) : void => {
+			UniStoreKit.shared.restorePurchase(success = (res : UniPurchase[]) : void => {
 				let tempArray : Array<any> = []
 				res.forEach(function (e : UniPurchase) {
 				
@@ -81,7 +81,7 @@ class IapManager {
 				})
 
 				this.restoreTransactionsSuccessAction(tempArray, options)
-			}, @escaping failure = (error : UniStoreKitError) : void => {
+			}, failure = (error : UniStoreKitError) : void => {
 
 				switch (error) {
 					case UniStoreKitError.user_cancelled:
@@ -130,7 +130,7 @@ class IapManager {
 	@UTSiOS.keyword("fileprivate")
 	getUnfinishedTransactions(options : AppleIAPUnfinishedTransactionOptions) {
 		if (UTSiOS.available("iOS 15.0, *")) {
-			UniStoreKit.shared.getUnfinishedTransactions(@escaping completion = (res : UniPurchase[]) : void => {
+			UniStoreKit.shared.getUnfinishedTransactions(completion = (res : UniPurchase[]) : void => {
 
 				let tempArray : Array<any> = []
 				res.forEach(function (e : UniPurchase) {
@@ -235,7 +235,7 @@ class IapManager {
 				purchaseOption.promotionalOffer = promotionalOffer
 			}
 
-			UniStoreKit.shared.buyProduct(identifier = iapOptions.productId, purchaseOption = purchaseOption, @escaping success = (res : UniPurchase) : void => {
+			UniStoreKit.shared.buyProduct(identifier = iapOptions.productId, purchaseOption = purchaseOption, success = (res : UniPurchase) : void => {
 
 				const transaction : AppleIAPTransactionOptions = {
 					productId: res.productId,
@@ -250,7 +250,7 @@ class IapManager {
 
 				this.requestVirtualPaymentSuccessAction(transaction, options)
 
-			}, @escaping failure = (error : UniStoreKitError) : void => {
+			}, failure = (error : UniStoreKitError) : void => {
 
 				switch (error) {
 					case UniStoreKitError.purchase_not_allowed:

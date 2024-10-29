@@ -84,7 +84,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"arkts": false
+						"arkts": true
 					}
 				},
 				"chooseVideo": {
@@ -120,7 +120,25 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"arkts": false
+						"arkts": true
+					}
+				},
+				"chooseFile": {
+					"name": "chooseFile",
+					"app": {
+						"js": false,
+						"kotlin": false,
+						"swift": false,
+						"arkts": true
+					}
+				},
+				"chooseMedia": {
+					"name": "chooseMedia",
+					"app": {
+						"js": false,
+						"kotlin": false,
+						"swift": false,
+						"arkts": true
 					}
 				}
 			}

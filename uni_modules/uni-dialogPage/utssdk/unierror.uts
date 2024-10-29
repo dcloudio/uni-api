@@ -1,0 +1,35 @@
+import {
+    OpenDialogPageFail,
+    CloseDialogPageFail,
+    RouteErrorCode,
+} from './interface.uts'
+
+export class OpenDialogPageSuccessImpl extends AsyncApiSuccessResult {
+    override errMsg: string
+    constructor(errMsg: string = 'openDialogPage: ok') {
+        this.errMsg = errMsg
+    }
+}
+
+export class OpenDialogPageFailImpl extends UniError implements OpenDialogPageFail {
+    override errCode: RouteErrorCode
+    constructor(errMsg: string = '', errCode: RouteErrorCode = 4) {
+        super(errMsg)
+        this.errCode = errCode
+    }
+}
+
+export class CloseDialogPageSuccessImpl extends AsyncApiSuccessResult {
+    override errMsg: string
+    constructor(errMsg: string = 'closeDialogPage: ok') {
+        this.errMsg = errMsg
+    }
+}
+
+export class CloseDialogPageFailImpl extends UniError implements CloseDialogPageFail {
+    override errCode: RouteErrorCode
+    constructor(errMsg: string = '', errCode: RouteErrorCode = 4) {
+        super(errMsg)
+        this.errCode = errCode
+    }
+}

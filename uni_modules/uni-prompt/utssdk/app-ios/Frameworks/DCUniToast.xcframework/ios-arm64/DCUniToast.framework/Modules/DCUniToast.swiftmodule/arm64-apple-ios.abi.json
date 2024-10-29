@@ -4114,917 +4114,924 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 2451,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 2781,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 2921,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 2927,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 3023,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 3029,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 3059,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 3128,
       "length": 2,
       "value": "30"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
       "offset": 3346,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
-      "offset": 3618,
+      "offset": 3605,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
-      "offset": 3686,
+      "offset": 3696,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
-      "offset": 3809,
+      "offset": 3774,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
       "kind": "IntegerLiteral",
-      "offset": 3842,
+      "offset": 3897,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Text.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3930,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 439,
       "length": 12,
       "value": "\"Frameworks\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 626,
       "length": 11,
       "value": "\"framework\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 859,
       "length": 8,
       "value": "\"bundle\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 1003,
       "length": 5,
       "value": "\"png\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 1723,
       "length": 12,
       "value": "\"Frameworks\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 1910,
       "length": 11,
       "value": "\"framework\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 1997,
       "length": 20,
       "value": "\"获取bundle失败\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "StringLiteral",
       "offset": 2217,
       "length": 8,
       "value": "\"bundle\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "IntegerLiteral",
       "offset": 2923,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "IntegerLiteral",
       "offset": 3226,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "IntegerLiteral",
       "offset": 3521,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastHelper.swift",
       "kind": "IntegerLiteral",
       "offset": 3526,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "FloatLiteral",
       "offset": 964,
       "length": 3,
       "value": "0.2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "IntegerLiteral",
       "offset": 1092,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "IntegerLiteral",
       "offset": 1213,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "IntegerLiteral",
       "offset": 1802,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "BooleanLiteral",
       "offset": 1857,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "IntegerLiteral",
       "offset": 2076,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "BooleanLiteral",
       "offset": 2080,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "BooleanLiteral",
       "offset": 2087,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Remove.swift",
       "kind": "IntegerLiteral",
       "offset": 2291,
       "length": 4,
       "value": "1000"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 267,
       "length": 4,
       "value": "1001"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 700,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 986,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 1006,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2069,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2075,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2310,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "BooleanLiteral",
       "offset": 2425,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2479,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2609,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2615,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "BooleanLiteral",
       "offset": 2762,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 2968,
       "length": 2,
       "value": "10"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "FloatLiteral",
       "offset": 3521,
       "length": 3,
       "value": "0.0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "FloatLiteral",
       "offset": 3562,
       "length": 3,
       "value": "0.2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast.swift",
       "kind": "IntegerLiteral",
       "offset": 3610,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 5103,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 5115,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 5985,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6059,
       "length": 2,
       "value": "35"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6065,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6478,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6577,
       "length": 2,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6723,
       "length": 2,
       "value": "10"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6757,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6854,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6860,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 6916,
       "length": 2,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 7193,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Status.swift",
       "kind": "IntegerLiteral",
       "offset": 7213,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 1934,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 1971,
       "length": 2,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2159,
       "length": 2,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2305,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2616,
       "length": 4,
       "value": "0x6a"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2621,
       "length": 5,
       "value": "0x100"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2635,
       "length": 4,
       "value": "0xb4"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2640,
       "length": 5,
       "value": "0x100"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2653,
       "length": 4,
       "value": "0x9f"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2658,
       "length": 5,
       "value": "0x100"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2672,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "IntegerLiteral",
       "offset": 2761,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "BooleanLiteral",
       "offset": 3239,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+StatusBar.swift",
       "kind": "FloatLiteral",
       "offset": 3594,
       "length": 3,
       "value": "0.3"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "FloatLiteral",
       "offset": 722,
       "length": 3,
       "value": "1.5"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 870,
       "length": 2,
       "value": "76"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 873,
       "length": 3,
       "value": "255"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 885,
       "length": 2,
       "value": "76"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 888,
       "length": 3,
       "value": "255"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 899,
       "length": 2,
       "value": "76"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 902,
       "length": 3,
       "value": "255"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "FloatLiteral",
       "offset": 914,
       "length": 3,
       "value": "0.9"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 997,
       "length": 3,
       "value": "135"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1010,
       "length": 3,
       "value": "135"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1134,
       "length": 2,
       "value": "50"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1146,
       "length": 2,
       "value": "50"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1411,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1488,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1492,
       "length": 3,
       "value": "120"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1676,
       "length": 2,
       "value": "55"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToastConfig.swift",
       "kind": "IntegerLiteral",
       "offset": 1783,
       "length": 2,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "StringLiteral",
       "offset": 562,
       "length": 17,
       "value": "\"正在加载中\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 628,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 1292,
       "length": 3,
       "value": "0.1"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 1344,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "StringLiteral",
       "offset": 2804,
       "length": 17,
       "value": "\"正在加载中\""
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 2877,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 3569,
       "length": 3,
       "value": "0.1"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 3628,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 5754,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 5766,
       "length": 2,
       "value": "40"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 6078,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 6098,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 6179,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "BooleanLiteral",
       "offset": 6183,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "BooleanLiteral",
       "offset": 6191,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 6370,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 6424,
       "length": 3,
       "value": "0.0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 6430,
       "length": 4,
       "value": "30.0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 6527,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7094,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 7206,
       "length": 4,
       "value": "14.0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7393,
       "length": 2,
       "value": "36"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7427,
       "length": 2,
       "value": "36"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7480,
       "length": 1,
       "value": "7"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7508,
       "length": 2,
       "value": "12"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7538,
       "length": 2,
       "value": "14"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 7665,
       "length": 2,
       "value": "18"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "Array",
       "offset": 8189,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 8729,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 8749,
       "length": 1,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 9258,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 9435,
       "length": 4,
       "value": "1000"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 9649,
       "length": 1,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 12087,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "IntegerLiteral",
       "offset": 12093,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/dcloud\/srv\/ext\/SDKiOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
+      "filePath": "\/Users\/fred\/Documents\/work\/iOS\/ExtApiDependency\/DCUniToast\/DCUniToast\/MCToast+Loading.swift",
       "kind": "FloatLiteral",
       "offset": 12625,
       "length": 3,

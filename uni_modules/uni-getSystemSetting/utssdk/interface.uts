@@ -16,7 +16,12 @@ export type GetSystemSettingResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
@@ -36,11 +41,16 @@ export type GetSystemSettingResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
-  bluetoothError?: string,
+  bluetoothError?: string | null,
   /**
    * 位置是否开启
    *
@@ -56,7 +66,12 @@ export type GetSystemSettingResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
@@ -76,7 +91,12 @@ export type GetSystemSettingResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
@@ -96,11 +116,16 @@ export type GetSystemSettingResult = {
    * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
-  wifiError?: string,
+  wifiError?: string | null,
   /**
    * 设备方向
    *
@@ -116,7 +141,12 @@ export type GetSystemSettingResult = {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
-   * 		}
+   * 		},
+  *    "harmony": {
+  *      "osVer": "3.0",
+  *      "uniVer": "4.25",
+  *      "unixVer": "x"
+  *    }
    * 	}
    * }
    */
@@ -158,8 +188,8 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		},
   *    "harmony": {
-  *      "osVer": "x",
-  *      "uniVer": "x",
+  *      "osVer": "3.0",
+  *      "uniVer": "4.31",
   *      "unixVer": "x"
   *    }
 	* 	},

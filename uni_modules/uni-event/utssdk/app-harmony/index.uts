@@ -2,38 +2,38 @@ import {
     Emitter
 } from '@dcloudio/uni-runtime'
 import {
+    $Emit,
+    $Off,
     $On,
     $Once,
-    $Off,
-    $Emit,
 } from '../interface.uts'
 import {
+    API_$_EMIT,
+    API_$_OFF,
     API_$_ON,
     API_$_ONCE,
-    API_$_OFF,
-    API_$_EMIT,
 } from '../protocol.uts'
 
 interface IUniEventEmitter {
     on: (eventName: string, callback: Function) => void
     once: (eventName: string, callback: Function) => void
-    off: (eventName: string, callback: Function) => void
+    off: (eventName: string, callback?: Function | null) => void
     emit: (eventName: string, ...args: (Object | undefined | null)[]) => void
 }
 
 const emitter: IUniEventEmitter = new Emitter() as IUniEventEmitter
 
-export const $on: $On = defineSyncApi<void>(
+export const $on: $On = defineSyncApi<number>(
     API_$_ON,
     (eventName: string, callback: Function) => {
-        emitter.on(eventName, callback)
+        return emitter.on(eventName, callback)
     }
 ) as $On
 
-export const $once: $Once = defineSyncApi<void>(
+export const $once: $Once = defineSyncApi<number>(
     API_$_ONCE,
     (eventName: string, callback: Function) => {
-        emitter.once(eventName, callback)
+        return emitter.once(eventName, callback)
     }
 ) as $Once
 
