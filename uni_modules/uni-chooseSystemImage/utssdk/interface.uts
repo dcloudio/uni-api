@@ -18,3 +18,21 @@ export type ChooseSystemImageOptions = {
 }
 
 export type ChooseSystemImage = (options : ChooseSystemImageOptions) => void
+
+export type ChooseSystemMediaSuccessResult = {
+	filePaths : Array<string>
+}
+export type ChooseSystemMediaSuccessCallback = (result : ChooseSystemMediaSuccessResult) => void
+export type ChooseSystemMediaFailResult = ChooseSystemImageError
+export type ChooseSystemMediaFailCallback = (result : ChooseSystemMediaFailResult) => void
+export type ChooseSystemMediaCompleteCallback = (callback : any) => void
+export type ChooseSystemMediaOptions = {
+	count : number,
+	mediaType ?: Array<string> | null,
+	pageOrientation ?: string | null,
+	success ?: ChooseSystemMediaSuccessCallback | null,
+	fail ?: ChooseSystemMediaFailCallback | null,
+	complete ?: ChooseSystemMediaCompleteCallback | null
+}
+
+export type ChooseSystemMedia = (options : ChooseSystemMediaOptions) => void
