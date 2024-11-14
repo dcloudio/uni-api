@@ -38,6 +38,6 @@ export class ReportFailImpl extends UniError implements ReportError {
     super()
     this.errSubject = ReportUniErrorSubject
     this.errCode = errCode
-    this.errMsg = ReportUniErrors[errCode] ?? ''
+    this.errMsg = ReportUniErrors.get(errCode) ?? ''
   }
 }
