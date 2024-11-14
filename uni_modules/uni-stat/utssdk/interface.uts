@@ -84,7 +84,7 @@ export type ReportOptions = {
 	 * `uni-app-hide`：应用进入后台
 	 * `uni-app-error`：应用发生错误，options 参数必填，值为错误信息，类型为String
 	 * `title`：标题采集
-	 * 自定义name：用户自定义
+	 * `自定义name`：用户自定义
 	 */
 	name : string
 	/**
@@ -118,8 +118,8 @@ export type Report = (options : ReportOptions) => void
 export interface Uni {
 	/**
 	 * 统计自定义事件
-	 * @description 统计自定义事件上报
-	 * @param {ReportOptions} options 额外参数
+	 * @description uni统计自定义上报方法。
+	 * @param {ReportOptions} options 自定义事件参数
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
@@ -130,7 +130,7 @@ export interface Uni {
 	 *   	 	 	}
 	 *    },
 	 *  	"web": {
-	 *    	"uniVer": "4.33"
+	 *    	"unixVer": "4.33"
 	 *  	}
 	 * }
 	 * @example
