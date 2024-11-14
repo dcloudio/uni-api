@@ -1,45 +1,128 @@
+/**
+ * 接口调用成功回调
+ */
 export type ReportSuccess = {
-  /**
+	/**
 	* 成功的详细信息
 	*/
-	errMsg : string,
+	errMsg : string
 }
 
-export type ReportFail = {
+/**
+ * 错误码
+ */
+export type ReportErrorCode =
 	/**
-	* 错误的详细信息
-	*/
-	errMsg : string,
+	 * 统计服务尚未初始化，请在main.uts中引入统计插件！
+	 */
+	61001 |
+	/**
+	 * uni-app-launch 下 options 参数必填，请检查！
+	 */
+	61002 |
+	/**
+	 * Report的 name参数必填
+	 */
+	61003 |
+	/**
+	 * Report的name参数类型必须为字符串
+	 */
+	61004 |
+	/**
+	 * Report的name参数长度最大为255
+	 */
+	61005 |
+	/**
+	 * Report的options参数只能为String或者Object类型
+	 */
+	61006 |
+	/**
+	 * Report的options参数若为String类型，则长度最大为255
+	 */
+	61007 |
+	/**
+	 * Report的name参数为title时，options参数类型只能为String
+	 */
+	61008
+
+/**
+ * 错误回调
+ */
+export interface ReportError extends IUniError {
+	/**
+	 * 错误码
+	 */
+	errCode : ReportErrorCode
 }
 
+/**
+ * 接口调用失败回调
+ */
+export type ReportFail = ReportError
+
+/**
+ * 接口调用成功回调
+ */
+export type ReportSuccessCallback = (res : ReportSuccess) => void
+/**
+ * 接口调用失败回调
+ */
+export type ReportFailCallback = (err : ReportFail) => void
+/**
+ * 接口调用结束回调（调用成功、失败都会执行）
+ */
+export type ReportCompleteCallback = (res : any) => void
+
+/**
+ * 自定义事件名称
+ */
+export type ReportNames =
+	/**
+	 * 应用启动，options 参数必填，值为 onLaunch 返回值
+	 */
+	'uni-app-launch' |
+	/**
+	 * 应用进入前台
+	 */
+	'uni-app-show' |
+	/**
+	 * 应用进入后台
+	 */
+	'uni-app-hide' |
+	/**
+	 * 应用发生错误，options 参数必填，值为错误信息，类型为String
+	 */
+	'uni-app-error' |
+	/**
+	 * 非内置名称，自定义上报，options 参数为String类型或Object，值为用户定义
+	 */
+	string
+
+/**
+ * Report 参数定义
+ */
 export type ReportOptions = {
 	/**
-	 * 自定义事件名称，内置名称(不允许覆盖)：
-	 * uni-app-launch ： 应用启动
-	 * uni-app-show		： 应用进入前台
-	 * uni-app-hide		： 应用进入后台
-	 * uni-app-error	： 应用发生错误
+	 * 自定义事件名称，内置名称不允许覆盖
 	 */
-	name : string
+	name : ReportNames
 	/**
 	 * 额外参数
 	 */
-	options ?: any
+	options ?: any | null
 	/**
-		* 接口调用结束的回调函数（调用成功、失败都会执行）
-		*/
-	success ?: (res : ReportSuccess) => void
+	 * 接口调用成功的回调函数
+	 */
+	success ?: ReportSuccessCallback | null,
 	/**
-		* 接口调用失败的回调函数
-		*/
-	fail ?: (res : ReportFail) => void
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ReportFailCallback | null,
 	/**
-		* 接口调用成功的回调函数
-		*/
-	complete ?: (res : any) => void
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ReportCompleteCallback | null
 }
-
-export type ReportResult = {}
 
 /**
 * 自定义事件信息
@@ -55,33 +138,49 @@ export interface Uni {
 	/**
 	 * 统计自定义事件
 	 * @description 统计自定义事件上报
-	 * @param {ReportOptions} options
+	 * @param {ReportOptions} options 额外参数
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "uniVer": "4.33"
+	 *        },
+	 *        "ios": {
+	 *            "uniVer": "4.33"
+	 *   	  },
+	 *    },
+	 *  "web": {
+	 *    "uniVer": "4.33",
+	 *  }
+	 * }
 	 * @example
 	 * ```typescript
-	 * uni.report({
-	 *		name:'uni-app-launch',
-	 *		success(res) {
-	 *			console.log(res);
-	 *		}
-	 * })
+	 *	 uni.report({
+	 *			name:'uni-app-launch',
+	 *			success(res) {
+	 *				console.log(res);
+	 *			},
+	 *			fail(err) {
+	 *				console.log(err);
+	 *			}
+	 * 	})
 	 * ```
 	 * @remark
 	 * - 该接口需要同步调用
 	 */
-	report(options : ReportOptions) : void,
+	report(options : ReportOptions) : void;
 }
 
 // 统计插件参数类型
 export type UniStatOptions = {
 	/**
-   * 是否开启debug模式
-   * @defaultValue false
-   */
+	 * 是否开启debug模式
+	 * @defaultValue false
+	 */
 	debug ?: boolean
 	/**
-   * 前端数据上报周期 ，单位s
-   * @defaultValue 10
-   */
+	 * 前端数据上报周期 ，单位s
+	 * @defaultValue 10
+	 */
 	reportInterval ?: number
 	/* 多服务空间配置 */
 	uniCloud ?: UniCloudInitOptions
@@ -91,14 +190,14 @@ export type UniStatOptions = {
 
 export type UniStatCollectItemsOptions = {
 	/**
-   * 是否开启推送PushClientID的采集
-   * @defaultValue false
-   */
+	 * 是否开启推送PushClientID的采集
+	 * @defaultValue false
+	 */
 	uniPushClientID ?: boolean
 	/**
-   * 是否开启页面数据采集
-   * @defaultValue true
-   */
+	 * 是否开启页面数据采集
+	 * @defaultValue true
+	 */
 	uniStatPageLog ?: boolean
 }
 
@@ -146,7 +245,6 @@ export type TitleConfigParams = {
 	report : string
 	/** 统计数据类型 */
 	lt : string
-
 }
 
 /**
@@ -305,7 +403,7 @@ export type StatDefault = {
 	/** 网络 */
 	net ?: string
 	/** 错误信息 */
-	em ?:string
+	em ?: string
 }
 
 /**
@@ -449,4 +547,4 @@ export type PageReportParams = {
 	cst ?: number
 }
 
-export type ErrorCallback = (is_err : boolean, errMsg : string) => void
+export type ErrorCallback = (is_err : boolean, code : ReportErrorCode) => void
