@@ -74,38 +74,19 @@ export type ReportFailCallback = (err : ReportFail) => void
 export type ReportCompleteCallback = (res : any) => void
 
 /**
- * 自定义事件名称
- */
-export type ReportNames =
-	/**
-	 * 应用启动，options 参数必填，值为 onLaunch 返回值
-	 */
-	'uni-app-launch' |
-	/**
-	 * 应用进入前台
-	 */
-	'uni-app-show' |
-	/**
-	 * 应用进入后台
-	 */
-	'uni-app-hide' |
-	/**
-	 * 应用发生错误，options 参数必填，值为错误信息，类型为String
-	 */
-	'uni-app-error' |
-	/**
-	 * 非内置名称，自定义上报，options 参数为String类型或Object，值为用户定义
-	 */
-	string
-
-/**
  * Report 参数定义
  */
 export type ReportOptions = {
 	/**
-	 * 自定义事件名称，内置名称不允许覆盖
+	 * 自定义事件名称，内置名称不允许覆盖，可选值:
+	 * `uni-app-launch`：应用启动，options 参数必填，值为 onLaunch 返回值
+	 * `uni-app-show`：应用进入前台
+	 * `uni-app-hide`：应用进入后台
+	 * `uni-app-error`：应用发生错误，options 参数必填，值为错误信息，类型为String
+	 * `title`：标题采集
+	 * 自定义name：用户自定义
 	 */
-	name : ReportNames
+	name : string
 	/**
 	 * 额外参数
 	 */
@@ -142,15 +123,15 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "uniVer": "4.33"
+	 *            "unixVer": "4.33"
 	 *        },
 	 *        "ios": {
-	 *            "uniVer": "4.33"
-	 *   	  },
+	 *            "unixVer": "4.33"
+	 *   	 	 	}
 	 *    },
-	 *  "web": {
-	 *    "uniVer": "4.33",
-	 *  }
+	 *  	"web": {
+	 *    	"uniVer": "4.33"
+	 *  	}
 	 * }
 	 * @example
 	 * ```typescript
