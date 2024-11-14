@@ -13,35 +13,35 @@ export type ReportSuccess = {
  */
 export type ReportErrorCode =
 	/**
-	 * 统计服务尚未初始化，请在main.uts中引入统计插件！
+	 * 统计服务尚未初始化，需在`main.uts`中引入统计插件
 	 */
 	61001 |
 	/**
-	 * uni-app-launch 下 options 参数必填，请检查！
+	 * name参数是uni-app-launch时， options 参数未填写
 	 */
 	61002 |
 	/**
-	 * Report的 name参数必填
+	 * name参数未填写
 	 */
 	61003 |
 	/**
-	 * Report的name参数类型必须为字符串
+	 * name参数类型错误，应为`String`类型
 	 */
 	61004 |
 	/**
-	 * Report的name参数长度最大为255
+	 * name参数长度超限，最大不超过255
 	 */
 	61005 |
 	/**
-	 * Report的options参数只能为String或者Object类型
+	 * options参数错误，应为String或Object类型
 	 */
 	61006 |
 	/**
-	 * Report的options参数若为String类型，则长度最大为255
+	 * options参数为String类型时，长度超限，最大不超过255
 	 */
 	61007 |
 	/**
-	 * Report的name参数为title时，options参数类型只能为String
+	 * name参数为title时，options参数类型错误，应为String
 	 */
 	61008
 
