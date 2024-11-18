@@ -1,14 +1,14 @@
 {
 	"id": "uni-stat",
 	"displayName": "uni统计 for uni-app x",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "uni统计的uni-app x 版本",
 	"keywords": [
         "uni-stat"
     ],
 	"repository": "https://gitcode.net/dcloud/uni-api",
 	"engines": {
-		"HBuilderX": "^3.6.8"
+		"HBuilderX": "^4.33"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -63,7 +63,7 @@
                     "app-ios": {
                         "minVersion": "9"
                     },
-                    "app-harmony": "n"
+                    "app-harmony": "y"
                 },
 				"H5-mobile": {
 					"Safari": "y",
