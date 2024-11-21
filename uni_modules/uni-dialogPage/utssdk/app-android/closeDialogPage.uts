@@ -3,14 +3,28 @@ import {
     ANIMATION_TYPE,
     getCurrentPage,
     Page,
+    isSystemDialogPage,
 } from '@dcloudio/uni-runtime'
+import {
+    DEFAULT_ANIMATION_DURATION,
+    DEFAULT_ANIMATION_OUT,
+} from '../constants.uts'
 import { CloseDialogPageOptions } from '../interface.uts'
 import { CloseDialogPageSuccessImpl, CloseDialogPageFailImpl } from '../unierror.uts'
 
 export const closeDialogPage = (options: CloseDialogPageOptions | null) => {
+    if (options?.animationType === 'pop-out') {
+        options.animationType = 'none'
+    }
     const closeOptions = new Map<string, any | null>([
-        [ANIMATION_TYPE, 'none'],
-        [ANIMATION_DURATION, 0],
+        [
+            ANIMATION_TYPE,
+            options?.animationType ?? DEFAULT_ANIMATION_OUT,
+        ],
+        [
+            ANIMATION_DURATION,
+            options?.animationDuration ?? DEFAULT_ANIMATION_DURATION,
+        ],
     ])
     if (options?.dialogPage === null) {
         const currentPage = getCurrentPage()
@@ -35,6 +49,10 @@ export const closeDialogPage = (options: CloseDialogPageOptions | null) => {
         const dialogPage = options?.dialogPage!
         const currentPages = getCurrentPages()
         const parentPage = dialogPage.getParentPage()
+        if (isSystemDialogPage(dialogPage)) {
+            (dialogPage.$vm as Page).$close(closeOptions)
+            return
+        }
         if ((dialogPage.$vm as Page).$dialog === null ||
             currentPages.indexOf(parentPage) === -1 ||
             parentPage!.getDialogPages().indexOf(dialogPage) === -1) {
@@ -44,7 +62,7 @@ export const closeDialogPage = (options: CloseDialogPageOptions | null) => {
                 options.complete?.(errRes)
             }
         } else {
-            (dialogPage!.$vm as Page).$close(closeOptions)
+            (dialogPage.$vm as Page).$close(closeOptions)
             if (options !== null) {
                 const successRes = new CloseDialogPageSuccessImpl()
                 options.success?.(successRes)

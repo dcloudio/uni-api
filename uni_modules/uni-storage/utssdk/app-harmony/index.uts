@@ -73,21 +73,17 @@ function stringifyStorageValue(value: any): string {
     return JSON.stringify({ type: typeof value, data: value } as ESObject);
 }
 
-interface UniStorageMP {
-    id: string
-}
-
 // TODO 回收Preference
 const stores = new Map<string, dataPreferences.Preferences>()
 function createStore(): dataPreferences.Preferences {
-    const appId = (getCurrentMP() as UniStorageMP).id
-    if (stores.has(appId)) {
-        return stores.get(appId)!
+    const id = getCurrentMP().id
+    if (stores.has(id)) {
+        return stores.get(id)!
     }
     const store = dataPreferences.getPreferencesSync(UTSHarmony.getUIAbilityContext() as common.UIAbilityContext, {
-        name: `storage.${appId}`
+        name: `storage.${id}`
     } as dataPreferences.Options)
-    stores.set(appId, store)
+    stores.set(id, store)
     return store
 }
 

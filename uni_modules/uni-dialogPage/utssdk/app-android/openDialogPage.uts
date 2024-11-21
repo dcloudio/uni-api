@@ -5,6 +5,11 @@ import {
     navigateDialogPage,
 } from '@dcloudio/uni-runtime'
 import { normalizeRouteOptions } from '../protocols.uts'
+import {
+    DEFAULT_ANIMATION_DURATION,
+    DEFAULT_ANIMATION_IN,
+} from '../constants.uts'
+
 import { OpenDialogPageOptions } from '../interface.uts'
 import { OpenDialogPageSuccessImpl, OpenDialogPageFailImpl } from '../unierror.uts'
 
@@ -34,15 +39,24 @@ export const openDialogPage = (options: OpenDialogPageOptions): UniPage | null =
 
     options.url = normalizeRouteOptionsResult.url
 
+    if (options.animationType === 'pop-in') {
+        options.animationType = 'none'
+    }
     const dialogPage = navigateDialogPage(
         options.url as string,
         new Map<string, any | null>([
-            [ANIMATION_TYPE, 'none'],
-            [ANIMATION_DURATION, 0],
+            [
+                ANIMATION_TYPE,
+                options.animationType ?? DEFAULT_ANIMATION_IN,
+            ],
+            [
+                ANIMATION_DURATION,
+                options.animationDuration ?? DEFAULT_ANIMATION_DURATION,
+            ],
         ]),
         NAVIGATE_TO,
         navigationStart,
-        new Map([
+        new Map<string, any | null>([
             ['disableEscBack', options.disableEscBack],
             ['parentPage', options.parentPage],
         ]),

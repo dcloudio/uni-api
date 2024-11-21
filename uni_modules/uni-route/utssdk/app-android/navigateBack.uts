@@ -5,6 +5,7 @@ import {
     ON_LAST_PAGE_BACK_PRESS,
     ON_SHOW,
     Page,
+    REDIRECT_TO,
     invokeAfterRouteHooks,
     invokeBeforeRouteHooks,
     invokeCurrentAppHook,
@@ -76,15 +77,22 @@ export const _navigateBack = (
                 )
             })
         }
+        let animationType = options?.animationType ?? DEFAULT_ANIMATION_NAVIGATE_BACK
+        let animationDuration = options?.animationDuration ?? DEFAULT_ANIMATION_DURATION
+        if (currentPage.vm!.openType == REDIRECT_TO) {
+            // 如果是 redirectTo 跳转的，需要指定 back 动画
+            animationType = DEFAULT_ANIMATION_OUT
+            animationDuration = DEFAULT_ANIMATION_DURATION
+        }
         currentPage.vm!.$close(
             new Map<string, any | null>([
                 [
                     ANIMATION_TYPE,
-                    options?.animationType ?? DEFAULT_ANIMATION_NAVIGATE_BACK,
+                    animationType,
                 ],
                 [
                     ANIMATION_DURATION,
-                    options?.animationDuration ?? DEFAULT_ANIMATION_DURATION,
+                    animationDuration,
                 ],
             ]),
         )

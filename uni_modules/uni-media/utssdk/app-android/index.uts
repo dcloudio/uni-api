@@ -11,14 +11,14 @@ import {
 	SaveVideoToPhotosAlbum, SaveVideoToPhotosAlbumOptions, SaveVideoToPhotosAlbumSuccess,
 	CompressVideo, CompressVideoOptions,
 } from "../interface.uts"
-export { ChooseFileSuccess, ChooseFileOptions, ChooseMediaFileType, ChooseMediaTempFile, ChooseMediaSuccess, ChooseMediaOptions, ChooseFileFail, ChooseFileComplete, ChooseMediaFail } from '../interface.uts';
+export { ChooseFileSuccess, ChooseFileOptions, ChooseMediaFileType, ChooseMediaTempFile, ChooseMediaSuccess, ChooseMediaOptions, ChooseFileFail, ChooseFileComplete, ChooseMediaFail, LongPressActionsSuccessData, LongPressActionsOptions } from '../interface.uts';
 import {
 	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
 	MediaErrorImpl
 } from "../unierror.uts"
 import { chooseMediaImage, chooseMediaVideo } from "./utils/ChooseMediaUtils.uts"
 import { transcodeImage, transcodeVideo } from './utils/CompressUtils.uts'
-import { getVideoMetadata, copyFile } from "./utils/MediaUtils.uts"
+import { getVideoMetadata, copyFile, getOrientation } from "./utils/MediaUtils.uts"
 import Intent from 'android.content.Intent';
 import Manifest from 'android.Manifest';
 import Build from 'android.os.Build';
@@ -118,18 +118,18 @@ class LongClick implements LongClickEventManager.OnLongClickListener {
 		this.options = options
 	}
 	override onLongClickListener(values : JSONObject) {
-		var itemList : Array<string> | null = null
-		var itemColor : string | null = null
-		var hasLongPressAction = false;
-		if (this.options.longPressActions != null && this.options.longPressActions!.itemList != null && this.options.longPressActions!.itemList!.length > 0) {
-			itemList = this.options.longPressActions!.itemList!
-			hasLongPressAction = true
-		} else {
-			itemList = ["保存"]
-		}
-		if (this.options.longPressActions != null && this.options.longPressActions!.itemColor != null) {
-			itemColor = this.options.longPressActions!.itemColor!
-		}
+		// var itemList : Array<string> | null = null
+		// var itemColor : string | null = null
+		// var hasLongPressAction = false;
+		// if (this.options.longPressActions != null && this.options.longPressActions!.itemList != null && this.options.longPressActions!.itemList!.length > 0) {
+		// 	itemList = this.options.longPressActions!.itemList!
+		// 	hasLongPressAction = true
+		// } else {
+		// 	itemList = ["保存"]
+		// }
+		// if (this.options.longPressActions != null && this.options.longPressActions!.itemColor != null) {
+		// 	itemColor = this.options.longPressActions!.itemColor!
+		// }
 		// let actionOption : ShowActionSheetOptions = {
 		// 	"itemList": itemList!,
 		// 	"itemColor": itemColor == null ? "" : itemColor!,
@@ -259,7 +259,7 @@ class ImageInfoTarget extends CustomTarget<File> {
 
 function getExif(src : string, options : GetImageInfoOptions, bitmapOption : BitmapFactory.Options | null) {
 	var exifInfo : ExifInterface | null = null
-	if(bitmapOption == null) {
+	if (bitmapOption == null) {
 		bitmapOption = new BitmapFactory.Options();
 		bitmapOption.inJustDecodeBounds = true;
 	}
@@ -378,16 +378,16 @@ function loadFile(options : SaveImageToPhotosAlbumOptions, saveToAlbum : boolean
 	}
 }
 
-function getInputStream(fromFilePath:string):InputStream|null {
+function getInputStream(fromFilePath : string) : InputStream | null {
 	var fis : InputStream | null = null
 	try {
-	if (fromFilePath.startsWith(ASSETS_PATH)) {
-		fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
-	} else {
-		fis = new FileInputStream(fromFilePath)
-	}
-	} catch(e){
-		
+		if (fromFilePath.startsWith(ASSETS_PATH)) {
+			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+		} else {
+			fis = new FileInputStream(fromFilePath)
+		}
+	} catch (e) {
+
 	}
 	return fis
 }
@@ -409,6 +409,11 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 			var mimeType : string | null = null
 			if (isVideo) {
 				var retriever = new MediaMetadataRetriever()
+				if (fromFilePath.startsWith(ASSETS_PATH)) {
+					var mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/_" + System.currentTimeMillis()
+					copyFile(fromFilePath,mediaCachePath)
+					fromFilePath = mediaCachePath
+				}
 				retriever.setDataSource(fromFilePath)
 				mimeType = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
 			} else {
@@ -445,7 +450,7 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 				return false
 			}
 			fis = getInputStream(fromFilePath)
-			if(fis == null) {
+			if (fis == null) {
 				return false
 			}
 			var byteArrays = ByteArray(102400 * 2)
@@ -568,15 +573,10 @@ function loadFile(options : SaveVideoToPhotosAlbumOptions) {
 		options.complete?.(error)
 		return
 	}
-	let originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
-	if (originalPath.startsWith(ASSETS_PATH)) {
-		originalPath = originalPath.replace(ASSETS_PATH, "")
-	}
-	if (!new File(originalPath).exists()) {
-		let error = new MediaErrorImpl(1101003, UniError_SaveVideoToPhotosAlbum);
-		options.fail?.(error)
-		options.complete?.(error)
-		return
+	var originalPath = options.filePath
+	var file = new File(originalPath)
+	if (!file.exists()) {
+		originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
 	}
 	let path = DCIM_PATH + originalPath.substring(originalPath.lastIndexOf("/") + 1)
 	if (copyFileToPublicPath(originalPath, path, true)) {

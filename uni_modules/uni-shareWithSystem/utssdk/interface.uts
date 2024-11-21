@@ -5,12 +5,232 @@ export type ShareWithSystemSuccess = {
 
 }
 
-/**
- * uni.shareWithSystem失败回调参数
- */
-export type ShareWithSystemFail = {
 
-}
+export type ShareWithSystemFail = IShareWithSystemFail;
+
+export interface IShareWithSystemFail extends IUniError {
+	errCode : ShareWithSystemErrorCode
+};
+/**
+ * 错误码
+ */
+export type ShareWithSystemErrorCode = 
+/**
+ * 取消分享
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "x",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310600 |
+/**
+ * 分享内容不可以为空
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310601 |
+/**
+ * 已经成功调用系统分享接口，系统分享出错
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310602 |
+/**
+ * 图片路径无效
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310603 |
+/**
+ * 无效的链接
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310604 |
+/**
+ * video 路径无效
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310605 |
+/**
+ * file 文件不存在
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310606 |
+/**
+ * audio 路径无效
+ * @uniPlatform {
+	*    "app": {
+	*        "android": {
+	*            "osVer": "5.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "ios": {
+	*            "osVer": "12.0",
+	*            "uniVer": "√",
+	*            "unixVer": "4.33"
+	*        },
+	*        "harmony": {
+	*            "osVer": "3.0",
+	*            "uniVer": "x",
+	*            "unixVer": "x"
+	*        }
+	*    },
+	*    "web": {
+	*        "uniVer": "x",
+	*        "unixVer": "x"
+	*    }
+	* }
+ */
+1310607;
 
 /**
  * uni.shareWithSystem成功回调函数定义
@@ -29,14 +249,13 @@ export type ShareWithSystemCallback = (res: any) => void
  */
 export type ShareWithSystemOptions = {
     /**
-     * 分享类型，只支持text，image，默认为text。
-     * harmonyOS不支持此参数，如果传了多个类型的数据，分享弹框上可以由用户选择分享什么类型。类型优先级：href > imageUrl > summary，优先级最高的类型会成为默认类型。
+     * 分享类型,默认为text。
      * @uniPlatform {
      *     "app": {
      *         "android": {
      *             "osVer": "5.0",
      *             "uniVer": "√",
-     *             "unixVer": "x"
+     *             "unixVer": "4.33"
      *         },
      *         "ios": {
      *             "osVer": "12.0",
@@ -55,29 +274,412 @@ export type ShareWithSystemOptions = {
      *     }
      * }
      */
-    type?: 'text' | 'image',
+    type?: 
+	/**
+	 * text类型
+	 * @uniPlatform {
+	 *     "app": {
+	 *         "android": {
+	 *             "osVer": "5.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "ios": {
+	 *             "osVer": "12.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "x"
+	 *         },
+	 *         "harmony": {
+	 *             "osVer": "3.0",
+	 *             "uniVer": "x",
+	 *             "unixVer": "x"
+	 *         }
+	 *     },
+	 *     "web": {
+	 *         "uniVer": "x",
+	 *         "unixVer": "x"
+	 *     }
+	 * }
+	 */
+	'text' |
+	 /**
+	  * image类型
+	  * @uniPlatform {
+	  *     "app": {
+	  *         "android": {
+	  *             "osVer": "5.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "4.33"
+	  *         },
+	  *         "ios": {
+	  *             "osVer": "12.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "x"
+	  *         },
+	  *         "harmony": {
+	  *             "osVer": "3.0",
+	  *             "uniVer": "x",
+	  *             "unixVer": "x"
+	  *         }
+	  *     },
+	  *     "web": {
+	  *         "uniVer": "x",
+	  *         "unixVer": "x"
+	  *     }
+	  * }
+	  */
+	 'image' | 
+	 /**
+	  * video类型
+	  * @uniPlatform {
+	  *     "app": {
+	  *         "android": {
+	  *             "osVer": "5.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "4.33"
+	  *         },
+	  *         "ios": {
+	  *             "osVer": "12.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "x"
+	  *         },
+	  *         "harmony": {
+	  *             "osVer": "3.0",
+	  *             "uniVer": "x",
+	  *             "unixVer": "x"
+	  *         }
+	  *     },
+	  *     "web": {
+	  *         "uniVer": "x",
+	  *         "unixVer": "x"
+	  *     }
+	  * }
+	  */
+	 'video' | 
+	 /**
+	  * audio类型
+	  * @uniPlatform {
+	  *     "app": {
+	  *         "android": {
+	  *             "osVer": "5.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "4.33"
+	  *         },
+	  *         "ios": {
+	  *             "osVer": "12.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "x"
+	  *         },
+	  *         "harmony": {
+	  *             "osVer": "3.0",
+	  *             "uniVer": "x",
+	  *             "unixVer": "x"
+	  *         }
+	  *     },
+	  *     "web": {
+	  *         "uniVer": "x",
+	  *         "unixVer": "x"
+	  *     }
+	  * }
+	  */
+	 'audio' | 
+	 /**
+	  * file类型
+	  * @uniPlatform {
+	  *     "app": {
+	  *         "android": {
+	  *             "osVer": "5.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "4.33"
+	  *         },
+	  *         "ios": {
+	  *             "osVer": "12.0",
+	  *             "uniVer": "√",
+	  *             "unixVer": "x"
+	  *         },
+	  *         "harmony": {
+	  *             "osVer": "3.0",
+	  *             "uniVer": "x",
+	  *             "unixVer": "x"
+	  *         }
+	  *     },
+	  *     "web": {
+	  *         "uniVer": "x",
+	  *         "unixVer": "x"
+	  *     }
+	  * }
+	  */
+	 'file',
     /**
      * 分享的文字内容
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     summary?: string,
     /**
      * 分享链接
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     href?: string,
     /**
-     * 分享图片，仅支持本地路径
+     * 分享单个图片，仅支持本地路径
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     imageUrl?: string,
+	/**
+	 * 分享图片，仅支持本地路径
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
+	 */
+	imagePaths?: Array<string>,
+	/**
+	 * 分享video，仅支持本地路径
+	 * @uniPlatform {
+	 *     "app": {
+	 *         "android": {
+	 *             "osVer": "5.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "ios": {
+	 *             "osVer": "12.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "harmony": {
+	 *             "osVer": "3.0",
+	 *             "uniVer": "x",
+	 *             "unixVer": "x"
+	 *         }
+	 *     },
+	 *     "web": {
+	 *         "uniVer": "x",
+	 *         "unixVer": "x"
+	 *     }
+	 * }
+	 */
+	
+	videoPaths?: Array<string>,
+	/**
+	 * 分享audio，仅支持本地路径
+	 * @uniPlatform {
+	 *     "app": {
+	 *         "android": {
+	 *             "osVer": "5.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "ios": {
+	 *             "osVer": "12.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "harmony": {
+	 *             "osVer": "3.0",
+	 *             "uniVer": "x",
+	 *             "unixVer": "x"
+	 *         }
+	 *     },
+	 *     "web": {
+	 *         "uniVer": "x",
+	 *         "unixVer": "x"
+	 *     }
+	 * }
+	 */
+	audioPaths?: Array<string>,
+	/**
+	 * 分享文件，仅支持本地路径
+	 * @uniPlatform {
+	 *     "app": {
+	 *         "android": {
+	 *             "osVer": "5.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "ios": {
+	 *             "osVer": "12.0",
+	 *             "uniVer": "√",
+	 *             "unixVer": "4.33"
+	 *         },
+	 *         "harmony": {
+	 *             "osVer": "3.0",
+	 *             "uniVer": "x",
+	 *             "unixVer": "x"
+	 *         }
+	 *     },
+	 *     "web": {
+	 *         "uniVer": "x",
+	 *         "unixVer": "x"
+	 *     }
+	 * }
+	 */
+	
+	filePaths?: Array<string>,
     /**
      * 接口调用成功的回调函数
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     success?: ShareWithSystemSuccessCallback | null,
     /**
      * 接口调用失败的回调函数
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     fail?: ShareWithSystemFailCallback | null,
     /**
      * 接口调用结束的回调函数（调用成功、失败都会执行）
+     * @uniPlatform {
+     *     "app": {
+     *         "android": {
+     *             "osVer": "5.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "ios": {
+     *             "osVer": "12.0",
+     *             "uniVer": "√",
+     *             "unixVer": "4.33"
+     *         },
+     *         "harmony": {
+     *             "osVer": "3.0",
+     *             "uniVer": "x",
+     *             "unixVer": "x"
+     *         }
+     *     },
+     *     "web": {
+     *         "uniVer": "x",
+     *         "unixVer": "x"
+     *     }
+     * }
      */
     complete?: ShareWithSystemCallback | null
 }
@@ -86,8 +688,7 @@ export type ShareWithSystem = (options: ShareWithSystemOptions) => void
 
 export interface Uni {
     /**
-     * uni.shareWithSystem函数定义
-     * 使用系统分享。harmonyOS
+     * 使用系统分享。
      *
      * @param {ShareWithSystemOptions} options
      * @uniPlatform {
@@ -95,12 +696,12 @@ export interface Uni {
      *         "android": {
      *             "osVer": "5.0",
      *             "uniVer": "√",
-     *             "unixVer": "x"
+     *             "unixVer": "4.33"
      *         },
      *         "ios": {
      *             "osVer": "12.0",
      *             "uniVer": "√",
-     *             "unixVer": "x"
+     *             "unixVer": "4.33"
      *         },
      *         "harmony": {
      *             "osVer": "3.0",
@@ -113,8 +714,6 @@ export interface Uni {
      *         "unixVer": "x"
      *     }
      * }
-     * @uniVersion 2.0.3
-     * @uniVueVersion 2,3  //支持的vue版本
      */
     shareWithSystem(options: ShareWithSystemOptions): void,
 }

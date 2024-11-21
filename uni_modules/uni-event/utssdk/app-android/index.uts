@@ -1,5 +1,5 @@
 import { Emitter } from '@dcloudio/uni-runtime'
-import { $Emit, $Off, $On, $Once } from '../interface.uts'
+import { $Off, $On, $Once } from '../interface.uts'
 
 const emitter = new Emitter()
 
@@ -16,7 +16,6 @@ export const $once = defineSyncApi<$Once>('$once', (eventName, callback): number
     return emitter.once(eventName, callback)
 })
 
-export const $emit = defineSyncApi<$Emit>('$emit', (eventName, arg) => {
-    // TODO muti args
-    emitter.emit(eventName, arg)
-})
+export function $emit(eventName: string, ...args: Array<any | null>): void {
+    emitter.emit(eventName, ...args)
+}

@@ -3,7 +3,7 @@ import {
 	CompressVideoOptions, CompressVideoSuccess
 } from "../../interface.uts"
 import {
-	UniError_CompressVideo,UniError_CompressImage,
+	UniError_CompressVideo, UniError_CompressImage,
 	MediaErrorImpl
 } from "../../unierror.uts"
 import TextUtils from 'android.text.TextUtils';
@@ -17,8 +17,9 @@ import Field from 'java.lang.reflect.Field';
 import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
 import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
 import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
+import { copyFile } from "./MediaUtils.uts";
 
-const mediaCachePath = UTSAndroid.getAppCachePath()+"uni-media/"
+const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
 // export function threadCompress() {
 // }
 export function transcodeImage(options : CompressImageOptions) {
@@ -201,8 +202,24 @@ class CompressOptions {
 }
 
 export function transcodeVideo(options : CompressVideoOptions) {
-	let inPath = UTSAndroid.convert2AbsFullPath(options.src)
-	let inFile = new File(inPath)
+	var inPath = options.src
+	var inFile = new File(inPath)
+	if (!inFile.exists()) {
+		inPath = UTSAndroid.convert2AbsFullPath(options.src)
+	}
+	if (inPath.startsWith("/android_asset/")) {
+		var mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/_" + System.currentTimeMillis()
+		if (copyFile(inPath, mediaCachePath)) {
+			inPath = mediaCachePath
+		} else {
+			let error = new MediaErrorImpl(1101010, UniError_CompressVideo);
+			options.fail?.(error)
+			options.complete?.(error)
+		}
+	}
+	if (!inFile.exists()) {
+		inFile = new File(inPath)
+	}
 	if (!inFile.exists()) {
 		let error = new MediaErrorImpl(1101003, UniError_CompressVideo);
 		options.fail?.(error)
@@ -234,7 +251,6 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	if (!outFile.getParentFile().exists()) {
 		outFile.getParentFile().mkdirs()
 	}
-
 	MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
 }
 

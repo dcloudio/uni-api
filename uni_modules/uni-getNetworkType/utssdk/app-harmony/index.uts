@@ -194,7 +194,14 @@ export const getNetworkType: GetNetworkType = defineAsyncApi<GetNetworkTypeOptio
                 networkType: NetworkinfoType[type].toLocaleLowerCase()
             } as GetNetworkTypeSuccess)
         }).catch((err: BusinessError) => {
-            res.reject(err.message)
+            // NOTE 在 pad 上无网络
+            if (err.code === 2100001) {
+                res.resolve({
+                    networkType: NetworkinfoType[1].toLocaleLowerCase()
+                } as GetNetworkTypeSuccess)
+            } else {
+                res.reject(err.message)
+            }
         })
     }
 ) as GetNetworkType

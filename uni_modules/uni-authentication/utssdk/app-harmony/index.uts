@@ -158,6 +158,9 @@ function fingerPrintAvailable() {
         userAuth.getAvailableStatus(userAuth.UserAuthType.FINGERPRINT, userAuth.AuthTrustLevel.ATL1);
         return true
     } catch (error) {
+        if ([userAuth.UserAuthResultCode.NOT_ENROLLED, userAuth.UserAuthResultCode.PIN_EXPIRED].includes((error as BusinessError).code)) {
+            return true
+        }
         return false
     }
 }
@@ -167,6 +170,9 @@ function faceAvailable() {
         userAuth.getAvailableStatus(userAuth.UserAuthType.FACE, userAuth.AuthTrustLevel.ATL1);
         return true
     } catch (error) {
+        if ([userAuth.UserAuthResultCode.NOT_ENROLLED, userAuth.UserAuthResultCode.PIN_EXPIRED].includes((error as BusinessError).code)) {
+            return true
+        }
         return false
     }
 }

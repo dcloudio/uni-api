@@ -11,6 +11,7 @@ export const ExitUniErrorSubject = 'uni-exit';
  * @UniError
  */
 export const ExitUniErrors:Map<number, string> = new Map([
+	
   /**
    * 系统不支持
    */
@@ -18,7 +19,11 @@ export const ExitUniErrors:Map<number, string> = new Map([
   /**
    * 未知错误
    */
-  [12002, 'unknown error']
+  [12002, 'unknown error'],
+  /**
+   * iOS平台，仅在uni-app x SDK模式中支持应用退出
+   */
+  [12003, 'app exit is supported only in uni-app x SDK mode']
 ]);
 
 /**

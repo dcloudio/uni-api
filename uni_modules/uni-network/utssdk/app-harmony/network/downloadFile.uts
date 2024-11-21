@@ -24,7 +24,6 @@ import {
 import {
     getClientCertificate,
     parseUrl,
-    IUniNetworkMP
 } from './utils.uts'
 import {
     getCookieSync,
@@ -121,7 +120,7 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
         }
 
         const httpRequest = http.createHttp()
-        const mp = getCurrentMP()! as IUniNetworkMP
+        const mp = getCurrentMP()
         const userAgent = mp.userAgent.fullUserAgent
         if (userAgent && !header!['User-Agent'] && !header!['user-agent']) {
             header!['User-Agent'] = userAgent
@@ -154,7 +153,7 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
 
         let responseContentType = ''
         let responseContentDisposition = ''
-
+        let lastUrl = url
         httpRequest.on('headersReceive', (headers: Object) => {
             const realHeaders = headers as Record<string, string | string[]>
             responseContentType =
@@ -167,7 +166,11 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
                 ''
             const setCookieHeader = realHeaders['set-cookie'] || realHeaders['Set-Cookie']
             if (setCookieHeader) {
-                setCookieSync(url, setCookieHeader as string[])
+                setCookieSync(lastUrl, setCookieHeader as string[])
+            }
+            const location = realHeaders['location'] || realHeaders['Location']
+            if (location) {
+                lastUrl = location as string
             }
             // TODO headersReceive存在bug，暂不支持回调给用户。注意重定向时会多次触发，但是只需要给用户回调最后一次
             // emitter.emit('headersReceive', header);

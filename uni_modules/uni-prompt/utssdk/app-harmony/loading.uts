@@ -24,6 +24,8 @@ interface IShowLoadingOptions {
     title: string,
     mask: boolean
 }
+interface IHideLoadingOptions { }
+interface IHideLoadingSuccess { }
 
 export const showLoading: ShowLoading = defineAsyncApi<ShowLoadingOptions, ShowLoadingSuccess>(
     API_SHOW_LOADING,
@@ -40,11 +42,12 @@ export const showLoading: ShowLoading = defineAsyncApi<ShowLoadingOptions, ShowL
     ShowLoadingApiOptions
 ) as ShowLoading
 
-export const hideLoading: HideLoading = defineSyncApi<void>(
+export const hideLoading: HideLoading = defineAsyncApi<IHideLoadingOptions, IHideLoadingSuccess>(
     API_HIDE_LOADING,
-    function () {
+    function (options: IHideLoadingOptions, exec: ApiExecutor<IHideLoadingSuccess>) {
         onNativePageReady().then((nativePage: Object) => {
             getOSRuntime().hideLoading()
+            exec.resolve({} as IHideLoadingSuccess)
         })
     },
 ) as HideLoading

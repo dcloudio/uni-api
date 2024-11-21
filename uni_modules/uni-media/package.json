@@ -146,7 +146,8 @@
 		"dependencies": [
 			"uni-prompt",
 			"app-ios:permission-album",
-			"app-ios:permission-camera"
+			"app-ios:permission-camera",
+			"uni-framework"
 		],
 		"encrypt": [],
 		"platforms": {
