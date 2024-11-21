@@ -13,7 +13,7 @@ import {
 import { OpenDialogPageOptions } from '../interface.uts'
 import { OpenDialogPageSuccessImpl, OpenDialogPageFailImpl } from '../unierror.uts'
 
-export const openDialogPage = (options: OpenDialogPageOptions): UniDialogPage | null => {
+export const openDialogPage = (options: OpenDialogPageOptions): UniPage | null => {
     const navigationStart = Date.now()
 
     const normalizeRouteOptionsResult = normalizeRouteOptions(
@@ -56,7 +56,7 @@ export const openDialogPage = (options: OpenDialogPageOptions): UniDialogPage | 
         ]),
         NAVIGATE_TO,
         navigationStart,
-        new Map([
+        new Map<string, any | null>([
             ['disableEscBack', options.disableEscBack],
             ['parentPage', options.parentPage],
         ]),

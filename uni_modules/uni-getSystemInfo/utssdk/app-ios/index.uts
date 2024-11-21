@@ -111,11 +111,11 @@ function getWindowInfoResult() : GetWindowInfoResult {
 	}
 	
 	const safeAreaLeft = insetLeft
-	const safeAreaRight = windowWidth - insetRight
+	const safeAreaRight = screenWidth - insetRight
 	const safeAreaTop = insetTop
-	const safeAreaBottom = windowHeight - insetBottom
-	const safeAreaWidth = windowWidth - insetLeft - insetRight
-	const safeAreaHeight = windowHeight - insetTop - insetBottom
+	const safeAreaBottom = screenHeight - insetBottom
+	const safeAreaWidth = screenWidth - insetLeft - insetRight
+	const safeAreaHeight = screenHeight - insetTop - insetBottom
 	
 	const safeArea : SafeArea = {
 		left: safeAreaLeft,

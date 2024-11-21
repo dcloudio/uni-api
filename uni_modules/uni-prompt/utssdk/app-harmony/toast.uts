@@ -1,4 +1,3 @@
-import { getCurrentWindow } from '@dcloudio/uni-runtime';
 import { window } from '@kit.ArkUI';
 import { BusinessError } from '@ohos.base';
 import { promptAction } from '@kit.ArkUI';
@@ -6,39 +5,39 @@ import { ShowToast, ShowToastOptions, ShowToastSuccess, HideToast } from '../int
 import { API_SHOW_TOAST, ShowToastProtocol, ShowToastApiOptions, API_HIDE_TOAST } from '../protocol.uts'
 
 export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSuccess>(
-  API_SHOW_TOAST,
-  function (options: ShowToastOptions, res: ApiExecutor<ShowToastSuccess>) {
-    try {
-      const showToastOptions: promptAction.ShowToastOptions = {
-        message: options.title,
-        duration: options.duration!,
-        alignment: Alignment.Center
-      }
-      if (options.position) {
-        switch (options.position) {
-          case 'top':
-            showToastOptions.alignment = Alignment.Top
-            break
-          case 'bottom':
-            showToastOptions.alignment = Alignment.Bottom
-            break
+    API_SHOW_TOAST,
+    function (options: ShowToastOptions, res: ApiExecutor<ShowToastSuccess>) {
+        try {
+            const showToastOptions: promptAction.ShowToastOptions = {
+                message: options.title,
+                duration: options.duration!,
+                alignment: Alignment.Center
+            }
+            if (options.position) {
+                switch (options.position) {
+                    case 'top':
+                        showToastOptions.alignment = Alignment.Top
+                        break
+                    case 'bottom':
+                        showToastOptions.alignment = Alignment.Bottom
+                        break
+                }
+            }
+            const window = UTSHarmony.getCurrentWindow() as window.Window;
+            window.getUIContext().getPromptAction().showToast(showToastOptions)
+            res.resolve({} as ShowToastSuccess)
+        } catch (error) {
+            let message = (error as BusinessError).message
+            res.reject(message)
         }
-      }
-      const window = getCurrentWindow() as window.Window;
-      window.getUIContext().getPromptAction().showToast(showToastOptions)
-      res.resolve({} as ShowToastSuccess)
-    } catch (error) {
-      let message = (error as BusinessError).message
-      res.reject(message)
-    }
-  },
-  ShowToastProtocol,
-  ShowToastApiOptions
+    },
+    ShowToastProtocol,
+    ShowToastApiOptions
 ) as ShowToast
 
 export const hideToast: HideToast = defineAsyncApi(
-  API_HIDE_TOAST,
-  function (_, res: ApiExecutor<any>) {
-    res.reject('hideToast is not supported on HarmonyOS')
-  }
+    API_HIDE_TOAST,
+    function (_, res: ApiExecutor<any>) {
+        // res.reject('hideToast is not supported on HarmonyOS')
+    }
 ) as HideToast

@@ -3,95 +3,95 @@ import { API_CHOOSE_IMAGE, CompressImageApiOptions, CompressImageApiProtocol } f
 import { image } from '@kit.ImageKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
-import { getEnv, UTSHarmony } from '@dcloudio/uni-runtime';
+import { getEnv } from '@dcloudio/uni-runtime';
 
 export interface _CompressImageSuccess {
-  size: number,
-  tempFilePath: string
+    size: number,
+    tempFilePath: string
 }
 
 function getFileName(path: string) {
-  const array = path.split('/')
-  return array[array.length - 1]
+    const array = path.split('/')
+    return array[array.length - 1]
 }
 
 let id: number = 0
 
 export function _compressImage(args: CompressImageOptions) {
-  const imageName = getFileName(args.src)
-  const imageExt = imageName.split('.').slice(-1)[0];
-  const imagePacker: image.ImagePacker = image.createImagePacker();
-  const file2 = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY);
+    const imageName = getFileName(args.src)
+    const imageExt = imageName.split('.').slice(-1)[0];
+    const imagePacker: image.ImagePacker = image.createImagePacker();
+    const file2 = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY);
 
-  if (!file2) {
-    throw new Error('open file failed')
-  }
-
-  const imageSource: image.ImageSource = image.createImageSource(file2.fd);
-
-  if (imageSource == null) {
-    throw new Error('create image source failed')
-  }
-
-  let decodingOptions: image.DecodingOptions = { editable: true };
-  if (args.rotate != null) {
-    decodingOptions.rotate = args.rotate
-  }
-  if (args.compressedHeight != null || args.compressedWidth != null) {
-    decodingOptions.desiredSize = {
-      height: (args.compressedHeight ?? args.compressedWidth)!,
-      width: (args.compressedWidth ?? args.compressedHeight)!
+    if (!file2) {
+        throw new Error('open file failed')
     }
-  }
-  const pixelMap = imageSource.createPixelMapSync(decodingOptions);
 
-  let format: string = ''
-  if (['jpg', 'jpe', 'jpeg', 'png'].includes(imageExt)) {
-    format = 'image/jpeg'
-  }
-  if (imageExt === 'webp') format = 'image/webp'
+    const imageSource: image.ImageSource = image.createImageSource(file2.fd);
 
-  if (!format.length) {
-    throw new Error('error image format')
-  }
-  const packOptions: image.PackingOption = {
-    format,
-    quality: args.quality ?? 80
-  }
+    if (imageSource == null) {
+        throw new Error('create image source failed')
+    }
 
-  const tempFileName = `${Date.now()}_${id++}_${imageName}`
-  const tempDirPath = `${getEnv().TEMP_PATH}/compress`
-  if (!fileIo.accessSync(tempDirPath)) {
-    fileIo.mkdirSync(tempDirPath, true)
-  }
+    let decodingOptions: image.DecodingOptions = { editable: true };
+    if (args.rotate != null) {
+        decodingOptions.rotate = args.rotate
+    }
+    if (args.compressedHeight != null || args.compressedWidth != null) {
+        decodingOptions.desiredSize = {
+            height: (args.compressedHeight ?? args.compressedWidth)!,
+            width: (args.compressedWidth ?? args.compressedHeight)!
+        }
+    }
+    const pixelMap = imageSource.createPixelMapSync(decodingOptions);
 
-  const tempFilePath: string = `${tempDirPath}/${tempFileName}`
-  const file = fileIo.openSync(tempFilePath, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE);
+    let format: string = ''
+    if (['jpg', 'jpe', 'jpeg', 'png'].includes(imageExt)) {
+        format = 'image/jpeg'
+    }
+    if (imageExt === 'webp') format = 'image/webp'
 
-  return imagePacker.packToFile(pixelMap, file.fd, packOptions).then(_ => {
-    const size = fileIo.statSync(file.fd).size
-    fileIo.closeSync(file.fd)
-    pixelMap.release()
-    return {
-      size,
-      tempFilePath
-    } as _CompressImageSuccess
-  })
+    if (!format.length) {
+        throw new Error('error image format')
+    }
+    const packOptions: image.PackingOption = {
+        format,
+        quality: args.quality ?? 80
+    }
+
+    const tempFileName = `${Date.now()}_${id++}_${imageName}`
+    const tempDirPath = `${getEnv().TEMP_PATH}/compress`
+    if (!fileIo.accessSync(tempDirPath)) {
+        fileIo.mkdirSync(tempDirPath, true)
+    }
+
+    const tempFilePath: string = `${tempDirPath}/${tempFileName}`
+    const file = fileIo.openSync(tempFilePath, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE);
+
+    return imagePacker.packToFile(pixelMap, file.fd, packOptions).then(_ => {
+        const size = fileIo.statSync(file.fd).size
+        fileIo.closeSync(file.fd)
+        pixelMap.release()
+        return {
+            size,
+            tempFilePath
+        } as _CompressImageSuccess
+    })
 }
 
 export const compressImage: CompressImage = defineAsyncApi<CompressImageOptions, CompressImageSuccess>(
-  API_CHOOSE_IMAGE,
-  (args: CompressImageOptions, executor: ApiExecutor<CompressImageSuccess>) => {
-    try {
-      _compressImage(args).then((res) => {
-        executor.resolve({
-          tempFilePath: res.tempFilePath
-        } as CompressImageSuccess)
-      })
-    } catch (error) {
-      executor.reject((error as BusinessError).message)
-    }
-  },
-  CompressImageApiProtocol,
-  CompressImageApiOptions
+    API_CHOOSE_IMAGE,
+    (args: CompressImageOptions, executor: ApiExecutor<CompressImageSuccess>) => {
+        try {
+            _compressImage(args).then((res) => {
+                executor.resolve({
+                    tempFilePath: res.tempFilePath
+                } as CompressImageSuccess)
+            })
+        } catch (error) {
+            executor.reject((error as BusinessError).message)
+        }
+    },
+    CompressImageApiProtocol,
+    CompressImageApiOptions
 ) as CompressImage

@@ -32,7 +32,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "x",
      *        "uniVer": "x",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "x",

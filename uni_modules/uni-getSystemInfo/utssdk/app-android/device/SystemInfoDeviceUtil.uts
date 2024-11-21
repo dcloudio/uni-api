@@ -11,8 +11,12 @@ import TextUtils from 'android.text.TextUtils';
 
 import BufferedReader from 'java.io.BufferedReader';
 import InputStreamReader from 'java.io.InputStreamReader';
+
+// #ifdef UNI-APP-X
 import ViewCompat from 'androidx.core.view.ViewCompat';
 import WindowInsetsCompat from 'androidx.core.view.WindowInsetsCompat';
+import Settings from 'android.provider.Settings';
+// #endif
 
 
 export class DeviceUtil {
@@ -337,13 +341,22 @@ export class DeviceUtil {
 		return result;
 	}
 	
+	// #ifdef UNI-APP-X
 	public static isGestureNavigationIndicator(activity : Activity) : boolean {
-		const insets = ViewCompat.getRootWindowInsets(activity.getWindow().getDecorView());
-		if (insets == null) return false;
-		const navigationBarsInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-        const systemGesturesInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures());
-		return navigationBarsInsets.bottom != 0 && navigationBarsInsets.bottom != systemGesturesInsets.bottom;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			const insets = ViewCompat.getRootWindowInsets(activity.getWindow().getDecorView());
+			if (insets == null) return false;
+			const navigationBarsInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+			const systemGesturesInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures());
+			let navigationMode = 0;
+			try {
+				navigationMode = Settings.Secure.getInt(activity.getContentResolver(), "navigation_mode");
+			} catch (e : Settings.SettingNotFoundException) { }
+			return navigationBarsInsets.bottom != 0 && (navigationBarsInsets.bottom != systemGesturesInsets.bottom || navigationMode == 2);
+		}
+		return false;
 	}
+	// #endif
 	
 	public static isInMultiWindowMode(activity : Activity) : boolean {
 		if (Build.BRAND.equals("OPPO", true)) {

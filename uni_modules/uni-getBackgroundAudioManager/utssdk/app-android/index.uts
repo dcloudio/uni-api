@@ -1,0 +1,6 @@
+import { GetBackgroundAudioManager, BackgroundAudioManager } from "../interface.uts"
+
+export const getBackgroundAudioManager : GetBackgroundAudioManager = function () : BackgroundAudioManager {
+	let player = BackgroundAudioPlayer.getInstance()
+	return player
+}

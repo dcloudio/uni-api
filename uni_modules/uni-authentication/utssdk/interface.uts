@@ -27,8 +27,50 @@ export interface Uni {
    *   "web": {
    *     "uniVer": "x",
    *     "unixVer": "x"
-   *   }
-	 * }
+   *   },
+   *  "mp":{
+   *    weixin: {
+   *      hostVer: '√',
+   *      uniVer: '√',
+   *      unixVer: '4.35'
+   *    },
+   *    alipay: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    baidu: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    toutiao: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    lark: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    qq: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    kuaishou: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    jd: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    }
+   *  }
+   * }
    */
   startSoterAuthentication: StartSoterAuthentication;
   /**
@@ -58,7 +100,49 @@ export interface Uni {
    *   "web": {
    *     "uniVer": "x",
    *     "unixVer": "x"
-   *   }
+   *   },
+   *  "mp":{
+   *    weixin: {
+   *      hostVer: '√',
+   *      uniVer: '√',
+   *      unixVer: '4.35'
+   *    },
+   *    alipay: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    baidu: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    toutiao: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    lark: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    qq: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    kuaishou: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    jd: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    }
+   *  }
 	 * }
    */
   checkIsSupportSoterAuthentication: CheckIsSupportSoterAuthentication;
@@ -89,7 +173,49 @@ export interface Uni {
    *   "web": {
    *     "uniVer": "x",
    *     "unixVer": "x"
-   *   }
+   *   },
+   *  "mp":{
+   *    weixin: {
+   *      hostVer: '√',
+   *      uniVer: '√',
+   *      unixVer: '4.35'
+   *    },
+   *    alipay: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    baidu: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    toutiao: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    lark: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    qq: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    kuaishou: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    },
+   *    jd: {
+   *      hostVer: 'x',
+   *      uniVer: 'x',
+   *      unixVer: 'x'
+   *    }
+   *  }
 	 * }
    */
   checkIsSoterEnrolledInDevice: CheckIsSoterEnrolledInDevice;

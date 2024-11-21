@@ -1,57 +1,57 @@
 export type MediaOrientation =
-| 'up'
-| 'down'
-| 'left'
-| 'right'
-| 'up-mirrored'
-| 'down-mirrored'
-| 'left-mirrored'
-| 'right-mirrored'
+	| 'up'
+	| 'down'
+	| 'left'
+	| 'right'
+	| 'up-mirrored'
+	| 'down-mirrored'
+	| 'left-mirrored'
+	| 'right-mirrored'
 
 /**
  * 错误码
  */
 export type MediaErrorCode =
-/**
- * 用户取消
- */
-1101001 |
-/**
- * urls至少包含一张图片地址
- */
-1101002 |
-/**
- * 文件不存在
- */
-1101003 |
-/**
- * 图片加载失败
- */
-1101004 |
-/**
- * 未获取权限
- */
-1101005 |
-/**
- * 图片或视频保存失败
- */
-1101006 |
-/**
- * 图片裁剪失败
- */
-1101007 |
-/**
- * 拍照或录像失败
- */
-1101008 |
-/**
- * 图片压缩失败
- */
-1101009 |
-/**
- * 其他错误
- */
-1101010;
+	/**
+	 * 用户取消
+	 */
+	1101001 |
+	/**
+	 * urls至少包含一张图片地址
+	 */
+	1101002 |
+	/**
+	 * 文件不存在
+	 */
+	1101003 |
+	/**
+	 * 图片加载失败
+	 */
+	1101004 |
+	/**
+	 * 未获取权限
+	 */
+	1101005 |
+	/**
+	 * 图片或视频保存失败
+	 */
+	1101006 |
+	/**
+	 * 图片裁剪失败
+	 */
+	1101007 |
+	/**
+	 * 拍照或录像失败
+	 */
+	1101008 |
+	/**
+	 * 图片压缩失败
+	 */
+	1101009 |
+	/**
+	 * 其他错误
+	 */
+	1101010;
 
 /**
  * 图片或视频操作失败的错误回调
@@ -64,19 +64,19 @@ export type ChooseImageTempFile = {
 	/**
 	 * 本地文件路径
 	 */
-	path: string,
+	path : string,
 	/**
 	 * 本地文件大小，单位：B
 	 */
-	size: number,
+	size : number,
 	/**
 	 * 包含扩展名的文件名称，仅H5支持
 	 */
-	name?: string | null,
+	name ?: string | null,
 	/**
 	 * 文件类型，仅H5支持
 	 */
-	type?: string | null
+	type ?: string | null
 }
 export type ChooseImageSuccess = {
 	/**
@@ -124,7 +124,128 @@ export type ChooseImageCropOptions = {
 	resize ?: (boolean) | null;
 }
 
+export type ChooseImagePageOrientation =
+	/**
+	 * 自动
+	 */
+	"auto" |
+	/**
+	 * 竖屏显示
+	 */
+	"portrait" |
+	/**
+	 * 横屏显示
+	 */
+	"landscape"
+
+export type ChooseImageAlbumMode = 
+/**
+ * 自定义媒体选择器
+ */
+"custom" | 
+/**
+ * 系统媒体选择器
+ */
+"system"
+
 export type ChooseImageOptions = {
+	/**
+	 * 屏幕方向。默认为page.json中的pageOrientation。
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "4.33",
+	 *			"unixVer": "4.33"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "4.33",
+	 *			"unixVer": "4.33"
+	 *		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *	"web": {
+	 *		"uniVer": "x",
+	 *		"unixVer": "x"
+	 *	}
+	 * }
+	 */
+	pageOrientation ?: ChooseImagePageOrientation | null,
+	/**
+		 * 图片选择模式
+		 * @default "custom"
+		 * @uniPlatform {
+		 *	 "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "4.33",
+		 *			"unixVer": "4.33"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "x",
+		 *			"unixVer": "x"
+		 *		},
+	*    "harmony": {
+	*      "osVer": "3.0",
+	*      "uniVer": "x",
+	*      "unixVer": "x"
+	*    }
+		 *	},
+		 *	"web": {
+		 *		"uniVer": "x",
+		 *		"unixVer": "x"
+		 *	}
+		 * }
+		 */
+	albumMode ?: ChooseImageAlbumMode | null,
 	/**
 	 * 最多可以选择的图片张数，app端不限制，微信小程序最多可支持20个。
 	 * @defaultValue 9
@@ -135,16 +256,68 @@ export type ChooseImageOptions = {
 	 * @defaultValue ['original','compressed']
 	 * @uniPlatform {
 	 * "app":{
-   *    "harmony": {
-   *      "osVer": "3.0",
-   *      "uniVer": "4.23",
-   *      "unixVer": "x"
-   *    }
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
+	 *		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
 	 * },
-   *  "web": {
-   *    "uniVer": "x",
-   *    "unixVer": "x"
-   *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
 	 * }
 	 */
 	sizeType ?: (string[]) | null,
@@ -159,15 +332,62 @@ export type ChooseImageOptions = {
 	 *	"app": {
 	 *		"android": {
 	 *			"osVer": "5.0",
-	 *			"uniVer": "√",
+	 *			"uniVer": "x",
+	 *			"unixVer": "x"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "x",
 	 *			"unixVer": "x"
 	 *		},
 	 *   "harmony": {
-   *        "osVer": "x",
-   *        "uniVer": "x",
-   *        "unixVer": "x"
-   *      }
+     *        "osVer": "x",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *      }
 	 * 	 },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
 	 * "web": {
 	 *		"uniVer": "2.9.9",
 	 *		"unixVer": "4.0"
@@ -179,16 +399,26 @@ export type ChooseImageOptions = {
 	 * 图像裁剪参数，设置后 sizeType 失效。
 	 * @uniPlatform {
 	 * "app":{
-   *    "harmony": {
-   *      "osVer": "x",
-   *      "uniVer": "x",
-   *      "unixVer": "x"
-   *    }
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "3.9"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "4.11"
+	 *		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
 	 * },
-   *  "web": {
-   *    "uniVer": "x",
-   *    "unixVer": "x"
-   *  }
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "x"
+     *  }
 	 * }
 	 */
 	crop ?: (ChooseImageCropOptions) | null,
@@ -289,9 +519,51 @@ export type PreviewImageOptions = {
    *      "unixVer": "x"
    *    }
 	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
 	 *	"web": {
 	 *		"uniVer": "√",
-	 *		"unixVer": "4.0"
+	 *		"unixVer": "x"
 	 *	}
 	 * }
 	 */
@@ -301,11 +573,25 @@ export type PreviewImageOptions = {
 	 *
 	 * @uniPlatform {
 	 *	 "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
+	 *	},
+	 *	"web": {
+	 *		"uniVer": "√",
+	 *		"unixVer": "x"
 	 *	}
 	 * }
 	 */
@@ -326,6 +612,29 @@ export type PreviewImageOptions = {
 	/**
 	 * 是否可循环预览
 	 * @type boolean
+	 * @uniPlatform {
+	 	 *	 "app": {
+	 		 *		"android": {
+	 		 *			"osVer": "5.0",
+	 		 *			"uniVer": "√",
+	 		 *			"unixVer": "3.9"
+	 		 *		},
+	 		 *		"ios": {
+	 		 *			"osVer": "10.0",
+	 		 *			"uniVer": "√",
+	 		 *			"unixVer": "4.11"
+	 		 *		},
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 	 *	},
+		 *	"web": {
+		 *		"uniVer": "√",
+		 *		"unixVer": "x"
+		 *	}
+	 	 * }
 	 */
 	loop ?: boolean | null,
 	/**
@@ -337,15 +646,67 @@ export type PreviewImageOptions = {
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
 	 *		},
+	 *     "ios": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		},
    *    "harmony": {
    *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
-	 *	}
+	 *	},
+	 *    "web": {
+	 *      "osVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  }
 	 * }
 	 */
-	longPressActions ?: LongPressActionsOptions | null,
+	// longPressActions ?: LongPressActionsOptions | null,
 	/**
 	 * 接口调用成功的回调函数
 	 */
@@ -407,20 +768,104 @@ export type GetImageInfoSuccess = {
 	/**
 	 * 返回图片的方向
 	 * @uniPlatform {
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	orientation ?: MediaOrientation,
 	/**
 	 * 返回图片的格式
 	 * @uniPlatform {
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	type : string | null
@@ -575,8 +1020,106 @@ export type ChooseVideoFail = IMediaError;
 export type ChooseVideoSuccessCallback = (callback : ChooseVideoSuccess) => void
 export type ChooseVideoFailCallback = (callback : ChooseVideoFail) => void
 export type ChooseVideoCompleteCallback = ChooseImageCompleteCallback
-
+export type ChooseVideoPageOrientation = ChooseImagePageOrientation
+export type ChooseVideoAlbumMode = ChooseImageAlbumMode
 export type ChooseVideoOptions = {
+	/**
+	 * 屏幕方向。默认为page.json中的pageOrientation。
+	 * @uniPlatform {
+	 *	 "app": {
+	 *		"android": {
+	 *			"osVer": "5.0",
+	 *			"uniVer": "4.33",
+	 *			"unixVer": "4.33"
+	 *		},
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "4.33",
+	 *			"unixVer": "4.33"
+	 *		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *	"web": {
+	 *		"uniVer": "x",
+	 *		"unixVer": "x"
+	 *	}
+	 * }
+	 */
+	pageOrientation ?: ChooseVideoPageOrientation | null,
+	/**
+		 * 视频选择模式
+		 * @default "custom"
+		 * @uniPlatform {
+		 *	 "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "4.33",
+		 *			"unixVer": "4.33"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "x",
+		 *			"unixVer": "x"
+		 *		},
+	*    "harmony": {
+	*      "osVer": "3.0",
+	*      "uniVer": "x",
+	*      "unixVer": "x"
+	*    }
+		 *	},
+		 *	"web": {
+		 *		"uniVer": "x",
+		 *		"unixVer": "x"
+		 *	}
+		 * }
+		 */
+	albumMode ?: ChooseVideoAlbumMode | null,
 	/**
 	 * album 从相册选视频，camera 使用相机拍摄，默认为：['album', 'camera']
 	 */
@@ -587,12 +1130,64 @@ export type ChooseVideoOptions = {
 	 * @default true
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.18"
+		 *		},
    *    "harmony": {
    *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
 	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
    *  "web": {
    *    "uniVer": "x",
    *    "unixVer": "x"
@@ -604,16 +1199,68 @@ export type ChooseVideoOptions = {
 	 * 拍摄视频最长拍摄时间，单位秒。最长支持 60 秒
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.18"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.25",
    *      "unixVer": "x"
    *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	maxDuration ?: number | null,
@@ -622,16 +1269,68 @@ export type ChooseVideoOptions = {
 	 *
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.18"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.25",
    *      "unixVer": "x"
    *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	camera ?:
@@ -652,12 +1351,59 @@ export type ChooseVideoOptions = {
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
-     *    }
-	 *	 }
+	 *		"ios": {
+	 *			"osVer": "10.0",
+	 *			"uniVer": "√",
+	 *			"unixVer": "x"
+	 *		},
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 *	 },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  }
 	 * }
 	 */
 	extension ?: (string[]) | null,
@@ -682,16 +1428,26 @@ export type GetVideoInfoSuccess = {
 	 * 画面方向
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
    *      "unixVer": "x"
    *    }
 	 * },
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	orientation ?: MediaOrientation,
@@ -699,16 +1455,68 @@ export type GetVideoInfoSuccess = {
 	 * 视频格式
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
    *      "unixVer": "x"
    *    }
 	 * },
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	type : string | null,
@@ -732,16 +1540,68 @@ export type GetVideoInfoSuccess = {
 	 * 视频帧率
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
 	 * },
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	fps : number | null,
@@ -749,16 +1609,68 @@ export type GetVideoInfoSuccess = {
 	 * 视频码率，单位 kbps
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
 	 * },
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	bitrate : number | null
@@ -854,7 +1766,49 @@ export type CompressVideoOptions = {
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
 	 *		}
-	 *	 }
+	 *	 },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  }
 	 * }
 	 */
 	bitrate ?: number | null,
@@ -867,7 +1821,49 @@ export type CompressVideoOptions = {
 	 *			"uniVer": "√",
 	 *			"unixVer": "x"
 	 *		}
-	 *	 }
+	 *	 },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  }
 	 * }
 	 */
 	fps ?: number | null,
@@ -891,61 +1887,61 @@ export type CompressVideoOptions = {
 
 export type CompressVideo = (options : CompressVideoOptions) => void;
 
-export type ChooseFile = (options: ChooseFileOptions) => void;
+export type ChooseFile = (options : ChooseFileOptions) => void;
 export type ChooseFileSuccess = {
-    /**
-     * 文件的本地文件路径列表
-     * @type string | string []
-     */
-    tempFilePaths: string[],
-    /**
-     * 文件的本地文件列表，每一项是一个 File 对象
-     * @type ChooseFileSuccessCallbackResultFile | ChooseFileSuccessCallbackResultFile [] | File | File []
-     */
-    tempFiles: any
+	/**
+	 * 文件的本地文件路径列表
+	 * @type string | string []
+	 */
+	tempFilePaths : string[],
+	/**
+	 * 文件的本地文件列表，每一项是一个 File 对象
+	 * @type ChooseFileSuccessCallbackResultFile | ChooseFileSuccessCallbackResultFile [] | File | File []
+	 */
+	tempFiles : any
 };
-export type ChooseFileSuccessCallback = (result: ChooseFileSuccess) => void;
+export type ChooseFileSuccessCallback = (result : ChooseFileSuccess) => void;
 export type ChooseFileFail = IMediaError;
-export type ChooseFileFailCallback = (result: ChooseFileFail) => void;
+export type ChooseFileFailCallback = (result : ChooseFileFail) => void;
 export type ChooseFileComplete = any;
-export type ChooseFileCompleteCallback = (result: ChooseFileComplete) => void;
+export type ChooseFileCompleteCallback = (result : ChooseFileComplete) => void;
 export type ChooseFileOptions = {
-    /**
-     * 最多可以选择的文件数，默认100
-     */
-    count?: number | null,
-    /**
-     * 选择文件的类型，默认all，可选image、video
-     * - image: 选择图片文件
-     * - video: 选择视频文件
-     * - all: 默认值，选择本地文件，包含图片和视频
-     */
-    type?: 'image' | 'video' | 'all' | null,
-    /**
-     * 选择文件的后缀名，暂只支持.zip、.png等，不支持application/msword等值
-     */
-    extension?: (string[]) | null,
-    /**
-     * original 原图，compressed 压缩图，默认二者都有
-     * @type string | string []
-     */
-    sizeType?: any | null,
-    /**
-     * album 从相册选图，camera 使用相机，默认二者都有
-     */
-    sourceType?: (string[]) | null,
-    /**
-     * 成功则返回图片的本地文件路径列表 tempFilePaths、tempFiles
-     */
-    success?: ChooseFileSuccessCallback | null,
-    /**
-     * 接口调用失败的回调函数
-     */
-    fail?: ChooseFileFailCallback | null,
-    /**
-     * 接口调用结束的回调函数（调用成功、失败都会执行）
-     */
-    complete?: ChooseFileCompleteCallback | null
+	/**
+	 * 最多可以选择的文件数，默认100
+	 */
+	count ?: number | null,
+	/**
+	 * 选择文件的类型，默认all，可选image、video
+	 * - image: 选择图片文件
+	 * - video: 选择视频文件
+	 * - all: 默认值，选择本地文件，包含图片和视频
+	 */
+	type ?: 'image' | 'video' | 'all' | null,
+	/**
+	 * 选择文件的后缀名，暂只支持.zip、.png等，不支持application/msword等值
+	 */
+	extension ?: (string[]) | null,
+	/**
+	 * original 原图，compressed 压缩图，默认二者都有
+	 * @type string | string []
+	 */
+	sizeType ?: any | null,
+	/**
+	 * album 从相册选图，camera 使用相机，默认二者都有
+	 */
+	sourceType ?: (string[]) | null,
+	/**
+	 * 成功则返回图片的本地文件路径列表 tempFilePaths、tempFiles
+	 */
+	success ?: ChooseFileSuccessCallback | null,
+	/**
+	 * 接口调用失败的回调函数
+	 */
+	fail ?: ChooseFileFailCallback | null,
+	/**
+	 * 接口调用结束的回调函数（调用成功、失败都会执行）
+	 */
+	complete ?: ChooseFileCompleteCallback | null
 };
 
 
@@ -958,7 +1954,7 @@ export type ChooseMediaTempFile = {
 	/**
 	 * 文件类型
 	 */
-	fileType: ChooseMediaFileType
+	fileType : ChooseMediaFileType
 	/**
 	 * 选定视频的数据量大小
 	 */
@@ -978,11 +1974,11 @@ export type ChooseMediaTempFile = {
 	/**
 	 * 视频缩略图临时文件路径
 	 */
-	thumbTempFilePath?: string | null
+	thumbTempFilePath ?: string | null
 }
 export type ChooseMediaSuccess = {
-	tempFiles: ChooseMediaTempFile[],
-	type: 'image' | 'video' | 'mix'
+	tempFiles : ChooseMediaTempFile[],
+	type : 'image' | 'video' | 'mix'
 };
 
 export type ChooseMediaFail = IMediaError;
@@ -995,7 +1991,7 @@ export type ChooseMediaOptions = {
 	 * 最多可以选择的文件个数
 	 * @defaultValue 9
 	 */
-	count?: number | null
+	count ?: number | null
 	/**
 	 * album 从相册选视频，camera 使用相机拍摄，合法值：'image'、'video'、'mix'
 	 * @defaultValue 	['image', 'video']
@@ -1011,12 +2007,64 @@ export type ChooseMediaOptions = {
 	 * @defaultValue ['original','compressed']
 	 * @uniPlatform {
 	 * "app":{
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
    *      "unixVer": "x"
    *    }
 	 * },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
    *  "web": {
    *    "uniVer": "x",
    *    "unixVer": "x"
@@ -1029,12 +2077,64 @@ export type ChooseMediaOptions = {
 	 * @defaultValue 10
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "x"
    *    }
 	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
    *  "web": {
    *    "uniVer": "x",
    *    "unixVer": "x"
@@ -1047,16 +2147,68 @@ export type ChooseMediaOptions = {
 	 *
 	 * @uniPlatform {
 	 * "app": {
+		 *		"android": {
+		 *			"osVer": "5.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "3.9"
+		 *		},
+		 *		"ios": {
+		 *			"osVer": "10.0",
+		 *			"uniVer": "√",
+		 *			"unixVer": "4.11"
+		 *		},
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.25",
    *      "unixVer": "x"
    *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 */
 	camera ?:
@@ -1100,21 +2252,21 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  },
 	 * "mp": {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -1186,21 +2338,21 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  },
 	 * "mp": {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -1272,16 +2424,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1315,16 +2509,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1364,16 +2600,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1413,16 +2691,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.31",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.31",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1463,16 +2783,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1504,16 +2866,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "√",
-     *    "unixVer": "4.0"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "√",
+	 *    "unixVer": "4.0"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1546,16 +2950,58 @@ export interface Uni {
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		},
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
+	 *    "harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.23",
+	 *      "unixVer": "x"
+	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1594,10 +3040,52 @@ export interface Uni {
 	 *      "unixVer": "x"
 	 *    }
 	 *	},
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
 	 * }
 	 * @uniVueVersion 2,3
 	 * @example
@@ -1639,13 +3127,55 @@ export interface Uni {
 	 *      "unixVer": "x"
 	 *    }
 	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
    *  "web": {
    *    "uniVer": "2.9.9",
    *    "unixVer": "4.0"
    *  }
 	 * }
 	 */
-	chooseFile: ChooseFile;
+	chooseFile : ChooseFile;
 	/**
 	 * 拍摄或从手机相册中选择图片或视频。
 	 *
@@ -1669,12 +3199,54 @@ export interface Uni {
 	 *      "unixVer": "x"
 	 *    }
 	 *	},
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.35"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
    *  "web": {
    *    "uniVer": "x",
    *    "unixVer": "x"
    *  }
 	 * }
 	 */
-	chooseMedia: ChooseMedia;
+	chooseMedia : ChooseMedia;
 
 }

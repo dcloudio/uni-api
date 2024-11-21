@@ -1,7 +1,6 @@
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import { window } from '@kit.ArkUI';
 import { promptAction } from '@kit.ArkUI';
-import { getCurrentWindow } from '@dcloudio/uni-runtime'
 import { _chooseMedia, _ChooseMediaOptions } from './media.uts'
 import {
     ChooseVideoOptions,
@@ -73,7 +72,7 @@ export const chooseVideo: ChooseVideo =
             } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
                 _chooseVideo(options, res)
             } else {
-                const lastWindow = getCurrentWindow() as window.Window
+                const lastWindow = UTSHarmony.getCurrentWindow() as window.Window
                 const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
                 UIContextPromptAction.showActionMenu({
                     buttons: [

@@ -17,14 +17,13 @@ import {
 } from '../../unierror.uts'
 import {
     getResourceStr,
-    getAbilityContext
 } from '@dcloudio/uni-runtime'
 import fs from '@ohos.file.fs';
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import common from '@ohos.app.ability.common';
 
 async function saveResource(src: Resource, dest: string) {
-    const context = getAbilityContext() as common.UIAbilityContext
+    const context = UTSHarmony.getUIAbilityContext() as common.UIAbilityContext
     const resourceManager = context.resourceManager
     const srcPath: string = src.params?.[0] as string
     const destFile = fs.openSync(dest, fs.OpenMode.WRITE_ONLY)
@@ -57,7 +56,7 @@ interface ISaveMediaError {
 
 async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promise<string | ISaveMediaError> {
     const realPath = getResourceStr(fromUri) as string | Resource
-    const context = getAbilityContext() as common.UIAbilityContext
+    const context = UTSHarmony.getUIAbilityContext() as common.UIAbilityContext
     let fileName = Date.now() + (type === 'image' ? '.png' : '.mp4')
     const isResource = typeof realPath !== 'string'
     if (isResource) {
@@ -75,11 +74,11 @@ async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promi
     const title = fileNameParts[0]
     const fileNameExtension = fileNameParts.pop()!
     const photoCreationConfigs: Array<photoAccessHelper.PhotoCreationConfig> = [
-      {
-        title, // 鸿蒙文档上说可选，但实际不可选，另外其中也不可包含`.`
-        fileNameExtension,
-        photoType: type === 'image' ? photoAccessHelper.PhotoType.IMAGE : photoAccessHelper.PhotoType.VIDEO,
-      }
+        {
+            title, // 鸿蒙文档上说可选，但实际不可选，另外其中也不可包含`.`
+            fileNameExtension,
+            photoType: type === 'image' ? photoAccessHelper.PhotoType.IMAGE : photoAccessHelper.PhotoType.VIDEO,
+        }
     ];
     const desFileUris: Array<string> = await phAccessHelper.showAssetsCreationDialog([
         fromUri // 此路径没什么用，即使是resource资源对应的路径也不影响

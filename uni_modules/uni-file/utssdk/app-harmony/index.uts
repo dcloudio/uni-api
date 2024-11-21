@@ -117,7 +117,7 @@ export const saveFile: SaveFile = defineAsyncApi<SaveFileOptions, SaveFileSucces
                 exec.reject(err.message)
             } else {
                 exec.resolve({
-                    savedFilePath: 'file://' + savedFilePath
+                    savedFilePath
                 } as SaveFileSuccess)
             }
         })
@@ -145,7 +145,7 @@ export const getSavedFileList: GetSavedFileList = defineAsyncApi<GetSavedFileLis
                             return null
                         }
                         return {
-                            filePath: 'file://' + fullPath,
+                            filePath: fullPath,
                             size: stat.size,
                             createTime: stat.ctime
                         } as SavedFileListItem

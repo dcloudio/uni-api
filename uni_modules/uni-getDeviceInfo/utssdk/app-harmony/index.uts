@@ -6,7 +6,6 @@ import {
     API_GET_DEVICE_INFO,
 } from '../protocol.uts'
 import {
-    UTSHarmony,
     getDeviceId
 } from '@dcloudio/uni-runtime'
 import I18n from '@ohos.i18n'

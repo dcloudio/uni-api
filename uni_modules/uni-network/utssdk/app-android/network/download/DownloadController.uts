@@ -337,7 +337,7 @@ class SimpleDownloadCallback implements Callback {
 					if (segment != null) {
 						if (segment.contains("filename")) {
 							const pair = this.stringSplit(segment.trim(), "=") //目前认为只存在一个键值对
-							if (pair != null) {
+							if (pair != null && pair.size > 1) {
 								let key = pair[0];
 								let value = pair[1];
 								const reg = new RegExp("^\"|\"$","g")
@@ -365,7 +365,7 @@ class SimpleDownloadCallback implements Callback {
 			let pos = path.lastIndexOf('/')
 			if (pos >= 0) {
 				path = path.substring(pos + 1)
-				if (path.indexOf('.') >= 0) { //存在后缀,则认为成功
+				if (path.indexOf('.') >= 0 || path.length > 0) { //存在类型后缀或者没有文件格式后缀的情况，取最后LastPathComponent的名称当做文件名。
 					if (path.contains("?")) {
 						path = path.substring(0, path.indexOf("?"))
 					}
@@ -373,7 +373,6 @@ class SimpleDownloadCallback implements Callback {
 				}
 			}
 		}
-
 
 		if (TextUtils.isEmpty(fileName)) {
 			fileName = System.currentTimeMillis().toString()
@@ -394,23 +393,31 @@ class SimpleDownloadCallback implements Callback {
 			fileName = subFileName + System.currentTimeMillis()
 		}
 
-		targetPath += fileName
-
-		if (new File(targetPath).exists()) {
-			const index = targetPath.lastIndexOf(".");
-			let tFileName = targetPath;
+		
+		if (new File(targetPath + fileName).exists()) {
+			const index = fileName.lastIndexOf(".");
+			let tFileName = fileName;
 			let tFileType = "";
 			if (index >= 0) {
-				tFileName = targetPath.substring(0, index)
-				tFileType = targetPath.substring(index)
+				tFileName = fileName.substring(0, index)
+				tFileType = fileName.substring(index)
+				
+				//fileName是 .xxx的情况
+				if(tFileName == ""){
+					tFileName = tFileType
+					tFileType = ""
+				}
+			} else {
+				tFileName = fileName
 			}
-
 			var number = 1
-			while (new File(targetPath).exists()) {
-				targetPath = tFileName + "(" + number + ")" + tFileType;
+			while (new File(targetPath + fileName).exists()) {
+				fileName = tFileName + "(" + number + ")" + tFileType;	
 				number++
 			}
 		}
+		
+		targetPath += fileName
 
 		const file = new File(targetPath)
 		const parentFile = file.getParentFile()

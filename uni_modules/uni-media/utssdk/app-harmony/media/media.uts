@@ -6,8 +6,13 @@ import image from '@ohos.multimedia.image'
 import {
     GetImageInfoSuccess,
     GetVideoInfoSuccess,
-    MediaOrientation
+    MediaOrientation,
+    CompressImageOptions,
+    CompressImageSuccess,
 } from '../../interface.uts'
+import {
+    _compressImage
+} from './compressImage.uts'
 
 export interface MediaFile {
     fileType: 'video' | 'image'
@@ -172,8 +177,20 @@ export async function _chooseMedia(
     const uris = photoSelectResult.photoUris
 
     if (mimeType !== photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE) {
+        let realUris: string[] = uris
+        if (!photoSelectResult.isOriginalPhoto) {
+            const compressResult = await Promise.all(
+                uris.map((uri): Promise<CompressImageSuccess> => {
+                    return _compressImage({
+                        src: uri,
+                        quality: 80
+                    } as CompressImageOptions)
+                })
+            )
+            realUris = compressResult.map(result => result.tempFilePath)
+        }
         return {
-            tempFiles: uris.map((uri) => {
+            tempFiles: realUris.map((uri) => {
                 const file = fs.openSync(uri, fs.OpenMode.READ_ONLY)
                 const stat = fs.statSync(file.fd)
                 fs.closeSync(file)

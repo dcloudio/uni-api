@@ -63,7 +63,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": ">=2.10.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -127,7 +127,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -191,7 +191,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -255,7 +255,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -319,7 +319,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -383,7 +383,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -447,7 +447,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -531,7 +531,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",

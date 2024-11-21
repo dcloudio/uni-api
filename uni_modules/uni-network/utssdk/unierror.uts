@@ -44,7 +44,9 @@ const NetWorkUniErrors : Map<RequestErrorCode, string> = new Map([
 	[602001, 'request system error']
 ]);
 
-
+// #ifdef APP-IOS
+@UTSiOS.keyword("fileprivate")
+// #endif
 export function getErrcode(errCode : number) : RequestErrorCode {
 	const res = NetWorkUniErrors[errCode];
 	return res == null ? 602001 : errCode;

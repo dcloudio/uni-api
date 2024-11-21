@@ -16,7 +16,11 @@ export type ExitErrorCode =
 /**
  * 未知错误
  */
-12002
+12002 |
+/**
+ * iOS平台，仅在uni-app x SDK模式中支持应用退出
+ */
+12003
 
 /**
  * uni.exit失败回调参数
@@ -62,33 +66,34 @@ export interface Uni {
 
   /**
    * 退出当前应用
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "5.0",
-   *            "uniVer": "3.8.15",
-   *            "uniUtsPlugin": "3.9.0",
-   *            "unixVer": "3.9.0",
-   *            "unixUtsPlugin": "3.9.0"
-   *        },
-   *        "ios": {
-   *            "osVer": "x",
-   *            "uniVer": "x",
-   *            "uniUtsPlugin": "x",
-   *            "unixVer": "x",
-   *            "unixUtsPlugin": "x"
-   *   	  },
-   *      "harmony": {
-   *        "osVer": "3.0",
-   *        "uniVer": "4.23",
-   *        "unixVer": "x"
-   *      }
-   *    },
-   *  "web": {
-   *    "uniVer": "x",
-   *    "unixVer": "x"
-   *  }
-   * }
+   * @uniPlatform 
+    {
+      "app": {
+        "android": {
+          "osVer": "5.0",
+          "uniVer": "3.8.15",
+          "uniUtsPlugin": "3.91",
+          "unixVer": "3.91",
+          "unixUtsPlugin": "3.91"
+        },
+        "ios": {
+          "osVer": "12.0",
+          "uniVer": "x",
+          "uniUtsPlugin": "x",
+          "unixVer": "4.33",
+          "unixUtsPlugin": "4.33"
+        },
+        "harmony": {
+          "osVer": "3.0",
+          "uniVer": "4.23",
+          "unixVer": "x"
+        }
+      },
+      "web": {
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    }
    * @uniVueVersion 2,3  //支持的vue版本
    */
   exit(options?: ExitOptions | null):void;

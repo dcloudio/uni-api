@@ -1,4 +1,3 @@
-import { getCurrentWindow } from '@dcloudio/uni-runtime';
 import { window } from '@kit.ArkUI';
 import promptAction from '@ohos.promptAction';
 import { ShowActionSheet, ShowActionSheetOptions, ShowActionSheetSuccess } from '../interface.uts';
@@ -25,7 +24,7 @@ export const showActionSheet: ShowActionSheet = defineAsyncApi<ShowActionSheetOp
                 color: options.itemColor!
             } as promptAction.Button);
         })
-        const window = getCurrentWindow() as window.Window;
+        const window = UTSHarmony.getCurrentWindow() as window.Window;
         window.getUIContext().getPromptAction().showActionMenu({
             title: options.title,
             buttons: actionMenuButtons,

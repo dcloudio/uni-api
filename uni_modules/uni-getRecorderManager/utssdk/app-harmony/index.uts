@@ -4,15 +4,17 @@ import AVRecorder, { supportFormats as avRecorderSupportFormats } from './AVReco
 import { onRecorderStateChange, setRecordStateCallback, StateChangeRes } from './utils.uts';
 
   // NOTE 避免被 vue Proxy 污染
-let RECORDER_MANAGER: RecorderManager | null = null
+let RECORDER_MANAGER: AVRecorder | null = null
+const DEFAULT_DURATION = 1000 * 60
+const MAX_DURATION = DEFAULT_DURATION * 10
+const DEFAULT_FORMAT = 'aac'
 
 class RecorderManagerImpl implements RecorderManager {
-  start(options: RecorderManagerStartOptions): void {
-    if (!options.format) options.format = 'aac'
+  start(options: RecorderManagerStartOptions | null = null): void {
+    if (options == null) options = {} as RecorderManagerStartOptions
+    if (!options.format) options.format = DEFAULT_FORMAT
 
-    const DEFAULT_DURATION = 1000 * 60
-    const MAX_DURATION = DEFAULT_DURATION * 10
-    if (typeof options.duration === 'undefined' || options.duration === null) {
+    if (options.duration == null) {
       options.duration = DEFAULT_DURATION
     }
     if (options.duration > MAX_DURATION) {

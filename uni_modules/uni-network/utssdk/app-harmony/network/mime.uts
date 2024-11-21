@@ -1,5 +1,3 @@
-import { UTSHarmony } from '@dcloudio/uni-runtime';
-
 export function lookupExt(contentType: string): string | undefined {
     const rawContentType = contentType.split(';')[0].trim().toLowerCase()
     return (UTSHarmony.getExtensionFromMimeType(rawContentType) as string | null) || undefined

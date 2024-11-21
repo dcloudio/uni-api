@@ -30,9 +30,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 		super(context);
 		
 		if(UTSAndroid.getAppDarkMode()){
-			this.setContentView(R.layout.uni_prompt_modal_dialog_night);
+			this.setContentView(R.layout.uni_app_uni_prompt_modal_dialog_night);
 		}else{
-			this.setContentView(R.layout.uni_prompt_modal_dialog);
+			this.setContentView(R.layout.uni_app_uni_prompt_modal_dialog);
 		}
 		
 		this.getWindow()?.setBackgroundDrawableResource(android.R.color.transparent);
@@ -76,9 +76,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 			this.tvSureAction.setVisibility(View.VISIBLE)
 			
 			if(UTSAndroid.getAppDarkMode()){
-				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_right_night)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_app_uni_prompt_dialog_button_select_right_night)
 			}else{
-				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_right)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_app_uni_prompt_dialog_button_select_right)
 			}
 		}else{
 			this.tvCancelAction.setVisibility(View.GONE)
@@ -86,9 +86,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 			this.tvSureAction.setVisibility(View.VISIBLE)
 			
 			if(UTSAndroid.getAppDarkMode()){
-				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_total_night)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_app_uni_prompt_dialog_button_select_total_night)
 			}else{
-				this.tvSureAction.setBackgroundResource(R.drawable.uni_prompt_dialog_button_select_total)
+				this.tvSureAction.setBackgroundResource(R.drawable.uni_app_uni_prompt_dialog_button_select_total)
 			}
 			
 		}
@@ -138,9 +138,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 				if(TextUtils.isEmpty(style.title)){
 					// 如果此时title 为空，需要修改文本颜色
 					if(UTSAndroid.getAppDarkMode()){
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text_night))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_app_uni_prompt_dialog_title_text_night))
 					}else{
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_app_uni_prompt_dialog_title_text))
 					}
 				}
 			}else{
@@ -150,9 +150,9 @@ class UTSDialog extends Dialog implements View.OnClickListener {
 					this.tv_content.setVisibility(View.VISIBLE)
 					this.tv_content.setText(style.title)
 					if(UTSAndroid.getAppDarkMode()){
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text_night))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_app_uni_prompt_dialog_title_text_night))
 					}else{
-						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_prompt_dialog_title_text))
+						this.tv_content.setTextColor(UTSAndroid.getAppContext()!.getResources().getColor(R.color.uni_app_uni_prompt_dialog_title_text))
 					}
 				}else{
 					this.tv_content.setVisibility(View.GONE)

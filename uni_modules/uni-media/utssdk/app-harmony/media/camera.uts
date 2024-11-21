@@ -1,5 +1,3 @@
-import { getAbilityContext } from '@dcloudio/uni-runtime'
-
 import { fileIo as fs } from '@kit.CoreFileKit';
 import { _getVideoInfo, _getImageInfo } from './media.uts'
 import { cameraPicker } from '@kit.CameraKit'
@@ -9,73 +7,73 @@ import { MediaOrientation } from '../../interface.uts'
 export type CameraPosition = 'back' | 'front'
 
 export function getHMCameraPosition(cameraType: CameraPosition) {
-  switch (cameraType) {
-    case 'back':
-      return camera.CameraPosition.CAMERA_POSITION_BACK
-    case 'front':
-      return camera.CameraPosition.CAMERA_POSITION_FRONT
-    default:
-      return camera.CameraPosition.CAMERA_POSITION_BACK
-  }
+    switch (cameraType) {
+        case 'back':
+            return camera.CameraPosition.CAMERA_POSITION_BACK
+        case 'front':
+            return camera.CameraPosition.CAMERA_POSITION_FRONT
+        default:
+            return camera.CameraPosition.CAMERA_POSITION_BACK
+    }
 }
 
 interface TempFiles {
-  tempFilePath: string
-  size: number
+    tempFilePath: string
+    size: number
 }
 
 interface TakePhotoRes {
-  tempFiles: TempFiles[]
+    tempFiles: TempFiles[]
 }
 
 export const takePhoto = async (cameraType: CameraPosition = 'back') => {
-  let pickerProfile: cameraPicker.PickerProfile = {
-    cameraPosition: getHMCameraPosition(cameraType)
-  };
+    let pickerProfile: cameraPicker.PickerProfile = {
+        cameraPosition: getHMCameraPosition(cameraType)
+    };
 
-  const res = await cameraPicker.pick(getAbilityContext()!, [cameraPicker.PickerMediaType.PHOTO], pickerProfile)
-  const file = fs.openSync(res.resultUri, fs.OpenMode.READ_ONLY)
-  const stat = fs.statSync(file.fd)
-  return {
-    tempFiles: [{
-      tempFilePath: res.resultUri,
-      size: stat.size
-    }]
-  } as TakePhotoRes
+    const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, [cameraPicker.PickerMediaType.PHOTO], pickerProfile)
+    const file = fs.openSync(res.resultUri, fs.OpenMode.READ_ONLY)
+    const stat = fs.statSync(file.fd)
+    return {
+        tempFiles: [{
+            tempFilePath: res.resultUri,
+            size: stat.size
+        }]
+    } as TakePhotoRes
 }
 
 export interface TakeVideoOptions {
-  cameraType?: CameraPosition
-  videoDuration?: number
+    cameraType?: CameraPosition
+    videoDuration?: number
 }
 
 interface TakeVideoRes {
-  path: string
-  duration: number
-  size: number
-  height: number
-  width: number
-  orientation: MediaOrientation
-  type: string
+    path: string
+    duration: number
+    size: number
+    height: number
+    width: number
+    orientation: MediaOrientation
+    type: string
 }
 
 export const takeVideo = async (args?: TakeVideoOptions) => {
-  let pickerProfile: cameraPicker.PickerProfile = {
-    cameraPosition: getHMCameraPosition(args?.cameraType ?? 'back'),
-    videoDuration: args?.videoDuration
-  };
+    let pickerProfile: cameraPicker.PickerProfile = {
+        cameraPosition: getHMCameraPosition(args?.cameraType ?? 'back'),
+        videoDuration: args?.videoDuration
+    };
 
-  const res = await cameraPicker.pick(getAbilityContext()!, [cameraPicker.PickerMediaType.VIDEO], pickerProfile)
-  return _getVideoInfo(res.resultUri)
-    .then((getVideInfoRes) => {
-      return {
-        path: res.resultUri,
-        size: getVideInfoRes.size,
-        duration: getVideInfoRes.duration!,
-        width: getVideInfoRes.width!,
-        height: getVideInfoRes.height!,
-        type: getVideInfoRes.type!,
-        orientation: getVideInfoRes.orientation!,
-      } as TakeVideoRes
-    })
+    const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, [cameraPicker.PickerMediaType.VIDEO], pickerProfile)
+    return _getVideoInfo(res.resultUri)
+        .then((getVideInfoRes) => {
+            return {
+                path: res.resultUri,
+                size: getVideInfoRes.size,
+                duration: getVideInfoRes.duration!,
+                width: getVideInfoRes.width!,
+                height: getVideInfoRes.height!,
+                type: getVideInfoRes.type!,
+                orientation: getVideInfoRes.orientation!,
+            } as TakeVideoRes
+        })
 }

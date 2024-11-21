@@ -17,7 +17,6 @@ import {
     MediaUniErrors
 } from '../../unierror.uts'
 import { takePhoto } from './camera.uts'
-import { getCurrentWindow } from '@dcloudio/uni-runtime';
 
 const errSubject = 'uni-chooseImage'
 
@@ -76,7 +75,7 @@ export const chooseImage: ChooseImage =
             } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
                 _chooseImage(options, res)
             } else {
-                const lastWindow = getCurrentWindow() as window.Window
+                const lastWindow = UTSHarmony.getCurrentWindow() as window.Window
                 const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
                 UIContextPromptAction.showActionMenu({
                     buttons: [

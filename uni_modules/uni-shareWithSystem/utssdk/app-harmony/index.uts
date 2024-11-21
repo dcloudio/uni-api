@@ -5,14 +5,10 @@ import {
     ShareWithSystem,
     ShareWithSystemOptions,
     ShareWithSystemSuccess,
-    ShareWithSystemFail,
 } from "../interface.uts";
 import {
     API_SHARE_WITH_SYSTEM
 } from '../protocol.uts'
-import {
-    getAbilityContext
-} from '@dcloudio/uni-runtime'
 
 export {
     ShareWithSystem,
@@ -56,7 +52,7 @@ const shareWithSystem = defineAsyncApi<ShareWithSystemOptions, ShareWithSystemSu
             shareData.addRecord(shareRecords[index])
         }
         const shareController: systemShare.ShareController = new systemShare.ShareController(shareData);
-        shareController.show(getAbilityContext() as common.UIAbilityContext, {} as systemShare.ShareControllerOptions)
+        shareController.show(UTSHarmony.getUIAbilityContext() as common.UIAbilityContext, {} as systemShare.ShareControllerOptions)
         const onDismiss = () => {
             shareController.off('dismiss', onDismiss)
             exec.resolve({} as ShareWithSystemSuccess)

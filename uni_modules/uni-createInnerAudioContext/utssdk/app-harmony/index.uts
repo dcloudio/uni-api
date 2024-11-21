@@ -1,7 +1,7 @@
 import { media } from '@kit.MediaKit';
 import { audio } from '@kit.AudioKit';
 
-import { InnerAudioContext, CreateInnerAudioContext } from '../interface.uts';
+import { InnerAudioContext, CreateInnerAudioContext, type ICreateInnerAudioContextFail } from '../interface.uts';
 import { API_CREATE_INNER_AUDIO_CONTEXT } from '../protocol.uts';
 import { getFdFromUriOrSandBoxPath, isFileUri, isSandboxPath, AudioPlayerCallback, AudioPlayerError } from './utils.uts';
 
@@ -254,7 +254,7 @@ class AudioPlayer implements InnerAudioContext {
   onTimeUpdate(callback: (result: any) => void): void {
     this.audioPlayerCallback.onTimeUpdate(callback)
   }
-  onError(callback: (result: any) => void): void {
+  onError(callback: (result: ICreateInnerAudioContextFail) => void): void {
     this.audioPlayerCallback.onError(callback)
   }
   onWaiting(callback: (result: any) => void): void {
@@ -284,7 +284,7 @@ class AudioPlayer implements InnerAudioContext {
   offTimeUpdate(callback: (result: any) => void): void {
     this.audioPlayerCallback.offTimeUpdate(callback)
   }
-  offError(callback: (result: any) => void): void {
+  offError(callback: (result: ICreateInnerAudioContextFail) => void): void {
     this.audioPlayerCallback.offError(callback)
   }
   offWaiting(callback: (result: any) => void): void {

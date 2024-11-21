@@ -7,6 +7,7 @@ import {
 export class OpenDialogPageSuccessImpl extends AsyncApiSuccessResult {
     override errMsg: string
     constructor(errMsg: string = 'openDialogPage: ok') {
+        super()
         this.errMsg = errMsg
     }
 }
@@ -22,6 +23,7 @@ export class OpenDialogPageFailImpl extends UniError implements OpenDialogPageFa
 export class CloseDialogPageSuccessImpl extends AsyncApiSuccessResult {
     override errMsg: string
     constructor(errMsg: string = 'closeDialogPage: ok') {
+        super()
         this.errMsg = errMsg
     }
 }

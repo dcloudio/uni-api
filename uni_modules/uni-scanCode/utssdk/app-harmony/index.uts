@@ -5,12 +5,8 @@ import {
     ScanCodeFail,
     ScanCodeSuccess,
     ScanCodeOptions,
-    ScanCodeSupportedTypes,
     ScanCode
 } from '../interface.uts'
-import {
-    getAbilityContext
-} from '@dcloudio/uni-runtime'
 import { scanCore, scanBarcode } from '@kit.ScanKit';
 
 export {
@@ -85,7 +81,7 @@ export const scanCode: ScanCode = defineAsyncApi<ScanCodeOptions, ScanCodeSucces
             enableMultiMode: true,
             enableAlbum: !options.onlyFromCamera
         };
-        scanBarcode.startScanForResult(getAbilityContext()!, scanOptions, (err, data) => {
+        scanBarcode.startScanForResult(UTSHarmony.getUIAbilityContext()!, scanOptions, (err, data) => {
             if (err) {
                 exec.reject(err.message);
                 return;

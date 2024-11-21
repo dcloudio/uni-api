@@ -1,0 +1,6 @@
+{
+	"dependencies": [
+		"com.google.android.exoplayer:exoplayer-core:2.18.0",
+		"androidx.media:media:1.4.3"
+	]
+}

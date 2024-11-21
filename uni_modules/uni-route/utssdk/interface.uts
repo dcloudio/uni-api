@@ -42,7 +42,7 @@ export type NavigateToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -111,42 +111,42 @@ export type NavigateToOptions = {
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "toutiao": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "lark": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "qq": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "kuaishou": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "jd": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    }
      *  },
@@ -460,42 +460,42 @@ export type NavigateToOptions = {
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "toutiao": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "lark": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "qq": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "kuaishou": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "jd": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    }
      *  },
@@ -530,7 +530,7 @@ export type NavigateToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -599,7 +599,7 @@ export type NavigateToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -668,7 +668,7 @@ export type NavigateToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -737,7 +737,7 @@ export type NavigateToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -816,7 +816,7 @@ export type RedirectToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -885,7 +885,7 @@ export type RedirectToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -954,7 +954,7 @@ export type RedirectToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1023,7 +1023,7 @@ export type RedirectToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1102,7 +1102,7 @@ export type ReLaunchOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1171,7 +1171,7 @@ export type ReLaunchOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1240,7 +1240,7 @@ export type ReLaunchOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1309,7 +1309,7 @@ export type ReLaunchOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1390,7 +1390,7 @@ export type SwitchTabOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1459,7 +1459,7 @@ export type SwitchTabOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1528,7 +1528,7 @@ export type SwitchTabOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1597,7 +1597,7 @@ export type SwitchTabOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1676,7 +1676,7 @@ export type NavigateBackOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1740,42 +1740,42 @@ export type NavigateBackOptions = {
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "toutiao": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "lark": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "qq": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "kuaishou": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "jd": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    }
      *  },
@@ -2074,42 +2074,42 @@ export type NavigateBackOptions = {
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "toutiao": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "lark": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "qq": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "kuaishou": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    },
      *    "jd": {
      *        "hostVer": "√",
-     *        "uniVer": "√",
+     *        "uniVer": "x",
      *        "unixVer": "x"
      *    }
      *  },
@@ -2139,7 +2139,7 @@ export type NavigateBackOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2208,7 +2208,7 @@ export type NavigateBackOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2277,7 +2277,7 @@ export type NavigateBackOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2353,7 +2353,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2426,7 +2426,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2499,7 +2499,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2572,7 +2572,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -2645,7 +2645,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "4.35"
      *    },
      *    "alipay": {
      *        "hostVer": "√",

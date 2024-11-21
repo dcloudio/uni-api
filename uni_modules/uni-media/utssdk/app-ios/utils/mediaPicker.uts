@@ -13,6 +13,7 @@ import {
 	UniError_ChooseImage, MediaErrorImpl, UniError_PreviewImage, UniError_ChooseVideo, UniError_CompressImage, UniError_GetVideoInfo, UniError_CompressVideo
 } from "../../unierror.uts";
 import { isExistFilePath, createFilePath } from "./handleImageUtils.uts";
+import { UIInterfaceOrientationMask } from "UIKit";
 
 export class DCUniMediaPicker {
 	private mediaAlbum : DCloudMediaAlbum | null = null;
@@ -211,6 +212,7 @@ export class DCUniMediaPicker {
 		options.set('filePath', path);
 		options.set('maximum', 1);
 		options.set('filter', "video");
+		options.set('pageOrientation', this.convertPageOrientation(option.pageOrientation).rawValue);
 		DispatchQueue.main.async(execute = () : void => {
 			if (this.mediaAlbum == null) {
 				this.mediaAlbum = new DCloudMediaAlbum();
@@ -238,6 +240,19 @@ export class DCUniMediaPicker {
 				option.complete?.(mediaError)
 			})
 		})
+	} 
+	
+	private convertPageOrientation(orientationStr: string | null) : UIInterfaceOrientationMask{
+		if(orientationStr == "auto"){
+			return UIInterfaceOrientationMask.allButUpsideDown;
+		}
+		if(orientationStr == "portrait"){
+			return UIInterfaceOrientationMask.portrait;
+		}
+		if(orientationStr == "landscape"){
+			return UIInterfaceOrientationMask.landscape;
+		}
+		return UTSiOS.getSupportOrientation();
 	}
 
 	private _chooseImageWithAlbum(option : ChooseImageOptions, count : number) {
@@ -250,6 +265,8 @@ export class DCUniMediaPicker {
 		if (count > 0) {
 			options.set('maximum', count);
 		}
+		options.set('pageOrientation', this.convertPageOrientation(option.pageOrientation).rawValue);
+		
 		if (option.crop != null) {
 			let crop : Map<string, any> = new Map();
 			if (option.crop!.width != null) {

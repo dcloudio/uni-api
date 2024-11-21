@@ -9,352 +9,351 @@ import { BackgroundAudioManager, GetBackgroundAudioManager } from '../interface.
 import { API_GET_BACKGROUND_AUDIO_MANAGER } from '../protocol.uts';
 import { getFdFromUriOrSandBoxPath, isFileUri, isSandboxPath, AudioPlayerCallback, AudioPlayerError } from './utils.uts';
 import { BusinessError } from '@ohos.base';
-import { getAbilityContext } from '@dcloudio/uni-runtime';
 
 interface TempAbilityInfo {
-  bundleName: string
-  name: string
+    bundleName: string
+    name: string
 }
 const audioPlayerCallback = new AudioPlayerCallback()
 let AV_SESSION: avSession.AVSession | null = null
 function createAVSession() {
-  avSession.createAVSession(getAbilityContext()!, 'player', 'audio').then((data) => {
-    AV_SESSION = data;
-  });
+    avSession.createAVSession(UTSHarmony.getUIAbilityContext()!, 'player', 'audio').then((data) => {
+        AV_SESSION = data;
+    });
 }
 function destroyAVSession() {
-  if (AV_SESSION === null) { return; }
-  AV_SESSION.destroy();
-  AV_SESSION = null
+    if (AV_SESSION === null) { return; }
+    AV_SESSION.destroy();
+    AV_SESSION = null
 }
 function startBackgroundTask() {
-  const abilityInfo: TempAbilityInfo = getAbilityContext()!.abilityInfo
-  const wantAgentInfo: wantAgent.WantAgentInfo = {
-    wants: [
-      {
-        bundleName: abilityInfo.bundleName,
-        abilityName: abilityInfo.name
-      }
-    ],
-    operationType: wantAgent.OperationType.START_ABILITY,
-    requestCode: 0,
-    wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
-  };
-  // use WantAgent to notify
-  wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
-    return backgroundTaskManager.startBackgroundRunning(getAbilityContext()!, backgroundTaskManager.BackgroundMode.AUDIO_PLAYBACK, wantAgentObj);
-  }).then(() => {
-    console.debug('[getBackgroundAudioManager]  start bg operation succeeded');
-  }).catch((err: BusinessError) => {
-    audioPlayerCallback.error(new AudioPlayerError(err.message, err.code));
-  });
+    const abilityInfo: TempAbilityInfo = UTSHarmony.getUIAbilityContext()!.abilityInfo
+    const wantAgentInfo: wantAgent.WantAgentInfo = {
+        wants: [
+            {
+                bundleName: abilityInfo.bundleName,
+                abilityName: abilityInfo.name
+            }
+        ],
+        operationType: wantAgent.OperationType.START_ABILITY,
+        requestCode: 0,
+        wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
+    };
+    // use WantAgent to notify
+    wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
+        return backgroundTaskManager.startBackgroundRunning(UTSHarmony.getUIAbilityContext()!, backgroundTaskManager.BackgroundMode.AUDIO_PLAYBACK, wantAgentObj);
+    }).then(() => {
+        console.debug('[getBackgroundAudioManager]  start bg operation succeeded');
+    }).catch((err: BusinessError) => {
+        audioPlayerCallback.error(new AudioPlayerError(err.message, err.code));
+    });
 }
 function stopBackgroundTask() {
-  backgroundTaskManager.stopBackgroundRunning(getAbilityContext()!).then(() => {
-    console.debug('[getBackgroundAudioManager]  stop operation succeeded');
-  }).catch((err: BusinessError) => {
-    audioPlayerCallback.error(new AudioPlayerError(err.message, err.code));
-  });
+    backgroundTaskManager.stopBackgroundRunning(UTSHarmony.getUIAbilityContext()!).then(() => {
+        console.debug('[getBackgroundAudioManager]  stop operation succeeded');
+    }).catch((err: BusinessError) => {
+        audioPlayerCallback.error(new AudioPlayerError(err.message, err.code));
+    });
 }
 
 function START_BACKGROUND() {
-  startBackgroundTask();
-  createAVSession();
+    startBackgroundTask();
+    createAVSession();
 }
 
 function STOP_BACKGROUND() {
-  destroyAVSession();
-  stopBackgroundTask();
+    destroyAVSession();
+    stopBackgroundTask();
 }
 
 const LOG = (msg: string) => console.log(`[getBackgroundAudioManager]: ${msg}`)
 
 class STATE_TYPE {
-  // 音频播放空闲
-  static IDLE: string = 'idle'
-  // 音频正在播放
-  static PLAYING: string = 'playing'
-  // 音频暂停播放
-  static PAUSED: string = 'paused'
-  // 音频停止播放
-  static STOPPED: string = 'stopped'
-  // 错误状态
-  static ERROR: string = 'error'
+    // 音频播放空闲
+    static IDLE: string = 'idle'
+    // 音频正在播放
+    static PLAYING: string = 'playing'
+    // 音频暂停播放
+    static PAUSED: string = 'paused'
+    // 音频停止播放
+    static STOPPED: string = 'stopped'
+    // 错误状态
+    static ERROR: string = 'error'
 }
 
 class BackgroundAudioManagerImpl implements BackgroundAudioManager {
-  // NOTE 使用 static 避免被 vue Proxy 污染
-  static audioPlayer?: media.AudioPlayer
+    // NOTE 使用 static 避免被 vue Proxy 污染
+    static audioPlayer?: media.AudioPlayer
 
-  private _src: string = ''
-  private _startTime: number = 0
-  private _buffered: number = 0
-  private _title: string = ''
-  private _epname: string = ''
-  private _singer: string = ''
-  private _coverImgUrl: string = ''
-  private _webUrl: string = ''
-  private _protocol: string = ''
-  private _playbackRate: number = 1
+    private _src: string = ''
+    private _startTime: number = 0
+    private _buffered: number = 0
+    private _title: string = ''
+    private _epname: string = ''
+    private _singer: string = ''
+    private _coverImgUrl: string = ''
+    private _webUrl: string = ''
+    private _protocol: string = ''
+    private _playbackRate: number = 1
 
-  readonly obeyMuteSwitch: boolean = false
+    readonly obeyMuteSwitch: boolean = false
 
-  constructor() { this.init() }
+    constructor() { this.init() }
 
-  init() {
-    BackgroundAudioManagerImpl.audioPlayer = media.createAudioPlayer();
+    init() {
+        BackgroundAudioManagerImpl.audioPlayer = media.createAudioPlayer();
 
-    BackgroundAudioManagerImpl.audioPlayer.on('dataLoad', () => {
-      audioPlayerCallback.canPlay()
-    });
+        BackgroundAudioManagerImpl.audioPlayer.on('dataLoad', () => {
+            audioPlayerCallback.canPlay()
+        });
 
-    BackgroundAudioManagerImpl.audioPlayer.on('play', () => {
-      audioPlayerCallback.play()
-    });
+        BackgroundAudioManagerImpl.audioPlayer.on('play', () => {
+            audioPlayerCallback.play()
+        });
 
-    BackgroundAudioManagerImpl.audioPlayer.on('pause', () => {
-      audioPlayerCallback.pause()
-    });
+        BackgroundAudioManagerImpl.audioPlayer.on('pause', () => {
+            audioPlayerCallback.pause()
+        });
 
-    BackgroundAudioManagerImpl.audioPlayer.on('finish', () => {
-      STOP_BACKGROUND()
-      audioPlayerCallback.ended()
-    });
+        BackgroundAudioManagerImpl.audioPlayer.on('finish', () => {
+            STOP_BACKGROUND()
+            audioPlayerCallback.ended()
+        });
 
-    BackgroundAudioManagerImpl.audioPlayer.on('timeUpdate', res => {
-      audioPlayerCallback.timeUpdate(res / 1000)
-    });
+        BackgroundAudioManagerImpl.audioPlayer.on('timeUpdate', res => {
+            audioPlayerCallback.timeUpdate(res / 1000)
+        });
 
-    BackgroundAudioManagerImpl.audioPlayer.on('error', (err) => {
-      audioPlayerCallback.error(new AudioPlayerError(err.message, err.code))
-    });
-    BackgroundAudioManagerImpl.audioPlayer.on('bufferingUpdate', (infoType, value) => {
-      console.info(`[AdvancedAPI] audioPlayer bufferingUpdate ${infoType} ${value}`)
-      if (infoType === media.BufferingInfoType.BUFFERING_PERCENT && value !== 0 && BackgroundAudioManagerImpl.audioPlayer) {
-        this._buffered = value;
-        if ((BackgroundAudioManagerImpl.audioPlayer.currentTime / 1000) >= (BackgroundAudioManagerImpl.audioPlayer.duration * value / 100000)) {
-          audioPlayerCallback.waiting()
+        BackgroundAudioManagerImpl.audioPlayer.on('error', (err) => {
+            audioPlayerCallback.error(new AudioPlayerError(err.message, err.code))
+        });
+        BackgroundAudioManagerImpl.audioPlayer.on('bufferingUpdate', (infoType, value) => {
+            console.info(`[AdvancedAPI] audioPlayer bufferingUpdate ${infoType} ${value}`)
+            if (infoType === media.BufferingInfoType.BUFFERING_PERCENT && value !== 0 && BackgroundAudioManagerImpl.audioPlayer) {
+                this._buffered = value;
+                if ((BackgroundAudioManagerImpl.audioPlayer.currentTime / 1000) >= (BackgroundAudioManagerImpl.audioPlayer.duration * value / 100000)) {
+                    audioPlayerCallback.waiting()
+                }
+            }
+        });
+        BackgroundAudioManagerImpl.audioPlayer.on('audioInterrupt', (InterruptEvent) => {
+            console.info('[AdvancedAPI]  audioInterrupt:' + JSON.stringify(InterruptEvent));
+            if (BackgroundAudioManagerImpl.audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE) {
+                BackgroundAudioManagerImpl.audioPlayer.pause();
+            }
+            if (BackgroundAudioManagerImpl.audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_RESUME) {
+                BackgroundAudioManagerImpl.audioPlayer.play();
+            }
+        });
+    }
+    get duration() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return 0 }
+        return BackgroundAudioManagerImpl.audioPlayer.duration / 1000;
+    }
+    get currentTime() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return 0 }
+        return BackgroundAudioManagerImpl.audioPlayer.currentTime / 1000;
+    }
+    get paused() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return false }
+        return BackgroundAudioManagerImpl.audioPlayer.state === STATE_TYPE.PAUSED
+    }
+    get src() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return '' }
+        return BackgroundAudioManagerImpl.audioPlayer.src;
+    }
+    set src(value) {
+        if (typeof (value) !== 'string') {
+            audioPlayerCallback.error(new AudioPlayerError(`set src: ${value} is not string`, 10004))
+            return;
         }
-      }
-    });
-    BackgroundAudioManagerImpl.audioPlayer.on('audioInterrupt', (InterruptEvent) => {
-      console.info('[AdvancedAPI]  audioInterrupt:' + JSON.stringify(InterruptEvent));
-      if (BackgroundAudioManagerImpl.audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE) {
-        BackgroundAudioManagerImpl.audioPlayer.pause();
-      }
-      if (BackgroundAudioManagerImpl.audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_RESUME) {
+        if (!BackgroundAudioManagerImpl.audioPlayer) {
+            audioPlayerCallback.error(new AudioPlayerError(`player is not exist`, 10001))
+            return;
+        }
+        if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
+            LOG(`set src: ${value} is invalid`);
+            return;
+        }
+        let path: string = '';
+        if (value.startsWith('http:') || value.startsWith('https:')) {
+            path = value;
+        } else if (isFileUri(value) || isSandboxPath(value)) {
+            try {
+                const fd = getFdFromUriOrSandBoxPath(value);
+                path = `fd://${fd}`;
+            }
+            catch (err) {
+                audioPlayerCallback.error(new AudioPlayerError((err as BusinessError).message, (err as BusinessError).code))
+            }
+        }
+        if (BackgroundAudioManagerImpl.audioPlayer.src && path !== BackgroundAudioManagerImpl.audioPlayer.src) {
+            BackgroundAudioManagerImpl.audioPlayer.reset();
+        }
+        BackgroundAudioManagerImpl.audioPlayer.src = path;
+        this._src = value;
+        if (this._startTime) {
+            BackgroundAudioManagerImpl.audioPlayer.seek(this._startTime);
+        }
         BackgroundAudioManagerImpl.audioPlayer.play();
-      }
-    });
-  }
-  get duration() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return 0 }
-    return BackgroundAudioManagerImpl.audioPlayer.duration / 1000;
-  }
-  get currentTime() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return 0 }
-    return BackgroundAudioManagerImpl.audioPlayer.currentTime / 1000;
-  }
-  get paused() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return false }
-    return BackgroundAudioManagerImpl.audioPlayer.state === STATE_TYPE.PAUSED
-  }
-  get src() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return '' }
-    return BackgroundAudioManagerImpl.audioPlayer.src;
-  }
-  set src(value) {
-    if (typeof (value) !== 'string') {
-      audioPlayerCallback.error(new AudioPlayerError(`set src: ${value} is not string`, 10004))
-      return;
+        START_BACKGROUND()
     }
-    if (!BackgroundAudioManagerImpl.audioPlayer) {
-      audioPlayerCallback.error(new AudioPlayerError(`player is not exist`, 10001))
-      return;
+    get startTime() {
+        return this._startTime / 1000;
     }
-    if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
-      LOG(`set src: ${value} is invalid`);
-      return;
+    set startTime(time: number) {
+        this._startTime = time * 1000;
     }
-    let path: string = '';
-    if (value.startsWith('http:') || value.startsWith('https:')) {
-      path = value;
-    } else if (isFileUri(value) || isSandboxPath(value)) {
-      try {
-        const fd = getFdFromUriOrSandBoxPath(value);
-        path = `fd://${fd}`;
-      }
-      catch (err) {
-        audioPlayerCallback.error(new AudioPlayerError((err as BusinessError).message, (err as BusinessError).code))
-      }
+    get title() {
+        return this._title;
     }
-    if (BackgroundAudioManagerImpl.audioPlayer.src && path !== BackgroundAudioManagerImpl.audioPlayer.src) {
-      BackgroundAudioManagerImpl.audioPlayer.reset();
+    set title(titleName: string) {
+        this._title = titleName;
     }
-    BackgroundAudioManagerImpl.audioPlayer.src = path;
-    this._src = value;
-    if (this._startTime) {
-      BackgroundAudioManagerImpl.audioPlayer.seek(this._startTime);
+    get buffered() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) return 0
+        return BackgroundAudioManagerImpl.audioPlayer.duration * this._buffered / 100000;
     }
-    BackgroundAudioManagerImpl.audioPlayer.play();
-    START_BACKGROUND()
-  }
-  get startTime() {
-    return this._startTime / 1000;
-  }
-  set startTime(time: number) {
-    this._startTime = time * 1000;
-  }
-  get title() {
-    return this._title;
-  }
-  set title(titleName: string) {
-    this._title = titleName;
-  }
-  get buffered() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) return 0
-    return BackgroundAudioManagerImpl.audioPlayer.duration * this._buffered / 100000;
-  }
-  get epname() {
-    return this._epname;
-  }
-  set epname(epName: string) {
-    this._epname = epName;
-  }
-  get singer() {
-    return this._singer;
-  }
-  set singer(singerName: string) {
-    this._singer = singerName;
-  }
-  get coverImgUrl() {
-    return this._coverImgUrl;
-  }
-  set coverImgUrl(url: string) {
-    this._coverImgUrl = url;
-  }
-  get webUrl() {
-    return this._webUrl;
-  }
-  set webUrl(url: string) {
-    this._webUrl = url;
-  }
-  get protocol() {
-    return this._protocol;
-  }
-  set protocol(protocolType: string) {
-    this._protocol = protocolType;
-  }
-  set playbackRate(rate: number) {
-    audioPlayerCallback.error(new AudioPlayerError('HarmonyOS Next Audio setting playbackRate is not supported.', -1))
-  }
-  get playbackRate() {
-    return this._playbackRate
-  }
-  play() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) {
-      return;
+    get epname() {
+        return this._epname;
     }
-    const state = BackgroundAudioManagerImpl.audioPlayer.state;
-    if (![STATE_TYPE.PAUSED, STATE_TYPE.STOPPED, STATE_TYPE.IDLE].includes(state)) {
-      return;
+    set epname(epName: string) {
+        this._epname = epName;
     }
-    if (this._src && BackgroundAudioManagerImpl.audioPlayer.src === '') {
-      this.src = this._src;
+    get singer() {
+        return this._singer;
     }
-    BackgroundAudioManagerImpl.audioPlayer.play();
-    START_BACKGROUND()
-  }
-  pause() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
+    set singer(singerName: string) {
+        this._singer = singerName;
+    }
+    get coverImgUrl() {
+        return this._coverImgUrl;
+    }
+    set coverImgUrl(url: string) {
+        this._coverImgUrl = url;
+    }
+    get webUrl() {
+        return this._webUrl;
+    }
+    set webUrl(url: string) {
+        this._webUrl = url;
+    }
+    get protocol() {
+        return this._protocol;
+    }
+    set protocol(protocolType: string) {
+        this._protocol = protocolType;
+    }
+    set playbackRate(rate: number) {
+        audioPlayerCallback.error(new AudioPlayerError('HarmonyOS Next Audio setting playbackRate is not supported.', -1))
+    }
+    get playbackRate() {
+        return this._playbackRate
+    }
+    play() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) {
+            return;
+        }
+        const state = BackgroundAudioManagerImpl.audioPlayer.state;
+        if (![STATE_TYPE.PAUSED, STATE_TYPE.STOPPED, STATE_TYPE.IDLE].includes(state)) {
+            return;
+        }
+        if (this._src && BackgroundAudioManagerImpl.audioPlayer.src === '') {
+            this.src = this._src;
+        }
+        BackgroundAudioManagerImpl.audioPlayer.play();
+        START_BACKGROUND()
+    }
+    pause() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
 
-    const state = BackgroundAudioManagerImpl.audioPlayer.state;
+        const state = BackgroundAudioManagerImpl.audioPlayer.state;
 
-    if (STATE_TYPE.PLAYING !== state) { return; }
-    BackgroundAudioManagerImpl.audioPlayer.pause();
-  }
-  stop() {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
-    if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(BackgroundAudioManagerImpl.audioPlayer.state)) { return; }
-
-    BackgroundAudioManagerImpl.audioPlayer.stop();
-    BackgroundAudioManagerImpl.audioPlayer.release();
-
-    this.init();
-    STOP_BACKGROUND()
-    audioPlayerCallback.stop()
-  }
-  seek(position: number) {
-    if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
-    const state = BackgroundAudioManagerImpl.audioPlayer.state;
-    if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(state)) {
-      return;
+        if (STATE_TYPE.PLAYING !== state) { return; }
+        BackgroundAudioManagerImpl.audioPlayer.pause();
     }
-    BackgroundAudioManagerImpl.audioPlayer.seek(position * 1000);
-  }
-  onCanplay(callback: (result: any) => void): void {
-    audioPlayerCallback.onCanplay(callback)
-  }
-  onPlay(callback: (result: any) => void): void {
-    audioPlayerCallback.onPlay(callback)
-  }
-  onPause(callback: (result: any) => void): void {
-    audioPlayerCallback.onPause(callback)
-  }
-  onStop(callback: (result: any) => void): void {
-    audioPlayerCallback.onStop(callback)
-  }
-  onEnded(callback: (result: any) => void): void {
-    audioPlayerCallback.onEnded(callback)
-  }
-  onTimeUpdate(callback: (result: any) => void): void {
-    audioPlayerCallback.onTimeUpdate(callback)
-  }
-  onError(callback: (result: any) => void): void {
-    audioPlayerCallback.onError(callback)
-  }
-  onWaiting(callback: (result: any) => void): void {
-    audioPlayerCallback.onWaiting(callback)
-  }
-  offCanplay(callback: (result: any) => void): void {
-    audioPlayerCallback.offCanplay(callback)
-  }
-  offPlay(callback: (result: any) => void): void {
-    audioPlayerCallback.offPlay(callback)
-  }
-  offPause(callback: (result: any) => void): void {
-    audioPlayerCallback.offPause(callback)
-  }
-  offStop(callback: (result: any) => void): void {
-    audioPlayerCallback.offStop(callback)
-  }
-  offEnded(callback: (result: any) => void): void {
-    audioPlayerCallback.offEnded(callback)
-  }
-  offTimeUpdate(callback: (result: any) => void): void {
-    audioPlayerCallback.offTimeUpdate(callback)
-  }
-  offError(callback: (result: any) => void): void {
-    audioPlayerCallback.offError(callback)
-  }
-  offWaiting(callback: (result: any) => void): void {
-    audioPlayerCallback.offWaiting(callback)
-  }
-  onPrev(callback: (result: any) => void): void {
-    throw new Error('Method not implemented.');
-  }
-  onNext(callback: (result: any) => void): void {
-    throw new Error('Method not implemented.');
-  }
+    stop() {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
+        if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(BackgroundAudioManagerImpl.audioPlayer.state)) { return; }
+
+        BackgroundAudioManagerImpl.audioPlayer.stop();
+        BackgroundAudioManagerImpl.audioPlayer.release();
+
+        this.init();
+        STOP_BACKGROUND()
+        audioPlayerCallback.stop()
+    }
+    seek(position: number) {
+        if (!BackgroundAudioManagerImpl.audioPlayer) { return; }
+        const state = BackgroundAudioManagerImpl.audioPlayer.state;
+        if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(state)) {
+            return;
+        }
+        BackgroundAudioManagerImpl.audioPlayer.seek(position * 1000);
+    }
+    onCanplay(callback: (result: any) => void): void {
+        audioPlayerCallback.onCanplay(callback)
+    }
+    onPlay(callback: (result: any) => void): void {
+        audioPlayerCallback.onPlay(callback)
+    }
+    onPause(callback: (result: any) => void): void {
+        audioPlayerCallback.onPause(callback)
+    }
+    onStop(callback: (result: any) => void): void {
+        audioPlayerCallback.onStop(callback)
+    }
+    onEnded(callback: (result: any) => void): void {
+        audioPlayerCallback.onEnded(callback)
+    }
+    onTimeUpdate(callback: (result: any) => void): void {
+        audioPlayerCallback.onTimeUpdate(callback)
+    }
+    onError(callback: (result: any) => void): void {
+        audioPlayerCallback.onError(callback)
+    }
+    onWaiting(callback: (result: any) => void): void {
+        audioPlayerCallback.onWaiting(callback)
+    }
+    offCanplay(callback: (result: any) => void): void {
+        audioPlayerCallback.offCanplay(callback)
+    }
+    offPlay(callback: (result: any) => void): void {
+        audioPlayerCallback.offPlay(callback)
+    }
+    offPause(callback: (result: any) => void): void {
+        audioPlayerCallback.offPause(callback)
+    }
+    offStop(callback: (result: any) => void): void {
+        audioPlayerCallback.offStop(callback)
+    }
+    offEnded(callback: (result: any) => void): void {
+        audioPlayerCallback.offEnded(callback)
+    }
+    offTimeUpdate(callback: (result: any) => void): void {
+        audioPlayerCallback.offTimeUpdate(callback)
+    }
+    offError(callback: (result: any) => void): void {
+        audioPlayerCallback.offError(callback)
+    }
+    offWaiting(callback: (result: any) => void): void {
+        audioPlayerCallback.offWaiting(callback)
+    }
+    onPrev(callback: (result: any) => void): void {
+        throw new Error('Method not implemented.');
+    }
+    onNext(callback: (result: any) => void): void {
+        throw new Error('Method not implemented.');
+    }
 }
 
 let backgroundAudioManager: BackgroundAudioManager | null = null
 
 export const getBackgroundAudioManager: GetBackgroundAudioManager =
-  defineSyncApi<BackgroundAudioManager>(
-    API_GET_BACKGROUND_AUDIO_MANAGER,
-    () => {
-      if (!backgroundAudioManager) backgroundAudioManager = new BackgroundAudioManagerImpl()
-      return backgroundAudioManager
-    }
-  ) as GetBackgroundAudioManager
+    defineSyncApi<BackgroundAudioManager>(
+        API_GET_BACKGROUND_AUDIO_MANAGER,
+        () => {
+            if (!backgroundAudioManager) backgroundAudioManager = new BackgroundAudioManagerImpl()
+            return backgroundAudioManager
+        }
+    ) as GetBackgroundAudioManager

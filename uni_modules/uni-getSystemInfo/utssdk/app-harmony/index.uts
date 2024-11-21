@@ -14,7 +14,6 @@ import {
     API_GET_WINDOW_INFO,
 } from '../protocol.uts'
 import {
-    UTSHarmony,
     getWindowInfo as internalGetWindowInfo,
     getDeviceId,
 } from '@dcloudio/uni-runtime'
@@ -74,7 +73,7 @@ interface ISystemInfoAppVersion {
 function internalGetSystemInfo(): GetSystemInfoResult {
     const appVersion: ISystemInfoAppVersion = UTSHarmony.getAppVersion()
     const appLanguage = I18n.System.getAppPreferredLanguage()
-    const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion()
+    const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion() as string
     const uniCompilerVersionCode: number = parseFloat(uniCompilerVersion)
     const uniRuntimeVersion: string = UTSHarmony.getUniRuntimeVersion()
     const windowInfo = internalGetWindowInfo() as GetWindowInfoResult

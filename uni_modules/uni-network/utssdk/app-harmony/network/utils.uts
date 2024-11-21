@@ -19,23 +19,17 @@ function needsEncoding(str: string) {
 }
 
 export function parseUrl(url: string) {
-    const urlObj = harmonyUrl.URL.parseURL(url);
-    urlObj.params.forEach((value, key) => {
-        if (needsEncoding(value)) {
-            urlObj.params.set(key, value);
-        }
-    })
-    return urlObj.toString()
-}
-
-interface IUniNetworkMPUserAgent {
-    fullUserAgent: string
-}
-
-export interface IUniNetworkMP {
-    on: Function
-    off: Function
-    userAgent: IUniNetworkMPUserAgent
+    try {
+        const urlObj = harmonyUrl.URL.parseURL(url);
+        urlObj.params.forEach((value, key) => {
+            if (needsEncoding(value)) {
+                urlObj.params.set(key, value);
+            }
+        })
+        return urlObj.toString()
+    } catch (error) {
+        return url
+    }
 }
 
 export const certificates: Certificate[] = []

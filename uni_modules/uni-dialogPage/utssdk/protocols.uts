@@ -25,6 +25,9 @@ export function normalizeRouteOptions(
             url,
         } as NormalizeRouteOptionsResult
     }
+    if (url.startsWith('uni:')) {
+        return { errMsg: '', url } as NormalizeRouteOptionsResult
+    }
     // 格式化为绝对路径路由
     url = normalizeRoute(url)
     const pagePath = parseUrl(url!).path
@@ -86,7 +89,7 @@ function getRealRoute(fromRoute: string, toRoute: string): string {
     const toRouteArray = toRoute.split('/')
     const toRouteLength = toRouteArray.length
     let i = 0
-    for (; i < toRouteLength && toRouteArray[i] == '..'; i++) {
+    for (;i < toRouteLength && toRouteArray[i] == '..';i++) {
         // noop
     }
     toRouteArray.splice(0, i)

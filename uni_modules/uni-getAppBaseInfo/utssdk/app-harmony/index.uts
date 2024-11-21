@@ -5,9 +5,6 @@ import {
 import {
     API_GET_APP_BASE_INFO,
 } from '../protocol.uts'
-import {
-    UTSHarmony,
-} from '@dcloudio/uni-runtime'
 import I18n from '@ohos.i18n'
 import bundleManager from '@ohos.bundle.bundleManager'
 
@@ -39,7 +36,7 @@ export const getAppBaseInfo: GetAppBaseInfo = defineSyncApi<GetAppBaseInfoResult
     (): GetAppBaseInfoResult => {
         const appVersion: IAppBaseInfoAppVersion = UTSHarmony.getAppVersion()
         const appLanguage = I18n.System.getAppPreferredLanguage()
-        const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion()
+        const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion() as string
         const uniRuntimeVersion: string = UTSHarmony.getUniRuntimeVersion()
         return {
             appId: UTSHarmony.getAppId() as string,

@@ -32,7 +32,7 @@ export interface Uni {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -141,7 +141,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -213,7 +213,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -285,7 +285,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -357,7 +357,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -429,7 +429,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -501,7 +501,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -573,7 +573,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -645,7 +645,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -717,7 +717,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -790,7 +790,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "√",
@@ -863,7 +863,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "x",
@@ -936,7 +936,7 @@ export interface RecorderManager {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "4.35"
    *    },
    *    "alipay": {
    *      "hostVer": "x",
