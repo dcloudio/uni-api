@@ -1,6 +1,6 @@
 import { DownloadFileOptions, DownloadTask, DownloadFileProgressUpdateCallback, OnProgressDownloadResult } from '../../interface.uts';
 import { NetworkDownloadFileListener } from '../NetworkManager.uts';
-import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionDownloadTask, NSError, URLSessionDownloadDelegate, URLRequest, FileManager, NSString, NSTemporaryDirectory, NSHomeDirectory , CharacterSet } from 'Foundation';
+import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionDownloadTask, NSError, URLSessionDownloadDelegate, URLRequest, FileManager, NSString, NSTemporaryDirectory, NSHomeDirectory , CharacterSet , HTTPURLResponse } from 'Foundation';
 import { } from 'CommonCrypto';
 import { UnsafeBufferPointer, UnsafeRawBufferPointer } from 'Swift';
 import { ObjCBool } from "ObjectiveC";
@@ -252,21 +252,27 @@ export class DownloadController implements URLSessionDownloadDelegate {
 	urlSession(session : URLSession, @argumentLabel("") downloadTask : URLSessionDownloadTask, @argumentLabel("didFinishDownloadingTo") location : URL) {
 		let listener = this.taskMap.get(downloadTask);
 		let suggestedFilename = downloadTask.response?.suggestedFilename
-		const fileName = this.getFileName(suggestedFilename ?? "", downloadTask.response?.url)
-		let destPath = this.getTargetPath(listener?.options, fileName, listener);
-		if (destPath != null) {
-			let fileManager = FileManager.default
-			try {
-				let directoryPath = (destPath as NSString).deletingLastPathComponent
-				if (!fileManager.fileExists(atPath = directoryPath)) {
-					UTSiOS.try(fileManager.createDirectory(atPath = directoryPath, withIntermediateDirectories = true, attributes = null), "?")
+		const statusCode = (downloadTask.response as HTTPURLResponse).statusCode
+		if(statusCode - 200 < 100 && statusCode - 200 >= 0) {
+			const fileName = this.getFileName(suggestedFilename ?? "", downloadTask.response?.url)
+			let destPath = this.getTargetPath(listener?.options, fileName, listener);
+			if (destPath != null) {
+				let fileManager = FileManager.default
+				try {
+					let directoryPath = (destPath as NSString).deletingLastPathComponent
+					if (!fileManager.fileExists(atPath = directoryPath)) {
+						UTSiOS.try(fileManager.createDirectory(atPath = directoryPath, withIntermediateDirectories = true, attributes = null), "?")
+					}
+					UTSiOS.try(fileManager.moveItem(atPath = location.path, toPath = destPath!), "?")
+					listener?.onFinished(downloadTask.response as HTTPURLResponse, destPath!);
+				} catch {
+					let error = new NSError(domain = "file move fail", code = 602001);
+					listener?.onFail(error);
 				}
-				UTSiOS.try(fileManager.moveItem(atPath = location.path, toPath = destPath!), "?")
-				listener?.onFinished(downloadTask.response as HTTPURLResponse, destPath!);
-			} catch {
-				let error = new NSError(domain = "file move fail", code = 602001);
-				listener?.onFail(error);
 			}
+		} else {
+			let error = new NSError(domain = "request fail", code = statusCode);
+			listener?.onFail(error);
 		}
 		this.taskMap.delete(downloadTask);
 	}

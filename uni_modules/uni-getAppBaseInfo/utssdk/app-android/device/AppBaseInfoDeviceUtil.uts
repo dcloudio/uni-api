@@ -90,6 +90,17 @@ export class AppBaseInfoDeviceUtil {
 		}
 	}
 	
+	public static getChannel(context: Context): string{
+		try {
+			const packageManager = context.getPackageManager();
+			const info = packageManager.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA)
+			const bundle = info.metaData
+			return bundle.getString("DCLOUD_CHANNEL") ?? ""
+		} catch (e : Exception) {
+			return ""
+		}
+	}
+	
 	private static getSignatureString(sign: Signature, type : string):string {
 		const hexBytes = sign.toByteArray();
 		let fingerPrint = "error!";

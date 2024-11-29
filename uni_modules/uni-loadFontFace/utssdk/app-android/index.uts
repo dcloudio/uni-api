@@ -1,6 +1,7 @@
 import {
     NativeLoadFontFaceFail,
     NativeLoadFontFaceOptions,
+    appLoadFontFace,
     getCurrentPage,
 } from '@dcloudio/uni-runtime'
 
@@ -18,9 +19,7 @@ export const loadFontFace = defineAsyncApi<
 >('loadFontFace', (options: LoadFontFaceOptions, res: ApiExecutor) => {
     if (options.global == true) {
         if (checkOptionSource(options, res)) {
-            getApp().$nativeApp!.loadFontFace(
-                getLoadFontFaceOptions(options, res),
-            )
+            appLoadFontFace(getLoadFontFaceOptions(options, res))
         }
     } else {
         const page = getCurrentPage()
@@ -33,12 +32,12 @@ export const loadFontFace = defineAsyncApi<
         }
         if (checkOptionSource(options, res)) {
             page.$fontFamilySet.add(options.family)
-            page.$nativePage!.loadFontFace(getLoadFontFaceOptions(options, res))
+            appLoadFontFace(getLoadFontFaceOptions(options, res))
         }
     }
 })
 
-const SOURCE_REG = /(.+\.((ttf)|(otf)|(woff2?))$)|(^(http|https):\/\/.+)/
+const SOURCE_REG = /(.+\.((ttf)|(otf)|(woff2?))$)|(^(http|https):\/\/.+)|(^(data:font).+)/
 function checkOptionSource(
     options: LoadFontFaceOptions,
     res: ApiExecutor,
@@ -58,6 +57,11 @@ function checkOptionSource(
 
 function removeUrlWrap(source: string): string {
     if (source.startsWith('url(')) {
+        // url("xxx") format("xxx") 时移除 format("xxx")
+        const FormatParts = source.split('format(')
+        if (FormatParts.length > 1) {
+            source = FormatParts[0].trim()
+        }
         source = source.substring(4, source.length - 1)
     }
     if (source.startsWith('"') || source.startsWith("'")) {

@@ -5,6 +5,7 @@ import {
     Page,
     REDIRECT_TO,
     SWITCH_TAB,
+    getAppStartDuration,
     getCurrentPage,
     onAfterRoute,
     onBeforeRoute,
@@ -155,8 +156,7 @@ class PerformanceEntryStatusNavigation extends PerformanceEntryStatus {
         if (innerPage != null) {
             this._entryData.duration = Date.now() - this._entryData.startTime
             if (this._entryData.name == APP_LAUNCH) {
-                this._entryData.duration +=
-                    getApp().$nativeApp!.getAppStartDuration()
+                this._entryData.duration += getAppStartDuration()
             }
         }
     }

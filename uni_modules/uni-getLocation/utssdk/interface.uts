@@ -709,18 +709,19 @@ export type GetLocationOptions = {
 	/**
 	 * 定位服务提供商，通过 [uni.getProvider](https://doc.dcloud.net.cn/uni-app-x/api/provider.html) 获取,目前支持系统定位(system)、腾讯定位(tencent)
 	 * 腾讯定位是4.25版本后支持的；
+     * web端暂不支持provider机制；
 	 * @defaultValue system
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
 	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
-	 *            "unixVer": "3.9.0"
+	 *            "unixVer": "4.25"
 	 *        },
 	 *        "ios": {
 	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
-	 *            "unixVer": "4.11"
+	 *            "unixVer": "4.25"
 	 *        },
 	 *    "harmony": {
 	 *      "osVer": "x",
@@ -729,8 +730,8 @@ export type GetLocationOptions = {
 	 *    }
 	 *    },
 	 *    "web": {
-	 *        "uniVer": "√",
-	 *        "unixVer": "4.0"
+	 *        "uniVer": "x",
+	 *        "unixVer": "x"
 	 *    }
 	 * }
 	 */
@@ -860,8 +861,8 @@ export type GetLocationOptions = {
 	 *    }
 	 *    },
 	 *    "web": {
-	 *        "uniVer": "√",
-	 *        "unixVer": "4.0"
+	 *        "uniVer": "x",
+	 *        "unixVer": "x"
 	 *    }
 	 * }
 	 */
@@ -888,8 +889,8 @@ export type GetLocationOptions = {
 	 *    }
 	 *    },
 	 *    "web": {
-	 *        "uniVer": "√",
-	 *        "unixVer": "4.0"
+	 *        "uniVer": "x",
+	 *        "unixVer": "x"
 	 *    }
 	 * }
 	 */

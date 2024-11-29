@@ -1,4 +1,3 @@
-import { UTSHarmony } from "@dcloudio/uni-runtime"
 import {
     API_HIDE_KEYBOARD
 } from '../protocol.uts'

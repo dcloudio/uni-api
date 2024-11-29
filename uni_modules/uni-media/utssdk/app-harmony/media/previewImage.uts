@@ -1,6 +1,5 @@
 import {
     getOSRuntime,
-    getCurrentPage
 } from '@dcloudio/uni-runtime'
 import {
     PreviewImageOptions,
@@ -18,7 +17,7 @@ import {
 } from '../../protocol.uts'
 import {
     getRealPath,
-    waitForCurrentNativePage
+    onNativePageReady
 } from '@dcloudio/uni-runtime'
 
 interface IPreviewImageOptions {
@@ -30,11 +29,12 @@ interface IPreviewImageOptions {
 export const previewImage: PreviewImage = defineAsyncApi<PreviewImageOptions, PreviewImageSuccess>(
     API_PREVIEW_IMAGE,
     function (options: PreviewImageOptions, exec: ApiExecutor<PreviewImageSuccess>) {
-        waitForCurrentNativePage().then((nativePage: Object) => {
+        const currentUrl = typeof options.current === 'number' ? options.urls[options.current ?? 0] : options.current as string
+        onNativePageReady().then((nativePage: Object) => {
             getOSRuntime().previewImage(
                 {
                     urls: options.urls.map(url => getRealPath(url) as string),
-                    current: options.current || '',
+                    current: getRealPath(currentUrl || ''),
                     showmenu: options.showmenu === false ? false : true,
                 } as IPreviewImageOptions,
                 nativePage
@@ -52,7 +52,7 @@ export const previewImage: PreviewImage = defineAsyncApi<PreviewImageOptions, Pr
 export const closePreviewImage: ClosePreviewImage = defineAsyncApi<ClosePreviewImageOptions, ClosePreviewImageSuccess>(
     API_CLOSE_PREVIEW_IMAGE,
     function (options: ClosePreviewImageOptions, exec: ApiExecutor<ClosePreviewImageSuccess>) {
-        waitForCurrentNativePage().then((nativePage: Object) => {
+        onNativePageReady().then((nativePage: Object) => {
             getOSRuntime().closePreviewImage()
             exec.resolve({
                 errMsg: ''

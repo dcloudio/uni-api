@@ -1,4 +1,4 @@
-import { GetSystemInfoOptions, GetSystemInfo, GetSystemInfoResult, SafeArea, SafeAreaInsets, GetSystemInfoSync, GetWindowInfo, GetWindowInfoResult } from "../interface.uts";
+import { GetSystemInfoOptions, GetSystemInfo, GetSystemInfoResult, SafeArea, SafeAreaInsets, GetSystemInfoSync, GetWindowInfo, GetWindowInfoResult, CutoutRect } from "../interface.uts";
 import PackageManager from 'android.content.pm.PackageManager';
 import Build from 'android.os.Build';
 import { DeviceUtil } from './device/SystemInfoDeviceUtil.uts'
@@ -6,6 +6,7 @@ import CountDownLatch from 'java.util.concurrent.CountDownLatch';
 import Looper from 'android.os.Looper';
 import Handler from 'android.os.Handler';
 import ViewGroup from "android.view.ViewGroup";
+import ViewCompat from 'androidx.core.view.ViewCompat';
 
 export const getSystemInfo : GetSystemInfo = function (options : GetSystemInfoOptions) {
 	const result = getSystemInfoSync();
@@ -62,11 +63,17 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 			const windowTop = 0;
 			const windowBottom = 0;
 			const safeAreaInsetsTop = statusBarHeight;
+			let safeAreaInsetsBottom = 0;
+			// #ifdef UNI-APP-X
+			if (DeviceUtil.isGestureNavigationIndicator(activity) && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
+				safeAreaInsetsBottom = DeviceUtil.getNavigationBarHeight(activity);
+			}
+			// #endif
 			const safeAreaInsets : SafeAreaInsets = {
 				left: 0,
 				top: safeAreaInsetsTop,
 				right: 0,
-				bottom: 0
+				bottom: safeAreaInsetsBottom
 			}
 
 			const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
@@ -167,11 +174,17 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 	const windowTop = 0;
 	const windowBottom = 0;
 	const safeAreaInsetsTop = statusBarHeight;
+	let safeAreaInsetsBottom = 0;
+	// #ifdef UNI-APP-X
+	if (DeviceUtil.isGestureNavigationIndicator(activity) && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
+		safeAreaInsetsBottom = DeviceUtil.getNavigationBarHeight(activity);
+	}
+	// #endif
 	const safeAreaInsets : SafeAreaInsets = {
 		left: 0,
 		top: safeAreaInsetsTop,
 		right: 0,
-		bottom: 0
+		bottom: safeAreaInsetsBottom
 	}
 	
 	const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
@@ -186,6 +199,18 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 	}
 	const screenTop = windowTop;
 	
+	// #ifdef UNI-APP-X
+	const cutoutArea : Array<CutoutRect> = [];
+	ViewCompat.getRootWindowInsets(activity.getWindow().getDecorView())?.getDisplayCutout()?.getBoundingRects().forEach((item) => {
+		cutoutArea.push({
+			left: Math.round(item.left / pixelRatio),
+			right: Math.round(item.right / pixelRatio),
+			top: Math.round(item.top / pixelRatio),
+			bottom: Math.round(item.bottom / pixelRatio)
+		} as CutoutRect);
+	});
+	// #endif
+	
     let result = {
 		pixelRatio: pixelRatio,
 		screenWidth: screenWidth,
@@ -197,7 +222,10 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 		windowBottom: windowBottom,
 		safeArea: safeArea,
 		safeAreaInsets: safeAreaInsets,
-		screenTop: screenTop
+		screenTop: screenTop,
+		// #ifdef UNI-APP-X
+		cutoutArea: cutoutArea
+		// #endif
 	} as GetWindowInfoResult;
 	return result;
 };

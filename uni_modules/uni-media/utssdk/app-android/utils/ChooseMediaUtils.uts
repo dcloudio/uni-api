@@ -1,13 +1,14 @@
 import {
 	ChooseImageOptions, ChooseImageSuccess, ChooseImageCropOptions,
-	ChooseVideoOptions, ChooseVideoSuccess,
+	ChooseVideoOptions, ChooseVideoSuccess, ChooseImageTempFile,
 	GetVideoInfoSuccess,
+	ChooseImagePageOrientation,
 } from "../../interface.uts"
 import {
 	UniError_ChooseImage, UniError_ChooseVideo,
 	MediaErrorImpl
 } from "../../unierror.uts"
-import { getVideoMetadata } from "./MediaUtils.uts"
+import { getOrientation, getVideoMetadata } from "./MediaUtils.uts"
 import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts"
 import { getUniActivity } from "io.dcloud.uts.android";
 import Intent from 'android.content.Intent';
@@ -27,35 +28,53 @@ import CompressUtil from 'io.dcloud.uts.util.CompressUtil';
 
 const GALLERY_MEDIA_PICKER_RESULT = 1004;
 
-const mediaCachePath = UTSAndroid.getAppCachePath()+"uni-media/"
+const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
 
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			let requestPermissionList : Array<string> = [Manifest.permission.CAMERA]
-			if (index == 1) {
-				requestPermissionList = [Manifest.permission.READ_EXTERNAL_STORAGE]
-				if (getUniActivity()!.getApplicationInfo().targetSdkVersion >= 33) {
-					requestPermissionList = ["android.permission.READ_MEDIA_IMAGES"]
-				}
+		if (option.albumMode == "system" && index != 0) {
+			if (Build.VERSION.SDK_INT > 32) {
+				openAlbumForImage(option, count, 100)
+			} else {
+				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
+					if (index == 0) {
+						openCameraForImage(option, compressed)
+					} else {
+						openAlbumForImage(option, count, 100)
+					}
+				}, (a : boolean, b : string[]) => {
+					let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
+					option.fail?.(error)
+					option.complete?.(error)
+				})
 			}
-			UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
+		} else {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				let requestPermissionList : Array<string> = [Manifest.permission.CAMERA]
+				if (index == 1) {
+					requestPermissionList = [Manifest.permission.READ_EXTERNAL_STORAGE]
+					if (getUniActivity()!.getApplicationInfo().targetSdkVersion >= 33) {
+						requestPermissionList = ["android.permission.READ_MEDIA_IMAGES"]
+					}
+				}
+				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
+					if (index == 0) {
+						openCameraForImage(option, compressed)
+					} else {
+						openAlbumForImage(option, count, 100)
+					}
+				}, (a : boolean, b : string[]) => {
+					// 失败回调
+					let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
+					option.fail?.(error)
+					option.complete?.(error)
+				})
+			} else {
 				if (index == 0) {
 					openCameraForImage(option, compressed)
-				} else {
-					openAlbumForImage(option, count, 100)
+				} else if (index == 1) {
+					openAlbumForImage(option, count, 101)
 				}
-			}, (a : boolean, b : string[]) => {
-				// 失败回调
-				let error = new MediaErrorImpl(1101005, UniError_ChooseImage);
-				option.fail?.(error)
-				option.complete?.(error)
-			})
-		} else {
-			if (index == 0) {
-				openCameraForImage(option, compressed)
-			} else if (index == 1) {
-				openAlbumForImage(option, count, 101)
 			}
 		}
 	})
@@ -88,7 +107,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 						"errSubject": "uni-chooseImage",
 						"tempFilePaths": ["file://" + cameraPath],
 						"errMsg": "chooseImage:ok",
-						"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() }]
+						"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() } as ChooseImageTempFile]
 					}
 					option.success?.(success)
 					option.complete?.(success)
@@ -133,7 +152,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 								"errSubject": "uni-chooseImage",
 								"tempFilePaths": ["file://" + cameraPath],
 								"errMsg": "chooseImage:ok",
-								"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() }]
+								"tempFiles": [{ "path": "file://" + cameraPath, "size": picFile.length() } as ChooseImageTempFile]
 							}
 							option.success?.(success)
 							option.complete?.(success)
@@ -174,19 +193,17 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 		if (requestCode == GALLERY_MEDIA_PICKER_RESULT) {
 			UTSAndroid.offAppActivityResult(albumFunction!)
 			let picPaths : Array<string> = []
-			let picTempPathJson : Array<UTSJSONObject> = []
+			let picTempPathJson : Array<ChooseImageTempFile> = []
 			if (data != null) {
 				let selectMediaResult : kotlin.collections.ArrayList<Parcelable> | null = data!!.getParcelableArrayListExtra("select_result");
 				if (selectMediaResult != null) {
 					selectMediaResult.forEach((current) => {
 						let path = (current as Media).path;
 						picPaths.push("file://" + (current as Media).path);
-						let tempPathJson = {}
-						tempPathJson["path"] = "file://" + path
 						try {
-							tempPathJson["size"] = new File(path).length()
+							let tempPathJson : ChooseImageTempFile = { "path": "file://" + path, "size": new File(path).length() }
+							picTempPathJson.push(tempPathJson)
 						} catch (e) { }
-						picTempPathJson.push(tempPathJson)
 					})
 				}
 			}
@@ -207,42 +224,60 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 		}
 	}
 	UTSAndroid.onAppActivityResult(albumFunction!)
-	openGalleryActivity(count, type, false, option.sizeType, option.crop);
+	openGalleryActivity(count, type, false, option.sizeType, option.crop, option.pageOrientation, option.albumMode);
 }
 
 export function chooseMediaVideo(options : ChooseVideoOptions) {
 	uniChooseVideo(options, (count : number, compressed : boolean, index : number) => {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			let requestPermissionList : Array<string> = [Manifest.permission.CAMERA]
-			if (index == 1) {
-				requestPermissionList = [Manifest.permission.READ_EXTERNAL_STORAGE]
-				if (getUniActivity()!.getApplicationInfo().targetSdkVersion >= 33) {
-					requestPermissionList = ["android.permission.READ_MEDIA_VIDEO"]
-				}
+		if (options.albumMode == "system" && index != 0) {
+			if (Build.VERSION.SDK_INT > 32) {
+				openAlbumForVideo(options, count, 102, compressed)
+			} else {
+				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
+					if (index == 0) {
+						openCameraForVideo(options, compressed)
+					} else {
+						openAlbumForVideo(options, count, 102, compressed)
+					}
+				}, (a : boolean, b : string[]) => {
+					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+					options.fail?.(error)
+					options.complete?.(error)
+				})
 			}
-			UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
+		} else {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				let requestPermissionList : Array<string> = [Manifest.permission.CAMERA]
+				if (index == 1) {
+					requestPermissionList = [Manifest.permission.READ_EXTERNAL_STORAGE]
+					if (getUniActivity()!.getApplicationInfo().targetSdkVersion >= 33) {
+						requestPermissionList = ["android.permission.READ_MEDIA_VIDEO"]
+					}
+				}
+				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, requestPermissionList, (a : boolean, b : string[]) => {
+					if (index == 0) {
+						openCameraForVideo(options, compressed)
+					} else {
+						openAlbumForVideo(options, count, 102, compressed)
+					}
+				}, (a : boolean, b : string[]) => {
+					// 失败回调
+					if (index == 0) {
+						let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+						options.fail?.(error)
+						options.complete?.(error)
+					} else {
+						let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
+						options.fail?.(error)
+						options.complete?.(error)
+					}
+				})
+			} else {
 				if (index == 0) {
 					openCameraForVideo(options, compressed)
-				} else {
+				} else if (index == 1) {
 					openAlbumForVideo(options, count, 102, compressed)
 				}
-			}, (a : boolean, b : string[]) => {
-				// 失败回调
-				if (index == 0) {
-					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
-					options.fail?.(error)
-					options.complete?.(error)
-				} else {
-					let error = new MediaErrorImpl(1101005, UniError_ChooseVideo);
-					options.fail?.(error)
-					options.complete?.(error)
-				}
-			})
-		} else {
-			if (index == 0) {
-				openCameraForVideo(options, compressed)
-			} else if (index == 1) {
-				openAlbumForVideo(options, count, 102, compressed)
 			}
 		}
 	})
@@ -408,10 +443,10 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 		}
 	}
 	UTSAndroid.onAppActivityResult(openAlbumFunction!)
-	openGalleryActivity(count, type, compressed, null, null);
+	openGalleryActivity(count, type, compressed, null, null, option.pageOrientation, option.albumMode);
 }
 
-function openGalleryActivity(count : number, type : number, compressed : boolean, sizeType ?: (string[]) | null, crop ?: ChooseImageCropOptions | null) {
+function openGalleryActivity(count : number, type : number, compressed : boolean, sizeType ?: (string[]) | null, crop ?: ChooseImageCropOptions | null, pageOrientation ?: ChooseImagePageOrientation | null, useSystem : string | null) {
 	let selected : Array<string> = [];// 已选中的图片
 	let maximum = -1;
 	let editable = true; // 是否可编辑，对应editable
@@ -419,7 +454,11 @@ function openGalleryActivity(count : number, type : number, compressed : boolean
 	// let compressed = false; // 视频压缩，对应“videoCompress”
 
 	let albumIntent = new Intent()
-	albumIntent.setClassName(getUniActivity()!!, "io.dcloud.uts.dmcbig.mediapicker.PickerActivity");
+	if (useSystem == "system") {
+		albumIntent.setClassName(getUniActivity()!!, "io.dcloud.uts.pick.SystemPickerActivity");
+	} else {
+		albumIntent.setClassName(getUniActivity()!!, "io.dcloud.uts.dmcbig.mediapicker.PickerActivity");
+	}
 	albumIntent.putExtra(/* SELECT_MODE = */"select_mode",/* PICKER_IMAGE_VIDEO = */type)
 	albumIntent.putExtra(/* SINGLE_SELECT = */"single_select", false)
 	albumIntent.putExtra(/* COMPRESSED = */"COMPRESSED", compressed)
@@ -436,5 +475,7 @@ function openGalleryActivity(count : number, type : number, compressed : boolean
 		albumIntent.putExtra(/* IMAGE_CROP = */"image_crop", JSON.stringify(crop))
 		albumIntent.putExtra(/* MAX_SELECT_COUNT = */"max_select_count", 1)  // 编辑模式下只能选中一个
 	}
+	albumIntent.putExtra("page_orientation", getOrientation(pageOrientation))
+	albumIntent.putExtra("copy_privacy_path", !UTSAndroid.isUniAppX())
 	getUniActivity()!!.startActivityForResult(albumIntent, GALLERY_MEDIA_PICKER_RESULT.toInt())
 }

@@ -1,4 +1,4 @@
-import picker from '@ohos.file.picker'
+import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import fs from '@ohos.file.fs'
 import { ReadOptions } from '@ohos.file.fs'
 import media from '@ohos.multimedia.media'
@@ -6,8 +6,13 @@ import image from '@ohos.multimedia.image'
 import {
     GetImageInfoSuccess,
     GetVideoInfoSuccess,
-    MediaOrientation
+    MediaOrientation,
+    CompressImageOptions,
+    CompressImageSuccess,
 } from '../../interface.uts'
+import {
+    _compressImage
+} from './compressImage.uts'
 
 export interface MediaFile {
     fileType: 'video' | 'image'
@@ -19,11 +24,14 @@ export interface MediaFile {
     thumbTempFilePath?: string
 }
 
-export interface ChooseMediaOptions {
+export interface _ChooseMediaOptions {
     mimeType:
-    | picker.PhotoViewMIMETypes.VIDEO_TYPE
-    | picker.PhotoViewMIMETypes.IMAGE_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
+    | photoAccessHelper.PhotoViewMIMETypes.IMAGE_VIDEO_TYPE
     count?: number
+    sourceType?: ('album' | 'camera')[]
+    isOriginalSupported?: boolean
 }
 
 export interface chooseMediaSuccessCallbackResult {
@@ -76,9 +84,16 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
     const file = await fs.open(uri, fs.OpenMode.READ_ONLY)
     const imageSource = image.createImageSource(file.fd)
     const imageInfo = await imageSource.getImageInfo()
-    const orientation = await imageSource.getImageProperty(
-        image.PropertyKey.ORIENTATION
-    )
+    let orientation: string = ''
+    try {
+        orientation = await imageSource.getImageProperty(
+            image.PropertyKey.ORIENTATION
+        )
+    } catch (error) {
+        // do nothing
+    }
+    await imageSource.release()
+    await fs.close(file.fd)
     let orientationNum = 0
     if (typeof orientation === 'string') {
         const matched = orientation.match(/^Unknown value (\d)$/)
@@ -147,20 +162,35 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
  */
 
 export async function _chooseMedia(
-    options: ChooseMediaOptions
+    options: _ChooseMediaOptions
 ): Promise<chooseMediaSuccessCallbackResult> {
-    const photoSelectOptions = new picker.PhotoSelectOptions()
+    const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions()
     const mimeType = options.mimeType
     photoSelectOptions.MIMEType = mimeType
     photoSelectOptions.maxSelectNumber = options.count || 9
-    const photoPicker = new picker.PhotoViewPicker()
+    photoSelectOptions.isOriginalSupported = options.isOriginalSupported
+    // 仅支持移除相机选项
+    photoSelectOptions.isPhotoTakingSupported = !(options.sourceType && !options.sourceType.includes('camera'))
+    const photoPicker = new photoAccessHelper.PhotoViewPicker()
     const photoSelectResult = await photoPicker.select(photoSelectOptions)
 
     const uris = photoSelectResult.photoUris
 
-    if (mimeType !== picker.PhotoViewMIMETypes.VIDEO_TYPE) {
+    if (mimeType !== photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE) {
+        let realUris: string[] = uris
+        if (!photoSelectResult.isOriginalPhoto) {
+            const compressResult = await Promise.all(
+                uris.map((uri): Promise<CompressImageSuccess> => {
+                    return _compressImage({
+                        src: uri,
+                        quality: 80
+                    } as CompressImageOptions)
+                })
+            )
+            realUris = compressResult.map(result => result.tempFilePath)
+        }
         return {
-            tempFiles: uris.map((uri) => {
+            tempFiles: realUris.map((uri) => {
                 const file = fs.openSync(uri, fs.OpenMode.READ_ONLY)
                 const stat = fs.statSync(file.fd)
                 fs.closeSync(file)

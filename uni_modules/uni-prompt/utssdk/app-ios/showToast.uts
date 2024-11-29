@@ -35,8 +35,26 @@ export function toShowToast(options : ShowToastOptions) {
 			}
 			MCToast.mc_text(options.title, offset = CGFloat(centerPoint.toFloat()), duration = CGFloat(duration.toFloat()), respond = mask)
 		} else {
-			MCToastConfig.shared.icon.successImage = new UIImage(named = "uni_uts_toast_success.png")
-			MCToastConfig.shared.icon.failureImage = new UIImage(named = "uni_uts_toast_error.png")
+			let successImage = new UIImage(named = "uni_uts_toast_success.png")
+			let failureImage = new UIImage(named = "uni_uts_toast_error.png")
+			const bundleUrl = Bundle.main.url(forResource = "uni-prompt", withExtension = "bundle")
+			if (bundleUrl != null) {
+				const bundle = Bundle(url = bundleUrl!)
+				if (bundle != null) {
+					const success_img = new UIImage(named = "uni_uts_toast_success.png", in = bundle!, compatibleWith = null)
+					if (success_img != null) {
+						successImage = success_img
+					}
+					
+					const failure_img = new UIImage(named = "uni_uts_toast_error.png", in = bundle!, compatibleWith = null)
+					if (failure_img != null) {
+						failureImage = failure_img
+					}
+				}
+			}
+			MCToastConfig.shared.icon.successImage = successImage
+			MCToastConfig.shared.icon.failureImage = failureImage
+
 			if (options.image != null) {
 				const imagePath = UTSiOS.getResourcePath(options.image!)
 				const image = new UIImage(contentsOfFile = imagePath)

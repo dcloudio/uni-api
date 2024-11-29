@@ -4,6 +4,8 @@ import {
     NAVIGATE_BACK,
     ON_LAST_PAGE_BACK_PRESS,
     ON_SHOW,
+    Page,
+    REDIRECT_TO,
     invokeAfterRouteHooks,
     invokeBeforeRouteHooks,
     invokeCurrentAppHook,
@@ -40,7 +42,14 @@ export const _navigateBack = (
         return
     }
     const currentPage = pages[pages.length - 1]
-    const onBackPressRes = invokePageOnBackPress(currentPage, from)
+    let onBackPressRes = invokePageOnBackPress(currentPage.vm!, from)
+    if (onBackPressRes !== true) {
+        const dialogPages = currentPage.getDialogPages()
+        if (dialogPages.length > 0) {
+            const dialogPage = dialogPages[dialogPages.length - 1]
+            onBackPressRes = invokePageOnBackPress(dialogPage.$vm as Page, from)
+        }
+    }
     if (onBackPressRes == true) {
         if (res !== null) {
             res.resolve(null)
@@ -48,9 +57,9 @@ export const _navigateBack = (
         return
     }
     invokeBeforeRouteHooks(NAVIGATE_BACK)
-    if (isDirectPage(currentPage)) {
+    if (isDirectPage(currentPage.vm!)) {
         reLaunchEntryPage()
-    } else if (isTabPage(currentPage) || pages.length == 1) {
+    } else if (isTabPage(currentPage.vm!) || pages.length == 1) {
         quit()
     } else {
         if (options?.delta !== null && options?.delta! > 1) {
@@ -63,20 +72,27 @@ export const _navigateBack = (
             )
             deltaPages.reverse()
             deltaPages.forEach(deltaPage => {
-                deltaPage.$close(
+                deltaPage.vm!.$close(
                     new Map<string, any | null>([[ANIMATION_TYPE, 'none']]),
                 )
             })
         }
-        currentPage.$close(
+        let animationType = options?.animationType ?? DEFAULT_ANIMATION_NAVIGATE_BACK
+        let animationDuration = options?.animationDuration ?? DEFAULT_ANIMATION_DURATION
+        if (currentPage.vm!.openType == REDIRECT_TO) {
+            // 如果是 redirectTo 跳转的，需要指定 back 动画
+            animationType = DEFAULT_ANIMATION_OUT
+            animationDuration = DEFAULT_ANIMATION_DURATION
+        }
+        currentPage.vm!.$close(
             new Map<string, any | null>([
                 [
                     ANIMATION_TYPE,
-                    options?.animationType ?? DEFAULT_ANIMATION_NAVIGATE_BACK,
+                    animationType,
                 ],
                 [
                     ANIMATION_DURATION,
-                    options?.animationDuration ?? DEFAULT_ANIMATION_DURATION,
+                    animationDuration,
                 ],
             ]),
         )

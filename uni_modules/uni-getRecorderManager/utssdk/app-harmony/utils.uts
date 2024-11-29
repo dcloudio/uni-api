@@ -1,0 +1,103 @@
+import { getEnv } from '@dcloudio/uni-runtime';
+import { fileIo } from '@kit.CoreFileKit';
+import { RecorderManagerOnStopResult } from '../interface.uts';
+
+export type RecorderState = 'pause' | 'resume' | 'start' | 'stop' | 'error' | 'frameRecorded' | 'interruptionBegin' | 'interruptionEnd'
+
+interface Callbacks {
+  pause: Function[]
+  resume: Function[]
+  start: Function[]
+  stop: Function[]
+  error: Function[]
+  frameRecorded: Function[]
+  interruptionBegin: Function[]
+  interruptionEnd: Function[]
+}
+
+const callbacks: Callbacks = {
+  pause: [],
+  resume: [],
+  start: [],
+  stop: [],
+  error: [],
+  frameRecorded: [],
+  interruptionBegin: [],
+  interruptionEnd: []
+}
+
+export function setRecordStateCallback(state: RecorderState, cb: Function) {
+  switch (state) {
+    case 'pause':
+      callbacks.pause.push(cb)
+      break
+    case 'resume':
+      callbacks.resume.push(cb)
+      break
+    case 'start':
+      callbacks.start.push(cb)
+      break
+    case 'stop':
+      callbacks.stop.push(cb)
+      break
+    case 'error':
+      callbacks.error.push(cb)
+      break
+    case 'frameRecorded':
+      callbacks.frameRecorded.push(cb)
+      break
+    case 'interruptionBegin':
+      callbacks.interruptionBegin.push(cb)
+      break
+    case 'interruptionEnd':
+      callbacks.interruptionEnd.push(cb)
+      break
+  }
+}
+
+export interface StateChangeRes extends RecorderManagerOnStopResult {
+  errMsg?: string
+  frameBuffer?: ArrayBuffer
+  isLastFrame?: boolean
+}
+
+export function onRecorderStateChange(state: RecorderState, res?: StateChangeRes) {
+  const cbs: Function[] = (() => {
+    switch (state) {
+      case 'pause':
+        return callbacks.pause
+      case 'resume':
+        return callbacks.resume
+      case 'start':
+        return callbacks.start
+      case 'stop':
+        return callbacks.stop
+      case 'error':
+        return callbacks.error
+      case 'frameRecorded':
+        return callbacks.frameRecorded
+      case 'interruptionBegin':
+        return callbacks.interruptionBegin
+      case 'interruptionEnd':
+        return callbacks.interruptionEnd
+      default:
+        return []
+    }
+  })()
+  cbs.forEach(fn => {
+    if (typeof fn === 'function') {
+      fn(res)
+    }
+  })
+}
+
+export function createFile(supportFormats: string[], format: string, defaultExt: string) {
+  const TEMP_PATH = getEnv().TEMP_PATH as string
+  const filePath = `${TEMP_PATH}/recorder/`
+  if (!fileIo.accessSync(filePath)) {
+    fileIo.mkdirSync(filePath, true)
+  }
+  const fileName = `${Date.now()}.${supportFormats.includes(format ?? '') ? format?.toLocaleLowerCase() : defaultExt}`
+  const file: fileIo.File = fileIo.openSync(`${filePath}${fileName}`, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
+  return file
+}

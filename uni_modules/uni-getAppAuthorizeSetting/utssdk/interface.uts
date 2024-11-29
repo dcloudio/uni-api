@@ -18,8 +18,8 @@ export interface Uni {
 	* 			"unixVer": "4.11"
 	* 		},
   *    "harmony": {
-  *      "osVer": "x",
-  *      "uniVer": "x",
+  *      "osVer": "3.0",
+  *      "uniVer": "4.31",
   *      "unixVer": "x"
   *    }
 	* 	},

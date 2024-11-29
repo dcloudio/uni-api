@@ -12,9 +12,10 @@ const errorCodeMap : Map<string, number> = new Map([
 	['5000', 701110],
 	['6001', 700601],
 	['6002', 700602],
-	['6004', 700603]
+	['6004', 700603],
+	['6007', 700607],
+	['4001', 700608]
 ]);
-
 
 export class UniPaymentAlipayProviderImpl implements UniPaymentAlipayProvider {
 	id: string

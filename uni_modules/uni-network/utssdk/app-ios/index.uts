@@ -376,7 +376,10 @@ class DownloadNetworkListener extends NetworkDownloadFileListener {
 		}
 
 		let failResult = new DownloadFileFailImpl(getErrcode(Number.from(errCode)));
-		failResult.cause = new SourceError(cause);
+		let codeCause = StatusCode.getStatus(new String(code))
+		const sourceError = new SourceError(codeCause == "unknown status" ? cause : codeCause);
+		sourceError.code = Number.from(code);
+		failResult.cause = sourceError;
 		let fail = kParam?.fail;
 		let complete = kParam?.complete;
 		fail?.(failResult);

@@ -59,7 +59,7 @@ function closeToast(type : string | null) {
 	// #ifdef UNI-APP-X
 	let pages = getCurrentPages();
 	if (pages.length > 0) {
-		let page = pages[pages.length - 1];
+		let page = pages[pages.length - 1].vm!;
 		onReadyToast.remove(page)
 	}
 	// #endif
@@ -131,9 +131,9 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 			 */
 			const pages = getCurrentPages();
 			if (pages.length > 0) {
-			    const page = pages[pages.length - 1]
-			    const instance = page.$
-			    if (page.$isReady) {
+				const page = pages[pages.length - 1].vm!
+				const instance = page.$
+				if (page.$isReady) {
 					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 					toast = alert
 			        alert?.showWaiting();
@@ -263,7 +263,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				 */
 				const pages = getCurrentPages();
 				if (pages.length > 0) {
-				    const page = pages[pages.length - 1]
+					const page = pages[pages.length - 1].vm!
 				    const instance = page.$
 				    if (page.$isReady) {
 						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)

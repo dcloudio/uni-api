@@ -18,8 +18,21 @@ import {
     saveImageToPhotosAlbum,
     saveVideoToPhotosAlbum
 } from './media/saveMedia.uts'
+import { compressImage } from './media/compressImage.uts';
+import { chooseFile } from './media/chooseFile.uts';
+import { chooseMedia } from './media/chooseMedia.uts';
+import { compressVideo } from './media/compressVideo.uts';
 
 export {
+    CompressVideo,
+    CompressVideoOptions,
+    CompressVideoSuccess,
+    ChooseMediaOptions,
+    ChooseMediaSuccess,
+    ChooseMedia,
+    ChooseFileOptions,
+    ChooseFileSuccess,
+    ChooseFile,
     ChooseImageOptions,
     ChooseImageSuccess,
     ChooseImage,
@@ -54,5 +67,9 @@ export {
     previewImage,
     closePreviewImage,
     saveImageToPhotosAlbum,
-    saveVideoToPhotosAlbum
+    saveVideoToPhotosAlbum,
+    compressImage,
+    chooseFile,
+    chooseMedia,
+    compressVideo
 }

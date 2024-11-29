@@ -1,51 +1,53 @@
+import { window } from '@kit.ArkUI';
 import { ShowModal, ShowModalSuccess, ShowModalOptions } from '../interface.uts';
 import { ShowModalApiOptions, ShowModalProtocol, API_SHOW_MODAL } from '../protocol.uts';
 
 export const showModal: ShowModal = defineAsyncApi<ShowModalOptions, ShowModalSuccess>(
-  API_SHOW_MODAL,
-  async function (args: ShowModalOptions, res: ApiExecutor<ShowModalSuccess>) {
-    const modalRes = await new Promise<ShowModalSuccess>((resolve, reject) => {
-      const confirmButton: AlertDialogButtonOptions = {
-        value: args.confirmText ?? '确定',
-        fontColor: args.confirmColor!,
-        action: () => {
-          resolve({ "confirm": true } as ShowModalSuccess)
+    API_SHOW_MODAL,
+    async function (args: ShowModalOptions, res: ApiExecutor<ShowModalSuccess>) {
+        const modalRes = await new Promise<ShowModalSuccess>((resolve, reject) => {
+            const confirmButton: AlertDialogButtonOptions = {
+                value: args.confirmText ?? '确定',
+                fontColor: args.confirmColor!,
+                action: () => {
+                    resolve({ "confirm": true } as ShowModalSuccess)
+                }
+            };
+            const cancelButton: AlertDialogButtonOptions = {
+                value: args.cancelText ?? '取消',
+                fontColor: args.cancelColor ?? '#000000',
+                action: () => {
+                    resolve({ "cancel": true } as ShowModalSuccess)
+                }
+            };
+            const buttons: Array<AlertDialogButtonOptions> = [];
+            if (args.showCancel) {
+                buttons.push(cancelButton);
+            }
+            buttons.push(confirmButton);
+            const window = UTSHarmony.getCurrentWindow() as window.Window;
+            window.getUIContext().showAlertDialog(
+                {
+                    title: args.title ?? '',
+                    message: args.content ?? '',
+                    autoCancel: false,
+                    alignment: DialogAlignment.Center,
+                    buttons,
+                    cancel: () => {
+                        resolve({ 'cancel': true } as ShowModalSuccess)
+                    }
+                } as AlertDialogParamWithOptions
+            )
+        });
+        if (modalRes.confirm) {
+            modalRes.cancel = false
         }
-      };
-      const cancelButton: AlertDialogButtonOptions = {
-        value: args.cancelText ?? '取消',
-        fontColor: args.cancelColor ?? '#000000',
-        action: () => {
-          resolve({ "cancel": true } as ShowModalSuccess)
+        if (modalRes.cancel) {
+            modalRes.confirm = false
         }
-      };
-      const buttons: Array<AlertDialogButtonOptions> = [];
-      if (args.showCancel) {
-        buttons.push(cancelButton);
-      }
-      buttons.push(confirmButton);
-      AlertDialog.show(
-        {
-          title: args.title ?? '',
-          message: args.content ?? '',
-          autoCancel: false,
-          alignment: DialogAlignment.Center,
-          buttons,
-          cancel: () => {
-            resolve({ 'cancel': true } as ShowModalSuccess)
-          }
-        } as AlertDialogParamWithOptions
-      )
-    });
-    if (modalRes.confirm) {
-      modalRes.cancel = false
-    }
-    if (modalRes.cancel) {
-      modalRes.confirm = false
-    }
-    modalRes.content = null
-    res.resolve(modalRes as ShowModalSuccess)
-  },
-  ShowModalProtocol,
-  ShowModalApiOptions
+        modalRes.content = null
+        res.resolve(modalRes as ShowModalSuccess)
+    },
+    ShowModalProtocol,
+    ShowModalApiOptions
 ) as ShowModal

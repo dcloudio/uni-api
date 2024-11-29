@@ -1390,6 +1390,111 @@ export interface DownloadTask {
   onProgressUpdate(callback: DownloadFileProgressUpdateCallback): void,
 };
 
+export type ConfigMTLS = (options: ConfigMTLSOptions) => void;
+export type Certificate = {
+    /**
+     * 对应请求的域名（注意：不要协议部分）
+     */
+    host: string,
+    /**
+     * 客户端证书（服务器端需要验证客户端证书时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台客户端证书只支持 .p12 类型的证书。HarmonyOS Next 上是证书路径 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
+     */
+    client?: string | null,
+    /**
+     * 客户端证书对应的密码（客户端证书存在时必须配置此项。HarmonyOS Next 上是证书秘钥的密码 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
+     */
+    clientPassword?: string | null,
+    /**
+     * 证书秘钥的路径，只支持 HarmonyOS Next
+     *
+     * @uniPlatform {
+	   * 	"app": {
+	   * 		"android": {
+	   * 			"osVer": "x",
+	   * 			"uniVer": "x",
+	   * 			"unixVer": "x"
+	   * 		},
+	   * 		"ios": {
+	   * 			"osVer": "x",
+	   * 			"uniVer": "x",
+	   * 			"unixVer": "x"
+	   * 		},
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.31",
+     *      "unixVer": "x"
+     *    }
+	   * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+	   * }
+     */
+    keyPath?: string | null,
+    /**
+     * 服务器端证书（客户端需要对服务器端证书做校验时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台服务器端证书只支持 .cer 类型的证书。HarmonyOS Next 不支持）
+     *
+     * @uniPlatform {
+	   * 	"app": {
+	   * 		"android": {
+	   * 			"osVer": "4.4",
+	   * 			"uniVer": "3.2.7",
+	   * 			"unixVer": "x"
+	   * 		},
+	   * 		"ios": {
+	   * 			"osVer": "10.0",
+	   * 			"uniVer": "3.2.7",
+	   * 			"unixVer": "x"
+	   * 		},
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+	   * 	},
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "x"
+     *   }
+	   * }
+     */
+    server?: (string[]) | null
+};
+export type ConfigMTLSSuccess = {
+    /**
+     * 成功返回 0,失败返回相应 code 码
+     */
+    code: number
+};
+export type ConfigMTLSSuccessCallback = (result: ConfigMTLSSuccess) => void;
+export type ConfigMTLSFail = {
+    /**
+     * 成功返回 0,失败返回相应 code 码
+     */
+    code: number
+};
+export type ConfigMTLSFailCallback = (result: ConfigMTLSFail) => void;
+export type ConfigMTLSComplete = any;
+export type ConfigMTLSCompleteCallback = (result: ConfigMTLSComplete) => void;
+export type ConfigMTLSOptions = {
+    /**
+     * 资源url
+     */
+    certificates: Certificate[],
+    /**
+     * 成功返回的回调函数
+     */
+    success?: ConfigMTLSSuccessCallback | null,
+    /**
+     * 失败的回调函数
+     */
+    fail?: ConfigMTLSFailCallback | null,
+    /**
+     * 结束的回调函数（调用成功、失败都会执行）
+     */
+    complete?: ConfigMTLSCompleteCallback | null
+}
 
 export interface Uni {
   /**
@@ -1536,4 +1641,35 @@ export interface Uni {
      ```
     */
   downloadFile(options: DownloadFileOptions): DownloadTask;
+  /**
+   * 配置自签名证书
+   *
+   * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
+   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
+   *
+   * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "4.4",
+	 * 			"uniVer": "3.2.7",
+	 * 			"unixVer": "x"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "10.0",
+	 * 			"uniVer": "3.2.7",
+	 * 			"unixVer": "x"
+	 * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.31",
+   *      "unixVer": "x"
+   *    }
+	 * 	},
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+	 * }
+   */
+  configMTLS: ConfigMTLS;
 }

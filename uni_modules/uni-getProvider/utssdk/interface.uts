@@ -38,7 +38,12 @@ export type GetProviderSuccess = {
 	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
-	 *    }
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 * 		}
 	 *  },
 	 *  "web": {
 	 *    "uniVer": "x",
@@ -46,7 +51,34 @@ export type GetProviderSuccess = {
 	 *  }
 	 * }
 	 */
-	'payment',
+	'payment' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 得到的服务供应商
 	 * @type PlusShareShareService['id'][] | PlusPushClientInfo['id'][] | PlusOauthAuthService['id'][] | PlusPaymentPaymentChannel['id'][]
@@ -129,7 +161,7 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "9.0",
+	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -156,7 +188,7 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "9.0",
+	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -172,7 +204,34 @@ export type GetProviderSyncSuccess = {
 	 *  }
 	 * }
 	 */
-	'location',
+	'location' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 得到的服务供应商
 	 * @type PlusShareShareService['id'][] | PlusPushClientInfo['id'][] | PlusOauthAuthService['id'][] | PlusPaymentPaymentChannel['id'][]
@@ -184,7 +243,7 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "9.0",
+	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -211,7 +270,7 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "9.0",
+	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -298,7 +357,34 @@ export type GetProviderSyncOptions = {
 	 *  }
 	 * }
 	 */
-	'location',
+	'location' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 };
 
 export type GetProviderSuccessCallback = (result : GetProviderSuccess) => void;
@@ -351,7 +437,34 @@ export type GetProviderOptions = {
 	 *  }
 	 * }
 	 */
-	'payment',
+	'payment' |
+	/**
+	 * 授权登录
+	 * @uniPlatform {
+	 *  "app": {
+	 *    "android": {
+	 *      "osVer": "5.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "ios": {
+	 *      "osVer": "12.0",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 * 		"harmony": {
+	 *      "osVer": "3.0",
+	 *      "uniVer": "4.27",
+	 *      "unixVer": "x"
+	 * 		}
+	 *  },
+	 *  "web": {
+	 *    "uniVer": "x",
+	 *    "unixVer": "x"
+	 *  }
+	 * }
+	 */
+	'oauth',
 	/**
 	 * 接口调用成功的回调
 	 * @uniPlatform {
@@ -461,8 +574,8 @@ export interface Uni {
 	 * getProvider的同步方法
 	 * @param {GetProviderSyncOptions} options
 	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/plugins/provider.html#getprovider
-	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/provider.html
-	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/provider.html
+	 * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/provider.html#getprovidersync
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/provider.html#getprovidersync
 	 * @uniPlatform {
 	 *  "app": {
 	 *    "android": {
@@ -471,7 +584,7 @@ export interface Uni {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "9.0",
+	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },

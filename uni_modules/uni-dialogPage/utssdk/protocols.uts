@@ -1,0 +1,100 @@
+import {
+    APP_LAUNCH,
+    NAVIGATE_TO,
+    REDIRECT_TO,
+    SWITCH_TAB,
+    addLeadingSlash,
+    findPageRoute,
+    getNavigatorLockUrl,
+    getTabBarIndex,
+    parseUrl,
+    setNavigatorLockUrl,
+} from '@dcloudio/uni-runtime'
+
+type NormalizeRouteOptionsResult = {
+    errMsg: string
+    url: string
+}
+export function normalizeRouteOptions(
+    type: string,
+    url: string,
+): NormalizeRouteOptionsResult {
+    if (url == null || url!.length == 0) {
+        return {
+            errMsg: `Missing required args: url`,
+            url,
+        } as NormalizeRouteOptionsResult
+    }
+    if (url.startsWith('uni:')) {
+        return { errMsg: '', url } as NormalizeRouteOptionsResult
+    }
+    // 格式化为绝对路径路由
+    url = normalizeRoute(url)
+    const pagePath = parseUrl(url!).path
+    const pageRoute = findPageRoute(pagePath)
+    if (pageRoute == null) {
+        return {
+            errMsg: `page ${url} is not found`,
+            url,
+        } as NormalizeRouteOptionsResult
+    }
+    // 检测不同类型跳转
+    const tabIndex = getTabBarIndex(url)
+    if ((type == NAVIGATE_TO || type == REDIRECT_TO) && tabIndex !== -1) {
+        return {
+            errMsg: `can not ${type} a tabbar page`,
+            url,
+        } as NormalizeRouteOptionsResult
+    } else if (type == SWITCH_TAB) {
+        if (tabIndex == -1) {
+            return {
+                errMsg: `can not switch to no-tabBar page`,
+                url,
+            } as NormalizeRouteOptionsResult
+        } else {
+            // switchTab不允许传递参数,reLaunch到一个tabBar页面是可以的
+            url = pagePath
+        }
+    }
+
+    // 主要拦截目标为用户快速点击时触发的多次跳转，该情况，通常前后 url 是一样的
+    if (getNavigatorLockUrl() == url && type != APP_LAUNCH) {
+        return { errMsg: `${url} locked`, url } as NormalizeRouteOptionsResult
+    }
+
+    setNavigatorLockUrl(url)
+
+    return { errMsg: '', url } as NormalizeRouteOptionsResult
+}
+
+function normalizeRoute(toRoute: string): string {
+    if (toRoute.indexOf('/') == 0) {
+        return toRoute
+    }
+    let fromRoute = ''
+    const pages = getCurrentPages()
+    if (pages.length > 0) {
+        fromRoute = pages[pages.length - 1].route
+    }
+    return getRealRoute(fromRoute, toRoute)
+}
+
+function getRealRoute(fromRoute: string, toRoute: string): string {
+    if (toRoute.indexOf('/') == 0) {
+        return toRoute
+    }
+    if (toRoute.indexOf('./') == 0) {
+        return getRealRoute(fromRoute, toRoute.slice(2))
+    }
+    const toRouteArray = toRoute.split('/')
+    const toRouteLength = toRouteArray.length
+    let i = 0
+    for (;i < toRouteLength && toRouteArray[i] == '..';i++) {
+        // noop
+    }
+    toRouteArray.splice(0, i)
+    toRoute = toRouteArray.join('/')
+    const fromRouteArray = fromRoute.length > 0 ? fromRoute.split('/') : []
+    fromRouteArray.splice(fromRouteArray.length - i - 1, i + 1)
+    return addLeadingSlash(fromRouteArray.concat(toRouteArray).join('/'))
+}

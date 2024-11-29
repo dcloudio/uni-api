@@ -57,7 +57,7 @@ export const setNavigationBarColor: SetNavigationBarColor =
           styles.backgroundColor = args.backgroundColor
         }
         const statusBarStyle = args.frontColor === '#000000' ? 'dark' : 'light'
-        navigator.setStatusBarStyle(statusBarStyle)
+        try { navigator.setStatusBarStyle(statusBarStyle) } catch (error) { }
 
         // 用户调用api时同时改变当前页配置，这样在系统调用设置时，可以避免覆盖用户设置
         page.$page.statusBarStyle = statusBarStyle
