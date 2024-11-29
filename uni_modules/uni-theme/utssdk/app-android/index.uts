@@ -1,6 +1,7 @@
 import { OnOsThemeChange, OnOsThemeChangeCallback, OffOsThemeChange, SetAppTheme, SetAppThemeOptions, SetAppThemeSuccessResult, OnAppThemeChangeCallback, OnAppThemeChange, OffAppThemeChange, OsThemeChangeResult, AppThemeChangeResult} from "../interface.uts";
 import { AppThemeFailImpl } from '../unierror.uts';
 
+export { OnHostThemeChangeCallbackResult, OnThemeChangeCallbackResult } from '../interface.uts';
 
 export const onOsThemeChange: OnOsThemeChange = function(callback : OnOsThemeChangeCallback): number{
 	return UTSAndroid.onOsThemeChanged(function(res: UTSJSONObject) {

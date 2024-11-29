@@ -66,7 +66,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -141,7 +141,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",

@@ -1,0 +1,437 @@
+import fs, { type WriteOptions as OHWriteOptions } from '@ohos.file.fs'
+import { GET_FILE_SYSTEM_MANAGER } from '../protocol.uts';
+import { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, FileManagerSuccessResult, FileStats, FileSystemManager, FStatOptions, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, GetFileInfoOptions, GetSavedFileListOptions, MkDirOptions, OpenFileOptions, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, StatOptions, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions } from '../interface.uts';
+import { CallBack, FileCallback } from './callback.uts';
+import { checkDataType, getParameterError, checkEncoding, checkPathExistenceSync, checkPath, mkdirRecursive, obtainUpperPath, checkPathSync, DataType, wrapErrMsg, transformErrorCode, getNoSuchFileOrDirectory, } from './utils.uts';
+import { BusinessError } from '@ohos.base';
+import { FileSystemManagerFailImpl } from '../unierror.uts';
+
+
+const DEFAULT_ENCODING = 'utf-8'
+const ENCODING_SUPPORT = ["ascii", "base64", "utf-8"]
+const DEFAULT_POSITION = 0
+const DEFAULT_LENGTH = 0
+const DEFAULT_FLAG = 'r'
+const DEFAULT_OFFSET = 0
+const FLAG = [
+  'a', //	打开文件用于追加。 如果文件不存在，则创建该文件
+  'ax', //	类似于 'a'，但如果路径存在，则失败
+  'a+', //	打开文件用于读取和追加。 如果文件不存在，则创建该文件
+  'ax+', //	类似于 'a+'，但如果路径存在，则失败
+  'as', //	打开文件用于追加（在同步模式中）。 如果文件不存在，则创建该文件
+  'as+', //	打开文件用于读取和追加（在同步模式中）。 如果文件不存在，则创建该文件
+  'r', //	打开文件用于读取。 如果文件不存在，则会发生异常
+  'r+', //	打开文件用于读取和写入。 如果文件不存在，则会发生异常
+  'w', //	打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件
+  'wx', //	类似于 'w'，但如果路径存在，则失败
+  'w+', //	打开文件用于读取和写入。 如果文件不存在则创建文件，如果文件存在则截断文件
+  'wx+', //	类似于 'w+'，但如果路径存在，则失败
+]
+
+class FileSystemManagerImpl implements FileSystemManager {
+  readFile(options: ReadFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  readFileSync(filePath: string, encoding?: string): ReadFileSuccessResult {
+    throw new Error('Method not implemented.');
+  }
+  writeFile(options: WriteFileOptions): void {
+    const errMsg = `writeFile: fail`
+    const { filePath, data, encoding = DEFAULT_ENCODING, success, fail, complete } = options
+    const cb = new FileCallback({ success, fail, complete } as CallBack)
+
+    if (!checkDataType(filePath, true, 'string')) {
+      cb.fail(getParameterError(`${errMsg} filePath`) as ApiError)
+      return
+    }
+
+    if (!ENCODING_SUPPORT.includes(encoding)) {
+      cb.fail(getParameterError(`${errMsg} encoding`) as ApiError)
+      return
+    }
+
+    let file: fs.File | null = null
+    try {
+      // 判断filePath是文件还是目录
+      const stat = fs.statSync(filePath)
+      if (stat.isDirectory()) {
+        cb.fail({ errMsg: `${errMsg} illegal operation on a directory, open: ${filePath}` } as ApiError)
+        return
+      }
+    } catch (error) {
+      try {
+        file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY)
+      } catch (error) {
+        cb.fail(wrapErrMsg(new FileSystemManagerFailImpl(transformErrorCode((error as BusinessError).code)), errMsg) as ApiError)
+        return
+      }
+    }
+
+    const writeOptions: OHWriteOptions = {}
+    if (checkDataType((data as (string | ArrayBuffer)), true, 'string')) writeOptions.encoding = encoding as string
+
+    if (file == null) {
+      file = fs.openSync(filePath, fs.OpenMode.WRITE_ONLY)
+    }
+    // const file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY)
+    fs.write(file.fd, data as (string | ArrayBuffer), writeOptions).then(writeLen => {
+      cb.success({ errMsg: 'writeFile: ok' } as FileManagerSuccessResult)
+    }).finally(() => {
+      fs.closeSync(file)
+    })
+  }
+  writeFileSync(filePath: string, data: any, encoding: string = DEFAULT_ENCODING): void {
+    const errMsg = `writeFileSync: fail`
+
+    if (!checkDataType(filePath, true, 'string')) {
+      throw new Error(getParameterError(`${errMsg} filePath`).errMsg)
+    }
+
+    if (!ENCODING_SUPPORT.includes(encoding)) {
+      throw new Error(getParameterError(`${errMsg} encoding`).errMsg)
+    }
+
+    let file: fs.File | null = null
+    try {
+      // 判断filePath是文件还是目录
+      const stat = fs.statSync(filePath)
+      if (stat.isDirectory()) {
+        throw new Error(`${errMsg} illegal operation on a directory, open: ${filePath}`)
+      }
+    } catch (error) {
+      try {
+        file = fs.openSync(filePath, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY)
+      } catch (error) {
+        throw new Error(wrapErrMsg(new FileSystemManagerFailImpl(transformErrorCode((error as BusinessError).code)), errMsg).errMsg)
+      }
+    }
+
+    const writeOptions: OHWriteOptions = {}
+    if (checkDataType((data as (string | ArrayBuffer)), true, 'string')) writeOptions.encoding = encoding
+
+    if (file == null) {
+      file = fs.openSync(filePath, fs.OpenMode.WRITE_ONLY)
+    }
+    try {
+      fs.writeSync(file.fd, data as (string | ArrayBuffer), writeOptions)
+      fs.closeSync(file)
+    } catch (err) {
+      fs.closeSync(file)
+      throw new Error(`writeFileSync: ${(err as BusinessError).message}`)
+    }
+  }
+  read(option: ReadOption): void {
+    throw new Error('Method not implemented.');
+  }
+  readSync(option: ReadSyncOption): ReadResult {
+    throw new Error('Method not implemented.');
+  }
+  unlink(options: UnLinkOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  unlinkSync(filePath: string): void {
+    throw new Error('Method not implemented.');
+  }
+  mkdir(options: MkDirOptions): void {
+    const errMsg = `mkdir: fail`
+    let { dirPath, recursive, success, fail, complete } = options
+    const cb = new FileCallback({ success, fail, complete } as CallBack)
+    // 将非boolean类型的入参转换为boolean类型
+    if (!checkDataType(recursive, false, 'boolean')) {
+      recursive = Boolean(recursive)
+    }
+
+    const checkRes = checkPath('mkdir', 'dirPath', dirPath)
+    if (!checkRes.isValid) {
+      cb.fail(checkRes.err as ApiError)
+      return
+    }
+
+    // 检查目录是否已经存在
+    if (fs.accessSync(dirPath)) {
+      cb.fail({ errMsg: `${errMsg} dirPath already exists: ${dirPath}` } as ApiError)
+      return
+    }
+
+    const getSubPath = obtainUpperPath(dirPath)
+    if (!recursive && !fs.accessSync(getSubPath.upperPath)) {
+      cb.fail({errMsg: `${errMsg} recursive is false and upper path does not exist`} as ApiError)
+      return
+    }
+
+    fs.mkdir(dirPath, recursive)
+      .then(() => {
+        cb.success({ errMsg: 'mkdir: ok' } as FileManagerSuccessResult)
+      })
+      .catch((err: BusinessError) => {
+        cb.fail(wrapErrMsg(new FileSystemManagerFailImpl(transformErrorCode((err).code)), errMsg) as ApiError)
+      })
+  }
+  mkdirSync(dirPath: string, recursive: boolean): void {
+    const errMsg = `mkdirSync: fail`
+    // 将非boolean类型的入参转换为boolean类型
+    if (!checkDataType(recursive, false, 'boolean')) {
+      recursive = Boolean(recursive)
+    }
+
+    const res = checkPathSync('mkdirSync', 'dirPath', dirPath)
+    if (!res.isValid) {
+      throw new Error(res.err?.errMsg)
+    }
+
+    // 检查目录是否已经存在
+    if (fs.accessSync(dirPath)) {
+      throw new Error(`${errMsg} dirPath already exists: ${dirPath}`)
+    }
+
+    // recursive为false且上级目录不存在
+    if (!recursive && !fs.accessSync(obtainUpperPath(dirPath).upperPath)) {
+      throw new Error(`${errMsg} recursive is false and upper path does not exist`)
+    }
+
+    try {
+      fs.mkdirSync(dirPath, recursive)
+    } catch (err) {
+      throw new Error(wrapErrMsg(new FileSystemManagerFailImpl(transformErrorCode((err as BusinessError).code)), errMsg).errMsg)
+    }
+  }
+  rmdir(options: RmDirOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  rmdirSync(dirPath: string, recursive: boolean): void {
+    throw new Error('Method not implemented.');
+  }
+  readdir(options: ReadDirOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  readdirSync(dirPath: string): string[] | null {
+    throw new Error('Method not implemented.');
+  }
+  access(options: AccessOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  accessSync(path: string): void {
+    throw new Error('Method not implemented.');
+  }
+  rename(options: RenameOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  renameSync(oldPath: string, newPath: string): void {
+    throw new Error('Method not implemented.');
+  }
+  copyFile(options: CopyFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  copyFileSync(srcPath: string, destPath: string): void {
+    throw new Error('Method not implemented.');
+  }
+  getFileInfo(options: GetFileInfoOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  stat(options: StatOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  statSync(path: string, recursive: boolean): FileStats[] {
+    throw new Error('Method not implemented.');
+  }
+  appendFile(options: AppendFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  appendFileSync(filePath: string, data: any, encoding?: string): void {
+    throw new Error('Method not implemented.');
+  }
+  saveFile(options: SaveFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  saveFileSync(tempFilePath: string, filePath: string | null): string {
+    throw new Error('Method not implemented.');
+  }
+  removeSavedFile(options: RemoveSavedFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  unzip(options: UnzipFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  getSavedFileList(options: GetSavedFileListOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  truncate(options: TruncateFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  truncateSync(filePath: string, length?: number): void {
+    throw new Error('Method not implemented.');
+  }
+  readCompressedFile(options: ReadCompressedFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  readCompressedFileSync(filePath: string, compressionAlgorithm: string): string {
+    throw new Error('Method not implemented.');
+  }
+  open(options: OpenFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  openSync(options: OpenFileSyncOptions): string {
+    throw new Error('Method not implemented.');
+  }
+  write(options: WriteOptions): void {
+    let { fd: inFd, data, offset, length, position, encoding, success, fail, complete } = options
+    const cb = new FileCallback({ success, fail, complete } as CallBack)
+    let fd: number = -1
+    const writeOptions: OHWriteOptions = {}
+
+    if (!checkDataType(inFd, true, 'string') || inFd === '' || isNaN(Number(inFd))) {
+      cb.fail({ errMsg: 'write: fail invalid fd' } as ApiError)
+      return
+    } else {
+      fd = Number(inFd)
+    }
+
+    if (!checkDataType((data as DataType), true, 'arraybuffer') && !checkDataType((data as DataType), true, 'string')) {
+      cb.fail({ errMsg: 'write: fail data must be a string or ArrayBuffer' } as ApiError)
+      return
+    }
+
+    // data的类型为ArrayBuffer
+    if (checkDataType((data as DataType), true, 'arraybuffer')) {
+      const sizeOfArrayBuffer = (data as ArrayBuffer).byteLength as number
+      if (!checkDataType(offset, false, 'number') || offset! < 0 || !offset) {
+        offset = DEFAULT_OFFSET       // 非number类型、小于0、undefined、null
+      }
+
+      if (offset > sizeOfArrayBuffer) {
+        cb.fail({ errMsg: `write: fail RangeError [ERR_OUT_OF_RANGE]: The value of offset is out of range. It must be <= ${sizeOfArrayBuffer}. Received ${offset}` } as ApiError)
+        return
+      }
+
+      if (!checkDataType(length, false, 'number') || length! < 0 || !length) {
+        length = sizeOfArrayBuffer - offset      // length为非法输入时，将其的值设为sizeOfArrayBuffer - offset
+      }
+
+      if (length > sizeOfArrayBuffer - offset) {
+        cb.fail({ errMsg: `write: fail RangeError [ERR_OUT_OF_RANGE]: The value of length is out of range. It must be <= ${sizeOfArrayBuffer - offset}. Received ${length}` } as ApiError)
+        return
+      }
+
+      const uint8ArrayTemp = new Uint8Array(data as ArrayBuffer)
+      const slicedArray = uint8ArrayTemp.slice(offset)  // 截取offset位置后的内容
+      data = slicedArray.buffer
+    }
+
+    // data的类型为string
+    if (checkDataType((data as DataType), true, 'string')) {
+      const res = checkEncoding('write', encoding)
+      if (!res.isValid) {
+        cb.fail({ errMsg: res.errMsg } as ApiError)
+        return
+      }
+      writeOptions.encoding = encoding as string
+      // 微信中，当data的类型为string时，length的设定值无效，默认写入data的全部内容
+      // 而鸿蒙接口中，无论data的类型为arraybuffer还是string，都会使用用户传入的length值
+      length = (data as string).length
+    }
+
+    if (!checkDataType(position, false, 'number') || position! < 0 || !position) {
+      position = DEFAULT_POSITION     // position为number类型外的非法值时，将其设为0
+    }
+
+    writeOptions.offset = position
+    writeOptions.length = length!
+
+    fs.write(fd, data as (ArrayBuffer | string), writeOptions).then((writeLen) => {
+      cb.success({ bytesWritten: writeLen, errMsg: 'write:ok' } as WriteResult)
+    }).catch((err: BusinessError) => {
+      cb.fail({ errMsg: `write data to file failed with error message: ${err.message}, error code: ${err.code}` } as ApiError)
+    })
+  }
+  writeSync(options: WriteSyncOptions): WriteResult {
+    let { fd: inFd, data, offset, length, position, encoding } = options
+    let fd: number = -1
+    const writeOptions: OHWriteOptions = {}
+
+    if (!checkDataType(inFd, true, 'string') || inFd === '' || isNaN(Number(inFd))) {
+      throw new Error('writeSync: fail invalid fd')
+    } else {
+      fd = Number(inFd)
+    }
+
+    if (!checkDataType((data as DataType), true, 'arraybuffer') && !checkDataType((data as DataType), true, 'string')) {
+      throw new Error('writeSync: fail data must be a string or ArrayBuffer')
+    }
+
+    // data的类型为ArrayBuffer
+    if (checkDataType((data as DataType), true, 'arraybuffer')) {
+      const sizeOfArrayBuffer = (data as ArrayBuffer).byteLength as number
+      if (!checkDataType(offset, false, 'number') || offset! < 0 || !offset) {
+        offset = DEFAULT_OFFSET       // 非number类型、小于0、undefined、null
+      }
+
+      if (offset > sizeOfArrayBuffer) {
+        throw new Error(`write: fail RangeError [ERR_OUT_OF_RANGE]: The value of offset is out of range. It must be <= ${sizeOfArrayBuffer}. Received ${offset}`)
+      }
+
+      if (!checkDataType(length, false, 'number') || length! < 0 || !length) {
+        length = sizeOfArrayBuffer - offset      // length为非法输入时，将其的值设为sizeOfArrayBuffer - offset
+      }
+
+      if (length > sizeOfArrayBuffer - offset) {
+        throw new Error(`write: fail RangeError [ERR_OUT_OF_RANGE]: The value of length is out of range. It must be <= ${sizeOfArrayBuffer - offset}. Received ${length}`)
+      }
+
+      const uint8ArrayTemp = new Uint8Array(data as ArrayBuffer)
+      const slicedArray = uint8ArrayTemp.slice(offset)  // 截取offset位置后的内容
+      data = slicedArray.buffer
+    }
+
+    // data的类型为string
+    if (checkDataType((data as DataType), true, 'string')) {
+      const res = checkEncoding('write', encoding)
+      if (!res.isValid) {
+        throw new Error(res.errMsg)
+      }
+      writeOptions.encoding = encoding as string
+      // 微信中，当data的类型为string时，length的设定值无效，默认写入data的全部内容
+      // 而鸿蒙接口中，无论data的类型为arraybuffer还是string，都会使用用户传入的length值
+      length = (data as string).length
+    }
+
+    if (!checkDataType(position, false, 'number') || position! < 0 || !position) {
+      position = DEFAULT_POSITION     // position为number类型外的非法值时，将其设为0
+    }
+
+    writeOptions.offset = position
+    writeOptions.length = length!
+
+    try {
+      const writeLen = fs.writeSync(fd, data as (ArrayBuffer | string), writeOptions)
+      return { bytesWritten: writeLen, errMsg: 'write:ok' } as WriteResult
+    } catch (error) {
+      throw new Error(`writeSync: fail ${(error as BusinessError).message}`)
+    }
+  }
+  close(options: CloseOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  closeSync(options: CloseSyncOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  fstat(options: FStatOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  fstatSync(options: FStatSyncOptions): Stats {
+    throw new Error('Method not implemented.');
+  }
+  ftruncate(options: FTruncateFileOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  ftruncateSync(options: FTruncateFileSyncOptions): void {
+    throw new Error('Method not implemented.');
+  }
+  readZipEntry(options: ReadZipEntryOptions): void {
+    throw new Error('Method not implemented.');
+  }
+
+}
+
+export const getFileSystemManager = defineSyncApi<FileSystemManager>(GET_FILE_SYSTEM_MANAGER, () => {
+  return new FileSystemManagerImpl()
+});

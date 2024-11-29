@@ -73,7 +73,7 @@ export class WaitingView{
 		this.screenWidth = context?.getResources()?.getDisplayMetrics()!.widthPixels
 		this.ScreenHeight = context?.getResources()?.getDisplayMetrics()!.heightPixels
 		this.density = context?.getResources()?.getDisplayMetrics()!.density
-		this.waitingView = LayoutInflater.from(context).inflate(R.layout.uni_prompt_loadingview, null, false) as ViewGroup
+		this.waitingView = LayoutInflater.from(context).inflate(R.layout.uni_app_uni_prompt_loadingview, null, false) as ViewGroup
 		this.waitingRootView = this.waitingView.findViewById<LinearLayout>(R.id.dcloud_pd_root)
 		this.mProgressBar = this.waitingView.findViewById<ProgressBar>(R.id.dcloud_pb_loading)
 		this.textView = this.waitingView.findViewById<TextView>(R.id.dcloud_tv_loading)
@@ -143,7 +143,7 @@ export class WaitingView{
 			this.waitingRootView.setPadding((10 * this.density).toInt(), (20 * this.density).toInt(), (10 * this.density).toInt(), (20 * this.density).toInt())
 		}
 
-		let drawable = this.context?.getResources()!!.getDrawable(R.drawable.uni_prompt_circle_white_progress)
+		let drawable = this.context?.getDrawable(R.drawable.uni_app_uni_prompt_circle_white_progress)!
 		if (this.loadingHeight > 0) {
 			this.mProgressBar.setLayoutParams(new LinearLayout.LayoutParams((this.loadingHeight * this.density).toInt(), (this.loadingHeight * this.density).toInt()))
 		} else {
@@ -200,9 +200,9 @@ export class WaitingView{
 			// let mBitmap: Bitmap | null = null;
 			let imageBytes: ByteArray | null = null
 			if (this.LoadingIcon == "successIcon") {
-				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/toast_success.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_success.png"))
 			} else if (this.LoadingIcon == "errorIcon") {
-				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/toast_error.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_error.png"))
 			} else if (this.LoadingIcon.length > 0) {
 				let path: string = ""
 				if (this.LoadingIcon.startsWith("file://")) {

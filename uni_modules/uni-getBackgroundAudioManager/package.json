@@ -37,7 +37,7 @@
           "name": "getBackgroundAudioManager",
           "app": {
             "js": false,
-            "kotlin": false,
+            "kotlin": true,
             "swift": false,
             "arkts": true
           }
@@ -45,7 +45,8 @@
       }
     },
     "dependencies": [
-      "uni-framework"
+      "uni-framework",
+	  "uni-network"
     ],
     "encrypt": [],
     "platforms": {

@@ -1,0 +1,9 @@
+import { InnerAudioContext, CreateInnerAudioContext } from "../interface.uts"
+export { CreateInnerAudioContextFailImpl } from '../unierror.uts'
+
+export const createInnerAudioContext : CreateInnerAudioContext = function () : InnerAudioContext {
+
+	let player = new UniAudioPlayer()
+	return player
+
+}

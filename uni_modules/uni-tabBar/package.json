@@ -39,7 +39,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "hideTabBarRedDot": {
@@ -48,7 +48,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "setTabBarBadge": {
@@ -57,7 +57,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "removeTabBarBadge": {
@@ -66,7 +66,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "setTabBarItem": {
@@ -75,7 +75,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "setTabBarStyle": {
@@ -84,7 +84,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "showTabBar": {
@@ -93,7 +93,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "hideTabBar": {
@@ -102,7 +102,7 @@
                         "js": false,
                         "kotlin": false,
                         "swift": false,
-                        "arkts": true
+                        "arkts": false
                     }
                 },
                 "onTabBarMidButtonTap": {

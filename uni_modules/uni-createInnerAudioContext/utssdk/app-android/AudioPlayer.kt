@@ -55,7 +55,7 @@ object CacheManager {
     fun getSimpleCache(): SimpleCache {
         if (simpleCache == null) {
             // 创建缓存目录
-            val cacheDir = File(UTSAndroid.getAppCachePath(), "uni-audio")
+            val cacheDir = File(UTSAndroid.getAppCachePath(), "uni-audio/inner")
             if (!cacheDir.exists()) {
                 cacheDir.mkdirs()
             }
