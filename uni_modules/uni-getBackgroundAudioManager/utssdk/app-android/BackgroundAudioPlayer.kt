@@ -5,12 +5,16 @@
     "UNUSED_ANONYMOUS_PARAMETER"
 )
 
-package uts.sdk.modules.uniGetBackgroundAudioManager;
+package uts.sdk.modules.DCloudUniGetBackgroundAudioManager;
 
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
+import android.net.Uri
+import android.util.Log
+import android.webkit.CookieManager
 import com.google.android.exoplayer2.DeviceInfo
+import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
@@ -20,24 +24,55 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.Tracks
 import com.google.android.exoplayer2.audio.AudioAttributes
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.text.CueGroup
 import com.google.android.exoplayer2.trackselection.TrackSelectionParameters
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.HttpDataSource
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource
+import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor
+import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.google.android.exoplayer2.video.VideoSize
 import io.dcloud.uts.UTSAndroid
-import io.dcloud.uts.UTSArray
 import io.dcloud.uts.UTSJSONObject
-import io.dcloud.uts.clearInterval
 import io.dcloud.uts.compareTo
+import io.dcloud.uts.console
+import io.dcloud.uts.includes
 import io.dcloud.uts.setInterval
 import io.dcloud.uts.times
 import io.dcloud.uts.utsArrayOf
+import java.io.File
+import java.io.IOException
 
 typealias EventCallback = (result: Any) -> Unit;
+
+object CacheManager {
+
+    private var simpleCache: SimpleCache? = null
+
+    // 获取 SimpleCache 实例的方法
+    fun getSimpleCache(): SimpleCache {
+        if (simpleCache == null) {
+            // 创建缓存目录
+            val cacheDir = File(UTSAndroid.getAppCachePath(), "uni-audio/background")
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs()
+            }
+            System.out.println("cacheDir=>" + cacheDir.path)
+            // 创建缓存对象，最大缓存100MB
+            simpleCache =
+                SimpleCache(cacheDir, LeastRecentlyUsedCacheEvictor(100 * 1024 * 1024))
+        }
+        return simpleCache!!
+    }
+}
 
 open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     AudioManager.OnAudioFocusChangeListener {
     open var _src: String = "";
+    private var cacheDataSourceFactory: CacheDataSource.Factory? = null
+    private var TAG = "BackgroundAudioPlayer"
 
     companion object {
         private lateinit var backgroundAudioPlayer: BackgroundAudioPlayer
@@ -67,15 +102,42 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         }
 
     open fun changeSRC(src: String) {
-        this._src = src;
-        var mediaItem = MediaItem.fromUri(this._src);
-        this.player.setMediaItem(mediaItem);
+        if (src.startsWith("http:") || src.startsWith("https:")) {
+            this._src = src;
+        } else {
+            this._src = UTSAndroid.convert2AbsFullPath(src);
+        }
+        setMediaItem()
         this.player.prepare();
         if (this._startTime > 0) {
             this.player.seekTo((this._startTime * 1000).toLong());
         }
-        if (this._autoplay) {
-            this.play();
+    }
+
+    private fun setMediaItem() {
+        val mediaItem = MediaItem.fromUri(this._src)
+        if (_src.startsWith("http:") || _src.startsWith("https:")) {
+            var uri = Uri.parse(_src)
+            val userAgent =
+                UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!!)["ua"].toString();
+            val cookies = CookieManager.getInstance()
+                .getCookie(uri.scheme + "://" + uri.host)
+
+            val httpDataSourceFactory = DefaultHttpDataSource.Factory()
+                .setUserAgent(userAgent)  // 设置 User-Agent
+                .setDefaultRequestProperties(mapOf("Cookie" to cookies)) // 设置 Cookies
+
+            cacheDataSourceFactory?.setUpstreamDataSourceFactory(httpDataSourceFactory)
+                ?.setCache(CacheManager.getSimpleCache())
+                ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
+            cacheDataSourceFactory?.let {
+                this.player.setMediaSource(
+                    ProgressiveMediaSource.Factory(it)
+                        .createMediaSource(mediaItem)
+                )
+            }
+        } else {
+            this.player.setMediaItem(mediaItem);
         }
     }
 
@@ -89,44 +151,9 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                 return;
             }
             this._startTime = startTime;
-            if (this._src != "" && !this.player.isPlaying() && !this.isPausedByUser) {
+            if (this._src != "" && !this.player.isPlaying && !this.isPausedByUser) {
                 this.player.seekTo((this._startTime * 1000).toLong());
             }
-        }
-    open var _autoplay: Boolean = false;
-    open var autoplay: Boolean
-        get(): Boolean {
-            return this._autoplay;
-        }
-        set(autoplay: Boolean) {
-            this._autoplay = autoplay;
-            if (this._src == "") {
-                return;
-            }
-            if (!this.player.isPlaying() && !this.isPausedByUser) {
-                this.play();
-            }
-        }
-    open var _loop: Boolean = false;
-    open var loop: Boolean
-        get(): Boolean {
-            return this._loop;
-        }
-        set(startTime: Boolean) {
-            this._loop = startTime;
-            if (this._loop) {
-                this.player.repeatMode = Player.REPEAT_MODE_ONE;
-            } else {
-                this.player.repeatMode = Player.REPEAT_MODE_OFF;
-            }
-        }
-    open var _obeyMuteSwitch: Boolean = true;
-    open var obeyMuteSwitch: Boolean
-        get(): Boolean {
-            return this._obeyMuteSwitch;
-        }
-        set(startTime: Boolean) {
-            this._obeyMuteSwitch = startTime;
         }
     override var duration: Number
         get(): Number {
@@ -139,47 +166,31 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         set(_) {}
     override var currentTime: Number
         get(): Number {
-            if (this.player.isPlaying()) {
-                return this.player.getCurrentPosition() / 1000;
+            if (this.player.isPlaying) {
+                return this.player.currentPosition / 1000;
             }
             return 0;
         }
-       set(currentTime) {
-           val positionInMillis = (currentTime.toDouble() * 1000).toLong()
-           this.player.seekTo(positionInMillis)
-       }
+        set(currentTime) {
+            val positionInMillis = (currentTime.toDouble() * 1000).toLong()
+            this.player.seekTo(positionInMillis)
+        }
     override var paused: Boolean
         get(): Boolean {
-            return !this.player.isPlaying();
+            return !this.player.isPlaying;
         }
         set(_) {}
     override var buffered: Number
         get(): Number {
-            return this.player.getBufferedPosition();
+            return this.player.bufferedPosition;
         }
         set(_) {}
-    open var _volume: Number = 0;
-    open var volume: Number
-        get(): Number {
-            return this.player.getVolume();
-        }
-        set(volume: Number) {
-            var tVolume = volume;
-            if (volume > 1) {
-                tVolume = 1;
-            } else if (volume < 0) {
-                tVolume = 0;
-            }
-            this.player.setVolume(tVolume.toFloat());
-            this._volume = tVolume;
-        }
-    open var _sessionCategory: String = "";
-    open var _playbackRate: Number? = 1.0;
+    open var _playbackRate: Number = 1.0;
     override var playbackRate: Number?
         get(): Number? {
             return this._playbackRate;
         }
-        set(rate: Number?) {
+        set(rate) {
             if (utsArrayOf(
                     0.5,
                     0.8,
@@ -187,7 +198,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                     1.25,
                     1.5,
                     2.0
-                ).indexOf(rate) > 0
+                ).indexOf(rate?.toDouble()) >= 0
             ) {
                 this.player.setPlaybackSpeed(rate!!.toFloat());
             }
@@ -195,16 +206,22 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override var title = "";
     override var epname = "";
     override var singer = "";
-    override var coverImgUrl = "";
+    override var coverImgUrl = ""
+
     override var webUrl = "";
     override var protocol = "";
     open var player: ExoPlayer;
-    open var callbacks = HashMap<String, UTSArray<EventCallback>>();
+    open var callbacks = HashMap<String, EventCallback>();
+    private var errorCallBack: ((result: ICreateBackgroundAudioFail) -> Unit)? = null
     open var isPausedByUser: Boolean = false;
     open var isSeeking: Boolean = false;
     open var audioManager: AudioManager;
 
+
     constructor() {
+        // 创建 CacheDataSourceFactory
+        cacheDataSourceFactory = CacheDataSource.Factory()
+
         this.player = ExoPlayer.Builder(UTSAndroid.getAppContext()!!).build();
         this.player.addListener(this);
         this.audioManager =
@@ -215,33 +232,38 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         UTSAndroid.getAppContext()
             ?.stopService(Intent(UTSAndroid.getAppContext(), AudioService::class.java))
     }
-
     fun playInService() {
-        if (this._src == "") {
-            // var errorResult: UTSJSONObject = object : UTSJSONObject() {
-            //     var errCode: Number = -1
-            //     var errMsg = "empty src"
-            // };
-            invokeCallBack("error")
-            return;
-        }
-
-        if (this.player.playbackState == Player.STATE_IDLE) {//停止后播放
-            var mediaItem = MediaItem.fromUri(this._src);
-            this.player.setMediaItem(mediaItem);
-            this.player.prepare();
-        }
-        this.isPausedByUser = false;
-        if (this.player.playbackState == Player.STATE_READY) {//暂停后播放
-            if (this.isSeeking) {
-                this.isSeeking = false;
-                invokeCallBack("seeked")
+        try {
+            if (this._src == "") {
+                errorCallBack?.invoke(CreateBackgroundAudioFailImpl(1107609))
+                return;
             }
-            invokeCallBack("play")
-        }
-        this.player.playWhenReady = true;
-        this.registerAudioManager();
+            when (this.player.playbackState) {
+                Player.STATE_IDLE -> {//停止
+                    setMediaItem()
+                    this.player.prepare();
+                }
 
+                Player.STATE_READY -> {//暂停或者准备好
+                    if (this.isSeeking) {
+                        console.log("1");
+                        this.isSeeking = false;
+                        invokeCallBack("seeked")
+                    }
+                    invokeCallBack("play")
+                }
+            }
+            this.isPausedByUser = false;
+            this.player.playWhenReady = true;
+
+        } catch (e: Exception) {
+            var fail = CreateBackgroundAudioFailImpl(1107601)
+            e.message?.let {
+                fail.errMsg = it
+            }
+            errorCallBack?.invoke(fail)
+        }
+        this.registerAudioManager();
     }
 
     override fun play() {
@@ -264,12 +286,17 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         this.player.pause();
         this.unregisterAudioManager();
         invokeCallBack("pause")
+        AudioService.audioService?.pause()
     }
 
-    fun invokeCallBack(action: String) {
-        this.callbacks[action]?.forEach(fun(item: EventCallback) {
-            item(UTSJSONObject());
-        })
+    fun invokeCallBack(action: String, result: Any? = null) {
+        this.callbacks[action]?.let {
+            if (result != null) {
+                it(result)
+            } else {
+                it(UTSJSONObject());
+            }
+        }
     }
 
     override fun stop() {
@@ -282,12 +309,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     }
 
     override fun seek(position: Number) {
-        if (position > 0) {
+        if (position >= 0) {
             this.isSeeking = true;
             this.player.seekTo((position * 1000).toLong());
             invokeCallBack("seeking")
         }
     }
+
     @Suppress("DEPRECATION")
     open fun registerAudioManager() {
         this.audioManager.requestAudioFocus(
@@ -296,6 +324,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
             AudioManager.AUDIOFOCUS_GAIN
         );
     }
+
     @Suppress("DEPRECATION")
     open fun unregisterAudioManager() {
         this.audioManager.abandonAudioFocus(this);
@@ -309,54 +338,26 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     }
 
     open fun addEvent(action: String, callback: EventCallback) {
-        var playArray = this.callbacks.get(action);
-        if (playArray == null) {
-            playArray = UTSArray<EventCallback>();
-        }
-        playArray.push(callback);
-        this.callbacks.put(action, playArray);
+        this.callbacks[action] = callback
     }
 
     open fun removeEvent(action: String, callback: EventCallback) {
-        var playArray = this.callbacks.get(action) ?: return;
-        if (playArray.indexOf(callback) > 0) {
-            playArray.splice(playArray.indexOf(callback), 1);
-            this.callbacks[action] = playArray;
-        }
+        this.callbacks.remove(action)
     }
 
     override fun onCanplay(callback: EventCallback) {
         this.addEvent("canplay", callback);
     }
-
-    open fun offCanplay(callback: EventCallback) {
-        this.removeEvent("canplay", callback);
-    }
-
     override fun onPlay(callback: EventCallback) {
         this.addEvent("play", callback);
     }
-
-    open fun offPlay(callback: EventCallback) {
-        this.removeEvent("play", callback);
-    }
-
     override fun onPause(callback: EventCallback) {
         this.addEvent("pause", callback);
-    }
-
-    open fun offPause(callback: EventCallback) {
-        this.removeEvent("pause", callback);
     }
 
     override fun onStop(callback: EventCallback) {
         this.addEvent("stop", callback);
     }
-
-    open fun offStop(callback: EventCallback) {
-        this.removeEvent("stop", callback);
-    }
-
     override fun onEnded(callback: EventCallback) {
         this.addEvent("ended", callback);
     }
@@ -374,41 +375,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         this.addEvent("next", callback);
     }
 
-    open fun offTimeUpdate(callback: EventCallback) {
-        this.removeEvent("timeUpdate", callback);
-        this.stopTimeUpdate();
+    override fun onError(callback: (result: ICreateBackgroundAudioFail) -> Unit) {
+        this.errorCallBack = callback
     }
 
-    override fun onError(callback: EventCallback) {
-        this.addEvent("error", callback);
-    }
-
-    open fun offError(callback: EventCallback) {
-        this.removeEvent("error", callback);
-    }
 
     override fun onWaiting(callback: EventCallback) {
         this.addEvent("waiting", callback);
-    }
-
-    open fun offWaiting(callback: EventCallback) {
-        this.removeEvent("waiting", callback);
-    }
-
-    open fun onSeeking(callback: EventCallback) {
-        this.addEvent("seeking", callback);
-    }
-
-    open fun offSeeking(callback: EventCallback) {
-        this.removeEvent("seeking", callback);
-    }
-
-    open fun onSeeked(callback: EventCallback) {
-        this.addEvent("seeked", callback);
-    }
-
-    open fun offSeeked(callback: EventCallback) {
-        this.removeEvent("seeked", callback);
     }
 
     open var isTriggerTimeUpdate = false;
@@ -425,28 +398,8 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         }, 750);
     }
 
-    open fun stopTimeUpdate() {
-        if (!this.isTriggerTimeUpdate) {
-            return;
-        }
-        var timeUpdate = this.callbacks["timeUpdate"];
-        if (timeUpdate == null || timeUpdate.size == 0) {
-            clearInterval(this.timeUpdateInterval.toInt());
-            this.timeUpdateInterval = 0;
-            this.isTriggerTimeUpdate = false;
-        }
-    }
-
-    override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {}
-    override fun onPlayerError(error: PlaybackException) {
-        // var errorResult: UTSJSONObject = object : UTSJSONObject() {
-        //     var errCode = error.errorCode
-        //     var errMsg = error.message
-        // };
-       invokeCallBack("error")
-    }
-
-    override fun onPlaybackStateChanged(playbackState: Int) {
+    override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+        Log.d(TAG, "onPlayerStateChanged $playWhenReady $playbackState")
         if (playbackState == Player.STATE_BUFFERING) {
             invokeCallBack("waiting")
         } else if (playbackState == Player.STATE_READY) {
@@ -455,16 +408,50 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                 invokeCallBack("seeked")
             } else {
                 invokeCallBack("canplay")
+                AudioService.audioService?.canPlay()
                 if (this.player.playWhenReady) {
                     invokeCallBack("play")
                 }
             }
         } else if (playbackState == Player.STATE_ENDED) {
             invokeCallBack("ended")
+            AudioService.audioService?.onEnd()
+            this.player.playWhenReady = false
+            this.player.seekTo(0)
         }
     }
 
+    override fun onPlayerError(error: PlaybackException) {
+        var fail = CreateBackgroundAudioFailImpl(1107605)
+        error.message?.let {
+            fail.errMsg = it
+        }
+        if (error is ExoPlaybackException) {
+            val exoError: ExoPlaybackException = error as ExoPlaybackException;
+            if (exoError.type == ExoPlaybackException.TYPE_SOURCE) {
+                val sourceException: IOException = exoError.sourceException;
+                if (sourceException is HttpDataSource.HttpDataSourceException) {
+                    fail = CreateBackgroundAudioFailImpl(1107602)
+                    val httpException: HttpDataSource.HttpDataSourceException = sourceException;
+                    httpException.message?.let {
+                        fail.errMsg = it
+                    }
+                } else {
+                    val message = sourceException.message as String;
+                    if (message.includes("None of the available extractors")) {
+                        fail = CreateBackgroundAudioFailImpl(1107604)
+                        fail.errMsg = message
+                    } else {
+                        fail = CreateBackgroundAudioFailImpl(1107603)
+                        fail.errMsg = message
+                    }
+                }
+            }
+        }
+        this.errorCallBack?.invoke(fail)
+    }
 
+    override fun onPlaybackStateChanged(playbackState: Int) {}
     override fun onEvents(player: Player, events: Player.Events) {}
     override fun onTimelineChanged(timeline: Timeline, reason: Int) {}
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {}
@@ -486,7 +473,9 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         oldPosition: Player.PositionInfo,
         newPosition: Player.PositionInfo,
         reason: Int
-    ) {}
+    ) {
+    }
+
     override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {}
     override fun onSeekBackIncrementChanged(seekBackIncrementMs: Long) {}
     override fun onSeekForwardIncrementChanged(seekForwardIncrementMs: Long) {}

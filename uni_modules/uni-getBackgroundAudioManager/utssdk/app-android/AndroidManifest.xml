@@ -5,9 +5,9 @@
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
 	<application>
-		<service android:name="uts.sdk.modules.uniGetBackgroundAudioManager.AudioService"
+		<service android:name="uts.sdk.modules.DCloudUniGetBackgroundAudioManager.AudioService"
 			android:foregroundServiceType="mediaPlayback" />
-		<activity android:name="uts.sdk.modules.uniGetBackgroundAudioManager.AudioTempActivity"
+		<activity android:name="uts.sdk.modules.DCloudUniGetBackgroundAudioManager.AudioTempActivity"
 			android:theme="@style/DCUniAudioTranslucentTheme"
 			android:configChanges="orientation|keyboardHidden|screenSize|mcc|mnc|fontScale"
 			android:screenOrientation="user" android:exported="true">

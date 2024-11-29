@@ -9,564 +9,564 @@ export type CanvasContextToBlobCallback = (blob: Blob) => void
 // #endif
 
 export interface CanvasContext {
-  getContext(type: '2d'): CanvasRenderingContext2D | null
+    getContext(type: '2d'): CanvasRenderingContext2D | null
 
-  // #ifdef WEB
-  /**
-   * 创造 Blob 对象
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "x"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "x"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  toBlob(callback: CanvasContextToBlobCallback, type?: string, quality?: number): void
-  // #endif
-  /**
-   * 返回一个包含图片展示的 data URI
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "4.25"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "4.25"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  toDataURL(): string
-  /**
-   * 返回一个包含图片展示的 data URI
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "4.25"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "4.25"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  toDataURL(type: string): string
-  /**
-   * 返回一个包含图片展示的 data URI
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "4.25"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "4.25"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  toDataURL(type: string, encoderOptions: any): string
-  /**
-   * 返回一个包含图片展示的 data URI
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "4.25"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "4.25"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  createImage(): Image
-  /**
-   * 返回一个包含图片展示的 data URI
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *        "osVer": "5.0",
-   *        "uniVer": "x",
-   *        "unixVer": "4.25"
-   *      },
-   *      "ios": {
-   *          "osVer": "10.0",
-   *          "uniVer": "x",
-   *          "unixVer": "4.25"
-   *      }
-   *  },
-   *  "web": {
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  createPath2D(): Path2D
-  /**
-   * 在下一次重绘之前，调用用户提供的回调函数
-   * @uniPlatform {
-   *   "app": {
-   *     "android": {
-   *       "osVer": "5.0",
-   *       "uniVer": "x",
-   *       "unixVer": "4.25"
-   *     },
-   *     "ios": {
-   *       "osVer": "12.0",
-   *       "uniVer": "x",
-   *       "unixVer": "4.25"
-   *     }
-   *   },
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "4.25"
-   *   },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  requestAnimationFrame(callback: RequestAnimationFrameCallback): number;
-  /**
-   * 取消一个先前通过调用 uni.requestAnimationFrame() 方法添加到计划中的动画帧请求
-   * @uniPlatform {
-   *   "app": {
-   *     "android": {
-   *       "osVer": "5.0",
-   *       "uniVer": "x",
-   *       "unixVer": "4.25"
-   *     },
-   *     "ios": {
-   *       "osVer": "12.0",
-   *       "uniVer": "x",
-   *       "unixVer": "4.25"
-   *     }
-   *   },
-   *   "web": {
-   *     "uniVer": "x",
-   *     "unixVer": "4.25"
-   *   },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  cancelAnimationFrame(taskId: number): void;
+    // #ifdef WEB
+    /**
+     * 创造 Blob 对象
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "x"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    toBlob(callback: CanvasContextToBlobCallback, type?: string, quality?: number): void
+    // #endif
+    /**
+     * 返回一个包含图片展示的 data URI
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "4.25"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.25"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    toDataURL(): string
+    /**
+     * 返回一个包含图片展示的 data URI
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "4.25"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.25"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    toDataURL(type: string): string
+    /**
+     * 返回一个包含图片展示的 data URI
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "4.25"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.25"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    toDataURL(type: string, encoderOptions: any): string
+    /**
+     * 返回一个包含图片展示的 data URI
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "4.25"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.25"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    createImage(): Image
+    /**
+     * 返回一个包含图片展示的 data URI
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *        "osVer": "5.0",
+     *        "uniVer": "x",
+     *        "unixVer": "4.25"
+     *      },
+     *      "ios": {
+     *          "osVer": "10.0",
+     *          "uniVer": "x",
+     *          "unixVer": "4.25"
+     *      }
+     *  },
+     *  "web": {
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    createPath2D(): Path2D
+    /**
+     * 在下一次重绘之前，调用用户提供的回调函数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "x",
+     *       "unixVer": "4.25"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "x",
+     *       "unixVer": "4.25"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "4.25"
+     *   },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    requestAnimationFrame(callback: RequestAnimationFrameCallback): number;
+    /**
+     * 取消一个先前通过调用 uni.requestAnimationFrame() 方法添加到计划中的动画帧请求
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "osVer": "5.0",
+     *       "uniVer": "x",
+     *       "unixVer": "4.25"
+     *     },
+     *     "ios": {
+     *       "osVer": "12.0",
+     *       "uniVer": "x",
+     *       "unixVer": "4.25"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "4.25"
+     *   },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    cancelAnimationFrame(taskId: number): void;
 }
 
 export type CreateCanvasContextAsyncOptions = {
@@ -594,7 +594,7 @@ export type CreateCanvasContextAsyncOptions = {
     *    weixin: {
     *      hostVer: '√',
     *      uniVer: '√',
-    *      unixVer: '4.35'
+    *      unixVer: '4.41'
     *
 },
     *    alipay: {
@@ -667,7 +667,7 @@ export type CreateCanvasContextAsyncOptions = {
    *    weixin: {
    *      hostVer: '√',
    *      uniVer: '√',
-   *      unixVer: '4.35'
+   *      unixVer: '4.41'
    *    },
    *    alipay: {
    *      hostVer: 'x',
@@ -731,7 +731,7 @@ export type CreateCanvasContextAsyncOptions = {
    *    weixin: {
    *      hostVer: '√',
    *      uniVer: '√',
-   *      unixVer: '4.35'
+   *      unixVer: '4.41'
    *    },
    *    alipay: {
    *      hostVer: 'x',
@@ -795,7 +795,7 @@ export type CreateCanvasContextAsyncOptions = {
    *    weixin: {
    *      hostVer: '√',
    *      uniVer: '√',
-   *      unixVer: '4.35'
+   *      unixVer: '4.41'
    *    },
    *    alipay: {
    *      hostVer: 'x',
@@ -859,7 +859,7 @@ export type CreateCanvasContextAsyncOptions = {
    *    weixin: {
    *      hostVer: '√',
    *      uniVer: '√',
-   *      unixVer: '4.35'
+   *      unixVer: '4.41'
    *    },
    *    alipay: {
    *      hostVer: 'x',
@@ -903,70 +903,70 @@ export type CreateCanvasContextAsyncOptions = {
 }
 
 export interface Uni {
-  /**
-   * 获取CanvasContext对象实例
-   *
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/createCanvasContextAsync.html
-   * @uniPlatform {
-   *  "app": {
-   *    "android": {
-   *      "osVer": "5.0",
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *    },
-   *    "ios": {
-   *      "osVer": "12.0",
-   *      "uniVer": "x",
-   *      "unixVer": "4.25"
-   *    }
-   *  },
-   *  "web": {
-   *    "uniVer": "x",
-   *    "unixVer": "4.25"
-   *  },
-   *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.35'
-   *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
-   *    }
-   *  }
-   * }
-   */
-  createCanvasContextAsync(options: CreateCanvasContextAsyncOptions): void
+    /**
+     * 获取CanvasContext对象实例
+     *
+     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/createCanvasContextAsync.html
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "x",
+     *      "unixVer": "4.25"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "x",
+     *    "unixVer": "4.25"
+     *  },
+     *  "mp":{
+     *    weixin: {
+     *      hostVer: '√',
+     *      uniVer: '√',
+     *      unixVer: '4.41'
+     *    },
+     *    alipay: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    baidu: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    toutiao: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    lark: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    qq: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    kuaishou: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    },
+     *    jd: {
+     *      hostVer: 'x',
+     *      uniVer: 'x',
+     *      unixVer: 'x'
+     *    }
+     *  }
+     * }
+     */
+    createCanvasContextAsync(options: CreateCanvasContextAsyncOptions): void
 }

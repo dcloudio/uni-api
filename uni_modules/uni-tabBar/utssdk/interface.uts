@@ -6,14 +6,14 @@ export type SetTabBarBadgeSuccessCallback = (
  * 错误码
  */
 export type SetTabBarErrorCode =
-/**
- * TabBar 不存在
- */
-100 |
-/**
- * 参数错误
- */
-200;
+    /**
+     * TabBar 不存在
+     */
+    100 |
+    /**
+     * 参数错误
+     */
+    200;
 
 export interface SetTabBarFail extends IUniError {
     errCode: SetTabBarErrorCode
@@ -280,7 +280,7 @@ export type SetTabBarStyleOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -501,7 +501,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -576,7 +576,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -651,7 +651,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -726,7 +726,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -801,7 +801,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -876,7 +876,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -951,7 +951,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -1026,7 +1026,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",

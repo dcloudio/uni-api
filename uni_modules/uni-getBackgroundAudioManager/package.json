@@ -45,7 +45,8 @@
       }
     },
     "dependencies": [
-      "uni-framework"
+      "uni-framework",
+	  "uni-network"
     ],
     "encrypt": [],
     "platforms": {

@@ -13,6 +13,8 @@ import {
 
 import { AppThemeFailImpl } from '../unierror.uts'
 
+export { OnHostThemeChangeCallbackResult, OnThemeChangeCallbackResult } from '../interface.uts';
+
 /**
  * 监听系统主题变化
 */

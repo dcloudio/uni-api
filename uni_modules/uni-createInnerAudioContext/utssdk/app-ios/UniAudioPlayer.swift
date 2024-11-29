@@ -4,6 +4,7 @@ import DCloudUniappRuntime;
 
 private enum UniAudioObserveKeypath: String {
     case status = "status"
+    case timeControlStatus = "timeControlStatus"
     case rate = "rate"
     case loadedTimeRanges = "loadedTimeRanges"
     case playbackBufferEmpty = "ong "
@@ -23,7 +24,7 @@ private enum UniAudioEvent: String {
 }
 
 // 闭包class化，方便通过 == 对比
-public class CallbackWrapper: Equatable {
+private class CallbackWrapper: Equatable {
     enum CallbackType {
         case callback(UniAudioEventCallback)
         case errorCallback(UniAudioErrorEventCallback)
@@ -49,7 +50,7 @@ typealias UniAudioErrorEventCallback = (_ result: ICreateInnerAudioContextFail) 
 
 public class UniAudioPlayer: NSObject, InnerAudioContext {
     
-    public lazy var playerItem: AVPlayerItem? = {
+    private lazy var playerItem: AVPlayerItem? = {
         if let url = URL(string: src) {
             return AVPlayerItem(url: url)
         } else {
@@ -57,7 +58,7 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
         }
     }()
     
-    public lazy var player: AVPlayer? = {
+    private lazy var player: AVPlayer? = {
         return AVPlayer(playerItem: playerItem)
     }()
     
@@ -85,14 +86,27 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
             player?.volume = _volume.toFloat()
         }
     }
+    private var _playbackRate: NSNumber = 1.0 {
+        didSet {
+            if player?.timeControlStatus == .playing {
+                player?.rate = _playbackRate.toFloat()
+            } else {
+                player?.pause()
+            }
+        }
+    }
+    private var _isNeedSetRate = false //添加该变量优化系统默认的只有播放状态设置rate才有效的情况
     private var _status: AVPlayerItem.Status? //playitem 监听status状态
-    private var _isPlaying = false
-    private var _isManualPause = false
-    
+    private var _isPlaying = false  //是否正在播放，侧重于用户是否点击了播放按钮
+    private var _isManualPause = false //是否用户点击暂停，和缓冲的暂停无关
+    private var _hasPlayError = false //是否播放出错
+    private var _currentFailImpl: CreateInnerAudioContextFailImpl? = nil //当前播放出错error对象
+    private var _isSeeking = false //是否是正在seeking状态
+
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
-    private var errorEventCallBacks: [UniAudioErrorEventCallback]? = nil
+    private var errorEventCallBacks: [UniAudioErrorEventCallback] = []
     private var timeObserverToken: Any?
-    
+
     
     public var duration: NSNumber {
         get {
@@ -103,7 +117,11 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     
     public var currentTime: NSNumber {
         get {
-            return NSNumber(floatLiteral: player?.currentTime().seconds ?? 0.0)
+            var second = 0.0
+            if let temp = player?.currentTime().seconds, temp >= 0 {
+                second = temp
+            }
+            return NSNumber(floatLiteral: second)
         }
         set {}
     }
@@ -155,8 +173,13 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     }
     
     public var playbackRate: NSNumber? {
-        get { NSNumber(value: player?.rate ?? 1.0) }
-        set { player?.rate = newValue?.floatValue ?? 1.0 }
+        get { return _playbackRate }
+        set {
+            if _playbackRate != newValue {
+                _isNeedSetRate = true
+                _playbackRate = newValue ?? 1.0
+            }
+        }
     }
     
     public func seek(_ position: NSNumber) {
@@ -229,11 +252,11 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     }
     
     public func onError(_ callback: @escaping (any ICreateInnerAudioContextFail) -> Void) {
-        errorEventCallBacks?.append(callback)
+        errorEventCallBacks.append(callback)
     }
     
     public func offError(_ callback: @escaping (any ICreateInnerAudioContextFail) -> Void) {
-        errorEventCallBacks?.removeAll()
+        errorEventCallBacks.removeAll()
     }
     
     public func onWaiting(_ callback: @escaping (Any) -> Void) {
@@ -288,14 +311,14 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
 
 extension UniAudioPlayer {
     private func innerPlay(needDispathEvent: Bool? = false) {
-        if src == "" {
-            failedAction(1107609)
-            return
-        }
-        
-        if _status == .readyToPlay, let player = player {
-            player.play()
-            if let needDispathEvent = needDispathEvent, needDispathEvent {
+        if let player = player {
+            if self.startTime.toDouble() > 0 {
+                innerSeek(self.startTime)
+            }
+            if !_hasPlayError {
+                player.play()
+            }
+            if let needDispathEvent = needDispathEvent, needDispathEvent, !_hasPlayError {
                 dispatchEvent(event: .play)
             }
         }
@@ -308,9 +331,11 @@ extension UniAudioPlayer {
             if let needDispathEvent = needDispathEvent, needDispathEvent {
                 UNILogDebug("======audio======, Seeking started，调用seek方法后调用")
                 dispatchEvent(event: .seeking)
+                _isSeeking = true
             }
             player?.seek(to: seekTime, completionHandler: { [weak self] finished in
                 self?.dispatchEvent(event: .seeked)
+                self?._isSeeking = false
             })
         }
     }
@@ -320,7 +345,10 @@ extension UniAudioPlayer {
         if let errMsg = errMsg {
             failImpl.errMsg = errMsg
         }
-        errorEventCallBacks?.forEach { $0(failImpl) }
+        _hasPlayError = true
+        _currentFailImpl = failImpl
+        errorEventCallBacks.forEach { $0(failImpl) }
+        player?.pause()
     }
     
     // 配置音频会话，支持后台播放
@@ -337,29 +365,54 @@ extension UniAudioPlayer {
     // 初始化 AVPlayer 并配置选项
     private func configurePlayer() {
         player?.volume = self.volume.toFloat()
-        playbackRate = 1.0
-        
         if self.startTime.toDouble() > 0 {
             innerSeek(self.startTime)
         }
-        
-        if autoplay {
-            innerPlay()
-        }
+        player?.rate = playbackRate?.toFloat() ?? 1.0
     }
     
     // 设置播放源并更新 AVPlayerItem
     private func updatePlayerItem() {
-        if player == nil {
-            configurePlayer()
-        }
-        guard let url = URL(string: self.src) else { return }
-        if let asset = player?.currentItem?.asset as? AVURLAsset, asset.url == url { return }
+        guard let player = player else { return }
         
+        if src == "" {
+            failedAction(1107609)
+            return
+        }
+        var url: URL? = nil
+        if self.src.startsWith("http") || self.src.startsWith("https") {
+            if let _url = URL(string: self.src) {
+                url = _url
+            }
+        } else {
+            let temp = UTSiOS.convert2AbsFullPath(self.src)
+            url = URL(fileURLWithPath: temp)
+            if let path = url?.path {
+                if (!FileManager.default.fileExists(atPath: path)) {
+                    failedAction(1107603)
+                    return
+                }
+            }
+        }
+
+        if let asset = player.currentItem?.asset as? AVURLAsset, asset.url == url {
+            if _hasPlayError {
+                innerSeek(0)
+                if let errCode = _currentFailImpl?.errCode {
+                    failedAction(errCode)
+                }
+            }
+            return
+        } else {
+            _hasPlayError = false
+        }
+
         playerItem = nil
-        playerItem = AVPlayerItem(url: url)
-        player?.replaceCurrentItem(with: playerItem)
-        player?.pause()
+        if let url = url {
+            playerItem = AVPlayerItem(url: url)
+            player.replaceCurrentItem(with: playerItem)
+        }
+        player.pause()
         
         // 监听各种状态
         addPlayerObservers()
@@ -453,7 +506,7 @@ extension UniAudioPlayer {
                 handleAudioPlayerStatus(status)
             }
         } else if keyPath == UniAudioObserveKeypath.rate.rawValue {
-            UNILogDebug("======audio======, rate发生变化：\(player?.rate ?? 0)")
+//            UNILogDebug("======audio======, rate发生变化：\(player?.rate ?? 0)")
         } else if keyPath == UniAudioObserveKeypath.loadedTimeRanges.rawValue {
             if let timeRange = playerItem?.loadedTimeRanges.first?.timeRangeValue {
                 self.buffered = timeRange.end.seconds as NSNumber
@@ -473,11 +526,25 @@ extension UniAudioPlayer {
                     _isPlaying = false
                 }
             }
+        } else if keyPath == UniAudioObserveKeypath.timeControlStatus.rawValue {
+            if let player = player {
+//                UNILogDebug("======audio======, 播放状态改变为 = \(player.timeControlStatus)")
+                if player.timeControlStatus == .playing {
+                    _hasPlayError = false
+                    if _isNeedSetRate {
+                        _isNeedSetRate = false
+                        player.rate = playbackRate?.toFloat() ?? 1.0
+                    }
+                } else {
+                    _isNeedSetRate = true
+                }
+            }
         }
     }
     
     private func addPlayerObservers() {
         if let player = player, let currentItem = player.currentItem {
+            player.addObserver(self, forKeyPath: UniAudioObserveKeypath.timeControlStatus.rawValue, options: .new, context: nil)
             player.addObserver(self, forKeyPath: UniAudioObserveKeypath.rate.rawValue, options: .new, context: nil)
             currentItem.addObserver(self, forKeyPath: UniAudioObserveKeypath.status.rawValue, options: .new, context: nil)
             currentItem.addObserver(self, forKeyPath: UniAudioObserveKeypath.loadedTimeRanges.rawValue, options: .new, context: nil)
@@ -510,7 +577,6 @@ extension UniAudioPlayer {
     @objc private func seekingStarted(_ notification: Notification) {
         guard let playerItem = notification.object as? AVPlayerItem else { return }
         let currentTime = CMTimeGetSeconds(playerItem.currentTime())
-        // 检查是否跳转到有效时间（非初始化阶段的 0 或无效时间）
         if currentTime > 0 {
             UNILogDebug("======audio======, Seeking started，调用seek方法后调用")
             dispatchEvent(event: .seeking)
@@ -525,26 +591,29 @@ extension UniAudioPlayer {
     
     
     @objc private func playerDidFinishPlaying(_ notification: Notification) {
-        UNILogDebug("======audio======, 播放结束")
-        dispatchEvent(event: .ended)
         innerSeek(0)
         if self.loop {
             innerPlay()
+        } else {
+            UNILogDebug("======audio======, 播放结束")
+            dispatchEvent(event: .ended)
         }
     }
     
     private func removePlayerObservers() {
         removePeriodicTimeObserver()
         if let player = player, let currentItem = player.currentItem {
+            player.removeObserver(self, forKeyPath: UniAudioObserveKeypath.timeControlStatus.rawValue, context: nil)
             player.removeObserver(self, forKeyPath: UniAudioObserveKeypath.rate.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.status.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.loadedTimeRanges.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.playbackBufferEmpty.rawValue, context: nil)
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.playbackLikelyToKeepUp.rawValue, context: nil)
         }
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemPlaybackStalled, object: nil)
-        
+        NotificationCenter.default.removeObserver(self, name: AVPlayerItem.didPlayToEndTimeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: AVPlayerItem.playbackStalledNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: AVPlayerItem.timeJumpedNotification, object: nil)
+
         player?.replaceCurrentItem(with: nil)
     }
     
@@ -560,8 +629,10 @@ extension UniAudioPlayer {
             let currentTime = CMTimeGetSeconds(time)
             
             if let duration = self?.player?.currentItem?.duration, duration.isNumeric {
-                UNILogDebug("======audio======, 当前时间: \(currentTime), 总时长: \(CMTimeGetSeconds(duration))")
-                self?.dispatchEvent(event: .timeUpdate)
+                if let isSeeking = self?._isSeeking, !isSeeking {
+                    UNILogDebug("======audio======, 当前时间: \(currentTime), 总时长: \(CMTimeGetSeconds(duration))")
+                    self?.dispatchEvent(event: .timeUpdate)
+                }
             }
         }
     }
@@ -584,7 +655,7 @@ extension UniAudioPlayer {
             UNILogDebug("======audio======, AVPlayerItem failed, 获取错误的域和错误码以进一步分析失败原因")
             if let error = playerItem?.error as NSError? {
                 if error.domain == NSURLErrorDomain {
-                    failedAction(1107602)
+                    failedAction(1107602, errMsg: error.localizedDescription)
                 } else if error.domain == AVFoundationErrorDomain {
                     failedAction(1107604)
                 }

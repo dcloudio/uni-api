@@ -9,29 +9,29 @@ export interface Uni {
     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
     * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		},
+  * {
+  * 	"app": {
+  * 		"android": {
+  * 			"osVer": "5.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "3.9+"
+  * 		},
+  * 		"ios": {
+  * 			"osVer": "12.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "4.11"
+  * 		},
   *    "harmony": {
   *      "osVer": "3.0",
   *      "uniVer": "4.23",
   *      "unixVer": "x"
   *    }
-	* 	},
+  * 	},
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -73,7 +73,7 @@ export interface Uni {
     *     "uniVer": "√",
     *     "unixVer": "4.0"
     *   }
-	* }
+  * }
     * @example
      ```typescript
       uni.getSystemInfo({
@@ -98,24 +98,24 @@ export interface Uni {
     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
     * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		}
-	* 	},
+  * {
+  * 	"app": {
+  * 		"android": {
+  * 			"osVer": "5.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "3.9+"
+  * 		},
+  * 		"ios": {
+  * 			"osVer": "12.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "4.11"
+  * 		}
+  * 	},
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -157,7 +157,7 @@ export interface Uni {
     *     "uniVer": "√",
     *     "unixVer": "4.0"
     *   }
-	* }
+  * }
     * @example
      ```typescript
       uni.getSystemInfoSync()
@@ -175,24 +175,24 @@ export interface Uni {
     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
     * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		}
-	* 	},
+  * {
+  * 	"app": {
+  * 		"android": {
+  * 			"osVer": "5.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "3.9+"
+  * 		},
+  * 		"ios": {
+  * 			"osVer": "12.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "4.11"
+  * 		}
+  * 	},
      *  "mp": {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -234,7 +234,7 @@ export interface Uni {
     *     "uniVer": "√",
     *     "unixVer": "4.0"
     *   }
-	* }
+  * }
     * @example
      ```typescript
       uni.getWindowInfo()
@@ -274,7 +274,7 @@ export type SafeArea = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *
 },
     *    "alipay": {
@@ -354,7 +354,7 @@ export type SafeArea = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -425,7 +425,7 @@ export type SafeArea = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -496,7 +496,7 @@ export type SafeArea = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -567,7 +567,7 @@ export type SafeArea = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -638,7 +638,7 @@ export type SafeArea = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -711,7 +711,7 @@ export type SafeAreaInsets = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -782,7 +782,7 @@ export type SafeAreaInsets = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -853,7 +853,7 @@ export type SafeAreaInsets = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -924,7 +924,7 @@ export type SafeAreaInsets = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -998,7 +998,7 @@ export type CutoutRect = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1069,7 +1069,7 @@ export type CutoutRect = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1140,7 +1140,7 @@ export type CutoutRect = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1211,7 +1211,7 @@ export type CutoutRect = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1285,7 +1285,7 @@ export type GetSystemInfoResult = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1356,7 +1356,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1427,7 +1427,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1498,7 +1498,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1569,7 +1569,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1640,7 +1640,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1783,7 +1783,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -1996,7 +1996,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2067,7 +2067,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2138,7 +2138,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2209,7 +2209,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2280,7 +2280,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2351,7 +2351,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2431,7 +2431,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2503,7 +2503,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2574,7 +2574,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2645,7 +2645,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2817,7 +2817,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2889,7 +2889,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -2960,7 +2960,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3031,7 +3031,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3102,7 +3102,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3174,7 +3174,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3245,7 +3245,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3316,7 +3316,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3459,7 +3459,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3530,7 +3530,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3601,7 +3601,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3672,7 +3672,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3744,7 +3744,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3815,7 +3815,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3886,7 +3886,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -3958,7 +3958,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4171,7 +4171,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4242,7 +4242,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4313,7 +4313,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4384,7 +4384,7 @@ export type GetSystemInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4622,7 +4622,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4693,7 +4693,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4764,7 +4764,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4835,7 +4835,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4900,7 +4900,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -4973,7 +4973,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -5073,7 +5073,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -5144,7 +5144,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -5215,7 +5215,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -5287,7 +5287,7 @@ export type GetWindowInfoResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",

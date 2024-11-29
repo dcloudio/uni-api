@@ -5,7 +5,7 @@
   "description": "uni-file-manager",
   "keywords": [
     "uni-file-manager"
-],
+  ],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.6.8"
@@ -32,18 +32,19 @@
   },
   "uni_modules": {
     "dependencies": [],
-	"uni-ext-api": {
-		"uni": {
-			"getFileSystemManager": {
-				"name": "getFileSystemManager",
-				"app": {
-					"js": true,
-					"kotlin": true,
-					"swift": false
-				}
-			}
-		}
-	},
+    "uni-ext-api": {
+      "uni": {
+        "getFileSystemManager": {
+          "name": "getFileSystemManager",
+          "app": {
+            "js": true,
+            "kotlin": true,
+            "swift": false,
+            "arkts": true
+          }
+        }
+      }
+    },
     "encrypt": [],
     "platforms": {
       "cloud": {

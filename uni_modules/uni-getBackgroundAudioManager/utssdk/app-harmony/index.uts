@@ -3,12 +3,12 @@ import { audio } from '@kit.AudioKit';
 import { avSession } from '@kit.AVSessionKit';
 import { wantAgent } from '@kit.AbilityKit';
 import { backgroundTaskManager } from '@kit.BackgroundTasksKit';
-import UIAbility from '@ohos.app.ability.UIAbility'
 
 import { BackgroundAudioManager, GetBackgroundAudioManager } from '../interface.uts';
 import { API_GET_BACKGROUND_AUDIO_MANAGER } from '../protocol.uts';
 import { getFdFromUriOrSandBoxPath, isFileUri, isSandboxPath, AudioPlayerCallback, AudioPlayerError } from './utils.uts';
 import { BusinessError } from '@ohos.base';
+import { ICreateBackgroundAudioFail } from '../interface.uts';
 
 interface TempAbilityInfo {
     bundleName: string
@@ -309,7 +309,7 @@ class BackgroundAudioManagerImpl implements BackgroundAudioManager {
     onTimeUpdate(callback: (result: any) => void): void {
         audioPlayerCallback.onTimeUpdate(callback)
     }
-    onError(callback: (result: any) => void): void {
+    onError(callback: (result: ICreateBackgroundAudioFail) => void): void {
         audioPlayerCallback.onError(callback)
     }
     onWaiting(callback: (result: any) => void): void {
@@ -333,7 +333,7 @@ class BackgroundAudioManagerImpl implements BackgroundAudioManager {
     offTimeUpdate(callback: (result: any) => void): void {
         audioPlayerCallback.offTimeUpdate(callback)
     }
-    offError(callback: (result: any) => void): void {
+    offError(callback: (result: ICreateBackgroundAudioFail) => void): void {
         audioPlayerCallback.offError(callback)
     }
     offWaiting(callback: (result: any) => void): void {

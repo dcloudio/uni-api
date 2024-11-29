@@ -19,8 +19,8 @@ export interface Uni {
      *          "osVer": "12.0",
      *          "uniVer": "x",
      *          "unixVer": "4.11",
-	 * 			"uniUtsPlugin": "x",
-	 *          "unixUtsPlugin": "4.25"
+     * 			"uniUtsPlugin": "x",
+     *          "unixUtsPlugin": "4.25"
      *      },
      *    "harmony": {
      *      "osVer": "x",
@@ -32,7 +32,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "x",
      *        "uniVer": "x",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "x",

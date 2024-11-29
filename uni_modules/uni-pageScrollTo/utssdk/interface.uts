@@ -48,7 +48,7 @@ export type PageScrollToOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    }
      *  },
      *  "web": {
@@ -75,7 +75,7 @@ export type PageScrollToOptions = {
      */
     complete?: PageScrollToCompleteCallback | null
 }
-export type PageScrollTo = ( options: PageScrollToOptions ) => Promise<PageScrollToSuccess> | null
+export type PageScrollTo = (options: PageScrollToOptions) => Promise<PageScrollToSuccess> | null
 export interface Uni {
     /**
      * 将页面滚动到目标位置
@@ -105,7 +105,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "4.35"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",

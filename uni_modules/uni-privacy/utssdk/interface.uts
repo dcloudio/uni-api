@@ -37,7 +37,7 @@ export interface Uni {
     })
     ```
    */
-  onPrivacyAuthorizationChange(callback : OnPrivacyAuthorizationChangeCallback) : number
+  onPrivacyAuthorizationChange(callback: OnPrivacyAuthorizationChangeCallback): number
 
   /**
    * 取消监听隐私协议状态改变
@@ -75,7 +75,7 @@ export interface Uni {
     uni.offPrivacyAuthorizationChange(id)
     ```
    */
-  offPrivacyAuthorizationChange(id : number) : void
+  offPrivacyAuthorizationChange(id: number): void
 
   /**
    * 获取隐私协议状态
@@ -106,7 +106,7 @@ export interface Uni {
         "weixin": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "4.35"
+          "unixVer": "4.41"
         },
         "alipay": {
           "hostVer": "√",
@@ -164,7 +164,7 @@ export interface Uni {
     })
     ```
    */
-  getPrivacySetting(options : GetPrivacySettingOptions) : void
+  getPrivacySetting(options: GetPrivacySettingOptions): void
 
   /**
    * 重置隐私协议状态为未同意
@@ -201,14 +201,14 @@ export interface Uni {
     uni.resetPrivacyAuthorization()
     ```
    */
-  resetPrivacyAuthorization() : void
+  resetPrivacyAuthorization(): void
 }
 
-export type OnPrivacyAuthorizationChange = (callback : OnPrivacyAuthorizationChangeCallback) => number
+export type OnPrivacyAuthorizationChange = (callback: OnPrivacyAuthorizationChangeCallback) => number
 
-export type OffPrivacyAuthorizationChange = (id : number) => void
+export type OffPrivacyAuthorizationChange = (id: number) => void
 
-export type OnPrivacyAuthorizationChangeCallback = (res : PrivacyChangeResult) => void
+export type OnPrivacyAuthorizationChangeCallback = (res: PrivacyChangeResult) => void
 
 export type PrivacyChangeResult = {
   /**
@@ -242,14 +242,14 @@ export type PrivacyChangeResult = {
       }
     }
    */
-  needAuthorization : boolean
+  needAuthorization: boolean
 }
 
-export type GetPrivacySetting = (options : GetPrivacySettingOptions) => void
+export type GetPrivacySetting = (options: GetPrivacySettingOptions) => void
 
-export type GetPrivacySettingSuccessCallback = (result : GetPrivacySettingSuccessResult) => void;
-export type GetPrivacySettingFailCallback = (result : any) => void;
-export type GetPrivacySettingCompleteCallback = (result : any) => void;
+export type GetPrivacySettingSuccessCallback = (result: GetPrivacySettingSuccessResult) => void;
+export type GetPrivacySettingFailCallback = (result: any) => void;
+export type GetPrivacySettingCompleteCallback = (result: any) => void;
 export type ResetPrivacyAuthorization = () => void
 
 export type GetPrivacySettingSuccessResult = {
@@ -282,7 +282,7 @@ export type GetPrivacySettingSuccessResult = {
         "weixin": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "4.35"
+          "unixVer": "4.41"
         },
         "alipay": {
           "hostVer": "√",
@@ -326,7 +326,7 @@ export type GetPrivacySettingSuccessResult = {
       }
     }
    */
-  needAuthorization : boolean
+  needAuthorization: boolean
 }
 
 export type GetPrivacySettingOptions = {
@@ -360,7 +360,7 @@ export type GetPrivacySettingOptions = {
         "weixin": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "4.35"
+          "unixVer": "4.41"
         },
         "alipay": {
           "hostVer": "√",
@@ -404,7 +404,7 @@ export type GetPrivacySettingOptions = {
       }
     }
    */
-  success ?: GetPrivacySettingSuccessCallback
+  success?: GetPrivacySettingSuccessCallback
 
   /**
    * 接口调用失败的回调函数
@@ -436,7 +436,7 @@ export type GetPrivacySettingOptions = {
         "weixin": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "4.35"
+          "unixVer": "4.41"
         },
         "alipay": {
           "hostVer": "√",
@@ -480,7 +480,7 @@ export type GetPrivacySettingOptions = {
       }
     }
    */
-  fail ?: GetPrivacySettingFailCallback
+  fail?: GetPrivacySettingFailCallback
 
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
@@ -512,7 +512,7 @@ export type GetPrivacySettingOptions = {
         "weixin": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "4.35"
+          "unixVer": "4.41"
         },
         "alipay": {
           "hostVer": "√",
@@ -556,5 +556,5 @@ export type GetPrivacySettingOptions = {
       }
     }
    */
-  complete ?: GetPrivacySettingCompleteCallback
+  complete?: GetPrivacySettingCompleteCallback
 }

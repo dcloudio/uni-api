@@ -167,7 +167,12 @@ export async function _chooseMedia(
     const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions()
     const mimeType = options.mimeType
     photoSelectOptions.MIMEType = mimeType
-    photoSelectOptions.maxSelectNumber = options.count || 9
+    if (mimeType === photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE) {
+        photoSelectOptions.maxSelectNumber = 1
+    } else {
+        // chooseMedia支持count
+        photoSelectOptions.maxSelectNumber = options.count || 9
+    }
     photoSelectOptions.isOriginalSupported = options.isOriginalSupported
     // 仅支持移除相机选项
     photoSelectOptions.isPhotoTakingSupported = !(options.sourceType && !options.sourceType.includes('camera'))

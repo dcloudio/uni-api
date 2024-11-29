@@ -1,0 +1,506 @@
+import fs, { type ReadTextOptions, type ReadOptions } from '@ohos.file.fs'
+import { FileSystemManagerFailImpl } from "../unierror.uts"
+import { FileCallback } from './callback.uts';
+import { FileSystemManagerErrorCode, IFileSystemManagerFail, ReadFileSuccessResult } from '../interface.uts';
+import { BusinessError } from '@ohos.base';
+
+const openMode = fs.OpenMode
+
+export const modeReflect = {
+  'ax': 'a',
+  'ax+': 'a+',
+  'wx': 'w',
+  'wx+': 'w+'
+}
+
+const ENCODING = [
+  'utf8',
+  'utf-8',
+  'ascii',
+  'base64',
+  'binary',
+  'hex',
+  'ucs2',
+  'ucs-2',
+  'utf16le',
+  'utf-16le',
+  'latin1'
+]
+
+// 获取文件的类型码并返回
+export function getFileTypeMode(stat: fs.Stat): number {
+  if (stat.isBlockDevice()) {
+    return 0o060000
+  }
+  if (stat.isCharacterDevice()) {
+    return 0o020000
+  }
+  if (stat.isDirectory()) {
+    return 0o040000
+  }
+  if (stat.isFIFO()) {
+    return 0o010000
+  }
+  if (stat.isFile()) {
+    return 0o100000
+  }
+  if (stat.isSocket()) {
+    return 0o140000
+  }
+  if (stat.isSymbolicLink()) {
+    return 0o120000
+  }
+  return 0
+}
+
+export function getOpenMode(flag: string): number | null {
+  switch (flag) {
+    case 'a':
+      return openMode.CREATE | openMode.APPEND
+    case 'a+':
+      return openMode.CREATE | openMode.READ_WRITE | openMode.APPEND
+    case 'as':
+      return openMode.SYNC | openMode.CREATE | openMode.APPEND
+    case 'as+':
+      return openMode.SYNC | openMode.CREATE | openMode.READ_WRITE | openMode.APPEND
+    case 'r':
+      return openMode.READ_ONLY
+    case 'r+':
+      return openMode.READ_WRITE
+    case 'w':
+      return openMode.CREATE | openMode.WRITE_ONLY | openMode.TRUNC
+    case 'w+':
+      return openMode.CREATE | openMode.READ_WRITE | openMode.TRUNC
+  }
+  return null
+}
+
+export function transformErrorCode(errCode: number): FileSystemManagerErrorCode {
+  switch (errCode) {
+    case 13900012:
+    case 13900001:
+      return 1300013
+    case 13900002:
+      return 1300002
+    case 13900004:
+      return 1300201
+    case 13900005:
+      return 1301003
+    case 13900008:
+      return 1300009
+    case 13900010:
+      return 1300010
+    case 13900013:
+      return 1300011
+    case 13900018:
+      return 1300016
+    case 13900019:
+      return 1300021
+    case 13900020:
+      return 1300022
+    case 13900023:
+      return 1300017
+    case 13900024:
+      return 1300018
+    case 13900027:
+      return 1300019
+    case 13900030:
+      return 1300020
+    case 13900033:
+      return 1300021
+    case 13900034:
+      return 1300012
+    case 13900042:
+      return 1300013
+    case 13900044:
+      return 1300014
+  }
+  return 1300201
+}
+
+// 数据类型是否为string
+function isString(data?: DataType | null): boolean {
+  return typeof data === 'string'
+}
+
+// 数据类型是否为function
+function isFunction(data?: DataType | null): boolean {
+  return typeof data === 'function'
+}
+
+
+// 数据类型是否为null
+function isNull(data?: DataType | null): boolean {
+  return data === null
+}
+
+// 数据类型是否为undefined
+function isUndefined(data?: DataType | null): boolean {
+  return (typeof data) === 'undefined'
+}
+
+// 数据类型是否为数组
+function isArray(data?: DataType | null): boolean {
+  return Array.isArray(data)
+}
+
+// 数据类型是否为number
+function isNumber(data?: DataType | null): boolean {
+  return typeof data === 'number' && !Number.isNaN(data) && Number.isFinite(data)
+}
+
+// 数据类型是否为boolean
+function isBoolean(data?: DataType | null): boolean {
+  return typeof data === 'boolean'
+}
+
+// 数据类型是否为arraybuffer
+function isArrayBuffer(data?: DataType | null): boolean {
+  return data instanceof ArrayBuffer
+}
+
+function checkSingleDataType(data: DataType, dataType: string) {
+  let result = false
+  switch (dataType) {
+    case 'string':
+      result = isString(data)
+      break
+    case 'number':
+      result = isNumber(data)
+      break
+    case 'boolean':
+      result = isBoolean(data)
+      break
+    case 'function':
+      result = isFunction(data)
+      break
+    case 'arraybuffer':
+      result = isArrayBuffer(data)
+      break
+    case 'array':
+      result = isArray(data)
+      break
+    case 'null':
+      result = isNull(data)
+      break
+    case 'undefined':
+      result = isUndefined(data)
+      break
+  }
+  return result
+}
+
+type BaseType = number | string | boolean | null | undefined
+export type DataType = BaseType | Function | ArrayBuffer | Array<BaseType>
+
+/**
+ * 通用校验接口checkDataType
+ * @param {*} data 待校验数据
+ * @param {Boolean} isRequired 是否为必填项
+ * @param {String | String[]} dataType 字符串或数组，预期的数据类型，
+ * 字符串支持："string","number","boolean","function","array"
+ * 支持上述字符串类型组成的数组，数组情况下满足其中一种类型即校验通过
+ * @param {Function} customCheck 定制化校验方法，入参为data，需返回布尔
+ * @returns {Boolean} 返回是否校验通过
+ */
+export function checkDataType(data: DataType, isRequired: boolean, dataType: string, customCheck?: ((data: DataType) => boolean) | null): boolean {
+  let result = false
+  try {
+    if (isRequired && (isNull(data) || isUndefined(data))) {
+      throw new Error('The param data is required')
+    }
+    if (!isString(dataType) && !isArray(dataType)) {
+      throw new Error('The param dataType should be a String or an Array')
+    }
+    if (customCheck != null && typeof customCheck !== 'function') {
+      throw new Error('If customCheck exist,it should be a Function')
+    }
+
+    // 非必填时，如果没有该参数，直接返回true
+    if (!isRequired && (isNull(data) || isUndefined(data))) {
+      return true
+    }
+
+    result = checkSingleDataType(data as DataType, dataType)
+    if (result && typeof customCheck === 'function') {
+      result = customCheck!(data)
+    }
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+  return result
+}
+
+interface CustomValidReturn {
+  isValid: boolean
+  err?: IFileSystemManagerFail
+}
+
+// 检验路径的合法性：string 、空串 、必须存在
+export function checkPathExistence(methodName: string, pathName: string, path: string): CustomValidReturn {
+  const errMsg = `${methodName}: fail ${pathName}`
+  let isValid = false
+  if (!checkDataType(path, true, 'string')) {
+    return {
+      isValid,
+      err: getParameterError(errMsg)
+    }
+  }
+
+  if (path === '') {
+    return {
+      isValid,
+      err: getPermissionError(errMsg) as IFileSystemManagerFail
+    }
+  }
+
+  // 判断srcPath路径是否存在
+  if (!fs.accessSync(path)) {
+    return {
+      isValid,
+      err: getNoSuchFileOrDirectory(errMsg) as IFileSystemManagerFail
+    }
+  }
+  // 校验通过
+  return { isValid: true }
+}
+
+
+export function ohosRead(filePath: string, sizeOfNewArrayBuffer: number, cb: FileCallback) {
+  const file = fs.openSync(filePath, fs.OpenMode.READ_ONLY)
+  const buf = new ArrayBuffer(sizeOfNewArrayBuffer)
+  fs.read(file.fd, buf)
+    .then((readLen) => {
+      cb.success({
+        data: buf
+      } as ReadFileSuccessResult)
+    })
+    .catch((err: BusinessError) => {
+      cb.fail(new FileSystemManagerFailImpl(transformErrorCode(err.code)) as ApiError)
+    })
+    .finally(() => {
+      fs.closeSync(file)
+    })
+}
+
+export function ohosReadText(filePath: string, option: ReadTextOptions, cb: FileCallback) {
+  fs.readText(filePath, option)
+    .then((str) => {
+      cb.success({
+        data: str
+      } as ReadFileSuccessResult)
+    })
+    .catch((err: BusinessError) => {
+      cb.fail(new FileSystemManagerFailImpl(transformErrorCode(err.code)) as ApiError)
+    })
+}
+
+interface ObtainUpperPathReturn {
+  index: number
+  upperPath: string
+}
+
+// 获取目录路径
+export function obtainUpperPath(inputPath: string): ObtainUpperPathReturn {
+  let index = inputPath.lastIndexOf('/')
+  let upperPath = inputPath.substring(0, index)
+  return { index, upperPath } as ObtainUpperPathReturn
+}
+
+export function obtainFileName(inputPath: string) {
+  let index = inputPath.lastIndexOf('/')
+  let fileName = inputPath.substring(index)
+
+  // 处理' ../test.txt/ '的情况
+  if (inputPath.endsWith('/')) {
+    fileName = inputPath.substring(inputPath.lastIndexOf("/", inputPath.length - 2) + 1, inputPath.length - 1)
+  }
+
+  return { index, fileName }
+}
+
+interface CheckFd {
+  isValid: boolean
+  fd: number
+  err?: IFileSystemManagerFail
+}
+
+export function checkFd(methodName: string, fd: string): CheckFd {
+  const errMsg = `${methodName}: fail`
+  if (!checkDataType(fd, true, 'string')) {
+    return {
+      isValid: false,
+      fd: 0,
+      err: getParameterError(errMsg)
+    }
+  }
+
+  const transFdToNum = Number(fd)
+  if (isNaN(transFdToNum)) {
+    return {
+      isValid: false,
+      fd: 0,
+      err: getParameterError(errMsg)
+    }
+  }
+  return { isValid: true, fd: transFdToNum }
+}
+
+
+// 检验路径的合法性：string 和 空串
+export function checkPath(methodName: string, pathName: string, path: string): CustomValidReturn {
+  const errMsg = `${methodName}: fail ${pathName}`
+  let isValid = false
+  if (!checkDataType(path, true, 'string')) {
+    return {
+      isValid,
+      err: getParameterError(errMsg)
+    }
+  }
+
+  if (path === '') {
+    return {
+      isValid,
+      err: getPermissionError(errMsg)
+    }
+  }
+
+  // 校验通过
+  return { isValid: true }
+}
+
+export function checkPathSync(methodName: string, pathName: string, path: string): CustomValidReturn {
+  const errMsg = `${methodName}: fail ${pathName}`
+  let isValid = false
+  if (path === '' || !checkDataType(path, true, 'string')) {
+    return {
+      isValid,
+      err: getParameterError(errMsg)
+    }
+  }
+
+  return { isValid: true }
+}
+
+export function checkPathExistenceSync(methodName: string, pathName: string, path: string): CustomValidReturn {
+  const errMsg = `${methodName}: fail ${pathName}`
+  let isValid = false
+  if (path === '' || !checkDataType(path, true, 'string')) {
+    return {
+      isValid,
+      err: getParameterError(errMsg)
+    }
+  }
+
+  // 判断Path是否存在
+  if (!fs.accessSync(path)) {
+    return {
+      isValid,
+      err: getNoSuchFileOrDirectory(errMsg)
+    }
+  }
+
+  return { isValid: true }
+}
+
+interface CheckEncodingReturn {
+  isValid: boolean
+  errMsg?: string
+}
+
+export function checkEncoding(methodName: string, encoding?: string): CheckEncodingReturn {
+  let isValid = false
+  if (encoding === null || !checkDataType(encoding, false, 'string')) {
+    return { errMsg: `${methodName}: fail invalid encoding: ${encoding}`, isValid } as CheckEncodingReturn
+  }
+
+  if (encoding !== '' && encoding !== undefined) {
+    if (!ENCODING.includes(encoding)) {
+      return { errMsg: `${methodName}: fail Unknown encoding: ${encoding}`, isValid } as CheckEncodingReturn
+    }
+
+    // 提示开发者输入的encoding是合法的 但目前鸿蒙暂不支持
+    if (encoding !== 'utf-8' && encoding !== 'utf8') {
+      return { errMsg: `${methodName}: fail, The encoding is valid, but is not supported currently: ${encoding}`, isValid } as CheckEncodingReturn
+    }
+  }
+
+  return { isValid: true }
+}
+
+export function checkEncodingSync(methodName: string, encoding?: string): CheckEncodingReturn {
+  let isValid = false
+  if (encoding === null || !checkDataType(encoding, false, 'string')) {
+    return {
+      errMsg: `${methodName}: fail invalid encoding: ${encoding}`,
+      isValid
+    } as CheckEncodingReturn
+  }
+
+  if (encoding !== '' && encoding !== undefined) {
+    if (!ENCODING.includes(encoding)) {
+      return {
+        errMsg: `${methodName}: fail Unknown encoding: ${encoding}`,
+        isValid
+      } as CheckEncodingReturn
+    }
+
+    // 提示开发者输入的encoding是合法的 但目前鸿蒙暂不支持
+    if (encoding !== 'utf-8' && encoding !== 'utf8') {
+      return {
+        errMsg: `${methodName}: fail, The encoding is valid, but is not supported currently: ${encoding}`,
+        isValid
+      } as CheckEncodingReturn
+    }
+  }
+
+  return { isValid: true } as CheckEncodingReturn
+}
+
+export function mkdirRecursive(path: string, dirNames: string[]) {
+  const curDirName = dirNames.shift()
+  if (!path && !curDirName) {
+    path = ''
+  } else {
+    path = path + '/' + curDirName
+  }
+  if (!curDirName) {
+    if (dirNames.length > 0) {
+      mkdirRecursive(path, dirNames)
+    }
+    return
+  }
+
+  // 如果目录存在
+  if (fs.accessSync(path)) {
+    if (dirNames.length > 0) {
+      mkdirRecursive(path, dirNames)
+    }
+  } else {
+    // 目录不存在
+    fs.mkdirSync(path)
+    if (dirNames.length > 0) {
+      mkdirRecursive(path, dirNames)
+    }
+  }
+}
+
+export function wrapErrMsg(err: IFileSystemManagerFail, errMsg?: string): IFileSystemManagerFail {
+  if (errMsg) {
+    err.errMsg = `${errMsg} ${err.errMsg}`
+  }
+  return err
+}
+
+export function getParameterError(errMsg?: string): IFileSystemManagerFail {
+  return wrapErrMsg(new FileSystemManagerFailImpl(1300022) as IFileSystemManagerFail, errMsg)
+}
+
+export function getPermissionError(errMsg?: string): IFileSystemManagerFail {
+  return wrapErrMsg(new FileSystemManagerFailImpl(1300013) as IFileSystemManagerFail, errMsg)
+}
+
+export function getNoSuchFileOrDirectory(errMsg?: string): IFileSystemManagerFail {
+  return wrapErrMsg(new FileSystemManagerFailImpl(1300002) as IFileSystemManagerFail, errMsg)
+}

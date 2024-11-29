@@ -7,38 +7,38 @@ export type LoadFontFaceOptionDesc = {
  * 错误码
  */
 export type LoadFontFaceErrCode =
-/**
- * 框架内部异常
- */
-4 |
-/**
- * page is not ready
- */
-99 |
-/**
- * 参数错误
- */
-101 |
-/**
- * family is null
- */
-100001 |
-/**
- * source is null
- */
-100002 |
-/**
- * local font not found
- */
-200001 |
-/**
- * same source task is loading
- */
-300001 |
-/**
- * download fail
- */
-300002;
+    /**
+     * 框架内部异常
+     */
+    4 |
+    /**
+     * page is not ready
+     */
+    99 |
+    /**
+     * 参数错误
+     */
+    101 |
+    /**
+     * family is null
+     */
+    100001 |
+    /**
+     * source is null
+     */
+    100002 |
+    /**
+     * local font not found
+     */
+    200001 |
+    /**
+     * same source task is loading
+     */
+    300001 |
+    /**
+     * download fail
+     */
+    300002;
 
 export interface LoadFontFaceFail extends IUniError {
     errCode: LoadFontFaceErrCode
@@ -63,7 +63,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": ">=2.10.0",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -127,7 +127,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -191,7 +191,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -235,7 +235,7 @@ export type LoadFontFaceOptions = {
      *  }
      * }
      */
-    source: string
+    source: string.FontURIString
     /**
      * 可选的字体描述符
      * @uniPlatform {
@@ -255,7 +255,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -319,7 +319,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -383,7 +383,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -447,7 +447,7 @@ export type LoadFontFaceOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -531,7 +531,7 @@ export interface Uni {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",

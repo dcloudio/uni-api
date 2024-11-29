@@ -143,7 +143,7 @@ export class WaitingView{
 			this.waitingRootView.setPadding((10 * this.density).toInt(), (20 * this.density).toInt(), (10 * this.density).toInt(), (20 * this.density).toInt())
 		}
 
-		let drawable = this.context?.getResources()!!.getDrawable(R.drawable.uni_app_uni_prompt_circle_white_progress)
+		let drawable = this.context?.getDrawable(R.drawable.uni_app_uni_prompt_circle_white_progress)!
 		if (this.loadingHeight > 0) {
 			this.mProgressBar.setLayoutParams(new LinearLayout.LayoutParams((this.loadingHeight * this.density).toInt(), (this.loadingHeight * this.density).toInt()))
 		} else {

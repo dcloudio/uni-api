@@ -34,7 +34,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -110,7 +110,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -185,7 +185,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -260,7 +260,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -330,7 +330,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -422,7 +422,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -497,7 +497,7 @@ export type RequestOptions<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -590,7 +590,7 @@ export type RequestSuccess<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -664,7 +664,7 @@ export type RequestSuccess<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -738,7 +738,7 @@ export type RequestSuccess<T> = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -821,76 +821,76 @@ export type RequestSuccess<T> = {
  * 请求方法
  */
 export type RequestMethod =
-/**
- * GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
- */
-"GET" |
-/**
- * POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
- */
-"POST" |
-/**
- * PUT方法用有效载荷请求替换目标资源的所有当前表示。
- */
-"PUT" |
-/**
- * PATCH方法用于对资源应用部分修改。
- */
-"PATCH" |
-/**
- * DELETE方法删除指定的资源。
- */
-"DELETE" |
-/**
- * HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。
- */
-"HEAD" |
-/**
- * OPTIONS 方法用于描述目标资源的通信选项。
- */
-"OPTIONS";
+  /**
+   * GET方法请求一个指定资源的表示形式，使用 GET 的请求应该只被用于获取数据。
+   */
+  "GET" |
+  /**
+   * POST方法用于将实体提交到指定的资源，通常导致在服务器上的状态变化或副作用。
+   */
+  "POST" |
+  /**
+   * PUT方法用有效载荷请求替换目标资源的所有当前表示。
+   */
+  "PUT" |
+  /**
+   * PATCH方法用于对资源应用部分修改。
+   */
+  "PATCH" |
+  /**
+   * DELETE方法删除指定的资源。
+   */
+  "DELETE" |
+  /**
+   * HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体。
+   */
+  "HEAD" |
+  /**
+   * OPTIONS 方法用于描述目标资源的通信选项。
+   */
+  "OPTIONS";
 
 /**
  * 错误码
  */
 export type RequestErrorCode =
-/**
- * 接口超时
- */
-5 |
-/**
- * 服务端系统错误
- */
-1000 |
-/**
- * json数据解析错误
- */
-100001 |
-/**
- * 错误信息json解析失败
- */
-100002 |
-/**
- * 网络中断
- */
-600003 |
-/**
- * data参数类型不合法
- */
-600008 |
-/**
- * URL格式不合法
- */
-600009 |
-/**
- * request系统错误
- */
-602001;
+  /**
+   * 接口超时
+   */
+  5 |
+  /**
+   * 服务端系统错误
+   */
+  1000 |
+  /**
+   * json数据解析错误
+   */
+  100001 |
+  /**
+   * 错误信息json解析失败
+   */
+  100002 |
+  /**
+   * 网络中断
+   */
+  600003 |
+  /**
+   * data参数类型不合法
+   */
+  600008 |
+  /**
+   * URL格式不合法
+   */
+  600009 |
+  /**
+   * request系统错误
+   */
+  602001;
 
 /**
  * 网络请求失败的错误回调参数
  */
-export interface RequestFail extends IUniError{
+export interface RequestFail extends IUniError {
   errCode: RequestErrorCode
 };
 export type RequestSuccessCallback<T> = (option: RequestSuccess<T>) => void;
@@ -931,7 +931,7 @@ export interface RequestTask {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1021,7 +1021,7 @@ export type UploadFileOptionFiles = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1095,7 +1095,7 @@ export type UploadFileOptionFiles = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1169,7 +1169,7 @@ export type UploadFileOptionFiles = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1245,7 +1245,7 @@ export type UploadFileSuccess = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1319,7 +1319,7 @@ export type UploadFileSuccess = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1369,7 +1369,7 @@ export type UploadFileSuccessCallback = (result: UploadFileSuccess) => void;
 /**
  * 上传文件失败的错误回调参数
  */
-export interface UploadFileFail extends IUniError{
+export interface UploadFileFail extends IUniError {
   errCode: RequestErrorCode
 };
 export type UploadFileFailCallback = (result: UploadFileFail) => void;
@@ -1405,7 +1405,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1480,7 +1480,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1555,7 +1555,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1630,7 +1630,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1705,7 +1705,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1780,7 +1780,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1855,7 +1855,7 @@ export type UploadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1946,7 +1946,7 @@ export type OnProgressUpdateResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2020,7 +2020,7 @@ export type OnProgressUpdateResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2094,7 +2094,7 @@ export type OnProgressUpdateResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2175,7 +2175,7 @@ export interface UploadTask {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2260,7 +2260,7 @@ export interface UploadTask {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2348,7 +2348,7 @@ export type DownloadFileSuccess = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2422,7 +2422,7 @@ export type DownloadFileSuccess = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2472,7 +2472,7 @@ export type DownloadFileSuccessCallback = (result: DownloadFileSuccess) => void;
 /**
  * 下载文件失败的错误回调参数
  */
-export interface DownloadFileFail extends IUniError{
+export interface DownloadFileFail extends IUniError {
   errCode: RequestErrorCode
 };
 export type DownloadFileFailCallback = (result: DownloadFileFail) => void;
@@ -2508,7 +2508,7 @@ export type DownloadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2578,7 +2578,7 @@ export type DownloadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2654,7 +2654,7 @@ export type DownloadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2729,7 +2729,7 @@ export type DownloadFileOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2820,7 +2820,7 @@ export type OnProgressDownloadResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2894,7 +2894,7 @@ export type OnProgressDownloadResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -2968,7 +2968,7 @@ export type OnProgressDownloadResult = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -3048,7 +3048,7 @@ export interface DownloadTask {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -3133,7 +3133,7 @@ export interface DownloadTask {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -3190,110 +3190,110 @@ export interface DownloadTask {
 
 export type ConfigMTLS = (options: ConfigMTLSOptions) => void;
 export type Certificate = {
-    /**
-     * 对应请求的域名（注意：不要协议部分）
-     */
-    host: string,
-    /**
-     * 客户端证书（服务器端需要验证客户端证书时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台客户端证书只支持 .p12 类型的证书。HarmonyOS Next 上是证书路径 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
-     */
-    client?: string | null,
-    /**
-     * 客户端证书对应的密码（客户端证书存在时必须配置此项。HarmonyOS Next 上是证书秘钥的密码 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
-     */
-    clientPassword?: string | null,
-    /**
-     * 证书秘钥的路径，只支持 HarmonyOS Next
-     *
-     * @uniPlatform
-      {
-        "app": {
-          "android": {
-            "osVer": "x",
-            "uniVer": "x",
-            "unixVer": "x"
-          },
-          "ios": {
-            "osVer": "x",
-            "uniVer": "x",
-            "unixVer": "x"
-          },
-          "harmony": {
-            "osVer": "3.0",
-            "uniVer": "4.23",
-            "unixVer": "x"
-          }
+  /**
+   * 对应请求的域名（注意：不要协议部分）
+   */
+  host: string,
+  /**
+   * 客户端证书（服务器端需要验证客户端证书时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台客户端证书只支持 .p12 类型的证书。HarmonyOS Next 上是证书路径 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
+   */
+  client?: string | null,
+  /**
+   * 客户端证书对应的密码（客户端证书存在时必须配置此项。HarmonyOS Next 上是证书秘钥的密码 [文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-http-V5#clientcert11)）
+   */
+  clientPassword?: string | null,
+  /**
+   * 证书秘钥的路径，只支持 HarmonyOS Next
+   *
+   * @uniPlatform
+    {
+      "app": {
+        "android": {
+          "osVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         },
-        "web": {
+        "ios": {
+          "osVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "harmony": {
+          "osVer": "3.0",
+          "uniVer": "4.23",
+          "unixVer": "x"
+        }
+      },
+      "web": {
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    }
+   */
+  keyPath?: string | null,
+  /**
+   * 服务器端证书（客户端需要对服务器端证书做校验时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台服务器端证书只支持 .cer 类型的证书。HarmonyOS Next 不支持）
+   *
+   * @uniPlatform {
+    {
+      "app": {
+        "android": {
+          "osVer": "4.4",
+          "uniVer": "3.2.7",
+          "unixVer": "x"
+        },
+        "ios": {
+          "osVer": "10.0",
+          "uniVer": "3.2.7",
+          "unixVer": "x"
+        },
+        "harmony": {
+          "osVer": "x",
           "uniVer": "x",
           "unixVer": "x"
         }
+      },
+      "web": {
+        "uniVer": "x",
+        "unixVer": "x"
       }
-     */
-    keyPath?: string | null,
-    /**
-     * 服务器端证书（客户端需要对服务器端证书做校验时需要配置此项，格式要求请参考下面的证书格式说明，注意 iOS 平台服务器端证书只支持 .cer 类型的证书。HarmonyOS Next 不支持）
-     *
-     * @uniPlatform {
-      {
-        "app": {
-          "android": {
-            "osVer": "4.4",
-            "uniVer": "3.2.7",
-            "unixVer": "x"
-          },
-          "ios": {
-            "osVer": "10.0",
-            "uniVer": "3.2.7",
-            "unixVer": "x"
-          },
-          "harmony": {
-            "osVer": "x",
-            "uniVer": "x",
-            "unixVer": "x"
-          }
-        },
-        "web": {
-          "uniVer": "x",
-          "unixVer": "x"
-        }
-      }
-     */
-    server?: (string[]) | null
+    }
+   */
+  server?: (string[]) | null
 };
 export type ConfigMTLSSuccess = {
-    /**
-     * 成功返回 0,失败返回相应 code 码
-     */
-    code: number
+  /**
+   * 成功返回 0,失败返回相应 code 码
+   */
+  code: number
 };
 export type ConfigMTLSSuccessCallback = (result: ConfigMTLSSuccess) => void;
 export type ConfigMTLSFail = {
-    /**
-     * 成功返回 0,失败返回相应 code 码
-     */
-    code: number
+  /**
+   * 成功返回 0,失败返回相应 code 码
+   */
+  code: number
 };
 export type ConfigMTLSFailCallback = (result: ConfigMTLSFail) => void;
 export type ConfigMTLSComplete = any;
 export type ConfigMTLSCompleteCallback = (result: ConfigMTLSComplete) => void;
 export type ConfigMTLSOptions = {
-    /**
-     * 资源url
-     */
-    certificates: Certificate[],
-    /**
-     * 成功返回的回调函数
-     */
-    success?: ConfigMTLSSuccessCallback | null,
-    /**
-     * 失败的回调函数
-     */
-    fail?: ConfigMTLSFailCallback | null,
-    /**
-     * 结束的回调函数（调用成功、失败都会执行）
-     */
-    complete?: ConfigMTLSCompleteCallback | null
+  /**
+   * 资源url
+   */
+  certificates: Certificate[],
+  /**
+   * 成功返回的回调函数
+   */
+  success?: ConfigMTLSSuccessCallback | null,
+  /**
+   * 失败的回调函数
+   */
+  fail?: ConfigMTLSFailCallback | null,
+  /**
+   * 结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: ConfigMTLSCompleteCallback | null
 }
 
 export interface Uni {
@@ -3302,6 +3302,8 @@ export interface Uni {
     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
+  * @inline
+  * @reified
     * @uniPlatform
     {
       "app": {
@@ -3329,7 +3331,7 @@ export interface Uni {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -3434,7 +3436,7 @@ export interface Uni {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -3525,7 +3527,7 @@ export interface Uni {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.35"
+    *        "unixVer": "4.41"
     *    },
     *    "alipay": {
     *        "hostVer": "√",

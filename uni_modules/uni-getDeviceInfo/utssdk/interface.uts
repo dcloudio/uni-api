@@ -18,9 +18,9 @@ export type GetDeviceInfoOptions = {
      * }
      */
     filter: Array<string>
-  }
+}
 
-  export type GetDeviceInfoResult = {
+export type GetDeviceInfoResult = {
     /**
      * 设备品牌
      * @deprecated 已废弃，仅为了向下兼容保留
@@ -48,7 +48,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -119,7 +119,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -190,7 +190,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -262,7 +262,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -333,7 +333,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -404,7 +404,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -617,7 +617,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -688,7 +688,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -972,7 +972,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1043,7 +1043,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1443,16 +1443,16 @@ export type GetDeviceInfoOptions = {
      * }
      */
     romVersion?: string | null,
-  }
+}
 
 
-  /**
-   * @param [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
-   */
-  export type GetDeviceInfo = (options?: GetDeviceInfoOptions | null) => GetDeviceInfoResult;
+/**
+ * @param [options=包含所有字段的过滤对象] 过滤的字段对象, 不传参数默认为获取全部字段。
+ */
+export type GetDeviceInfo = (options?: GetDeviceInfoOptions | null) => GetDeviceInfoResult;
 
 
-  export interface Uni {
+export interface Uni {
     /**
       * GetDeviceInfo(Object object)
       * @description
@@ -1485,7 +1485,7 @@ export type GetDeviceInfoOptions = {
      *    "weixin": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "4.35"
+     *        "unixVer": "4.41"
      *    },
      *    "alipay": {
      *        "hostVer": "√",
@@ -1536,4 +1536,4 @@ export type GetDeviceInfoOptions = {
        ```
       */
     getDeviceInfo(options?: GetDeviceInfoOptions | null): GetDeviceInfoResult;
-  }
+}

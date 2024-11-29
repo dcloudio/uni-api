@@ -26,6 +26,48 @@ export interface Uni {
           "unixVer": "x"
         }
       },
+      "mp": {
+        "weixin": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "alipay": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        }
+      },
       "web": {
         "uniVer": "x",
         "unixVer": "x"
@@ -38,7 +80,7 @@ export interface Uni {
     })
     ```
    */
-  onOsThemeChange(callback : OnOsThemeChangeCallback): number
+  onOsThemeChange(callback: OnOsThemeChangeCallback): number
 
   /**
    * 取消监听系统主题变化
@@ -67,6 +109,48 @@ export interface Uni {
           "unixVer": "x"
         }
       },
+      "mp": {
+        "weixin": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "alipay": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        }
+      },
       "web": {
         "uniVer": "x",
         "unixVer": "x"
@@ -77,7 +161,7 @@ export interface Uni {
     uni.offOsThemeChange(id)
     ```
    */
-  offOsThemeChange(id : number): void
+  offOsThemeChange(id: number): void
 
   /**
    * 设置应用主题
@@ -101,6 +185,48 @@ export interface Uni {
           "unixUtsPlugin": "4.18"
         }
       },
+      "mp": {
+        "weixin": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "alipay": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        }
+      },
       "web": {
         "uniVer": "x",
         "unixVer": "x"
@@ -122,7 +248,7 @@ export interface Uni {
     })
     ```
    */
-  setAppTheme(options : SetAppThemeOptions): void
+  setAppTheme(options: SetAppThemeOptions): void
 
   /**
    * 开启监听应用主题变化
@@ -146,6 +272,48 @@ export interface Uni {
           "unixUtsPlugin": "4.18"
         }
       },
+      "mp": {
+        "weixin": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "alipay": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
+        }
+      },
       "web": {
         "uniVer": "x",
         "unixVer": "x"
@@ -158,7 +326,7 @@ export interface Uni {
     })
     ```
    */
-  onAppThemeChange(callback : OnAppThemeChangeCallback): number
+  onAppThemeChange(callback: OnAppThemeChangeCallback): number
 
   /**
    * 取消监听应用主题变化
@@ -192,7 +360,296 @@ export interface Uni {
     uni.offAppThemeChange(id)
     ```
    */
-  offAppThemeChange(id : number): void
+  offAppThemeChange(id: number): void
+
+  /**
+   * 监听宿主题状态变化。
+   * @tutorial https://uniapp.dcloud.io/api/system/theme.html#onhostthemechange
+   * @tutorial-uni-app https://uniapp.dcloud.io/api/system/theme.html#onhostthemechange
+   * @uniPlatform {
+   *  "app": {
+   *    "android": {
+   *      "osVer": "5.0",
+   *      "uniVer": "x",
+   *      "unixVer": "4.35"
+   *    },
+   *    "ios": {
+   *      "osVer": "9.0",
+   *      "uniVer": "x",
+   *      "unixVer": "4.35"
+   *    },
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "mp": {
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "x",
+   *      "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "4.35"
+   *  }
+   * }
+   */
+  onHostThemeChange(callback: OnHostThemeChangeCallback): number;
+  /**
+   * 取消监听宿主题状态变化。
+   * @tutorial https://uniapp.dcloud.io/api/system/theme.html#offhostthemechange
+   * @tutorial-uni-app https://uniapp.dcloud.io/api/system/theme.html#offhostthemechange
+   * @uniPlatform {
+   *  "app": {
+   *    "android": {
+   *      "osVer": "5.0",
+   *      "uniVer": "x",
+   *      "unixVer": "4.35"
+   *    },
+   *    "ios": {
+   *      "osVer": "9.0",
+   *      "uniVer": "x",
+   *      "unixVer": "4.35"
+   *    },
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "mp": {
+   *    "weixin": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "web": {
+   *    "uniVer": "x",
+   *    "unixVer": "4.35"
+   *  }
+   * }
+   */
+  offHostThemeChange(id: number): void;
+
+
+  /**
+   * 监听系统主题状态变化。
+   * @deprecated 已废弃，在web、小程序上推荐使用 onHostThemeChange
+   * @tutorial https://uniapp.dcloud.io/api/system/theme.html#onthemechange
+   * @tutorial-uni-app https://uniapp.dcloud.io/api/system/theme.html#onthemechange
+   * @uniPlatform {
+   *  "app": {
+   *    "android": {
+   *      "osVer": "5.0",
+   *      "uniVer": "3.6.9",
+   *      "unixVer": "x"
+   *    },
+   *    "ios": {
+   *      "osVer": "9.0",
+   *      "uniVer": "2.6.5",
+   *      "unixVer": "x"
+   *    },
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "mp": {
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "2.11.0",
+   *      "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "√",
+   *      "uniVer": "5.3.0",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "web": {
+   *    "uniVer": "3.6.9",
+   *    "unixVer": "4.0"
+   *  }
+   * }
+   */
+  onThemeChange(callback: OnThemeChangeCallback): void;
+  /**
+   * 取消监听系统主题状态变化。
+   * @deprecated 已废弃，在web、小程序上推荐使用 offHostThemeChange
+   * @tutorial https://uniapp.dcloud.io/api/system/theme.html#offthemechange
+   * @tutorial-uni-app https://uniapp.dcloud.io/api/system/theme.html#offthemechange
+   * @uniPlatform {
+   *  "app": {
+   *    "android": {
+   *      "osVer": "5.0",
+   *      "uniVer": "3.6.9",
+   *      "unixVer": "x"
+   *    },
+   *    "ios": {
+   *      "osVer": "9.0",
+   *      "uniVer": "2.6.5",
+   *      "unixVer": "x"
+   *    },
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "mp": {
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "2.11.0",
+   *      "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "lark": {
+   *      "hostVer": "√",
+   *      "uniVer": "5.3.0",
+   *      "unixVer": "x"
+   *    },
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    },
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   *  },
+   *  "web": {
+   *    "uniVer": "3.6.9",
+   *    "unixVer": "4.0"
+   *  }
+   * }
+   */
+  offThemeChange(callback: OnThemeChangeCallback): void;
 }
 
 /**
@@ -257,7 +714,7 @@ export type OsThemeChangeResult = {
       }
     }
    */
-  osTheme : string
+  osTheme: string
 }
 
 /**
@@ -322,29 +779,29 @@ export type AppThemeChangeResult = {
       }
     }
    */
-  appTheme : string
+  appTheme: string
 }
 
 /*
  * 系统主题相关类型定义
  */
-export type OnOsThemeChangeCallback = (res : OsThemeChangeResult) => void
-export type OnOsThemeChange = (callback : OnOsThemeChangeCallback) => number
-export type OffOsThemeChange = (id : number) => void
+export type OnOsThemeChangeCallback = (res: OsThemeChangeResult) => void
+export type OnOsThemeChange = (callback: OnOsThemeChangeCallback) => number
+export type OffOsThemeChange = (id: number) => void
 
 /*
  * 应用主题相关类型定义
  */
-export type SetAppTheme = (options : SetAppThemeOptions) => void
-export type OnAppThemeChangeCallback = (res : AppThemeChangeResult) => void
-export type OnAppThemeChange = (callback : OnAppThemeChangeCallback) => number
-export type OffAppThemeChange = (id : number) => void
+export type SetAppTheme = (options: SetAppThemeOptions) => void
+export type OnAppThemeChangeCallback = (res: AppThemeChangeResult) => void
+export type OnAppThemeChange = (callback: OnAppThemeChangeCallback) => number
+export type OffAppThemeChange = (id: number) => void
 export type SetAppThemeSuccessResult = {
-  theme : string
+  theme: string
 }
-export type SetAppThemeSuccessCallback = (result : SetAppThemeSuccessResult) => void;
-export type SetAppThemeFailCallback = (result : AppThemeFail) => void;
-export type SetAppThemeCompleteCallback = (result : any) => void;
+export type SetAppThemeSuccessCallback = (result: SetAppThemeSuccessResult) => void;
+export type SetAppThemeFailCallback = (result: AppThemeFail) => void;
+export type SetAppThemeCompleteCallback = (result: any) => void;
 
 /**
  * @uniPlatform
@@ -408,7 +865,7 @@ export type SetAppThemeOptions = {
       }
     }
    */
-  theme : 'light' | 'dark' | 'auto'
+  theme: 'light' | 'dark' | 'auto'
 
   /**
    * 接口调用成功的回调函数
@@ -442,7 +899,7 @@ export type SetAppThemeOptions = {
       }
     }
    */
-  success? : SetAppThemeSuccessCallback
+  success?: SetAppThemeSuccessCallback
 
   /**
    * 接口调用失败的回调函数
@@ -476,7 +933,7 @@ export type SetAppThemeOptions = {
       }
     }
    */
-  fail? : SetAppThemeFailCallback
+  fail?: SetAppThemeFailCallback
 
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
@@ -510,7 +967,7 @@ export type SetAppThemeOptions = {
       }
     }
    */
-  complete? : SetAppThemeCompleteCallback
+  complete?: SetAppThemeCompleteCallback
 }
 
 /**
@@ -579,5 +1036,22 @@ export type AppThemeFail = IAppThemeFail;
   }
  */
 export interface IAppThemeFail extends IUniError {
-  errCode : AppThemeErrorCode
+  errCode: AppThemeErrorCode
 };
+
+export type OnHostThemeChangeCallbackResult = {
+  /**
+   * 主题名称
+   */
+  hostTheme: 'dark' | 'light'
+};
+export type OnHostThemeChangeCallback = (result: OnHostThemeChangeCallbackResult) => void;
+
+
+export type OnThemeChangeCallbackResult = {
+  /**
+   * 主题名称
+   */
+  theme: 'dark' | 'light'
+};
+export type OnThemeChangeCallback = (result: OnHostThemeChangeCallbackResult) => void;

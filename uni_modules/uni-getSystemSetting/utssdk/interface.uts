@@ -27,7 +27,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -94,7 +94,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "x",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -161,7 +161,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -201,7 +201,7 @@ export type GetSystemSettingResult = {
    *  }
    * }
    */
-  locationEnabled : boolean,
+  locationEnabled: boolean,
   /**
    * wifi是否开启
    *
@@ -228,7 +228,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -295,7 +295,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "x",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -362,7 +362,7 @@ export type GetSystemSettingResult = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -402,7 +402,7 @@ export type GetSystemSettingResult = {
    *  }
    * }
    */
-  deviceOrientation :
+  deviceOrientation:
   /**
    * 纵向
    */
@@ -427,29 +427,29 @@ export interface Uni {
     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
     * @uniPlatform
-	* {
-	* 	"app": {
-	* 		"android": {
-	* 			"osVer": "5.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "3.9+"
-	* 		},
-	* 		"ios": {
-	* 			"osVer": "12.0",
-	* 			"uniVer": "√",
-	* 			"unixVer": "4.11"
-	* 		},
+  * {
+  * 	"app": {
+  * 		"android": {
+  * 			"osVer": "5.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "3.9+"
+  * 		},
+  * 		"ios": {
+  * 			"osVer": "12.0",
+  * 			"uniVer": "√",
+  * 			"unixVer": "4.11"
+  * 		},
   *    "harmony": {
   *      "osVer": "3.0",
   *      "uniVer": "4.31",
   *      "unixVer": "x"
   *    }
-	* 	},
+  * 	},
    *  "mp": {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -491,7 +491,7 @@ export interface Uni {
   *     "uniVer": "x",
   *     "unixVer": "x"
   *   }
-	* }
+  * }
     * @example
      ```typescript
       uni.getSystemSetting()

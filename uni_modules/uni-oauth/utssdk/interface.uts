@@ -27,7 +27,7 @@ export interface Uni {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -109,7 +109,7 @@ export interface Uni {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -165,8 +165,8 @@ export interface Uni {
   getUserInfo: GetUserInfo;
 }
 export interface UniOAuthProvider extends UniProvider {
-	login(options : LoginOptions) : void;
-	getUserInfo(options : GetUserInfoOptions) : void;
+  login(options: LoginOptions): void;
+  getUserInfo(options: GetUserInfoOptions): void;
 }
 export type Login = (options: LoginOptions) => void;
 
@@ -864,7 +864,7 @@ export type GetUserInfoSuccess = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "√",
@@ -942,7 +942,7 @@ export type GetUserInfoSuccess = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1020,7 +1020,7 @@ export type GetUserInfoSuccess = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1098,7 +1098,7 @@ export type GetUserInfoSuccess = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1176,7 +1176,7 @@ export type GetUserInfoSuccess = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1367,7 +1367,7 @@ export type GetUserInfoOptions = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1445,7 +1445,7 @@ export type GetUserInfoOptions = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",
@@ -1523,7 +1523,7 @@ export type GetUserInfoOptions = {
    *    "weixin": {
    *        "hostVer": "√",
    *        "uniVer": "√",
-   *        "unixVer": "4.35"
+   *        "unixVer": "4.41"
    *    },
    *    "alipay": {
    *        "hostVer": "x",

@@ -198,10 +198,15 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 				let selectMediaResult : kotlin.collections.ArrayList<Parcelable> | null = data!!.getParcelableArrayListExtra("select_result");
 				if (selectMediaResult != null) {
 					selectMediaResult.forEach((current) => {
-						let path = (current as Media).path;
-						picPaths.push("file://" + (current as Media).path);
+						var path = (current as Media).path;
+						if (path.startsWith("file://") || path.startsWith("content://")) {
+							picPaths.push(path)
+						} else {
+							path = "file://" + path
+							picPaths.push(path);
+						}
 						try {
-							let tempPathJson : ChooseImageTempFile = { "path": "file://" + path, "size": new File(path).length() }
+							let tempPathJson : ChooseImageTempFile = { "path": path, "size": new File(path).length() }
 							picTempPathJson.push(tempPathJson)
 						} catch (e) { }
 					})
@@ -430,8 +435,14 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 				if (result instanceof GetVideoInfoSuccess) {
 					metadata = result as GetVideoInfoSuccess
 				}
+				var tPath = ""
+				if (picPaths.startsWith("file://") || picPaths.startsWith("content://")) {
+					tPath = picPaths
+				} else {
+					tPath = "file://" + picPaths
+				}
 				let success : ChooseVideoSuccess = {
-					tempFilePath: "file://" + picPaths,
+					tempFilePath: tPath,
 					width: metadata == null ? 0 : metadata!.width,
 					height: metadata == null ? 0 : metadata!.height,
 					size: metadata == null ? 0 : metadata!.size,
