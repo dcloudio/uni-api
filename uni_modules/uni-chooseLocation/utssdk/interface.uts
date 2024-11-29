@@ -4,12 +4,59 @@
 export type ChooseLocationErrorCode =
   /**
    * 取消
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.34"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.34"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.34"
+   *    }
+   * } 
    */
   1 |
   /**
    * 框架内部错误
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.34"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.34"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.34"
+   *    }
+   * } 
    */
   4;
+
 export interface ChooseLocationSuccess extends AsyncApiSuccessResult {
   name : string,
   address : string,
@@ -32,26 +79,191 @@ type ChooseLocationCompleteCallback = (result : ChooseLocationComplete) => void
 export type ChooseLocationOptions = {
   /**
    * 指示位置的经度
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   latitude ?: number | null,
   /**
    * 指示位置的纬度
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   longitude ?: number | null,
   /**
    * 指示位置的名称
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   keyword ?: string | null,
   /**
+   * 用户自定义参数
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.35"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.35"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.35"
+   *    }
+   * } 
+   */
+  payload ?: UTSJSONObject | null,
+  /**
    * 接口调用成功的回调函数
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   success ?: ChooseLocationSuccessCallback | null,
   /**
    * 接口调用失败的回调函数
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   fail ?: ChooseLocationFailCallback | null,
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
+   * @uniPlatform {
+   *    "app": {
+   *      "android": {
+   *        "osVer": "5.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "ios": {
+   *        "osVer": "12.0",
+   *        "uniVer": "√",
+   *        "unixVer": "4.33"
+   *      },
+   *      "harmony": {
+   *        "osVer": "3.0",
+   *        "uniVer": "4.23",
+   *        "unixVer": "x"
+   *      }
+   *    },
+   *    "web": {
+   *      "uniVer": "√",
+   *      "unixVer": "4.0"
+   *    }
+   * } 
    */
   complete ?: ChooseLocationCompleteCallback | null
 };
@@ -66,13 +278,13 @@ export type ChooseLocationOptions = {
  *        "android": {
  *            "osVer": "5.0",
  *            "uniVer": "√",
- *            "unixVer": "3.9.0"
+ *            "unixVer": "4.33"
  *        },
  *        "ios": {
  *            "osVer": "12.0",
  *            "uniVer": "√",
- *            "unixVer": "4.11"
- *   	  },
+ *            "unixVer": "4.33"
+ *        },
  *    "harmony": {
  *      "osVer": "3.0",
  *      "uniVer": "4.23",
@@ -151,10 +363,10 @@ export class ChooseLocationSuccessImpl extends AsyncApiSuccessResult implements 
 }
 export class ChooseLocationFailImpl extends UniError implements ChooseLocationFail {
   override errCode : ChooseLocationErrorCode
-  constructor(errMsg : string = 'chooseLocation:fail cancel', errCode : ChooseLocationErrorCode = 4) {
-    super(errMsg)
+  constructor(errMsg : string = 'chooseLocation:fail cancel', errCode : ChooseLocationErrorCode = 1) {
+    super()
     this.errCode = errCode
+    this.errMsg = errMsg
   }
 }
-
 // #endif
