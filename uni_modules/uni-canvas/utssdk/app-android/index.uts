@@ -52,20 +52,18 @@ class CanvasContextImpl implements CanvasContext {
 }
 
 export const createCanvasContextAsync =
-    function (options: CreateCanvasContextAsyncOptions) {
-      const currentPage: ComponentPublicInstance = options.component ?? (getCurrentPages()[getCurrentPages().length - 1]).vm as ComponentPublicInstance
-        if (currentPage != null) {
-            const element = currentPage.$el?.querySelector('#' + options.id)
-            if (element != null) {
-                const canvas = element as UniCanvasElement
-                options.success?.(new CanvasContextImpl(canvas))
-            } else {
-                const uniError = new UniError('uni-createCanvasContextAsync', -1, 'canvas id invalid.')
-                options.fail?.(uniError)
-            }
-        } else {
-          const uniError = new UniError('uni-createCanvasContextAsync', -1, 'No found current page.')
-          options.fail?.(uniError)
-        }
-        options.complete?.()
-    }
+  function (options: CreateCanvasContextAsyncOptions) {
+    const currentPage: ComponentPublicInstance = options.component ?? (getCurrentPages()[getCurrentPages().length - 1]).vm as ComponentPublicInstance
+    currentPage.createSelectorQuery().select('#' + options.id).fields({
+      node: true
+    } as NodeField, (ret) => {
+      const node = (ret as NodeInfo).node
+      if (node != null) {
+        options.success?.(new CanvasContextImpl(node as UniCanvasElement))
+      } else {
+        const uniError = new UniError('uni-createCanvasContextAsync', -1, 'canvas id invalid.')
+        options.fail?.(uniError)
+      }
+      options.complete?.()
+    }).exec()
+  }
