@@ -31,7 +31,7 @@ let toastType : string | null = null
 
 export function showToastImpl(style : ShowToastOptions) {
 	makeToast(style, 'toast', 'showToast')
-
+	
 }
 
 export function hideToastImpl() {
@@ -108,33 +108,33 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 		options["width"] = "140"
 		options["height"] = "112"
 
-
-
+		
+		
 		// #ifndef UNI-APP-X
 			/**
 			 * uni-app
 			 */
-			const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
+			const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 			toast = alert
 			alert?.showWaiting();
-
+			
 			UTSAndroid.onAppActivityDestroy(function(){
 				toast?.close()
 				toast = null
 			})
-
+			
 		// #endif
 		// #ifdef UNI-APP-X
 			/**
 			 * uni-app x
-			 * 需要特殊处理生命周期
+			 * 需要特殊处理生命周期 
 			 */
 			const pages = getCurrentPages();
 			if (pages.length > 0) {
 				const page = pages[pages.length - 1].vm!
 				const instance = page.$
 				if (page.$isReady) {
-					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
+					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 					toast = alert
 			        alert?.showWaiting();
 			    } else {
@@ -142,24 +142,24 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 			        onReady(() => {
 						if(onReadyToast.containsKey(page)){
 							options = onReadyToast.get(page) as UTSJSONObject;
-
-							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
+							
+							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 							toast = alert
 							alert?.showWaiting();
-
+							
 							onReadyToast.remove(page)
 						}
 			        }, instance)
 			    }
-
+			    
 				onUnload(() => {
 					toast?.close()
 					toast = null
 				}, instance)
 			}
 		// #endif
-
-
+		
+		
 		const res : ShowLoadingSuccess = {
 		}
 		style.success?.(res)
@@ -178,7 +178,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 		style.complete?.(res)
 
 	} else {
-
+		
 		toastType = type
 		if (["top", "center", "bottom"].indexOf(style.position) >= 0) {
 			androidToast = Toast.makeText(UTSAndroid.getAppContext(), style.title, Toast.LENGTH_SHORT);
@@ -200,7 +200,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 			androidToast!.show()
 			const res : ShowToastSuccess = {
 			}
-
+			
 			style.success?.(res)
 			style.complete?.(res)
 		} else {
@@ -240,8 +240,8 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				}
 			}
 
-
-
+			
+			
 			// #ifndef UNI-APP-X
 				/**
 				 * uni-app
@@ -249,17 +249,17 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 				toast = alert
 				alert?.showWaiting();
-
+				
 				UTSAndroid.onAppActivityDestroy(function(){
 					toast?.close()
 					toast = null
 				})
-
+				
 			// #endif
 			// #ifdef UNI-APP-X
 				/**
 				 * uni-app x
-				 * 需要特殊处理生命周期
+				 * 需要特殊处理生命周期 
 				 */
 				const pages = getCurrentPages();
 				if (pages.length > 0) {
@@ -274,24 +274,24 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				        onReady(() => {
 							if(onReadyToast.containsKey(page)){
 								options = onReadyToast.get(page) as UTSJSONObject;
-
+								 
 								const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
 								toast = alert
 								alert?.showWaiting();
-
+							
 								onReadyToast.remove(page)
 							}
 				        }, instance)
 				    }
-
+				    
 					onUnload(() => {
 						toast?.close()
 						toast = null
 					}, instance)
 				}
 			// #endif
-
-
+			
+			
 			let duration : number | null = style.duration
 			if (duration == null || duration <= 0) {
 				duration = 1500
@@ -301,10 +301,10 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 					toast?.close()
 				}, duration)
 			}
-
+			
 			const res : ShowToastSuccess = {
 			}
-
+			
 			style.success?.(res)
 			style.complete?.(res)
 		}

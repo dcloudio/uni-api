@@ -57,19 +57,17 @@ export class WaitingView{
 	private loadingHeight = 0
 	private LoadingIcon: string = ""
 	private mBitmap: Bitmap | null = null;
-
-
+	
+	
 	private mpopWindow?: PopupWindow = null
-
+	
 	private currentHandler: Handler
-
-  private hostView:View | null = null
-
+	
 		//{"back":"transmit","height":"112px","loading":{"display":"block","height":"55px","icon":"__uniapperror.png","jSONArray":false},"padding":"10px","size":"16px","width":"140px"}
 
 
-	constructor(context?: Activity, style: UTSJSONObject,view:View) {
-
+	constructor(context?: Activity, style: UTSJSONObject) {
+		
 		this.context = context;
 		this.style = style.toJSONObject() as JSONObject
 		this.screenWidth = context?.getResources()?.getDisplayMetrics()!.widthPixels
@@ -81,8 +79,7 @@ export class WaitingView{
 		this.textView = this.waitingView.findViewById<TextView>(R.id.dcloud_tv_loading)
 		this.seaparatorView = this.waitingView.findViewById<View>(R.id.dcloud_view_seaparator)
 		this.mImageView = this.waitingView.findViewById<ImageView>(R.id.dcloud_iv_loading)
-		this.hostView = view
-
+		
 		this.textView.setMaxLines(2)
 
 		this.handlerArguments()
@@ -95,7 +92,7 @@ export class WaitingView{
 		this.currentHandler = new Handler(Looper.getMainLooper())
 		this.initView()
 		this.makeBitmap()
-
+		
 	}
 
 	handlerArguments() {
@@ -136,7 +133,7 @@ export class WaitingView{
 		this.textView.setGravity(Gravity.CENTER)
 		this.textView.setText(this.title)
 		this.textView.setTextSize(0, (16 * this.density).toFloat())
-
+		
 		if(this.title.length < 1){
 			// 没有文本需要展示
 			this.textView.setVisibility(View.GONE)
@@ -169,8 +166,8 @@ export class WaitingView{
 		}
 		return this.context!.dispatchTouchEvent(ev)
 	}
-
-
+	
+	
 	showWaiting() {
 		if(this.context != null && !this.context!.isFinishing()){
 			let width = -2;
@@ -182,7 +179,7 @@ export class WaitingView{
 			}
 			let mpop = new PopupWindow(this.waitingView, width.toInt(), height.toInt(), this.mask)
 			this.mpopWindow = mpop
-			mpop.showAtLocation(hostView, Gravity.CENTER, 0, 0)
+			mpop.showAtLocation((this.context?.findViewById<ViewGroup>(android.R.id.content))?.getChildAt(0), Gravity.CENTER, 0, 0)
 			mpop.setOutsideTouchable(true)
 			mpop.setOnDismissListener(new WaitingDismissListener())
 			mpop.setTouchInterceptor(new TouchInterceptorListener(this.mask))
