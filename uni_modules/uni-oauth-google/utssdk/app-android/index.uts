@@ -41,14 +41,14 @@ function wrapLoginResult(account:GoogleSignInAccount):GoogleLoginResult{
 		nickname:account.getDisplayName(),
 		email:account.getEmail(),
 	} as GoogleLoginUserInfo
-	
+
 	let result = {
 		userInfo : userInfoRet,
 		authResult : authInfoRet
 	} as GoogleLoginResult
-	
+
 	return result
-	
+
 }
 
 /**
@@ -74,20 +74,24 @@ export const googleLogout : GoogleLogout = function (option : GoogleLogoutOption
  * android google login 实现逻辑
  */
 export const googleLogin : GoogleLogin = function (options : GoogleLoginOptions) {
-	
+
 	if(UTSAndroid.getAppContext() == null){
 		const err = new GoogleLoginFailImpl(9010003);
 		options.fail?.(err)
 		options.complete?.(err)
+    options.fail = null;
+    options.complete = null;
 		return;
 	}
 	if(UTSAndroid.getUniActivity() == null || UTSAndroid.getUniActivity()!.isFinishing()){
 		const err = new GoogleLoginFailImpl(9010003);
 		options.fail?.(err)
 		options.complete?.(err)
+    options.fail = null;
+    options.complete = null;
 		return;
 	}
-	
+
 	if(mGoogleSignInClient == null){
 		try{
 			let gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -99,7 +103,7 @@ export const googleLogin : GoogleLogin = function (options : GoogleLoginOptions)
 			mGoogleSignInClient = null
 		}
 	}
-	
+
 	if(mGoogleSignInClient == null){
 		//  依然初始化失败 todo
 		const err = new GoogleLoginFailImpl(9010004);
@@ -107,7 +111,7 @@ export const googleLogin : GoogleLogin = function (options : GoogleLoginOptions)
 		options.complete?.(err)
 		return;
 	}
-	
+
 	let account = GoogleSignIn.getLastSignedInAccount(UTSAndroid.getAppContext()!);
 	if(account != null){
 		/**
@@ -115,11 +119,12 @@ export const googleLogin : GoogleLogin = function (options : GoogleLoginOptions)
 		 */
 		let loginResult = wrapLoginResult(account)
 		options.success?.(loginResult);
-		console.log("success happen ============== 222222222  ")
 		options.complete?.(loginResult);
+    options.success = null;
+    options.complete = null;
 		return
 	}
-	
+
 	/**
 	 * 注册activity 的回调监听
 	 */
@@ -145,18 +150,22 @@ export const googleLogin : GoogleLogin = function (options : GoogleLoginOptions)
 					const err = new GoogleLoginFailImpl(9010002);
 					options.fail?.(err)
 					options.complete?.(err)
+          options.fail = null;
+          options.complete = null;
 				}
 			}else{
 				// 当前设备没有安装安装GMS?
 				const err = new GoogleLoginFailImpl(9010001);
 				options.fail?.(err)
 				options.complete?.(err)
+        options.fail = null;
+        options.complete = null;
 			}
 		}
-		
-		
+
+
 	});
-	
+
 	/**
 	 * 发起登录intent
 	 */
