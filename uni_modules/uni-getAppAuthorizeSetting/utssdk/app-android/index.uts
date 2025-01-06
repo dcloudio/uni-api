@@ -103,9 +103,14 @@ const hasDefinedInManifest = function (permission : string) : boolean {
 		const context = UTSAndroid.getAppContext()!!;
 		const packageInfo = context.getPackageManager().getPackageInfo(context.getApplicationInfo().packageName, PackageManager.GET_PERMISSIONS);
 		if (packageInfo != null) {
-			for (const requestPermission in packageInfo.requestedPermissions) {
-				if (permission == requestPermission) {
-					return true;
+			const requestedPermissions = packageInfo.requestedPermissions
+			if (requestedPermissions == null) {
+				return false
+			} else {
+				for (const requestPermission in requestedPermissions!!) {
+					if (permission == requestPermission) {
+						return true;
+					}
 				}
 			}
 		}

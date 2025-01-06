@@ -2,7 +2,7 @@ import { display } from '@kit.ArkUI';
 import { window } from '@kit.ArkUI';
 import { Callback, BusinessError } from '@kit.BasicServicesKit';
 
-import { getAbilityContext, UTSHarmony } from '@dcloudio/uni-runtime';
+import { getAbilityContext } from '@dcloudio/uni-runtime';
 
 import {
   OnUserCaptureScreen, UserCaptureScreenCallback,
@@ -52,7 +52,7 @@ export const setUserCaptureScreen: SetUserCaptureScreen = function (options: Set
       return;
     } else {
       try {
-        UTSHarmony.requestSystemPermission(['ohos.permission.PRIVACY_WINDOW'], (allRight: boolean) => {
+        UTSHarmony.requestSystemPermission(['ohos.permission.PRIVACY_WINDOW'], (allRight: boolean, _grantedList: string[]) => {
           if (allRight) {
             window.setWindowPrivacyMode(!options.enable, (err: BusinessError) => {
               const errCode: number = err.code;
@@ -71,8 +71,8 @@ export const setUserCaptureScreen: SetUserCaptureScreen = function (options: Set
           } else {
             throw new Error('permission denied')
           }
-        }, () => {
-          throw new Error('permission denied')
+        }, (_doNotAskAgain: boolean, _grantedList: string[]) => {
+            throw new Error('permission denied');
         })
       } catch (err) {
         options.fail?.({

@@ -6,14 +6,14 @@ export type SetTabBarBadgeSuccessCallback = (
  * 错误码
  */
 export type SetTabBarErrorCode =
-/**
- * TabBar 不存在
- */
-100 |
-/**
- * 参数错误
- */
-200;
+    /**
+     * TabBar 不存在
+     */
+    100 |
+    /**
+     * 参数错误
+     */
+    200;
 
 export interface SetTabBarFail extends IUniError {
     errCode: SetTabBarErrorCode
@@ -276,6 +276,48 @@ export type SetTabBarStyleOptions = {
      *      "unixVer": "x"
      *    }
      *  },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "4.41"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "√",
+    *        "uniVer": "√",
+    *        "unixVer": "x"
+    *    }
+    *  },
      *  "web": {
      *    "uniVer": "x",
      *    "unixVer": "4.23"
@@ -459,7 +501,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -534,7 +576,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -609,7 +651,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -684,7 +726,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -759,7 +801,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -834,7 +876,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -909,7 +951,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",
@@ -984,7 +1026,7 @@ export interface Uni {
      *    "weixin": {
      *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.41"
      *    },
      *    "alipay": {
      *      "hostVer": "√",

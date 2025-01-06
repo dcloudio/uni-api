@@ -6,8 +6,7 @@ public var __$$on = {
 (_ eventName: String, _ callback:@escaping (_ arg: Any...) -> Void) -> NSNumber in
     return UniUTSJS.on(eventName, callback);
 };
-public var __$$off = {
-(_ eventName: String, _ callbackId: NSNumber) -> Void in
+public func __$$off(_ eventName: String, _ callbackId: NSNumber? = nil) {
     UniUTSJS.off(eventName, callbackId);
 };
 public var __$$once = {

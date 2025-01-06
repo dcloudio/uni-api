@@ -8,7 +8,7 @@ import {
 	UniError_ChooseImage, UniError_ChooseVideo,
 	MediaErrorImpl
 } from "../../unierror.uts"
-import { getOrientation, getVideoMetadata } from "./MediaUtils.uts"
+import { getMediaInfo, getOrientation, getVideoMetadata } from "./MediaUtils.uts"
 import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts"
 import { getUniActivity } from "io.dcloud.uts.android";
 import Intent from 'android.content.Intent';
@@ -33,7 +33,7 @@ const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
 		if (option.albumMode == "system" && index != 0) {
-			if (Build.VERSION.SDK_INT > 32) {
+			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
 				openAlbumForImage(option, count, 100)
 			} else {
 				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
@@ -198,10 +198,15 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 				let selectMediaResult : kotlin.collections.ArrayList<Parcelable> | null = data!!.getParcelableArrayListExtra("select_result");
 				if (selectMediaResult != null) {
 					selectMediaResult.forEach((current) => {
-						let path = (current as Media).path;
-						picPaths.push("file://" + (current as Media).path);
+						var path = (current as Media).path;
+						if (path.startsWith("file://") || path.startsWith("content://")) {
+							picPaths.push(path)
+						} else {
+							path = "file://" + path
+							picPaths.push(path);
+						}
 						try {
-							let tempPathJson : ChooseImageTempFile = { "path": "file://" + path, "size": new File(path).length() }
+							let tempPathJson : ChooseImageTempFile = { "path": path, "size": getMediaInfo(path) }
 							picTempPathJson.push(tempPathJson)
 						} catch (e) { }
 					})
@@ -230,7 +235,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 export function chooseMediaVideo(options : ChooseVideoOptions) {
 	uniChooseVideo(options, (count : number, compressed : boolean, index : number) => {
 		if (options.albumMode == "system" && index != 0) {
-			if (Build.VERSION.SDK_INT > 32) {
+			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
 				openAlbumForVideo(options, count, 102, compressed)
 			} else {
 				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
@@ -430,8 +435,14 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 				if (result instanceof GetVideoInfoSuccess) {
 					metadata = result as GetVideoInfoSuccess
 				}
+				var tPath = ""
+				if (picPaths.startsWith("file://") || picPaths.startsWith("content://")) {
+					tPath = picPaths
+				} else {
+					tPath = "file://" + picPaths
+				}
 				let success : ChooseVideoSuccess = {
-					tempFilePath: "file://" + picPaths,
+					tempFilePath: tPath,
 					width: metadata == null ? 0 : metadata!.width,
 					height: metadata == null ? 0 : metadata!.height,
 					size: metadata == null ? 0 : metadata!.size,

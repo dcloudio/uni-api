@@ -114,7 +114,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 			/**
 			 * uni-app
 			 */
-			const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+			const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 			toast = alert
 			alert?.showWaiting();
 			
@@ -134,7 +134,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 				const page = pages[pages.length - 1].vm!
 				const instance = page.$
 				if (page.$isReady) {
-					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+					const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 					toast = alert
 			        alert?.showWaiting();
 			    } else {
@@ -143,7 +143,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 						if(onReadyToast.containsKey(page)){
 							options = onReadyToast.get(page) as UTSJSONObject;
 							
-							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+							const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 							toast = alert
 							alert?.showWaiting();
 							
@@ -246,7 +246,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				/**
 				 * uni-app
 				 */
-				const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+				const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 				toast = alert
 				alert?.showWaiting();
 				
@@ -266,7 +266,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 					const page = pages[pages.length - 1].vm!
 				    const instance = page.$
 				    if (page.$isReady) {
-						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+						const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 						toast = alert
 				        alert?.showWaiting();
 				    } else {
@@ -275,7 +275,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 							if(onReadyToast.containsKey(page)){
 								options = onReadyToast.get(page) as UTSJSONObject;
 								 
-								const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options)
+								const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
 								toast = alert
 								alert?.showWaiting();
 							

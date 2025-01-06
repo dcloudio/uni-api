@@ -1,5 +1,5 @@
 export const DEFAULT_ANIMATION_IN = 'none'
-export const DEFAULT_ANIMATION_OUT = 'none'
+export const DEFAULT_ANIMATION_OUT = 'auto'
 export const DEFAULT_ANIMATION_DURATION = 300
 export const DEFAULT_ANIMATION_NAVIGATE_BACK = 'auto'
 

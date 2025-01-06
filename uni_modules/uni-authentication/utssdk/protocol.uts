@@ -23,7 +23,8 @@ export const StartSoterAuthenticationApiProtocols = new Map<string, ProtocolOpti
   [
     'challenge',
     {
-      type: 'string'
+      type: 'string',
+      required: true
     }
   ],
   [

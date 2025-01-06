@@ -137,6 +137,8 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 						} else {
 							result['data'] = "error";
 						}
+					} else if("java.lang.String".equals(this.clzName, true)){
+						result['data'] = option['errorMsg'] ?? "error";
 					} else {
 						let errMsg = option['errorMsg'];
 						if (errMsg != null) {
@@ -145,6 +147,8 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 								result['data'] = errMsgJson;
 							} else {
 								let failResult = new RequestFailImpl(getErrcode(100002));
+								failResult.data = errMsg
+								failResult.cause = new SourceError("Error message parsing failed")
 								new RunnableTask(this.looper, () => {
 									if (kParam != null) {
 										let fail = kParam.fail;

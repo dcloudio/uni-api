@@ -1,10 +1,12 @@
 {
 	"id": "uni-stat",
 	"displayName": "uni统计 for uni-app x",
-	"version": "1.0.3",
+	"version": "1.0.6",
 	"description": "uni统计的uni-app x 版本",
 	"keywords": [
-        "uni-stat"
+        "uni-stat",
+        "统计",
+        "uni统计"
     ],
 	"repository": "https://gitcode.net/dcloud/uni-api",
 	"engines": {

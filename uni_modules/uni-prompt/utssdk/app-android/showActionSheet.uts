@@ -181,7 +181,7 @@ export class UniActionSheet extends Dialog{
 	
 	constructor(activity: Activity, style: ShowActionSheetOptions) {
 		
-		super(activity,R.style.uni_prompt_ActionsheetDialog);
+		super(activity,R.style.uni_app_uni_prompt_ActionsheetDialog);
 		
 		this.hostActivity = activity
 		this.hostStyle = style
@@ -190,9 +190,9 @@ export class UniActionSheet extends Dialog{
 		 * 适配暗黑模式，配置不同的布局文件
 		 */
 		if(UTSAndroid.getAppDarkMode()){
-			setContentView(R.layout.uni_prompt_uts_action_sheet_night)
+			setContentView(R.layout.uni_app_uni_prompt_uts_action_sheet_night)
 		}else{
-			setContentView(R.layout.uni_prompt_uts_action_sheet)
+			setContentView(R.layout.uni_app_uni_prompt_uts_action_sheet)
 		}
 		
 		
@@ -218,7 +218,7 @@ export class UniActionSheet extends Dialog{
 			this.window!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 			this.window!.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
 			if(this.window!.attributes != null){
-				this.window!.attributes!.windowAnimations = R.style.uni_prompt_DialogAnimations_slideWindow;
+				this.window!.attributes!.windowAnimations = R.style.uni_app_uni_prompt_DialogAnimations_slideWindow;
 			}
 		}
 		
@@ -339,18 +339,18 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 		if(viewType == 1002){
 			if(UTSAndroid.getAppDarkMode()){
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_night, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_app_uni_prompt_ac_recyclerview_layout_night, parent, false)
 			}else{
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_app_uni_prompt_ac_recyclerview_layout, parent, false)
 			}
 		}else{
 			if(UTSAndroid.getAppDarkMode()){
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_top_night, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_app_uni_prompt_ac_recyclerview_layout_top_night, parent, false)
 			}else{
 				view =
-				    LayoutInflater.from(parent.context).inflate(R.layout.uni_prompt_ac_recyclerview_layout_top, parent, false)
+				    LayoutInflater.from(parent.context).inflate(R.layout.uni_app_uni_prompt_ac_recyclerview_layout_top, parent, false)
 			}
 		}
 		

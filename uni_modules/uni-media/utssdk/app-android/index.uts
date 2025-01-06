@@ -13,12 +13,11 @@ import {
 } from "../interface.uts"
 export { ChooseFileSuccess, ChooseFileOptions, ChooseMediaFileType, ChooseMediaTempFile, ChooseMediaSuccess, ChooseMediaOptions, ChooseFileFail, ChooseFileComplete, ChooseMediaFail, LongPressActionsSuccessData, LongPressActionsOptions } from '../interface.uts';
 import {
-	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum,
-	MediaErrorImpl
+	UniError_PreviewImage, UniError_GetImageInfo, UniError_SaveImageToPhotosAlbum, UniError_SaveVideoToPhotosAlbum, UniError_CompressVideo, MediaErrorImpl
 } from "../unierror.uts"
 import { chooseMediaImage, chooseMediaVideo } from "./utils/ChooseMediaUtils.uts"
 import { transcodeImage, transcodeVideo } from './utils/CompressUtils.uts'
-import { getVideoMetadata, copyFile, getOrientation } from "./utils/MediaUtils.uts"
+import { getVideoMetadata, copyFile, getOrientation, getFileName } from "./utils/MediaUtils.uts"
 import Intent from 'android.content.Intent';
 import Manifest from 'android.Manifest';
 import Build from 'android.os.Build';
@@ -72,7 +71,7 @@ export const previewImage : PreviewImage = function (options : PreviewImageOptio
 			if (localPath.startsWith(ASSETS_PATH)) {
 				localPath = localPath.replace(ASSETS_PATH, "")
 			}
-			
+
 			values.add(localPath)
 			oroginalValues.add(original)
 		})
@@ -266,6 +265,16 @@ function getExif(src : string, options : GetImageInfoOptions, bitmapOption : Bit
 	if (src.startsWith(ASSETS_PATH)) {
 		exifInfo = new ExifInterface(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")));
 		BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")), null, bitmapOption)
+	} else if (src.startsWith("content://")) {
+		try {
+			exifInfo = new ExifInterface(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(src))!)
+			BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(src))!, null, bitmapOption)
+		} catch (e) {
+			let imageInfoCallback = new MediaErrorImpl(1101003, UniError_GetImageInfo);
+			options.fail?.(imageInfoCallback)
+			options.complete?.(imageInfoCallback)
+			return
+		}
 	} else if (new File(src).exists()) {
 		exifInfo = new ExifInterface(src)
 		BitmapFactory.decodeFile(src, bitmapOption)
@@ -312,10 +321,16 @@ function getExif(src : string, options : GetImageInfoOptions, bitmapOption : Bit
 				orientationStr = "up";
 				break;
 		}
+		var realPath = src
+		if (src.startsWith("content://") || src.startsWith("file://")) {
+			realPath = src
+		} else {
+			realPath = "file://" + src
+		}
 		let imageInfoCallback : GetImageInfoSuccess = {
 			"width": width,
 			"height": height,
-			"path": "file://" + src,
+			"path": realPath,
 			"orientation": orientationStr,
 			"type": TextUtils.isEmpty(mimeType) ? "unknown" : mimeType
 		}
@@ -354,13 +369,15 @@ function loadFile(options : SaveImageToPhotosAlbumOptions, saveToAlbum : boolean
 			return
 		}
 		let originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
-		if (originalPath.startsWith(ASSETS_PATH)) { } else if (!new File(originalPath).exists()) {
+		if (originalPath.startsWith(ASSETS_PATH) || originalPath.startsWith("content://")) {
+
+		} else if (!new File(originalPath).exists()) {
 			let error = new MediaErrorImpl(1101003, UniError_SaveImageToPhotosAlbum);
 			options.fail?.(error)
 			options.complete?.(error)
 			return
 		}
-		let path = DCIM_PATH + originalPath.substring(originalPath.lastIndexOf("/") + 1)
+		let path = DCIM_PATH + getFileName(originalPath)
 		if (copyFileToPublicPath(originalPath, path, false)) {
 			if (saveToAlbum) {
 				sendSaveToAlbumBroad(path)
@@ -383,6 +400,8 @@ function getInputStream(fromFilePath : string) : InputStream | null {
 	try {
 		if (fromFilePath.startsWith(ASSETS_PATH)) {
 			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+		} else if (fromFilePath.startsWith("content://")) {
+			fis = UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
 		} else {
 			fis = new FileInputStream(fromFilePath)
 		}
@@ -411,10 +430,14 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 				var retriever = new MediaMetadataRetriever()
 				if (fromFilePath.startsWith(ASSETS_PATH)) {
 					var mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/_" + System.currentTimeMillis()
-					copyFile(fromFilePath,mediaCachePath)
+					copyFile(fromFilePath, mediaCachePath)
 					fromFilePath = mediaCachePath
 				}
-				retriever.setDataSource(fromFilePath)
+				if (fromFilePath.startsWith("content://")) {
+					retriever.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(fromFilePath))
+				} else {
+					retriever.setDataSource(fromFilePath)
+				}
 				mimeType = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
 			} else {
 				let opt = new BitmapFactory.Options();
@@ -436,7 +459,7 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 			}
 			var resolver = UTSAndroid.getUniActivity()!.getContentResolver()
 			var contentValue = new ContentValues()
-			let fileName = fromFilePath.substring(fromFilePath.lastIndexOf("/") + 1)
+			var fileName = getFileName(fromFilePath)
 			contentValue.put(MediaStore.Files.FileColumns.DISPLAY_NAME, fileName)
 			contentValue.put(MediaStore.Files.FileColumns.MIME_TYPE, mimeType!)
 			contentValue.put(MediaStore.Files.FileColumns.TITLE, fileName)
@@ -578,7 +601,7 @@ function loadFile(options : SaveVideoToPhotosAlbumOptions) {
 	if (!file.exists()) {
 		originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
 	}
-	let path = DCIM_PATH + originalPath.substring(originalPath.lastIndexOf("/") + 1)
+	let path = DCIM_PATH + getFileName(originalPath)
 	if (copyFileToPublicPath(originalPath, path, true)) {
 		sendSaveToAlbumBroad(path)
 		let success : SaveVideoToPhotosAlbumSuccess = {
@@ -594,5 +617,11 @@ function loadFile(options : SaveVideoToPhotosAlbumOptions) {
 }
 
 export const compressVideo : CompressVideo = function (options : CompressVideoOptions) {
-	transcodeVideo(options)
+	try {
+		transcodeVideo(options)
+	} catch (e) {
+		let error = new MediaErrorImpl(1101010, UniError_CompressVideo);
+		options.fail?.(error)
+		options.complete?.(error)
+	}
 }

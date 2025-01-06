@@ -259,7 +259,13 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 
 			if (state == WifiManager.WIFI_STATE_ENABLED) {
 				// 获取当前的connectInfo 并且进行数据封装
-				let uniWifiInfo = new UniWifiInfo("","",false,0,0)
+				let uniWifiInfo:UniWifiInfo = {
+          SSID:'',
+          BSSID:'',
+          secure:false,
+          signalStrength:0,
+          frequency:0
+        }
 				//做一些异步操作
 				setTimeout(function () {
 					// BroadcastReceiver 中不能执行耗时任务，需要使用setTimeout
@@ -269,14 +275,21 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
           if(winfo != null && winfo.bssid != null && zeroCountNum(winfo.bssid) < 3){
               //  当前设备链接到了某个具体的wifi.封装成数据对象
               uniWifiInfo = wrapUniWifiInfoFromConnectInfo(winfo)
-              let res = new UniWifiResult(0,UniErrorSubject,'onWifiConnected:ok',uniWifiInfo)
+              let res:UniWifiResult = {
+                errCode:0,
+                errSubject:UniErrorSubject,
+                errMsg:'onWifiConnected:ok',
+                wifi:uniWifiInfo,
+              }
 
               // wifi状态可用了，分发当前的链接状态给已注册的监听集合
               for (let perCallback in Global.onWifiConnectCallbackList) {
                 perCallback(res);
               }
               // 封装仅SSID 数据对象
-              let connectedWithPartialInfo = new UniWifiInfoWithPartialInfo(uniWifiInfo.SSID)
+              let connectedWithPartialInfo:UniWifiInfoWithPartialInfo = {
+                SSID:uniWifiInfo.SSID,
+              }
 
               for (let perCallback in Global.onWifiConnectWithPartialInfoCallbackList) {
                 perCallback(connectedWithPartialInfo);
@@ -318,7 +331,12 @@ class CustomBroadcastReceiver extends BroadcastReceiver {
 
 			}
 
-      let ret = new UniWifiResult(0,UniErrorSubject,"getWifiList:ok",null)
+      let ret:UniWifiResult = {
+        errCode:0,
+        errSubject:UniErrorSubject,
+        errMsg:"getWifiList:ok",
+        wifi:null,
+      }
 			if(Global.supendGetWifiSuccess != null){
 				Global.supendGetWifiSuccess?.(ret)
 				Global.supendGetWifiSuccess = null
@@ -361,8 +379,12 @@ export function startWifiImpl(option : WifiOption) {
   // 初始化wifi 状态广播监听，后续所有的api，均基于此
   if(Global.mReceiver != null){
   	// 说明已经注册过了
-    let result = UniWifiResult(0,UniErrorSubject,"startWifi:ok",null)
-
+    let result:UniWifiResult = {
+      errCode:0,
+      errSubject:UniErrorSubject,
+      errMsg:"startWifi:ok",
+      wifi:null,
+    }
   	option.success?.(result)
   	option.complete?.(result)
   	return
@@ -519,7 +541,6 @@ export function offGetWifiList(callback? : UniWifiCallback) {
 	Global.supendGetWifiSuccess = null
 }
 
-
 /**
  * 真正执行wifi链接逻辑
  */
@@ -647,7 +668,6 @@ function realWifiConnect(option : WifiConnectOption){
 		result.wifi = wrapUniWifiInfoFromAndroid(scanWifiInfo)
 	}
 
-
 	option.success?.(result)
 	option.complete?.(result)
 }
@@ -663,8 +683,12 @@ export function connectWifi(option : WifiConnectOption) {
 		let manunalIntent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
 		UTSAndroid.getUniActivity()!.startActivity(manunalIntent);
 
-    
-     let result = new UniWifiResult(0,UniErrorSubject,"connectWifi:ok",null)
+    let result:UniWifiResult = {
+      errCode:0,
+      errSubject:UniErrorSubject,
+      errMsg:"connectWifi:ok",
+      wifi:null
+    }
 
 		option.success?.(result)
 		option.complete?.(result)

@@ -17,9 +17,13 @@ import Field from 'java.lang.reflect.Field';
 import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
 import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
 import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
-import { copyFile } from "./MediaUtils.uts";
+import { copyFile, getMediaInfo } from "./MediaUtils.uts";
+import Context from 'android.content.Context';
+import Uri from 'android.net.Uri';
+import FileInputStream from 'java.io.FileInputStream';
 
 const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
+const ASSETS_PATH = '/android_asset/'
 // export function threadCompress() {
 // }
 export function transcodeImage(options : CompressImageOptions) {
@@ -32,7 +36,7 @@ export function transcodeImage(options : CompressImageOptions) {
 	let compressOption = new CompressOptions()
 	compressOption.src = UTSAndroid.convert2AbsFullPath(options.src)
 	let srcFile = new File(compressOption.src)
-	if (!srcFile.exists()) {
+	if (!srcFile.exists() && !compressOption.src.startsWith("content://") && !compressOption.src.startsWith("/android_asset/")) {
 		let error = new MediaErrorImpl(1101003, UniError_CompressImage);
 		options.fail?.(error)
 		options.complete?.(error)
@@ -59,14 +63,20 @@ export function transcodeImage(options : CompressImageOptions) {
 	getHeightAndWidth(compressOption, widthStr, heightStr);
 	let bitmapOptions = new BitmapFactory.Options()
 	bitmapOptions.inJustDecodeBounds = false;
-	if (srcFile.length() > 1500000) {
+	if (getMediaInfo(compressOption.src) > 1500000) {
 		bitmapOptions.inSampleSize = 2
 	} else {
 		bitmapOptions.inSampleSize = 1
 	}
 	var srcBitmap : Bitmap | null = null
 	try {
-		srcBitmap = BitmapFactory.decodeFile(compressOption.src, bitmapOptions)
+		if (compressOption.src.startsWith("content://")) {
+			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bitmapOptions)
+		} else if (compressOption.src.startsWith("/android_asset/")) {
+			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bitmapOptions)
+		} else {
+			srcBitmap = BitmapFactory.decodeFile(compressOption.src, bitmapOptions)
+		}
 	} catch (e) {
 	}
 	if (srcBitmap == null) {
@@ -114,7 +124,17 @@ export function transcodeImage(options : CompressImageOptions) {
 
 function saveExif(oldFilePath : string, newFilePath : string) {
 	try {
-		let oldExif = new ExifInterface(oldFilePath);
+		var oldExif : ExifInterface;
+		if (oldFilePath.startsWith("content://")) {
+			oldExif = new ExifInterface((UTSAndroid.getAppContext() as Context).contentResolver.openInputStream(Uri.parse(oldFilePath)))
+		} else if (oldFilePath.startsWith("/android_asset/")) {
+			oldExif = new ExifInterface(UTSAndroid.getUniActivity()!.assets.open(oldFilePath.replace(ASSETS_PATH, ""))))
+		} else {
+			if (oldFilePath.startsWith("file://")) {
+				oldFilePath = oldFilePath.replace("file://", "")
+			}
+			oldExif = new ExifInterface(oldFilePath)
+		}
 		let newExif = new ExifInterface(newFilePath);
 		let cls = oldExif.javaClass;
 		let fields = cls.getFields();
@@ -136,14 +156,21 @@ function saveExif(oldFilePath : string, newFilePath : string) {
 		// }
 		newExif.saveAttributes();
 	} catch (e) {
-
 	}
 }
 
 function getHeightAndWidth(compressOption : CompressOptions, widthStr : string, heightStr : string) {
 	let bopt = new BitmapFactory.Options()
 	bopt.inJustDecodeBounds = true
-	BitmapFactory.decodeFile(compressOption.src, bopt)
+	if (compressOption.src.startsWith("content://")) {
+		try {
+			BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bopt)
+		} catch (e) { }
+	} else if (compressOption.src.startsWith("/android_asset/")) {
+		BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bopt)
+	} else {
+		BitmapFactory.decodeFile(compressOption.src, bopt)
+	}
 	let bitmapWidth = bopt.outWidth
 	let bitmapHeight = bopt.outHeight
 	if (bitmapHeight <= 0 || bitmapWidth <= 0) {
@@ -220,7 +247,7 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	if (!inFile.exists()) {
 		inFile = new File(inPath)
 	}
-	if (!inFile.exists()) {
+	if (!inFile.exists() && !inPath.startsWith("content://")) {
 		let error = new MediaErrorImpl(1101003, UniError_CompressVideo);
 		options.fail?.(error)
 		options.complete?.(error)
@@ -251,7 +278,18 @@ export function transcodeVideo(options : CompressVideoOptions) {
 	if (!outFile.getParentFile().exists()) {
 		outFile.getParentFile().mkdirs()
 	}
-	MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
+	if (inPath.startsWith("content://")) {
+		try {
+			var inStream = (UTSAndroid.getAppContext() as Context).getContentResolver().openInputStream(Uri.parse(inPath)) as FileInputStream
+			MediaTranscoder.getInstance().transcodeVideo(inStream.getFD(), outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
+		} catch (e) {
+			let error = new MediaErrorImpl(1101003, UniError_CompressVideo);
+			options.fail?.(error)
+			options.complete?.(error)
+		}
+	} else {
+		MediaTranscoder.getInstance().transcodeVideo(inPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(compressLevel, resolution!), new MediaTranscoderListener(inPath, outPath, options))
+	}
 }
 
 class MediaTranscoderListener implements Listener {
@@ -264,7 +302,6 @@ class MediaTranscoderListener implements Listener {
 		this.options = options
 	}
 	override onTranscodeProgress(progress : Double) {
-
 	}
 
 	override onTranscodeCompleted() {

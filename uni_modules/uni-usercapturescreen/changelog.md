@@ -1,3 +1,5 @@
+## 1.0.6（2024-11-22）
+- 修复 HarmonyOS Next 上调用 setUserCaptureScreen 报错的 Bug
 ## 1.0.5（2024-10-14）
 - 新增 支持 HarmonyOS Next 调用
 ## 1.0.4（2023-03-24）

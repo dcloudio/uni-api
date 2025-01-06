@@ -1,7 +1,7 @@
 {
 	"id": "uni-usercapturescreen",
 	"displayName": "uni-usercapturescreen",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "用户主动截屏事件监听",
 	"keywords": [
         "截屏"
@@ -59,10 +59,10 @@
 					"vue3": "y"
 				},
 				"App": {
-					"app-android": "y",
+                    "app-android": "y",
                     "app-ios": "y",
                     "app-harmony": "y"
-				},
+                },
 				"H5-mobile": {
 					"Safari": "n",
 					"Android Browser": "n",
