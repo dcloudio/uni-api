@@ -345,6 +345,12 @@ class BackgroundAudioManagerImpl implements BackgroundAudioManager {
     onNext(callback: (result: any) => void): void {
         throw new Error('Method not implemented.');
     }
+    onSeeking(callback: (result: any) => void): void {
+        throw new Error('Method not implemented.');
+    }
+    onSeeked(callback: (result: any) => void): void {
+        throw new Error('Method not implemented.');
+    }
 }
 
 let backgroundAudioManager: BackgroundAudioManager | null = null

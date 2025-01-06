@@ -14,7 +14,7 @@ export interface Uni {
    * 		"ios": {
    * 			"osVer": "12.0",
    * 			"uniVer": "√",
-   * 			"unixVer": "x"
+   * 			"unixVer": "4.41"
    * 		},
    *    "harmony": {
    *      "osVer": "3.0",
@@ -30,7 +30,7 @@ export interface Uni {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "4.35"
+   *      "unixVer": "4.41"
    *    },
    *    "alipay": {
    *      "hostVer": "1.11.0",
@@ -92,8 +92,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -115,8 +115,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -138,8 +138,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -162,8 +162,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }   
@@ -185,8 +185,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -208,8 +208,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -231,8 +231,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -254,8 +254,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -277,8 +277,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -300,8 +300,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -339,8 +339,8 @@ export interface BackgroundAudioManager {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.41",
-                  "unixUtsPlugin": "4.41"
+                  "unixVer": "x",
+                  "unixUtsPlugin": "x"
               },
               "ios": {
                   "osVer": "12.0",
@@ -369,8 +369,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -392,8 +392,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -415,8 +415,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -438,8 +438,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -461,8 +461,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -484,8 +484,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -507,8 +507,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -530,8 +530,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -553,8 +553,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -576,13 +576,67 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
    */
   onEnded(callback: (result: any) => void): void;
+  /**
+   * 音频进行 seek 操作事件
+   * @uniPlatform 
+    {
+  	  "app": {
+  		  "android": {
+  			  "osVer": "5.0",
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "4.41",
+  			  "unixUtsPlugin": "4.41"
+  		  },
+  		  "ios": {
+  			  "osVer": "12.0",
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "4.41",
+  			  "unixUtsPlugin": "4.41"
+  		  }
+  	  },
+  	  "web": {
+  		  "uniVer": "√",
+  		  "unixVer": "4.0"
+  	  }
+    }
+   */
+  onSeeking(callback : (result : any) => void) : void;
+  /**
+   * 音频完成 seek 操作事件
+   * @uniPlatform 
+    {
+  	  "app": {
+  		  "android": {
+  			  "osVer": "5.0",
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "4.41",
+  			  "unixUtsPlugin": "4.41"
+  		  },
+  		  "ios": {
+  			  "osVer": "12.0",
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "4.41",
+  			  "unixUtsPlugin": "4.41"
+  		  }
+  	  },
+  	  "web": {
+  		  "uniVer": "√",
+  		  "unixVer": "4.0"
+  	  }
+    }
+   */
+  onSeeked(callback : (result : any) => void) : void;
   /**
    * 背景音频播放进度更新事件
    * @uniPlatform 
@@ -599,8 +653,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -622,8 +676,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -645,8 +699,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -668,8 +722,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -691,8 +745,8 @@ export interface BackgroundAudioManager {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "4.41",
+                  "unixUtsPlugin": "4.41"
               }
           }
     }
@@ -705,8 +759,7 @@ export interface BackgroundAudioManager {
 export type CreateBackgroundAudioErrorCode =
 	/**
 	 * 系统错误
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -719,8 +772,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }
@@ -728,8 +781,7 @@ export type CreateBackgroundAudioErrorCode =
 	1107601 |
 	/**
 	 * 网络错误
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -742,8 +794,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }
@@ -751,8 +803,7 @@ export type CreateBackgroundAudioErrorCode =
 	1107602 |
 	/**
 	 * 文件错误
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -765,8 +816,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }
@@ -774,8 +825,7 @@ export type CreateBackgroundAudioErrorCode =
 	1107603 |
 	/**
 	 * 格式错误
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -788,8 +838,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }
@@ -797,8 +847,7 @@ export type CreateBackgroundAudioErrorCode =
 	1107604 |
 	/**
 	 * 未知错误
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -811,8 +860,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }
@@ -820,8 +869,7 @@ export type CreateBackgroundAudioErrorCode =
 	1107605 |
 	/**
 	 * 播放路径不能为空
-	 * @uniPlatform 
-	  {
+	 * @uniPlatform {
 	      "app": {
 	          "android": {
 	              "osVer": "5.0",
@@ -834,8 +882,8 @@ export type CreateBackgroundAudioErrorCode =
 	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
-	              "unixVer": "x",
-	              "unixUtsPlugin": "x"
+	              "unixVer": "4.41",
+	              "unixUtsPlugin": "4.41"
 	          }
 	      },
 	  }

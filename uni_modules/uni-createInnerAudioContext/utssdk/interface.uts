@@ -8,68 +8,68 @@ export interface Uni {
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/create-inner-audio-context.html
      * @uniPlatform
       {
-          "app": {
-              "android": {
-                  "osVer": "5.0",
-                  "uniVer": "√",
-                  "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
-              },
-              "ios": {
-                  "osVer": "12.0",
-                  "uniVer": "√",
-                  "uniUtsPlugin": "x",
-                  "unixVer": "4.41",
-                  "unixUtsPlugin": "4.41"
-              }
-          },
-          "mp": {
-        "weixin": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "4.41"
+        "app": {
+            "android": {
+                "osVer": "5.0",
+                "uniVer": "√",
+                "uniUtsPlugin": "x",
+                "unixVer": "4.33",
+                "unixUtsPlugin": "4.33"
+            },
+            "ios": {
+                "osVer": "12.0",
+                "uniVer": "√",
+                "uniUtsPlugin": "x",
+                "unixVer": "4.41",
+                "unixUtsPlugin": "4.41"
+            }
         },
-        "alipay": {
-            "hostVer": "1.23.4",
-            "uniVer": "√",
-            "unixVer": "x"
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
         },
-        "baidu": {
-            "hostVer": "√",
+        "web": {
             "uniVer": "√",
-            "unixVer": "x"
-        },
-        "toutiao": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "x"
-        },
-        "lark": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "x"
-        },
-        "qq": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "x"
-        },
-        "kuaishou": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "x"
-        },
-        "jd": {
-            "hostVer": "√",
-            "uniVer": "√",
-            "unixVer": "x"
+            "unixVer": "4.0"
         }
-      },
-          "web": {
-              "uniVer": "√",
-              "unixVer": "4.0"
-          }
       }
      */
     createInnerAudioContext: CreateInnerAudioContext;
@@ -98,6 +98,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -125,6 +167,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -152,6 +236,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -180,6 +306,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -207,6 +375,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -234,6 +444,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -262,6 +514,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -291,6 +585,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -320,6 +656,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "x"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "x",
               "unixVer": "x"
@@ -347,6 +725,48 @@ export interface InnerAudioContext {
                  "unixUtsPlugin": "4.41"
              }
          },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
          "web": {
              "uniVer": "√",
              "unixVer": "4.0"
@@ -375,6 +795,48 @@ export interface InnerAudioContext {
                  "unixUtsPlugin": "4.41"
              }
          },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
          "web": {
              "uniVer": "x",
              "unixVer": "x"
@@ -402,6 +864,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -429,6 +933,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -456,6 +1002,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -483,6 +1071,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -537,6 +1167,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -592,6 +1264,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -620,6 +1334,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -647,6 +1403,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -674,6 +1472,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -701,6 +1541,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -728,6 +1610,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -755,6 +1679,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -782,6 +1748,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -809,6 +1817,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -836,6 +1886,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -863,6 +1955,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -890,6 +2024,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -917,6 +2093,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -944,6 +2162,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -971,6 +2231,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -1025,6 +2327,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -1052,6 +2396,48 @@ export interface InnerAudioContext {
                   "unixUtsPlugin": "4.41"
               }
           },
+        "mp": {
+            "weixin": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "4.41"
+            },
+            "alipay": {
+                "hostVer": "1.23.4",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "baidu": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "toutiao": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "lark": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "qq": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "kuaishou": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            },
+            "jd": {
+                "hostVer": "√",
+                "uniVer": "√",
+                "unixVer": "x"
+            }
+        },
           "web": {
               "uniVer": "√",
               "unixVer": "4.0"
@@ -1067,8 +2453,7 @@ export interface InnerAudioContext {
 export type CreateInnerAudioContextErrorCode =
     /**
      * 系统错误
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",
@@ -1094,8 +2479,7 @@ export type CreateInnerAudioContextErrorCode =
     1107601 |
     /**
      * 网络错误
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",
@@ -1121,8 +2505,7 @@ export type CreateInnerAudioContextErrorCode =
     1107602 |
     /**
      * 文件错误
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",
@@ -1148,8 +2531,7 @@ export type CreateInnerAudioContextErrorCode =
     1107603 |
     /**
      * 格式错误
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",
@@ -1175,8 +2557,7 @@ export type CreateInnerAudioContextErrorCode =
     1107604 |
     /**
      * 未知错误
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",
@@ -1202,8 +2583,7 @@ export type CreateInnerAudioContextErrorCode =
     1107605 |
     /**
      * 播放路径不能为空
-     * @uniPlatform
-      {
+     * @uniPlatform {
           "app": {
               "android": {
                   "osVer": "5.0",

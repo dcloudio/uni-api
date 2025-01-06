@@ -1,83 +1,83 @@
-export type SaveFileSuccess = {
+export type LegacySaveFileSuccess = {
     savedFilePath: string;
 };
-export type SaveFileSuccessCallback = (res: SaveFileSuccess) => void;
-export type SaveFileFail = {};
-export type SaveFileFailCallback = (res: SaveFileFail) => void;
-export type SaveFileCompleteCallback = (res: any) => void;
-export type SaveFileOptions = {
+export type LegacySaveFileSuccessCallback = (res: LegacySaveFileSuccess) => void;
+export type LegacySaveFileFail = {};
+export type LegacySaveFileFailCallback = (res: LegacySaveFileFail) => void;
+export type LegacySaveFileCompleteCallback = (res: any) => void;
+export type LegacySaveFileOptions = {
     tempFilePath: string;
-    success?: SaveFileSuccessCallback | null;
-    fail?: SaveFileFailCallback | null;
-    complete?: SaveFileCompleteCallback | null;
+    success?: LegacySaveFileSuccessCallback | null;
+    fail?: LegacySaveFileFailCallback | null;
+    complete?: LegacySaveFileCompleteCallback | null;
 };
 
-export type GetFileInfoSuccess = {
+export type LegacyGetFileInfoSuccess = {
     digest: string;
     size: number;
 };
-export type GetFileInfoSuccessCallback = (res: GetFileInfoSuccess) => void;
-export type GetFileInfoFail = {};
-export type GetFileInfoFailCallback = (res: GetFileInfoFail) => void;
-export type GetFileInfoCompleteCallback = (res: any) => void;
-export type GetFileInfoOptions = {
+export type LegacyGetFileInfoSuccessCallback = (res: LegacyGetFileInfoSuccess) => void;
+export type LegacyGetFileInfoFail = {};
+export type LegacyGetFileInfoFailCallback = (res: LegacyGetFileInfoFail) => void;
+export type LegacyGetFileInfoCompleteCallback = (res: any) => void;
+export type LegacyGetFileInfoOptions = {
     filePath: string;
     digestAlgorithm?: string | null;
-    success?: GetFileInfoSuccessCallback | null;
-    fail?: GetFileInfoFailCallback | null;
-    complete?: GetFileInfoCompleteCallback | null;
+    success?: LegacyGetFileInfoSuccessCallback | null;
+    fail?: LegacyGetFileInfoFailCallback | null;
+    complete?: LegacyGetFileInfoCompleteCallback | null;
 };
 
-export type GetSavedFileInfoSuccess = {
+export type LegacyGetSavedFileInfoSuccess = {
     size: number;
     createTime: number;
 };
-export type GetSavedFileInfoSuccessCallback = (res: GetSavedFileInfoSuccess) => void;
-export type GetSavedFileInfoFail = {};
-export type GetSavedFileInfoFailCallback = (res: GetSavedFileInfoFail) => void;
-export type GetSavedFileInfoCompleteCallback = (res: any) => void;
-export type GetSavedFileInfoOptions = {
+export type LegacyGetSavedFileInfoSuccessCallback = (res: LegacyGetSavedFileInfoSuccess) => void;
+export type LegacyGetSavedFileInfoFail = {};
+export type LegacyGetSavedFileInfoFailCallback = (res: LegacyGetSavedFileInfoFail) => void;
+export type LegacyGetSavedFileInfoCompleteCallback = (res: any) => void;
+export type LegacyGetSavedFileInfoOptions = {
     filePath: string;
-    success?: GetSavedFileInfoSuccessCallback | null;
-    fail?: GetSavedFileInfoFailCallback | null;
-    complete?: GetSavedFileInfoCompleteCallback | null;
+    success?: LegacyGetSavedFileInfoSuccessCallback | null;
+    fail?: LegacyGetSavedFileInfoFailCallback | null;
+    complete?: LegacyGetSavedFileInfoCompleteCallback | null;
 };
 
-export type RemoveSavedFileSuccess = {};
-export type RemoveSavedFileSuccessCallback = (res: RemoveSavedFileSuccess) => void;
-export type RemoveSavedFileFail = {};
-export type RemoveSavedFileFailCallback = (res: RemoveSavedFileFail) => void;
-export type RemoveSavedFileCompleteCallback = (res: any) => void;
-export type RemoveSavedFileOptions = {
+export type LegacyRemoveSavedFileSuccess = {};
+export type LegacyRemoveSavedFileSuccessCallback = (res: LegacyRemoveSavedFileSuccess) => void;
+export type LegacyRemoveSavedFileFail = {};
+export type LegacyRemoveSavedFileFailCallback = (res: LegacyRemoveSavedFileFail) => void;
+export type LegacyRemoveSavedFileCompleteCallback = (res: any) => void;
+export type LegacyRemoveSavedFileOptions = {
     filePath: string;
-    success?: RemoveSavedFileSuccessCallback | null;
-    fail?: RemoveSavedFileFailCallback | null;
-    complete?: RemoveSavedFileCompleteCallback | null;
+    success?: LegacyRemoveSavedFileSuccessCallback | null;
+    fail?: LegacyRemoveSavedFileFailCallback | null;
+    complete?: LegacyRemoveSavedFileCompleteCallback | null;
 };
 
-export type SavedFileListItem = {
+export type LegacySavedFileListItem = {
     filePath: string;
     size: number;
     createTime: number;
 };
-export type GetSavedFileListSuccess = {
-    fileList: SavedFileListItem[];
+export type LegacyGetSavedFileListSuccess = {
+    fileList: LegacySavedFileListItem[];
 };
-export type GetSavedFileListSuccessCallback = (res: GetSavedFileListSuccess) => void;
-export type GetSavedFileListFail = {};
-export type GetSavedFileListFailCallback = (res: GetSavedFileListFail) => void;
-export type GetSavedFileListCompleteCallback = (res: any) => void;
-export type GetSavedFileListOptions = {
-    success?: GetSavedFileListSuccessCallback | null;
-    fail?: GetSavedFileListFailCallback | null;
-    complete?: GetSavedFileListCompleteCallback | null;
+export type LegacyGetSavedFileListSuccessCallback = (res: LegacyGetSavedFileListSuccess) => void;
+export type LegacyGetSavedFileListFail = {};
+export type LegacyGetSavedFileListFailCallback = (res: LegacyGetSavedFileListFail) => void;
+export type LegacyGetSavedFileListCompleteCallback = (res: any) => void;
+export type LegacyGetSavedFileListOptions = {
+    success?: LegacyGetSavedFileListSuccessCallback | null;
+    fail?: LegacyGetSavedFileListFailCallback | null;
+    complete?: LegacyGetSavedFileListCompleteCallback | null;
 };
 
-export type SaveFile = (options?: SaveFileOptions | null) => void;
-export type GetFileInfo = (options?: GetFileInfoOptions | null) => void;
-export type GetSavedFileInfo = (options?: GetSavedFileInfoOptions | null) => void;
-export type RemoveSavedFile = (options?: RemoveSavedFileOptions | null) => void;
-export type GetSavedFileList = (options?: GetSavedFileListOptions | null) => void;
+export type SaveFile = (options?: LegacySaveFileOptions | null) => void;
+export type GetFileInfo = (options?: LegacyGetFileInfoOptions | null) => void;
+export type GetSavedFileInfo = (options?: LegacyGetSavedFileInfoOptions | null) => void;
+export type RemoveSavedFile = (options?: LegacyRemoveSavedFileOptions | null) => void;
+export type GetSavedFileList = (options?: LegacyGetSavedFileListOptions | null) => void;
 
 
 export interface Uni {
@@ -140,7 +140,7 @@ export interface Uni {
      * }
      * @uniVueVersion 2,3  //支持的vue版本
      */
-    saveFile(options?: SaveFileOptions | null): void;
+    saveFile(options?: LegacySaveFileOptions | null): void;
     /**
      * 获取本地已保存的文件列表
      * @uniPlatform {
@@ -200,7 +200,7 @@ export interface Uni {
      * }
      * @uniVueVersion 2,3  //支持的vue版本
      */
-    getSavedFileList(options?: GetSavedFileListOptions | null): void;
+    getSavedFileList(options?: LegacyGetSavedFileListOptions | null): void;
     /**
      * 获取已保存到本地的文件信息
      * @uniPlatform {
@@ -260,7 +260,7 @@ export interface Uni {
      * }
      * @uniVueVersion 2,3  //支持的vue版本
      */
-    getSavedFileInfo(options?: GetSavedFileInfoOptions | null): void;
+    getSavedFileInfo(options?: LegacyGetSavedFileInfoOptions | null): void;
     /**
      * 删除已保存的文件
      * @uniPlatform {
@@ -320,7 +320,7 @@ export interface Uni {
      * }
      * @uniVueVersion 2,3  //支持的vue版本
      */
-    removeSavedFile(options?: RemoveSavedFileOptions | null): void;
+    removeSavedFile(options?: LegacyRemoveSavedFileOptions | null): void;
     /**
      * 获取文件信息
      * @uniPlatform {
@@ -380,5 +380,5 @@ export interface Uni {
      * }
      * @uniVueVersion 2,3  //支持的vue版本
      */
-    getFileInfo(options?: GetFileInfoOptions | null): void;
+    getFileInfo(options?: LegacyGetFileInfoOptions | null): void;
 }

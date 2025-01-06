@@ -32,87 +32,87 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -139,45 +139,45 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -203,45 +203,45 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -267,45 +267,45 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -331,45 +331,45 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -395,45 +395,45 @@ export interface CanvasContext {
      *      "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -459,45 +459,45 @@ export interface CanvasContext {
      *     "unixVer": "4.25"
      *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -523,45 +523,45 @@ export interface CanvasContext {
      *     "unixVer": "4.25"
      *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
@@ -591,52 +591,52 @@ export type CreateCanvasContextAsyncOptions = {
     *
 },
     *  "mp": {
-    *    weixin: {
-    *      hostVer: '√',
-    *      uniVer: '√',
-    *      unixVer: '4.41'
+    *    "weixin": {
+    *      "hostVer": "√",
+    *      "uniVer": "√",
+    *      "unixVer": "4.41"
     *
 },
-    *    alipay: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "alipay": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    baidu: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "baidu": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    toutiao: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "toutiao": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    lark: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "lark": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    qq: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "qq": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    kuaishou: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "kuaishou": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 },
-    *    jd: {
-    *      hostVer: 'x',
-    *      uniVer: 'x',
-    *      unixVer: 'x'
+    *    "jd": {
+    *      "hostVer": "x",
+    *      "uniVer": "x",
+    *      "unixVer": "x"
     *
 }
     *
@@ -664,45 +664,45 @@ export type CreateCanvasContextAsyncOptions = {
      *      "unixVer": "4.25"
      *  },
    *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.41'
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "4.41"
    *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    }
    *  }
      * }
@@ -728,45 +728,45 @@ export type CreateCanvasContextAsyncOptions = {
      *      "unixVer": "4.25"
      *  },
    *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.41'
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "4.41"
    *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    }
    *  }
      * }
@@ -792,45 +792,45 @@ export type CreateCanvasContextAsyncOptions = {
      *      "unixVer": "4.25"
      *  },
    *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.41'
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "4.41"
    *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    }
    *  }
      * }
@@ -856,45 +856,45 @@ export type CreateCanvasContextAsyncOptions = {
      *      "unixVer": "4.25"
      *  },
    *  "mp":{
-   *    weixin: {
-   *      hostVer: '√',
-   *      uniVer: '√',
-   *      unixVer: '4.41'
+   *    "weixin": {
+   *      "hostVer": "√",
+   *      "uniVer": "√",
+   *      "unixVer": "4.41"
    *    },
-   *    alipay: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "alipay": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    baidu: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "baidu": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    toutiao: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "toutiao": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    lark: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "lark": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    qq: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "qq": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    kuaishou: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "kuaishou": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    },
-   *    jd: {
-   *      hostVer: 'x',
-   *      uniVer: 'x',
-   *      unixVer: 'x'
+   *    "jd": {
+   *      "hostVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
    *    }
    *  }
      * }
@@ -925,45 +925,45 @@ export interface Uni {
      *    "unixVer": "4.25"
      *  },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }

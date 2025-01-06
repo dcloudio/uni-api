@@ -65,7 +65,31 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 			const safeAreaInsetsTop = statusBarHeight;
 			let safeAreaInsetsBottom = 0;
 			// #ifdef UNI-APP-X
-			if (DeviceUtil.isGestureNavigationIndicator(activity) && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
+			let androidThreeButtonNavigationTranslucent = false;
+			const pages = getCurrentPages();
+			if (pages.length > 0) {
+				const currentPage = pages[pages.length - 1];
+				androidThreeButtonNavigationTranslucent = (currentPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? false;
+				const dialogPages = currentPage.getDialogPages();
+				const systemDialogPages = currentPage.vm!.$systemDialogPages;
+				if (dialogPages.length > 0 && systemDialogPages.length == 0) {
+					const currentDialogPage = dialogPages[dialogPages.length - 1];
+					androidThreeButtonNavigationTranslucent = (currentDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+				} else if (systemDialogPages.length > 0 && dialogPages.length == 0) {
+					const currentSystemDialogPage = systemDialogPages[systemDialogPages.length - 1];
+					androidThreeButtonNavigationTranslucent = (currentSystemDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+				} else if (dialogPages.length > 0 && systemDialogPages.length > 0) {
+					const currentDialogPage = dialogPages[dialogPages.length - 1];
+					const currentSystemDialogPage = systemDialogPages[systemDialogPages.length - 1];
+					if (parseInt(currentDialogPage.vm!.$nativePage!.pageId) > parseInt(currentSystemDialogPage.vm!.$nativePage!.pageId)) {
+						androidThreeButtonNavigationTranslucent = (currentDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+					} else {
+						androidThreeButtonNavigationTranslucent = (currentSystemDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+					}
+				}
+			}
+			const navigationMode = UTSAndroid.getNavigationMode();
+			if ((androidThreeButtonNavigationTranslucent && navigationMode == "button" || navigationMode == "gesture_indicator") && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
 				safeAreaInsetsBottom = DeviceUtil.getNavigationBarHeight(activity);
 			}
 			// #endif
@@ -76,7 +100,12 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 				bottom: safeAreaInsetsBottom
 			}
 
-			const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
+			let contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio);
+			// #ifdef UNI-APP-X
+			if (!androidThreeButtonNavigationTranslucent && navigationMode == "button") {
+				contentHeight -= DeviceUtil.getNavigationBarHeight(activity);
+			}
+			// #endif
 			
 			const safeArea : SafeArea = {
 				left: safeAreaInsets.left,
@@ -176,7 +205,31 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 	const safeAreaInsetsTop = statusBarHeight;
 	let safeAreaInsetsBottom = 0;
 	// #ifdef UNI-APP-X
-	if (DeviceUtil.isGestureNavigationIndicator(activity) && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
+	let androidThreeButtonNavigationTranslucent = false;
+	const pages = getCurrentPages();
+	if (pages.length > 0) {
+		const currentPage = pages[pages.length - 1];
+		androidThreeButtonNavigationTranslucent = (currentPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? false;
+		const dialogPages = currentPage.getDialogPages();
+		const systemDialogPages = currentPage.vm!.$systemDialogPages;
+		if (dialogPages.length > 0 && systemDialogPages.length == 0) {
+			const currentDialogPage = dialogPages[dialogPages.length - 1];
+			androidThreeButtonNavigationTranslucent = (currentDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+		} else if (systemDialogPages.length > 0 && dialogPages.length == 0) {
+			const currentSystemDialogPage = systemDialogPages[systemDialogPages.length - 1];
+			androidThreeButtonNavigationTranslucent = (currentSystemDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+		} else if (dialogPages.length > 0 && systemDialogPages.length > 0) {
+			const currentDialogPage = dialogPages[dialogPages.length - 1];
+			const currentSystemDialogPage = systemDialogPages[systemDialogPages.length - 1];
+			if (parseInt(currentDialogPage.vm!.$nativePage!.pageId) > parseInt(currentSystemDialogPage.vm!.$nativePage!.pageId)) {
+				androidThreeButtonNavigationTranslucent = (currentDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+			} else {
+				androidThreeButtonNavigationTranslucent = (currentSystemDialogPage.getPageStyle()["androidThreeButtonNavigationTranslucent"] as boolean | null) ?? true;
+			}
+		}
+	}
+	const navigationMode = UTSAndroid.getNavigationMode();
+	if ((androidThreeButtonNavigationTranslucent && navigationMode == "button" || navigationMode == "gesture_indicator") && (!DeviceUtil.isInMultiWindowMode(activity) || DeviceUtil.getSplitScreenPosition(activity) != 'top')) {
 		safeAreaInsetsBottom = DeviceUtil.getNavigationBarHeight(activity);
 	}
 	// #endif
@@ -187,7 +240,12 @@ export const getWindowInfo: GetWindowInfo = function(): GetWindowInfoResult {
 		bottom: safeAreaInsetsBottom
 	}
 	
-	const contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio)
+	let contentHeight = Math.ceil(UTSAndroid.getUniActivity()!!.findViewById<ViewGroup>(android.R.id.content).height / pixelRatio);
+	// #ifdef UNI-APP-X
+	if (!androidThreeButtonNavigationTranslucent && navigationMode == "button") {
+		contentHeight -= DeviceUtil.getNavigationBarHeight(activity);
+	}
+	// #endif
 	
 	const safeArea : SafeArea = {
 		left: safeAreaInsets.left,

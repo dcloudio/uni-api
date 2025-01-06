@@ -8,7 +8,7 @@ import {
 	UniError_ChooseImage, UniError_ChooseVideo,
 	MediaErrorImpl
 } from "../../unierror.uts"
-import { getOrientation, getVideoMetadata } from "./MediaUtils.uts"
+import { getMediaInfo, getOrientation, getVideoMetadata } from "./MediaUtils.uts"
 import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts"
 import { getUniActivity } from "io.dcloud.uts.android";
 import Intent from 'android.content.Intent';
@@ -33,7 +33,7 @@ const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
 		if (option.albumMode == "system" && index != 0) {
-			if (Build.VERSION.SDK_INT > 32) {
+			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
 				openAlbumForImage(option, count, 100)
 			} else {
 				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
@@ -206,7 +206,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 							picPaths.push(path);
 						}
 						try {
-							let tempPathJson : ChooseImageTempFile = { "path": path, "size": new File(path).length() }
+							let tempPathJson : ChooseImageTempFile = { "path": path, "size": getMediaInfo(path) }
 							picTempPathJson.push(tempPathJson)
 						} catch (e) { }
 					})
@@ -235,7 +235,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 export function chooseMediaVideo(options : ChooseVideoOptions) {
 	uniChooseVideo(options, (count : number, compressed : boolean, index : number) => {
 		if (options.albumMode == "system" && index != 0) {
-			if (Build.VERSION.SDK_INT > 32) {
+			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
 				openAlbumForVideo(options, count, 102, compressed)
 			} else {
 				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {

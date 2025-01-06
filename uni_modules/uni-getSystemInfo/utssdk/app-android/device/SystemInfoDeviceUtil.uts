@@ -341,23 +341,6 @@ export class DeviceUtil {
 		return result;
 	}
 	
-	// #ifdef UNI-APP-X
-	public static isGestureNavigationIndicator(activity : Activity) : boolean {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-			const insets = ViewCompat.getRootWindowInsets(activity.getWindow().getDecorView());
-			if (insets == null) return false;
-			const navigationBarsInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-			const systemGesturesInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures());
-			let navigationMode = 0;
-			try {
-				navigationMode = Settings.Secure.getInt(activity.getContentResolver(), "navigation_mode");
-			} catch (e : Settings.SettingNotFoundException) { }
-			return navigationBarsInsets.bottom != 0 && (navigationBarsInsets.bottom != systemGesturesInsets.bottom || navigationMode == 2);
-		}
-		return false;
-	}
-	// #endif
-	
 	public static isInMultiWindowMode(activity : Activity) : boolean {
 		if (Build.BRAND.equals("OPPO", true)) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

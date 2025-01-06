@@ -578,7 +578,7 @@ export type RequestPaymentOptions = {
 		*    "weixin": {
 		*        "hostVer": "√",
 		*        "uniVer": "√",
-		*        "unixVer": "4.41"
+		*        "unixVer": "x"
 		*    },
 		*    "alipay": {
 		*        "hostVer": "√",

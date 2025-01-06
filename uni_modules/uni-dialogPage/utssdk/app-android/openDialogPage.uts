@@ -59,9 +59,13 @@ export const openDialogPage = (options: OpenDialogPageOptions): UniPage | null =
         new Map<string, any | null>([
             ['disableEscBack', options.disableEscBack],
             ['parentPage', options.parentPage],
+            ['triggerParentHide', options.triggerParentHide],
         ]),
+        // 调整回调在 callback 中执行，避免时机太早， showToast 异常
+        () => {
+            options.success?.(new OpenDialogPageSuccessImpl())
+            options.complete?.(new OpenDialogPageSuccessImpl())
+        }
     )
-    options.success?.(new OpenDialogPageSuccessImpl())
-    options.complete?.(new OpenDialogPageSuccessImpl())
     return dialogPage
 }

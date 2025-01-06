@@ -533,7 +533,7 @@ export interface Uni {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "2.11.0",
-   *      "unixVer": "x"
+   *      "unixVer": "4.41"
    *    },
    *    "alipay": {
    *      "hostVer": "x",
@@ -605,7 +605,7 @@ export interface Uni {
    *    "weixin": {
    *      "hostVer": "√",
    *      "uniVer": "2.11.0",
-   *      "unixVer": "x"
+   *      "unixVer": "4.41"
    *    },
    *    "alipay": {
    *      "hostVer": "x",
@@ -1054,4 +1054,4 @@ export type OnThemeChangeCallbackResult = {
    */
   theme: 'dark' | 'light'
 };
-export type OnThemeChangeCallback = (result: OnHostThemeChangeCallbackResult) => void;
+export type OnThemeChangeCallback = (result: OnThemeChangeCallbackResult) => void;

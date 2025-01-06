@@ -17,6 +17,9 @@ import FileOutputStream from 'java.io.FileOutputStream';
 import FileInputStream from 'java.io.FileInputStream';
 import InputStream from 'java.io.InputStream';
 import UniConfig from 'io.dcloud.uniapp.framework.UniConfig';
+import Cursor from 'android.database.Cursor';
+import OpenableColumns from 'android.provider.OpenableColumns';
+import Uri from 'android.net.Uri';
 
 const ASSETS_PATH = '/android_asset/'
 
@@ -29,7 +32,7 @@ export function getVideoMetadata(src : string) : any {
 	}
 	var path = src
 	var videoFile = new File(src)
-	if(!videoFile.exists()) {
+	if (!videoFile.exists()) {
 		path = UTSAndroid.convert2AbsFullPath(src)
 	}
 	if (path.startsWith("/android_asset/")) {
@@ -41,17 +44,21 @@ export function getVideoMetadata(src : string) : any {
 			return error
 		}
 	}
-	if(!videoFile.exists()) {
+	if (!videoFile.exists()) {
 		videoFile = new File(path)
 	}
-	if (!videoFile.exists()) {
+	if (!videoFile.exists() && !src.startsWith("content://")) {
 		let error = new MediaErrorImpl(1101003, UniError_GetVideoInfo);
 		return error
 	}
-	videoInfo.size = videoFile.length() / 1024;
+	videoInfo.size = getMediaInfo(path) / 1024;
 	try {
 		let retriever = new MediaMetadataRetriever()
-		retriever.setDataSource(path)
+		if (path.startsWith("content://")) {
+			retriever.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(path))
+		} else {
+			retriever.setDataSource(path)
+		}
 		let durationStr : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
 		let width : number | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toFloat()
 		let height : number | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT)?.toFloat()
@@ -101,7 +108,7 @@ export function getVideoMetadata(src : string) : any {
 		let fps : string | null = retriever.extractMetadata(32);
 		if (TextUtils.isEmpty(fps)) {
 			let extractor = new MediaExtractor()
-			extractor.setDataSource(path)
+			extractor.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(path), null)
 			let trackCount = extractor.getTrackCount();
 			for (var i = 0; i < trackCount; i++) {
 				let mediaFormat = extractor.getTrackFormat(i.toInt());
@@ -128,6 +135,8 @@ export function copyFile(fromFilePath : string, toFilePath : string) : boolean {
 	try {
 		if (fromFilePath.startsWith(ASSETS_PATH)) {
 			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+		} else if (fromFilePath.startsWith("content://")) {
+			fis = UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
 		} else {
 			let fromFile = new File(fromFilePath)
 			if (!fromFile.exists()) {
@@ -218,4 +227,62 @@ function getGlobalConfig() : UniConfig | null {
 	} catch (e) {
 		return null
 	}
+}
+
+export function getMediaInfo(path : string) : Long {
+	if (path.startsWith("content://")) {
+		var returnCursor : Cursor | null = null
+		var length:Long = 0
+		try {
+			returnCursor = UTSAndroid.getAppContext()!.getContentResolver().query(Uri.parse(path), null, null, null, null);
+			if (returnCursor != null && returnCursor.moveToFirst()) {
+				var index = returnCursor.getColumnIndex(OpenableColumns.SIZE)
+				if (!returnCursor.isNull(index)) {
+					length = returnCursor.getLong(index)
+				}
+			} else { return 0 }
+		} catch (e) {
+		} finally {
+			if (returnCursor != null) {
+				returnCursor.close()
+			}
+		}
+		return length
+	} else if (path.startsWith(ASSETS_PATH)) {
+		try {
+			var stream = UTSAndroid.getUniActivity()!.assets.open(path.replace(ASSETS_PATH, ""))
+			var size = stream?.available()
+			stream?.close()
+			return size!.toLong()
+		} catch (e) { 
+		}
+	} else {
+		var file = new File(path)
+		if (file.exists()) {
+			return file.length()
+		} else {
+			if (path.startsWith("file://")) {
+				file = new File(path.replace("file://", ""))
+				if (file.exists())
+					return file.length()
+				else
+					return 0
+			}
+		}
+	}
+	return 0
+}
+
+export function getFileName(path : string) : string {
+	var fileName = path.substring(path.lastIndexOf("/") + 1)
+	if (path.startsWith("content://")) {
+		var type : string | null = UTSAndroid.getUniActivity()!.getContentResolver().getType(Uri.parse(path))
+		if (!TextUtils.isEmpty(type)) {
+			var ext = type!.split("/")
+			if (ext != null && ext.length > 1) {
+				fileName = fileName + "." + ext[1]
+			}
+		}
+	}
+	return fileName
 }

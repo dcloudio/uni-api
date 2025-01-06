@@ -55,12 +55,18 @@ open class OpenDialogPageOptions{
         if let tmp = obj["animationType"] as? String {
             self.animationType = tmp
         }
+
         if let tmp = obj["animationDuration"] as? Float {
             self.animationDuration = NSNumber(tmp)
         }
         if let tmp = obj["disableEscBack"] as? Bool {
             self.disableEscBack = NSNumber(tmp)
         }
+
+        if let tmp = obj["triggerParentHide"] as? Bool {
+            self.triggerParentHide = NSNumber(tmp)
+        }
+
         self.parentPage = obj["parentPage"]
         if let tmp = obj["success"] as? OpenDialogPageSuccessCallback {
             self.success = tmp
@@ -77,6 +83,7 @@ open class OpenDialogPageOptions{
     public var animationType : String? = nil
     public var animationDuration : NSNumber? = nil
     public var disableEscBack : NSNumber? = nil
+    public var triggerParentHide : NSNumber? = nil
     //Todo.. parentPage应为UniPage但定义为UniPage会导致jsexport导出失败原因未知暂时定义为Any
     public var parentPage : Any? = nil
 //    public var parentPage : UniPage? = nil
@@ -145,6 +152,7 @@ public func openDialogPage(_ option : OpenDialogPageOptions) -> UniDialogPage? {
     ocOption.parentPage = option.parentPage
     ocOption.animationType = option.animationType
     ocOption.animationDuration = option.animationDuration
+    ocOption.triggerParentHide = option.triggerParentHide 
     ocOption.success = { args in
         let res = OpenDialogPageSuccessImpl(args)
         if let callback = option.success  {

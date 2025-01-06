@@ -1,7 +1,7 @@
 
 export type ReadFileSuccessResult = {
     /**
-     * 读取的内容，类型为 String 或 ArrayBuffer，在4.31以前类型是string，4.31起为了同时支持arraybuffer，类型改成了any，请在使用时手动as为指定类型
+     * 读取的内容，类型为 String 或 ArrayBuffer(iOS平台仅支持String)，在4.31以前类型是string，4.31起为了同时支持arraybuffer，类型改成了any，请在使用时手动as为指定类型
      * @uniPlatform {
      *    "app": {
      *        "android": {
@@ -12,7 +12,7 @@ export type ReadFileSuccessResult = {
      *        "ios": {
      *            "osVer": "12.0",
      *            "uniVer": "x",
-     *            "unixVer": "x"
+     *            "unixVer": "4.11"
      *        },
      *    "harmony": {
      *      "osVer": "x",
@@ -139,7 +139,7 @@ export type WriteFileOptions = {
      */
     encoding?: "ascii" | "base64" | "utf-8",
     /**
-     * 写入的内容，类型为 String 或 ArrayBuffer，在4.31以前类型是string，4.31起为了同时支持arraybuffer，类型改成了any
+     * 写入的内容，类型为 String 或 ArrayBuffer(iOS平台仅支持String)， 在4.31以前类型是string，4.31起为了同时支持arraybuffer，类型改成了any
      * @uniPlatform {
      *    "app": {
      *        "android": {
@@ -150,7 +150,7 @@ export type WriteFileOptions = {
      *        "ios": {
      *            "osVer": "12.0",
      *            "uniVer": "x",
-     *            "unixVer": "x"
+     *            "unixVer": "4.11"
      *        },
      *    "harmony": {
      *      "osVer": "x",

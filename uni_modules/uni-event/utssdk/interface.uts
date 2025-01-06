@@ -257,7 +257,7 @@ export interface Uni {
 
     /**
      * 触发自定义事件，附加的参数会传递给事件监听器。
-     *
+     * 在iOS平台UTS环境下或者UTS和JS通信时参数仅支持基础类型、string、Array、UTSJSONObject,其中Array，UTSJSONObject也仅支持包含上述类型,on和emit类型需匹配否则会产生异常
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#emit
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#emit
      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/window/communication.html#emit
