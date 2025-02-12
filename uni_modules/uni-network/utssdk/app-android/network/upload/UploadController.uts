@@ -30,7 +30,64 @@ import UUID from 'java.util.UUID';
 import Context from 'android.content.Context';
 import FileOutputStream from 'java.io.FileOutputStream';
 import { CookieInterceptor } from '../interceptor/CookieInterceptor.uts'
+import RequestBuilder from 'okhttp3.Request.Builder'
 
+function copyAssetFileToPrivateDir(context: Context, fileName: string): File| null {
+	try {
+		const destPath = context.getCacheDir().getPath() + "/uploadFiles/" + fileName
+		const outFile = new File(destPath)
+		const parentFile = outFile.getParentFile()
+		if (parentFile != null) {
+			if (!parentFile.exists()) {
+				parentFile.mkdirs()
+			}
+		}
+		if(!outFile.exists()){
+			outFile.createNewFile()
+		}
+		const inputStream = context.getAssets().open(fileName)
+		const outputStream = new FileOutputStream(outFile)
+		let buffer = new ByteArray(1024);
+		do {
+			let len = inputStream.read(buffer);
+			if (len == -1) {
+				break;
+			}
+			outputStream.write(buffer, 0, len)
+		} while (true)
+
+		inputStream.close()
+		outputStream.close()
+
+		return outFile
+	} catch (e: Exception) {
+		e.printStackTrace()
+	}
+
+	return null
+}
+
+/** 路径转换帮助函数 */
+function convertUriHelper(uri:string):string {
+	if (uri.startsWith("file://")) {
+		uri = uri.substring("file://".length)
+	} else if(uri.startsWith("unifile://")){
+		uri = UTSAndroid.convert2AbsFullPath(uri)
+	}else {
+		// 如果不是file://开头的，就说明是相对路径。
+		uri = UTSAndroid.convert2AbsFullPath(uri)
+		if(uri.startsWith("/android_asset/")){
+			const filePath = uri.replace("/android_asset/", "")
+			const context = UTSAndroid.getAppContext();
+			const apkFile = copyAssetFileToPrivateDir(context!!, filePath)
+			if(apkFile != null){
+				uri = apkFile.getPath()
+			}
+		}
+	}
+	
+	return uri;
+}
 
 class FileInformation {
 	public inputStream : InputStream | null = null;
@@ -127,25 +184,9 @@ class UploadController {
 
 		return clientBuilder.build();
 	}
-
-
-	private createUploadRequest(options : UploadFileOptions, listener : NetworkUploadFileListener) : Request | null {
-		let requestBilder = new Request.Builder();
-		try {
-			requestBilder.url(options.url);
-		} catch (exception : Exception) {
-			let option = {};
-			option['statusCode'] = '-1';
-			option['errorCode'] = '600009';
-			option['errorMsg'] = "invalid URL";
-			let cause = exception.cause.toString();
-			option['cause'] = new SourceError(cause);
-			if (listener != null) {
-				listener.onComplete(option);
-			}
-			return null;
-		}
-
+	
+	/** 多文件表单上传 */
+	private multiPartBodyRequestBilder(bilder:RequestBuilder, options : UploadFileOptions, listener : NetworkUploadFileListener):ProgressRequestBody|null {
 		let multiPartBody = (new MultipartBody.Builder("----" + UUID.randomUUID().toString())).setType(MultipartBody.FORM);
 		
 		const formData = options.formData?.toMap();
@@ -160,7 +201,7 @@ class UploadController {
 				}
 			}
 		}
-
+		
 		const tempFiles = options.files;
 		if (tempFiles != null && tempFiles!.length > 0) {
 			const files : UploadFileOptionFiles[] = tempFiles;
@@ -169,7 +210,7 @@ class UploadController {
 				const path = file.uri;
 				const fileInformation = this.getFileInformation(path)
 				const name = file.name ?? "file";
-
+		
 				const inputStream = fileInformation?.inputStream;
 				if (fileInformation != null && inputStream != null) {
 					let requestBody = new InputStreamRequestBody(MediaType.parse(fileInformation.mime ?? "*/*")!, fileInformation.size, inputStream);
@@ -199,10 +240,10 @@ class UploadController {
 				}
 				return null;
 			}
-
+		
 			const fileInformation = this.getFileInformation(filePath);
 			const name = options.name ?? "file";
-
+		
 			const inputStream = fileInformation?.inputStream;
 			if (fileInformation != null && inputStream != null) {
 				let requestBody = new InputStreamRequestBody(MediaType.parse(fileInformation.mime ?? "*/*")!, fileInformation.size, inputStream);
@@ -219,31 +260,128 @@ class UploadController {
 				return null;
 			}
 		}
-
-
+		
+		
 		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
+		bilder.header("User-Agent", ua);
+		
 		const headers = options.header?.toMap();
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
-
+		
 				if (value != null) {
-					requestBilder.addHeader(key, "" + value);
+					bilder.addHeader(key, "" + value);
 				} else {
 					continue;
 				}
 			}
 		}
-
-		requestBilder.post(new ProgressRequestBody(multiPartBody.build(), new NetworkUploadProgressListener(listener)));
+		
+		return new ProgressRequestBody(multiPartBody.build(), new NetworkUploadProgressListener(listener));
+	}
+	
+	/** 单文件上传 */
+	private normalBodyRequestBilder(bilder:RequestBuilder, options : UploadFileOptions, listener : NetworkUploadFileListener):ProgressRequestBody|null {
+		let filePath = ''
+		if(options.filePath != null) {
+			filePath = options.filePath!
+		}else {
+			if(options.files == null || options.files!.length < 1) {
+				 if (listener != null) {
+					let option = {};
+					option['statusCode'] = '-1';
+					option['errorCode'] = '-1';
+					option['errorMsg'] = "未提供任何文件，无法上传";
+					option['cause'] = null;
+					listener.onComplete(option);
+				 }
+				return null
+			}else if(options.files!.length > 1) {
+				 if (listener != null) {
+					let option = {};
+					option['statusCode'] = '-1';
+					option['errorCode'] = '-1';
+					option['errorMsg'] = "binary模式不支持多文件上传";
+					option['cause'] = null;
+					listener.onComplete(option);
+				 }
+				return null
+			}
+			
+			filePath = options.files![0].uri
+		}
+		const files = options.files as UploadFileOptionFiles[]
+		if(files.length > 1) {
+			 // 支持单个文件传输，多个文件需要报错
+			 if (listener != null) {
+			 	let option = {};
+			 	option['statusCode'] = '-1';
+			 	option['errorCode'] = '-1';
+			 	option['errorMsg'] = "binary模式不支持多文件上传";
+			 	option['cause'] = null;
+			 	listener.onComplete(option);
+			 }
+			return null;
+		}
+		
+		const body = RequestBody.create(MediaType.parse(this.getMimeType(files[0].uri))!, new File(convertUriHelper(filePath)));
+		const ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)['ua'].toString();
+		bilder.header('User-Agent', ua);
+		const headers = options.header?.toMap();
+		if (headers != null) {
+			for (entry in headers) {
+				const key = entry.key;
+				const value = entry.value;
+		
+				if (value != null) {
+					bilder.addHeader(key, "" + value);
+				} else {
+					continue;
+				}
+			}
+		}
+		
+		return new ProgressRequestBody(body, new NetworkUploadProgressListener(listener));
+	}
+	
+	private createUploadRequest(options : UploadFileOptions, listener : NetworkUploadFileListener) : Request | null {
+		let requestBilder = new Request.Builder();
+		try {
+			requestBilder.url(options.url);
+		} catch (exception : Exception) {
+			let option = {};
+			option['statusCode'] = '-1';
+			option['errorCode'] = '600009';
+			option['errorMsg'] = "invalid URL";
+			let cause = exception.cause.toString();
+			option['cause'] = new SourceError(cause);
+			if (listener != null) {
+				listener.onComplete(option);
+			}
+			return null;
+		}
+		
+		let requestBody:ProgressRequestBody|null = null;
+		
+		if(options.binary == true) {
+			requestBody = this.normalBodyRequestBilder(requestBilder, options, listener);
+		}else {
+			requestBody = this.multiPartBodyRequestBilder(requestBilder, options, listener);
+		}
+		
+		if(requestBody == null) return null;
+		
+		if(options.method != null && options.method!.toUpperCase() == 'PUT') {
+			requestBilder.put(requestBody!);
+		}else {
+			requestBilder.post(requestBody!);
+		}
 
 		return requestBilder.build();
 	}
-
-
+	
 	/**
 	 * 获取文件信息对象
 	 */
@@ -299,42 +437,9 @@ class UploadController {
 		return result;
 	}
 
-
 	private copyAssetFileToPrivateDir(context: Context, fileName: string): File| null {
-	    try {
-	        const destPath = context.getCacheDir().getPath() + "/uploadFiles/" + fileName
-	        const outFile = new File(destPath)
-			const parentFile = outFile.getParentFile()
-			if (parentFile != null) {
-				if (!parentFile.exists()) {
-					parentFile.mkdirs()
-				}
-			}
-			if(!outFile.exists()){
-				outFile.createNewFile()
-			}
-	        const inputStream = context.getAssets().open(fileName)
-	        const outputStream = new FileOutputStream(outFile)
-			let buffer = new ByteArray(1024);
-			do {
-				let len = inputStream.read(buffer);
-				if (len == -1) {
-					break;
-				}
-				outputStream.write(buffer, 0, len)
-			} while (true)
-	
-	        inputStream.close()
-	        outputStream.close()
-	
-	        return outFile
-	    } catch (e: Exception) {
-	        e.printStackTrace()
-	    }
-	
-	    return null
+	    return copyAssetFileToPrivateDir(context, fileName)
 	}
-
 
 	private checkPrivatePath(path : string) : boolean {
 		if (Build.VERSION.SDK_INT > 29 && Environment.isExternalStorageManager()) {

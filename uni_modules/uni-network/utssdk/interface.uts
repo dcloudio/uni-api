@@ -1915,6 +1915,14 @@ export type UploadFileOptions = {
    * @defaultValue null
    */
   complete?: UploadFileCompleteCallback | null
+  /**
+   * 请求方式（支持POST PUT）
+   */
+  method?:string|null
+  /**
+   * 是否二进制传输（值为true时，formData字段将失效）
+   */
+  binary?:boolean|null
 };
 export type OnProgressUpdateResult = {
   /**
