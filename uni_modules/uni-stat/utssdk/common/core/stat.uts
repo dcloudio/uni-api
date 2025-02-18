@@ -2,7 +2,7 @@
 import { Report } from "./report.uts";
 import { StatType } from "./stat-type";
 import { EventParams, UniStatOptions, ErrorCallback, ReportErrorCode } from '../../interface.uts'
-import { is_page, is_page_report, get_space, is_push_clientid, calibration } from '../utils/pageInfo.uts'
+import { is_page, is_page_report, get_space, is_push_clientid, calibration,get_crash_logs } from '../utils/pageInfo.uts'
 import { Config } from "../config";
 
 export class Stat {
@@ -82,7 +82,14 @@ export class Stat {
     const uniStatConfig = Config.getOptions()
     // 设置上报周期时间
     this.report.eportInterval = uniStatConfig.reportInterval ?? 10
-
+		
+		// #ifdef APP
+		// 获取崩溃日志
+		get_crash_logs((logs)=>{
+			console.log('----- logs',logs);
+			this.registerEvent(StatType.Crash, null, logs)
+		})
+		// #endif
   }
   /**
    * 应用启动
@@ -221,6 +228,9 @@ export class Stat {
           this.report.appError(error)
         }
         break
+			case StatType.Crash:
+			    this.report.appCrash(options as string[])
+			  break
     }
   }
 
