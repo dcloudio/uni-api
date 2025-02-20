@@ -357,7 +357,7 @@ export class Report {
 			"sv": statdata.sv, // 系统版本名称
 			"brand":statdata.brand, // 手机品牌
 			"md": statdata.md, // 手机型号
-			"root": statdata.root ? 0 : 1, // 是否root
+			"root": statdata.root, // 是否root
 			// "batlevel": "", // 设备电池电量
 			// "battemp": "", // 电池温度
 			// "memuse": "", // 系统已使用内存

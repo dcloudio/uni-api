@@ -171,6 +171,7 @@ function getEventData(lt : string, elm : StatDefault) : any {
 			break
 		case '31': // 应用错误
 			data = FilterParam(ErrorParamsKeys, elm)
+			break
 		case '41': // 崩溃
 			data = FilterParam(CrashParamsKeys, elm)
 			break
