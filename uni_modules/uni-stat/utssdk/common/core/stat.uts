@@ -82,11 +82,10 @@ export class Stat {
     const uniStatConfig = Config.getOptions()
     // 设置上报周期时间
     this.report.eportInterval = uniStatConfig.reportInterval ?? 10
-		
+
 		// #ifdef APP
 		// 获取崩溃日志
 		get_crash_logs((logs)=>{
-			console.log('----- logs',logs);
 			this.registerEvent(StatType.Crash, null, logs)
 		})
 		// #endif
