@@ -7,7 +7,44 @@
 [Hello UTS](https://gitcode.net/dcloud/hello-uts)
 
 
-注意：
+API：uni.requestMerchantTransfer(options: RequestMerchantTransferOption)
+
+功能描述：商家转账用户确认模式下，在移动端应用APP中集成开放SDK调起微信请求用户确认收款。
+
+# RequestMerchantTransferOption参数介绍：
+
+| 名称      | 类型     | 必备 | 描述                                                         |
+|-----------|:---------:|:---------:|--------------------------------------------------------------|
+| mchId     | string   | 是   | 商户号                                                       |
+| subMchId  | string   | 否   | 子商户号，服务商模式下必填                                   |
+| package   | string   | 是   | 商家转账付款单跳转收款页 pkg 信息,商家转账付款单受理成功时返回给商户 |
+| appId     | string   | 否   | 商户 appId（微信平台appid），普通模式下必填，服务商模式下，appId 和 subAppId 二选一填写 |
+| subAppId  | string   | 否   | 子商户 appId（微信平台子appid)，服务商模式下，appId 和 subAppId 二选一填写      |
+| openId    | string   | 否   | 收款用户 openId， 对应传入的商户 appId 下，某用户的 openId    |
+| success   | function | 否   | 接口调用成功的回调函数                                        |
+| fail      | function | 否   | 接口调用失败的回调函数                                        |
+| complete  | function | 否   | 接口调用结束的回调函数（调用成功、失败都会执行）              |
+
+# 使用示例：
+对应参考：[微信小程序API规范](https://developers.weixin.qq.com/miniprogram/dev/api/payment/wx.requestMerchantTransfer.html)
+```javascript
+uni.requestMerchantTransfer({
+	"mchId": "mchId",
+	"appId": "微信开发者平台对应app的APPID",
+	"package": "package",
+	success: (res) => {
+		console.log(res)
+	},
+	fail: (res) => {
+		console.log(res.errMsg)
+	},
+	complete: (res) => {
+		console.log(res.errMsg)
+	}
+})
+```
+
+# iOS注意：在提交云端打包之前必须配置对应的Info.plist文件
 1. 需要在项目根目录下添加 Info.plist 文件 (https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-ios.html#infoplist)
 2. plist中添加 uni-requestMerchantTransfer 插件需要的key：（如下）
 
