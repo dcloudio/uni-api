@@ -1,17 +1,12 @@
 # uni-requestMerchantTransfer
-### 开发文档
-[UTS 语法](https://uniapp.dcloud.net.cn/tutorial/syntax-uts.html)
-[UTS API插件](https://uniapp.dcloud.net.cn/plugin/uts-plugin.html)
-[UTS uni-app兼容模式组件](https://uniapp.dcloud.net.cn/plugin/uts-component.html)
-[UTS 标准模式组件](https://doc.dcloud.net.cn/uni-app-x/plugin/uts-vue-component.html)
-[Hello UTS](https://gitcode.net/dcloud/hello-uts)
 
+微信小程序平台参考：[微信小程序API规范](https://developers.weixin.qq.com/miniprogram/dev/api/payment/wx.requestMerchantTransfer.html)
 
-API：uni.requestMerchantTransfer(options: RequestMerchantTransferOption)
+## uni.requestMerchantTransfer(options: RequestMerchantTransferOption)
 
-功能描述：商家转账用户确认模式下，在移动端应用APP中集成开放SDK调起微信请求用户确认收款。
+商家转账用户确认模式下，在移动端应用APP中集成开放SDK调起微信请求用户确认收款。
 
-# RequestMerchantTransferOption参数介绍：
+### RequestMerchantTransferOption参数：
 
 | 名称      | 类型     | 必备 | 描述                                                         |
 |-----------|:---------:|:---------:|--------------------------------------------------------------|
@@ -25,8 +20,8 @@ API：uni.requestMerchantTransfer(options: RequestMerchantTransferOption)
 | fail      | function | 否   | 接口调用失败的回调函数                                        |
 | complete  | function | 否   | 接口调用结束的回调函数（调用成功、失败都会执行）              |
 
-# 使用示例：
-对应参考：[微信小程序API规范](https://developers.weixin.qq.com/miniprogram/dev/api/payment/wx.requestMerchantTransfer.html)
+### 示例：
+
 ```javascript
 uni.requestMerchantTransfer({
 	"mchId": "mchId",
@@ -44,10 +39,14 @@ uni.requestMerchantTransfer({
 })
 ```
 
-# iOS注意：在提交云端打包之前必须配置对应的Info.plist文件
-1. 需要在项目根目录下添加 Info.plist 文件 (https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-ios.html#infoplist)
-2. plist中添加 uni-requestMerchantTransfer 插件需要的key：（如下）
+## 注意事项
 
+iOS平台必须在项目根目录下的 [Info.plist](https://uniapp.dcloud.net.cn/tutorial/app-nativeresource-ios.html#infoplist) 文件中配置微信开发者平台的APPID和通用链接，配置后需提交云端打包生效。
+
+1. 在 `WeChat` 节点下配置 `appid` 和 `universalLink`
+2. 在 `CFBundleURLTypes` 节点下配置 scheme 数据
+
+示例如下：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -60,13 +59,6 @@ uni.requestMerchantTransfer({
 			<key>universalLink</key>
 			<string>请填写能唤起当前应用的Universal Links路径</string>
 		</dict>
-
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>weixin</string>
-			<string>weixinULAPI</string>
-			<string>weixinURLParamsAPI</string>
-		</array>
 
 		<key>CFBundleURLTypes</key>
 		<array>
@@ -84,3 +76,6 @@ uni.requestMerchantTransfer({
 	</dict>
 </plist>
 ```
+
+> 如果同时使用了微信支付、微信登录、微信分享模块时，appid 和 universalLink 的值需与 manifest.json 中配置的值保持一致。
+
