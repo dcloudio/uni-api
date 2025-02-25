@@ -1,11 +1,11 @@
 
-import { RequestMerchantTransfer, RequestMerchantTransferOption, RequestMerchantTransferGeneralCallbackResult } from '../interface.uts';
+import { RequestMerchantTransfer, RequestMerchantTransferOptions, RequestMerchantTransferGeneralCallbackResult } from '../interface.uts';
 import WXAPIFactory from 'com.tencent.mm.opensdk.openapi.WXAPIFactory'
 import URLEncoder from 'java.net.URLEncoder'
 import StandardCharsets from 'java.nio.charset.StandardCharsets'
 import WXOpenBusinessView from 'com.tencent.mm.opensdk.modelbiz.WXOpenBusinessView'
 import Build from 'com.tencent.mm.opensdk.constants.Build'
-export const requestMerchantTransfer : RequestMerchantTransfer = function (options : RequestMerchantTransferOption) {
+export const requestMerchantTransfer : RequestMerchantTransfer = function (options : RequestMerchantTransferOptions) {
 	var appId = options.appId
 	var api = WXAPIFactory.createWXAPI(UTSAndroid.getAppContext(), appId, false)
 	var wxSdkVersion = api.wxAppSupportAPI
@@ -33,19 +33,24 @@ export const requestMerchantTransfer : RequestMerchantTransfer = function (optio
 		req.query = query
 		// 发送请求并检查返回值
 		var ret = api.sendReq(req)
-		var result : RequestMerchantTransferGeneralCallbackResult = {
-			errMsg: 'ok'
-		}
-		console.log(query)
-		if (!ret) {
+		if (ret) {
+			var result : RequestMerchantTransferGeneralCallbackResult = {
+				errMsg: 'ok'
+			}
 			options.success?.(result)
+			options.complete?.(result)
+		}else{
+			var result : RequestMerchantTransferGeneralCallbackResult = {
+				errMsg: 'fail'
+			}
+			options.fail?.(result)
 			options.complete?.(result)
 		}
 	} else {
 		var result : RequestMerchantTransferGeneralCallbackResult = {
 			errMsg: '当前微信版本过低，请升级微信以使用该功能'
 		}
-		options.success?.(result)
+		options.fail?.(result)
 		options.complete?.(result)
 	}
 }

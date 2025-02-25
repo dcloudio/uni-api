@@ -1,8 +1,8 @@
 import { UIApplication } from "UIKit";
 import { URL, NSUserActivity, Bundle, URLComponents, URLQueryItem, Script } from "Foundation";
-import { RequestMerchantTransfer, RequestMerchantTransferOption, RequestMerchantTransferGeneralCallbackResult } from '../interface.uts';
+import { RequestMerchantTransfer, RequestMerchantTransferOptions, RequestMerchantTransferGeneralCallbackResult } from '../interface.uts';
 
-export const requestMerchantTransfer : RequestMerchantTransfer = function (options : RequestMerchantTransferOption) {
+export const requestMerchantTransfer : RequestMerchantTransfer = function (options : RequestMerchantTransferOptions) {
 	WxpayManager.requestMerchantTransfer(options)
 }
 
@@ -28,7 +28,7 @@ export class WxpayManagerHookProxy implements UTSiOSHookProxy {
 
 class WxpayManager implements WXApiDelegate {
 	private static shared = new WxpayManager()
-	private static options ?: RequestMerchantTransferOption
+	private static options ?: RequestMerchantTransferOptions
 
 	@UTSiOS.keyword("fileprivate")
 	static registerApp() {
@@ -60,7 +60,7 @@ class WxpayManager implements WXApiDelegate {
 				scheme = wechat!['appid'] as string | null
 			}
 		}
-
+		
 		return scheme
 	}
 
@@ -96,7 +96,7 @@ class WxpayManager implements WXApiDelegate {
 		return components.percentEncodedQuery
 	}
 
-	static requestMerchantTransfer(options : RequestMerchantTransferOption) {
+	static requestMerchantTransfer(options : RequestMerchantTransferOptions) {
 		WxpayManager.options = options
 		if (WxpayManager.isWXAppInstalled() == false) {
 			var res : RequestMerchantTransferGeneralCallbackResult = {

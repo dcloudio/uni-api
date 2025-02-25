@@ -60,18 +60,18 @@ export interface Uni {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
 		}
 	*/
-	requestMerchantTransfer(options : RequestMerchantTransferOption) : void;
+	requestMerchantTransfer(options : RequestMerchantTransferOptions) : void;
 }
 
-export type RequestMerchantTransfer = (options : RequestMerchantTransferOption) => void;
-export type RequestMerchantTransferOption = {
+export type RequestMerchantTransfer = (options : RequestMerchantTransferOptions) => void;
+export type RequestMerchantTransferOptions = {
 	/**
 		商户号
 		@uniPlatform {
@@ -133,8 +133,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -202,8 +202,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -271,8 +271,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -340,8 +340,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -409,8 +409,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -478,8 +478,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -547,8 +547,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -616,8 +616,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
@@ -685,8 +685,8 @@ export type RequestMerchantTransferOption = {
 					"unixVer": "x"
 				},
 				"jd": {
-					"hostVer": "x",
-					"uniVer": "x",
+					"hostVer": "x", 
+					"uniVer": "x", 
 					"unixVer": "x"
 				}
 			}
