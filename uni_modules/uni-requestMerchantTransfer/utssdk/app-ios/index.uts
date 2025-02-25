@@ -60,7 +60,7 @@ class WxpayManager implements WXApiDelegate {
 				scheme = wechat!['appid'] as string | null
 			}
 		}
-		
+
 		return scheme
 	}
 
@@ -106,7 +106,7 @@ class WxpayManager implements WXApiDelegate {
 			options.complete?.(res)
 		}
 
-		if (WxpayManager.getApplicationScheme() == null && WxpayManager.getApplicationScheme() == "") {
+		if (WxpayManager.getApplicationScheme() == null || WxpayManager.getApplicationScheme() == "") {
 			var res : RequestMerchantTransferGeneralCallbackResult = {
 				errMsg: '没有配置对应的URL Scheme'
 			}
@@ -115,7 +115,7 @@ class WxpayManager implements WXApiDelegate {
 			return
 		}
 
-		if (WxpayManager.getApplicationUniversalLink() == null && WxpayManager.getApplicationUniversalLink() == "") {
+		if (WxpayManager.getApplicationUniversalLink() == null || WxpayManager.getApplicationUniversalLink() == "") {
 			var res : RequestMerchantTransferGeneralCallbackResult = {
 				errMsg: '没有配置对应的Universal Link'
 			}
