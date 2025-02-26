@@ -60,7 +60,7 @@ class WxpayManager implements WXApiDelegate {
 				scheme = wechat!['appid'] as string | null
 			}
 		}
-		
+
 		return scheme
 	}
 
@@ -154,28 +154,30 @@ class WxpayManager implements WXApiDelegate {
 
 	//@brief 发送一个sendReq后，收到微信的回应
 	onResp(resp : BaseResp) {
-		let resp = resp as WXOpenBusinessViewResp
+		if (resp instanceof WXOpenBusinessViewResp) {
+			let resp = resp as WXOpenBusinessViewResp
 
-		if (resp.extMsg?.includes("cancel") == true) {
-			var res : RequestMerchantTransferGeneralCallbackResult = {
-				errMsg: '用户取消'
+			if (resp.extMsg?.includes("cancel") == true) {
+				var res : RequestMerchantTransferGeneralCallbackResult = {
+					errMsg: '用户取消'
+				}
+				WxpayManager.options?.fail?.(res)
+				WxpayManager.options?.complete?.(res)
 			}
-			WxpayManager.options?.fail?.(res)
-			WxpayManager.options?.complete?.(res)
-		}
-		if (resp.extMsg?.includes("fail") == true) {
-			var res : RequestMerchantTransferGeneralCallbackResult = {
-				errMsg: '展示页面失败'
+			if (resp.extMsg?.includes("fail") == true) {
+				var res : RequestMerchantTransferGeneralCallbackResult = {
+					errMsg: '展示页面失败'
+				}
+				WxpayManager.options?.fail?.(res)
+				WxpayManager.options?.complete?.(res)
 			}
-			WxpayManager.options?.fail?.(res)
-			WxpayManager.options?.complete?.(res)
-		}
-		if (resp.extMsg?.includes("success") == true) {
-			var res : RequestMerchantTransferGeneralCallbackResult = {
-				errMsg: '确认收款'
+			if (resp.extMsg?.includes("success") == true) {
+				var res : RequestMerchantTransferGeneralCallbackResult = {
+					errMsg: '确认收款'
+				}
+				WxpayManager.options?.success?.(res)
+				WxpayManager.options?.complete?.(res)
 			}
-			WxpayManager.options?.success?.(res)
-			WxpayManager.options?.complete?.(res)
 		}
 	}
 }
