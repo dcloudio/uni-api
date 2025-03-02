@@ -2,13 +2,13 @@
 	"id": "uni-requestMerchantTransfer",
 	"displayName": "uni-requestMerchantTransfer",
 	"version": "1.0.0",
-	"description": "uni-requestMerchantTransfer",
+	"description": "商家转账用户确认模式下调起微信请求用户确认收款",
 	"keywords": [
-		"uni-requestMerchantTransfer"
-	],
+        "微信确认收款"
+    ],
 	"repository": "",
 	"engines": {
-		"HBuilderX": "^3.6.8"
+		"HBuilderX": "^4.11"
 	},
 	"dcloudext": {
 		"type": "uts",
@@ -24,9 +24,9 @@
 			"qq": ""
 		},
 		"declaration": {
-			"ads": "",
-			"data": "",
-			"permissions": ""
+			"ads": "无",
+			"data": "使用微信Open SDK，数据采集相关内容参考：微信Open SDK个人信息处理规则\nhttps://support.weixin.qq.com/cgi-bin/mmsupportacctnodeweb-bin/pages/RYiYJkLOrQwu0nb8",
+			"permissions": "无"
 		},
 		"npmurl": ""
 	},
@@ -48,20 +48,24 @@
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
-				"tcb": "u",
-				"aliyun": "u",
-				"alipay": "u"
+				"tcb": "y",
+				"aliyun": "y",
+				"alipay": "y"
 			},
 			"client": {
 				"Vue": {
-					"vue2": "u",
-					"vue3": "u"
+					"vue2": "y",
+					"vue3": "y"
 				},
 				"App": {
-					"app-android": "u",
-					"app-ios": "u",
-					"app-harmony": "u"
-				},
+                    "app-android": {
+                        "minVersion": "21"
+                    },
+                    "app-ios": {
+                        "minVersion": "12"
+                    },
+                    "app-harmony": "u"
+                },
 				"H5-mobile": {
 					"Safari": "u",
 					"Android Browser": "u",
