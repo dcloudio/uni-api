@@ -12,7 +12,7 @@ export type GetBatteryInfoSuccess = {
 
 export type GetBatteryInfoOptions = {
   /**
-    * 接口调用结束的回调函数（调用成功、失败都会执行）
+    * 接口调用成功的回调
     */
   success?: (res: GetBatteryInfoSuccess) => void
   /**
@@ -20,7 +20,7 @@ export type GetBatteryInfoOptions = {
     */
   fail?: (res: UniError) => void
   /**
-    * 接口调用成功的回调
+    * 接口调用结束的回调函数（调用成功、失败都会执行）
     */
   complete?: (res: any) => void
 }
@@ -80,107 +80,160 @@ interface Uni {
    * ```
    * @remark
    * - 该接口需要同步调用
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4.4",
-   *            "uniVer": "3.6.11",
-   *            "unixVer": "3.9.0"
-   *        },
-   *        "ios": {
-   *            "osVer": "12.0",
-   *            "uniVer": "3.6.11",
-   *            "unixVer": "4.11"
-   *        },
-   *    "harmony": {
-   *      "osVer": "3.0",
-   *      "uniVer": "4.23",
-   *      "unixVer": "x"
-   *    }
-   *    },
-   *  "mp": {
-   *    "weixin": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "4.35"
-   *    },
-   *    "alipay": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "baidu": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "toutiao": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "lark": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "qq": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "kuaishou": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    },
-   *    "jd": {
-   *      "hostVer": "√",
-   *      "uniVer": "√",
-   *      "unixVer": "x"
-   *    }
-   *  },
-   *    "web": {
-   *      "uniVer": "3.6.11",
-   *      "unixVer": "4.0"
-   *    }
-   * }
+   * @uniPlatform
+    {
+      "app": {
+        "android": {
+          "osVer": "5.0",
+          "uniVer": "3.6.11",
+          "uniUtsPlugin": "x",
+          "unixVer": "3.9",
+          "unixUtsPlugin": "3.9"
+        },
+        "ios": {
+          "osVer": "12.0",
+          "uniVer": "3.6.11",
+          "uniUtsPlugin": "x",
+          "unixVer": "4.11",
+          "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "osVer": "3.0",
+          "uniVer": "4.23",
+          "unixVer": "x"
+        }
+      },
+      "mp": {
+        "weixin": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "4.35"
+        },
+        "alipay": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        }
+      },
+      "web": {
+        "uniVer": "3.6.11",
+        "unixVer": "4.0"
+      }
+    }
    * @uniVueVersion 2,3  //支持的vue版本
    *
    */
   getBatteryInfo(options: GetBatteryInfoOptions): void,
+
   /**
    * 同步获取电池电量信息
    *
    * @example
    * ```typescript
-   * uni.getBatteryInfo()
+   * let batteryInfo = uni.getBatteryInfoSync()
    * ```
    * @remark
    * - 该接口需要同步调用
-   * @uniPlatform {
-   *    "app": {
-   *        "android": {
-   *            "osVer": "4.4.4",
-   *            "uniVer": "3.6.11",
-   *            "unixVer": "3.9.0"
-   *        },
-   *        "ios": {
-   *            "osVer": "12.0",
-   *            "uniVer": "3.6.11",
-   *            "unixVer": "4.11"
-   *        },
-     *    "harmony": {
-     *      "osVer": "3.0",
-     *      "uniVer": "4.23",
-     *      "unixVer": "x"
-     *    }
-   *    },
-   *    "web": {
-   *      "uniVer": "3.6.11",
-   *      "unixVer": "4.0"
-   *    }
-   * }
+   * @uniPlatform
+    {
+      "app": {
+        "android": {
+          "osVer": "5.0",
+          "uniVer": "3.6.11",
+          "uniUtsPlugin": "x",
+          "unixVer": "3.9",
+          "unixUtsPlugin": "3.9"
+        },
+        "ios": {
+          "osVer": "12.0",
+          "uniVer": "3.6.11",
+          "uniUtsPlugin": "x",
+          "unixVer": "4.11",
+          "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "osVer": "3.0",
+          "uniVer": "4.23",
+          "unixVer": "x"
+        }
+      },
+      "mp": {
+        "weixin": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "4.35"
+        },
+        "alipay": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        }
+      },
+      "web": {
+        "uniVer": "3.6.11",
+        "unixVer": "4.0"
+      }
+    }
    * @uniVueVersion 2,3  //支持的vue版本
    *
    */
