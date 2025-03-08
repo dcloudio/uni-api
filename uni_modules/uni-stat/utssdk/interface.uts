@@ -322,7 +322,7 @@ export type StatDefault = {
 	/** 城市 */
 	ct ?: string
 	/** 上报数据时的时间戳 */
-	t : number
+	t ?: number
 	/** 页面标题 */
 	tt ?: string
 	/** 手机品牌 */
@@ -392,6 +392,13 @@ export type StatDefault = {
 	net ?: string
 	/** 错误信息 */
 	em ?: string
+	/* 是否root ios为越狱 */
+	root ?: number
+	/*manifest.json 中应用版本名称。*/
+	pv ?: string
+	log ?: string
+	did ?: string
+	os ?: string
 }
 
 /**
