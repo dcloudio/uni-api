@@ -313,6 +313,22 @@ export const is_handle_device = () : boolean => {
 	return isHandleDevice === '1'
 }
 
+/**
+ * 获取网络状态
+ */
+export const get_net = () : Promise<string> => {
+	return new Promise((resolve, reject) => {
+		uni.getNetworkType({
+			success(e : GetNetworkTypeSuccess) {
+				const net = e.networkType
+				resolve(net)
+			}, fail() {
+				reject('')
+			}
+		})
+	})
+}
+
 
 /**
  * 获取上报数据默认值
@@ -335,7 +351,7 @@ export const get_default_data = () : StatDefault => {
 		v: RUNTIME_VERSION,
 		ch: get_channel(),
 		cn: '',
-		pn: '',
+		pn: get_pack_name(),
 		ct: '',
 		t: get_time(),
 		tt: '',
@@ -455,7 +471,7 @@ export const get_crash_logs = (fn : (value : string[]) => void) => {
 		const reportLogs : Promise<string>[] = []
 		for (let i = 0; i < crash_data.length; i++) {
 			const item = crash_data[i];
-			let file_text:string;
+			let file_text : string;
 			// #ifdef APP-ANDROID
 			file_text = item.get('file') as string
 			// #endif
