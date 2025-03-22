@@ -1,7 +1,7 @@
 {
   "id": "uni-stat",
   "displayName": "uni统计 for uni-app x",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "uni统计的uni-app x 版本",
   "keywords": [
     "uni-stat",
@@ -60,8 +60,8 @@
         },
         "App": {
             "app-harmony": "n",
-            "app-android": "u",
-            "app-ios": "u"
+            "app-android": "y",
+            "app-ios": "y"
         },
         "H5-mobile": {
           "Safari": "y",
