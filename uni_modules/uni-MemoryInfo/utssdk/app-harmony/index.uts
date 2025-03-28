@@ -1,0 +1,19 @@
+import { OnMemoryInfoChange, OffMemoryInfoChange, GetMemoryInfo } from '../interface.uts'
+import { MemoryInfoNative } from "./MemoryInfoNative.ets"
+
+type MemoryInfoChangeCallback = (memInfo : number[]) => void
+
+// 开启内存监听
+export const onMemoryInfoChange : OnMemoryInfoChange = function (callback : MemoryInfoChangeCallback) {
+  MemoryInfoNative.onMemoryInfoChangeArkts(callback)
+}
+
+// 结束内存监听
+export const offMemoryInfoChange : OffMemoryInfoChange = function () {
+  MemoryInfoNative.offMemoryInfoChangeArkts()
+}
+
+// 同步获取内存信息
+export const getMemoryInfo : GetMemoryInfo = function () : Array<number> {
+  return MemoryInfoNative.getMemInfoArkts();
+}
