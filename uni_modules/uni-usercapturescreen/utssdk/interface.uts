@@ -101,7 +101,7 @@
 			 *    "harmony": {
 			 *      "osVer": "3.0",
 			 *      "uniVer": "4.25",
-			 *      "unixVer": "x"
+			 *      "unixVer": "4.61"
 			 *    }
 		 *    }
 		 * }
@@ -129,8 +129,8 @@
 		 *   	  },
 			 *    "harmony": {
 			 *      "osVer": "3.0",
-			 *      "uniVer": "4.25",,
-			 *      "unixVer": "x"
+			 *      "uniVer": "4.25",
+			 *      "unixVer": "4.61"
 			 *    }
 		 *    }
 		 * }
@@ -159,7 +159,7 @@
 			 *    "harmony": {
 			 *      "osVer": "3.0",
 			 *      "uniVer": "4.25",
-			 *      "unixVer": "x"
+			 *      "unixVer": "4.61"
 			 *    }
 		 *    }
 		 * }
