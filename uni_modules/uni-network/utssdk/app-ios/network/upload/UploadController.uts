@@ -56,7 +56,7 @@ class UploadController implements URLSessionDataDelegate {
 			this.session = new URLSession(configuration = urlSessionConfig, delegate = this, delegateQueue = OperationQueue.current);
 		}
 
-		const bodyData = this.createBody(boundary, options, listener);
+		const bodyData = options.binary == true ? this.createBinaryBody(boundary, options, listener) : this.createBody(boundary, options, listener);
 		if (bodyData == null) {
 			const task = new NetworkUploadTaskImpl(null, listener);
 			listener.task = task
@@ -87,7 +87,7 @@ class UploadController implements URLSessionDataDelegate {
 		let request = new URLRequest(url = url!, cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval = timeoutInterval);
 		request.httpShouldHandleCookies = true;
 
-		request.httpMethod = "POST";
+		request.httpMethod = param.method != null ? param.method!.toUpperCase() : "POST";
 
 		request.setValue(`multipart/form-data; boundary=${boundary}`, forHTTPHeaderField = "Content-Type");
 
@@ -112,6 +112,30 @@ class UploadController implements URLSessionDataDelegate {
 			}
 		}
 		return request;
+	}
+	
+	/** 创建二进制请求体 */
+	private createBinaryBody(boundary : string, options : UploadFileOptions, listener : NetworkUploadFileListener) : Data | null {
+		let filePath:string = ''
+		
+		if(options.filePath != null) {
+			filePath = options.filePath!
+		}else {
+			if(options.files == null || options.files!.length < 1) {
+				let error = new NSError(domain = "未提供任何文件，无法上传", code = -1)
+				listener.onFail(error)
+				return null
+			}else if(options.files!.length > 1) {
+				let error = new NSError(domain = "二进制上传不支持多文件", code = -1)
+				listener.onFail(error)
+				return null
+			}
+			
+			filePath = options.files![0].uri
+		}
+		
+		const absolutePath = new URL(fileURLWithPath = UTSiOS.getResourceAbsolutePath(filePath, null))
+		return UTSiOS.try(new Data(contentsOf = absolutePath), "?")
 	}
 
 	private createBody(boundary : string, options : UploadFileOptions, listener : NetworkUploadFileListener) : Data | null {
