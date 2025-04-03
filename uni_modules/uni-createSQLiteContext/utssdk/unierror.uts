@@ -1,0 +1,57 @@
+import { ICreateSQLiteContextError } from "./interface.uts"
+
+/**
+ * 错误主题
+ */
+export const UniErrorSubject = 'uni-create-sql-context';
+
+/**
+ * 错误码
+ * @UniError
+ */
+export const UniErrors: Map<number, string> = new Map([
+  /**
+   * 数据库启动失败
+   */
+  [1000001, 'Database startup failed'],
+  /**
+   * 执行SQL增删改语句失败
+   */
+  [1000002, 'Failed to execute SQL insert, update, delete statement'],
+  /**
+   * 执行SQL查询语句失败
+   */
+  [1000003, 'Failed to execute SQL query statement'],
+  /**
+   * 事务开始失败
+   */
+  [1000004, 'Transaction start failed'],
+  /**
+   * 事务提交失败
+   */
+  [1000005, 'Transaction commit failed'],
+  /**
+   * 事务回滚失败
+   */
+  [1000006, 'Transaction rollback failed'],
+  /**
+   * 数据库关闭失败
+   */
+  [1000007, 'Database shutdown failed'],
+  /**
+   * 未知错误
+   */
+  [1000008, 'Unknown error'],
+]);
+
+export class createSQLiteContextFailImpl extends UniError implements ICreateSQLiteContextError {
+  override errCode: number
+  constructor(
+    errCode: number
+  ) {
+    super()
+    this.errSubject = UniErrorSubject
+    this.errCode = errCode
+    this.errMsg = UniErrors[errCode] ?? ''
+  }
+}

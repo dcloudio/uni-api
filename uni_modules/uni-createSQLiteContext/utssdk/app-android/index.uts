@@ -1,0 +1,126 @@
+import Cursor from 'android.database.Cursor';
+import SQLiteDatabase from 'android.database.sqlite.SQLiteDatabase';
+import SQLiteOpenHelper from 'android.database.sqlite.SQLiteOpenHelper';
+
+import { createSQLiteContextOptions, executeSqlOptions, selectSqlOptions, executeSqlOptionsResult, selectSqlOptionsResult, CreateSQLiteContext, transactionOptions } from '../interface.uts';
+import { createSQLiteContextFailImpl } from '../unierror.uts';
+
+class SQLiteContext extends SQLiteOpenHelper {
+  private databaseName: string | null;
+
+  constructor(name: string) {
+    let version = 1;
+    super(UTSAndroid.getAppContext()!, name, null, version.toInt());
+    this.databaseName = name;
+  }
+
+  public executeSql(options: executeSqlOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const SqlArray = options.sql.split(';');
+    let result: executeSqlOptionsResult = {
+      data: [] as boolean[],
+      errMsg: 'executeSql:ok',
+    }
+    try {
+      for (let i = 0; i < SqlArray.length; i++) {
+        if (SqlArray[i].length > 0) {
+          const sql = SqlArray[i].replace(/^\s+/, '');
+          try {
+            database.execSQL(sql);
+            result.data.push(true);
+          } catch {
+            result.data.push(false);
+          }
+        }
+      }
+      options.success?.(result);
+    } catch (e) {
+      const data = result.data;
+      result = new createSQLiteContextFailImpl(1000002);
+      result.data = data;
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
+  }
+
+  public selectSql(options: selectSqlOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const SqlArray = options.sql.split(';');
+    let result: selectSqlOptionsResult = {
+      data: [] as boolean[],
+      errMsg: 'selectSql:ok',
+    }
+    try {
+      for (let i = 0; i < SqlArray.length; i++) {
+        if (SqlArray[i].length > 0) {
+          const sql = SqlArray[i].replace(/^\s+/, '');
+          try {
+            const cursor: Cursor = database.rawQuery(sql, null);
+            //获取查询结果的字符串并push到result.data中
+            if (cursor.moveToFirst()) {
+              do {
+                const row = cursor.getColumnCount();
+                const rowArray = [] as string[];
+                for (let j = 0; j < row; j++) {
+                  rowArray.push(cursor.getString(j));
+                }
+                result.data.push(rowArray);
+              } while (cursor.moveToNext());
+            }
+            cursor.close();
+          } catch {
+            result.data.push("");
+          }
+        }
+      }
+      options.success?.(result);
+    } catch (e) {
+      const data = result.data;
+      result = new createSQLiteContextFailImpl(1000003);
+      result.data = data;
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
+  }
+
+  public transaction(options: transactionOptions) {
+    const database: SQLiteDatabase = this.getReadableDatabase();
+    const transaction = options.transaction;
+    let result: executeSqlOptionsResult = {
+      errMsg: 'transaction:ok',
+    }
+    try {
+      if (transaction == 'begin') {
+        //开启事务
+        database.execSQL('BEGIN TRANSACTION');
+      } else if (transaction == 'commit') {
+        //提交事务
+        database.execSQL('COMMIT');
+      } else if (transaction == 'rollback') {
+        //回滚事务
+        database.execSQL('ROLLBACK');
+      }
+      options.success?.(result);
+    } catch (e) {
+      let errCode = 1000008;
+      if (transaction == 'begin') {
+        errCode = 1000004;
+      } else if (transaction == 'commit') {
+        errCode = 1000005;
+      } else if (transaction == 'rollback') {
+        errCode = 1000006;
+      }
+      result = new createSQLiteContextFailImpl(errCode);
+      options.fail?.(result);
+    }
+    options.complete?.(result);
+    return result;
+  }
+}
+
+export const createSQLiteContext: CreateSQLiteContext = function (options: createSQLiteContextOptions) {
+  const name = options.name + '.db';
+  return new SQLiteContext(name);
+}

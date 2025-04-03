@@ -1,0 +1,203 @@
+/**
+ * 初始化数据库时的相关配置
+ * @param name 数据库名称
+ */
+export type createSQLiteContextOptions = {
+  /**
+   * 数据库名称
+   */
+  name: string,
+}
+
+/**
+ * 执行增删改等操作的SQL语句的相关配置
+ * @param sql SQL语句
+ * @param success 成功回调
+ * @param fail 失败回调
+ * @param complete 完成回调
+ */
+export type executeSqlOptions = {
+  /**
+   * SQL语句
+   */
+  sql: string,
+  /**
+   * 执行增删改等操作的SQL语句的成功回调
+   */
+  success?: executeSqlOptionsSuccessCallback | null,
+  /**
+   * 执行增删改等操作的SQL语句的失败回调
+   */
+  fail?: executeSqlOptionsFailCallback | null,
+  /**
+   * 执行增删改等操作的SQL语句的完成回调
+   */
+  complete?: executeSqlOptionsCompleteCallback | null,
+}
+
+/**
+ * 执行增删改等操作的SQL语句的成功回调
+ */
+export type executeSqlOptionsSuccessCallback = (res: executeSqlOptionsResult) => void
+
+/**
+ * 执行增删改等操作的SQL语句的失败回调
+ */
+export type executeSqlOptionsFailCallback = (res: executeSqlOptionsResult) => void
+
+/**
+ * 执行增删改等操作的SQL语句的完成回调
+ */
+export type executeSqlOptionsCompleteCallback = (res: executeSqlOptionsResult) => void
+
+/**
+ * 执行增删改等操作的SQL语句的返回结果
+ * @param errMsg 返回的错误信息
+ * @param date 返回的数据
+ */
+export interface executeSqlOptionsResultInterface extends ICreateSQLiteContextError {
+  /**
+   * 返回的错误信息
+   */
+  errMsg: string,
+  /**
+   * 返回的数据
+   */
+  date?: boolean[],
+}
+export type executeSqlOptionsResult = executeSqlOptionsResultInterface
+
+/**
+ * 执行查询操作的SQL语句的相关配置
+ */
+export type selectSqlOptions = {
+  /**
+   * SQL语句
+   */
+  sql: string,
+  /**
+   * 执行查询操作的SQL语句的成功回调
+   */
+  success?: selectSqlOptionsSuccessCallback | null,
+  /**
+   * 执行查询操作的SQL语句的失败回调
+   */
+  fail?: selectSqlOptionsFailCallback | null,
+  /**
+   * 执行查询操作的SQL语句的完成回调
+   */
+  complete?: selectSqlOptionsCompleteCallback | null,
+}
+
+/**
+ * 执行查询操作的SQL语句的成功回调
+ */
+export type selectSqlOptionsSuccessCallback = (res: selectSqlOptionsResult) => void
+
+/**
+ * 执行查询操作的SQL语句的失败回调
+ */
+export type selectSqlOptionsFailCallback = (res: selectSqlOptionsResult) => void
+
+/**
+ * 执行查询操作的SQL语句的完成回调
+ */
+export type selectSqlOptionsCompleteCallback = (res: selectSqlOptionsResult) => void
+
+/**
+ * 执行查询操作的SQL语句的返回结果
+ * @param errMsg 返回的错误信息
+ * @param date 返回的数据
+ */
+export interface selectSqlOptionsResultInterface extends ICreateSQLiteContextError {
+  /**
+   * 返回的错误信息
+   */
+  errMsg: string,
+  /**
+   * 返回的数据
+   */
+  date?: string[],
+}
+export type selectSqlOptionsResult = selectSqlOptionsResultInterface
+
+/**
+ * uni.createSQLiteContext失败回调参数
+ */
+export interface ICreateSQLiteContextError extends IUniError {
+  errCode: number
+}
+
+export type CreateSQLiteContext = (options: createSQLiteContextOptions) => CreateSQLiteContextCallBack
+
+export interface CreateSQLiteContextCallBack {
+  /**
+   * 执行增删改等操作的SQL语句
+   */
+  executeSql: (options: executeSqlOptions) => executeSqlOptionsCompleteCallback,
+  /**
+   * 执行查询操作的SQL语句
+   */
+  selectSql: (options: selectSqlOptions) => selectSqlOptionsCompleteCallback,
+  /**
+   * 关闭数据库
+   */
+  close: () => void,
+  /**
+   * 开启事务
+   */
+  transaction: (options: transactionOptions) => transactionCompleteCallback,
+}
+
+export type transactionOptions = {
+  /**
+   * 事务执行的操作
+   */
+  operation: transactionOperation,
+  /**
+   * 事务执行的成功回调
+   */
+  success?: transactionSuccessCallback | null,
+  /**
+   * 事务执行的失败回调
+   */
+  fail?: transactionFailCallback | null,
+  /**
+   * 事务执行的完成回调
+   */
+  complete?: transactionCompleteCallback | null,
+}
+
+/**
+ * 事务操作类型
+ * @param begin 开始事务
+ * @param commit 提交事务
+ * @param rollback 回滚事务
+ */
+export type transactionOperation = 'begin' | 'commit' | 'rollback'
+
+/**
+ * 事务执行的成功回调
+ */
+export type transactionSuccessCallback = (res: transactionResult) => void
+
+/**
+ * 事务执行的失败回调
+ */
+export type transactionFailCallback = (res: transactionResult) => void
+
+/**
+ * 事务执行的完成回调
+ */
+export type transactionCompleteCallback = (res: transactionResult) => void
+
+/**
+ * 事务执行的返回结果
+ */
+export interface transactionResultInterface extends ICreateSQLiteContextError {
+  /**
+   * 返回的错误信息
+   */
+  errMsg: string,
+}
+export type transactionResult = transactionResultInterface
