@@ -75,7 +75,7 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.isRoot = DeviceUtil.hasRootPrivilege();
 	}
 	if (filterArray.indexOf("isSimulator") != -1) {
-		result.isSimulator = DeviceUtil.isSimulator(activity);
+		result.isSimulator = DeviceUtil.isSimulator(activity, false);
 	}
 	if (filterArray.indexOf("isUSBDebugging") != -1) {
 		result.isUSBDebugging = DeviceUtil.listeningForADB();
@@ -103,4 +103,9 @@ function getBaseInfo(filterArray : Array<string>) : GetDeviceInfoResult {
 		result.romVersion = DeviceUtil.getRomVersion();
 	}
 	return result;
+}
+
+export function isSimulator(): boolean {
+	const activity = UTSAndroid.getUniActivity()!;
+	return DeviceUtil.isSimulator(activity, false)
 }

@@ -1,9 +1,17 @@
 import { RequestPaymentFailImpl as RequestPaymentFailImplement } from './unierror.uts'
 
 export type RequestPaymentFailImpl = RequestPaymentFailImplement
+
+// #ifdef APP-IOS
+export interface UniPaymentProvider extends Uni, JSExport { }
+// #endif
+
+// #ifndef APP-IOS
 export interface UniPaymentProvider extends UniProvider {
-	requestPayment(options: RequestPaymentOptions): void;
+	requestPayment(options : RequestPaymentOptions) : void;
 }
+// #endif
+
 export interface Uni {
 	/**
 	 * @description 请求支付
@@ -36,7 +44,7 @@ export interface Uni {
 		 *    "harmony": {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.26",
-		 *      "unixVer": "x"
+		 *      "unixVer": "4.61"
 		 *    }
 	 *    },
 		*  "mp": {
@@ -110,7 +118,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -137,7 +145,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -164,7 +172,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -191,7 +199,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -218,7 +226,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -245,7 +253,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -272,7 +280,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -299,7 +307,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -326,7 +334,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -353,7 +361,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -380,7 +388,7 @@ export type RequestPaymentErrorCode =
 		*        "harmony": {
 		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
-		*            "unixVer": "x"
+		*            "unixVer": "4.61"
 		*        }
 		*    },
 		*    "web": {
@@ -465,7 +473,7 @@ export type RequestPaymentSuccess = {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -544,7 +552,7 @@ export type RequestPaymentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "3，0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 	 *    "web": {
@@ -571,7 +579,7 @@ export type RequestPaymentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -640,7 +648,7 @@ export type RequestPaymentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "3，0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -709,7 +717,7 @@ export type RequestPaymentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -778,7 +786,7 @@ export type RequestPaymentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
-	 *      "unixVer": "x"
+	 *      "unixVer": "4.61"
 	 *    }
 	 *    },
 		*  "mp": {

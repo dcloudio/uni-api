@@ -4,8 +4,13 @@ import { ShowActionSheetOptions,ShowActionSheet} from "../interface.uts"
 import { ShowModalOptions,ShowModal} from "../interface.uts"
 
 import * as ToastModule from "./showToast.uts"
+// #ifndef UNI-APP-X
 import * as ModalModule from "./showModal.uts"
+// #endif
+// #ifndef UNI-APP-X
 import * as ActionSheetModule from "./showActionSheet.uts"
+// #endif
+
 
 
 export const showToast : ShowToast = function (options : ShowToastOptions) {
@@ -36,16 +41,21 @@ export const hideLoading : HideLoading = function () {
 	},null)
 }
 
+// #ifndef UNI-APP-X
 export const showModal : ShowModal = function (options : ShowModalOptions) {
 	UTSAndroid.dispatchAsync('main',function(res){
 		ModalModule.showModalImpl(options)
 	},null)
 }
+// #endif
 
+// #ifndef UNI-APP-X
 export const showActionSheet : ShowActionSheet = function (options : ShowActionSheetOptions) {
 	UTSAndroid.dispatchAsync('main',function(res){
 		ActionSheetModule.actionSheetImpl(options)
 	},null)
 }
+
+// #endif
 
 

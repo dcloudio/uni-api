@@ -39,7 +39,17 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": true
+					}
+				},
+				"isSimulator":{
+					"name": "isSimulator",
+					"app":{
+						"js": false,
+						"kotlin": true,
+						"swift": false,
+						"arkts": false
 					}
 				}
 			}

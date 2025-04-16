@@ -35,7 +35,7 @@ export class EmulatorCheckUtil {
 		return EmulatorCheckUtil.INSTANCE!;
 	}
 
-	public emulatorCheck(context: Context): boolean {
+	public emulatorCheck(context: Context, sampleSensor: boolean): boolean {
 		if (context == null) {
 			throw new IllegalArgumentException("context must not be null");
 		}
@@ -122,10 +122,6 @@ export class EmulatorCheckUtil {
 				return true;
 		}
 
-		//检测传感器数量
-		let sensorNumber = this.getSensorNumber(context);
-		if (sensorNumber <= 7) ++suspectCount;
-
 		//检测已安装第三方应用数量
 		/*int userAppNumber = getUserAppNumber();
 			if (userAppNumber <= 5) ++suspectCount;*/
@@ -138,9 +134,16 @@ export class EmulatorCheckUtil {
 		let supportBluetooth = this.supportBluetooth(context);
 		if (!supportBluetooth) ++suspectCount;
 
-		//检测光线传感器
-		let hasLightSensor = this.hasLightSensor(context);
-		if (!hasLightSensor) ++suspectCount;
+
+		if(sampleSensor){
+			//检测传感器数量
+			let sensorNumber = this.getSensorNumber(context);
+			if (sensorNumber <= 7) ++suspectCount;
+			
+			//检测光线传感器
+			let hasLightSensor = this.hasLightSensor(context);
+			if (!hasLightSensor) ++suspectCount;
+		}
 
 		//检测进程组信息
 		/*CheckResult cgroupResult = checkFeaturesByCgroup();

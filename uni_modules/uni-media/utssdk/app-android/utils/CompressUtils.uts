@@ -17,7 +17,7 @@ import Field from 'java.lang.reflect.Field';
 import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
 import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
 import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
-import { copyFile, getMediaInfo } from "./MediaUtils.uts";
+import { copyFile, formatNumber, getMediaInfo } from "./MediaUtils.uts";
 import Context from 'android.content.Context';
 import Uri from 'android.net.Uri';
 import FileInputStream from 'java.io.FileInputStream';
@@ -307,9 +307,11 @@ class MediaTranscoderListener implements Listener {
 	override onTranscodeCompleted() {
 		let outFile = new File(this.outPath)
 		if (outFile.exists()) {
+			var length = outFile.length()
 			let success : CompressVideoSuccess = {
 				tempFilePath: "file://" + this.outPath,
-				size: outFile.length() / 1024
+				size: formatNumber(length / 1024.0),
+				byteSize:length
 			}
 			this.options.success?.(success)
 			this.options.complete?.(success)

@@ -20,7 +20,7 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {
@@ -80,7 +80,7 @@ export interface Uni {
    *  }
    * }
    */
-  login: Login;
+  login(options: LoginOptions): void;
   /**
    * 获取用户信息
    *
@@ -102,7 +102,7 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {
@@ -162,7 +162,7 @@ export interface Uni {
    *  }
    * }
    */
-  getUserInfo: GetUserInfo;
+  getUserInfo(options: GetUserInfoOptions): void;
 }
 export interface UniOAuthProvider extends UniProvider {
   login(options: LoginOptions): void;
@@ -250,7 +250,7 @@ export type LoginOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.27",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {
@@ -773,7 +773,7 @@ export type UserInfo = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.27",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {
@@ -857,7 +857,7 @@ export type GetUserInfoSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.27",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {
@@ -1258,7 +1258,7 @@ export type GetUserInfoOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.27",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    *  },
    *  "mp": {

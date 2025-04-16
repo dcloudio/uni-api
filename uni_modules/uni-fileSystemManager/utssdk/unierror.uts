@@ -33,9 +33,10 @@ export const FileSystemManagerUniErrors : Map<FileSystemManagerErrorCode, string
 	[1300018, 'File too large'],
 	[1300019, 'Read-only file system'],
 	[1300020, 'File name too long'],
-	[1300021, 'Too many symbolic links encountered']
+	[1300033, 'Too many symbolic links encountered']
 ]);
 export class FileSystemManagerFailImpl extends UniError implements IFileSystemManagerFail {
+	override errCode: FileSystemManagerErrorCode
 	constructor(errCode : FileSystemManagerErrorCode) {
 		super();
 		this.errSubject = FileSystemManagerUniErrorSubject;

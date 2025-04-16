@@ -6,7 +6,7 @@ import {
 } from "../../interface.uts"
 import {
 	UniError_ChooseImage, UniError_ChooseVideo,
-	MediaErrorImpl
+	MediaErrorImpl,
 } from "../../unierror.uts"
 import { getMediaInfo, getOrientation, getVideoMetadata } from "./MediaUtils.uts"
 import { uniChooseImage, uniChooseVideo } from "./ChooseImageUtils.uts"
@@ -25,10 +25,15 @@ import Listener from 'io.dcloud.uts.androidtranscoder.MediaTranscoder.Listener';
 import MediaTranscoder from 'io.dcloud.uts.androidtranscoder.MediaTranscoder';
 import MediaFormatStrategyPresets from 'io.dcloud.uts.androidtranscoder.format.MediaFormatStrategyPresets';
 import CompressUtil from 'io.dcloud.uts.util.CompressUtil';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import TextUtils from 'android.text.TextUtils';
+import Locale from 'java.util.Locale';
+import Option from 'com.bumptech.glide.load.Option';
 
 const GALLERY_MEDIA_PICKER_RESULT = 1004;
 
 const mediaCachePath = UTSAndroid.getAppCachePath() + "uni-media/"
+const ASSETS_PATH = '/android_asset/'
 
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
@@ -308,13 +313,11 @@ function openCameraForVideo(option : ChooseVideoOptions, compressed : boolean) {
 				if (resultCode == -1) {
 					if (picFile.exists()) {
 						if (compressed) {
-							// cameraPath = CompressUtil.compressImage(cameraPath, cameraPath, false, getUniActivity()!!)
-							// picFile = new File(cameraPath)
 							let outPath = (mediaCachePath + System.currentTimeMillis() + ".mp4")
 							MediaTranscoder.getInstance().transcodeVideo(cameraPath, outPath, MediaFormatStrategyPresets.createAndroid720pStrategy(2, 1.0), new MediaTranscoderListener(option, cameraPath, outPath))
 						} else {
 							var metadata : GetVideoInfoSuccess | null = null
-							let result = getVideoMetadata(cameraPath)
+							let result = getVideoMetadata(cameraPath, null)
 							if (result instanceof GetVideoInfoSuccess) {
 								metadata = result as GetVideoInfoSuccess
 							}
@@ -372,7 +375,7 @@ class MediaTranscoderListener implements Listener {
 	override onTranscodeCompleted() {
 		this.deleteInPath()
 		var metadata : GetVideoInfoSuccess | null = null
-		let result = getVideoMetadata(this.outPath)
+		let result = getVideoMetadata(this.outPath, null)
 		if (result instanceof GetVideoInfoSuccess) {
 			metadata = result as GetVideoInfoSuccess
 		}
@@ -431,7 +434,7 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 				option.complete?.(error)
 			} else {
 				var metadata : GetVideoInfoSuccess | null = null
-				let result = getVideoMetadata(picPaths)
+				let result = getVideoMetadata(picPaths, null)
 				if (result instanceof GetVideoInfoSuccess) {
 					metadata = result as GetVideoInfoSuccess
 				}

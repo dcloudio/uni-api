@@ -2,7 +2,7 @@ import { UTSiOSHookProxy } from "DCloudUniappRuntime";
 import { UIApplication } from "UIKit"
 import { AlipaySDK } from "AlipaySDK" assert { type: "implementationOnly" };
 import { URL, NSUserActivity, NSUserActivityTypeBrowsingWeb, Bundle } from "Foundation"
-import { UniPaymentAlipayProvider } from './interface.uts'
+import { UniPaymentAlipayProvider } from '../interface.uts'
 
 const defaultErrorCode : number = 700000;
 
@@ -26,6 +26,14 @@ export class UniPaymentAlipayProviderImpl implements UniPaymentAlipayProvider {
 
     requestPayment(options : RequestPaymentOptions) {
 		Alipay.requestPayment(options)
+	}
+	
+	toJSON() : Map<string, any> {
+		const dict = new Map<string, any>()
+		dict.set('id', this.id)
+		dict.set('description', this.description)
+		dict.set('isAppExist', this.isAppExist)
+		return dict
 	}
 	
 	constructor() {

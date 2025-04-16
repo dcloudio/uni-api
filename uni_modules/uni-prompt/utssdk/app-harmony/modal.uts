@@ -1,4 +1,3 @@
-import { window } from '@kit.ArkUI';
 import { ShowModal, ShowModalSuccess, ShowModalOptions } from '../interface.uts';
 import { ShowModalApiOptions, ShowModalProtocol, API_SHOW_MODAL } from '../protocol.uts';
 
@@ -8,14 +7,14 @@ export const showModal: ShowModal = defineAsyncApi<ShowModalOptions, ShowModalSu
         const modalRes = await new Promise<ShowModalSuccess>((resolve, reject) => {
             const confirmButton: AlertDialogButtonOptions = {
                 value: args.confirmText ?? '确定',
-                fontColor: args.confirmColor!,
+                fontColor: args.confirmColor! as string,
                 action: () => {
                     resolve({ "confirm": true } as ShowModalSuccess)
                 }
             };
             const cancelButton: AlertDialogButtonOptions = {
                 value: args.cancelText ?? '取消',
-                fontColor: args.cancelColor ?? '#000000',
+                fontColor: (args.cancelColor ?? '#000000') as string,
                 action: () => {
                     resolve({ "cancel": true } as ShowModalSuccess)
                 }
@@ -25,7 +24,7 @@ export const showModal: ShowModal = defineAsyncApi<ShowModalOptions, ShowModalSu
                 buttons.push(cancelButton);
             }
             buttons.push(confirmButton);
-            const window = UTSHarmony.getCurrentWindow() as window.Window;
+            const window = UTSHarmony.getCurrentWindow();
             window.getUIContext().showAlertDialog(
                 {
                     title: args.title ?? '',

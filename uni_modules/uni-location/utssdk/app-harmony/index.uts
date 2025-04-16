@@ -1,0 +1,55 @@
+import {
+    GetLocation,
+    GetLocationOptions,
+    GetLocationSuccess,
+    GetLocationFail,
+} from '../interface.uts'
+import {
+    UniLocationProvider
+} from './interface.uts'
+import {
+    LocationUniErrors
+} from '../unierror.uts'
+import {
+    API_GET_LOCATION,
+} from '../protocol.uts'
+
+export {
+    UniLocationProvider,
+    GetLocation,
+    GetLocationOptions,
+    GetLocationSuccess,
+    GetLocationFail,
+}
+
+export const getLocation: GetLocation = defineAsyncApi<GetLocationOptions, GetLocationSuccess>(
+    API_GET_LOCATION,
+    (options: GetLocationOptions, exec: ApiExecutor<GetLocationSuccess>): void => {
+        const realProvider = options.provider || 'system'
+        const provider = getUniProvider<UniLocationProvider>('location', realProvider)
+        if (!provider) {
+            const errMsg = LocationUniErrors.get(1505604) ?? ""
+            exec.reject(errMsg, {
+                errCode: 1505604
+            } as ApiError)
+            return
+        }
+        provider.getLocation({
+            type: options.type,
+            altitude: options.altitude,
+            geocode: options.geocode,
+            isHighAccuracy: options.isHighAccuracy,
+            highAccuracyExpireTime: options.highAccuracyExpireTime,
+            success: (result: GetLocationSuccess) => {
+                exec.resolve(result)
+            },
+            fail: (error: GetLocationFail) => {
+                const errMsg = LocationUniErrors.get(error.errCode) ?? ""
+                exec.reject(errMsg, {
+                    errCode: error.errCode
+                } as ApiError)
+            }
+        } as GetLocationOptions)
+    }
+) as GetLocation
+

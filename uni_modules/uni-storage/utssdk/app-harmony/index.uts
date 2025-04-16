@@ -63,7 +63,11 @@ export {
 
 function parseStorageValue(value: string): any {
     try {
-        return JSON.parse(value).data;
+        if (globalThis.UTS) {
+            return globalThis.UTS.JSON.parse(value).data;
+        } else {
+            return JSON.parse(value).data;
+        }
     } catch (e) {
         return value;
     }
@@ -76,7 +80,7 @@ function stringifyStorageValue(value: any): string {
 // TODO 回收Preference
 const stores = new Map<string, dataPreferences.Preferences>()
 function createStore(): dataPreferences.Preferences {
-    const id = getCurrentMP().id
+    const id = getCurrentMP().appId
     if (stores.has(id)) {
         return stores.get(id)!
     }

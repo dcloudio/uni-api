@@ -1,5 +1,4 @@
 import { UTSiOS } from "DCloudUTSFoundation"
-import { MCToast, MCToastConfig } from "DCUniToast"  assert { type: "implementationOnly" };
 import { UIScreen, UIImage } from 'UIKit'
 import { ShowToastOptions, ShowLoadingOptions, ShowToastSuccess, ShowToastFail, ShowLoadingSuccess, ShowLoadingFail } from '../interface.uts'
 import { PromptErrorImpl } from "../unierror.uts"

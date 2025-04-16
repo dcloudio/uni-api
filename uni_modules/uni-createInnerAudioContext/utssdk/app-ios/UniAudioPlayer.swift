@@ -1,6 +1,7 @@
 import AVFoundation
 import MediaPlayer
-import DCloudUniappRuntime;
+import DCloudUniappRuntime
+@_implementationOnly import KTVHTTPCache
 
 private enum UniAudioObserveKeypath: String {
     case status = "status"
@@ -49,7 +50,6 @@ typealias UniAudioEventCallback = (_ result: Any) -> Void
 typealias UniAudioErrorEventCallback = (_ result: ICreateInnerAudioContextFail) -> Void
 
 public class UniAudioPlayer: NSObject, InnerAudioContext {
-    
     private lazy var playerItem: AVPlayerItem? = {
         if let url = URL(string: src) {
             return AVPlayerItem(url: url)
@@ -103,14 +103,15 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     private var _currentFailImpl: CreateInnerAudioContextFailImpl? = nil //当前播放出错error对象
     private var _isSeeking = false //是否是正在seeking状态
     private var _readyToPlay = false //是否canPlay状态
-
+    private var _cacheSize: Int64 = 100*1024*1024 //默认缓存大小100M
+    
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
     private var errorEventCallBacks: [UniAudioErrorEventCallback] = []
     private var timeObserverToken: Any?
-
+    
     public var duration: NSNumber {
         get {
-            return NSNumber(floatLiteral: playerItem?.asset.duration.seconds ?? 0.0)
+            return NSNumber(floatLiteral: playerItem?.asset.duration.seconds.round(3) ?? 0.0)
         }
         set {}
     }
@@ -121,7 +122,7 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
             if let temp = player?.currentTime().seconds, temp >= 0 {
                 second = temp
             }
-            return NSNumber(floatLiteral: second)
+            return NSNumber(floatLiteral: second.round(3))
         }
         set {}
     }
@@ -308,6 +309,37 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
 }
 
 extension UniAudioPlayer {
+    private func initCacheConfig() {
+        //设置是否显示KTVHTTPCache的log日志
+        KTVHTTPCache.logSetConsoleLogEnable(false)
+        try? KTVHTTPCache.proxyStart()
+        KTVHTTPCache.cacheSetMaxCacheLength(_cacheSize)
+        KTVHTTPCache.cacheSetRootPath("Caches/uni-audio")
+        //配置MIME类型集
+        let contentTypes: [String] = [
+            "audio/wav",
+            "audio/flac",
+            "audio/aiff",
+            "audio/caf",
+            "audio/mpeg",
+            "audio/mp4",
+            "audio/m4a",
+            "audio/x-m4a",
+            "audio/aac",
+            "audio/*" //通配符
+        ]
+        //设置可接受的内容类型
+        KTVHTTPCache.downloadSetAcceptableContentTypes(contentTypes)
+        
+        //通过拦截url中的contentType动态设置是否要继续请求
+        KTVHTTPCache.downloadSetUnacceptableContentTypeDisposer { url, contentType in
+            if let contentType = contentType {
+                UNILogDebug("======audio======, KTVHTTPCache Intercepted Content-Type: \(contentType)")
+            }
+            return true
+        }
+    }
+    
     private func innerPlay(needDispathEvent: Bool? = false) {
         if let player = player {
             if self.startTime.toDouble() > 0 {
@@ -351,6 +383,7 @@ extension UniAudioPlayer {
     
     // 初始化 AVPlayer 并配置选项
     private func configurePlayer() {
+        initCacheConfig()
         player?.volume = self.volume.toFloat()
         if self.startTime.toDouble() > 0 {
             innerSeek(self.startTime)
@@ -381,8 +414,14 @@ extension UniAudioPlayer {
                 }
             }
         }
-
-        if let asset = player.currentItem?.asset as? AVURLAsset, asset.url == url {
+        
+        var tempCacheUrl: URL?
+        
+        let isM3u8 = url?.path.lowercased().contains("m3u8") ?? false
+        if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
+            tempCacheUrl = cacheUrl
+        }
+        if let asset = player.currentItem?.asset as? AVURLAsset, (asset.url == url || asset.url == tempCacheUrl) {
             if _hasPlayError {
                 innerSeek(0)
                 if let errCode = _currentFailImpl?.errCode {
@@ -393,11 +432,27 @@ extension UniAudioPlayer {
         } else {
             _hasPlayError = false
         }
-
+        
         playerItem = nil
         if let url = url {
             _readyToPlay = false
-            playerItem = AVPlayerItem(url: url)
+            if let scheme = url.scheme, scheme.startsWith("http") {
+                var _cacheUrl: URL
+                if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
+                    _cacheUrl = cacheUrl
+                } else {
+                    let headers = [
+                        "User-Agent": UTSiOS.getUserAgent(),
+                        "Cookie": UTSiOS.getCookieString(url)
+                    ]
+                    KTVHTTPCache.downloadSetAdditionalHeaders(headers)
+                    _cacheUrl = KTVHTTPCache.proxyURL(withOriginalURL: url, bindToLocalhost: false)
+                }
+                playerItem = AVPlayerItem(url: _cacheUrl)
+            } else {
+                playerItem = AVPlayerItem(url: url)
+            }
+            
             player.replaceCurrentItem(with: playerItem)
         }
         player.pause()
@@ -463,10 +518,10 @@ extension UniAudioPlayer {
                 handleAudioPlayerStatus(status)
             }
         } else if keyPath == UniAudioObserveKeypath.rate.rawValue {
-//            UNILogDebug("======audio======, rate发生变化：\(player?.rate ?? 0)")
+            //            UNILogDebug("======audio======, rate发生变化：\(player?.rate ?? 0)")
         } else if keyPath == UniAudioObserveKeypath.loadedTimeRanges.rawValue {
             if let timeRange = playerItem?.loadedTimeRanges.first?.timeRangeValue {
-                self.buffered = timeRange.end.seconds as NSNumber
+                self.buffered = (timeRange.end.seconds.round(3) as NSNumber)
             }
         } else if keyPath == UniAudioObserveKeypath.playbackBufferEmpty.rawValue {
             UNILogDebug("======audio======, buffer empty, 但可能还在播放")
@@ -475,7 +530,7 @@ extension UniAudioPlayer {
             UNILogDebug("======audio======, buffer 充足, 当前buffered = \(self.buffered)")
         } else if keyPath == UniAudioObserveKeypath.timeControlStatus.rawValue {
             if let player = player {
-//                UNILogDebug("======audio======, 播放状态改变为 = \(player.timeControlStatus)")
+                //                UNILogDebug("======audio======, 播放状态改变为 = \(player.timeControlStatus)")
                 if player.timeControlStatus == .playing {
                     _hasPlayError = false
                     if _isNeedSetRate {
@@ -528,7 +583,7 @@ extension UniAudioPlayer {
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.playbackLikelyToKeepUp.rawValue, context: nil)
         }
         NotificationCenter.default.removeObserver(self, name: AVPlayerItem.didPlayToEndTimeNotification, object: nil)
-
+        
         player?.replaceCurrentItem(with: nil)
     }
     
@@ -601,6 +656,11 @@ extension NSNumber {
     func toFloat() -> Float {
         return Float(truncating: self)
     }
+    
+    /// 设置最多小数点位数, 显示控制直接移除小数点位数
+    func maximumFractionDigits(_ count: Int) -> NSNumber {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = count
+        return formatter.number(from: formatter.string(from: self) ?? self.stringValue) ?? self
+    }
 }
-
-

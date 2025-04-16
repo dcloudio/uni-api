@@ -23,6 +23,9 @@ import ByteBuffer from 'java.nio.ByteBuffer';
 import InputStream from 'java.io.InputStream';
 import DA from 'io.dcloud.common.cs.DA';
 import Op from 'androidx.fragment.app.FragmentTransaction.Op';
+import Uri from 'android.net.Uri'
+import { isSandyBoxPath } from './FileManagerUtil.uts'
+
 
 
 class AndroidStats implements Stats, io.dcloud.uts.log.LogSelf, io.dcloud.uts.json.IJsonStringify {
@@ -370,6 +373,27 @@ class AndroidFileSystemManager implements FileSystemManager {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
 			}
 
+		} else if (srcPath.startsWith("content://")) {
+			// 检查目标文件
+			let newFilePath = UTSAndroid.convert2AbsFullPath(destPath)
+			let isSandyBox = isSandyBoxPath(newFilePath, false)
+			if (!isSandyBox) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
+			}
+			let newFile = new File(newFilePath)
+			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
+				/**
+				 * 父文件不存在
+				 */
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			}
+			
+			let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
+			if (byteArray == null) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+			} else {
+				newFile.writeBytes(byteArray)
+			}
 		} else {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
@@ -480,6 +504,50 @@ class AndroidFileSystemManager implements FileSystemManager {
 					options.complete?.(success)
 				}, null)
 
+			} else if (filePath.startsWith("content://")) {
+				// 检查目标文件
+				let newFilePath = UTSAndroid.convert2AbsFullPath(options.destPath)
+				let isSandyBox = isSandyBoxPath(newFilePath, false)
+				if (!isSandyBox) {
+					currentDispatcher.async(function (_) {
+						let err = new FileSystemManagerFailImpl(1300013);
+						options.fail?.(err)
+						options.complete?.(err)
+					}, null)
+					return
+				}
+				let newFile = new File(newFilePath)
+				if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
+					/**
+					 * 父文件不存在
+					 */
+					currentDispatcher.async(function (_) {
+						let err = new FileSystemManagerFailImpl(1300002);
+						options.fail?.(err)
+						options.complete?.(err)
+					})
+					return
+				}
+
+				let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
+				if (byteArray == null) {
+					// 调用系统api 失败
+					currentDispatcher.async(function (_) {
+						let err = new FileSystemManagerFailImpl(1300201);
+						options.fail?.(err)
+						options.complete?.(err)
+					})
+					return
+				} else {
+					newFile.writeBytes(byteArray)
+				}
+				currentDispatcher.async(function (_) {
+					let success : FileManagerSuccessResult = {
+						errMsg: "copyFile:ok"
+					}
+					options.success?.(success)
+					options.complete?.(success)
+				})
 			} else {
 				let isSandyBox = isSandyBoxPath(filePath, true)
 				if (!isSandyBox) {
@@ -771,7 +839,8 @@ class AndroidFileSystemManager implements FileSystemManager {
 			}
 
 			let success : ReadDirSuccessResult = {
-				files: UTSArray.fromNative(targetFile.list()!)
+				files: UTSArray.fromNative(targetFile.list()!),
+				errMsg: "readdir:ok"
 			}
 			currentDispatcher.async(function (_) {
 				options.success?.(success)
@@ -1466,6 +1535,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 	}
 	public truncate(options : TruncateFileOptions) {
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
+		let that = this
 		UTSAndroid.getDispatcher('io').async(function (_) {
 			let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
 
@@ -1483,11 +1553,8 @@ class AndroidFileSystemManager implements FileSystemManager {
 			}
 
 			let content = targetFile.readText()
-			if (content.length > options.length) {
-				let truncatedContent = content.substring(0, options.length)
-				targetFile.writeText(truncatedContent)
-			}
-
+			that.truncatedBytes(content,options.length,targetFile)
+            
 			let success : FileManagerSuccessResult = {
 				errMsg: "truncateFile:ok"
 			}
@@ -1496,6 +1563,14 @@ class AndroidFileSystemManager implements FileSystemManager {
 				options.complete?.(success)
 			}, null)
 		}, null)
+	}
+	
+	private truncatedBytes(content : string, lenght : number,targetFile:File) {
+		let byteArray = content.toByteArray(Charsets.UTF_8)
+		if (byteArray.size > lenght) {
+			let truncatedBytes = byteArray.copyOfRange(0, lenght.toInt())
+			targetFile.writeText(truncatedBytes.toString(Charsets.UTF_8))
+		}
 	}
 
 	truncateSync(filePath : string, length ?: number) {
@@ -1515,10 +1590,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		}
 
 		let content = targetFile.readText()
-		if (content.length > tempLength) {
-			let truncatedContent = content.substring(0, tempLength)
-			targetFile.writeText(truncatedContent)
-		}
+		this.truncatedBytes(content,tempLength,targetFile)
 	}
 
 	readCompressedFile(options : ReadCompressedFileOptions) {
@@ -1731,6 +1803,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 	}
 	public ftruncate(options : FTruncateFileOptions) {
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
+		let that = this
 		UTSAndroid.getDispatcher('io').async(function (_) {
 			if (!this.fileDesUtil.openMap.has(options.fd)) {
 				currentDispatcher.async(function (_) {
@@ -1746,7 +1819,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				let truncatedContent = content.substring(0, options.length)
 				targetFile.writeText(truncatedContent)
 			}
-
+            that.truncatedBytes(content,options.length,targetFile)
 			let success : FileManagerSuccessResult = {
 				errMsg: "ftruncate:ok"
 			}
@@ -1763,10 +1836,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 		}
 		let targetFile = this.fileDesUtil.openMap.get(options.fd)
 		let content = targetFile!.readText()
-		if (content.length > options.length) {
-			let truncatedContent = content.substring(0, options.length)
-			targetFile.writeText(truncatedContent)
-		}
+		this.truncatedBytes(content,options.length,targetFile)
 	}
 
 	public readZipEntry(options : ReadZipEntryOptions) {
@@ -1841,7 +1911,9 @@ class AndroidFileSystemManager implements FileSystemManager {
 						})
 
 					let success : EntriesResult = {
-						result: resultMap
+						result: resultMap,
+						entries:resultMap,
+						errMsg: 'readZipEntry:ok'
 					}
 					currentDispatcher.async(function (_) {
 						options.success?.(success)
@@ -1863,53 +1935,6 @@ export const getFileSystemManager : GetFileSystemManager = function () : FileSys
 	return AndroidFileSystemManager.getManager()
 };
 
-/**
- * 判断传入的路径是否是沙盒路径，如果不是则不能继续操作
- */
-export function isSandyBoxPath(inputPath : string, onlyRead : boolean) : boolean {
-	//处理非沙盒目录时 需要校验一下MANAGE_EXTERNAL_STORAGE权限 如果授权则可任意操作
-	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-		if (Environment.isExternalStorageManager()) {
-			console.log('Environment.isExternalStorageManager()')
-			return true
-		}
-	}
-
-	/**
-	 * 第一条规则，判断是否操作的是应用资源目录。开发者具备该目录下读取的权限操作
-	 */
-	let appResRoot = UTSAndroid.convert2AbsFullPath(uni.env.APP_RESOURCE_PATH)
-	if (inputPath.startsWith(appResRoot)) {
-		// 路径是应用资源目录
-		if (onlyRead) {
-			// 并且是读取操作，返回
-			return true
-		} else {
-			// 不是读取
-			return false
-		}
-	}
-	/**
-	 * 第二条规则，是否属于应用根目录 SANDBOX_PATH
-	 */
-	let sandyBoxRoot = UTSAndroid.convert2AbsFullPath(uni.env.SANDBOX_PATH)
-	if (inputPath.startsWith(sandyBoxRoot)) {
-		// 是否是应用根目录
-		return true
-	}
-
-	/**
-	 * 第三条规则，是否属于应用内置根目录 ANDROID_INTERNAL_SANDBOX_PATH
-	 */
-	let innerSandyBoxRoot = UTSAndroid.convert2AbsFullPath(uni.env.ANDROID_INTERNAL_SANDBOX_PATH)
-	if (inputPath.startsWith(innerSandyBoxRoot)) {
-		// 是否是应用根目录
-		return true
-	}
-
-
-	return false
-}
 
 
 function wrapStats(sourceFile : File) : Stats {

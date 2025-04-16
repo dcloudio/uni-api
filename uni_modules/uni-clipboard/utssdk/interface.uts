@@ -19,7 +19,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -70,7 +70,7 @@ export interface Uni {
      *  }
      * }
    */
-  setClipboardData: SetClipboardData;
+  setClipboardData(options: SetClipboardDataOptions): void;
   /**
    * 获得系统剪贴板的内容
    *
@@ -91,7 +91,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -142,7 +142,7 @@ export interface Uni {
      *  }
      * }
    */
-  getClipboardData: GetClipboardData;
+  getClipboardData(options: GetClipboardDataOptions): void;
 }
 
 export type SetClipboardData = (options: SetClipboardDataOptions) => void;

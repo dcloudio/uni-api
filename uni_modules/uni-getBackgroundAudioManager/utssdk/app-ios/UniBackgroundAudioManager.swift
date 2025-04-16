@@ -1,6 +1,7 @@
 import AVFoundation
 import MediaPlayer
-import DCloudUniappRuntime;
+import DCloudUniappRuntime
+@_implementationOnly import KTVHTTPCache
 
 private enum UniBackgroundAudioObserveKeypath: String {
     case status = "status"
@@ -122,6 +123,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
             return player?.timeControlStatus == .playing
         }
     }
+    
     private var _isManualPlay = false  //是否正在播放，侧重于用户是否点击了播放按钮
     private var _isManualPause = false //是否用户点击暂停，和缓冲的暂停无关
     private var _hasPlayError = false //是否播放出错
@@ -130,6 +132,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     private var _isAppActive = false //app是否正在前台状态
     private var _hasConfigAudioSession = false //是否配置好了后台播放会话通道
     private var _readyToPlay = false //是否canPlay状态
+    private var _cacheSize: Int64 = 100*1024*1024 //默认缓存大小100M
     
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
     private var errorEventCallBacks: [UniBackgroundAudioErrorEventCallback] = []
@@ -138,7 +141,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     
     public var duration: NSNumber {
         get {
-            return NSNumber(floatLiteral: playerItem?.asset.duration.seconds ?? 0.0)
+            return NSNumber(floatLiteral: playerItem?.asset.duration.seconds.round(3) ?? 0.0)
         }
         set {}
     }
@@ -149,7 +152,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
             if let temp = player?.currentTime().seconds, temp >= 0 {
                 second = temp
             }
-            return NSNumber(floatLiteral: second)
+            return NSNumber(floatLiteral: second.round(3))
         }
         set {}
     }
@@ -259,7 +262,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         deactivateAudioSession()
         releaseResources()
     }
-
+    
     public func onCanplay(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .canplay, eventCallback: callback)
     }
@@ -382,6 +385,38 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
 }
 
 extension UniBackgroundAudioManager {
+    private func initCacheConfig() {
+        //设置是否显示KTVHTTPCache的log日志
+        KTVHTTPCache.logSetConsoleLogEnable(false)
+        try? KTVHTTPCache.proxyStart()
+        KTVHTTPCache.cacheSetMaxCacheLength(_cacheSize)
+        KTVHTTPCache.cacheSetRootPath("Caches/uni-audio")
+
+        //配置MIME类型集
+        let contentTypes: [String] = [
+            "audio/wav",
+            "audio/flac",
+            "audio/aiff",
+            "audio/caf",
+            "audio/mpeg",
+            "audio/mp4",
+            "audio/m4a",
+            "audio/x-m4a",
+            "audio/aac",
+            "audio/*" //通配符
+        ]
+        //设置可接受的内容类型
+        KTVHTTPCache.downloadSetAcceptableContentTypes(contentTypes)
+        
+        //通过拦截url中的contentType动态设置是否要继续请求
+        KTVHTTPCache.downloadSetUnacceptableContentTypeDisposer { url, contentType in
+            if let contentType = contentType {
+                UNILogDebug("======audio======, KTVHTTPCache Intercepted Content-Type: \(contentType)")
+            }
+            return true
+        }
+    }
+    
     private func innerStop(needClearPlayingCenterInfo: Bool = false) {
         if let player = player {
             player.pause()
@@ -447,6 +482,7 @@ extension UniBackgroundAudioManager {
     
     // 初始化 AVPlayer 并配置选项
     private func configurePlayer() {
+        initCacheConfig()
         player?.volume = self.volume.toFloatA()
         if self.startTime.toDoubleA() > 0 {
             innerSeek(self.startTime)
@@ -477,8 +513,12 @@ extension UniBackgroundAudioManager {
                 }
             }
         }
-        
-        if let asset = player.currentItem?.asset as? AVURLAsset, asset.url == url {
+        var tempCacheUrl: URL?
+        let isM3u8 = url?.path.lowercased().contains("m3u8") ?? false
+        if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
+            tempCacheUrl = cacheUrl
+        }
+        if let asset = player.currentItem?.asset as? AVURLAsset, (asset.url == url || asset.url == tempCacheUrl) {
             if _hasPlayError {
                 innerSeek(0)
                 if let errCode = _currentFailImpl?.errCode {
@@ -493,7 +533,23 @@ extension UniBackgroundAudioManager {
         playerItem = nil
         if let url = url {
             _readyToPlay = false
-            playerItem = AVPlayerItem(url: url)
+            if let scheme = url.scheme, scheme.startsWith("http") {
+                var _cacheUrl: URL
+                if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
+                    _cacheUrl = cacheUrl
+                } else {
+                    let headers = [
+                        "User-Agent": UTSiOS.getUserAgent(),
+                        "Cookie": UTSiOS.getCookieString(url)
+                    ]
+                    KTVHTTPCache.downloadSetAdditionalHeaders(headers)
+                    _cacheUrl = KTVHTTPCache.proxyURL(withOriginalURL: url, bindToLocalhost: false)
+                }
+                playerItem = AVPlayerItem(url: _cacheUrl)
+            } else {
+                playerItem = AVPlayerItem(url: url)
+            }
+            
             player.replaceCurrentItem(with: playerItem)
         }
         player.pause()
@@ -514,7 +570,6 @@ extension UniBackgroundAudioManager {
         playerItem = nil
     }
 }
-
 
 //event事件
 extension UniBackgroundAudioManager {
@@ -561,7 +616,7 @@ extension UniBackgroundAudioManager {
             //            UNILogDebug("======audio======, rate发生变化：\(player?.rate ?? 0)")
         } else if keyPath == UniBackgroundAudioObserveKeypath.loadedTimeRanges.rawValue {
             if let timeRange = playerItem?.loadedTimeRanges.first?.timeRangeValue {
-                self.buffered = timeRange.end.seconds as NSNumber
+                self.buffered = timeRange.end.seconds.round(3) as NSNumber
             }
         } else if keyPath == UniBackgroundAudioObserveKeypath.playbackBufferEmpty.rawValue {
             UNILogDebug("======audio======, buffer empty, 但可能还在播放")
@@ -695,7 +750,7 @@ extension UniBackgroundAudioManager {
         removePeriodicTimeObserver()
         removeListenerInterruption()
         removePeriodicTimeObserver()
-
+        
         player?.replaceCurrentItem(with: nil)
     }
     
@@ -835,8 +890,7 @@ extension UniBackgroundAudioManager {
             }
             return .success
         }
-
-        setRatingCommand(commandCenter)
+        
         setChangePlaybackPositionCommand(commandCenter)
     }
     
@@ -1014,3 +1068,5 @@ extension NSNumber {
         return Float(truncating: self)
     }
 }
+
+

@@ -1,12 +1,12 @@
+// #ifndef UNI-APP-X
 import { UIPopoverArrowDirection , UIDevice , UIUserInterfaceIdiom, CGRect, UIInterfaceOrientationMask } from "UIKit"
 import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
-import { DCActionSheetController, DCAlertAction, DCAlertActionStyle } from "DCloudAlertController" assert { type: "implementationOnly" };
 import { ShowActionSheetOptions, ShowActionSheetSuccess, ShowActionSheetFail } from '../interface.uts'
 import { PromptErrorImpl } from "../unierror.uts"
-// #ifdef UNI-APP-X
-import { UniSDKEngine } from "DCloudUniappRuntime"
-// #endif
+// // #ifdef UNI-APP-X
+// import { UniSDKEngine } from "DCloudUniappRuntime"
+// // #endif
 
 
 export function actionSheet(options : ShowActionSheetOptions) {
@@ -33,9 +33,9 @@ export function actionSheet(options : ShowActionSheetOptions) {
 		// 初始化actionSheet的实例
 		
 		let supportedInterfaceOrientations : UIInterfaceOrientationMask | null = null
-		// #ifdef UNI-APP-X
-		supportedInterfaceOrientations = UniSDKEngine.shared.getAppManager()?.getCurrentApp()?.appConfig.supportedInterfaceOrientations
-		// #endif
+		// // #ifdef UNI-APP-X
+		// supportedInterfaceOrientations = UniSDKEngine.shared.getAppManager()?.getCurrentApp()?.appConfig.supportedInterfaceOrientations
+		// // #endif
 		
 		let actionSheet = DCActionSheetController.init(noticeTitle = options.title ?? "", supportedInterfaceOrientations = supportedInterfaceOrientations)
 		 
@@ -90,3 +90,4 @@ export function actionSheet(options : ShowActionSheetOptions) {
 	})
 }
 
+// #endif

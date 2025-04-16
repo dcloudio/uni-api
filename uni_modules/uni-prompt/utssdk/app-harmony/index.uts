@@ -1,4 +1,29 @@
 export { showToast, hideToast } from './toast.uts'
+// #ifndef UNI-APP-X
 export { showModal } from './modal.uts'
 export { showActionSheet } from './actionSheet.uts'
+// #endif
 export { showLoading, hideLoading } from './loading.uts'
+
+export {
+    ShowToast,
+    ShowToastOptions,
+    ShowToastSuccess,
+    ShowToastFail,
+    HideToast,
+    ShowLoading,
+    ShowLoadingOptions,
+    ShowLoadingSuccess,
+    ShowLoadingFail,
+    HideLoading,
+    // #ifndef UNI-APP-X
+    ShowModal,
+    ShowModalOptions,
+    ShowModalSuccess,
+    ShowModalFail,
+    ShowActionSheet,
+    ShowActionSheetOptions,
+    ShowActionSheetSuccess,
+    ShowActionSheetFail,
+    // #endif
+} from '../interface.uts';

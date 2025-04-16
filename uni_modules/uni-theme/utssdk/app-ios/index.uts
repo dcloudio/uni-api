@@ -8,7 +8,11 @@ import {
 	SetAppThemeSuccessResult,
 	OnAppThemeChange,
 	OnAppThemeChangeCallback,
-	AppThemeChangeResult
+	AppThemeChangeResult,
+	OnHostThemeChange,
+	OnHostThemeChangeCallback, 
+	OnHostThemeChangeCallbackResult, 
+	OffHostThemeChange
 } from '../interface.uts'
 
 import { AppThemeFailImpl } from '../unierror.uts'
@@ -74,3 +78,22 @@ export const offAppThemeChange = function (id : number) : void {
 	UTSiOS.offAppThemeChange(id)
 }
 
+
+/**
+ * 监听系统主题变化
+*/
+export const onHostThemeChange : OnHostThemeChange = function (callback : OnHostThemeChangeCallback) : number {
+	return UTSiOS.onOsThemeChange((theme : string) : void => {
+		let result : OnHostThemeChangeCallbackResult = {
+			hostTheme: theme == "dark" ? "dark" : "light"
+		}
+		callback(result)
+	})
+}
+
+/**
+ * 取消监听系统主题变化
+*/
+export const offHostThemeChange : OffHostThemeChange = function (id : number) : void {
+	UTSiOS.offOsThemeChange(id)
+}

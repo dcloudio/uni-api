@@ -87,7 +87,6 @@ export class DownloadController {
 		clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-		clientBuilder.callTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.addInterceptor(new CookieInterceptor());
 
 		if (this.downloadExecutorService == null) {
@@ -209,6 +208,16 @@ class SimpleDownloadCallback implements Callback {
 					if (targetFile.exists()) {
 						option['tempFilePath'] = targetFile.getPath();
 					}
+					this.listener?.onComplete(option);
+				} catch (e: Exception){
+					let option: UTSJSONObject = {};
+					const code = "-1"
+					const errorMsg = e.message
+					option['statusCode'] = code;
+					option['errorCode'] = code;
+					option['errorMsg'] = errorMsg;
+					const sourceError = new SourceError(errorMsg ?? "");
+					option['cause'] = sourceError;
 					this.listener?.onComplete(option);
 				} finally {
 					tempSink?.close()

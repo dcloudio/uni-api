@@ -1,5 +1,5 @@
-import { UniPaymentProvider, RequestPayment, RequestPaymentOptions} from "./interface.uts";
-import { RequestPaymentFailImpl } from './unierror.uts';
+import { UniPaymentProvider, RequestPayment, RequestPaymentOptions} from "../interface.uts";
+import { RequestPaymentFailImpl } from '../unierror.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
 
 export const requestPayment : RequestPayment = function (options : RequestPaymentOptions) {

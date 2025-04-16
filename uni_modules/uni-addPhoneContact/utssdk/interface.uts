@@ -19,7 +19,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.25",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      * 	},
      *   "web": {
@@ -70,7 +70,7 @@ export interface Uni {
      *  }
      * }
      */
-    addPhoneContact: AddPhoneContact;
+    addPhoneContact(options: AddPhoneContactOptions): void;
 }
 
 export type AddPhoneContact = (options: AddPhoneContactOptions) => void;

@@ -20,7 +20,7 @@ export const rpx2px: Rpx2px = defineSyncApi<number>(
         if (windowStage) {
             const mainWindow: harmonyWindow.Window = windowStage.getMainWindowSync()
             windowWidthInPx = mainWindow.getWindowProperties().windowRect.width
-            windowWidthInVp = px2vp(windowWidthInPx)
+            windowWidthInVp = Math.ceil(px2vp(windowWidthInPx))
         }
         let result = (number / BASE_DEVICE_WIDTH) * windowWidthInVp
         if (result < 0) {

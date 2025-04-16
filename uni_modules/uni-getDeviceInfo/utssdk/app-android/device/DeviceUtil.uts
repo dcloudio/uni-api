@@ -173,8 +173,8 @@ export class DeviceUtil {
 		return Build.TAGS != null && Build.TAGS.includes("test-keys") || hasRootDir;
 	}
 
-	public static isSimulator(context: Context): boolean {
-		return EmulatorCheckUtil.getSingleInstance().emulatorCheck(context);
+	public static isSimulator(context: Context, sampleSensor: boolean): boolean {
+		return EmulatorCheckUtil.getSingleInstance().emulatorCheck(context, sampleSensor);
 	}
 
 

@@ -16,7 +16,7 @@ export interface Uni {
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#on
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#on
      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/window/communication.html#on
-     * @uniPlatform 
+     * @uniPlatform
       {
         "app": {
           "android": {
@@ -36,7 +36,7 @@ export interface Uni {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -98,7 +98,7 @@ export interface Uni {
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#off
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#off
      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/window/communication.html#off
-     * @uniPlatform 
+     * @uniPlatform
       {
         "app": {
           "android": {
@@ -118,7 +118,7 @@ export interface Uni {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -180,7 +180,7 @@ export interface Uni {
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#once
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#once
      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/window/communication.html#once
-     * @uniPlatform 
+     * @uniPlatform
       {
         "app": {
           "android": {
@@ -200,7 +200,7 @@ export interface Uni {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -261,7 +261,7 @@ export interface Uni {
      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#emit
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/event-bus.html#emit
      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/window/communication.html#emit
-     * @uniPlatform 
+     * @uniPlatform
       {
         "app": {
           "android": {
@@ -281,7 +281,7 @@ export interface Uni {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {

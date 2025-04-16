@@ -46,18 +46,20 @@
 					"name": "previewImage",
 					"app": {
 						"js": false,
-						"kotlin": true,
-						"swift": true,
-						"arkts": true
+						"kotlin": false,
+						"swift": false,
+						"arkts": true,
+                        "x-arkts": false
 					}
 				},
 				"closePreviewImage": {
 					"name": "closePreviewImage",
 					"app": {
 						"js": false,
-						"kotlin": true,
-						"swift": true,
-						"arkts": true
+						"kotlin": false,
+						"swift": false,
+						"arkts": true,
+                        "x-arkts": false
 					}
 				},
 				"getImageInfo": {
@@ -127,16 +129,7 @@
 					"name": "chooseFile",
 					"app": {
 						"js": false,
-						"kotlin": false,
-						"swift": false,
-						"arkts": true
-					}
-				},
-				"chooseMedia": {
-					"name": "chooseMedia",
-					"app": {
-						"js": false,
-						"kotlin": false,
+						"kotlin": true,
 						"swift": false,
 						"arkts": true
 					}
@@ -144,7 +137,7 @@
 			}
 		},
 		"dependencies": [
-			"uni-prompt",
+			"uni-actionSheet",
 			"app-ios:permission-album",
 			"app-ios:permission-camera",
 			"uni-framework"

@@ -45,7 +45,7 @@ export type ShowToastCompleteCallback = (res: any) => void
 export type Icon =
   /**
    * 显示成功图标
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -114,7 +114,7 @@ export type Icon =
   "success" |
   /**
    * 显示错误图标
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -183,7 +183,7 @@ export type Icon =
   "error" |
   /**
    * 显示错误图标，此时title文本无长度显示
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -252,7 +252,7 @@ export type Icon =
   "fail" |
   /**
    * 显示异常图标，此时title文本无长度显示
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -321,7 +321,7 @@ export type Icon =
   "exception" |
   /**
    * 显示加载图标
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -390,7 +390,7 @@ export type Icon =
   "loading" |
   /**
    * 不显示图标
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -464,7 +464,7 @@ export type Icon =
 export type ShowToastPosition =
   /**
    * 居上显示
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -484,7 +484,7 @@ export type ShowToastPosition =
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -538,7 +538,7 @@ export type ShowToastPosition =
   "top" |
   /**
    * 居中显示
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -558,7 +558,7 @@ export type ShowToastPosition =
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -612,7 +612,7 @@ export type ShowToastPosition =
   "center" |
   /**
    * 居底显示
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -632,7 +632,7 @@ export type ShowToastPosition =
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -691,7 +691,7 @@ export type ShowToastPosition =
 export type ShowToastOptions = {
   /**
    * 提示的内容，长度与 icon 取值有关。
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -711,7 +711,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -766,7 +766,7 @@ export type ShowToastOptions = {
   /**
    * 图标
    * @defaultValue "success"
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -840,7 +840,7 @@ export type ShowToastOptions = {
   icon?: Icon | null,
   /**
    * 自定义图标的本地路径（app端暂不支持gif）
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -860,7 +860,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -915,7 +915,7 @@ export type ShowToastOptions = {
   /**
    * 是否显示透明蒙层，防止触摸穿透
    * @defaultValue false
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -935,7 +935,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -990,7 +990,7 @@ export type ShowToastOptions = {
   /**
    * 提示的延迟时间，单位毫秒
    * @defaultValue 1500
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1010,7 +1010,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -1064,7 +1064,7 @@ export type ShowToastOptions = {
   duration?: number | null,
   /**
    * 纯文本轻提示显示位置，填写有效值后只有 title 属性生效，且不支持通过 uni.hideToast 隐藏。
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1084,7 +1084,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -1138,7 +1138,7 @@ export type ShowToastOptions = {
   position?: ShowToastPosition | null,
   /**
    * 接口调用成功的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1158,7 +1158,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -1212,7 +1212,7 @@ export type ShowToastOptions = {
   success?: ShowToastSuccessCallback | null,
   /**
    * 接口调用失败的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1232,7 +1232,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -1286,7 +1286,7 @@ export type ShowToastOptions = {
   fail?: ShowToastFailCallback | null,
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1306,7 +1306,7 @@ export type ShowToastOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -1368,7 +1368,7 @@ export type ShowToastOptions = {
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
  * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -1388,7 +1388,7 @@ export type ShowToastOptions = {
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -1447,7 +1447,7 @@ export type ShowToast = (options: ShowToastOptions) => void
  *
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
  * @tutorial-uni-app https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -1467,7 +1467,7 @@ export type ShowToast = (options: ShowToastOptions) => void
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -1579,7 +1579,7 @@ export type ShowLoadingOptions = {
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
  * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -1599,7 +1599,7 @@ export type ShowLoadingOptions = {
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -1658,7 +1658,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
  * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -1678,7 +1678,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -1730,7 +1730,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
   }
  */
 export type HideLoading = () => void
-
+// #ifdef !UNI-APP-X || APP-HARMONY
 /**
  * uni.showModal 成功回调参数
  */
@@ -1831,7 +1831,7 @@ export type ShowModalOptions = {
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
  * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -1851,7 +1851,7 @@ export type ShowModalOptions = {
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -1903,7 +1903,9 @@ export type ShowModalOptions = {
   }
  */
 export type ShowModal = (options: ShowModalOptions) => void
+// #endif
 
+// #ifdef !UNI-APP-X
 /**
  * uni.ShowActionSheet成功回调参数
  */
@@ -1911,7 +1913,7 @@ export type ShowActionSheetSuccess = {
   /**
    * 用户点击的按钮，从上到下的顺序，从0开始
    */
-  tapIndex: number | null,
+  tapIndex: number,
 }
 
 export type Popover = {
@@ -1998,7 +2000,7 @@ export type ShowActionSheetOptions = {
  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
  * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -2018,7 +2020,7 @@ export type ShowActionSheetOptions = {
       "harmony": {
         "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "x"
+        "unixVer": "4.61"
       }
     },
     "mp": {
@@ -2070,6 +2072,7 @@ export type ShowActionSheetOptions = {
   }
  */
 export type ShowActionSheet = (options: ShowActionSheetOptions) => void
+// #endif
 
 
 export interface Uni {
@@ -2088,7 +2091,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2108,7 +2111,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2170,7 +2173,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2190,7 +2193,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2257,7 +2260,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2277,7 +2280,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2345,7 +2348,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2365,7 +2368,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2417,7 +2420,7 @@ export interface Uni {
     }
    */
   hideLoading(): void,
-
+	// #ifndef UNI-APP-X
   /**
    * @description 显示模态弹窗，可以只有一个确定按钮，也可以同时有确定和取消按钮。类似于一个API整合了 html 中：alert、confirm。
    * @example
@@ -2437,7 +2440,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2457,7 +2460,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2509,7 +2512,8 @@ export interface Uni {
     }
    */
   showModal(options: ShowModalOptions): void,
-
+	// #endif
+  // #ifndef UNI-APP-X
   /**
    * @description 从底部向上弹出操作菜单
    * @example
@@ -2527,7 +2531,7 @@ export interface Uni {
    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2547,7 +2551,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -2599,4 +2603,5 @@ export interface Uni {
     }
    */
   showActionSheet(options: ShowActionSheetOptions): void
+  // #endif
 }

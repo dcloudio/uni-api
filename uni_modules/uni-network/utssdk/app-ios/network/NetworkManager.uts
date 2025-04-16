@@ -1,4 +1,4 @@
-import { RequestOptions, RequestTask, UploadTask, UploadFileOptions, OnProgressUpdateResult, UploadFileProgressUpdateCallback, OnProgressDownloadResult, DownloadTask, DownloadFileOptions, DownloadFileProgressUpdateCallback } from '../interface.uts';
+import { RequestOptions, RequestTask, UploadTask, UploadFileOptions, OnProgressUpdateResult, UploadFileProgressUpdateCallback, OnProgressDownloadResult, DownloadTask, DownloadFileOptions, DownloadFileProgressUpdateCallback } from '../../interface.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
 import { URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
 import { UploadController } from './upload/UploadController.uts';
@@ -7,7 +7,7 @@ import { DownloadController } from './download/DownloadController.uts';
 class NetworkRequestListener {
 	@UTSiOS.keyword("weak")
 	public task: AnyObject | null = null;
-	
+
 	public onStart() : void { }
 
 	public onHeadersReceived(statusCode : number, headers : Map<string, any>) : void { }
@@ -110,7 +110,7 @@ class NetworkManager implements URLSessionDataDelegate {
 		}
 
 
-		let timeout = param.timeout == null ? 60000 : param.timeout;
+		let timeout = param.timeout == null ? 120000 : param.timeout;
 		let timeoutInterval = new Double(timeout!) / 1000;
 		let request = new URLRequest(url = url!, cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval = timeoutInterval);
 		request.httpShouldHandleCookies = true;
@@ -192,6 +192,9 @@ class NetworkManager implements URLSessionDataDelegate {
 					}
 					bodyData = body?.data(using = String.Encoding.utf8);
 				}
+			} else if (param.data instanceof ArrayBuffer) {
+				const arrayBuffer = param.data as ArrayBuffer
+				bodyData = arrayBuffer.toData()
 			} else if (param.data instanceof UTSJSONObject) {
 				let body : string | null = "";
 				const contentType = request.value(forHTTPHeaderField = "Content-Type")

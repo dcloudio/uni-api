@@ -1,6 +1,9 @@
+// #ifndef UNI-APP-X
 import {
     getOSRuntime,
+    onNativePageReady,
 } from '@dcloudio/uni-runtime'
+// #endif
 import {
     PreviewImageOptions,
     PreviewImageSuccess,
@@ -16,8 +19,7 @@ import {
     API_CLOSE_PREVIEW_IMAGE
 } from '../../protocol.uts'
 import {
-    getRealPath,
-    onNativePageReady
+    getRealPath
 } from '@dcloudio/uni-runtime'
 
 interface IPreviewImageOptions {

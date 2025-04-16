@@ -183,6 +183,11 @@ export interface Uni {
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
           "unixUtsPlugin": "4.18"
+        },
+        "harmony": {
+          "osVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         }
       },
       "mp": {
@@ -270,6 +275,11 @@ export interface Uni {
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
           "unixUtsPlugin": "4.18"
+        },
+        "harmony": {
+          "osVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         }
       },
       "mp": {
@@ -348,6 +358,11 @@ export interface Uni {
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
           "unixUtsPlugin": "4.18"
+        },
+        "harmony": {
+          "osVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         }
       },
       "web": {
@@ -371,12 +386,12 @@ export interface Uni {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.35"
+   *      "unixVer": "x"
    *    },
    *    "ios": {
    *      "osVer": "9.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.35"
+   *      "unixVer": "x"
    *    },
    *    "harmony": {
    *      "osVer": "x",
@@ -442,12 +457,12 @@ export interface Uni {
    *    "android": {
    *      "osVer": "5.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.35"
+   *      "unixVer": "x"
    *    },
    *    "ios": {
    *      "osVer": "9.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.35"
+   *      "unixVer": "x"
    *    },
    *    "harmony": {
    *      "osVer": "x",
@@ -789,6 +804,8 @@ export type OnOsThemeChangeCallback = (res: OsThemeChangeResult) => void
 export type OnOsThemeChange = (callback: OnOsThemeChangeCallback) => number
 export type OffOsThemeChange = (id: number) => void
 
+export type OnHostThemeChange = (callback: OnHostThemeChangeCallback) => number
+export type OffHostThemeChange = (id: number) => void;
 /*
  * 应用主题相关类型定义
  */

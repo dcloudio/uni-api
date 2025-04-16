@@ -1,6 +1,6 @@
+// #ifndef UNI-APP-X
 import { UTSiOS } from "DCloudUTSFoundation"
 import { DispatchQueue } from 'Dispatch';
-import { DCAlertAction, DCAlertActionStyle, DCAlertView, DCAlertViewControllerStyle } from "DCloudAlertController"  assert { type: "implementationOnly" };
 import { ShowModalOptions, ShowModalSuccess, ShowModalFail } from '../interface.uts'
 
 export function toShowModal(options: ShowModalOptions) {
@@ -76,3 +76,4 @@ export function toShowModal(options: ShowModalOptions) {
 	})
 }
 
+// #endif

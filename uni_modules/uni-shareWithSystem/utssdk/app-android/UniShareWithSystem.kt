@@ -147,7 +147,10 @@ object UniShareWithSystem {
                     return null
                 }
                 path = destPath
-            } else {
+            } else if(path.startsWith("content://")){
+                localArrayList.add(Uri.parse(path))
+                continue
+            }else {
                 val srcFile = File(path)
                 if (!srcFile.exists()) {
                     fail(type, pathList[i], cbFail)

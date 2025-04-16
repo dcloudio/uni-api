@@ -184,9 +184,9 @@ class AudioService : Service() {
         // 通知渠道的id
         val id = "uniappx_music_channel"
         // 用户可以看到的通知渠道的名字.
-        val name: CharSequence = "uniappx"
+        val name: String = this.getString(R.string.uni_app_uni_getBackgroundAudioManager_notification_name)
         // 用户可以看到的通知渠道的描述
-        val description = "通知栏播放控制"
+        val description = name
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_LOW
             val mChannel = NotificationChannel(id, name, importance)

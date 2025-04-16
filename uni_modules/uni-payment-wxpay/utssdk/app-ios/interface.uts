@@ -1,3 +1,0 @@
-export interface UniPaymentWxpayProvider extends UniPaymentProvider, JSExport {
-	isWeChatInstalled : boolean
-}

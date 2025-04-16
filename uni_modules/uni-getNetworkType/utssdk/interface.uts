@@ -23,7 +23,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.24",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      * 	},
        *  "mp": {
@@ -103,7 +103,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.24",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      * 	},
        *  "mp": {
@@ -154,7 +154,7 @@ export interface Uni {
      *   }
      * }
      */
-    onNetworkStatusChange: OnNetworkStatusChange;
+    onNetworkStatusChange(callback: OnNetworkStatusChangeCallback): void;
     /**
      * 取消监听网络状态变化
      *
@@ -175,7 +175,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.24",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      * 	},
        *  "mp": {
@@ -226,7 +226,7 @@ export interface Uni {
      *   }
      * }
      */
-    offNetworkStatusChange: OffNetworkStatusChange;
+    offNetworkStatusChange(callback: (result: any) => void): void;
 }
 
 export type GetNetworkType = (options: GetNetworkTypeOptions) => void;

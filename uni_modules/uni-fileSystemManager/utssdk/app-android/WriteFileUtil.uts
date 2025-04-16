@@ -8,7 +8,7 @@ import { AppendFileOptions, FileManagerSuccessResult, OpenFileOptions, OpenFileS
 import { UniErrorSubject, FileSystemManagerFailImpl, FileSystemManagerUniErrors, FileSystemManagerUniErrorSubject } from '../unierror';
 import RandomAccessFile from 'java.io.RandomAccessFile'
 import FileChannel from 'java.nio.channels.FileChannel'
-import { isSandyBoxPath } from './index.uts'
+import { isSandyBoxPath } from './FileManagerUtil.uts'
 import ByteBuffer from 'java.nio.ByteBuffer';
 import Base64 from "android.util.Base64"
 import FileOutputStream from 'java.io.FileOutputStream';
@@ -250,7 +250,7 @@ export class WriteFileUtil {
 			let outStream = new FileOutputStream(fd.getFileDescriptor())
 			let fileChannel = outStream.getChannel()
 			//创建ByteBuffer并写入数据
-			let byteLength : number
+			let byteLength : number = 0
 			if (options.data instanceof ArrayBuffer) {
 				let buffer = options.data as ArrayBuffer
 				byteLength = that.writeBufferByCondition(buffer, options.offset, options.position, options.length, fileChannel)
@@ -279,9 +279,8 @@ export class WriteFileUtil {
 
 				buffer.flip()
 				while (buffer.hasRemaining()) {
-					fileChannel.write(buffer, 0)
+					byteLength+=fileChannel.write(buffer, 0)
 				}
-				byteLength = options.data.toString().length
 
 				fileChannel.close()
 				outStream.close()
@@ -310,7 +309,7 @@ export class WriteFileUtil {
 		if (fd == null) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
 		}
-		let byteLength : number = options.data.toString().length
+		let byteLength : number = 0
 		try {
 			let outStream = new FileOutputStream(fd.getFileDescriptor())
 			let fileChannel = outStream.getChannel()
@@ -342,7 +341,7 @@ export class WriteFileUtil {
 				}
 				buffer.flip()
 				while (buffer.hasRemaining()) {
-					fileChannel.write(buffer, 0)
+					byteLength+=fileChannel.write(buffer, 0)
 				}
 				fileChannel.close()
 				outStream.close()

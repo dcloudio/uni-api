@@ -1,3 +1,4 @@
+// #ifndef UNI-APP-X
 import Dialog from 'android.app.Dialog';
 import Activity from 'android.app.Activity';
 import Gravity from 'android.view.Gravity';
@@ -20,11 +21,11 @@ import WindowManager from 'android.view.WindowManager';
 import { ShowActionSheetOptions, ShowActionSheetSuccess} from '../interface.uts'
 import { PromptErrorImpl } from "../unierror.uts"
 
-// #ifdef UNI-APP-X
-import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
-import onReady from 'io.dcloud.uniapp.framework.onReady';
-import onUnload from 'io.dcloud.uniapp.framework.onUnload';
-// #endif
+// // #ifdef UNI-APP-X
+// import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
+// import onReady from 'io.dcloud.uniapp.framework.onReady';
+// import onUnload from 'io.dcloud.uniapp.framework.onUnload';
+// // #endif
 
 
 let uniActionSheet:UniActionSheet|null = null
@@ -83,44 +84,44 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 		})
 		
 	// #endif
-	// #ifdef UNI-APP-X
-		/**
-		 * uni-app x
-		 * 需要特殊处理生命周期 
-		 */
-		const pages = getCurrentPages();
-		if (pages.length > 0) {
-			const page = pages[pages.length - 1].vm!
-			const instance = page.$
-			if (page.$isReady) {
-				if(UTSAndroid.getTopPageActivity() == null){
-					return 
-				}
-				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-					return 
-				}
-				uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
-		        uniActionSheet?.show()
-		    } else {
-		        onReady(() => {
-					if(UTSAndroid.getTopPageActivity() == null){
-						return 
-					}
-					if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-						return 
-					}
-					uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
-		            uniActionSheet?.show()
-		        }, instance)
-		    }
+	// // #ifdef UNI-APP-X
+	// 	/**
+	// 	 * uni-app x
+	// 	 * 需要特殊处理生命周期 
+	// 	 */
+	// 	const pages = getCurrentPages();
+	// 	if (pages.length > 0) {
+	// 		const page = pages[pages.length - 1].vm!
+	// 		const instance = page.$
+	// 		if (page.$isReady) {
+	// 			if(UTSAndroid.getTopPageActivity() == null){
+	// 				return 
+	// 			}
+	// 			if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+	// 				return 
+	// 			}
+	// 			uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
+	// 	        uniActionSheet?.show()
+	// 	    } else {
+	// 	        onReady(() => {
+	// 				if(UTSAndroid.getTopPageActivity() == null){
+	// 					return 
+	// 				}
+	// 				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+	// 					return 
+	// 				}
+	// 				uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
+	// 	            uniActionSheet?.show()
+	// 	        }, instance)
+	// 	    }
 		    
-			onUnload(() => {
-				uniActionSheet?.dismiss()
-				uniActionSheet = null
-			}, instance)
+	// 		onUnload(() => {
+	// 			uniActionSheet?.dismiss()
+	// 			uniActionSheet = null
+	// 		}, instance)
 			
-		}
-	// #endif
+	// 	}
+	// // #endif
 	
 	
 }
@@ -387,6 +388,8 @@ function isValidColor(colorStr?:string):boolean{
 	}
 	return true
 }
+
+// #endif
 
 
 
