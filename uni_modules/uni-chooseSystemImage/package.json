@@ -1,7 +1,7 @@
 {
   "id": "uni-chooseSystemImage",
   "displayName": "uni-chooseSystemMedia",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "从手机相册中选择图片或视频，解决google play新政策禁止添加媒体权限的问题",
   "keywords": [
     "google",
