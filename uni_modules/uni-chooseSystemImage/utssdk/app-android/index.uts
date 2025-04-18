@@ -35,7 +35,7 @@ export const chooseSystemImage : ChooseSystemImage = function (option : ChooseSy
 		option.complete?.(error)
 		return
 	}
-	if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
+	if (Build.VERSION.SDK_INT > 32) {
 		__chooseSystemImage(option)
 	} else {
 		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
@@ -58,7 +58,7 @@ export const chooseSystemMedia : ChooseSystemMedia = function (option : ChooseSy
 	if (option.count > 100) {
 		option.count = 100
 	}
-	if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
+	if (Build.VERSION.SDK_INT > 32) {
 		__chooseSystemMedia(option)
 	} else {
 		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
