@@ -75,22 +75,27 @@ class EventSourceListenerImpl implements EventSourceListener {
 		this.msHander = handler
 	}
 	override onOpen(eventSource : EventSource, response : Response) {
-		this.msHander?.open?.(new UniMessageEvent('open'))
+		const event = new UniMessageEvent()
+		event.type = 'open'
+		this.msHander?.open?.(event)
 	}
 	override  onEvent(eventSource : EventSource, id : string | null, type : string | null, data : String) {
 		let tempType = ''
 		if (type != null) {
 			tempType = type
 		}
-		let event = new UniMessageEvent(tempType)
+
+		let event = new UniMessageEvent()
+		event.type = tempType
 		event.data = data
 		event.lastEventId = id
 		this.msHander?.message?.(event)
-
 	}
 
 	override  onClosed(eventSource : EventSource) {
-		this.msHander?.close?.(new UniMessageEvent('close'))
+		const event = new UniMessageEvent()
+		event.type = 'close'
+		this.msHander?.close?.(event)
 	}
 
 	override  onFailure(eventSource : EventSource, t : Throwable | null, response : Response | null) {

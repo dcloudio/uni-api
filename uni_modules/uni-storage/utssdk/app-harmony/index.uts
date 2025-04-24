@@ -63,11 +63,13 @@ export {
 
 function parseStorageValue(value: string): any {
     try {
-        if (globalThis.UTS) {
-            return globalThis.UTS.JSON.parse(value).data;
-        } else {
-            return JSON.parse(value).data;
-        }
+        // #ifdef UNI-APP-X
+        const valueObj: ESObject = globalThis.UTS.JSON.parse(value);
+        return valueObj ? valueObj.data : value;
+        // #endif
+        // #ifndef UNI-APP-X
+        return JSON.parse(value).data;
+        // #endif
     } catch (e) {
         return value;
     }
@@ -224,6 +226,3 @@ export {
     getStorageInfoSync,
     getStorageInfo,
 }
-
-
-

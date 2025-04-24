@@ -225,12 +225,12 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                         data = responseData.toString('utf8')
                         if (dataType === 'json') {
                             try {
-                                if (globalThis.UTS) {
-                                    // 注意UTS.JSON.parse并不会抛出错误，只会返回null
-                                    data = globalThis.UTS.JSON.parse(data) || data;
-                                } else {
-                                    data = JSON.parse(data);
-                                }
+                                // #ifdef UNI-APP-X
+                                data = globalThis.UTS.JSON.parse(data) || data;
+                                // #endif
+                                // #ifndef UNI-APP-X
+                                data = JSON.parse(data);
+                                // #endif
                             } catch (e) {
                                 // 与微信保持一致，不抛出异常
                             }

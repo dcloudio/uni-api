@@ -4821,8 +4821,6 @@ export type GetWindowInfoResult = {
   pixelRatio: number,
   /**
    * 屏幕宽度，单位为px
-   * 
-   * @deprecated 已废弃，仅为了向下兼容保留
    *
    * @uniPlatform
    * {
@@ -4894,8 +4892,6 @@ export type GetWindowInfoResult = {
   screenWidth: number,
   /**
    * 屏幕高度，单位为px
-   * 
-   * @deprecated 已废弃，仅为了向下兼容保留
    *
    * @uniPlatform
    * {
@@ -4967,8 +4963,6 @@ export type GetWindowInfoResult = {
   screenHeight: number,
   /**
    * 可使用窗口宽度，单位为px
-   * 
-   * @deprecated 已废弃，仅为了向下兼容保留
    *
    * @uniPlatform
    * {
@@ -5040,8 +5034,6 @@ export type GetWindowInfoResult = {
   windowWidth: number,
   /**
    * 可使用窗口高度，单位为px
-   * 
-   * @deprecated 已废弃，仅为了向下兼容保留
    *
    * @uniPlatform
    * {
@@ -5423,7 +5415,6 @@ export type GetWindowInfoResult = {
   /**
    * 窗口上边缘的 y 值，单位为px
    *
-   * @deprecated 已废弃，仅为了向下兼容保留
    * @uniPlatform
    * {
    * 	"app": {
