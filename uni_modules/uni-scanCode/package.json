@@ -31,14 +31,24 @@
         "npmurl": ""
     },
     "uni_modules": {
-        "dependencies": [],
+		"pages":{
+			"app-ios":false,
+			"app-harmony":false
+		},
+        "dependencies": [
+            "uni-framework",
+            "uni-camera",
+            "uni-barcode-scanning",
+            "uni-media",
+			"uni-getSystemInfo"
+        ],
         "uni-ext-api": {
             "uni": {
                 "scanCode": {
                     "name": "scanCode",
                     "app": {
                         "js": false,
-                        "kotlin": false,
+                        "kotlin": true,
                         "swift": false,
                         "arkts": true
                     }

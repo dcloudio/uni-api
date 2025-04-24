@@ -29,7 +29,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -105,7 +105,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -159,7 +159,7 @@ export type GetAppBaseInfoResult = {
     appName?: string,
 
     /**
-     * `manifest.json` 中应用版本名称。
+     * `manifest.json` 中应用版本名称，如果离线打包注意修改修改index.kt中UniAppConfig类型中的版本名称[文档](https://doc.dcloud.net.cn/uni-app-x/native/use/android.html#%E6%8B%B7%E8%B4%9Dkt%E6%96%87%E4%BB%B6)。
      *
      * @uniPlatform
       {
@@ -181,7 +181,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -235,7 +235,7 @@ export type GetAppBaseInfoResult = {
     appVersion?: string,
 
     /**
-     * `manifest.json` 中应用版本名号。
+     * `manifest.json` 中应用版本名号，如果离线打包注意修改修改index.kt中UniAppConfig类型中的版本号[文档](https://doc.dcloud.net.cn/uni-app-x/native/use/android.html#%E6%8B%B7%E8%B4%9Dkt%E6%96%87%E4%BB%B6)。
      *
      * @uniPlatform
       {
@@ -485,7 +485,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -561,7 +561,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -637,7 +637,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1061,8 +1061,8 @@ export type GetAppBaseInfoResult = {
           }
         },
         "web": {
-          "uniVer": "x",
-          "unixVer": "x"
+          "uniVer": "√",
+          "unixVer": "4.0"
         }
       }
      */
@@ -1244,7 +1244,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1320,7 +1320,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1473,7 +1473,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1549,7 +1549,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1625,7 +1625,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1672,7 +1672,7 @@ export type GetAppBaseInfoResult = {
         },
         "web": {
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.0"
         }
       }
      */
@@ -1701,7 +1701,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -1753,6 +1753,83 @@ export type GetAppBaseInfoResult = {
       }
      */
     packageName?: string,
+
+
+    /**
+     * 鸿蒙的包名
+     *
+     * @uniPlatform
+      {
+        "app": {
+          "android": {
+            "osVer": "5.0",
+            "uniVer": "x",
+            "uniUtsPlugin": "x",
+            "unixVer": "x",
+            "unixUtsPlugin": "x"
+          },
+          "ios": {
+            "osVer": "12.0",
+            "uniVer": "x",
+            "uniUtsPlugin": "x",
+            "unixVer": "x",
+            "unixUtsPlugin": "x"
+          },
+          "harmony": {
+            "osVer": "3.0",
+            "uniVer": "4.61",
+            "unixVer": "4.61"
+          }
+        },
+        "mp": {
+          "weixin": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "alipay": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "baidu": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "toutiao": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "lark": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "qq": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "kuaishou": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          },
+          "jd": {
+            "hostVer": "√",
+            "uniVer": "x",
+            "unixVer": "x"
+          }
+        },
+        "web": {
+          "uniVer": "x",
+          "unixVer": "x"
+        }
+      }
+     */
+    bundleName?: string,
 
     /**
      * iOS的bundleId
@@ -1930,7 +2007,7 @@ export type GetAppBaseInfoResult = {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {
@@ -2096,7 +2173,7 @@ export interface Uni {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
         "mp": {

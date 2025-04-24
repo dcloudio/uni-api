@@ -21,7 +21,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
        * 	},
      *   "web": {
@@ -29,50 +29,50 @@ export interface Uni {
      *     "unixVer": "x"
      *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
      */
-    startSoterAuthentication: StartSoterAuthentication;
+    startSoterAuthentication(options: StartSoterAuthenticationOptions): void;
     /**
      * 获取本机支持的 SOTER 生物认证方式
      *
@@ -94,7 +94,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
        * 	},
      *   "web": {
@@ -102,50 +102,50 @@ export interface Uni {
      *     "unixVer": "x"
      *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
        * }
      */
-    checkIsSupportSoterAuthentication: CheckIsSupportSoterAuthentication;
+    checkIsSupportSoterAuthentication(options: CheckIsSupportSoterAuthenticationOptions): void;
     /**
      * 获取设备内是否录入如指纹等生物信息
      *
@@ -167,7 +167,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
        * 	},
      *   "web": {
@@ -175,50 +175,50 @@ export interface Uni {
      *     "unixVer": "x"
      *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
        * }
      */
-    checkIsSoterEnrolledInDevice: CheckIsSoterEnrolledInDevice;
+    checkIsSoterEnrolledInDevice(options: CheckIsSoterEnrolledInDeviceOptions): void;
 }
 
 export type StartSoterAuthentication = (options: StartSoterAuthenticationOptions) => void;
@@ -231,7 +231,7 @@ export type SoterAuthMode =
      */
     'fingerPrint' |
     /**
-     * 人脸识别（暂未支持）
+     * 人脸识别
      */
     'facial' |
     /**
@@ -247,7 +247,7 @@ export type StartSoterAuthenticationSuccess = {
     /**
      * 生物认证方式
      * - fingerPrint: 指纹识别
-     * - facial: 人脸识别（暂未支持）
+     * - facial: 人脸识别
      * - speech: 声纹识别（暂未支持）
      */
     authMode: SoterAuthMode,
@@ -266,13 +266,6 @@ export type StartSoterAuthenticationSuccess = {
 };
 export type StartSoterAuthenticationSuccessCallback = (result: StartSoterAuthenticationSuccess) => void;
 export type StartSoterAuthenticationFail = UniError;
-export type UniError = {
-    errSubject: string,
-    errCode: number,
-    errMsg: string,
-    data?: object | null,
-    cause?: any | null
-};
 export type StartSoterAuthenticationFailCallback = (result: StartSoterAuthenticationFail) => void;
 export type StartSoterAuthenticationComplete = any;
 export type StartSoterAuthenticationCompleteCallback = (result: StartSoterAuthenticationComplete) => void;

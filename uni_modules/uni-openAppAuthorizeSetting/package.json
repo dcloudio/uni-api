@@ -32,18 +32,18 @@
   },
   "uni_modules": {
     "dependencies": [],
-	"uni-ext-api": {
-		"uni": {
-			"openAppAuthorizeSetting": {
-				"name": "openAppAuthorizeSetting",
-				"app": {
-					"js": false,
-					"kotlin": true,
-					"swift": true
-				}
-			}
-		}
-	},
+    "uni-ext-api": {
+      "uni": {
+        "openAppAuthorizeSetting": {
+          "name": "openAppAuthorizeSetting",
+          "app": {
+            "js": false,
+            "kotlin": true,
+            "swift": true
+          }
+        }
+      }
+    },
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -88,6 +88,7 @@
           "联盟": "u"
         }
       }
-    }
+    },
+    "treeShaking": false
   }
 }

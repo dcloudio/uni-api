@@ -3,7 +3,12 @@ import {
     RequestPayment,
     RequestPaymentOptions,
     RequestPaymentFail,
-    RequestPaymentSuccess
+    RequestPaymentSuccess,
+    RequestPaymentComplete,
+    RequestPaymentCompleteCallback,
+    RequestPaymentErrorCode,
+    RequestPaymentFailCallback,
+    RequestPaymentSuccessCallback,
 } from '../interface.uts'
 import {
     RequestPaymentUniErrors
@@ -17,7 +22,12 @@ export {
     RequestPaymentOptions,
     RequestPaymentFail,
     RequestPaymentSuccess,
-    UniPaymentProvider
+    UniPaymentProvider,
+    RequestPaymentComplete,
+    RequestPaymentCompleteCallback,
+    RequestPaymentErrorCode,
+    RequestPaymentFailCallback,
+    RequestPaymentSuccessCallback,
 }
 
 export const requestPayment: RequestPayment = defineAsyncApi<RequestPaymentOptions, RequestPaymentSuccess>(

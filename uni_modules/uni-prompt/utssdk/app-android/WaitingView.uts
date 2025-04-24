@@ -65,8 +65,9 @@ export class WaitingView{
 	
 		//{"back":"transmit","height":"112px","loading":{"display":"block","height":"55px","icon":"__uniapperror.png","jSONArray":false},"padding":"10px","size":"16px","width":"140px"}
 
-
-	constructor(context?: Activity, style: UTSJSONObject) {
+	private hostView:View|null = null
+	
+	constructor(context?: Activity, style: UTSJSONObject,view?:View) {
 		
 		this.context = context;
 		this.style = style.toJSONObject() as JSONObject
@@ -79,7 +80,7 @@ export class WaitingView{
 		this.textView = this.waitingView.findViewById<TextView>(R.id.dcloud_tv_loading)
 		this.seaparatorView = this.waitingView.findViewById<View>(R.id.dcloud_view_seaparator)
 		this.mImageView = this.waitingView.findViewById<ImageView>(R.id.dcloud_iv_loading)
-		
+		this.hostView = view
 		this.textView.setMaxLines(2)
 
 		this.handlerArguments()
@@ -128,7 +129,6 @@ export class WaitingView{
 
 	initView() {
 		// 初始化默认参数
-		// this.textView.setTextColor(0xffffffff)
 		this.textView.setTextColor(Color.WHITE)
 		this.textView.setGravity(Gravity.CENTER)
 		this.textView.setText(this.title)
@@ -170,6 +170,13 @@ export class WaitingView{
 	
 	showWaiting() {
 		if(this.context != null && !this.context!.isFinishing()){
+			if(this.hostView == null){
+				/**
+				 * add since 2024-12-09
+				 * 如果hostview = null 阻止弹出
+				 */
+				return
+			}
 			let width = -2;
 			let height = -2
 			if (Build.VERSION.SDK_INT >= 23 && this.mask) {
@@ -179,7 +186,7 @@ export class WaitingView{
 			}
 			let mpop = new PopupWindow(this.waitingView, width.toInt(), height.toInt(), this.mask)
 			this.mpopWindow = mpop
-			mpop.showAtLocation((this.context?.findViewById<ViewGroup>(android.R.id.content))?.getChildAt(0), Gravity.CENTER, 0, 0)
+			mpop.showAtLocation(this.hostView!, Gravity.CENTER, 0, 0)
 			mpop.setOutsideTouchable(true)
 			mpop.setOnDismissListener(new WaitingDismissListener())
 			mpop.setTouchInterceptor(new TouchInterceptorListener(this.mask))

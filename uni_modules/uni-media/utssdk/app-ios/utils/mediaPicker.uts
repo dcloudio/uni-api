@@ -1,24 +1,25 @@
 import { UTSiOS } from "DCloudUTSFoundation";
 import { FileManager } from "Foundation";
-import { DCloudMediaCamera, DCloudMediaAlbum, DCloudImageBrowser, DCloudImageBrowserLoadImageDelegate, DCloudMediaImageCompress, DCloudMediaVideoCompress } from "DCloudMediaPicker" assert { type: "implementationOnly" };
+import { DCloudMediaCamera, DCloudMediaAlbum, DCloudMediaImageCompress, DCloudMediaVideoCompress } from "DCloudMediaPicker" assert { type: "implementationOnly" };
 import {
-	ChooseImageOptions, ChooseImageSuccess,
-	PreviewImageOptions, PreviewImageSuccess,
+	ChooseImageOptions, ChooseImageTempFile,
+	ChooseImageSuccess,
 	ChooseVideoOptions, ChooseVideoSuccess,
 	CompressImageOptions, CompressImageSuccess,
 	GetVideoInfoOptions, GetVideoInfoSuccess,
 	CompressVideoOptions, CompressVideoSuccess
 } from "../../interface.uts";
 import {
-	UniError_ChooseImage, MediaErrorImpl, UniError_PreviewImage, UniError_ChooseVideo, UniError_CompressImage, UniError_GetVideoInfo, UniError_CompressVideo
+	UniError_ChooseImage, MediaErrorImpl, UniError_ChooseVideo, UniError_CompressImage, UniError_GetVideoInfo, UniError_CompressVideo
 } from "../../unierror.uts";
 import { isExistFilePath, createFilePath } from "./handleImageUtils.uts";
 import { UIInterfaceOrientationMask } from "UIKit";
+import { AnyHashable } from 'Swift';
 
 export class DCUniMediaPicker {
 	private mediaAlbum : DCloudMediaAlbum | null = null;
 	private mediaCamera : DCloudMediaCamera | null = null;
-	private imageBrowser : PreviewImageBrowser | null = null;
+	// private imageBrowser : PreviewImageBrowser | null = null;
 	private imageCompress : DCloudMediaImageCompress | null = null;
 
 	chooseImageWithCamera(option : ChooseImageOptions) {
@@ -33,12 +34,12 @@ export class DCUniMediaPicker {
 	chooseVideoWithAlbum(option : ChooseVideoOptions) {
 		this._chooseVideoWithAlbum(option);
 	}
-	preview(options : PreviewImageOptions) {
-		this._previewImage(options);
-	}
-	closePreview() {
-		this._closePreview();
-	}
+	// preview(options : PreviewImageOptions) {
+	// 	this._previewImage(options);
+	// }
+	// closePreview() {
+	// 	this._closePreview();
+	// }
 	compressImage(option : CompressImageOptions) {
 		this._compressImage(option);
 	}
@@ -81,8 +82,8 @@ export class DCUniMediaPicker {
 			resolution = 0.3;
 			fps = 25;
 		}
-
-		const currentTime = Int(Date().timeIntervalSince1970)
+		
+		const currentTime = `${Date.now()}${Math.floor(Math.random() * 10000)}`;
 		const fileName = "compressVideo_" + currentTime.toString() + "." + fileExtension;
 		const filePath = createFilePath(fileName);
 
@@ -97,8 +98,8 @@ export class DCUniMediaPicker {
 			DispatchQueue.main.async(execute = () : void => {
 				DCloudMediaVideoCompress.compressVideo(withVideoUrl = videoUrl, outputPath = filePath, withBiteRate = bitrate, withFrameRate = fps, withVideoWidth = compressWidth, withVideoHeight = compressHeight, compressComplete = (response : Map<AnyHashable, any>) : void => {
 					const result : Map<string, any> = response as Map<string, any>;
-					if (result.has('tempFilePath') && result.has('size')) {
-						let success : CompressVideoSuccess = { "tempFilePath": result.get('tempFilePath') as string, "size": result.get('size') as number }
+					if (result.has('tempFilePath') && result.has('size') && result.has('byteSize')) {
+						let success : CompressVideoSuccess = { "tempFilePath": result.get('tempFilePath'), "size": result.get('size'), "byteSize": result.get('byteSize')}
 						options.success?.(success)
 						options.complete?.(success)
 					} else {
@@ -120,16 +121,18 @@ export class DCUniMediaPicker {
 		const url = new URL(fileURLWithPath = path);
 		const videoInfo = DCloudMediaVideoCompress.getVideoInfo(url);
 		if (videoInfo != null) {
-			if (videoInfo!.has('orientation') && videoInfo!.has('duration') && videoInfo!.has('type') && videoInfo!.has('size') && videoInfo!.has('width') && videoInfo!.has('height') && videoInfo!.has('fps') && videoInfo!.has('bitrate')) {
+			if (videoInfo!.has('orientation') && videoInfo!.has('duration') && videoInfo!.has('type') && videoInfo!.has('size') && videoInfo!.has('byteSize') && videoInfo!.has('width') && videoInfo!.has('height') && videoInfo!.has('fps') && videoInfo!.has('bitrate') && videoInfo!.has('thumbTempFilePath')) {
 				const successCallback : GetVideoInfoSuccess = {
-					"orientation": videoInfo!.get("orientation"),
-					"duration": videoInfo!.get("duration"),
-					"type": videoInfo!.get("type"),
-					"size": videoInfo!.get("size"),
-					"width": videoInfo!.get("width"),
-					"height": videoInfo!.get("height"),
-					"fps": videoInfo!.get("fps"),
-					"bitrate": videoInfo!.get("bitrate")
+					orientation: videoInfo!.get("orientation"),
+					duration: videoInfo!.get("duration"),
+					type: videoInfo!.get("type"),
+					size: videoInfo!.get("size"),
+					byteSize: videoInfo!.get("byteSize"),
+					width: videoInfo!.get("width"),
+					height: videoInfo!.get("height"),
+					fps: videoInfo!.get("fps"),
+					bitrate: videoInfo!.get("bitrate"),
+					thumbTempFilePath: videoInfo!.get("thumbTempFilePath")
 				}
 				options.success?.(successCallback)
 				options.complete?.(successCallback)
@@ -218,21 +221,28 @@ export class DCUniMediaPicker {
 				this.mediaAlbum = new DCloudMediaAlbum();
 			}
 			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
-				if (response.has('tempFilePath') && response.has('width') && response.has('height') && response.has('size') && response.has('duration')) {
-					let success : ChooseVideoSuccess = {
-						tempFilePath: response.get('tempFilePath'),
-						width: response.get('width'),
-						height: response.get('height'),
-						size: response.get('size'),
-						duration: response.get('duration'),
+				if (response.has('tempFiles')){
+					const list : Array<any> = response.get('tempFiles') as Array<any>;
+					if(list.length > 0){
+						const file : Map<AnyHashable, any> = list[0] as Map<AnyHashable, any>;
+						if (file.has('tempFilePath') && file.has('width') && file.has('height') && file.has('size') && file.has('duration')) {
+							let success : ChooseVideoSuccess = {
+								tempFilePath: file.get('tempFilePath'),
+								width: file.get('width'),
+								height: file.get('height'),
+								size: file.get('size'),
+								duration: file.get('duration'),
+							}
+							option.success?.(success)
+							option.complete?.(success)
+							return;
+						}
 					}
-					option.success?.(success)
-					option.complete?.(success)
-				} else {
-					let mediaError = new MediaErrorImpl(1101009, UniError_ChooseVideo);
-					option.fail?.(mediaError)
-					option.complete?.(mediaError)
 				}
+				
+				let mediaError = new MediaErrorImpl(1101009, UniError_ChooseVideo);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
 
 			}, fail = (code : number) : void => {
 				let mediaError = new MediaErrorImpl(code, UniError_ChooseVideo);
@@ -240,16 +250,16 @@ export class DCUniMediaPicker {
 				option.complete?.(mediaError)
 			})
 		})
-	} 
-	
-	private convertPageOrientation(orientationStr: string | null) : UIInterfaceOrientationMask{
-		if(orientationStr == "auto"){
+	}
+
+	private convertPageOrientation(orientationStr : string | null) : UIInterfaceOrientationMask {
+		if (orientationStr == "auto") {
 			return UIInterfaceOrientationMask.allButUpsideDown;
 		}
-		if(orientationStr == "portrait"){
+		if (orientationStr == "portrait") {
 			return UIInterfaceOrientationMask.portrait;
 		}
-		if(orientationStr == "landscape"){
+		if (orientationStr == "landscape") {
 			return UIInterfaceOrientationMask.landscape;
 		}
 		return UTSiOS.getSupportOrientation();
@@ -261,12 +271,13 @@ export class DCUniMediaPicker {
 		options.set('resolution', "high");
 		options.set('sizeType', option.sizeType);
 		options.set('filePath', path);
+		options.set('filter', "image");
 
 		if (count > 0) {
 			options.set('maximum', count);
 		}
 		options.set('pageOrientation', this.convertPageOrientation(option.pageOrientation).rawValue);
-		
+
 		if (option.crop != null) {
 			let crop : Map<string, any> = new Map();
 			if (option.crop!.width != null) {
@@ -288,20 +299,38 @@ export class DCUniMediaPicker {
 				this.mediaAlbum = new DCloudMediaAlbum();
 			}
 			this.mediaAlbum?.start(options, success = (response : Map<AnyHashable, any>) : void => {
-				if (response.has('tempFilePaths') && response.has('tempFiles')) {
-					let success : ChooseImageSuccess = {
-						"errSubject": "uni-chooseImage",
-						"tempFilePaths": response.get('tempFilePaths'),
-						"errMsg": "chooseImage:ok",
-						"tempFiles": response.get('tempFiles')
+				if (response.has('tempFiles')) {
+					const list : Array<any> = response.get('tempFiles') as Array<any>;
+					if (list.length > 0) {
+						let tempFiles : ChooseImageTempFile[] = new Array();
+						let tempFilePaths : string[] = new Array();
+						for (let i = 0; i < list.length; i++) {
+							const file : Map<AnyHashable,any> = list[i] as Map<AnyHashable,any>;
+						    const path : string = file["tempFilePath"] as string
+							const size : number = file["size"] as number
+							tempFilePaths.add(path);
+							
+							const tempFile : ChooseImageTempFile = {
+								path: path,
+								size: size
+							}
+							tempFiles.add(tempFile);
+						}
+						let success : ChooseImageSuccess = {
+							"errSubject": "uni-chooseImage",
+							"tempFilePaths": tempFilePaths,
+							"errMsg": "chooseImage:ok",
+							"tempFiles": tempFiles
+						}
+						option.success?.(success)
+						option.complete?.(success)
+						return;
 					}
-					option.success?.(success)
-					option.complete?.(success)
-				} else {
-					let mediaError = new MediaErrorImpl(1101004, UniError_ChooseImage);
-					option.fail?.(mediaError)
-					option.complete?.(mediaError)
+					
 				}
+				let mediaError = new MediaErrorImpl(1101004, UniError_ChooseImage);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
 
 			}, fail = (code : number) : void => {
 				let mediaError = new MediaErrorImpl(code, UniError_ChooseImage);
@@ -312,16 +341,13 @@ export class DCUniMediaPicker {
 	}
 
 	private _chooseVideoWithCamera(option : ChooseVideoOptions) {
-
-		const currentTime = Int(Date().timeIntervalSince1970)
-		const fileName = currentTime.toString() + ".mp4";
-		const filePath = createFilePath(fileName);
+		const filePath = createFilePath("");
 
 		let options : Map<string, any> = new Map();
 		options.set('resolution', "high");
 		options.set('videoCompress', option.compressed);
 		options.set('filePath', filePath);
-		options.set('type', "video");
+		options.set('filter', "video");
 		if (option.maxDuration != null) {
 			if (option.maxDuration! > 0) {
 				options.set('videoMaximumDuration', option.maxDuration);
@@ -338,21 +364,28 @@ export class DCUniMediaPicker {
 				this.mediaCamera = new DCloudMediaCamera();
 			}
 			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
-				if (response.has('tempFilePath') && response.has('width') && response.has('height') && response.has('size') && response.has('duration')) {
-					let success : ChooseVideoSuccess = {
-						tempFilePath: response.get('tempFilePath'),
-						width: response.get('width'),
-						height: response.get('height'),
-						size: response.get('size'),
-						duration: response.get('duration'),
+				if (response.has('tempFiles')) {
+					const tempFiles : Array<any> = response.get('tempFiles') as Array<any>;
+					if (tempFiles.length > 0) {
+						const result : Map<AnyHashable, any> = tempFiles[0] as Map<AnyHashable, any>;
+						if (result.has('tempFilePath') && result.has('width') && result.has('height') && result.has('size') && result.has('duration')) {
+							let success : ChooseVideoSuccess = {
+								tempFilePath: result.get('tempFilePath') as string,
+								width: result.get('width') as number,
+								height: result.get('height') as number,
+								size: result.get('size') as number,
+								duration: result.get('duration') as number
+							}
+							option.success?.(success)
+							option.complete?.(success)
+							return;
+						}
 					}
-					option.success?.(success)
-					option.complete?.(success)
-				} else {
-					let mediaError = new MediaErrorImpl(1101008, UniError_ChooseVideo);
-					option.fail?.(mediaError)
-					option.complete?.(mediaError)
 				}
+
+				let mediaError = new MediaErrorImpl(1101008, UniError_ChooseVideo);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
 
 			}, fail = (code : number) : void => {
 				let mediaError = new MediaErrorImpl(code, UniError_ChooseVideo);
@@ -363,14 +396,12 @@ export class DCUniMediaPicker {
 	}
 
 	private _chooseImageWithCamera(option : ChooseImageOptions) {
-		const currentTime = Int(Date().timeIntervalSince1970)
-		const fileName = currentTime.toString() + ".jpg";
-		const filePath = createFilePath(fileName);
+		const filePath = createFilePath("");
 		let options : Map<string, any> = new Map();
 		options.set('resolution', "high");
 		options.set('sizeType', option.sizeType);
 		options.set('filePath', filePath);
-		options.set('type', "image");
+		options.set('filter', "image");
 		if (option.crop != null) {
 			let crop : Map<string, any> = new Map();
 			if (option.crop!.width != null) {
@@ -392,21 +423,32 @@ export class DCUniMediaPicker {
 				this.mediaCamera = new DCloudMediaCamera();
 			}
 			this.mediaCamera?.start(options, success = (response : Map<AnyHashable, any>) : void => {
-				if (response.has('tempFilePaths') && response.has('tempFiles')) {
-					let success : ChooseImageSuccess = {
-						"errSubject": "uni-chooseImage",
-						"tempFilePaths": response.get('tempFilePaths'),
-						"errMsg": "chooseImage:ok",
-						"tempFiles": response.get('tempFiles')
+				if (response.has('tempFiles')) {
+					const tempList : Array<any> = response.get('tempFiles') as Array<any>;
+					if (tempList.length > 0) {
+						const item : Map<AnyHashable, any> = tempList[0] as Map<AnyHashable, any>;
+						const path : string = item.get('tempFilePath') as string;
+						const size : number = item.get('size') as number;
+						const tempFilePaths : string[] = new Array(path);
+						const tempFile : ChooseImageTempFile = {
+							path: path,
+							size: size
+						}
+						const tempFiles : ChooseImageTempFile[] = new Array(tempFile);
+						let success : ChooseImageSuccess = {
+							"errSubject": "uni-chooseImage",
+							"tempFilePaths": tempFilePaths,
+							"errMsg": "chooseImage:ok",
+							"tempFiles": tempFiles
+						}
+						option.success?.(success)
+						option.complete?.(success)
+						return
 					}
-					option.success?.(success)
-					option.complete?.(success)
-				} else {
-					let mediaError = new MediaErrorImpl(1101008, UniError_ChooseImage);
-					option.fail?.(mediaError)
-					option.complete?.(mediaError)
 				}
-
+				let mediaError = new MediaErrorImpl(1101008, UniError_ChooseImage);
+				option.fail?.(mediaError)
+				option.complete?.(mediaError)
 			}, fail = (code : number) : void => {
 				let mediaError = new MediaErrorImpl(code, UniError_ChooseImage);
 				option.fail?.(mediaError)
@@ -416,72 +458,72 @@ export class DCUniMediaPicker {
 	}
 
 
-	private _closePreview() {
-		DispatchQueue.main.async(execute = () : void => {
-			if (this.imageBrowser == null) {
-				this.imageBrowser = new PreviewImageBrowser();
-			}
-			this.imageBrowser?.close();
-		})
-	}
-	private _previewImage(options : PreviewImageOptions) {
+	// private _closePreview() {
+	// 	DispatchQueue.main.async(execute = () : void => {
+	// 		if (this.imageBrowser == null) {
+	// 			this.imageBrowser = new PreviewImageBrowser();
+	// 		}
+	// 		this.imageBrowser?.close();
+	// 	})
+	// }
+	// private _previewImage(options : PreviewImageOptions) {
 
-		const op : Map<string, any> = new Map();
-		let images : Array<any> = [];
-		for (var i = 0; i < options.urls.length; i++) {
-			const item : Map<string, any> = new Map();
-			item.set('src', options.urls[i]);
-			item.set("path", UTSiOS.getResourceAbsolutePath(options.urls[i], null));
-			images.push(item)
-		}
-		op.set('images', images);
-		if (options.current != null) {
-			op.set('current', options.current);
-		}
-		if (options.indicator != null) {
-			op.set('indicator', options.indicator);
-		}
-		op.set('loop', options.loop);
-		op.set("cachePath", UTSiOS.getMediaCacheDir());
-		DispatchQueue.main.async(execute = () : void => {
-			if (this.imageBrowser == null) {
-				this.imageBrowser = new PreviewImageBrowser();
-			}
-			this.imageBrowser?.startPreview(op);
-		})
+	// 	const op : Map<string, any> = new Map();
+	// 	let images : Array<any> = [];
+	// 	for (var i = 0; i < options.urls.length; i++) {
+	// 		const item : Map<string, any> = new Map();
+	// 		item.set('src', options.urls[i]);
+	// 		item.set("path", UTSiOS.getResourceAbsolutePath(options.urls[i], null));
+	// 		images.push(item)
+	// 	}
+	// 	op.set('images', images);
+	// 	if (options.current != null) {
+	// 		op.set('current', options.current);
+	// 	}
+	// 	if (options.indicator != null) {
+	// 		op.set('indicator', options.indicator);
+	// 	}
+	// 	op.set('loop', options.loop);
+	// 	op.set("cachePath", UTSiOS.getMediaCacheDir());
+	// 	DispatchQueue.main.async(execute = () : void => {
+	// 		if (this.imageBrowser == null) {
+	// 			this.imageBrowser = new PreviewImageBrowser();
+	// 		}
+	// 		this.imageBrowser?.startPreview(op);
+	// 	})
 
-		let success : PreviewImageSuccess = { errMsg: 'ok', "errSubject": UniError_PreviewImage }
-		options.success?.(success)
-		options.complete?.(success)
-	}
+	// 	let success : PreviewImageSuccess = { errMsg: 'ok', "errSubject": UniError_PreviewImage }
+	// 	options.success?.(success)
+	// 	options.complete?.(success)
+	// }
 }
 
 
-@UTSiOS.keyword("private") class PreviewImageBrowser implements DCloudImageBrowserLoadImageDelegate {
-	private browser = new DCloudImageBrowser(frame = CGRectZero);
+// @UTSiOS.keyword("private") class PreviewImageBrowser implements DCloudImageBrowserLoadImageDelegate {
+// 	private browser = new DCloudImageBrowser(frame = CGRectZero);
 
-	startPreview(options : Map<string, any>) {
-		this._startPreview(options);
-	}
-	close() {
-		this._close()
-	}
-	private _startPreview(options : Map<string, any>) {
-		let window = UTSiOS.getKeyWindow()
-		this.browser.frame = window.bounds;
-		this.browser.loadImageDelegate = this;
-		this.browser.setupOptions(options);
-		window.addSubview(this.browser);
-	}
-	private _close() {
-		this.browser.exitBroswerMode();
-	}
+// 	startPreview(options : Map<string, any>) {
+// 		this._startPreview(options);
+// 	}
+// 	close() {
+// 		this._close()
+// 	}
+// 	private _startPreview(options : Map<string, any>) {
+// 		let window = UTSiOS.getKeyWindow()
+// 		this.browser.frame = window.bounds;
+// 		this.browser.loadImageDelegate = this;
+// 		this.browser.setupOptions(options);
+// 		window.addSubview(this.browser);
+// 	}
+// 	private _close() {
+// 		this.browser.exitBroswerMode();
+// 	}
 
-	dispatchLoadImage(url : String, @argumentLabel("") completion : (res : UIImage) => void) {
-		UTSiOS.loadImage(url, (image, data) => {
-			if (image != null) {
-				completion(image!);
-			}
-		});
-	}
-}
+// 	dispatchLoadImage(url : String, @argumentLabel("") completion : (res : UIImage) => void) {
+// 		UTSiOS.loadImage(url, (image, data) => {
+// 			if (image != null) {
+// 				completion(image!);
+// 			}
+// 		});
+// 	}
+// }

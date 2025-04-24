@@ -44,6 +44,9 @@ import io.dcloud.uts.times
 import io.dcloud.uts.utsArrayOf
 import java.io.File
 import java.io.IOException
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
+import com.google.android.exoplayer2.metadata.Metadata;
+import android.text.TextUtils
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -128,12 +131,11 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
             cacheDataSourceFactory?.setUpstreamDataSourceFactory(httpDataSourceFactory)
                 ?.setCache(CacheManager.getSimpleCache())
                 ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
-            cacheDataSourceFactory?.let {
-                this.player.setMediaSource(
-                    ProgressiveMediaSource.Factory(it)
-                        .createMediaSource(mediaItem)
-                )
-            }
+			val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
+			if(cacheDataSourceFactory != null && this._cache == true) {
+				defaultMediaSource.setDataSourceFactory(cacheDataSourceFactory!!)
+			}
+			this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
         } else {
             this.player.setMediaItem(mediaItem);
         }
@@ -191,7 +193,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
     override var duration: Number
         get(): Number {
             if (this.player.playbackState == Player.STATE_READY || this.player.playbackState == Player.STATE_ENDED) {
-                return this.player.duration / 1000;
+                return this.player.duration.toDouble() / 1000;
             } else {
                 return 0;
             }
@@ -202,7 +204,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
     override var currentTime: Number
         get(): Number {
             if (this.player.isPlaying) {
-                return this.player.currentPosition / 1000;
+                return this.player.currentPosition.toDouble() / 1000;
             }
             return 0;
         }
@@ -217,7 +219,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
         set(_) {}
     override var buffered: Number
         get(): Number {
-            return this.player.bufferedPosition;
+            return this.player.bufferedPosition / 1000f;
         }
         set(_) {}
     open var _volume: Number = 0;
@@ -253,6 +255,16 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
                 this.player.setPlaybackSpeed(rate!!.toFloat());
             }
         }
+	open var _cache = true
+	override var cache = true
+		set(cach) {
+			this._cache = cach
+			if(!this.player.isPlaying && !this.isPausedByUser && !this.player.isLoading) {
+                if(!TextUtils.isEmpty(this._src)) {
+                    this.changeSRC(this._src)
+                }
+            }
+		}
     open var player: ExoPlayer;
     open var callbacks = HashMap<String, UTSArray<EventCallback>>();
     private var errorCallBack: ((result: ICreateInnerAudioContextFail) -> Unit)? = null
@@ -286,7 +298,6 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
 
                 Player.STATE_READY -> {//暂停或者准备好
                     if (this.isSeeking) {
-                        console.log("1");
                         this.isSeeking = false;
                         invokeCallBack("seeked")
                     }
@@ -522,14 +533,16 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
                         fail.errMsg = it
                     }
                 } else {
-                    val message = sourceException.message as String;
-                    if (message.includes("None of the available extractors")) {
-                        fail = CreateInnerAudioContextFailImpl(1107604)
-                        fail.errMsg = message
-                    } else {
-                        fail = CreateInnerAudioContextFailImpl(1107603)
-                        fail.errMsg = message
-                    }
+                    sourceException.message?.let {
+						if (it.includes("None of the available extractors")) {
+						    fail = CreateInnerAudioContextFailImpl(1107604)
+						    fail.errMsg = it
+						} else {
+						    fail = CreateInnerAudioContextFailImpl(1107603)
+						    fail.errMsg = it
+						}
+					}
+                    
                 }
             }
         }
@@ -574,6 +587,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {}
     override fun onPlayerErrorChanged(error: PlaybackException?) {}
     override fun onPositionDiscontinuity(reason: Int) {}
+	override fun onMetadata(metadata:Metadata) {}
     override fun onPositionDiscontinuity(
         oldPosition: Player.PositionInfo,
         newPosition: Player.PositionInfo,

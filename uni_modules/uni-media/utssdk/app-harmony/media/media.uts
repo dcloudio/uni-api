@@ -3,6 +3,7 @@ import fs from '@ohos.file.fs'
 import { ReadOptions } from '@ohos.file.fs'
 import media from '@ohos.multimedia.media'
 import image from '@ohos.multimedia.image'
+import uniformTypeDescriptor from '@ohos.data.uniformTypeDescriptor'
 import {
     GetImageInfoSuccess,
     GetVideoInfoSuccess,
@@ -25,6 +26,7 @@ export interface MediaFile {
 }
 
 export interface _ChooseMediaOptions {
+    original?: boolean
     mimeType:
     | photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE
     | photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE
@@ -44,9 +46,11 @@ export async function _getVideoInfo(uri: string): Promise<GetVideoInfoSuccess> {
     let metadata: media.AVMetadata | null = null
     let size: number = 0
     try {
-        size = (await fs.stat(file.fd)).size
+        const fileSize = (await fs.stat(file.fd)).size
+        // 单位：KB
+        size = fileSize / 1024
         avMetadataExtractor.dataSrc = {
-            fileSize: size,
+            fileSize,
             callback: (buffer: ArrayBuffer, length: number, pos?: number) => {
                 return fs.readSync(file.fd, buffer, {
                     offset: pos,
@@ -92,6 +96,7 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
     } catch (error) {
         // do nothing
     }
+    const mimeType = imageInfo.mimeType
     await imageSource.release()
     await fs.close(file.fd)
     let orientationNum = 0
@@ -139,6 +144,7 @@ export async function _getImageInfo(uri: string): Promise<GetImageInfoSuccess> {
         width: imageInfo.size.width,
         height: imageInfo.size.height,
         orientation: orientationStr,
+        type: UTSHarmony.getExtensionFromMimeType(mimeType) as string,
     } as GetImageInfoSuccess
 }
 
@@ -183,7 +189,8 @@ export async function _chooseMedia(
 
     if (mimeType !== photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE) {
         let realUris: string[] = uris
-        if (!photoSelectResult.isOriginalPhoto) {
+        // 用户只传 original 时，不显示原图选项，但 isOriginalPhoto 为 false；同时也不压缩
+        if (!photoSelectResult.isOriginalPhoto && options.original !== true) {
             const compressResult = await Promise.all(
                 uris.map((uri): Promise<CompressImageSuccess> => {
                     return _compressImage({
@@ -202,6 +209,7 @@ export async function _chooseMedia(
                 return {
                     fileType: 'image',
                     tempFilePath: uri,
+                    // 单位：B
                     size: stat.size,
                 } as MediaFile
             }),
@@ -223,4 +231,13 @@ export async function _chooseMedia(
     return {
         tempFiles,
     } as chooseMediaSuccessCallbackResult
+}
+
+export function getMimeTypeFromExtension(extension: string): string | null {
+    const typeId = uniformTypeDescriptor.getUniformDataTypeByFilenameExtension(
+        '.' + extension,
+    )
+    const typeObj = uniformTypeDescriptor.getTypeDescriptor(typeId)
+    const mimeTypes = typeObj.mimeTypes
+    return mimeTypes[0] || null
 }

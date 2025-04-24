@@ -36,7 +36,7 @@ export const setStorage: SetStorage = function (options: SetStorageOptions) {
 
   setTimeout(function () {
 
-    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
     if (dcStorage == null) {
 	  let ret = new UniError("uni-setStorage", -1, "storage not found.") 
       options.fail?.(ret)
@@ -47,9 +47,9 @@ export const setStorage: SetStorage = function (options: SetStorageOptions) {
      * 通过公共函数执行设置逻辑
      */
     uni_setStorageAsync(options, (itemKey: string, itemData: string) => {
-      dcStorage.performSetItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey, itemData);
+      dcStorage.performSetItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), itemKey, itemData);
     }, (itemKey: string) => {
-      dcStorage.performRemoveItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey);
+      dcStorage.performRemoveItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), itemKey);
     })
 
 
@@ -61,7 +61,7 @@ export const setStorage: SetStorage = function (options: SetStorageOptions) {
  */
 export const setStorageSync: SetStorageSync = function (key: string, data: any) {
 
-  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
 
   if (dcStorage == null) {
     // 异常了
@@ -69,9 +69,9 @@ export const setStorageSync: SetStorageSync = function (key: string, data: any) 
   }
   uni_setStorageSync(key, data, (itemKey: string, itemValue: string) => {
     let dataString = itemValue
-    dcStorage.performSetItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey, dataString);
+    dcStorage.performSetItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), itemKey, dataString);
   }, (itemKey: string) => {
-    dcStorage.performRemoveItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), itemKey);
+    dcStorage.performRemoveItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), itemKey);
   })
 
 
@@ -83,7 +83,7 @@ export const setStorageSync: SetStorageSync = function (key: string, data: any) 
  */
 function includeKey(key: string): boolean {
 
-  let info = DCStorage.getDCStorage(UTSAndroid.getUniActivity()!).performGetAllKeys(UTSAndroid.getAppId())
+  let info = DCStorage.getDCStorage(UTSAndroid.getAppContext()!).performGetAllKeys(UTSAndroid.getAppId())
   if (info.v != null && info.code == DCStorage.SUCCESS) {
     //&& info.v instanceof java.util.List
     // @ts-expect-error
@@ -98,7 +98,7 @@ function includeKey(key: string): boolean {
 export const getStorage: GetStorage = function getStorage(options: GetStorageOptions) {
 
 
-  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
 
   if (dcStorage == null) {
 	let ret = new UniError("uni-setStorage", -1, "storage not found.") 
@@ -159,7 +159,7 @@ export const getStorageSync: GetStorageSync = function (key: string): any | null
 
 
   return uni_getStorageSync(key, function (itemKey: string): string | null {
-    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
 
     if (dcStorage == null) {
       return "";
@@ -184,7 +184,7 @@ export const getStorageInfo: GetStorageInfo = function (options: GetStorageInfoO
   setTimeout(function () {
 
 
-    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
 
     if (dcStorage == null) {
 	  let ret = new UniError("uni-setStorage", -1, "storage not found.") 
@@ -246,7 +246,7 @@ export const getStorageInfoSync: GetStorageInfoSync = function (): GetStorageInf
     limitSize: 10240,
   }
 
-  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
   if (dcStorage == null) {
     return ret
   }
@@ -291,14 +291,14 @@ export const getStorageInfoSync: GetStorageInfoSync = function (): GetStorageInf
 export const removeStorage: RemoveStorage = function (options: RemoveStorageOptions) {
 
   setTimeout(function () {
-    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
     if (dcStorage == null) {
 	  let ret = new UniError("uni-removeStorage", -1, "storage not found.") 
       options.fail?.(ret)
       options.complete?.(ret)
       return;
     }
-    dcStorage.performRemoveItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), options.key);
+    dcStorage.performRemoveItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), options.key);
     let ret: RemoveStorageSuccess = {}
     options.success?.(ret)
     options.complete?.(ret)
@@ -312,11 +312,11 @@ export const removeStorage: RemoveStorage = function (options: RemoveStorageOpti
  */
 export const removeStorageSync: RemoveStorageSync = function (key: string) {
 
-  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
   if (dcStorage == null) {
     return;
   }
-  dcStorage.performRemoveItem(UTSAndroid.getUniActivity(), UTSAndroid.getAppId(), key);
+  dcStorage.performRemoveItem(UTSAndroid.getAppContext(), UTSAndroid.getAppId(), key);
 
 }
 
@@ -326,14 +326,14 @@ export const removeStorageSync: RemoveStorageSync = function (key: string) {
 export const clearStorage: ClearStorage = function (option: ClearStorageOptions | null) {
 
   setTimeout(function () {
-    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+    let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
     if (dcStorage == null) {
 	  let ret = new UniError("uni-clearStorage", -1, "error:storage not found.") 
       option?.fail?.(ret)
       option?.complete?.(ret)
       return;
     }
-    dcStorage.performClear(UTSAndroid.getUniActivity(), UTSAndroid.getAppId());
+    dcStorage.performClear(UTSAndroid.getAppContext(), UTSAndroid.getAppId());
 
 
     let ret: ClearStorageSuccess = {}
@@ -349,11 +349,11 @@ export const clearStorage: ClearStorage = function (option: ClearStorageOptions 
 export const clearStorageSync: ClearStorageSync = function () {
 
 
-  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getUniActivity());
+  let dcStorage = DCStorage.getDCStorage(UTSAndroid.getAppContext());
   if (dcStorage == null) {
     return;
   }
-  dcStorage.performClear(UTSAndroid.getUniActivity(), UTSAndroid.getAppId());
+  dcStorage.performClear(UTSAndroid.getAppContext(), UTSAndroid.getAppId());
 
 }
 

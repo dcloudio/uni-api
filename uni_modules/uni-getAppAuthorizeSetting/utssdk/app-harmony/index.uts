@@ -8,12 +8,14 @@ const DENIED = 'denied'
 const NOT_DETERMINED = 'not determined'
 const CONFIG_ERROR = 'config error'
 
+type LocationAccuracy = 'reduced' | 'full' | 'unsupported'
+
 class AppAuthorizeSetting {
   albumAuthorized: string = NOT_DETERMINED
   bluetoothAuthorized: string = NOT_DETERMINED
   cameraAuthorized: string = NOT_DETERMINED
   locationAuthorized: string = NOT_DETERMINED
-  locationAccuracy: string = NOT_DETERMINED
+  locationAccuracy: LocationAccuracy = 'unsupported'
   microphoneAuthorized: string = NOT_DETERMINED
   notificationAuthorized: string = NOT_DETERMINED
 
@@ -21,6 +23,9 @@ class AppAuthorizeSetting {
   notificationBadgeAuthorized: string = NOT_DETERMINED
   notificationSoundAuthorized: string = NOT_DETERMINED
   phoneCalendarAuthorized: string = NOT_DETERMINED
+  readPhoneCalendarAuthorized: string = NOT_DETERMINED
+  writePhoneCalendarAuthorized: string = NOT_DETERMINED
+  pasteboardAuthorized: string = NOT_DETERMINED
 }
 
 class GetAppAuthorizeSettingImpl {
@@ -40,6 +45,7 @@ class GetAppAuthorizeSettingImpl {
     this.getMicrophoneAuthorizeSetting()
     this.getNotificationAuthorizeSetting()
     this.getPhoneCalendarAuthorizeSetting()
+    this.getPasteboardAuthorizedSetting()
   }
 
   getAlbumAuthorizeSetting() {
@@ -73,12 +79,19 @@ class GetAppAuthorizeSettingImpl {
   }
 
   getLocationAuthorizeSetting() {
-    const grantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.LOCATION')
+    const locationGrantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.LOCATION')
+    const grantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.APPROXIMATELY_LOCATION')
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
       this.appAuthorizeSetting.locationAuthorized = DENIED
+      this.appAuthorizeSetting.locationAccuracy = 'unsupported'
     }
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       this.appAuthorizeSetting.locationAuthorized = AUTHORIZED
+      if (locationGrantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        this.appAuthorizeSetting.locationAccuracy = 'full'
+      } else {
+        this.appAuthorizeSetting.locationAccuracy = 'reduced'
+      }
     }
   }
 
@@ -94,7 +107,6 @@ class GetAppAuthorizeSettingImpl {
 
   getNotificationAuthorizeSetting() {
     try {
-      // @ts-ignore 12 支持，https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-notificationmanager-V5#notificationmanagerisnotificationenabledsync12
       const isNotificationEnabled = notificationManager.isNotificationEnabledSync()
       if (isNotificationEnabled) {
         this.appAuthorizeSetting.notificationAuthorized = DENIED
@@ -108,12 +120,38 @@ class GetAppAuthorizeSettingImpl {
   }
 
   getPhoneCalendarAuthorizeSetting() {
+    let write = false
+    let read = false
     const grantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.WRITE_CALENDAR')
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-      this.appAuthorizeSetting.phoneCalendarAuthorized = DENIED
+      this.appAuthorizeSetting.writePhoneCalendarAuthorized = DENIED
     }
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      this.appAuthorizeSetting.writePhoneCalendarAuthorized = AUTHORIZED
+      write = true
+    }
+    const readGrantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.READ_CALENDAR')
+    if (readGrantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+      this.appAuthorizeSetting.readPhoneCalendarAuthorized = DENIED
+    }
+    if (readGrantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      this.appAuthorizeSetting.readPhoneCalendarAuthorized = AUTHORIZED
+      read = true
+    }
+    if (write && read) {
       this.appAuthorizeSetting.phoneCalendarAuthorized = AUTHORIZED
+    } else {
+      this.appAuthorizeSetting.phoneCalendarAuthorized = DENIED
+    }
+  }
+
+  getPasteboardAuthorizedSetting() {
+    const grantStatus = this.atManager.checkAccessTokenSync(this.accessTokenId, 'ohos.permission.READ_PASTEBOARD')
+    if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+      this.appAuthorizeSetting.pasteboardAuthorized = DENIED
+    }
+    if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      this.appAuthorizeSetting.pasteboardAuthorized = AUTHORIZED
     }
   }
 }

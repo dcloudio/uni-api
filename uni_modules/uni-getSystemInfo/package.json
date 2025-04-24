@@ -31,35 +31,37 @@
     "npmurl": ""
   },
   "uni_modules": {
-    "dependencies": [],
-	"uni-ext-api": {
-		"uni": {
-			"getSystemInfo": {
-				"name": "getSystemInfo",
-				"app": {
-					"js": false,
-					"kotlin": true,
-					"swift": true
-				}
-			},
-			"getSystemInfoSync":{
-				"name": "getSystemInfoSync",
-				"app": {
-					"js": false,
-					"kotlin": true,
-					"swift": true
-				}
-			},
-			"getWindowInfo":{
-				"name": "getWindowInfo",
-				"app": {
-					"js": false,
-					"kotlin": true,
-					"swift": true
-				}
-			}
-		}
-	},
+    "dependencies": [
+      "uni-framework"
+    ],
+    "uni-ext-api": {
+      "uni": {
+        "getSystemInfo": {
+          "name": "getSystemInfo",
+          "app": {
+            "js": false,
+            "kotlin": true,
+            "swift": true
+          }
+        },
+        "getSystemInfoSync":{
+          "name": "getSystemInfoSync",
+          "app": {
+            "js": false,
+            "kotlin": true,
+            "swift": true
+          }
+        },
+        "getWindowInfo":{
+          "name": "getWindowInfo",
+          "app": {
+            "js": false,
+            "kotlin": true,
+            "swift": true
+          }
+        }
+      }
+    },
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -104,6 +106,7 @@
           "联盟": "u"
         }
       }
-    }
+    },
+    "treeShaking": false
   }
 }

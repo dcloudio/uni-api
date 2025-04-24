@@ -37,9 +37,9 @@
         "getFileSystemManager": {
           "name": "getFileSystemManager",
           "app": {
-            "js": true,
+            "js": false,
             "kotlin": true,
-            "swift": false,
+            "swift": true,
             "arkts": true
           }
         }

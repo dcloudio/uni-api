@@ -33,7 +33,7 @@ export class AppBaseInfoDeviceUtil {
 	public static getHostVersion(context : Context) : string {
 		let packageManager = context.getPackageManager();
 		let applicationInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
-		return applicationInfo.versionName;
+		return applicationInfo.versionName ?? "";
 	}
 
 	public static getHostCode(context : Context) : string {
@@ -81,7 +81,7 @@ export class AppBaseInfoDeviceUtil {
 			const packageManager = context.getPackageManager();
 			const info = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES) as PackageInfo;
 			let result = "";
-			info.signatures.forEach((value) => {
+			info.signatures?.forEach((value) => {
 				result = AppBaseInfoDeviceUtil.getSignatureString(value, "SHA1")
 			})
 			return result

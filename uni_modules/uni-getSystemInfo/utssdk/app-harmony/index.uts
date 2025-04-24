@@ -71,7 +71,7 @@ interface ISystemInfoAppVersion {
 }
 
 function internalGetSystemInfo(): GetSystemInfoResult {
-    const appVersion: ISystemInfoAppVersion = UTSHarmony.getAppVersion()
+    const appVersion = UTSHarmony.getAppVersion() as ISystemInfoAppVersion
     const appLanguage = I18n.System.getAppPreferredLanguage()
     const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion() as string
     const uniCompilerVersionCode: number = parseFloat(uniCompilerVersion)
@@ -114,9 +114,11 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         osTheme: UTSHarmony.getOsTheme() as string,
         osVersion: deviceInfo.majorVersion + '.' + deviceInfo.seniorVersion + '.' + deviceInfo.featureVersion + '.' + deviceInfo.buildVersion,
         osName: 'harmonyos',
-        romName: deviceInfo.distributionOSName, // TODO 应为此值，但实际上是空字符串，待确认
+        romName: deviceInfo.distributionOSName || 'HarmonyOS NEXT', // TODO 应为deviceInfo.distributionOSName，但实际上是空字符串，待确认
         romVersion: deviceInfo.distributionOSVersion,
         system: deviceInfo.osFullName,
+        osHarmonySDKAPIVersion: deviceInfo.sdkApiVersion,
+        osHarmonyDisplayVersion: deviceInfo.displayVersion,
 
         // windowInfo
         pixelRatio,
@@ -131,20 +133,20 @@ function internalGetSystemInfo(): GetSystemInfoResult {
         windowWidth,
 
         // other
-        SDKVersion: '',
-        browserName: '',
-        browserVersion: '',
-        ua: '',
+        // SDKVersion: '',
+        // browserName: '',
+        // browserVersion: '',
+        ua: UTSHarmony.getUserAgent(),
 
 
         // 已废弃，但是为了兼容性暂不修改interface定义，随便返回一个符合类型定义的值
         language: appLanguage,
         brand: deviceInfo.brand,
-        model: '',
+        // model: '',
         platform: 'harmonyos',
         uniCompileVersion: uniCompilerVersion,
         uniCompileVersionCode: uniCompilerVersionCode,
-        version: ''
+        // version: ''
 
     } as GetSystemInfoResult
 }

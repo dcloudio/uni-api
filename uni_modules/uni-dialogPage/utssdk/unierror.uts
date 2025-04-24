@@ -1,10 +1,11 @@
 import {
+    OpenDialogPageSuccess,
     OpenDialogPageFail,
     CloseDialogPageFail,
     RouteErrorCode,
 } from './interface.uts'
 
-export class OpenDialogPageSuccessImpl extends AsyncApiSuccessResult {
+export class OpenDialogPageSuccessImpl implements OpenDialogPageSuccess {
     override errMsg: string
     constructor(errMsg: string = 'openDialogPage: ok') {
         super()
@@ -13,9 +14,11 @@ export class OpenDialogPageSuccessImpl extends AsyncApiSuccessResult {
 }
 
 export class OpenDialogPageFailImpl extends UniError implements OpenDialogPageFail {
+    override errMsg: string
     override errCode: RouteErrorCode
     constructor(errMsg: string = '', errCode: RouteErrorCode = 4) {
-        super(errMsg)
+        super()
+        this.errMsg = errMsg
         this.errCode = errCode
     }
 }

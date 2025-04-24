@@ -15,6 +15,9 @@ export const AppThemeUniErrors : Map<AppThemeErrorCode, string> = new Map([
 ]);
 
 export class AppThemeFailImpl extends UniError implements IAppThemeFail {
+	// ifdef APP-HARMONY
+	override errCode: AppThemeErrorCode;
+	// endif
 	constructor(errCode : AppThemeErrorCode) {
 		super();
 		this.errSubject = AppThemeUniErrorSubject;

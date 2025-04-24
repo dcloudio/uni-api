@@ -15,6 +15,14 @@ import {
     OnSocketOpen,
     OnSocketClose,
     OnSocketError,
+    OnSocketOpenCallback,
+    OnSocketOpenCallbackResult,
+    OnSocketCloseCallback,
+    OnSocketCloseCallbackResult,
+    OnSocketErrorCallback,
+    OnSocketMessageCallback,
+    SendSocketMessageErrorCode,
+    SendSocketMessageFail,
 } from '../interface.uts'
 import {
     API_CONNECT_SOCKET,
@@ -36,7 +44,15 @@ export {
     CloseSocketOptions,
     OnSocketMessageCallbackResult,
     ConnectSocketSuccess,
-    OnSocketErrorCallbackResult
+    OnSocketErrorCallbackResult,
+    OnSocketOpenCallback,
+    OnSocketOpenCallbackResult,
+    OnSocketCloseCallback,
+    OnSocketCloseCallbackResult,
+    OnSocketErrorCallback,
+    OnSocketMessageCallback,
+    SendSocketMessageErrorCode,
+    SendSocketMessageFail,
 }
 
 interface IUniWebsocketEmitter {
@@ -67,6 +83,7 @@ function destroySocketTaskEmitter(emitter: IUniWebsocketEmitter) {
 }
 
 class SocketTask implements UniSocketTask {
+    __v_skip: boolean = true
     _destroy: Function
     private _ws: webSocket.WebSocket;
     private _emitter: IUniWebsocketEmitter = new Emitter() as IUniWebsocketEmitter
@@ -78,14 +95,14 @@ class SocketTask implements UniSocketTask {
                 data
             } as OnSocketMessageCallbackResult
             this._emitter.emit('message', message)
-            const socketTasks = getSocketTasks(mp.id)
+            const socketTasks = getSocketTasks(mp.appId)
             if (this === socketTasks[0]) {
                 GlobalWebsocketEmitter.emit('message', message)
             }
         })
         this._ws.on('open', (_, data) => {
             this._emitter.emit('open', data)
-            const socketTasks = getSocketTasks(mp.id)
+            const socketTasks = getSocketTasks(mp.appId)
             if (this === socketTasks[0]) {
                 GlobalWebsocketEmitter.emit('open', data)
             }
@@ -95,14 +112,14 @@ class SocketTask implements UniSocketTask {
                 errMsg: error.message
             } as OnSocketErrorCallbackResult
             this._emitter.emit('error', message)
-            const socketTasks = getSocketTasks(mp.id)
+            const socketTasks = getSocketTasks(mp.appId)
             if (this === socketTasks[0]) {
                 GlobalWebsocketEmitter.emit('error', message)
             }
         })
         this._ws.on('close', (_, data) => {
             this._emitter.emit('close', data)
-            const socketTasks = getSocketTasks(mp.id)
+            const socketTasks = getSocketTasks(mp.appId)
             if (this === socketTasks[0]) {
                 GlobalWebsocketEmitter.emit('close', data)
             }
@@ -169,7 +186,7 @@ function addSocketTask(task: SocketTask) {
     task.onClose(() => {
         mp.off('beforeClose', task._destroy)
     })
-    const id = mp.id
+    const id = mp.appId
     if (!socketTasksMap.has(id)) {
         socketTasksMap.set(id, [])
     }
@@ -180,7 +197,7 @@ function addSocketTask(task: SocketTask) {
 function getSocketTasks(id?: string) {
     if (!id) {
         const mp = getCurrentMP()
-        id = mp.id
+        id = mp.appId
     }
     return socketTasksMap.get(id!) || []
 }
@@ -204,6 +221,9 @@ export const connectSocket = defineTaskApi<ConnectSocketOptions, ConnectSocketSu
             mp.off('beforeClose', task._destroy)
         })
         addSocketTask(task)
+        exec.resolve({
+            errMsg: 'connectSocket:ok',
+        } as ConnectSocketSuccess)
         return task
     },
     ConnectSocketApiProtocol,

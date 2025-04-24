@@ -19,58 +19,58 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.25",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      * 	},
      *   "web": {
      *     "uniVer": "x",
      *     "unixVer": "x"
-     *   }
+     *   },
      *  "mp":{
-     *    weixin: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: '4.41'
+     *    "weixin": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "4.41"
      *    },
-     *    alipay: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: 'x'
+     *    "alipay": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
      *    },
-     *    baidu: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: 'x'
+     *    "baidu": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
      *    },
-     *    toutiao: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "toutiao": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    lark: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "lark": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    qq: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "qq": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    },
-     *    kuaishou: {
-     *      hostVer: '√',
-     *      uniVer: '√',
-     *      unixVer: 'x'
+     *    "kuaishou": {
+     *      "hostVer": "√",
+     *      "uniVer": "√",
+     *      "unixVer": "x"
      *    },
-     *    jd: {
-     *      hostVer: 'x',
-     *      uniVer: 'x',
-     *      unixVer: 'x'
+     *    "jd": {
+     *      "hostVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
      *    }
      *  }
      * }
      */
-    addPhoneContact: AddPhoneContact;
+    addPhoneContact(options: AddPhoneContactOptions): void;
 }
 
 export type AddPhoneContact = (options: AddPhoneContactOptions) => void;

@@ -1,6 +1,5 @@
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
-import { window } from '@kit.ArkUI';
-import { promptAction } from '@kit.ArkUI';
+import { uni } from '@dcloudio/uni-runtime'
 import { _chooseMedia, _ChooseMediaOptions } from './media.uts'
 import {
     ChooseImageOptions,
@@ -19,12 +18,26 @@ import {
 import { takePhoto } from './camera.uts'
 
 const errSubject = 'uni-chooseImage'
+interface ChooseImageShowActionSheetOptionsSuccessOptions {
+    tapIndex: number
+}
+
+interface ChooseImageShowActionSheetOptionsFailOptions {
+    errMsg: string
+}
+
+interface ChooseImageShowActionSheetOptions {
+    itemList: string[]
+    success?: (e: ChooseImageShowActionSheetOptionsSuccessOptions) => void | null
+    fail?: (e: ChooseImageShowActionSheetOptionsFailOptions) => void | null
+};
 
 const _chooseImage = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) => {
     _chooseMedia({
         mimeType: photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE,
         sourceType: ["album"],
-        isOriginalSupported: options.sizeType?.includes('original') !== false,
+        isOriginalSupported: options.sizeType ? options.sizeType.includes('original') && options.sizeType.includes('compressed') : true,
+        original: options.sizeType ? options.sizeType.length === 1 && options.sizeType[0] === 'original' : false,
         count: options.count!,
     } as _ChooseMediaOptions)
         .then((chooseMediaRes) => {
@@ -54,7 +67,7 @@ const _chooseImage = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageS
 }
 
 const _takePhoto = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuccess>) => {
-    takePhoto().then(photo => {
+    takePhoto(errSubject).then(photo => {
         res.resolve({
             errMsg: '',
             errSubject,
@@ -62,7 +75,7 @@ const _takePhoto = (options: ChooseImageOptions, res: ApiExecutor<ChooseImageSuc
             tempFiles: photo.tempFiles.map((tempFile): ChooseImageTempFile => ({ path: tempFile.tempFilePath, size: tempFile.size } as ChooseImageTempFile))
         } as ChooseImageSuccess)
     }).catch((err: Error) => {
-        res.reject(err.message)
+        res.reject(err.message, err as ApiError)
     })
 }
 
@@ -75,30 +88,23 @@ export const chooseImage: ChooseImage =
             } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
                 _chooseImage(options, res)
             } else {
-                const lastWindow = UTSHarmony.getCurrentWindow() as window.Window
-                const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
-                UIContextPromptAction.showActionMenu({
-                    buttons: [
-                        {
-                            text: '拍照',
-                            color: '#000000'
-                        },
-                        {
-                            text: '从相册选择',
-                            color: '#000000'
-                        }
-                    ],
-                } as promptAction.ActionMenuOptions, (err, { index }) => {
-                    if (err) {
-                        res.reject('cancel')
-                    } else {
-                        if (index === 0) {
+                uni.showActionSheet({
+                    itemList: ['拍摄', '从相册选择'],
+                    success: (e) => {
+                        if (e.tapIndex === 0) {
                             _takePhoto(options, res)
-                        } else if (index === 1) {
+                        } else if (e.tapIndex === 1) {
                             _chooseImage(options, res)
                         }
+                    },
+                    fail: (e) => {
+                        if (e.errMsg.includes('cancel')) {
+                            res.reject('cancel')
+                        } else {
+                            res.reject()
+                        }
                     }
-                })
+                } as ChooseImageShowActionSheetOptions)
             }
         },
         ChooseImageApiProtocol,

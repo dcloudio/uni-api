@@ -1,3 +1,4 @@
+// #ifndef UNI-APP-X
 import Dialog from 'android.app.Dialog';
 import Context from 'android.content.Context';
 import R from 'io.dcloud.uts.prompt.R';
@@ -10,11 +11,11 @@ import Color from 'android.graphics.Color';
 import { ShowModalOptions,ShowModalSuccess,ShowModalFail} from '../interface.uts'
 import TextUtils from 'android.text.TextUtils';
 
-// #ifdef UNI-APP-X
-import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
-import onReady from 'io.dcloud.uniapp.framework.onReady';
-import onUnload from 'io.dcloud.uniapp.framework.onUnload';
-// #endif
+// // #ifdef UNI-APP-X
+// import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
+// import onReady from 'io.dcloud.uniapp.framework.onReady';
+// import onUnload from 'io.dcloud.uniapp.framework.onUnload';
+// // #endif
 
 
 class UTSDialog extends Dialog implements View.OnClickListener {
@@ -232,68 +233,68 @@ export function showModalImpl(style:ShowModalOptions){
 	
 	
 	
-	// #ifndef UNI-APP-X
-		/**
-		 * uni-app
-		 */
-		if(UTSAndroid.getTopPageActivity() == null){
-			return 
-		}
-		if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-			return 
-		}
-		utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
-		utsDialog?.initStyle(style)
-		utsDialog?.show();
+	// // #ifndef UNI-APP-X
+	// 	/**
+	// 	 * uni-app
+	// 	 */
+	// 	if(UTSAndroid.getTopPageActivity() == null){
+	// 		return 
+	// 	}
+	// 	if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+	// 		return 
+	// 	}
+	// 	utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+	// 	utsDialog?.initStyle(style)
+	// 	utsDialog?.show();
 		
-		UTSAndroid.onAppActivityDestroy(function(){
-			utsDialog?.dismiss()
-			utsDialog = null
-		})
+	// 	UTSAndroid.onAppActivityDestroy(function(){
+	// 		utsDialog?.dismiss()
+	// 		utsDialog = null
+	// 	})
 		
-	// #endif
-	// #ifdef UNI-APP-X
-		/**
-		 * uni-app x
-		 * 需要特殊处理生命周期 
-		 */
-		const pages = getCurrentPages();
-		if (pages.length > 0) {
-			const page = pages[pages.length - 1].vm!
-			const instance = page.$
-			if (page.$isReady) {
-				if(UTSAndroid.getTopPageActivity() == null){
-					return 
-				}
-				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-					return 
-				}
-				utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
-				utsDialog?.initStyle(style)
-		        utsDialog?.show();
-		    } else {
-		        onReady(() => {
-					if(UTSAndroid.getTopPageActivity() == null){
-						return 
-					}
-					if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-						return 
-					}
-					utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
-					utsDialog?.initStyle(style)
-		            utsDialog?.show();
-		        }, instance)
-		    }
+	// // #endif
+	// // #ifdef UNI-APP-X
+	// 	/**
+	// 	 * uni-app x
+	// 	 * 需要特殊处理生命周期 
+	// 	 */
+	// 	const pages = getCurrentPages();
+	// 	if (pages.length > 0) {
+	// 		const page = pages[pages.length - 1].vm!
+	// 		const instance = page.$
+	// 		if (page.$isReady) {
+	// 			if(UTSAndroid.getTopPageActivity() == null){
+	// 				return 
+	// 			}
+	// 			if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+	// 				return 
+	// 			}
+	// 			utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+	// 			utsDialog?.initStyle(style)
+	// 	        utsDialog?.show();
+	// 	    } else {
+	// 	        onReady(() => {
+	// 				if(UTSAndroid.getTopPageActivity() == null){
+	// 					return 
+	// 				}
+	// 				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+	// 					return 
+	// 				}
+	// 				utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+	// 				utsDialog?.initStyle(style)
+	// 	            utsDialog?.show();
+	// 	        }, instance)
+	// 	    }
 		    
-			onUnload(() => {
-				utsDialog?.dismiss()
-				utsDialog = null
-			}, instance)
+	// 		onUnload(() => {
+	// 			utsDialog?.dismiss()
+	// 			utsDialog = null
+	// 		}, instance)
 			
 		    
-		}
-	// #endif
-	
-	
+	// 	}
+	// // #endif
 	
 }
+
+// #endif

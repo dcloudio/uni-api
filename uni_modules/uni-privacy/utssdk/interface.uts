@@ -20,9 +20,9 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -60,9 +60,9 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -97,9 +97,9 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -186,9 +186,9 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -231,9 +231,9 @@ export type PrivacyChangeResult = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -273,9 +273,9 @@ export type GetPrivacySettingSuccessResult = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -351,9 +351,9 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -427,9 +427,9 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {
@@ -503,9 +503,9 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "x",
+          "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "mp": {

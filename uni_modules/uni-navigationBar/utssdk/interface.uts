@@ -24,9 +24,9 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
+     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -102,9 +102,9 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
+     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -169,7 +169,12 @@ export type SetNavigationBarColorOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -233,7 +238,12 @@ export type SetNavigationBarColorOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -297,7 +307,12 @@ export type SetNavigationBarColorOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -393,9 +408,9 @@ export type SetNavigationBarTitleOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
+     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -469,7 +484,12 @@ export type SetNavigationBarTitleOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -533,7 +553,12 @@ export type SetNavigationBarTitleOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -597,7 +622,12 @@ export type SetNavigationBarTitleOptions = {
      *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -721,9 +751,9 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
+     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -797,9 +827,9 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
+     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -874,7 +904,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -925,7 +955,7 @@ export interface Uni {
      *  }
      * }
      */
-    showNavigationBarLoading: ShowNavigationBarLoading;
+    showNavigationBarLoading(options?: ShowNavigationBarLoadingOptions | null): void
 
     /**
      * 隐藏导航条加载动画
@@ -947,7 +977,7 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -998,5 +1028,5 @@ export interface Uni {
      *  }
      * }
      */
-    hideNavigationBarLoading: HideNavigationBarLoading;
+    hideNavigationBarLoading(options?: HideNavigationBarLoadingOptions | null): void
 }

@@ -1,4 +1,4 @@
-import { getCurrentPage, navigator } from '@dcloudio/uni-runtime';
+import { navigator } from '@dcloudio/uni-runtime';
 import { HideNavigationBarLoading, HideNavigationBarLoadingOptions, HideNavigationBarLoadingSuccess, SetNavigationBarColor, SetNavigationBarColorOptions, SetNavigationBarColorSuccess, SetNavigationBarTitle, SetNavigationBarTitleOptions, SetNavigationBarTitleSuccess, ShowNavigationBarLoading, ShowNavigationBarLoadingOptions, ShowNavigationBarLoadingSuccess } from '../interface.uts';
 import { API_SET_NAVIGATION_BAR_COLOR, API_SET_NAVIGATION_BAR_TITLE, SetNavigationBarColorProtocol, SetNavigationBarTitleProtocol } from '../protocol.uts';
 
@@ -39,48 +39,34 @@ const getWebview = (page: Page): Webview | null => {
 export const setNavigationBarColor: SetNavigationBarColor =
   defineAsyncApi<SetNavigationBarColorOptions, SetNavigationBarColorSuccess>(
     API_SET_NAVIGATION_BAR_COLOR,
-    (
-      args: SetNavigationBarColorOptions,
-      executor: ApiExecutor<SetNavigationBarColorSuccess>
-    ) => {
-      const page = getCurrentPage() as Page
+    (options: SetNavigationBarColorOptions, executor: ApiExecutor<SetNavigationBarColorSuccess>) => {
+      const { frontColor, backgroundColor } = options
+      const pages = globalThis.getCurrentPages() as UniPageImpl[]
+      const page = (pages[pages.length - 1])
       if (!page) {
         return executor.reject(`getCurrentPages is empty`)
       }
-      const webview = getWebview(page)
-      if (webview) {
-        const styles: PlusWebviewWebviewTitleNViewStyles = {}
-        if (args.frontColor) {
-          styles.titleColor = args.frontColor
-        }
-        if (args.backgroundColor) {
-          styles.backgroundColor = args.backgroundColor
-        }
-        const statusBarStyle = args.frontColor === '#000000' ? 'dark' : 'light'
-        try { navigator.setStatusBarStyle(statusBarStyle) } catch (error) { }
 
-        // 用户调用api时同时改变当前页配置，这样在系统调用设置时，可以避免覆盖用户设置
-        page.$page.statusBarStyle = statusBarStyle
+      const statusBarStyle = frontColor === '#000000' ? 'dark' : 'light'
+      try { navigator.setStatusBarStyle(statusBarStyle) } catch (error) { }
 
-        const style = webview.getStyle()
-        if (style && style.titleNView) {
-          if (style.titleNView.autoBackButton) {
-            styles.backButton = styles.backButton || {}
-            styles.backButton.color = args.frontColor
-          }
-          webview.setStyle({
-            titleNView: styles as TitleNView,
-          } as PlusWebviewWebviewTitleNViewStyles)
-        }
-        executor.resolve()
-      } else {
-        executor.reject()
-      }
+      const appPage: ESObject = (page.vm as ESObject).$nativePage
+
+      appPage!.updateStyle(
+        new Map<string, any | null>([
+          [
+            'navigationBarTextStyle',
+            frontColor == '#000000' ? 'black' : 'white',
+          ],
+          ['navigationBarBackgroundColor', backgroundColor],
+        ])
+      )
+      executor.resolve()
     },
     SetNavigationBarColorProtocol
   ) as SetNavigationBarColor
 
-
+// NOTE x 和 非 x 都不使用
 export const setNavigationBarTitle: SetNavigationBarTitle =
   defineAsyncApi<SetNavigationBarTitleOptions, SetNavigationBarTitleSuccess>(
     API_SET_NAVIGATION_BAR_TITLE,
@@ -111,26 +97,21 @@ export const setNavigationBarTitle: SetNavigationBarTitle =
 export const showNavigationBarLoading: ShowNavigationBarLoading =
   defineAsyncApi<ShowNavigationBarLoadingOptions, ShowNavigationBarLoadingSuccess>(
     API_SET_NAVIGATION_BAR_TITLE,
-    (args: ShowNavigationBarLoadingOptions, executor: ApiExecutor<ShowNavigationBarLoadingSuccess>) => {
-      const page = getCurrentPage() as Page
+    (options: ShowNavigationBarLoadingOptions, executor: ApiExecutor<ShowNavigationBarLoadingSuccess>) => {
+      const pages = globalThis.getCurrentPages() as UniPageImpl[]
+      const page = (pages[pages.length - 1])
       if (!page) {
         return executor.reject(`getCurrentPages is empty`)
       }
 
-      const webview = getWebview(page)
-      if (webview) {
-        const style = webview.getStyle()
-        if (style && style.titleNView) {
-          webview.setStyle({
-            titleNView: {
-              loading: true,
-            } as TitleNView,
-          } as PlusWebviewWebviewTitleNViewStyles)
-        }
-        executor.resolve()
-      } else {
-        executor.reject()
-      }
+      const appPage: ESObject = (page.vm as ESObject).$nativePage
+
+      appPage!.updateStyle(
+        new Map<string, any | null>([
+          ['navigationBarLoading', true]
+        ])
+      )
+      executor.resolve()
     }
   ) as ShowNavigationBarLoading
 
@@ -138,24 +119,19 @@ export const hideNavigationBarLoading: HideNavigationBarLoading =
   defineAsyncApi<HideNavigationBarLoadingOptions, HideNavigationBarLoadingSuccess>(
     API_SET_NAVIGATION_BAR_TITLE,
     (args: HideNavigationBarLoadingOptions, executor: ApiExecutor<HideNavigationBarLoadingSuccess>) => {
-      const page = getCurrentPage() as Page
+      const pages = globalThis.getCurrentPages() as UniPageImpl[]
+      const page = (pages[pages.length - 1])
       if (!page) {
         return executor.reject(`getCurrentPages is empty`)
       }
 
-      const webview = getWebview(page)
-      if (webview) {
-        const style = webview.getStyle()
-        if (style && style.titleNView) {
-          webview.setStyle({
-            titleNView: {
-              loading: false,
-            } as TitleNView,
-          } as PlusWebviewWebviewTitleNViewStyles)
-        }
-        executor.resolve()
-      } else {
-        executor.reject()
-      }
+      const appPage: ESObject = (page.vm as ESObject).$nativePage
+
+      appPage!.updateStyle(
+        new Map<string, any | null>([
+          ['navigationBarLoading', false]
+        ])
+      )
+      executor.resolve()
     }
   ) as HideNavigationBarLoading

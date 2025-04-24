@@ -20,7 +20,7 @@ export interface Uni {
     *    "harmony": {
     *      "osVer": "3.0",
     *      "uniVer": "4.31",
-    *      "unixVer": "x"
+    *      "unixVer": "4.61"
     *    }
       * 	},
        *  "mp": {
@@ -487,11 +487,130 @@ export type GetAppAuthorizeSettingResult = {
      */
     'authorized' |
     /**
+     * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+     */
+    'denied' |
+    /**
+     *  尚未请求授权，会在App下一次调用系统相应权限时请求；
+     */
+    'not determined' |
+    /**
+     * 当前应用没有配置推送权限描述
+     */
+    'config error' | null,
+    /**
+     * 允许读日历的开关（仅鸿蒙支持）
+     *
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+       *    "harmony": {
+       *      "osVer": "5.0.0",
+       *      "uniVer": "4.61",
+       *      "unixVer": "4.61"
+       *    }
+     * 	}
+     * }
+     */
+    readPhoneCalendarAuthorized?:
+    /**
+     * 已经获得授权，无需再次请求授权
+     */
+    'authorized' |
+    /**
+     * 请求授权被拒绝，无法再次请求授权。Android平台：需要申请相册相关权限；iOS平台：此情况需要引导用户打开系统设置，在设置页中打开权限
+     */
+    'denied' |
+    /**
+     *  尚未请求授权，会在App下一次调用系统相应权限时请求；
+     */
+    'not determined' |
+    /**
+     * 当前应用没有配置推送权限描述
+     */
+    'config error' | null,
+    /**
+     * 允许写日历的开关（仅鸿蒙支持）
+     *
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+       *    "harmony": {
+       *      "osVer": "5.0.0",
+       *      "uniVer": "4.61",
+       *      "unixVer": "4.61"
+       *    }
+     * 	}
+     * }
+     */
+    writePhoneCalendarAuthorized?:
+    /**
+     * 已经获得授权，无需再次请求授权
+     */
+    'authorized' |
+    /**
      * 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
      */
     'denied' |
     /**
-     * 尚未请求授权，会在App下一次调用系统相应权限时请求；（仅 iOS 会出现。此种情况下引导用户打开系统设置，不展示开关）
+     * 尚未请求授权，会在App下一次调用系统相应权限时请求；
+     */
+    'not determined' | null,
+    /**
+     * 允许读取剪切版（仅鸿蒙支持）
+     *
+     * @uniPlatform
+     * {
+     * 	"app": {
+     * 		"android": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+     * 		"ios": {
+     * 			"osVer": "x",
+     * 			"uniVer": "x",
+     * 			"unixVer": "x"
+     * 		},
+       *    "harmony": {
+       *      "osVer": "5.0.0",
+       *      "uniVer": "4.61",
+       *      "unixVer": "4.61"
+       *    }
+     * 	}
+     * }
+     */
+    pasteboardAuthorized?:
+    /**
+     * 已经获得授权，无需再次请求授权
+     */
+    'authorized' |
+    /**
+     * 请求授权被拒绝，无法再次请求授权；（此情况需要引导用户打开系统设置，在设置页中打开权限）
+     */
+    'denied' |
+    /**
+     * 尚未请求授权，会在App下一次调用系统相应权限时请求；
      */
     'not determined' | null
 };

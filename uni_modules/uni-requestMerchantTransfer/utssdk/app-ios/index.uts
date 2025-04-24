@@ -60,7 +60,7 @@ class WxpayManager implements WXApiDelegate {
 				scheme = wechat!['appid'] as string | null
 			}
 		}
-
+		
 		return scheme
 	}
 
@@ -156,7 +156,7 @@ class WxpayManager implements WXApiDelegate {
 	onResp(resp : BaseResp) {
 		if (resp instanceof WXOpenBusinessViewResp) {
 			let resp = resp as WXOpenBusinessViewResp
-
+			
 			if (resp.extMsg?.includes("cancel") == true) {
 				var res : RequestMerchantTransferGeneralCallbackResult = {
 					errMsg: '用户取消'

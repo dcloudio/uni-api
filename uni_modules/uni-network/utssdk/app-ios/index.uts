@@ -1,4 +1,4 @@
-import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask, UploadFileOptions, UploadFile, UploadTask, OnProgressUpdateResult, UploadFileSuccess, UploadFileProgressUpdateCallback, DownloadFileProgressUpdateCallback, DownloadFileOptions, OnProgressDownloadResult, DownloadFile, DownloadFileSuccess } from './interface';
+import { Request, RequestOptions, RequestSuccess, RequestFail, RequestTask, UploadFileOptions, UploadFile, UploadTask, OnProgressUpdateResult, UploadFileSuccess, UploadFileProgressUpdateCallback, DownloadFileProgressUpdateCallback, DownloadFileOptions, OnProgressDownloadResult, DownloadFile, DownloadFileSuccess } from '../interface';
 import { NetworkManager, NetworkRequestListener, NetworkUploadFileListener, NetworkDownloadFileListener } from './network/NetworkManager.uts'
 import { Data, HTTPURLResponse, NSError, NSNumber, ComparisonResult, RunLoop, Thread, JSONSerialization } from 'Foundation';
 import { StatusCode } from './network/StatusCode.uts';
@@ -10,7 +10,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 	private received : number = 0;
 	private data : Data = new Data();
 	@UTSiOS.keyword("weak")
-	public override task: AnyObject | null = null;
+	public override task : AnyObject | null = null;
 	constructor(param : RequestOptions<T>) {
 		this.param = param;
 		super();
@@ -76,7 +76,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 			complete?.(tmp);
 		} catch (e) {
 		}
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}
@@ -103,7 +103,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 		let complete = kParam?.complete;
 		fail?.(failResult);
 		complete?.(failResult);
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}
@@ -131,7 +131,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				if (dataStr == null || dataStr!.length == 0) {
 					return {};
 				}
-				
+
 				return this.tryParseJson(data!, dataStr!);
 			} else if (parseType == 'jsonp') {
 				if (dataStr == null || dataStr!.length == 0) {
@@ -145,6 +145,11 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				start += 1;
 				let tmp = dataStr!.slice(start, end);
 				return this.tryParseJson(data!, tmp);
+			} else if (parseType == 'arraybuffer') {
+				if (data == null) {
+					return data;
+				}
+				return ArrayBuffer.fromData(data!)
 			} else {
 				//dataStr如果解码失败是空的时候，还需要继续尝试解码。极端情况，服务器不是utf8的，所以字符解码会出现乱码，所以特殊处理一下非utf8的字符。
 				if (data == null) {
@@ -176,18 +181,18 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 			return JSON.parse<T>(dataStr!)
 		}
 	}
-	
+
 	/**
 	 * 尝试进行json解析，如果失败了就说明不是json数据
 	 */
-	private tryParseJson(data: Data, jsonStr: string): any | null{
-		let jsonData: any | null = null;
-		try{
+	private tryParseJson(data : Data, jsonStr : string) : any | null {
+		let jsonData : any | null = null;
+		try {
 			const res = UTSiOS.try(JSONSerialization.jsonObject(with = data, options = JSONSerialization.ReadingOptions.allowFragments), "?")
-			if(res != null){
+			if (res != null) {
 				jsonData = JSON.parse(jsonStr)
 			}
-		}catch(e){
+		} catch (e) {
 		}
 		return jsonData;
 	}
@@ -227,7 +232,7 @@ class UploadNetworkListener extends NetworkUploadFileListener {
 	public override progressListeners : Array<UploadFileProgressUpdateCallback> = [];
 	private data : Data = new Data();
 	@UTSiOS.keyword("weak")
-	public override task: AnyObject | null = null;
+	public override task : AnyObject | null = null;
 
 	constructor(param : UploadFileOptions) {
 		this.param = param;
@@ -270,7 +275,7 @@ class UploadNetworkListener extends NetworkUploadFileListener {
 		} catch (e) {
 		}
 		this.progressListeners.splice(0, this.progressListeners.length)
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}
@@ -297,7 +302,7 @@ class UploadNetworkListener extends NetworkUploadFileListener {
 		fail?.(failResult);
 		complete?.(failResult);
 		this.progressListeners.splice(0, this.progressListeners.length)
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}
@@ -325,7 +330,7 @@ class DownloadNetworkListener extends NetworkDownloadFileListener {
 	public override progressListeners : Array<DownloadFileProgressUpdateCallback> = [];
 	private data : Data = new Data();
 	@UTSiOS.keyword("weak")
-	public override task: AnyObject | null = null;
+	public override task : AnyObject | null = null;
 
 	constructor(options : DownloadFileOptions) {
 		super();
@@ -355,7 +360,7 @@ class DownloadNetworkListener extends NetworkDownloadFileListener {
 		} catch (e) {
 		}
 		this.progressListeners.splice(0, this.progressListeners.length)
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}
@@ -385,7 +390,7 @@ class DownloadNetworkListener extends NetworkDownloadFileListener {
 		fail?.(failResult);
 		complete?.(failResult);
 		this.progressListeners.splice(0, this.progressListeners.length)
-		if(this.task != null){
+		if (this.task != null) {
 			UTSiOS.destroyInstance(this.task!);
 		}
 	}

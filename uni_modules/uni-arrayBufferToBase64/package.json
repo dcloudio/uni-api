@@ -5,7 +5,7 @@
   "description": "uni-arrayBufferToBase64",
   "keywords": [
     "uni-arrayBufferToBase64"
-],
+  ],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.6.8"
@@ -38,9 +38,9 @@
           "name": "arrayBufferToBase64",
           "app": {
             "js": false,
-            "kotlin": false,
+            "kotlin": true,
             "swift": false,
-            "arkts": false
+            "arkts": true
           }
         }
       }
@@ -89,6 +89,7 @@
           "联盟": "u"
         }
       }
-    }
+    },
+    "treeShaking": false
   }
 }

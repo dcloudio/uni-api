@@ -1,7 +1,8 @@
-import { ChooseFile, ChooseFileOptions, ChooseFileSuccess, ChooseImageOptions, ChooseVideoOptions, ChooseVideoSuccess, IMediaError } from '../../interface.uts';
+import { ChooseFile, ChooseFileTempFile, ChooseFileOptions, ChooseFileSuccess, ChooseImageOptions, ChooseImageSuccess, ChooseVideoOptions, ChooseVideoSuccess, IMediaError } from '../../interface.uts';
 import { API_CHOOSE_FILE, ChooseFileApiOptions, ChooseFileApiProtocol } from '../../protocol.uts';
 import { chooseImage } from './chooseImage.uts';
 import { chooseVideo } from './chooseVideo.uts';
+import { getMimeTypeFromExtension } from './media.uts';
 
 import { BusinessError } from '@kit.BasicServicesKit';
 import { picker, fileIo } from '@kit.CoreFileKit';
@@ -52,22 +53,16 @@ const VIDEOS: string[] = [
     "wvx"
 ]
 
-interface IFile {
-    path: string,
-    size: number,
-    name: string,
-    type: string
-}
-
 function getFile(url: string) {
     const file = fileIo.openSync(url, fileIo.OpenMode.READ_ONLY)
     const size = fileIo.statSync(file.fd).size
+    const ext = file.name.split('.').pop()!
     return {
         path: url,
         name: file.name,
         size,
-        type: file.name.split('.').pop()!
-    } as IFile
+        type: getMimeTypeFromExtension(ext) ?? ext
+    } as ChooseFileTempFile
 }
 
 export const chooseFile: ChooseFile = defineAsyncApi<ChooseFileOptions, ChooseFileSuccess>(
@@ -77,10 +72,10 @@ export const chooseFile: ChooseFile = defineAsyncApi<ChooseFileOptions, ChooseFi
             if (args.type === 'image') {
                 chooseImage({
                     sourceType: args.sourceType,
-                    success(res: ChooseFileSuccess) {
+                    success(res: ChooseImageSuccess) {
                         executor.resolve({
                             tempFilePaths: res.tempFilePaths,
-                            tempFiles: res.tempFilePaths.map((url): IFile => getFile(url))
+                            tempFiles: res.tempFilePaths.map((url): ChooseFileTempFile => getFile(url))
                         } as ChooseFileSuccess)
                     },
                     fail(err: IMediaError) {
@@ -119,7 +114,7 @@ export const chooseFile: ChooseFile = defineAsyncApi<ChooseFileOptions, ChooseFi
 
                 documentPicker.select(documentSelectOptions)
                     .then((documentSelectResult: Array<string>) => {
-                        let tempFiles = documentSelectResult.map((url): IFile => getFile(url))
+                        let tempFiles = documentSelectResult.map((url): ChooseFileTempFile => getFile(url))
                         if (tempFiles.length !== 0) {
                             executor.resolve({
                                 tempFilePaths: documentSelectResult,

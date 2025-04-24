@@ -5,11 +5,9 @@
     "UNUSED_ANONYMOUS_PARAMETER"
 )
 
-package uts.sdk.modules.DCloudUniGetBackgroundAudioManager;
+package uts.sdk.modules.uniGetBackgroundAudioManager;
 
-import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
 import android.net.Uri
 import android.util.Log
 import android.webkit.CookieManager
@@ -44,6 +42,9 @@ import io.dcloud.uts.times
 import io.dcloud.uts.utsArrayOf
 import java.io.File
 import java.io.IOException
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
+import com.google.android.exoplayer2.metadata.Metadata;
+import android.text.TextUtils;
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -68,8 +69,7 @@ object CacheManager {
     }
 }
 
-open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
-    AudioManager.OnAudioFocusChangeListener {
+open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     open var _src: String = "";
     private var cacheDataSourceFactory: CacheDataSource.Factory? = null
     private var TAG = "BackgroundAudioPlayer"
@@ -130,12 +130,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
             cacheDataSourceFactory?.setUpstreamDataSourceFactory(httpDataSourceFactory)
                 ?.setCache(CacheManager.getSimpleCache())
                 ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
-            cacheDataSourceFactory?.let {
-                this.player.setMediaSource(
-                    ProgressiveMediaSource.Factory(it)
-                        .createMediaSource(mediaItem)
-                )
-            }
+			val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
+			if(cacheDataSourceFactory != null && this._cache == true) {
+			cacheDataSourceFactory?.let {
+				defaultMediaSource.setDataSourceFactory(it)
+			}
+			}
+			this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
         } else {
             this.player.setMediaItem(mediaItem);
         }
@@ -158,7 +159,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override var duration: Number
         get(): Number {
             if (this.player.playbackState == Player.STATE_READY || this.player.playbackState == Player.STATE_ENDED) {
-                return this.player.duration / 1000;
+                return this.player.duration.toDouble() / 1000;
             } else {
                 return 0;
             }
@@ -166,10 +167,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         set(_) {}
     override var currentTime: Number
         get(): Number {
-            if (this.player.isPlaying) {
-                return this.player.currentPosition / 1000;
-            }
-            return 0;
+            return this.player.currentPosition.toDouble() / 1000;
         }
         set(currentTime) {
             val positionInMillis = (currentTime.toDouble() * 1000).toLong()
@@ -182,7 +180,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         set(_) {}
     override var buffered: Number
         get(): Number {
-            return this.player.bufferedPosition;
+            return this.player.bufferedPosition / 1000f;
         }
         set(_) {}
     open var _playbackRate: Number = 1.0;
@@ -203,6 +201,16 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                 this.player.setPlaybackSpeed(rate!!.toFloat());
             }
         }
+	open var _cache = true
+	override var cache = true
+		set(cach) {
+			this._cache = cach
+			if(!this.player.isPlaying && !this.isPausedByUser && !this.player.isLoading) {
+	            if(!TextUtils.isEmpty(this._src)) {
+	                this.changeSRC(this._src)
+	            }
+	        }
+		}
     override var title = "";
     override var epname = "";
     override var singer = "";
@@ -215,23 +223,23 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     private var errorCallBack: ((result: ICreateBackgroundAudioFail) -> Unit)? = null
     open var isPausedByUser: Boolean = false;
     open var isSeeking: Boolean = false;
-    open var audioManager: AudioManager;
+    private var audioFocusHelper: AudioFocusHelper? = null
 
 
     constructor() {
         // 创建 CacheDataSourceFactory
         cacheDataSourceFactory = CacheDataSource.Factory()
-
+        audioFocusHelper = AudioFocusHelper(UTSAndroid.getAppContext()!!,this)
+        audioFocusHelper?.requestAudioFocus()
         this.player = ExoPlayer.Builder(UTSAndroid.getAppContext()!!).build();
         this.player.addListener(this);
-        this.audioManager =
-            UTSAndroid.getAppContext()!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager;
     }
 
     private fun stopPlayService() {
         UTSAndroid.getAppContext()
             ?.stopService(Intent(UTSAndroid.getAppContext(), AudioService::class.java))
     }
+
     fun playInService() {
         try {
             if (this._src == "") {
@@ -263,7 +271,6 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
             }
             errorCallBack?.invoke(fail)
         }
-        this.registerAudioManager();
     }
 
     override fun play() {
@@ -283,8 +290,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override fun pause() {
         this.isPausedByUser = true;
         this.player.playWhenReady = false;
-        this.player.pause();
-        this.unregisterAudioManager();
+        this.player.pause()
         invokeCallBack("pause")
         AudioService.audioService?.pause()
     }
@@ -303,7 +309,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
         this.isPausedByUser = true;
         this.player.playWhenReady = false;
         this.player.stop();
-        this.unregisterAudioManager();
+        audioFocusHelper?.abandonAudioFocus()
         invokeCallBack("stop")
         stopPlayService()
     }
@@ -315,28 +321,6 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
             invokeCallBack("seeking")
         }
     }
-
-    @Suppress("DEPRECATION")
-    open fun registerAudioManager() {
-        this.audioManager.requestAudioFocus(
-            this,
-            AudioManager.STREAM_MUSIC,
-            AudioManager.AUDIOFOCUS_GAIN
-        );
-    }
-
-    @Suppress("DEPRECATION")
-    open fun unregisterAudioManager() {
-        this.audioManager.abandonAudioFocus(this);
-    }
-
-    override fun onAudioFocusChange(focusChange: Int) {
-        if (focusChange == AudioManager.AUDIOFOCUS_LOSS || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-            this.pause();
-        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-        }
-    }
-
     open fun addEvent(action: String, callback: EventCallback) {
         this.callbacks[action] = callback
     }
@@ -348,9 +332,11 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override fun onCanplay(callback: EventCallback) {
         this.addEvent("canplay", callback);
     }
+
     override fun onPlay(callback: EventCallback) {
         this.addEvent("play", callback);
     }
+
     override fun onPause(callback: EventCallback) {
         this.addEvent("pause", callback);
     }
@@ -358,8 +344,17 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override fun onStop(callback: EventCallback) {
         this.addEvent("stop", callback);
     }
+
     override fun onEnded(callback: EventCallback) {
         this.addEvent("ended", callback);
+    }
+
+    override fun onSeeking(callback: (result: Any) -> Unit) {
+        this.addEvent("seeking", callback);
+    }
+
+    override fun onSeeked(callback: (result: Any) -> Unit) {
+        this.addEvent("seeked", callback);
     }
 
     override fun onTimeUpdate(callback: EventCallback) {
@@ -399,12 +394,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     }
 
     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-        Log.d(TAG, "onPlayerStateChanged $playWhenReady $playbackState")
+        Log.d(TAG, "onPlayerStateChanged $playWhenReady $playbackState $isPausedByUser")
         if (playbackState == Player.STATE_BUFFERING) {
             invokeCallBack("waiting")
         } else if (playbackState == Player.STATE_READY) {
             if (!this.isPausedByUser && this.isSeeking) {
                 this.isSeeking = false;
+                AudioService.audioService?.notifyChange()
                 invokeCallBack("seeked")
             } else {
                 invokeCallBack("canplay")
@@ -414,7 +410,9 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                 }
             }
         } else if (playbackState == Player.STATE_ENDED) {
-            invokeCallBack("ended")
+            if (playWhenReady){
+                invokeCallBack("ended")
+            }
             AudioService.audioService?.onEnd()
             this.player.playWhenReady = false
             this.player.seekTo(0)
@@ -422,6 +420,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     }
 
     override fun onPlayerError(error: PlaybackException) {
+        error.printStackTrace()
         var fail = CreateBackgroundAudioFailImpl(1107605)
         error.message?.let {
             fail.errMsg = it
@@ -437,14 +436,16 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
                         fail.errMsg = it
                     }
                 } else {
-                    val message = sourceException.message as String;
-                    if (message.includes("None of the available extractors")) {
-                        fail = CreateBackgroundAudioFailImpl(1107604)
-                        fail.errMsg = message
-                    } else {
-                        fail = CreateBackgroundAudioFailImpl(1107603)
-                        fail.errMsg = message
-                    }
+                    sourceException.message?.let {
+						if (it.includes("None of the available extractors")) {
+						    fail = CreateBackgroundAudioFailImpl(1107604)
+						    fail.errMsg = it
+						} else {
+						    fail = CreateBackgroundAudioFailImpl(1107603)
+						    fail.errMsg = it
+						}
+					}
+                    
                 }
             }
         }
@@ -469,6 +470,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener,
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {}
     override fun onPlayerErrorChanged(error: PlaybackException?) {}
     override fun onPositionDiscontinuity(reason: Int) {}
+	override fun onMetadata(metadata:Metadata) {}
     override fun onPositionDiscontinuity(
         oldPosition: Player.PositionInfo,
         newPosition: Player.PositionInfo,

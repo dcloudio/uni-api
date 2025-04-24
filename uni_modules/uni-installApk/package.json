@@ -1,7 +1,7 @@
 {
 	"id": "uni-installApk",
 	"displayName": "uni-installApk",
-	"version": "1.0.6",
+	"version": "1.0.5",
 	"description": "uni-installApk",
 	"keywords": [
         "uni-installApk"
@@ -57,10 +57,9 @@
 					"vue3": "y"
 				},
 				"App": {
-                    "app-android": "y",
-                    "app-ios": "n",
-                    "app-harmony": "u"
-                },
+					"app-android": "y",
+					"app-ios": "n"
+				},
 				"H5-mobile": {
 					"Safari": "n",
 					"Android Browser": "n",

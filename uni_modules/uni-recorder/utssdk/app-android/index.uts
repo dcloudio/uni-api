@@ -1,0 +1,90 @@
+import { API_GET_RECORDER_MANAGER } from '../protocol.uts';
+import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
+import { createFile, onRecorderStateChange, setRecordStateCallback, StateChangeRes } from './utils.uts';
+export { RecorderManagerFailImpl } from "../unierror.uts"
+import RecordOption from 'uts.sdk.modules.uniRecorder.recorder.RecordOption';
+import AudioRecorderMgr from 'uts.sdk.modules.uniRecorder.AudioRecorderMgr'
+
+// NOTE 避免被 vue Proxy 污染
+const DEFAULT_DURATION = 1000 * 60
+const MAX_DURATION = DEFAULT_DURATION * 10
+const DEFAULT_FORMAT = 'aac'
+let RECORDER_MANAGER : AudioRecorderMgr | null = null
+class RecorderManagerImpl implements RecorderManager {
+	constructor() {
+		RECORDER_MANAGER = new AudioRecorderMgr()
+	}
+	override start(options : RecorderManagerStartOptions) : void {
+		if (options == null) options = {} as RecorderManagerStartOptions
+		if (options.format == null) options.format = DEFAULT_FORMAT
+
+		if (options.duration == null) {
+			options.duration = DEFAULT_DURATION
+		}
+		if (options.duration! > MAX_DURATION) {
+			options.duration = MAX_DURATION
+		}
+		let recordOption = new RecordOption(options, createFile(options.format! as string))
+		RECORDER_MANAGER!.startRecorder(recordOption)
+		setTimeout(() => {
+			this.stop()
+		}, options.duration!)
+	}
+	override pause() : void {
+		if (RECORDER_MANAGER != null) { RECORDER_MANAGER!.pause() }
+	}
+	override resume() : void {
+		if (RECORDER_MANAGER != null) { RECORDER_MANAGER!.resume() }
+	}
+	override stop() {
+		if (RECORDER_MANAGER != null) {
+			try {
+				RECORDER_MANAGER!.stopRecorder()
+			} catch (error) {
+				RECORDER_MANAGER = null
+			}
+		}
+	}
+	override onStart(options : (result : any) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setStartCB(options)
+		}
+	}
+	override onPause(options : (result : any) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setPauseCB(options)
+		}
+	}
+	override onStop(options : (result : RecorderManagerOnStopResult) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setStopCB(options)
+		}
+	}
+	override onFrameRecorded(options : (result : any) => void) : void {
+		setRecordStateCallback('frameRecorded', options)
+	}
+	override onError(options : (result : IRecorderManagerFail) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setErrorCB(options)
+		}
+	}
+	override  onResume(options : (result : any) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setResumeCB(options)
+		}
+	}
+	override onInterruptionBegin(options : (result : any) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setOnInterruptionBegin(options)
+		}
+	}
+	override onInterruptionEnd(options : (result : any) => void) : void {
+		if (RECORDER_MANAGER != null) {
+			RECORDER_MANAGER!.setOnInterruptionEnd(options)
+		}
+	}
+}
+export const getRecorderManager : GetRecorderManager = function () : RecorderManager {
+	let recorderManager = new RecorderManagerImpl()
+	return recorderManager
+}

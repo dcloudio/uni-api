@@ -54,7 +54,7 @@ class AudioService : Service() {
 
     fun canPlay() {
         Log.d(tag, "registerCanPlay")
-        notifyChange("")
+        notifyChange()
         updateMetaData()
         updateNotification()
     }
@@ -173,10 +173,8 @@ class AudioService : Service() {
 
     /**
      * 发送更新广播
-     *
-     * @param what 发送更新广播
      */
-    private fun notifyChange(what: String) {
+    public fun notifyChange() {
         val state =
             if (playerHelper.player.isPlaying) PlaybackStateCompat.STATE_PLAYING else PlaybackStateCompat.STATE_PAUSED
         updatePlaybackState(state)
@@ -184,11 +182,11 @@ class AudioService : Service() {
 
     private fun initChannelId(): String {
         // 通知渠道的id
-        val id = "uniappx_music_channel"
+        val id = "uni_app_uni_getBackgroundAudioManager_music_channel"
         // 用户可以看到的通知渠道的名字.
-        val name: CharSequence = "uniappx"
+        val name: String = this.getString(R.string.uni_app_uni_getBackgroundAudioManager_notification_name)
         // 用户可以看到的通知渠道的描述
-        val description = "通知栏播放控制"
+        val description = name
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_LOW
             val mChannel = NotificationChannel(id, name, importance)
@@ -245,7 +243,10 @@ class AudioService : Service() {
 
     private fun setContent(notificationBuilder: NotificationCompat.Builder) {
         var intent = Intent();
-        intent.setClassName(this, "uts.sdk.modules.DCloudUniGetBackgroundAudioManager.AudioTempActivity");
+        intent.setClassName(
+            this,
+            "uts.sdk.modules.DCloudUniGetBackgroundAudioManager.AudioTempActivity"
+        );
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK);
         val contentIntent = PendingIntent.getActivity(
@@ -328,7 +329,7 @@ class AudioService : Service() {
             setupMediaSession()
             val style = androidx.media.app.NotificationCompat.MediaStyle()
                 .setMediaSession(mMediaSession?.sessionToken)
-            .setShowActionsInCompactView(0, 1, 2)//简图显示的按钮
+                .setShowActionsInCompactView(0, 1, 2)//简图显示的按钮
             notificationBuilder.setStyle(style)
             mMediaSession?.isActive = true
         }
@@ -376,6 +377,76 @@ class AudioService : Service() {
                 Log.d(
                     tag,
                     "onSeekTo = " + pos.toInt()
+                )
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+
+        // 接收到监听事件，可以有选择的进行重写相关方法
+        override fun onMediaButtonEvent(mediaButtonEvent: Intent): Boolean {
+            Log.d(
+                tag,
+                "mediaButtonEvent$mediaButtonEvent"
+            )
+            return super.onMediaButtonEvent(mediaButtonEvent)
+        }
+
+        override fun onPlay() {
+            try {
+                playerHelper.play()
+                updateNotification()
+                Log.d(
+                    tag,
+                    "onPlay"
+                )
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+
+        override fun onPause() {
+            try {
+                playerHelper.pause()
+                updateNotification()
+                Log.d(
+                    tag,
+                    "onPause"
+                )
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+
+        override fun onSkipToNext() {
+            try {
+                playerHelper.invokeCallBack("next")
+                Log.d(
+                    tag,
+                    "onSkipToNext"
+                )
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+
+        override fun onSkipToPrevious() {
+            try {
+                playerHelper.invokeCallBack("prev")
+                Log.d(
+                    tag,
+                    "onSkipToPrevious"
+                )
+            } catch (e: RemoteException) {
+                e.printStackTrace()
+            }
+        }
+
+        override fun onStop() {
+            try {
+                Log.d(
+                    tag,
+                    "onStop"
                 )
             } catch (e: RemoteException) {
                 e.printStackTrace()

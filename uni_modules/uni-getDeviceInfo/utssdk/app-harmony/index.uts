@@ -52,9 +52,11 @@ export const getDeviceInfo: GetDeviceInfo = defineSyncApi<GetDeviceInfoResult>(
             osVersion: deviceInfo.majorVersion + '.' + deviceInfo.seniorVersion + '.' + deviceInfo.featureVersion + '.' + deviceInfo.buildVersion,
             osName: 'harmonyos',
             platform: 'harmonyos',
-            romName: deviceInfo.distributionOSName, // TODO 应为此值，但实际上是空字符串，待确认
+            romName: deviceInfo.distributionOSName || 'HarmonyOS NEXT', // TODO 应为deviceInfo.distributionOSName，但实际上是空字符串，待确认
             romVersion: deviceInfo.distributionOSVersion,
             system: deviceInfo.osFullName,
+            osHarmonySDKAPIVersion: deviceInfo.sdkApiVersion,
+            osHarmonyDisplayVersion: deviceInfo.displayVersion,
         } as GetDeviceInfoResult
     }
 ) as GetDeviceInfo

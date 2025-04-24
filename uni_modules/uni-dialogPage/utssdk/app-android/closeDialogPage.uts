@@ -53,7 +53,7 @@ export const closeDialogPage = (options: CloseDialogPageOptions | null) => {
             (dialogPage.$vm as Page).$close(closeOptions)
             return
         }
-        if ((dialogPage.$vm as Page).$dialog === null ||
+        if ((dialogPage.$vm as Page).$dialogOptions === null ||
             currentPages.indexOf(parentPage) === -1 ||
             parentPage!.getDialogPages().indexOf(dialogPage) === -1) {
             if (options !== null) {

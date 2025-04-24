@@ -50,66 +50,81 @@ export type ScanCodeOptions = {
 
 
 export interface Uni {
-    /**
-     * 扫码
-     * @uniPlatform {
-     *    "app": {
-     *      "harmony": {
-     *        "osVer": "3.0",
-     *        "uniVer": "4.23",
-     *        "unixVer": "x"
-     *      }
-     *  },
-    *  "mp": {
-    *    "weixin": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "4.41"
-    *    },
-    *    "alipay": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "baidu": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "toutiao": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "lark": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "qq": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "kuaishou": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    },
-    *    "jd": {
-    *        "hostVer": "√",
-    *        "uniVer": "√",
-    *        "unixVer": "x"
-    *    }
-    *  },
-     *  "web": {
-     *    "uniVer": "x",
-     *    "unixVer": "x"
-     *  }
-     * }
-     * @uniVueVersion 2,3  //支持的vue版本
-     */
-    scanCode(options?: ScanCodeOptions | null): void;
+  /**
+   * 扫码
+   * @uniPlatform 
+    {
+      "app": {
+        "android": {
+          "osVer": "5.0",
+          "uniVer": "√",
+          "uniUtsPlugin": "x",
+          "unixVer": "4.64",
+          "unixUtsPlugin": "x"
+        },
+        "ios": {
+          "osVer": "12.0",
+          "uniVer": "√",
+          "uniUtsPlugin": "x",
+          "unixVer": "x",
+          "unixUtsPlugin": "x"
+        },
+        "harmony": {
+          "osVer": "3.0",
+          "uniVer": "4.23",
+          "unixVer": "4.61"
+        }
+      },
+      "mp": {
+        "weixin": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "4.41"
+        },
+        "alipay": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "baidu": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "toutiao": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "lark": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "qq": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "kuaishou": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        },
+        "jd": {
+          "hostVer": "√",
+          "uniVer": "√",
+          "unixVer": "x"
+        }
+      }
+      "web": {
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    }
+   * @uniVueVersion 2,3  //支持的vue版本
+   */
+  scanCode(options?: ScanCodeOptions | null): void;
 }
 
 export type ScanCode = (options?: ScanCodeOptions | null) => void;

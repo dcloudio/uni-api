@@ -1,10 +1,10 @@
 {
-    "id": "uni-exit",
-    "displayName": "uni-exit",
+    "id": "uni-keyboard",
+    "displayName": "uni-keyboard",
     "version": "1.0.0",
-    "description": "uni-exit",
+    "description": "uni-keyboard",
     "keywords": [
-        "uni-exit"
+        "uni-keyboard"
     ],
     "repository": "",
     "engines": {
@@ -38,11 +38,29 @@
                     "name": "hideKeyboard",
                     "app": {
                         "js": false,
-                        "kotlin": false,
-                        "swift": false,
+                        "kotlin": true,
+                        "swift": true,
                         "arkts": true
                     }
-                }
+                },
+				"onKeyboardHeightChange": {
+				    "name": "onKeyboardHeightChange",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": false
+				    }
+				},
+				"offKeyboardHeightChange": {
+				    "name": "offKeyboardHeightChange",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": false
+				    }
+				}
             }
         },
         "encrypt": [],

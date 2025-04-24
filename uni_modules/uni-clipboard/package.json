@@ -38,8 +38,8 @@
           "name": "getClipboardData",
           "app": {
             "js": false,
-            "kotlin": false,
-            "swift": false,
+            "kotlin": true,
+            "swift": true,
             "arkts": true
           }
         },
@@ -47,8 +47,8 @@
           "name": "setClipboardData",
           "app": {
             "js": false,
-            "kotlin": false,
-            "swift": false,
+            "kotlin": true,
+            "swift": true,
             "arkts": true
           }
         }

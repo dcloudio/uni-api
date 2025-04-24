@@ -2,14 +2,14 @@ import {
     ANIMATION_DURATION,
     ANIMATION_TYPE,
     NAVIGATE_TO,
+    NavigateToPage,
     ON_HIDE,
+    entryPageState,
     invokeCurrentPageHook,
     navigate,
-    entryPageState,
     navigateToPagesBeforeEntryPages,
-    NavigateToPage
+    normalizeRouteOptions
 } from '@dcloudio/uni-runtime'
-import { normalizeRouteOptions } from '../protocols.uts'
 import {
     DEFAULT_ANIMATION_DURATION,
     DEFAULT_ANIMATION_IN,

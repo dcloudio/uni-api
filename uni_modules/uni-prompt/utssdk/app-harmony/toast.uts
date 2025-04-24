@@ -1,4 +1,3 @@
-import { window } from '@kit.ArkUI';
 import { BusinessError } from '@ohos.base';
 import { promptAction } from '@kit.ArkUI';
 import { ShowToast, ShowToastOptions, ShowToastSuccess, HideToast } from '../interface.uts'
@@ -23,7 +22,7 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
                         break
                 }
             }
-            const window = UTSHarmony.getCurrentWindow() as window.Window;
+            const window = UTSHarmony.getCurrentWindow();
             window.getUIContext().getPromptAction().showToast(showToastOptions)
             res.resolve({} as ShowToastSuccess)
         } catch (error) {

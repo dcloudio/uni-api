@@ -1,4 +1,4 @@
-package uts.sdk.modules.uniShareWithSystem;
+package uts.sdk.modules.DCloudUniShareWithSystem;
 
 import android.app.Application
 import io.dcloud.uts.UTSAndroidHookProxy
