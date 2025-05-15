@@ -1,4 +1,4 @@
-import { UploadFileOptions, UploadTask, UploadFileProgressUpdateCallback, UploadFileOptionFiles, OnProgressUpdateResult } from '../../interface.uts';
+import { UploadFileOptions, UploadTask, UploadFileProgressUpdateCallback, UploadFileOptionFiles, OnProgressUpdateResult } from '../../../interface.uts';
 import { NetworkUploadFileListener } from '../NetworkManager.uts'
 import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionUploadTask, NSError , NSMutableData , NSMutableSet , URLRequest} from 'Foundation';
 import { UTTypeCreatePreferredIdentifierForTag, UTTypeCopyPreferredTagWithClass, kUTTagClassFilenameExtension, kUTTagClassMIMEType } from 'MobileCoreServices';
@@ -82,7 +82,7 @@ class UploadController implements URLSessionDataDelegate {
 			return null
 		}
 
-		let timeout = param.timeout == null ? 60000 : param.timeout;
+		let timeout = param.timeout == null ? 120000 : param.timeout;
 		let timeoutInterval = new Double(timeout!) / 1000;
 		let request = new URLRequest(url = url!, cachePolicy = URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval = timeoutInterval);
 		request.httpShouldHandleCookies = true;

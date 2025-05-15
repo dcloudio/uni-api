@@ -19,7 +19,7 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
    * 	},
    *   "web": {
@@ -70,7 +70,7 @@ export interface Uni {
    *  }
    * }
    */
-  getBackgroundAudioManager: GetBackgroundAudioManager;
+  getBackgroundAudioManager(): BackgroundAudioManager;
 }
 
 export type GetBackgroundAudioManager = () => BackgroundAudioManager;
@@ -78,7 +78,7 @@ export type GetBackgroundAudioManager = () => BackgroundAudioManager;
 export interface BackgroundAudioManager {
   /**
    * 当前音频的长度（单位：s），只有在当前有合法的 src 时返回
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -101,7 +101,7 @@ export interface BackgroundAudioManager {
   duration: number;
   /**
    * 当前音频的播放位置（单位：s），只有在当前有合法的 src 时返回
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -124,7 +124,7 @@ export interface BackgroundAudioManager {
   currentTime: number;
   /**
    * 当前是是否暂停或停止状态，true 表示暂停或停止，false 表示正在播放
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -148,7 +148,7 @@ export interface BackgroundAudioManager {
   paused: boolean;
   /**
    * 音频的数据源，默认为空字符串，当设置了新的 src 时，会自动开始播放 ，目前支持的格式有 m4a, aac, mp3, wav
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -166,12 +166,12 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               }
           }
-    }   
+    }
    */
   src: string;
   /**
    * 音频开始播放的位置（单位：s）
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -194,7 +194,7 @@ export interface BackgroundAudioManager {
   startTime: number;
   /**
    * 音频缓冲的时间点，仅保证当前播放时间点到此时间点内容已缓冲
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -210,6 +210,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "x",
+                  "uniVer": "x",
+                  "unixVer": "x"
               }
           }
     }
@@ -217,7 +222,7 @@ export interface BackgroundAudioManager {
   buffered: number;
   /**
    * 音频标题，用于做原生音频播放器音频标题。原生音频播放器中的分享功能，分享出去的卡片标题，也将使用该值。
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -233,6 +238,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -240,7 +250,7 @@ export interface BackgroundAudioManager {
   title: string;
   /**
    * 专辑名，原生音频播放器中的分享功能，分享出去的卡片简介，也将使用该值
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -256,6 +266,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -263,7 +278,7 @@ export interface BackgroundAudioManager {
   epname: string;
   /**
    * 歌手名，原生音频播放器中的分享功能，分享出去的卡片简介，也将使用该值
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -279,6 +294,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -286,7 +306,7 @@ export interface BackgroundAudioManager {
   singer: string;
   /**
    * 封面图url，用于做原生音频播放器背景图。原生音频播放器中的分享功能，分享出去的卡片配图及背景也将使用该图。
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -302,6 +322,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -309,7 +334,7 @@ export interface BackgroundAudioManager {
   coverImgUrl: string;
   /**
    * 页面链接，原生音频播放器中的分享功能，分享出去的卡片简介，也将使用该值
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -325,6 +350,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "x",
                   "unixUtsPlugin": "x"
+              },
+              "harmony": {
+                  "osVer": "x",
+                  "uniVer": "x",
+                  "unixVer": "x"
               }
           }
     }
@@ -332,7 +362,7 @@ export interface BackgroundAudioManager {
   webUrl: string;
   /**
    * 音频协议。默认值为 'http'，设置 'hls' 可以支持播放 HLS 协议的直播音频
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -348,6 +378,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "x",
                   "unixUtsPlugin": "x"
+              },
+              "harmony": {
+                  "osVer": "x",
+                  "uniVer": "x",
+                  "unixVer": "x"
               }
           }
     }
@@ -355,7 +390,7 @@ export interface BackgroundAudioManager {
   protocol: string;
   /**
    * 播放的倍率。可取值： 0.5/0.8/1.0/1.25/1.5/2.0，默认值为1.0。（仅 App 支持）
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -371,6 +406,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "x",
+                  "uniVer": "x",
+                  "unixVer": "x"
               }
           }
     }
@@ -378,7 +418,7 @@ export interface BackgroundAudioManager {
   playbackRate?: number;
   /**
    * 播放
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -394,6 +434,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -401,7 +446,7 @@ export interface BackgroundAudioManager {
   play(): void;
   /**
    * 暂停
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -417,6 +462,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -424,7 +474,7 @@ export interface BackgroundAudioManager {
   pause(): void;
   /**
    * 跳转到指定位置，单位 s
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -440,6 +490,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -447,7 +502,7 @@ export interface BackgroundAudioManager {
   seek(position: number): void;
   /**
    * 停止
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -463,6 +518,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -470,7 +530,7 @@ export interface BackgroundAudioManager {
   stop(): void;
   /**
    * 背景音频进入可以播放状态，但不保证后面可以流畅播放
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -486,6 +546,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -493,7 +558,7 @@ export interface BackgroundAudioManager {
   onCanplay(callback: (result: any) => void): void;
   /**
    * 背景音频播放事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -509,6 +574,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -516,7 +586,7 @@ export interface BackgroundAudioManager {
   onPlay(callback: (result: any) => void): void;
   /**
    * 背景音频暂停事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -532,6 +602,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -539,7 +614,7 @@ export interface BackgroundAudioManager {
   onPause(callback: (result: any) => void): void;
   /**
    * 背景音频停止事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -555,6 +630,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -562,7 +642,7 @@ export interface BackgroundAudioManager {
   onStop(callback: (result: any) => void): void;
   /**
    * 背景音频自然播放结束事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -578,6 +658,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -585,7 +670,7 @@ export interface BackgroundAudioManager {
   onEnded(callback: (result: any) => void): void;
   /**
    * 音频进行 seek 操作事件
-   * @uniPlatform 
+   * @uniPlatform
     {
   	  "app": {
   		  "android": {
@@ -601,7 +686,12 @@ export interface BackgroundAudioManager {
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41",
   			  "unixUtsPlugin": "4.41"
-  		  }
+  		  },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
+              }
   	  },
   	  "web": {
   		  "uniVer": "√",
@@ -612,7 +702,7 @@ export interface BackgroundAudioManager {
   onSeeking(callback : (result : any) => void) : void;
   /**
    * 音频完成 seek 操作事件
-   * @uniPlatform 
+   * @uniPlatform
     {
   	  "app": {
   		  "android": {
@@ -628,7 +718,12 @@ export interface BackgroundAudioManager {
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41",
   			  "unixUtsPlugin": "4.41"
-  		  }
+  		  },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
+              }
   	  },
   	  "web": {
   		  "uniVer": "√",
@@ -639,7 +734,7 @@ export interface BackgroundAudioManager {
   onSeeked(callback : (result : any) => void) : void;
   /**
    * 背景音频播放进度更新事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -655,6 +750,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -662,7 +762,7 @@ export interface BackgroundAudioManager {
   onTimeUpdate(callback: (result: any) => void): void;
   /**
    * 用户在系统音乐播放面板点击上一曲事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -678,6 +778,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -685,7 +790,7 @@ export interface BackgroundAudioManager {
   onPrev(callback: (result: any) => void): void;
   /**
    * 用户在系统音乐播放面板点击下一曲事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -701,6 +806,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.61",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -708,7 +818,7 @@ export interface BackgroundAudioManager {
   onNext(callback: (result: any) => void): void;
   /**
    * 背景音频播放错误事件
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -724,6 +834,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "5.0.0",
+                  "uniVer": "4.31",
+                  "unixVer": "4.61"
               }
           }
     }
@@ -731,7 +846,7 @@ export interface BackgroundAudioManager {
   onError(callback : (result : ICreateBackgroundAudioFail) => void) : void;
   /**
    * 音频加载中事件，当音频因为数据不足，需要停下来加载时会触发
-   * @uniPlatform 
+   * @uniPlatform
     {
           "app": {
               "android": {
@@ -747,6 +862,11 @@ export interface BackgroundAudioManager {
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
+              },
+              "harmony": {
+                  "osVer": "x",
+                  "uniVer": "x",
+                  "unixVer": "x"
               }
           }
     }

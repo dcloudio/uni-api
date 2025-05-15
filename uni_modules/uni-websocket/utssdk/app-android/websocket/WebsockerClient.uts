@@ -59,7 +59,13 @@ export class WebsockerClient {
 		}
 		let isSuccess = false;
 		try {
-			const sendResult = this.websocketDelegate.websocket?.send(options.data as string);
+			let sendResult:boolean | null
+            if(options.data instanceof ArrayBuffer){
+				sendResult = this.websocketDelegate.websocket?.send(ByteString.of(options.data.toByteBuffer()));
+			}else{
+				sendResult = this.websocketDelegate.websocket?.send(options.data as string);
+			}
+			
 			if(sendResult != null && !sendResult){
 				let result = new SendSocketMessageFailImpl(10001);
 				fail?.(result);
@@ -244,14 +250,9 @@ class SimpleWebsocketListener extends WebSocketListener {
 
 	override onMessage(webSocket : WebSocket, bytes : ByteString) : void {
 		new RunnableTask(this.looper, () => {
-			let sources = bytes.toByteArray();
-			let base64Str = Base64.encodeToString(sources, Base64.NO_WRAP);
-			let object = new JSONObject();
-			object.put("@type", "binary");
-			object.put("base64", base64Str);
 			const client = this.client;
 			if (client != null) {
-				this.listener?.onMessage(client, object.toJSONString());
+				this.listener?.onMessage(client, ArrayBuffer.fromByteBuffer(bytes.asByteBuffer()));
 			}
 		}).execute();
 	}

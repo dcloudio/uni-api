@@ -14,7 +14,12 @@ export interface WebviewContext {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
-     *    }
+     *    },
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.28",
+   *      "unixVer": "4.61"
+   *    }
 	 *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -34,7 +39,12 @@ export interface WebviewContext {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
-     *    }
+     *    },
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.28",
+   *      "unixVer": "4.61"
+   *    }
 	 *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -54,7 +64,12 @@ export interface WebviewContext {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
-     *    }
+     *    },
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.28",
+   *      "unixVer": "4.61"
+   *    }
 	 *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -74,7 +89,12 @@ export interface WebviewContext {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
-     *    }
+     *    },
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.28",
+   *      "unixVer": "4.61"
+   *    }
 	 *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -94,7 +114,12 @@ export interface WebviewContext {
      *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
-     *    }
+     *    },
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.28",
+   *      "unixVer": "4.61"
+   *    }
 	 *  }
 	 * }
 	 * @uniVueVersion 2,3
@@ -122,7 +147,7 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "x"
+   *      "unixVer": "4.61"
    *    }
 	 *  },
      *  "web": {
@@ -133,5 +158,5 @@ export interface Uni {
 	 * @uniVueVersion 2,3
 	 * @return {WebviewContext} web-view组件上下文对象
 	 */
-	createWebviewContext : CreateWebviewContext
+	createWebviewContext(webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null): WebviewContext | null;
 }

@@ -1,0 +1,18 @@
+import { GetElementById } from '../interface.uts'
+
+export const getElementById: GetElementById = defineSyncApi<UniElement | null>(
+    'getElementById',
+    (id: string.IDString | string): UniElement | null => {
+        const pages = globalThis.getCurrentPages() as UniPageImpl[];
+        if (pages.length == 0) {
+            return null;
+        }
+        const page = pages[pages.length - 1];
+        const bodyNode = ((page.vm as object)['$el'] as UniElement | null)?.parentNode
+        if (!bodyNode) {
+            console.warn('bodyNode is null');
+            return null;
+        }
+        return bodyNode.querySelector(`#${id}`);
+    },
+)

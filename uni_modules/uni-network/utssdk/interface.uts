@@ -27,7 +27,7 @@ export type RequestOptions<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -80,7 +80,7 @@ export type RequestOptions<T> = {
    */
   url: string,
   /**
-   * 请求的参数 在`app-android端，参数类型只能为`UTSJSONObject`或者`string`类型
+   * 请求的参数 在`app-android端，参数类型只能为`UTSJSONObject`或者`string`类型,app-android平台从 4.51版本开始支持ArrayBuffer, app-ios平台从 4.61版本开始支持ArrayBuffer
    * @type {RequestDataOptions}
    * @defaultValue null
    * @uniPlatform
@@ -103,7 +103,7 @@ export type RequestOptions<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -178,7 +178,7 @@ export type RequestOptions<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -253,7 +253,7 @@ export type RequestOptions<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -561,7 +561,7 @@ export type RequestOptions<T> = {
 
 export type RequestSuccess<T> = {
   /**
-   * 开发者服务器返回的数据
+   * 开发者服务器返回的数据, app-android平台从 4.51版本开始支持ArrayBuffer, app-ios平台从 4.61版本开始支持ArrayBuffer
    * @type {RequestDataOptions}
    * @uniPlatform
     {
@@ -583,7 +583,7 @@ export type RequestSuccess<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -657,7 +657,7 @@ export type RequestSuccess<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -731,7 +731,7 @@ export type RequestSuccess<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -805,7 +805,7 @@ export type RequestSuccess<T> = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -924,7 +924,7 @@ export interface RequestTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1014,7 +1014,7 @@ export type UploadFileOptionFiles = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1088,7 +1088,7 @@ export type UploadFileOptionFiles = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1238,7 +1238,7 @@ export type UploadFileSuccess = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1312,7 +1312,7 @@ export type UploadFileSuccess = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1398,7 +1398,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1473,7 +1473,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1548,7 +1548,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1623,7 +1623,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1698,7 +1698,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1773,7 +1773,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1848,7 +1848,7 @@ export type UploadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -1939,7 +1939,7 @@ export type OnProgressUpdateResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2013,7 +2013,7 @@ export type OnProgressUpdateResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2087,7 +2087,7 @@ export type OnProgressUpdateResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2168,7 +2168,7 @@ export interface UploadTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2253,7 +2253,7 @@ export interface UploadTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2341,7 +2341,7 @@ export type DownloadFileSuccess = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2415,7 +2415,7 @@ export type DownloadFileSuccess = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2501,7 +2501,7 @@ export type DownloadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2647,7 +2647,7 @@ export type DownloadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2722,7 +2722,7 @@ export type DownloadFileOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2813,7 +2813,7 @@ export type OnProgressDownloadResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2887,7 +2887,7 @@ export type OnProgressDownloadResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -2961,7 +2961,7 @@ export type OnProgressDownloadResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -3041,7 +3041,7 @@ export interface DownloadTask {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
     *  "mp": {
@@ -3126,7 +3126,7 @@ export interface DownloadTask {
           "harmony": {
             "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "x"
+            "unixVer": "4.61"
           }
         },
     *  "mp": {
@@ -3221,7 +3221,7 @@ export type Certificate = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -3324,7 +3324,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -3429,7 +3429,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -3520,7 +3520,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
     *  "mp": {
@@ -3607,7 +3607,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.31",
-          "unixVer": "x"
+          "unixVer": "4.61"
         }
       },
       "web": {
@@ -3616,5 +3616,5 @@ export interface Uni {
       }
     }
    */
-  configMTLS: ConfigMTLS;
+  configMTLS(options: ConfigMTLSOptions): void;
 }

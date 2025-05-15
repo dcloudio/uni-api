@@ -1,12 +1,17 @@
-import fs, { type ReadTextOptions, type ReadOptions } from '@ohos.file.fs'
+import fs, { type ReadTextOptions } from '@ohos.file.fs'
 import { FileSystemManagerFailImpl } from "../unierror.uts"
+import { BusinessError } from '@ohos.base';
+import util from '@ohos.util';
+import uri from '@ohos.uri';
+import { getEnv, getRealPath } from '@dcloudio/uni-runtime'
 import { FileCallback } from './callback.uts';
 import { FileSystemManagerErrorCode, IFileSystemManagerFail, ReadFileSuccessResult } from '../interface.uts';
-import { BusinessError } from '@ohos.base';
 
-const openMode = fs.OpenMode
+let type = new util.types();
 
-export const modeReflect = {
+export type ModeReflect = Record<string, string>
+
+export const modeReflect: ModeReflect = {
   'ax': 'a',
   'ax+': 'a+',
   'wx': 'w',
@@ -56,21 +61,21 @@ export function getFileTypeMode(stat: fs.Stat): number {
 export function getOpenMode(flag: string): number | null {
   switch (flag) {
     case 'a':
-      return openMode.CREATE | openMode.APPEND
+      return fs.OpenMode.CREATE | fs.OpenMode.APPEND
     case 'a+':
-      return openMode.CREATE | openMode.READ_WRITE | openMode.APPEND
+      return fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE | fs.OpenMode.APPEND
     case 'as':
-      return openMode.SYNC | openMode.CREATE | openMode.APPEND
+      return fs.OpenMode.SYNC | fs.OpenMode.CREATE | fs.OpenMode.APPEND
     case 'as+':
-      return openMode.SYNC | openMode.CREATE | openMode.READ_WRITE | openMode.APPEND
+      return fs.OpenMode.SYNC | fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE | fs.OpenMode.APPEND
     case 'r':
-      return openMode.READ_ONLY
+      return fs.OpenMode.READ_ONLY
     case 'r+':
-      return openMode.READ_WRITE
+      return fs.OpenMode.READ_WRITE
     case 'w':
-      return openMode.CREATE | openMode.WRITE_ONLY | openMode.TRUNC
+      return fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC
     case 'w+':
-      return openMode.CREATE | openMode.READ_WRITE | openMode.TRUNC
+      return fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE | fs.OpenMode.TRUNC
   }
   return null
 }
@@ -107,7 +112,7 @@ export function transformErrorCode(errCode: number): FileSystemManagerErrorCode 
     case 13900030:
       return 1300020
     case 13900033:
-      return 1300021
+      return 1300033
     case 13900034:
       return 1300012
     case 13900042:
@@ -115,11 +120,11 @@ export function transformErrorCode(errCode: number): FileSystemManagerErrorCode 
     case 13900044:
       return 1300014
   }
-  return 1300201
+  return errCode as FileSystemManagerErrorCode
 }
 
 // 数据类型是否为string
-function isString(data?: DataType | null): boolean {
+export function isString(data?: DataType | null): boolean {
   return typeof data === 'string'
 }
 
@@ -156,7 +161,8 @@ function isBoolean(data?: DataType | null): boolean {
 
 // 数据类型是否为arraybuffer
 function isArrayBuffer(data?: DataType | null): boolean {
-  return data instanceof ArrayBuffer
+  return type.isAnyArrayBuffer(data as object)
+  // return data instanceof ArrayBuffer
 }
 
 function checkSingleDataType(data: DataType, dataType: string) {
@@ -191,7 +197,7 @@ function checkSingleDataType(data: DataType, dataType: string) {
 }
 
 type BaseType = number | string | boolean | null | undefined
-export type DataType = BaseType | Function | ArrayBuffer | Array<BaseType>
+export type DataType = BaseType | Object | Function | ArrayBuffer | Array<BaseType>
 
 /**
  * 通用校验接口checkDataType
@@ -232,56 +238,42 @@ export function checkDataType(data: DataType, isRequired: boolean, dataType: str
   return result
 }
 
-interface CustomValidReturn {
-  isValid: boolean
-  err?: IFileSystemManagerFail
+export interface CustomValidReturn {
+  isValid: false
+  err: IFileSystemManagerFail
+}
+
+export interface CustomValidReturnValid {
+  isValid: true
 }
 
 // 检验路径的合法性：string 、空串 、必须存在
-export function checkPathExistence(methodName: string, pathName: string, path: string): CustomValidReturn {
-  const errMsg = `${methodName}: fail ${pathName}`
+export function checkPathExistence(methodName: string, pathName: string, path: string): CustomValidReturn | CustomValidReturnValid {
+  const errMsg = `${methodName}:fail ${pathName}`
   let isValid = false
   if (!checkDataType(path, true, 'string')) {
     return {
       isValid,
       err: getParameterError(errMsg)
-    }
+    } as CustomValidReturn
   }
 
   if (path === '') {
     return {
       isValid,
       err: getPermissionError(errMsg) as IFileSystemManagerFail
-    }
+    } as CustomValidReturn
   }
 
   // 判断srcPath路径是否存在
   if (!fs.accessSync(path)) {
     return {
       isValid,
-      err: getNoSuchFileOrDirectory(errMsg) as IFileSystemManagerFail
-    }
+      err: getNoSuchFileOrDirectoryError(errMsg) as IFileSystemManagerFail
+    } as CustomValidReturn
   }
   // 校验通过
-  return { isValid: true }
-}
-
-
-export function ohosRead(filePath: string, sizeOfNewArrayBuffer: number, cb: FileCallback) {
-  const file = fs.openSync(filePath, fs.OpenMode.READ_ONLY)
-  const buf = new ArrayBuffer(sizeOfNewArrayBuffer)
-  fs.read(file.fd, buf)
-    .then((readLen) => {
-      cb.success({
-        data: buf
-      } as ReadFileSuccessResult)
-    })
-    .catch((err: BusinessError) => {
-      cb.fail(new FileSystemManagerFailImpl(transformErrorCode(err.code)) as ApiError)
-    })
-    .finally(() => {
-      fs.closeSync(file)
-    })
+  return { isValid: true } as CustomValidReturnValid
 }
 
 export function ohosReadText(filePath: string, option: ReadTextOptions, cb: FileCallback) {
@@ -308,7 +300,12 @@ export function obtainUpperPath(inputPath: string): ObtainUpperPathReturn {
   return { index, upperPath } as ObtainUpperPathReturn
 }
 
-export function obtainFileName(inputPath: string) {
+interface ObtainFileNameReturn {
+  index: number
+  fileName: string
+}
+
+export function obtainFileName(inputPath: string): ObtainFileNameReturn {
   let index = inputPath.lastIndexOf('/')
   let fileName = inputPath.substring(index)
 
@@ -317,17 +314,22 @@ export function obtainFileName(inputPath: string) {
     fileName = inputPath.substring(inputPath.lastIndexOf("/", inputPath.length - 2) + 1, inputPath.length - 1)
   }
 
-  return { index, fileName }
+  return { index, fileName } as ObtainFileNameReturn
 }
 
-interface CheckFd {
-  isValid: boolean
+export interface CheckFd {
+  isValid: true
   fd: number
-  err?: IFileSystemManagerFail
 }
 
-export function checkFd(methodName: string, fd: string): CheckFd {
-  const errMsg = `${methodName}: fail`
+export interface CheckFdErr {
+  isValid: false
+  fd: number
+  err: IFileSystemManagerFail
+}
+
+export function checkFd(methodName: string, fd: string): CheckFd | CheckFdErr {
+  const errMsg = `${methodName}:fail`
   if (!checkDataType(fd, true, 'string')) {
     return {
       isValid: false,
@@ -347,10 +349,9 @@ export function checkFd(methodName: string, fd: string): CheckFd {
   return { isValid: true, fd: transFdToNum }
 }
 
-
 // 检验路径的合法性：string 和 空串
-export function checkPath(methodName: string, pathName: string, path: string): CustomValidReturn {
-  const errMsg = `${methodName}: fail ${pathName}`
+export function checkPath(methodName: string, pathName: string, path: string): CustomValidReturn | CustomValidReturnValid {
+  const errMsg = `${methodName}:fail ${pathName}`
   let isValid = false
   if (!checkDataType(path, true, 'string')) {
     return {
@@ -370,8 +371,8 @@ export function checkPath(methodName: string, pathName: string, path: string): C
   return { isValid: true }
 }
 
-export function checkPathSync(methodName: string, pathName: string, path: string): CustomValidReturn {
-  const errMsg = `${methodName}: fail ${pathName}`
+export function checkPathSync(methodName: string, pathName: string, path: string): CustomValidReturn | CustomValidReturnValid {
+  const errMsg = `${methodName}:fail ${pathName}`
   let isValid = false
   if (path === '' || !checkDataType(path, true, 'string')) {
     return {
@@ -383,8 +384,8 @@ export function checkPathSync(methodName: string, pathName: string, path: string
   return { isValid: true }
 }
 
-export function checkPathExistenceSync(methodName: string, pathName: string, path: string): CustomValidReturn {
-  const errMsg = `${methodName}: fail ${pathName}`
+export function checkPathExistenceSync(methodName: string, pathName: string, path: string): CustomValidReturn | CustomValidReturnValid {
+  const errMsg = `${methodName}:fail ${pathName}`
   let isValid = false
   if (path === '' || !checkDataType(path, true, 'string')) {
     return {
@@ -397,7 +398,7 @@ export function checkPathExistenceSync(methodName: string, pathName: string, pat
   if (!fs.accessSync(path)) {
     return {
       isValid,
-      err: getNoSuchFileOrDirectory(errMsg)
+      err: getNoSuchFileOrDirectoryError(errMsg)
     }
   }
 
@@ -406,84 +407,39 @@ export function checkPathExistenceSync(methodName: string, pathName: string, pat
 
 interface CheckEncodingReturn {
   isValid: boolean
-  errMsg?: string
+  errMsg: string
 }
 
 export function checkEncoding(methodName: string, encoding?: string): CheckEncodingReturn {
   let isValid = false
   if (encoding === null || !checkDataType(encoding, false, 'string')) {
-    return { errMsg: `${methodName}: fail invalid encoding: ${encoding}`, isValid } as CheckEncodingReturn
+    return { errMsg: `${methodName}:fail invalid encoding: ${encoding}`, isValid } as CheckEncodingReturn
   }
 
   if (encoding !== '' && encoding !== undefined) {
     if (!ENCODING.includes(encoding)) {
-      return { errMsg: `${methodName}: fail Unknown encoding: ${encoding}`, isValid } as CheckEncodingReturn
+      return { errMsg: `${methodName}:fail Unknown encoding: ${encoding}`, isValid } as CheckEncodingReturn
     }
 
     // 提示开发者输入的encoding是合法的 但目前鸿蒙暂不支持
     if (encoding !== 'utf-8' && encoding !== 'utf8') {
-      return { errMsg: `${methodName}: fail, The encoding is valid, but is not supported currently: ${encoding}`, isValid } as CheckEncodingReturn
+      return { errMsg: `${methodName}:fail, The encoding is valid, but is not supported currently: ${encoding}`, isValid } as CheckEncodingReturn
     }
   }
 
-  return { isValid: true }
+  return { isValid: true, errMsg: '' }
 }
 
-export function checkEncodingSync(methodName: string, encoding?: string): CheckEncodingReturn {
-  let isValid = false
-  if (encoding === null || !checkDataType(encoding, false, 'string')) {
-    return {
-      errMsg: `${methodName}: fail invalid encoding: ${encoding}`,
-      isValid
-    } as CheckEncodingReturn
-  }
-
-  if (encoding !== '' && encoding !== undefined) {
-    if (!ENCODING.includes(encoding)) {
-      return {
-        errMsg: `${methodName}: fail Unknown encoding: ${encoding}`,
-        isValid
-      } as CheckEncodingReturn
-    }
-
-    // 提示开发者输入的encoding是合法的 但目前鸿蒙暂不支持
-    if (encoding !== 'utf-8' && encoding !== 'utf8') {
-      return {
-        errMsg: `${methodName}: fail, The encoding is valid, but is not supported currently: ${encoding}`,
-        isValid
-      } as CheckEncodingReturn
-    }
-  }
-
-  return { isValid: true } as CheckEncodingReturn
+export function isFileUri(path: string) {
+  return path && typeof (path) === 'string' && (path.startsWith('file://') || path.startsWith('datashare://'));
 }
 
-export function mkdirRecursive(path: string, dirNames: string[]) {
-  const curDirName = dirNames.shift()
-  if (!path && !curDirName) {
-    path = ''
-  } else {
-    path = path + '/' + curDirName
-  }
-  if (!curDirName) {
-    if (dirNames.length > 0) {
-      mkdirRecursive(path, dirNames)
-    }
-    return
-  }
+interface FileSystemManagerApiError extends ApiError {
+  errMsg: string
+}
 
-  // 如果目录存在
-  if (fs.accessSync(path)) {
-    if (dirNames.length > 0) {
-      mkdirRecursive(path, dirNames)
-    }
-  } else {
-    // 目录不存在
-    fs.mkdirSync(path)
-    if (dirNames.length > 0) {
-      mkdirRecursive(path, dirNames)
-    }
-  }
+export function getApiError(errCode: number, errMsg?: string): FileSystemManagerApiError {
+  return wrapErrMsg(new FileSystemManagerFailImpl(transformErrorCode(errCode)), errMsg) as FileSystemManagerApiError
 }
 
 export function wrapErrMsg(err: IFileSystemManagerFail, errMsg?: string): IFileSystemManagerFail {
@@ -494,13 +450,92 @@ export function wrapErrMsg(err: IFileSystemManagerFail, errMsg?: string): IFileS
 }
 
 export function getParameterError(errMsg?: string): IFileSystemManagerFail {
-  return wrapErrMsg(new FileSystemManagerFailImpl(1300022) as IFileSystemManagerFail, errMsg)
+  return getApiError(1300022, errMsg) as IFileSystemManagerFail
 }
 
 export function getPermissionError(errMsg?: string): IFileSystemManagerFail {
-  return wrapErrMsg(new FileSystemManagerFailImpl(1300013) as IFileSystemManagerFail, errMsg)
+  return getApiError(1300013, errMsg) as IFileSystemManagerFail
 }
 
-export function getNoSuchFileOrDirectory(errMsg?: string): IFileSystemManagerFail {
-  return wrapErrMsg(new FileSystemManagerFailImpl(1300002) as IFileSystemManagerFail, errMsg)
+export function getNoSuchFileOrDirectoryError(errMsg?: string): IFileSystemManagerFail {
+  return getApiError(1300002, errMsg) as IFileSystemManagerFail
+}
+
+export function getAlreadyExistsError(errMsg?: string): IFileSystemManagerFail {
+  return getApiError(1301005, errMsg) as IFileSystemManagerFail
+}
+
+export function getIsDirectoryError(errMsg?: string): IFileSystemManagerFail {
+  return getApiError(1300021, errMsg) as IFileSystemManagerFail
+}
+
+export function getDirectoryNotEmpty(errMsg?: string): IFileSystemManagerFail {
+  return getApiError(1300066, errMsg) as IFileSystemManagerFail
+}
+
+export function getSavedDir() {
+  return getEnv().USER_DATA_PATH + '/saved'
+}
+
+export const savedFileList = new Map<string, string>()
+function getSavedFileName(fileName: string, index: number = 0): string {
+  if (savedFileList.has(fileName)) {
+    return getSavedFileName(`${fileName}${index}`, index + 1)
+  }
+  return fileName
+}
+export function getSavedFilePath(tempFilePath: string, savedPath: string) {
+  const uriInstance = new uri.URI(tempFilePath)
+  const fileInfo = uriInstance.clearQuery().getLastSegment().split('.')
+  const ext = fileInfo.length > 1 ? fileInfo.pop() : ''
+  let fileName = getSavedFileName(fileInfo.join('.'))
+  if (ext) {
+    fileName += '.' + ext
+  }
+  const savedFilePath = `${savedPath}${savedPath.endsWith('/') ? '' : '/'}${fileName}`
+  savedFileList.set(fileName, savedFilePath)
+  return savedFilePath
+}
+
+export function getFsPath(filePath: string) {
+  filePath = getRealPath(filePath) as string
+  if (!/^file:/.test(filePath)) {
+    return filePath
+  }
+  const rawPath = filePath.replace(/^file:\/\//, '')
+  if (rawPath[0] === '/') {
+    return rawPath
+  }
+  return filePath
+}
+
+// 给定一个基础路径和一组路径，计算所有可能的路径
+export function calculateAllPaths(base: string, paths: string[]): string[] {
+  if (!base.endsWith('/')) {
+    base += '/'; // 确保基础路径以斜杠结尾
+  }
+  const allPaths = new Set<string>(); // 使用Set来避免重复的路径
+
+  paths.forEach(path => {
+    // 移除路径开头的斜杠，以避免与base路径的斜杠重复
+    path = path.replace(/^\//, '');
+    // 将路径分割成数组
+    const uriInstance = new uri.URI(path)
+    const segments = uriInstance.getSegment();
+    let currentPath = base;
+
+    // 生成子路径
+    segments.forEach((segment, index) => {
+      // 如果是最后一个元素，说明是文件，直接添加
+      if (index === segments.length - 1) {
+        currentPath += segment;
+      } else {
+        // 否则是文件夹，添加到路径中，并添加斜杠
+        currentPath += segment + '/';
+      }
+      allPaths.add(currentPath);
+    });
+  });
+
+  return Array.from(allPaths); // 将Set转换为数组并返回
 }

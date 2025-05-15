@@ -65,7 +65,7 @@ export type GetBatteryInfo = (options: GetBatteryInfoOptions) => void
 
 export type GetBatteryInfoSync = () => GetBatteryInfoResult
 
-interface Uni {
+export interface Uni {
 
   /**
    * 获取电池电量信息
@@ -98,7 +98,7 @@ interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
+          "osVer": "5.0.0",
           "uniVer": "4.23",
           "unixVer": "x"
         }
@@ -182,7 +182,7 @@ interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
+          "osVer": "5.0.0",
           "uniVer": "4.23",
           "unixVer": "x"
         }

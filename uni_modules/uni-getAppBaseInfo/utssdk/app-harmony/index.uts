@@ -34,7 +34,7 @@ interface IAppBaseInfoAppVersion {
 export const getAppBaseInfo: GetAppBaseInfo = defineSyncApi<GetAppBaseInfoResult>(
     API_GET_APP_BASE_INFO,
     (): GetAppBaseInfoResult => {
-        const appVersion: IAppBaseInfoAppVersion = UTSHarmony.getAppVersion()
+        const appVersion = UTSHarmony.getAppVersion() as IAppBaseInfoAppVersion
         const appLanguage = I18n.System.getAppPreferredLanguage()
         const uniCompilerVersion: string = UTSHarmony.getUniCompilerVersion() as string
         const uniRuntimeVersion: string = UTSHarmony.getUniRuntimeVersion()
@@ -49,6 +49,7 @@ export const getAppBaseInfo: GetAppBaseInfo = defineSyncApi<GetAppBaseInfoResult
             hostLanguage: I18n.System.getSystemLanguage(),
             isUniAppX: UTSHarmony.isUniAppX() as boolean,
             packageName: getBundleInfo().name,
+            bundleName: getBundleInfo().name,
             uniCompilerVersion: uniCompilerVersion,
             uniCompilerVersionCode: parseFloat(uniCompilerVersion),
             uniRuntimeVersion: uniRuntimeVersion,

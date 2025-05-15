@@ -1,4 +1,5 @@
 import http from '@ohos.net.http'
+import buffer from '@ohos.buffer';
 import fs from '@ohos.file.fs'
 import {
     getRealPath,
@@ -45,6 +46,7 @@ interface IUploadTask {
 }
 
 class UploadTask implements UniUploadTask {
+    __v_skip: boolean = true
     private _uploadTask: IUploadTask
     constructor(uploadTask: IUploadTask) {
         this._uploadTask = uploadTask
@@ -126,7 +128,7 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                         /**
                          * TODO 未联系鸿蒙确认
                          * chooseImage返回"file://media/Photo/1/xxxx"，此uri可以被fs相关接口读取，但是上传时使用会报错
-                         * 使用"file://media/Photo/1/xxxx"、"file:///media/Photo/1/xxxx"、"/media/Photo/1/xxxx"、"media/Photo/1/xxxx"、格式的uri都会报错
+                         * 使用"file://media/Photo/1/xxxx"、"file:///media/Photo/1/xxxx"、"/media/Photo/1/xxxx"、"media/Photo/1/xxxx"、格式都会报错
                          * 错误信息：Failed to open/read local data from file/application
                          */
                         // filePath: getRealPath(uri!),
@@ -208,7 +210,12 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                 totalBytesExpectedToSend: totalSize,
             } as OnProgressUpdateResult)
         })
-        httpRequest.request(
+
+        const bufs = [] as buffer.Buffer[]
+        httpRequest.on('dataReceive', (data) => {
+            bufs.push(buffer.from(data))
+        })
+        httpRequest.requestInStream(
             parseUrl(url),
             {
                 header: headers,
@@ -219,7 +226,7 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                 expectDataType: http.HttpDataType.STRING,
                 clientCert: getClientCertificate(url)
             } as http.HttpRequestOptions,
-            (err, res) => {
+            (err, statusCode) => {
                 if (err) {
                     /**
                      * TODO abort后此处收到如下错误，待确认是否直接将此错误码转为abort错误
@@ -227,9 +234,10 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                      */
                     exec.reject(err.message)
                 } else {
+                    const responseData = buffer.concat(bufs)
                     exec.resolve({
-                        data: res.result as string,
-                        statusCode: res.responseCode,
+                        data: responseData.toString('utf8'),
+                        statusCode,
                     } as UniUploadFileSuccess)
                 }
                 uploadTask.offHeadersReceived()

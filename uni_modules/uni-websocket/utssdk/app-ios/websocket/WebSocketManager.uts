@@ -99,7 +99,7 @@ class SimpleSocketTask implements SocketTask {
 export interface WebSocketManagerListener {
 	onOpen(client : WebsockerClient, header : any) : void;
 
-	onMessage(client : WebsockerClient, data : string) : void;
+	onMessage(client : WebsockerClient, data : any) : void;
 
 	onClose(client : WebsockerClient, code : number, reason : string) : void;
 
@@ -218,7 +218,7 @@ export class WebSocketManager implements WebSocketManagerListener {
 		simpleTask.dispatchOpen(result);
 	}
 
-	onMessage(client : WebsockerClient, data : string) : void {
+	onMessage(client : WebsockerClient, data : any) : void {
 		const task = this.getTaskWithClient(client);
 		if (task == null) {
 			return

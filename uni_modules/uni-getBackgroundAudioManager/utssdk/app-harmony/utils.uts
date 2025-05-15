@@ -52,8 +52,25 @@ export class AudioPlayerCallback {
   onWaitingCallbacks: Function[] = []
   onSeekingCallbacks: Function[] = []
   onSeekedCallbacks: Function[] = []
+  onPrevCallbacks: Function[] = []
+  onNextCallbacks: Function[] = []
 
   constructor() { }
+
+  destroy() {
+    this.onCanplayCallbacks = []
+    this.onPlayCallbacks = []
+    this.onPauseCallbacks = []
+    this.onStopCallbacks = []
+    this.onEndedCallbacks = []
+    this.onTimeUpdateCallbacks = []
+    this.onErrorCallbacks = []
+    this.onWaitingCallbacks = []
+    this.onSeekingCallbacks = []
+    this.onSeekedCallbacks = []
+    this.onPrevCallbacks = []
+    this.onNextCallbacks = []
+  }
 
   canPlay() {
     callCallbacks(this.onCanplayCallbacks)
@@ -118,11 +135,23 @@ export class AudioPlayerCallback {
   offError(callback: Function) {
     remoteCallback(this.onErrorCallbacks, callback)
   }
+  prev() {
+    callCallbacks(this.onPrevCallbacks)
+  }
   onPrev(callback: Function) {
-    console.info('ios only');
+    this.onPrevCallbacks.push(callback)
+  }
+  offPrev(callback: Function) {
+    remoteCallback(this.onPrevCallbacks, callback)
+  }
+  next() {
+    callCallbacks(this.onNextCallbacks)
   }
   onNext(callback: Function) {
-    console.info('ios only');
+    this.onNextCallbacks.push(callback)
+  }
+  offNext(callback: Function) {
+    remoteCallback(this.onNextCallbacks, callback)
   }
   waiting() {
     callCallbacks(this.onWaitingCallbacks)

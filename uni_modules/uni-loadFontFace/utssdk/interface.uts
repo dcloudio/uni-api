@@ -501,6 +501,7 @@ export type LoadFontFaceFailCallback = (error: LoadFontFaceFail) => void
 
 export type LoadFontFaceComplete = AsyncApiResult
 export type LoadFontFaceCompleteCallback = (res: LoadFontFaceComplete) => void
+export type LoadFontFace = (options: LoadFontFaceOptions) => Promise<LoadFontFaceSuccess> | null
 
 export interface Uni {
     /**
@@ -522,9 +523,9 @@ export interface Uni {
      *          "unixVer": "4.10"
      *      },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "mp": {
@@ -575,7 +576,5 @@ export interface Uni {
      *  }
      * }
      */
-    loadFontFace(
-        options: LoadFontFaceOptions,
-    ): Promise<LoadFontFaceSuccess> | null
+    loadFontFace(options: LoadFontFaceOptions): Promise<LoadFontFaceSuccess> | null
 }

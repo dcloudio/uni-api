@@ -1,15 +1,15 @@
 import {
     ANIMATION_TYPE,
     REDIRECT_TO,
+    RedirectToPage,
+    entryPageState,
     getCurrentPage,
     navigate,
-    removePage,
-    entryPageState,
+    normalizeRouteOptions,
     redirectToPagesBeforeEntryPages,
-    RedirectToPage,
+    removePage,
 } from '@dcloudio/uni-runtime'
 import { RedirectToOptions, RedirectToSuccess } from '../interface.uts'
-import { normalizeRouteOptions } from '../protocols.uts'
 import { RedirectToFailImpl } from '../unierror.uts'
 
 export const redirectTo = defineAsyncApi<RedirectToOptions, RedirectToSuccess>(

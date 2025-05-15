@@ -116,7 +116,6 @@ class UploadController {
 		clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-		clientBuilder.callTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.addInterceptor(new CookieInterceptor());
 
 		if (this.uploadExecutorService == null) {

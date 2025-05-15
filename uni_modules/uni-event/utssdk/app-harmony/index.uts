@@ -26,7 +26,7 @@ const emitterStore = new Map<string, IUniEventEmitter>()
 
 function getEmitter(): IUniEventEmitter {
     const mp = getCurrentMP()
-    const id = mp.id as string
+    const id = mp.appId as string
     if (emitterStore.has(id)) {
         return emitterStore.get(id) as IUniEventEmitter
     }

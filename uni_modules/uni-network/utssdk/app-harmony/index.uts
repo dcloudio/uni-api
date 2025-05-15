@@ -11,11 +11,11 @@ import {
     configMTLS
 } from './network/configMTLS.uts'
 
-
 export {
     RequestTask,
     RequestOptions,
     RequestSuccess,
+    RequestFail,
     Request,
     UploadTask,
     UploadFileOptions,
@@ -29,7 +29,30 @@ export {
     DownloadFile,
     ConfigMTLSOptions,
     ConfigMTLSSuccess,
-    ConfigMTLS
+    ConfigMTLS,
+    UploadFileCompleteCallback,
+    UploadFileFail,
+    UploadFileFailCallback,
+    UploadFileOptionFiles,
+    UploadFileProgressUpdateCallback,
+    UploadFileSuccessCallback,
+    DownloadFileProgressUpdateCallback,
+    DownloadFileComplete,
+    DownloadFileCompleteCallback,
+    DownloadFileFail,
+    DownloadFileFailCallback,
+    DownloadFileSuccessCallback,
+    RequestCompleteCallback,
+    RequestErrorCode,
+    RequestFailCallback,
+    RequestMethod,
+    RequestSuccessCallback,
+    ConfigMTLSComplete,
+    ConfigMTLSCompleteCallback,
+    ConfigMTLSFail,
+    ConfigMTLSFailCallback,
+    ConfigMTLSSuccessCallback,
+    Certificate,
 } from '../interface.uts'
 
 export {

@@ -38,9 +38,9 @@
           "name": "arrayBufferToBase64",
           "app": {
             "js": false,
-            "kotlin": false,
+            "kotlin": true,
             "swift": false,
-            "arkts": false
+            "arkts": true
           }
         }
       }

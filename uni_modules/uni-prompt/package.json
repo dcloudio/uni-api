@@ -71,7 +71,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+                        "x-arkts": false
 					}
 				},
 				"showActionSheet": {
@@ -79,7 +80,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+                        "x-arkts": false
 					}
 				}
 			}

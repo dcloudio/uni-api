@@ -10,17 +10,17 @@ export interface Uni {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.51"
      *    },
      *    "ios": {
      *      "osVer": "5.0",
-     *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "uniVer": "4.61",
+     *      "unixVer": "4.61"
      *    },
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "4.61"
      *    }
      *  },
      *  "web": {
@@ -71,7 +71,7 @@ export interface Uni {
      *  }
      * }
      */
-    base64ToArrayBuffer: Base64ToArrayBuffer;
+    base64ToArrayBuffer(base64: string): ArrayBuffer;
 }
 
 export type Base64ToArrayBuffer = (base64: string) => ArrayBuffer;

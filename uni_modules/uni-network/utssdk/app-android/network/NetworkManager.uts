@@ -93,7 +93,7 @@ class NetworkManager {
 
 	public request<T>(param: RequestOptions<T>, listener: NetworkRequestListener): RequestTask {
 		if(param.data != null){
-			const isValidateData = param.data instanceof UTSJSONObject || typeof(param.data) == 'string'
+			const isValidateData = param.data instanceof UTSJSONObject || typeof(param.data) == 'string' || param.data instanceof ArrayBuffer
 			if(!isValidateData){
 				let option = {};
 				option['statusCode'] = '-1';
@@ -128,7 +128,6 @@ class NetworkManager {
 		clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
-		clientBuilder.callTimeout(timeout, TimeUnit.MILLISECONDS);
 		clientBuilder.protocols(Collections.singletonList(Protocol.HTTP_1_1));
 
 		clientBuilder.addInterceptor(new CookieInterceptor());
@@ -223,10 +222,25 @@ class NetworkManager {
 				listener.onProgress(0);
 			}
 
-			let body: string = "";
+			let body: any = "";
 			if (param.data != null) {
 				if (typeof(param.data) == 'string') {
 					body = param.data as string;
+				}else if(param.data instanceof ArrayBuffer){
+					try {
+						body = (param.data as ArrayBuffer).toByteBuffer().array()
+					} catch (e: Exception) {
+						let option = {};
+						option['statusCode'] = '-1';
+						option['errorCode'] = '602001';
+						option['errorMsg'] = "request system error";
+						option['cause'] = e;
+						if (listener != null) {
+							listener.onComplete(option);
+						}
+						return null;
+					}
+					
 				} else if (param.data instanceof UTSJSONObject){
 					if(contentType.indexOf("application/x-www-form-urlencoded") == 0){
 						const data = param.data as UTSJSONObject;
@@ -239,10 +253,16 @@ class NetworkManager {
 					}else{
 						body = JSON.stringify(param.data);
 					}
-				}
+				} 
 			}
-			let requestBody = RequestBody.create(MediaType.parse(contentType), body);
-			requestBilder.method(param.method, requestBody);
+			if(body instanceof ByteArray){
+				let requestBody = RequestBody.create(MediaType.parse(contentType), body as ByteArray);
+				requestBilder.method(param.method, requestBody);
+			}else{
+				let requestBody = RequestBody.create(MediaType.parse(contentType), body as string);
+				requestBilder.method(param.method, requestBody);
+			}
+
 			if (listener != null) {
 				listener.onProgress(100);
 			}

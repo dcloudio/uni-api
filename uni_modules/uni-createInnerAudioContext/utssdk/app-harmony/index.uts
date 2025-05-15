@@ -1,5 +1,6 @@
 import { media } from '@kit.MediaKit';
 import { audio } from '@kit.AudioKit';
+import { getRealPath } from '@dcloudio/uni-runtime'
 
 import { InnerAudioContext, CreateInnerAudioContext, type ICreateInnerAudioContextFail } from '../interface.uts';
 import { API_CREATE_INNER_AUDIO_CONTEXT } from '../protocol.uts';
@@ -24,6 +25,7 @@ class STATE_TYPE {
 }
 
 class AudioPlayer implements InnerAudioContext {
+  __v_skip: boolean = true
   private audioPlayerCallback: AudioPlayerCallback = new AudioPlayerCallback()
 
   private _volume: number = 1
@@ -133,6 +135,7 @@ class AudioPlayer implements InnerAudioContext {
       this.audioPlayerCallback.error(new AudioPlayerError(`player is not exist`, 10001))
       return;
     }
+    value = getRealPath(value)
     if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
       LOG(`set src: ${value} is invalid`);
       return;
@@ -214,14 +217,15 @@ class AudioPlayer implements InnerAudioContext {
     if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(audioPlayer.state)) { return; }
 
     audioPlayer.stop();
+    audioPlayer.reset()
+    audioPlayer.src = this.src
     this.audioPlayerCallback.stop();
-    audioPlayer.release();
   }
   seek(position: number) {
     const audioPlayer = AUDIO_PLAYERS[this.audioId];
     if (!audioPlayer) { return; }
     const state = audioPlayer.state;
-    if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING].includes(state)) {
+    if (![STATE_TYPE.PAUSED, STATE_TYPE.PLAYING, STATE_TYPE.IDLE].includes(state)) {
       return;
     }
     this.audioPlayerCallback.seeking()

@@ -16,11 +16,13 @@ import {
     MediaUniErrors
 } from '../../unierror.uts'
 import {
+    getEnv,
     getResourceStr,
 } from '@dcloudio/uni-runtime'
 import fs from '@ohos.file.fs';
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
 import common from '@ohos.app.ability.common';
+import fileUri from '@ohos.file.fileuri';
 
 async function saveResource(src: Resource, dest: string) {
     const context = UTSHarmony.getUIAbilityContext() as common.UIAbilityContext
@@ -28,7 +30,7 @@ async function saveResource(src: Resource, dest: string) {
     const srcPath: string = src.params?.[0] as string
     const destFile = fs.openSync(dest, fs.OpenMode.WRITE_ONLY)
     const content = await resourceManager.getRawFileContent(srcPath)
-    await fs.write(destFile.fd, content.buffer)
+    await fs.write(destFile.fd, content.buffer as ArrayBuffer)
     await fs.close(destFile)
 }
 
@@ -52,6 +54,15 @@ async function saveUri(src: string, dest: string) {
 interface ISaveMediaError {
     code: number
     message: string
+}
+
+function fileExists(filePath: string): boolean {
+    try {
+        fs.statSync(filePath)
+        return true
+    } catch (error) {
+        return false
+    }
 }
 
 async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promise<string | ISaveMediaError> {
@@ -80,8 +91,37 @@ async function saveMediaToAlbum(fromUri: string, type: 'image' | 'video'): Promi
             photoType: type === 'image' ? photoAccessHelper.PhotoType.IMAGE : photoAccessHelper.PhotoType.VIDEO,
         }
     ];
+    let showUri = ''
+    if (isResource) {
+        showUri = fromUri
+    } else if (realPath.startsWith('file:///data')) {
+        showUri = fileUri.getUriFromPath(realPath.slice(7))
+    } else if (realPath.startsWith('file://')) {
+        showUri = realPath
+    } else {
+        showUri = fileUri.getUriFromPath(realPath)
+    }
+
+    // 已知resfile下的文件无法预览，但是能保存成功。增加保存到沙箱的步骤使预览图能显示。https://issuereporter.developer.huawei.com/detail/250228115246024/comment
+    const resourceDir = getContext().resourceDir
+    if (showUri.indexOf(resourceDir + '/') > -1) {
+        const saveMediaCachePath = getEnv().TEMP_PATH + '/saveMediaCache'
+        if (!fileExists(saveMediaCachePath)) {
+            fs.mkdirSync(saveMediaCachePath, true)
+        }
+        const cachedFileName = saveMediaCachePath + '/' + fileName
+        const srcFile = await fs.open(showUri, fs.OpenMode.READ_ONLY)
+        if (fileExists(cachedFileName)) {
+            await fs.unlink(cachedFileName)
+        }
+        const destFile = await fs.open(saveMediaCachePath + '/' + fileName, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE)
+        await fs.copyFile(srcFile.fd, destFile.fd)
+        await fs.close(srcFile)
+        await fs.close(destFile)
+        showUri = fileUri.getUriFromPath(cachedFileName)
+    }
     const desFileUris: Array<string> = await phAccessHelper.showAssetsCreationDialog([
-        fromUri // 此路径没什么用，即使是resource资源对应的路径也不影响
+        showUri
     ], photoCreationConfigs);
     if (!desFileUris || desFileUris.length === 0) {
         return {
@@ -148,4 +188,3 @@ export const saveVideoToPhotosAlbum: SaveVideoToPhotosAlbum =
         },
         SaveVideoToPhotosAlbumApiProtocol
     ) as SaveVideoToPhotosAlbum
-

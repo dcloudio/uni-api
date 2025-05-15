@@ -70,10 +70,10 @@ export interface Uni {
      *  }
      * }
      */
-    createIntersectionObserver: CreateIntersectionObserver;
+    createIntersectionObserver(component: any, options?: CreateIntersectionObserverOptions | null): IntersectionObserver;
 }
 
-export type CreateIntersectionObserver = (component: any, options: CreateIntersectionObserverOptions) => IntersectionObserver;
+export type CreateIntersectionObserver = (component: any, options?: CreateIntersectionObserverOptions | null) => IntersectionObserver;
 
 export interface CreateIntersectionObserverOptions {
     /**

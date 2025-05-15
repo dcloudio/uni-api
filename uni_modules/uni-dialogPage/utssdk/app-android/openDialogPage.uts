@@ -3,8 +3,8 @@ import {
     ANIMATION_TYPE,
     NAVIGATE_TO,
     navigateDialogPage,
+    normalizeRouteOptions,
 } from '@dcloudio/uni-runtime'
-import { normalizeRouteOptions } from '../protocols.uts'
 import {
     DEFAULT_ANIMATION_DURATION,
     DEFAULT_ANIMATION_IN,

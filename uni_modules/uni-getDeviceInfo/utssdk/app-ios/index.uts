@@ -5,6 +5,10 @@ import { DeviceUtil } from './device/DeviceUtil.uts';
 import { GetDeviceInfo, GetDeviceInfoOptions, GetDeviceInfoResult } from '../interface.uts'
 import { UIScreen , UIDevice ,UIApplication } from 'UIKit';
 
+export function isSimulator(): boolean {
+	return UTSiOS.isSimulator()
+}
+
 export const getDeviceInfo : GetDeviceInfo = (config : GetDeviceInfoOptions | null) : GetDeviceInfoResult => {
 	let filter : Array<string> = [];
 	if (config != null && config?.filter != null) {

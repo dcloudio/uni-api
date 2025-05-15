@@ -32,6 +32,19 @@
     },
     "uni_modules": {
         "encrypt": [],
+        "uni-ext-api": {
+            "uni": {
+                "loadFontFace": {
+                    "name": "loadFontFace",
+                    "app": {
+                        "js": false,
+                        "kotlin": false,
+                        "swift": false,
+                        "arkts": true
+                    }
+                }
+            }
+        },
         "platforms": {
             "cloud": {
                 "tcb": "u",

@@ -1,0 +1,6 @@
+import {
+    GetLocationOptions,
+} from '../interface.uts'
+export interface UniLocationProvider extends UniProvider {
+    getLocation(options: GetLocationOptions): void;
+}

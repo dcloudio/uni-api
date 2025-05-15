@@ -20,10 +20,14 @@ import UniConfig from 'io.dcloud.uniapp.framework.UniConfig';
 import Cursor from 'android.database.Cursor';
 import OpenableColumns from 'android.provider.OpenableColumns';
 import Uri from 'android.net.Uri';
+import Bitmap from 'android.graphics.Bitmap';
+import OutputStream from 'java.io.OutputStream';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import DecimalFormat from 'java.text.DecimalFormat';
 
 const ASSETS_PATH = '/android_asset/'
 
-export function getVideoMetadata(src : string) : any {
+export function getVideoMetadata(src : string, filePath : string | null) : any {
 	let videoInfo : GetVideoInfoSuccess = {
 		duration: 0,
 		size: 0,
@@ -51,13 +55,20 @@ export function getVideoMetadata(src : string) : any {
 		let error = new MediaErrorImpl(1101003, UniError_GetVideoInfo);
 		return error
 	}
-	videoInfo.size = getMediaInfo(path) / 1024;
+	var byteSize = getMediaInfo(path)
+	videoInfo.byteSize = byteSize
+	videoInfo.size = formatNumber(byteSize / 1024.0);
 	try {
 		let retriever = new MediaMetadataRetriever()
 		if (path.startsWith("content://")) {
 			retriever.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(path))
 		} else {
 			retriever.setDataSource(path)
+		}
+		var firstFrameBitmap =
+			saveBitmapToLocalPath(retriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST_SYNC), filePath)
+		if (!firstFrameBitmap) {
+			filePath = ""
 		}
 		let durationStr : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
 		let width : number | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH)?.toFloat()
@@ -91,7 +102,7 @@ export function getVideoMetadata(src : string) : any {
 			} catch (e) {
 			}
 		}
-		let big : BigDecimal = BigDecimal.valueOf(duration.toDouble() / 1000).setScale(2, BigDecimal.ROUND_HALF_UP)
+		let big : BigDecimal = BigDecimal.valueOf(formatNumber(duration / 1000.0).toDouble()).setScale(2, BigDecimal.ROUND_HALF_UP)
 		videoInfo.duration = big.toFloat()
 		videoInfo.orientation = rotation!
 		let mimeType : string | null = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
@@ -119,7 +130,7 @@ export function getVideoMetadata(src : string) : any {
 				}
 			}
 		} else {
-			try { fpsNum = Math.ceil(((fps!!).toFloat() / (duration)) * 1000) } catch (e) { } // 沿用1.0设计，向上取整
+			try { fpsNum = Math.round(((fps!!).toFloat() / (duration)) * 1000) } catch (e) { } // 沿用1.0设计，向上取整
 		}
 		videoInfo.fps = fpsNum
 		return videoInfo
@@ -127,6 +138,32 @@ export function getVideoMetadata(src : string) : any {
 		let error = new MediaErrorImpl(1101010, UniError_GetVideoInfo);
 		return error
 	}
+}
+
+function saveBitmapToLocalPath(bitmap : Bitmap | null, filePath ?: string | null) : boolean {
+	if (TextUtils.isEmpty(filePath)) {
+		return false
+	}
+	var file = new File(filePath)
+	if (!file.parentFile.exists()) {
+		file.parentFile.mkdirs()
+	}
+	if (!file.exists()) {
+		file.createNewFile()
+	}
+	if (bitmap == null) {
+		return false
+	}
+	var os : OutputStream | null = null
+	try {
+		os = new FileOutputStream(file)
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os)
+	} catch (e) {
+		return false
+	} finally {
+		os?.close()
+	}
+	return true
 }
 
 
@@ -232,7 +269,7 @@ function getGlobalConfig() : UniConfig | null {
 export function getMediaInfo(path : string) : Long {
 	if (path.startsWith("content://")) {
 		var returnCursor : Cursor | null = null
-		var length:Long = 0
+		var length : Long = 0
 		try {
 			returnCursor = UTSAndroid.getAppContext()!.getContentResolver().query(Uri.parse(path), null, null, null, null);
 			if (returnCursor != null && returnCursor.moveToFirst()) {
@@ -254,7 +291,7 @@ export function getMediaInfo(path : string) : Long {
 			var size = stream?.available()
 			stream?.close()
 			return size!.toLong()
-		} catch (e) { 
+		} catch (e) {
 		}
 	} else {
 		var file = new File(path)
@@ -285,4 +322,10 @@ export function getFileName(path : string) : string {
 		}
 	}
 	return fileName
+}
+
+export function formatNumber(input:number):number {
+	let bd = DecimalFormat("#.###")
+	bd.setDecimalSeparatorAlwaysShown(false)
+	return bd.format(input).toFloat()
 }

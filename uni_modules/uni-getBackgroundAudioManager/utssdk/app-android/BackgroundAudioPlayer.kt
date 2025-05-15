@@ -42,6 +42,8 @@ import io.dcloud.uts.times
 import io.dcloud.uts.utsArrayOf
 import java.io.File
 import java.io.IOException
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
+import com.google.android.exoplayer2.metadata.Metadata;
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -127,12 +129,11 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
             cacheDataSourceFactory?.setUpstreamDataSourceFactory(httpDataSourceFactory)
                 ?.setCache(CacheManager.getSimpleCache())
                 ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
-            cacheDataSourceFactory?.let {
-                this.player.setMediaSource(
-                    ProgressiveMediaSource.Factory(it)
-                        .createMediaSource(mediaItem)
-                )
-            }
+			val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
+			cacheDataSourceFactory?.let {
+				defaultMediaSource.setDataSourceFactory(it)
+			}
+			this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
         } else {
             this.player.setMediaItem(mediaItem);
         }
@@ -155,7 +156,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     override var duration: Number
         get(): Number {
             if (this.player.playbackState == Player.STATE_READY || this.player.playbackState == Player.STATE_ENDED) {
-                return this.player.duration / 1000;
+                return this.player.duration.toDouble() / 1000;
             } else {
                 return 0;
             }
@@ -163,7 +164,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
         set(_) {}
     override var currentTime: Number
         get(): Number {
-            return this.player.currentPosition / 1000;
+            return this.player.currentPosition.toDouble() / 1000;
         }
         set(currentTime) {
             val positionInMillis = (currentTime.toDouble() * 1000).toLong()
@@ -176,7 +177,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
         set(_) {}
     override var buffered: Number
         get(): Number {
-            return this.player.bufferedPosition;
+            return this.player.bufferedPosition / 1000f;
         }
         set(_) {}
     open var _playbackRate: Number = 1.0;
@@ -396,7 +397,9 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
                 }
             }
         } else if (playbackState == Player.STATE_ENDED) {
-            invokeCallBack("ended")
+            if (playWhenReady){
+                invokeCallBack("ended")
+            }
             AudioService.audioService?.onEnd()
             this.player.playWhenReady = false
             this.player.seekTo(0)
@@ -404,6 +407,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     }
 
     override fun onPlayerError(error: PlaybackException) {
+        error.printStackTrace()
         var fail = CreateBackgroundAudioFailImpl(1107605)
         error.message?.let {
             fail.errMsg = it
@@ -451,6 +455,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {}
     override fun onPlayerErrorChanged(error: PlaybackException?) {}
     override fun onPositionDiscontinuity(reason: Int) {}
+	override fun onMetadata(metadata:Metadata) {}
     override fun onPositionDiscontinuity(
         oldPosition: Player.PositionInfo,
         newPosition: Player.PositionInfo,

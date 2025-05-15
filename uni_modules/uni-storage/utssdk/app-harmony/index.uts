@@ -63,7 +63,13 @@ export {
 
 function parseStorageValue(value: string): any {
     try {
+        // #ifdef UNI-APP-X
+        const valueObj: ESObject = globalThis.UTS.JSON.parse(value);
+        return valueObj ? valueObj.data : value;
+        // #endif
+        // #ifndef UNI-APP-X
         return JSON.parse(value).data;
+        // #endif
     } catch (e) {
         return value;
     }
@@ -76,7 +82,7 @@ function stringifyStorageValue(value: any): string {
 // TODO 回收Preference
 const stores = new Map<string, dataPreferences.Preferences>()
 function createStore(): dataPreferences.Preferences {
-    const id = getCurrentMP().id
+    const id = getCurrentMP().appId
     if (stores.has(id)) {
         return stores.get(id)!
     }
@@ -220,6 +226,3 @@ export {
     getStorageInfoSync,
     getStorageInfo,
 }
-
-
-

@@ -14,6 +14,7 @@ import Looper from 'android.os.Looper';
 import Class from 'java.lang.Class';
 import Type from 'java.lang.reflect.Type';
 import Gson from "io.dcloud.uts.gson.Gson";
+import ByteBuffer from 'java.nio.ByteBuffer';
 
 let charsetPattern = Pattern.compile('charset=([a-z0-9-]+)')
 
@@ -139,7 +140,12 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 						}
 					} else if("java.lang.String".equals(this.clzName, true)){
 						result['data'] = option['errorMsg'] ?? "error";
-					} else {
+					} else if("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)){
+						let textDecoder : TextEncoder = new TextEncoder()
+						let error :string= (option['errorMsg'] ?? "error") as string
+						let uint8Array = textDecoder.encode(error)
+						result['data'] = uint8Array.buffer
+					}else {
 						let errMsg = option['errorMsg'];
 						if (errMsg != null) {
 							let errMsgJson = JSON.parse<T>(errMsg as string, this.type);
@@ -175,36 +181,41 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 							}
 						}
 					}
-
-					let strData = this.readAsString(option['originalData'] as ByteArray, charset);
-
-					let type = kParam.responseType != null ? kParam.responseType : kParam.dataType;
-					if (type == null) {
-						type = charset;
-					}
-					if (kParam.method == "HEAD") {
-						type = "";
-					}
-
-					const data = this.parseData(strData, type);
-					if (data == null) {
-						let failResult = new RequestFailImpl(getErrcode(100001));
-
-						new RunnableTask(this.looper, () => {
-							if (kParam != null) {
-								let fail = kParam.fail;
-								if (fail != null) {
-									fail(failResult);
-								}
-								let complete = kParam.complete;
-								if (complete != null) {
-									complete(failResult);
-								}
-							}
-						}).execute();
-						return;
-					}
-
+					let data :any | null;
+				   if("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)){
+					  let by= option['originalData'] as ByteArray
+					  data =ArrayBuffer.fromByteBuffer(ByteBuffer.wrap(by))
+				   }else{
+					   let strData = this.readAsString(option['originalData'] as ByteArray, charset);
+					   
+					   let type = kParam.responseType != null ? kParam.responseType : kParam.dataType;
+					   if (type == null) {
+					   	type = charset;
+					   }
+					   if (kParam.method == "HEAD") {
+					   	type = "";
+					   }
+					   
+					   data = this.parseData(strData, type);
+					   if (data == null) {
+					   	let failResult = new RequestFailImpl(getErrcode(100001));
+					   
+					   	new RunnableTask(this.looper, () => {
+					   		if (kParam != null) {
+					   			let fail = kParam.fail;
+					   			if (fail != null) {
+					   				fail(failResult);
+					   			}
+					   			let complete = kParam.complete;
+					   			if (complete != null) {
+					   				complete(failResult);
+					   			}
+					   		}
+					   	}).execute();
+					   	return;
+					   }
+					   
+				   }
 					result['data'] = data;
 				}
 				result['statusText'] = StatusCode.getStatus(option['statusCode'] as string);

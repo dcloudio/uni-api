@@ -1,6 +1,5 @@
 import photoAccessHelper from '@ohos.file.photoAccessHelper'
-import { window } from '@kit.ArkUI';
-import { promptAction } from '@kit.ArkUI';
+import { uni } from '@dcloudio/uni-runtime'
 import { _chooseMedia, _ChooseMediaOptions } from './media.uts'
 import {
     ChooseVideoOptions,
@@ -17,11 +16,27 @@ import {
 } from '../../unierror.uts'
 import { CameraPosition, takeVideo, TakeVideoOptions } from './camera.uts'
 
+interface ChooseVideoShowActionSheetOptionsSuccessOptions {
+    tapIndex: number
+}
+
+interface ChooseVideoShowActionSheetOptionsFailOptions {
+    errMsg: string
+}
+
+interface ChooseVideoShowActionSheetOptions {
+    itemList: string[]
+    success?: (e: ChooseVideoShowActionSheetOptionsSuccessOptions) => void | null
+    fail?: (e: ChooseVideoShowActionSheetOptionsFailOptions) => void | null
+};
+
+const errSubject = 'uni-chooseVideo'
 const _chooseVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuccess>) => {
     _chooseMedia({
         mimeType: photoAccessHelper.PhotoViewMIMETypes.VIDEO_TYPE,
         sourceType: ["album"],
-        isOriginalSupported: options.compressed === false,
+        isOriginalSupported: options.compressed === true,
+        original: options.compressed === false
     } as _ChooseMediaOptions)
         .then((chooseMediaRes) => {
             const file = chooseMediaRes.tempFiles[0]
@@ -50,7 +65,7 @@ const _takeVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuc
         cameraType: options.camera! as CameraPosition,
         videoDuration: options.maxDuration!,
     }
-    takeVideo(takeVideoOptions).then(video => {
+    takeVideo(errSubject, takeVideoOptions).then(video => {
         res.resolve({
             tempFilePath: video.path,
             duration: video.duration,
@@ -59,7 +74,7 @@ const _takeVideo = (options: ChooseVideoOptions, res: ApiExecutor<ChooseVideoSuc
             height: video.height,
         } as ChooseVideoSuccess)
     }).catch((err: Error) => {
-        res.reject(err.message)
+        res.reject(err.message, err as ApiError);
     })
 }
 
@@ -72,30 +87,23 @@ export const chooseVideo: ChooseVideo =
             } else if (options.sourceType?.length === 1 && options.sourceType[0] === 'album') {
                 _chooseVideo(options, res)
             } else {
-                const lastWindow = UTSHarmony.getCurrentWindow() as window.Window
-                const UIContextPromptAction = await lastWindow.getUIContext().getPromptAction()
-                UIContextPromptAction.showActionMenu({
-                    buttons: [
-                        {
-                            text: '拍摄',
-                            color: '#000000'
-                        },
-                        {
-                            text: '从相册选择',
-                            color: '#000000'
-                        }
-                    ],
-                } as promptAction.ActionMenuOptions, (err, { index }) => {
-                    if (err) {
-                        res.reject('cancel')
-                    } else {
-                        if (index === 0) {
+                uni.showActionSheet({
+                    itemList: ['拍摄', '从相册选择'],
+                    success: (e) => {
+                        if (e.tapIndex === 0) {
                             _takeVideo(options, res)
-                        } else if (index === 1) {
+                        } else if (e.tapIndex === 1) {
                             _chooseVideo(options, res)
                         }
+                    },
+                    fail: (e) => {
+                        if (e.errMsg.includes('cancel')) {
+                            res.reject('cancel')
+                        } else {
+                            res.reject()
+                        }
                     }
-                })
+                } as ChooseVideoShowActionSheetOptions)
             }
         },
         ChooseVideoApiProtocol,

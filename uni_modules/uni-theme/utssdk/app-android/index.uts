@@ -1,4 +1,19 @@
-import { OnOsThemeChange, OnOsThemeChangeCallback, OffOsThemeChange, SetAppTheme, SetAppThemeOptions, SetAppThemeSuccessResult, OnAppThemeChangeCallback, OnAppThemeChange, OffAppThemeChange, OsThemeChangeResult, AppThemeChangeResult} from "../interface.uts";
+import { 
+	OnOsThemeChange, 
+	OnOsThemeChangeCallback, 
+	OffOsThemeChange, 
+	SetAppTheme, 
+	SetAppThemeOptions, 
+	SetAppThemeSuccessResult, 
+	OnAppThemeChangeCallback, 
+	OnAppThemeChange, 
+	OffAppThemeChange, 
+	OsThemeChangeResult, 
+	AppThemeChangeResult,
+	OnHostThemeChange, 
+	OnHostThemeChangeCallback, 
+	OnHostThemeChangeCallbackResult, 
+	OffHostThemeChange} from "../interface.uts";
 import { AppThemeFailImpl } from '../unierror.uts';
 
 export { OnHostThemeChangeCallbackResult, OnThemeChangeCallbackResult } from '../interface.uts';
@@ -43,4 +58,19 @@ export const onAppThemeChange: OnAppThemeChange = function(callback : OnAppTheme
 
 export const offAppThemeChange: OffAppThemeChange = function(id: number) {
 	UTSAndroid.offAppThemeChanged(id)
+}
+
+
+export const onHostThemeChange: OnHostThemeChange = function(callback: OnHostThemeChangeCallback): number{
+	return UTSAndroid.onOsThemeChanged(function(res: UTSJSONObject) {
+		const osTheme = res["osTheme"] as string
+		let result = {
+			hostTheme : osTheme === "dark" ? "dark" : "light"
+		} as OnHostThemeChangeCallbackResult
+		callback(result)
+	})
+}
+
+export const offHostThemeChange: OffHostThemeChange = function(id: number) {
+	UTSAndroid.offOsThemeChanged(id)
 }
