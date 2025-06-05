@@ -127,25 +127,17 @@ export interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "5.0",
-   *            "uniVer": "√",
    *            "unixVer": "4.33"
    *        },
    *        "ios": {
-   *            "osVer": "12.0",
-   *            "uniVer": "√",
    *            "unixVer": "4.33"
    *   	 	 	}
    *    },
    *  	"web": {
    *    	"unixVer": "4.33"
    *  	},
-   *		"mp": {
-   *			"weixin": {
-   *				"hostVer": "1.4.0",
-   *				"uniVer": "3.6.5",
-   *				"unixVer": "4.11"
-   *			}
+   *    "mp-weixin": {
+   *      "unixVer": "4.41"
    *  	}
    * }
    * @example
