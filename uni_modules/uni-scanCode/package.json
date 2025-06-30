@@ -32,7 +32,6 @@
     },
     "uni_modules": {
 		"pages":{
-			"app-ios":false,
 			"app-harmony":false
 		},
         "dependencies": [
@@ -49,7 +48,7 @@
                     "app": {
                         "js": false,
                         "kotlin": true,
-                        "swift": false,
+                        "swift": true,
                         "arkts": true
                     }
                 }

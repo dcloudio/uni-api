@@ -3,7 +3,8 @@ import { NetworkManager, NetworkRequestListener, NetworkUploadFileListener, Netw
 import { Data, HTTPURLResponse, NSError, NSNumber, ComparisonResult, RunLoop, Thread, JSONSerialization } from 'Foundation';
 import { StatusCode } from './network/StatusCode.uts';
 import { RequestFailImpl, UploadFileFailImpl, DownloadFileFailImpl, getErrcode } from '../unierror';
-
+import { NetworkUtil } from './network/utils/NetworkUtil.uts';
+import { CFString } from 'CoreFoundation';
 class SimpleNetworkListener<T> extends NetworkRequestListener {
 	private param : RequestOptions<T> | null = null;
 	private headers : Map<string, any> | null = null;
@@ -21,6 +22,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 
 	public override onHeadersReceived(statusCode : number, headers : Map<string, any>) : void {
 		this.headers = headers;
+		
 	}
 	public override onDataReceived(data : Data) : void {
 		this.received += Number.from(data.count);

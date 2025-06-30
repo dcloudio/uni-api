@@ -23,6 +23,7 @@ import FileInputStream from 'java.io.FileInputStream';
 import File from 'java.io.File';
 import ByteArrayOutputStream from 'java.io.ByteArrayOutputStream';
 import InputStream from 'java.io.InputStream';
+import AssetManager from 'android.content.res.AssetManager'
 import array from 'android.R.array';
 import Dialog from 'android.app.Dialog';
 
@@ -218,12 +219,20 @@ export class WaitingView{
 					path = UTSAndroid.getResourcePath(this.LoadingIcon)
 				}
 				if (path != null && path.length > 0) {
-					try {
-						let fis: FileInputStream = new FileInputStream(new File(path));
-						imageBytes = this.inputStreamToArray(fis);
-						fis.close()
-					} catch (e: Throwable) {
+					
+					if(path.startsWith("/android_asset/")){
+						// uni-app x 云打包模式下，返回的资源为asset风格，需要进行特殊处理
+						let assetImagePath = path.slice(15)
+						imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open(assetImagePath))
+					}else{
+						try {
+							let fis: FileInputStream = new FileInputStream(new File(path));
+							imageBytes = this.inputStreamToArray(fis);
+							fis.close()
+						} catch (e: Throwable) {
+						}
 					}
+					
 				}
 			} else {
 				return
@@ -286,6 +295,7 @@ export class WaitingView{
 				}
 			} while (true)
 			bos.close()
+			inputStream.close()
 			return bos.toByteArray()
 		} catch (e: Throwable) {
 			return null;

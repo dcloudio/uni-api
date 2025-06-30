@@ -26,6 +26,7 @@ export function scanCode(options: ScanCodeOptions | null): void {
 
     uni.openDialogPage({
         triggerParentHide: true,
+		animationType: "zoom-fade-out",
         url: `/uni_modules/uni-scanCode/pages/scanCode/scanCode?successEventName=${successEventName}&failEventName=${failEventName}&onlyFromCamera=${onlyFromCamera}`,
         fail(err) {
             uni.$off(successEventName);

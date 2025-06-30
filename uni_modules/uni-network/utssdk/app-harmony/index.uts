@@ -53,6 +53,10 @@ export {
     ConfigMTLSFailCallback,
     ConfigMTLSSuccessCallback,
     Certificate,
+    RequestTaskOnChunkReceivedCallback,
+    RequestTaskOnChunkReceivedListenerResult,
+    RequestTaskOnHeadersReceivedCallback,
+    RequestTaskOnHeadersReceivedListenerResult
 } from '../interface.uts'
 
 export {

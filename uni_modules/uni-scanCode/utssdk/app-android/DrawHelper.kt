@@ -15,9 +15,6 @@ class DrawHelper {
             Handler(Looper.getMainLooper()).post {
                 imageView.setImageBitmap(bitmap)
                 imageView.scaleType = ImageView.ScaleType.FIT_XY
-                if (bitmap.isRecycled) {
-                    bitmap.recycle()
-                }
             }
         }
 
@@ -63,9 +60,6 @@ class DrawHelper {
                         Handler(Looper.getMainLooper()).post {
                             imageView.setImageBitmap(rotationBitmap)
                             imageView.scaleType = ImageView.ScaleType.FIT_XY
-                            if (rotationBitmap.isRecycled) {
-                                rotationBitmap.recycle()
-                            }
                         }
                     } catch (e: Exception) {
                         Log.e("aaa", "格式转换失败: ${e.message}")

@@ -15,7 +15,8 @@ export interface Uni {
      *		}
      *	});
      * ```
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#requestvirtualpayment
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#requestvirtualpayment
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/plugins/virtualPayment.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#requestvirtualpayment
      * @uniPlatform {
      *    "app": {
@@ -82,7 +83,7 @@ export interface Uni {
 
     /**
     * @description 获取各平台虚拟支付的管理类，用于操作各平台专有的API。
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getvirtualpaymentmanager
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getvirtualpaymentmanager
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getvirtualpaymentmanager
     * @uniPlatform {
     *  "app": {
@@ -126,7 +127,7 @@ export interface VirtualPaymentManager {
      *		}
      *	});
      * ```
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#restoretransactions
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#restoretransactions
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#restoretransactions
      * @uniPlatform {
      *    "app": {
@@ -160,7 +161,7 @@ export interface VirtualPaymentManager {
      *		}
      *	});
      * ```
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getunfinishedtransactions
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getunfinishedtransactions
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#getunfinishedtransactions
      * @uniPlatform {
      *    "app": {
@@ -193,7 +194,7 @@ export interface VirtualPaymentManager {
      *		}
      *	});
      * ```
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#finishtransaction
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#finishtransaction
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/virtual-payment.html#finishtransaction
      * @uniPlatform {
      *    "app": {

@@ -94,27 +94,31 @@ export type OnKeyboardHeightChangeCallbackResult = {
 // 	 *  }
 // 	 * }
 // 	 */
-// 	end : number 
+// 	end : number
 // }
 
 // export type GetSelectedTextRangeFail = {
-	
+
 // }
 
 export interface Uni {
 	/**
 	 * 隐藏键盘
+	 *
+	* @tutorial_uni_app https://uniapp.dcloud.net.cn/api/key.html#hidekeyboard
+	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/keyboard.html#hidekeyboard
+	* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/keyboard.html#hidekeyboard
 	 * @uniPlatform {
 	 *    "app": {
 	 *      "android": {
-	*        "osVer": "12.0",
+	*        "osVer": "5.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      },
 	 *      "ios": {
 	*        "osVer": "12.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      },
 	 *      "harmony": {
 	 *        "osVer": "3.0",
@@ -172,45 +176,51 @@ export interface Uni {
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 */
 	hideKeyboard(options ?: HideKeyboardOptions | null) : void;
-	
+
 	/**
 	 * 监听键盘高度变化事件
+	* @tutorial_uni_app https://uniapp.dcloud.net.cn/api/key.html#onkeyboardheightchange
+	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/keyboard.html#onkeyboardheightchange
+	* @tutorial https://uniapp.dcloud.net.cn/api/key.html#onkeyboardheightchange
 	 * @uniPlatform {
 	 *    "app": {
 	 *      "android": {
-	*        "osVer": "12.0",
+	*        "osVer": "5.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      },
 	 *      "ios": {
 	*        "osVer": "12.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      }
 	 *  }
 	 * }
 	 */
 	onKeyboardHeightChange(callback: OnKeyboardHeightChangeCallback): number
-	
+
 	/**
 	 * 移除键盘高度变化事件的监听函数
+	* @tutorial_uni_app https://uniapp.dcloud.net.cn/api/key.html#offkeyboardheightchange
+	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/keyboard.html#offkeyboardheightchange
+	* @tutorial https://uniapp.dcloud.net.cn/api/key.html#offkeyboardheightchange
 	 * @uniPlatform {
 	 *    "app": {
 	 *      "android": {
-	*        "osVer": "12.0",
+	*        "osVer": "5.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      },
 	 *      "ios": {
 	*        "osVer": "12.0",
 	*        "uniVer": "√",
-	*        "unixVer": "4.65"
+	*        "unixVer": "4.71"
 	*      }
 	 *  }
 	 * }
 	 */
 	offKeyboardHeightChange(id ?: number | null): void
-	
+
 	// getSelectedTextRange(options : GetSelectedTextRangeOptions): void
 }
 

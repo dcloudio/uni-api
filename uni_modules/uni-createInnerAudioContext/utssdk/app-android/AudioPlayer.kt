@@ -78,8 +78,7 @@ object CacheManager {
 }
 
 
-open class AudioPlayer : InnerAudioContext, Player.Listener,
-    AudioManager.OnAudioFocusChangeListener {
+open class AudioPlayer : InnerAudioContext, Player.Listener {
     open var _src: String = "";
     private var cacheDataSourceFactory: CacheDataSource.Factory? = null
     override var src: String
@@ -307,7 +306,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
             this.isPausedByUser = false;
             this.player.playWhenReady = true;
 //            this.registerAudioManager();
-
+			AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).requestAudioFocus()
         } catch (e: Exception) {
             var fail = CreateInnerAudioContextFailImpl(1107601)
             e.message?.let {
@@ -321,11 +320,6 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
         this.isPausedByUser = true;
         this.player.playWhenReady = false;
         this.player.pause();
-        console.log(
-            "pause",
-            this.player.playbackState,
-            this.player.playbackState == Player.STATE_IDLE
-        );
 //        this.unregisterAudioManager();
         invokeCallBack("pause")
     }
@@ -377,13 +371,6 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
 //    open fun unregisterAudioManager() {
 //        this.audioManager.abandonAudioFocus(this);
 //    }
-
-    override fun onAudioFocusChange(focusChange: Int) {
-        if (focusChange == AudioManager.AUDIOFOCUS_LOSS || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-            this.pause();
-        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-        }
-    }
 
     open fun addEvent(action: String, callback: EventCallback) {
         var playArray = this.callbacks.get(action);

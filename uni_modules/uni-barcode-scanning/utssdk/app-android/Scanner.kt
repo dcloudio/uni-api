@@ -26,6 +26,7 @@ import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
+import androidx.core.graphics.scale
 
 class Scanner {
     interface ScannerCallback {
@@ -77,7 +78,7 @@ class Scanner {
             scannerCallback?.onLight(analyzeBrightness(imageProxy))
 
             var bitmap = imageProxy.toBitmap()
-            if (width != -1 && height != -1) {
+            if (width > 0 && height > 0) {
                 bitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees)
                 //bitmap转为16：9
                 if (bitmap.height / bitmap.width.toFloat() > height / width.toFloat()) {
@@ -88,7 +89,7 @@ class Scanner {
                     bitmap = cropBitmap(bitmap, newWith, bitmap.height)
                 }
                 //大小控制和预览一样
-                bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+                bitmap = bitmap.scale(width, height)
             }
 
             val inputImage = InputImage.fromBitmap(bitmap, 0)
@@ -128,9 +129,11 @@ class Scanner {
                     // 如果是 content:// 格式，直接解析
                     Uri.parse(filePath)
                 }
-				filePath.startsWith("file://") -> {
+
+                filePath.startsWith("file://") -> {
                     Uri.fromFile(File(filePath.substring(7))) // 去掉 file:// 前缀
                 }
+
                 else -> {
                     null
                 }
@@ -192,6 +195,25 @@ class Scanner {
                 barcodeScanner.let {
                     it.process(image)
                         .addOnSuccessListener { barcodes ->
+                            if (!isVideoFrame) {
+                                if (barcodes.size == 0) {
+                                    scannerCallback?.onScanFailure("no barcode found")
+                                    return@addOnSuccessListener
+                                } else {
+                                    var isEmptyOfRawBytes = false
+                                    for (barcode in barcodes) {
+                                        if (barcode.rawBytes != null && barcode.rawBytes?.size == 0) {
+                                            isEmptyOfRawBytes = true
+                                            break
+                                        }
+                                    }
+                                    if (isEmptyOfRawBytes) {
+                                        scannerCallback?.onScanFailure("no barcode found")
+                                        return@addOnSuccessListener
+                                    }
+                                }
+                            }
+
                             var needZoom = false
                             val barcodeInformation = mutableListOf<BarcodeInformation>()
                             for (barcode in barcodes) {

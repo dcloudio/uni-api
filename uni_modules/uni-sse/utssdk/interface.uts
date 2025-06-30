@@ -2,15 +2,14 @@
 export type ConnectEventSourceOptions = {
 	/**
 	 * 服务器地址
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -34,15 +33,14 @@ export type ConnectEventSourceOptions = {
 	url : string,
 	/**
 	 * 请求头
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.61",
-	        "unixUtsPlugin": "4.61"
+	        "unixVer": "4.61"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -71,16 +69,17 @@ export type ConnectEventSourceErrorCallback = (error : UniError) => void
 export interface Uni {
   /**
    * 连接 SSE
-   * @param {ConnectEventSourceOptions} options 
-   * @uniPlatform 
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/connect-event-source.html#connecteventsource
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/connect-event-source.html#connecteventsource
+   * @param {ConnectEventSourceOptions} options
+   * @uniPlatform
     {
       "app": {
         "android": {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -108,15 +107,14 @@ export interface UniEventSource {
 	/**
 	 *  message 事件，会在通过事件源收到数据时触发。
 	 * @param {ConnectEventSourceCallback} callback  事件回调
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -141,15 +139,14 @@ export interface UniEventSource {
 	/**
 	 * onerror 是当发生错误且这个错误事件（error）被 UniEventSource 触发时调用的一个事件处理函数。
 	 * @param {ConnectEventSourceErrorCallback} callback  事件回调
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -174,15 +171,14 @@ export interface UniEventSource {
 	/**
 	 * 一个事件处理器，它在收到 open 事件时被调用，在那时，连接刚被打开。
 	 * @param {ConnectEventSourceCallback} callback  事件回调
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -206,15 +202,14 @@ export interface UniEventSource {
 	onOpen(callback : ConnectEventSourceCallback) : void
 	/**
 	 * 关闭当前的连接
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -240,15 +235,14 @@ export interface UniEventSource {
 export class UniMessageEvent {
 	/**
 	 * 事件类型。
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -272,16 +266,15 @@ export class UniMessageEvent {
 	type : string | null = null;
 	/**
 	 * 消息发射器发出的数据。
-	 * @param {ConnectEventSourceOptions} options 
-	 * @uniPlatform 
+	 * @param {ConnectEventSourceOptions} options
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",
@@ -305,15 +298,14 @@ export class UniMessageEvent {
 	data : any | null = null;
 	/**
 	 * 一个字符串，表示事件的唯一 ID。
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
 	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
-	        "unixVer": "4.51",
-	        "unixUtsPlugin": "4.51"
+	        "unixVer": "4.51"
 	      },
 	      "ios": {
 	        "osVer": "12.0",

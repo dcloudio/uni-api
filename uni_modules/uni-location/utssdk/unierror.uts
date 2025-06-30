@@ -58,7 +58,11 @@ export const LocationUniErrors : Map<LocationErrorCode, string> = new Map([
 	/**
 	 * 腾讯定位只支持GCJ-02
 	 */
-	[1505607, 'GCJ-02 support only.'] 
+	[1505607, 'GCJ-02 support only.'],
+	/**
+	 * GPS 服务已关闭
+	 */
+	[1505608, "gps disabled"]
 ]);
 
 

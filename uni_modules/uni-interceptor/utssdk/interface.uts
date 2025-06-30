@@ -19,9 +19,9 @@ export interface Uni {
      * 添加拦截器
      * @param name 需要拦截的 API 名称
      * @param interceptor 拦截器
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/interceptor.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/interceptor.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -93,9 +93,9 @@ export interface Uni {
      * 删除拦截器
      * @param name 需要删除拦截器的 API 名称
      * @param interceptor 拦截器
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/interceptor.html#removeinterceptor
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html#removeinterceptor
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html#removeinterceptor
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/interceptor.html#removeinterceptor
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/interceptor.html#removeinterceptor
      * @uniPlatform {
      *  "app": {
      *    "android": {

@@ -6,7 +6,9 @@ export interface Uni {
    * 跳转系统授权管理页
    * @param {OpenAppAuthorizeSettingOptions}  options
    * @return {void}
-   * @tutorial http://uniapp.dcloud.io/api/system/openappauthorizesetting
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/open-app-authorize-setting.html#openappauthorizesetting
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/open-app-authorize-setting.html#openappauthorizesetting
+   * @tutorial_uni_app http://uniapp.dcloud.io/api/system/openappauthorizesetting
    * @uniPlatform
     {
       "app": {
@@ -14,8 +16,7 @@ export interface Uni {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -54,8 +55,7 @@ export type OpenAppAuthorizeSettingSuccess = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -89,8 +89,7 @@ export type OpenAppAuthorizeSettingFail = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -124,8 +123,7 @@ export type OpenAppAuthorizeSettingComplete = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -160,8 +158,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -194,8 +191,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",
@@ -228,8 +224,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
-          "unixVer": "4.51",
-          "unixUtsPlugin": "4.51"
+          "unixVer": "4.51"
         },
         "ios": {
           "osVer": "12.0",

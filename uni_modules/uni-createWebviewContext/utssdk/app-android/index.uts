@@ -1,4 +1,4 @@
-import { CreateWebviewContext, WebviewContext } from '../interface.uts';
+import { CreateWebviewContext, WebviewContext, UniWebviewContextLoadDataOptions } from '../interface.uts';
 
 export const createWebviewContext : CreateWebviewContext = function (webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null) : WebviewContext | null {
 	let webviewElement : UniElement | null = null;
@@ -40,5 +40,14 @@ class WebviewContextImpl implements WebviewContext {
 
 	override evalJS(js : string) {
 		this.webviewElement?.evalJS(js);
+	}
+
+	override loadData(options : UniWebviewContextLoadDataOptions) {
+		this.webviewElement?.loadData({
+			data: options.data,
+			baseURL: options.baseURL,
+			mimeType: options.mimeType,
+			encoding: options.encoding
+		} as UniWebViewElementLoadDataOptions);
 	}
 }

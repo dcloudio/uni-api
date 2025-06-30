@@ -2,9 +2,9 @@ export type OnLaunchOptions = {
     /**
      * 首次启动时的页面路径。返回值与App.onLaunch的回调参数一致
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -75,9 +75,9 @@ export type OnLaunchOptions = {
     /**
      * 首次启动时的Scheme。返回值与App.onLaunch的回调参数一致
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -148,9 +148,9 @@ export type OnLaunchOptions = {
     /**
      * 首次启动时的appLink。返回值与App.onLaunch的回调参数一致
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -226,9 +226,9 @@ export interface Uni {
     /**
      * 获取首次启动时的参数。返回值与App.onLaunch的回调参数一致
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-launch-options-sync.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/getLaunchOptionsSync.html
      * @uniPlatform {
      *  "app": {
      *    "android": {

@@ -49,6 +49,9 @@ private class CallbackWrapper: Equatable {
 typealias UniAudioEventCallback = (_ result: Any) -> Void
 typealias UniAudioErrorEventCallback = (_ result: ICreateInnerAudioContextFail) -> Void
 
+
+@objc(UniAudioPlayer)
+@objcMembers
 public class UniAudioPlayer: NSObject, InnerAudioContext {
     
     private lazy var playerItem: AVPlayerItem? = {
@@ -99,7 +102,7 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
         currentItem.status == .readyToPlay &&
         currentItem.isPlaybackLikelyToKeepUp
     }
-
+    
     private var _volume: NSNumber = 1.0 {
         didSet {
             player?.volume = _volume.toFloat()
@@ -124,6 +127,8 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     private var _readyToPlay = false //是否canPlay状态
     private var _cacheSize: Int64 = 100*1024*1024 //默认缓存大小100M
     private var _hasAddObservers = false //是否添加了观察者
+    private var _isPlayingBeforeInterruption = false //电话、闹铃等系统行为打断前是否正在播放
+    private var _isPlayingBeforeResignActive = false //进入非活跃状态（后台、下拉系统状态栏）
     
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
     private var errorEventCallBacks: [UniAudioErrorEventCallback] = []
@@ -312,6 +317,7 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     }
     
     public func play() {
+        configureAudioSession()
         innerPlay(needDispathEvent: true)
         _isManualPlay = true
         _isManualPause = false
@@ -455,7 +461,31 @@ extension UniAudioPlayer {
         }
         player?.rate = playbackRate?.toFloat() ?? 1.0
     }
+    
+    // 配置音频会话，支持混音播放
+    private func configureAudioSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        let isOtherAppAudioPlaying = audioSession.secondaryAudioShouldBeSilencedHint && audioSession.isOtherAudioPlaying
 
+        do {
+            if isOtherAppAudioPlaying {
+                try audioSession.setCategory(.ambient, mode: .default)
+                // 可考虑不播放或提示用户
+            } else {
+                try audioSession.setCategory(.playback, mode: .default)
+                // 正常播放
+            }
+            try audioSession.setActive(true)
+        } catch {
+            UNILogDebug("======audio======, Failed to set up audio session: \(error)")
+        }
+        
+        // 如果背景音频正在播放，需要重新设置下 MPNowPlayingInfoCenter 状态
+        if isOtherAppAudioPlaying == false {
+            let nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        }
+    }
     // 设置播放源并更新 AVPlayerItem
     private func updatePlayerItem() {
         guard let player = player else { return }
@@ -635,6 +665,8 @@ extension UniAudioPlayer {
             currentItem.addObserver(self, forKeyPath: UniAudioObserveKeypath.playbackBufferEmpty.rawValue, options: .new, context: nil)
             currentItem.addObserver(self, forKeyPath: UniAudioObserveKeypath.playbackLikelyToKeepUp.rawValue, options: .new, context: nil)
         }
+        addListenerInterruption()
+        
         //监听播放完毕
         NotificationCenter.default.addObserver(
             self,
@@ -642,8 +674,40 @@ extension UniAudioPlayer {
             name: AVPlayerItem.didPlayToEndTimeNotification,
             object: playerItem
         )
+        
+        //监听即将进入非活跃状态
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppStateChange),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+        
+        //监听进入活跃状态
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppStateChange),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
         _hasAddObservers = true
     }
+    
+    @objc private func handleAppStateChange(notification: Notification) {
+        if notification.name == UIApplication.willResignActiveNotification {
+            if paused == false {
+                _isPlayingBeforeResignActive = true
+                pause()
+            } else {
+                _isPlayingBeforeResignActive = false
+            }
+        } else if notification.name == UIApplication.didBecomeActiveNotification {
+            if _isPlayingBeforeResignActive {
+                play()
+            }
+        }
+    }
+    
     
     @objc private func playerDidFinishPlaying(_ notification: Notification) {
         innerSeek(0)
@@ -666,8 +730,11 @@ extension UniAudioPlayer {
             currentItem.removeObserver(self, forKeyPath: UniAudioObserveKeypath.playbackLikelyToKeepUp.rawValue, context: nil)
         }
         NotificationCenter.default.removeObserver(self, name: AVPlayerItem.didPlayToEndTimeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         
         player?.replaceCurrentItem(with: nil)
+        removeListenerInterruption()
         _hasAddObservers = false
     }
     
@@ -729,6 +796,75 @@ extension UniAudioPlayer {
             failedAction(117605)
         }
     }
+    
+    private func addListenerInterruption() {
+        // 监听音频被其他三方中断
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleInterruption(_:)),
+            name: AVAudioSession.interruptionNotification,
+            object: nil
+        )
+            
+        // 监听耳机或其他音频设备插拔
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(audioRouteChangeListenerCallback(_:)),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
+    }
+    
+    private func removeListenerInterruption() {
+        NotificationCenter.default.removeObserver(self, name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: AVAudioSession.routeChangeNotification, object: nil)
+    }
+    
+    @objc private func handleInterruption(_ notification: Notification) {
+        UNILogDebug("======audio======, 监听音频被其他三方中断")
+        guard let userInfo = notification.userInfo,
+              let interruptionTypeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeValue) else {
+            return
+        }
+        
+        switch interruptionType {
+        case .began:
+            UNILogDebug("======audio======, 音频中断开始")
+            _isPlayingBeforeInterruption = !paused
+            if _isPlayingBeforeInterruption {
+                pause()
+            }
+        case .ended:
+            UNILogDebug("======audio======, 音频中断结束时的处理逻辑")
+            if _isPlayingBeforeInterruption {
+                play()
+            }
+        @unknown default:
+            break
+        }
+    }
+    
+    @objc private func audioRouteChangeListenerCallback(_ notification: Notification) {
+        UNILogDebug("======audio======, 监听耳机或其他音频设备插拔")
+        guard let interruptionDict = notification.userInfo,
+              let routeChangeReasonValue = interruptionDict[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let routeChangeReason = AVAudioSession.RouteChangeReason(rawValue: routeChangeReasonValue) else {
+            return
+        }
+        
+        switch routeChangeReason {
+        case .newDeviceAvailable:
+            UNILogDebug("======audio======, 耳机或其他音频设备插入")
+        case .oldDeviceUnavailable:
+            UNILogDebug("======audio======, 耳机或其他音频设备拔出")
+            pause()
+        case .categoryChange:
+            UNILogDebug("======audio======, 音频会话类别发生变化")
+        default:
+            break
+        }
+    }
 }
 
 extension NSNumber {
@@ -747,3 +883,4 @@ extension NSNumber {
         return formatter.number(from: formatter.string(from: self) ?? self.stringValue) ?? self
     }
 }
+

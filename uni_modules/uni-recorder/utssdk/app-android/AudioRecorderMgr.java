@@ -6,6 +6,8 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 import io.dcloud.uniapp.util.LogUtils;
 import io.dcloud.uniapp.util.PermissionCallback;
 import io.dcloud.uniapp.util.PermissionUtils;
@@ -17,6 +19,19 @@ import uts.sdk.modules.uniRecorder.recorder.RecordOption;
 import uts.sdk.modules.uniRecorder.recorder.RecorderUtil;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import io.dcloud.uts.UTSAndroid;
+import io.dcloud.uts.UTSArray;
+import io.dcloud.uts.UTSObject;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import io.dcloud.uts.UTSJSONObject;
+import io.dcloud.uts.json.IJsonStringify;
+import io.dcloud.uts.log.LogSelfV2;
 
 public class AudioRecorderMgr extends AbsAudio {
     AbsRecorder mNativeRecorder;
@@ -63,7 +78,7 @@ public class AudioRecorderMgr extends AbsAudio {
     private Function1<Object, Unit> mPauseCB;
     private Function1<Object, Unit> mResumeCB;
     private Function1<Object, Unit> mOnInterruptionBegin;
-	private boolean isStarted = false;
+    private boolean isStarted = false;
 
     public void setOnInterruptionBegin(Function1<Object, Unit> onInterruptionBegin) {
         this.mOnInterruptionBegin = onInterruptionBegin;
@@ -140,14 +155,10 @@ public class AudioRecorderMgr extends AbsAudio {
     public void startRecorder(final RecordOption pOption) {
         LogUtils.INSTANCE.d("AudioRecorderMgr", "startRecorder", pOption);
         mOption = pOption;
-        PermissionUtils.INSTANCE.requestPermission(UTSAndroid.INSTANCE.getUniActivity(), "android.permission.RECORD_AUDIO", new PermissionCallback() {
+        Function2<Boolean, List<String>, Unit> successCallback = new Function2<Boolean, List<String>, Unit>() {
             @Override
-            public void isAllGranted(boolean result) {
-				
-            }
-
-            @Override
-            public void onGranted(@NonNull String[] permissions) {
+            public Unit invoke(Boolean allRight, List<String> grantedList) {
+                // 权限请求成功
                 mAudioManager.requestAudioFocus(mAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
                 LogUtils.INSTANCE.d("AudioRecorderMgr", "onGranted", mOption.mFormat);
@@ -158,27 +169,27 @@ public class AudioRecorderMgr extends AbsAudio {
                             .setCallback(new RecorderCallback());
 
                     if (mOption.mFormat.equalsIgnoreCase("aac") && Build.VERSION.SDK_INT < 16) {
-						isStarted = false;
+                        isStarted = false;
                         if (AudioRecorderMgr.this.mErrorCB != null)
-                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107605,"the current system does not support AAC recording!"));
-                        return;
+                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107605, "the current system does not support AAC recording!"));
+                        return Unit.INSTANCE;
                     }
                     if (mOption.mFormat.equalsIgnoreCase("mp3") && !RecorderUtil.isContainMp3()) {
-						isStarted = false;
+                        isStarted = false;
                         if (AudioRecorderMgr.this.mErrorCB != null)
-                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107605,"the current application configuration does not support mp3"));
-                        return;
+                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107605, "the current application configuration does not support mp3"));
+                        return Unit.INSTANCE;
                     }
                     try {
                         mNativeRecorder.start();
                         LogUtils.INSTANCE.d("AudioRecorderMgr", "mStartCB", mStartCB);
-						isStarted = true;
+                        isStarted = true;
                         if (mStartCB != null) mStartCB.invoke("");
                     } catch (Exception e) {
                         e.printStackTrace();
-						isStarted = false;
+                        isStarted = false;
                         if (AudioRecorderMgr.this.mErrorCB != null)
-                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107606,e.getMessage()));
+                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107606, e.getMessage()));
                         stop();
                     }
                 } else {//wav与pcm格式
@@ -187,31 +198,34 @@ public class AudioRecorderMgr extends AbsAudio {
                     try {
                         mRecorder.start();
                         LogUtils.INSTANCE.d("AudioRecorderMgr", "mStartCB", mRecorder);
-						isStarted = true;
+                        isStarted = true;
                         if (mStartCB != null) mStartCB.invoke("");
                     } catch (Exception e) {
                         e.printStackTrace();
-						isStarted = false;
+                        isStarted = false;
                         if (AudioRecorderMgr.this.mErrorCB != null)
-                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107606,e.getMessage()));
+                            AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107606, e.getMessage()));
                         stop();
                     }
                 }
-
+                return Unit.INSTANCE;
             }
+        };
 
+        // 实现失败回调
+        Function2<Boolean, List<String>, Unit> failureCallback = new Function2<Boolean, List<String>, Unit>() {
             @Override
-            public void onDenied(@NonNull String[] permissions) {
-				isStarted = false;
+            public Unit invoke(Boolean doNotAskAgain, List<String> grantedList) {
+                // 权限请求失败
+                isStarted = false;
                 if (AudioRecorderMgr.this.mErrorCB != null)
-                    AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107601,""));
+                    AudioRecorderMgr.this.mErrorCB.invoke(new RecorderManagerFailImpl(1107601, ""));
+                return Unit.INSTANCE;
             }
-
-            @Override
-            public void onPermanentDenied(@NonNull String[] permissions) {
-
-            }
-        });
+        };
+        UTSAndroid.INSTANCE.requestSystemPermission(UTSAndroid.INSTANCE.getUniActivity(), new UTSArray<String>() {{
+            push("android.permission.RECORD_AUDIO");
+        }}, successCallback, failureCallback, false);
     }
 
 
@@ -234,21 +248,10 @@ public class AudioRecorderMgr extends AbsAudio {
 
     private void invokeStop() {
         stop();
-		if(isStarted == true) {
-			isStarted = false;
-        if (mStopCB != null) mStopCB.invoke(new RecorderManagerOnStopResult() {
-            @NonNull
-            @Override
-            public String getTempFilePath() {
-                return mOption.mFileName;
-            }
-
-            @Override
-            public void setTempFilePath(@NonNull String s) {
-
-            }
-        });
-		}
+        if (isStarted == true) {
+            isStarted = false;
+            if (mStopCB != null) mStopCB.invoke(new RecorderStopCallback(mOption.mFileName));
+        }
     }
 
     private void stop() {
@@ -262,5 +265,40 @@ public class AudioRecorderMgr extends AbsAudio {
     public static boolean isPause(String format) {
         return format.equalsIgnoreCase("mp3") || format.equalsIgnoreCase("aac");
     }
+	
+	private static class RecorderStopCallback implements RecorderManagerOnStopResult,io.dcloud.uts.json.IJsonStringify, LogSelfV2 {
+		
+		String tempFilePath = "";
+		
+		public RecorderStopCallback(String filePath) {
+			this.tempFilePath = filePath;
+		}
+		
+		@NonNull
+		@Override
+		public String getTempFilePath() {
+		    return this.tempFilePath;
+		}
+		
+		@Override
+		public void setTempFilePath(@NonNull String s) {
+		
+		}
+		
+        @Nullable
+        @Override
+        public Object toJSON() {
+            UTSJSONObject object = new UTSJSONObject();
+            object.set("tempFilePath",this.tempFilePath);
+            return object;
+        }
 
+        @NonNull
+        @Override
+        public Map<String, Object> toLogMap() {
+            Map<String, Object> map = new HashMap<>();
+            map.put("tempFilePath", this.tempFilePath);
+            return map;
+        }
+	}
 }

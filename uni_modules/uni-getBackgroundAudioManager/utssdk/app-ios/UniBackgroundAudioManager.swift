@@ -51,6 +51,8 @@ private class CallbackWrapper: Equatable {
 typealias UniBackgroundAudioEventCallback = (_ result: Any) -> Void
 typealias UniBackgroundAudioErrorEventCallback = (_ result: ICreateBackgroundAudioFail) -> Void
 
+@objc(UniBackgroundAudioManager)
+@objcMembers
 public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     public static var shared = UniBackgroundAudioManager()
     
@@ -118,7 +120,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         currentItem.status == .readyToPlay &&
         currentItem.isPlaybackLikelyToKeepUp
     }
-
+    
     private var _volume: NSNumber = 1.0 {
         didSet {
             player?.volume = _volume.toFloatA()
@@ -148,10 +150,10 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     private var _currentFailImpl: CreateBackgroundAudioFailImpl? = nil //当前播放出错error对象
     private var _isSeeking = false //是否是正在seeking状态
     private var _isAppActive = false //app是否正在前台状态
-    private var _hasConfigAudioSession = false //是否配置好了后台播放会话通道
     private var _readyToPlay = false //是否canPlay状态
     private var _cacheSize: Int64 = 100*1024*1024 //默认缓存大小100M
     private var _hasAddObservers = false //是否添加了观察者
+    private var _isPlayingBeforeInterruption = false //电话、闹铃等系统行为打断前是否正在播放
 
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
     private var errorEventCallBacks: [UniBackgroundAudioErrorEventCallback] = []
@@ -277,7 +279,6 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     public override init() {
         super.init()
         _isAppActive = true
-        configureAudioSession()
         configureRemoteCommandCenter()
         configurePlayer()
     }
@@ -421,7 +422,7 @@ extension UniBackgroundAudioManager {
         try? KTVHTTPCache.proxyStart()
         KTVHTTPCache.cacheSetMaxCacheLength(_cacheSize)
         KTVHTTPCache.cacheSetRootPath("Caches/uni-audio")
-
+        
         //配置MIME类型集
         let contentTypes: [String] = [
             "audio/wav",
@@ -899,8 +900,6 @@ extension UniBackgroundAudioManager {
     
     // 配置音频会话，支持后台播放
     private func configureAudioSession() {
-        if _hasConfigAudioSession { return }
-        _hasConfigAudioSession = true
         do {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.playback, mode: .default, options: [])
@@ -1068,7 +1067,6 @@ extension UniBackgroundAudioManager {
     private func clearPlayingCenterInfo() {
         UIApplication.shared.endReceivingRemoteControlEvents()
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
-        _hasConfigAudioSession = false
         try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: [])
     }
     
@@ -1106,10 +1104,15 @@ extension UniBackgroundAudioManager {
         switch interruptionType {
         case .began:
             UNILogDebug("======audio======, 音频中断开始")
-            pause()
+            _isPlayingBeforeInterruption = !paused
+            if _isPlayingBeforeInterruption {
+                pause()
+            }
         case .ended:
             UNILogDebug("======audio======, 音频中断结束时的处理逻辑")
-            play()
+            if _isPlayingBeforeInterruption {
+                play()
+            }
         @unknown default:
             break
         }
@@ -1146,5 +1149,6 @@ extension NSNumber {
         return Float(truncating: self)
     }
 }
+
 
 

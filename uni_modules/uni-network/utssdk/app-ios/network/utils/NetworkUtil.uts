@@ -1,0 +1,48 @@
+export class NetworkUtil {
+    public static convertHeaders(headers: Map<string, any> | null): UTSJSONObject {
+		
+		let simpleHeaders = new UTSJSONObject()
+        if (headers != null) {
+			headers!.forEach((value: any | null, key: string) => {
+				if (value == null) {
+					simpleHeaders.set(key, '')
+				} else {
+					simpleHeaders.set(key, value)
+				}
+			})
+        }
+        return simpleHeaders;
+    }
+
+    public static parseCookie(header : UTSJSONObject | null) : string[] {
+		if (header == null) {
+			return []
+		}
+		let cookiesStr = header!.getString('Set-Cookie') as string | null
+		if (cookiesStr == null) {
+			cookiesStr = header!.getString('set-cookie') as string | null
+		}
+		if (cookiesStr == null) {
+			return []
+		}
+		let cookiesArr = new Array<string>()
+		if (cookiesStr!.charAt(0) == "[" && cookiesStr!.charAt(cookiesStr!.length - 1) == "]") {
+			cookiesStr = cookiesStr!.slice(1, -1)
+		}
+
+		const handleCookiesArr = cookiesStr!.split(';')
+		for (let i = 0; i < handleCookiesArr.length; i++) {
+			if (handleCookiesArr[i].indexOf('Expires=') != -1 || handleCookiesArr[i].indexOf('expires=') != -1) {
+				cookiesArr.push(handleCookiesArr[i].replace(',', ''))
+			} else {
+				cookiesArr.push(handleCookiesArr[i])
+			}
+		}
+		cookiesArr = cookiesArr.join(';').split(',')
+
+		return cookiesArr
+	}
+
+
+}
+

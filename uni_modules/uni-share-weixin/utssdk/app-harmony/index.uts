@@ -1,0 +1,14 @@
+import { UniShareWeixinProvider } from '../interface.uts';
+import { authentication } from '@kit.AccountKit';
+import { util } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+export class UniShareWeixinProviderImpl implements UniShareWeixinProvider {
+    id: string = "weixin"
+    description: string = "微信分享"
+    constructor() { }
+    
+    share(options: ShareOptions) {
+      // TODO
+    }
+}

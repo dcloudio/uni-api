@@ -2,7 +2,7 @@ import { DownloadFileOptions, DownloadTask, DownloadFileProgressUpdateCallback, 
 import { NetworkDownloadFileListener } from '../NetworkManager.uts';
 import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionDownloadTask, NSError, URLSessionDownloadDelegate, URLRequest, FileManager, NSString, NSTemporaryDirectory, NSHomeDirectory , CharacterSet , HTTPURLResponse } from 'Foundation';
 import { } from 'CommonCrypto';
-import { UnsafeBufferPointer, UnsafeRawBufferPointer } from 'Swift';
+import { Int, UnsafeBufferPointer, UnsafeRawBufferPointer } from 'Swift';
 import { ObjCBool } from "ObjectiveC";
 
 class NetworkDownloadTaskImpl implements DownloadTask {

@@ -1,8 +1,8 @@
 export interface Uni {
   /**
     * 创建一个 WebSocket 连接。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#connectsocket
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#connectsocket
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#connectsocket
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#connectsocket
     * @uniPlatform
     {
@@ -11,8 +11,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -90,8 +89,8 @@ export interface Uni {
     * @description
     * 监听WebSocket连接打开事件。
     * @deprecated 已废弃，使用 SocketTask 的 onOpen 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketopen
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketopen
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketopen
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketopen
     * @uniPlatform
     {
@@ -100,8 +99,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -175,8 +173,8 @@ export interface Uni {
   /**
     * 监听WebSocket错误。
     * @deprecated 已废弃，使用 SocketTask 的 onError 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketerror
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketerror
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketerror
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketerror
     * @uniPlatform
     {
@@ -185,8 +183,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -260,8 +257,8 @@ export interface Uni {
   /**
     * 通过 WebSocket 连接发送数据，需要先 uni.connectSocket，并在 uni.onSocketOpen 回调之后才能发送。
     * @deprecated 已废弃，使用 SocketTask 的 send 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#sendsocketmessage
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#sendsocketmessage
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#sendsocketmessage
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#sendsocketmessage
     * @uniPlatform
     {
@@ -270,8 +267,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -345,8 +341,8 @@ export interface Uni {
   /**
     * 监听WebSocket接受到服务器的消息事件。
     * @deprecated 已废弃，使用 SocketTask 的 onMessage 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketmessage
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketmessage
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketmessage
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketmessage
     * @uniPlatform
     {
@@ -355,8 +351,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -430,8 +425,8 @@ export interface Uni {
   /**
     * 关闭 WebSocket 连接。
     * @deprecated 已废弃，使用 SocketTask 的 close 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#closesocket
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#closesocket
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#closesocket
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#closesocket
     * @uniPlatform
     {
@@ -440,8 +435,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -513,8 +507,8 @@ export interface Uni {
   /**
     * 监听WebSocket关闭。
     * @deprecated 已废弃，使用 SocketTask 的 onClose 替换。
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketclose
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/websocket.html#onsocketclose
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketclose
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onsocketclose
     * @uniPlatform
     {
@@ -523,8 +517,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -627,8 +620,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -699,8 +691,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -766,8 +757,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -884,8 +874,7 @@ export type SendSocketMessageOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -976,8 +965,7 @@ export type CloseSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1048,8 +1036,7 @@ export type CloseSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1139,8 +1126,7 @@ export type OnSocketOpenCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1213,8 +1199,7 @@ export type OnSocketMessageCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1279,8 +1264,8 @@ export type OnSocketMessageCallbackResult = {
 export interface SocketTask {
   /**
     * 通过 WebSocket 连接发送数据
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#send
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-send
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#send
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#send
     * @uniPlatform
     {
@@ -1289,8 +1274,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1361,8 +1345,8 @@ export interface SocketTask {
 
   /**
     * 关闭 WebSocket 连接
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#close
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-close
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#close
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#close
     * @uniPlatform
     {
@@ -1371,8 +1355,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1443,8 +1426,8 @@ export interface SocketTask {
 
   /**
     * 监听 WebSocket 连接打开事件
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onopen
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onopen
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onopen
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onopen
     * @uniPlatform
     {
@@ -1453,8 +1436,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1525,8 +1507,8 @@ export interface SocketTask {
 
   /**
     * 监听 WebSocket 连接关闭事件
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onclose
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onclose
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onclose
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onclose
     * @uniPlatform
     {
@@ -1535,8 +1517,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1610,8 +1591,8 @@ export interface SocketTask {
     * onError()
     * @description
     * 监听 WebSocket 错误
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onerror
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onerror
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onerror
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onerror
     * @uniPlatform
     {
@@ -1620,8 +1601,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1693,8 +1673,8 @@ export interface SocketTask {
 
   /**
     * 监听 WebSocket 接受到服务器的消息事件
-    *  @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
-    *  @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onmessage
+    *  @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/socket-task.html#sockettask-onmessage
+    *  @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onmessage
     *  @tutorial https://doc.dcloud.net.cn/uni-app-x/api/websocket-global.html#onmessage
     * @uniPlatform
     {
@@ -1703,8 +1683,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1803,8 +1782,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1874,8 +1852,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",

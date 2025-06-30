@@ -95,6 +95,503 @@ export interface Uni {
      */
     getLocation(options: GetLocationOptions): void;
 
+// #ifdef APP-ANDROID
+	/**
+	 * @description 开启应用进入前台时接收位置消息。
+	 * @param {StartLocationUpdateOptions} option
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	startLocationUpdate(options:StartLocationUpdateOptions):void
+	
+	/**
+	 * @description 关闭监听实时位置变化，前后台都停止消息接收。
+	 * @param {StopLocationUpdateOptions} option
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	stopLocationUpdate(options:StopLocationUpdateOptions):void
+	/**
+	 * @description 监听实时地理位置变化事件
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	onLocationChange(listener:OnLocationChangeCallback):number
+	/**
+	 * @description 移除实时地理位置变化事件。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	offLocationChange(listener?:number|OnLocationChangeCallback|null):void
+	
+	/**
+	 * @description 开始监听实时地理位置信息变化事件，应用进入前后台时均接收实时地理位置信息。
+	 * @param {StartLocationUpdateBackgroundOptions} option
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	startLocationUpdateBackground(options:StartLocationUpdateBackgroundOptions):void
+	/**
+	 * @description 监听持续定位接口返回失败时触发。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	onLocationChangeError(listener:OnLocationChangeErrorCallback):number
+	/**
+	 * @description 移除监听持续定位接口返回失败事件。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        },
+	 *    "harmony": {
+	 *      "osVer": "x",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "x"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	offLocationChangeError(listener?:number|OnLocationChangeErrorCallback|null):void
+// #endif
 }
 
 /**
@@ -511,7 +1008,26 @@ export type LocationErrorCode =
      *    }
      * }
      */
-    1505607;
+    1505607 |
+	/**
+	 * GPS 服务已关闭
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.73"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "x"
+	 *        }
+	 *    }
+	 * }
+	 */
+	1505608
+	;
 
 /**
  * 网络请求失败的错误回调参数
@@ -1768,3 +2284,65 @@ export type GetLocationOptions = {
      */
     complete?: GetLocationCompleteCallback | null
 };
+
+type StartLocationUpdateSuccessCallback = () => void;
+type StartLocationUpdateFailCallback = (result: IGetLocationFail) => void;
+type StartLocationUpdateComplete = any;
+type StartLocationUpdateCompleteCallback = (result: StartLocationUpdateComplete) => void;
+
+export type StartLocationUpdateOptions = {
+	provider?: string | null,
+	type?:
+
+	"wgs84" |
+
+	"gcj02" | null,
+	
+	success?: StartLocationUpdateSuccessCallback | null,
+	fail?: StartLocationUpdateFailCallback | null,
+	complete?: StartLocationUpdateCompleteCallback | null
+}
+
+export type StartLocationUpdate = (options: StartLocationUpdateOptions) => void;
+
+type StopLocationUpdateSuccessCallback = () => void;
+type StopLocationUpdateFailCallback = (result: IGetLocationFail) => void;
+type StopLocationUpdateComplete = any;
+type StopLocationUpdateCompleteCallback = (result: StopLocationUpdateComplete) => void;
+
+export type StopLocationUpdateOptions = {
+	provider?: string | null,
+	success?: StopLocationUpdateSuccessCallback | null,
+	fail?: StopLocationUpdateFailCallback | null,
+	complete?: StopLocationUpdateCompleteCallback | null
+}
+
+export type StopLocationUpdate = (options: StopLocationUpdateOptions) => void;
+
+export type OnLocationChangeResult = GetLocationSuccess
+export type OnLocationChangeCallback =(res:OnLocationChangeResult)=>void
+export type OnLocationChange = (listener:OnLocationChangeCallback)=>number
+export type OffLocationChange = (listener?:number|OnLocationChangeCallback|null)=>void
+
+export type OnLocationChangeErrorCallback =(listener:IGetLocationFail)=>void
+export type OnLocationChangeError = (listener:OnLocationChangeErrorCallback)=>number
+export type OffLocationChangeError = (listener?:number|OnLocationChangeErrorCallback|null)=>void
+
+type StartLocationUpdateBackgroundSuccessCallback = StartLocationUpdateSuccessCallback
+type StartLocationUpdateBackgroundFailCallback = (result: IGetLocationFail) => void;
+type StartLocationUpdateBackgroundComplete = any;
+type StartLocationUpdateBackgroundCompleteCallback = (result: StartLocationUpdateBackgroundComplete) => void;
+
+export type StartLocationUpdateBackgroundOptions = {
+	provider?: string | null,
+	type?:
+
+	"wgs84" |
+
+	"gcj02" | null,
+	
+	success?: StartLocationUpdateBackgroundSuccessCallback | null,
+	fail?: StartLocationUpdateBackgroundFailCallback | null,
+	complete?: StartLocationUpdateBackgroundCompleteCallback | null
+}
+export type StartLocationUpdateBackground = (options:StartLocationUpdateBackgroundOptions)=>void

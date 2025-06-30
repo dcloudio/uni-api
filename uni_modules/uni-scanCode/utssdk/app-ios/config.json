@@ -1,3 +1,7 @@
 {
-  "deploymentTarget": "12"
+  "deploymentTarget": "12",
+  "frameworks": [
+  	"AVFoundation.framework",
+  	"CoreImage.framework"
+  ]
 }

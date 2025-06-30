@@ -56,6 +56,9 @@ export type LegacyRemoveSavedFileOptions = {
 };
 
 export type LegacySavedFileListItem = {
+	/**
+	 * 文件路径。自 `4.65` 起，返回 `unifile://` 协议的路径
+	 */
     filePath: string;
     size: number;
     createTime: number;
@@ -83,6 +86,7 @@ export type GetSavedFileList = (options?: LegacyGetSavedFileListOptions | null) 
 export interface Uni {
     /**
      * 保存文件
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/file.html#savefile
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
@@ -143,6 +147,7 @@ export interface Uni {
     saveFile(options?: LegacySaveFileOptions | null): void;
     /**
      * 获取本地已保存的文件列表
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/file.html#getsavedfilelist
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
@@ -203,6 +208,7 @@ export interface Uni {
     getSavedFileList(options?: LegacyGetSavedFileListOptions | null): void;
     /**
      * 获取已保存到本地的文件信息
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/file.html#getsavedfileinfo
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
@@ -263,6 +269,7 @@ export interface Uni {
     getSavedFileInfo(options?: LegacyGetSavedFileInfoOptions | null): void;
     /**
      * 删除已保存的文件
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/file.html#removesavedfile
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
@@ -323,6 +330,7 @@ export interface Uni {
     removeSavedFile(options?: LegacyRemoveSavedFileOptions | null): void;
     /**
      * 获取文件信息
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/file.html#getfileinfo
      * @uniPlatform {
      *    "app": {
      *      "harmony": {

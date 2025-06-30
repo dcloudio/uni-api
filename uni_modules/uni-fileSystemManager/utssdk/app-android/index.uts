@@ -14,19 +14,12 @@ import FileOutputStream from 'java.io.FileOutputStream';
 import ZipInputStream from 'java.util.zip.ZipInputStream';
 import BufferedInputStream from 'java.io.BufferedInputStream';
 import BrotliInputStream from 'org.brotli.dec.BrotliInputStream'
-import Build from 'android.os.Build'
-import Environment from 'android.os.Environment'
-import Option from 'android.app.VoiceInteractor.PickOptionRequest.Option';
-import FileDescriptor from 'java.io.FileDescriptor';
 import ParcelFileDescriptor from 'android.os.ParcelFileDescriptor';
-import ByteBuffer from 'java.nio.ByteBuffer';
 import InputStream from 'java.io.InputStream';
-import DA from 'io.dcloud.common.cs.DA';
-import Op from 'androidx.fragment.app.FragmentTransaction.Op';
 import Uri from 'android.net.Uri'
-import { isSandyBoxPath } from './FileManagerUtil.uts'
+import { convertRealPathToUniPath, isSandyBoxPath, isUniSystemPath } from './FileManagerUtil.uts'
 
-
+const FILE_SYSTEM_MANAGER_SAVE_PATH = "uni-store/"
 
 class AndroidStats implements Stats, io.dcloud.uts.log.LogSelf, io.dcloud.uts.json.IJsonStringify {
 	/**
@@ -143,9 +136,9 @@ class AndroidFileSystemManager implements FileSystemManager {
 							return false
 						})
 						.iterator()
-						.forEach(function (file : File) {
+						.forEach( (file : File)=> {
 							let perFileStats : FileStats = {
-								path: file.getPath(),
+								path: this.replacePath(file.getPath(),targetFile.path),
 								stats: wrapStats(file)
 							}
 							res.add(perFileStats)
@@ -164,9 +157,12 @@ class AndroidFileSystemManager implements FileSystemManager {
 					// 默认是false,只读取当前一个文件
 					let mode = 0
 					let filesize = 0;
-
+					let realPath = ""
+					if(targetFile.isDirectory()) {
+						realPath = "/"
+					}
 					let rootFileStats : FileStats = {
-						path: targetFile.getPath(),
+						path: realPath,
 						stats: wrapStats(targetFile)
 					}
 					let res : Array<FileStats> = [rootFileStats]
@@ -182,6 +178,16 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			}, null)
 		}, null)
+	}
+	
+	private replacePath(path:string,absolutePath:string):string {
+		if(path.startsWith(absolutePath)) {
+			path = path.replace(absolutePath,"")
+			if(!path.startsWith("/")) {
+				path = "/"+path
+			}
+		}
+		return path
 	}
 
 	public statSync(path : string, recursive : boolean) : FileStats[] {
@@ -215,20 +221,22 @@ class AndroidFileSystemManager implements FileSystemManager {
 				.iterator()
 				.forEach(function (file : File) {
 					let perFileStats : FileStats = {
-						path: file.getPath(),
+						path: this.replacePath(file.getPath(),targetFile.path),
 						stats: wrapStats(file)
 					}
 					res.add(perFileStats)
 				})
-
 			return res
 		} else {
 			// 默认是false,只读取当前一个文件
 			let mode = 0
 			let filesize = 0;
-
+			let realPath = ""
+			if(targetFile.isDirectory()) {
+				realPath = "/"
+			}
 			let rootFileStats : FileStats = {
-				path: targetFile.getPath(),
+				path: realPath,
 				stats: wrapStats(targetFile)
 			}
 			return [rootFileStats]
@@ -361,11 +369,15 @@ class AndroidFileSystemManager implements FileSystemManager {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!);
 			}
 			let newFile = new File(newFilePath)
+			if(newFile.exists() && newFile.isDirectory) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300021, msgPrefix + FileSystemManagerUniErrors.get(1300021)!)
+			}
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
+				newFile.parentFile?.mkdirs()
 				/**
 				 * 父文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				// throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
 			}
 			newFile.writeBytes(byteArray)
 			if (!newFile.exists()) {
@@ -381,11 +393,15 @@ class AndroidFileSystemManager implements FileSystemManager {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
 			}
 			let newFile = new File(newFilePath)
+			if(newFile.exists() && newFile.isDirectory) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300021, msgPrefix + FileSystemManagerUniErrors.get(1300021)!)
+			}
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 				/**
 				 * 父文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				// throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				newFile.parentFile?.mkdirs()
 			}
 			
 			let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
@@ -413,11 +429,15 @@ class AndroidFileSystemManager implements FileSystemManager {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
 			}
 			let newFile = new File(newFilePath)
+			if(newFile.exists() && newFile.isDirectory) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300021, msgPrefix + FileSystemManagerUniErrors.get(1300021)!)
+			}
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 				/**
 				 * 父文件不存在
 				 */
-				throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				// throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+				newFile.parentFile?.mkdirs()
 			}
 
 			let copyRetFile = targetFile.copyTo(newFile, true)
@@ -474,16 +494,25 @@ class AndroidFileSystemManager implements FileSystemManager {
 					return
 				}
 				let newFile = new File(newFilePath)
-				if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
-					/**
-					 * 父文件不存在
-					 */
+				if(newFile.exists() && newFile.isDirectory) {
 					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
+						let err = new FileSystemManagerFailImpl(1300021);
 						options.fail?.(err)
 						options.complete?.(err)
 					}, null)
 					return
+				}
+				if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
+					/**
+					 * 父文件不存在
+					 */
+					// currentDispatcher.async(function (_) {
+					// 	let err = new FileSystemManagerFailImpl(1300002);
+					// 	options.fail?.(err)
+					// 	options.complete?.(err)
+					// }, null)
+					// return
+					newFile.parentFile?.mkdirs()
 				}
 				newFile.writeBytes(byteArray)
 				if (!newFile.exists()) {
@@ -517,16 +546,25 @@ class AndroidFileSystemManager implements FileSystemManager {
 					return
 				}
 				let newFile = new File(newFilePath)
+				if(newFile.exists() && newFile.isDirectory) {
+					currentDispatcher.async(function (_) {
+						let err = new FileSystemManagerFailImpl(1300021);
+						options.fail?.(err)
+						options.complete?.(err)
+					}, null)
+					return
+				}
 				if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 					/**
 					 * 父文件不存在
 					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					})
-					return
+					// currentDispatcher.async(function (_) {
+					// 	let err = new FileSystemManagerFailImpl(1300002);
+					// 	options.fail?.(err)
+					// 	options.complete?.(err)
+					// })
+					// return
+					newFile.parentFile?.mkdirs()
 				}
 
 				let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
@@ -582,16 +620,25 @@ class AndroidFileSystemManager implements FileSystemManager {
 					return
 				}
 				let newFile = new File(newFilePath)
+				if(newFile.exists() && newFile.isDirectory) {
+					currentDispatcher.async(function (_) {
+						let err = new FileSystemManagerFailImpl(1300021);
+						options.fail?.(err)
+						options.complete?.(err)
+					}, null)
+					return
+				}
 				if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
 					/**
 					 * 父文件不存在
 					 */
-					currentDispatcher.async(function (_) {
-						let err = new FileSystemManagerFailImpl(1300002);
-						options.fail?.(err)
-						options.complete?.(err)
-					})
-					return
+					// currentDispatcher.async(function (_) {
+					// 	let err = new FileSystemManagerFailImpl(1300002);
+					// 	options.fail?.(err)
+					// 	options.complete?.(err)
+					// })
+					// return
+					newFile.parentFile?.mkdirs()
 				}
 
 				let copyRetFile = targetFile.copyTo(newFile, true)
@@ -857,12 +904,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 		if (!isSandyBox) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
 		}
-
-		if (!targetFile.exists() || !targetFile.isDirectory()) {
-			/**
-			 * 文件不存在 或者 文件是不是文件夹
-			 */
+		
+		if(!targetFile.exists()) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+		}
+		
+		if (!targetFile.isDirectory()) {
+			throw new UniError(FileSystemManagerUniErrorSubject, 1300016, msgPrefix + FileSystemManagerUniErrors.get(1300016)!)
 		}
 
 
@@ -875,6 +923,9 @@ class AndroidFileSystemManager implements FileSystemManager {
 			}
 		} else {
 			let delRet = targetFile.deleteRecursively()
+			if(isUniSystemPath(filePath)) {
+				targetFile.mkdirs()
+			}
 			if (!delRet) {
 				// 调用系统api 失败
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
@@ -939,13 +990,19 @@ class AndroidFileSystemManager implements FileSystemManager {
 				})
 				return
 			}
-
-			if (!targetFile.exists() || !targetFile.isDirectory()) {
-				/**
-				 * 文件不存在 或者 文件是不是文件夹
-				 */
+			
+			if(!targetFile.exists()) {
 				currentDispatcher.async(function (_) {
 					let err = new FileSystemManagerFailImpl(1300002);
+					options.fail?.(err)
+					options.complete?.(err)
+				})
+				return
+			}
+
+			if (!targetFile.isDirectory()) {
+				currentDispatcher.async(function (_) {
+					let err = new FileSystemManagerFailImpl(1300016);
 					options.fail?.(err)
 					options.complete?.(err)
 				})
@@ -968,6 +1025,9 @@ class AndroidFileSystemManager implements FileSystemManager {
 				}
 			} else {
 				let delRet = targetFile.deleteRecursively()
+				if(isUniSystemPath(filePath)) {
+					targetFile.mkdirs()
+				}
 				if (!delRet) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
@@ -1275,10 +1335,10 @@ class AndroidFileSystemManager implements FileSystemManager {
 			}
 
 			if (options.filePath == null) {
-				options.filePath = uni.env.USER_DATA_PATH
+				options.filePath = uni.env.CACHE_PATH +FILE_SYSTEM_MANAGER_SAVE_PATH +targetFile.getName()
 			}
 			// 检查目标文件
-			let newFilePath = UTSAndroid.convert2AbsFullPath(options.filePath! + targetFile.getName())
+			let newFilePath = UTSAndroid.convert2AbsFullPath(options.filePath!)
 			isSandyBox = isSandyBoxPath(newFilePath, false)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
@@ -1289,13 +1349,12 @@ class AndroidFileSystemManager implements FileSystemManager {
 				return
 			}
 			let newFile = new File(newFilePath)
-			console.log(newFile.getPath())
 			if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
-				/**
-				 * 父文件不存在
-				 */
+				newFile.getParentFile()?.mkdirs()
+			}
+			if(newFile.exists() && newFile.isDirectory()) {
 				currentDispatcher.async(function (_) {
-					let err = new FileSystemManagerFailImpl(1300002);
+					let err = new FileSystemManagerFailImpl(1300021);
 					options.fail?.(err)
 					options.complete?.(err)
 				}, null)
@@ -1314,7 +1373,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			}
 			targetFile.delete()
 			let ret : SaveFileSuccessResult = {
-				savedFilePath: newFile.getPath()
+				savedFilePath: convertRealPathToUniPath(newFile.getPath())
 			}
 
 			currentDispatcher.async(function (_) {
@@ -1342,21 +1401,21 @@ class AndroidFileSystemManager implements FileSystemManager {
 		}
 		let fp = filePath
 		if (fp == null) {
-			fp = uni.env.USER_DATA_PATH
+			fp = uni.env.CACHE_PATH +FILE_SYSTEM_MANAGER_SAVE_PATH +targetFile.getName()
 		}
 		// 检查目标文件
-		let newFilePath = UTSAndroid.convert2AbsFullPath(fp + targetFile.getName())
+		let newFilePath = UTSAndroid.convert2AbsFullPath(fp)
 		isSandyBox = isSandyBoxPath(newFilePath, false)
 		if (!isSandyBox) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
 		}
 		let newFile = new File(newFilePath)
-		console.log(newFile.getPath())
 		if (newFile.getParentFile() != null && !newFile.getParentFile()!.exists()) {
-			/**
-			 * 父文件不存在
-			 */
-			throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
+			newFile.getParentFile()!.mkdirs()
+		}
+		
+		if(newFile.exists() && newFile.isDirectory()) {
+			throw new UniError(FileSystemManagerUniErrorSubject, 1300021, msgPrefix + FileSystemManagerUniErrors.get(1300021)!) 
 		}
 
 		let copyRetFile = targetFile.copyTo(newFile, true)
@@ -1365,7 +1424,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
 		}
 		targetFile.delete()
-		return newFilePath
+		return convertRealPathToUniPath(newFilePath)
 	}
 	public unzip(options : UnzipFileOptions) {
 		let msgPrefix = "unzip:fail "
@@ -1458,7 +1517,6 @@ class AndroidFileSystemManager implements FileSystemManager {
 					}
 					// // 否则我们将文件提取出来
 					let fout = new FileOutputStream(targetPath + "/" + filename);
-					console.log(targetPath + "/" + filename)
 					// 将压缩文件内容写入到这个文件中
 					let count = zis.read(buffer)
 					while (count != -1) {
@@ -1479,7 +1537,6 @@ class AndroidFileSystemManager implements FileSystemManager {
 					options.complete?.(ret)
 				}, null)
 			} catch (e : Exception) {
-				console.log(e.message)
 				currentDispatcher.async(function (_) {
 					let err = new FileSystemManagerFailImpl(1300201);
 					options.fail?.(err)
@@ -1495,7 +1552,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
 		UTSAndroid.getDispatcher('io').async(function (_) {
-			let filePath = UTSAndroid.convert2AbsFullPath(uni.env.USER_DATA_PATH)
+			let filePath = UTSAndroid.convert2AbsFullPath(uni.env.CACHE_PATH+FILE_SYSTEM_MANAGER_SAVE_PATH)
 
 			let targetFile = new File(filePath)
 			if (!targetFile.exists() || !targetFile.isDirectory()) {
@@ -1520,7 +1577,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				.iterator()
 				.forEach(function (file : File) {
 					if (!file.isDirectory()) {
-						res.add(file.getPath())
+						res.add(convertRealPathToUniPath(file.getPath()))
 					}
 				})
 
@@ -1842,7 +1899,6 @@ class AndroidFileSystemManager implements FileSystemManager {
 	public readZipEntry(options : ReadZipEntryOptions) {
 		let targetPath = uni.env.CACHE_PATH + "/" + Base64.encodeToString(options.filePath.toByteArray(), Base64.NO_WRAP)
 		targetPath = UTSAndroid.convert2AbsFullPath(targetPath)
-		console.log("readZipEntry", targetPath)
 		let file : File = new File(targetPath)
 		if (!file.exists()) {
 			file.mkdirs()
@@ -1893,7 +1949,6 @@ class AndroidFileSystemManager implements FileSystemManager {
 								if (!file.isDirectory()) {
 									filterEntries?.forEach((item) => {
 										let entryPath = targetPath + "/" + item.path
-										console.log("readZipEntry", file.getPath())
 										if (entryPath == file.getPath()) {
 											let data = target.readFileSync(file.getPath(), item.encoding)
 											let zipFileItem : ZipFileItem = {
@@ -1940,7 +1995,7 @@ export const getFileSystemManager : GetFileSystemManager = function () : FileSys
 function wrapStats(sourceFile : File) : Stats {
 	let stats = new AndroidStats()
 	stats.mIsFile = sourceFile.isFile()
-	stats.lastModifiedTime = sourceFile.lastModified()
+	stats.lastModifiedTime = sourceFile.lastModified()/1000
 	stats.mode = getFileMode(sourceFile)
 	if (sourceFile.isFile()) {
 		stats.size = sourceFile.length()

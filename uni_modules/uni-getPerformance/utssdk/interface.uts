@@ -126,8 +126,8 @@ export interface Uni {
     /**
      * 返回一个Performance对象实例
      *
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-performance.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-performance.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-performance.html
      * @uniPlatform {
      *  "app": {
      *    "android": {

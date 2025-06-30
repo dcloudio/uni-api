@@ -15,15 +15,17 @@ export {
     ScanCodeOptions,
 }
 
+const isScanCoreSupported = canIUse('SystemCapability.Multimedia.Scan.Core');
+
 type UniScanOptionsTypes = 'barCode' | 'qrCode' | 'datamatrix' | 'pdf417'
 type UniScanResultTypes = "QR_CODE" | "AZTEC" | "CODABAR" | "CODE_39" | "CODE_93" | "CODE_128" | "DATA_MATRIX" | "EAN_8" | "EAN_13" | "ITF" | "MAXICODE" | "PDF_417" | "RSS_14" | "RSS_EXPANDED" | "UPC_A" | "UPC_E" | "UPC_EAN_EXTENSION" | "WX_CODE" | "CODE_25"
 
-const HarmonyScanTypeMap = new Map<UniScanOptionsTypes, scanCore.ScanType[]>([
+const HarmonyScanTypeMap = isScanCoreSupported ? new Map<UniScanOptionsTypes, scanCore.ScanType[]>([
     ['barCode', [scanCore.ScanType.ONE_D_CODE]],
     ['qrCode', [scanCore.ScanType.TWO_D_CODE]],
     ['datamatrix', [scanCore.ScanType.DATAMATRIX_CODE]],
     ['pdf417', [scanCore.ScanType.PDF417_CODE]]
-])
+]) : new Map<UniScanOptionsTypes, scanCore.ScanType[]>([])
 type HarmonyScanResultTypes = scanCore.ScanType.AZTEC_CODE |
     scanCore.ScanType.CODABAR_CODE |
     scanCore.ScanType.CODE128_CODE |
@@ -39,7 +41,7 @@ type HarmonyScanResultTypes = scanCore.ScanType.AZTEC_CODE |
     scanCore.ScanType.UPC_A_CODE |
     scanCore.ScanType.UPC_E_CODE
 
-const UniScanTypeMap = new Map<HarmonyScanResultTypes, UniScanResultTypes>([
+const UniScanTypeMap = isScanCoreSupported ? new Map<HarmonyScanResultTypes, UniScanResultTypes>([
     [scanCore.ScanType.AZTEC_CODE, 'AZTEC'],
     [scanCore.ScanType.CODABAR_CODE, 'CODABAR'],
     [scanCore.ScanType.CODE128_CODE, 'CODE_128'],
@@ -53,12 +55,12 @@ const UniScanTypeMap = new Map<HarmonyScanResultTypes, UniScanResultTypes>([
     [scanCore.ScanType.QR_CODE, 'QR_CODE'],
     [scanCore.ScanType.UPC_A_CODE, 'UPC_A'],
     [scanCore.ScanType.UPC_E_CODE, 'UPC_E'],
-])
+]) : new Map<HarmonyScanResultTypes, UniScanResultTypes>([])
 
 export const scanCode: ScanCode = defineAsyncApi<ScanCodeOptions, ScanCodeSuccess>(
     API_SCAN_CODE,
     function (options: ScanCodeOptions, exec: ApiExecutor<ScanCodeSuccess>) {
-        if (!canIUse('SystemCapability.Multimedia.Scan.ScanBarcode')) {
+        if (!isScanCoreSupported) {
             exec.reject('not support');
             return
         }

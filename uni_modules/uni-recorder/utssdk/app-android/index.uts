@@ -11,6 +11,7 @@ const MAX_DURATION = DEFAULT_DURATION * 10
 const DEFAULT_FORMAT = 'aac'
 let RECORDER_MANAGER : AudioRecorderMgr | null = null
 class RecorderManagerImpl implements RecorderManager {
+	timeoutId:number = -1
 	constructor() {
 		RECORDER_MANAGER = new AudioRecorderMgr()
 	}
@@ -26,7 +27,8 @@ class RecorderManagerImpl implements RecorderManager {
 		}
 		let recordOption = new RecordOption(options, createFile(options.format! as string))
 		RECORDER_MANAGER!.startRecorder(recordOption)
-		setTimeout(() => {
+		this.timeoutId = setTimeout(() => {
+			this.timeoutId = -1
 			this.stop()
 		}, options.duration!)
 	}
@@ -38,6 +40,7 @@ class RecorderManagerImpl implements RecorderManager {
 	}
 	override stop() {
 		if (RECORDER_MANAGER != null) {
+			clearTimeout(this.timeoutId)
 			try {
 				RECORDER_MANAGER!.stopRecorder()
 			} catch (error) {

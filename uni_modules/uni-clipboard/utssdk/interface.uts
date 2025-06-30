@@ -2,19 +2,20 @@ export interface Uni {
   /**
    * 设置系统剪贴板的内容
    *
-   * @tutorial https://uniapp.dcloud.net.cn/api/system/clipboard.html#setclipboarddata
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/clipboard.html#setclipboarddata
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/clipboard.html#setclipboarddata
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/clipboard.html#setclipboarddata
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/clipboard.html#setclipboarddata
    * @uniPlatform {
      *  "app": {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "4.65"
+     *      "unixVer": "4.71"
      *    },
      *    "ios": {
      *      "osVer": "12.0",
      *      "uniVer": "√",
-     *      "unixVer": "4.65"
+     *      "unixVer": "4.71"
      *    },
      *    "harmony": {
      *      "osVer": "3.0",
@@ -74,19 +75,20 @@ export interface Uni {
   /**
    * 获得系统剪贴板的内容
    *
-   * @tutorial https://uniapp.dcloud.net.cn/api/system/clipboard.html#getclipboarddata
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/clipboard.html#getclipboarddata
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/clipboard.html#getclipboarddata
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/clipboard.html#getclipboarddata
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/clipboard.html#getclipboarddata
    * @uniPlatform {
      *  "app": {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "4.65"
+     *      "unixVer": "4.71"
      *    },
      *    "ios": {
      *      "osVer": "12.0",
      *      "uniVer": "√",
-     *      "unixVer": "4.65"
+     *      "unixVer": "4.71"
      *    },
      *    "harmony": {
      *      "osVer": "3.0",
