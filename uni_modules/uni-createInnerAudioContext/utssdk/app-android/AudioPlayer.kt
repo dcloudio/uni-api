@@ -46,6 +46,7 @@ import java.io.File
 import java.io.IOException
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.metadata.Metadata;
+import android.text.TextUtils
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -77,8 +78,7 @@ object CacheManager {
 }
 
 
-open class AudioPlayer : InnerAudioContext, Player.Listener,
-    AudioManager.OnAudioFocusChangeListener {
+open class AudioPlayer : InnerAudioContext, Player.Listener {
     open var _src: String = "";
     private var cacheDataSourceFactory: CacheDataSource.Factory? = null
     override var src: String
@@ -131,7 +131,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
                 ?.setCache(CacheManager.getSimpleCache())
                 ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
 			val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
-			if(cacheDataSourceFactory != null) {
+			if(cacheDataSourceFactory != null && this._cache == true) {
 				defaultMediaSource.setDataSourceFactory(cacheDataSourceFactory!!)
 			}
 			this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
@@ -254,6 +254,16 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
                 this.player.setPlaybackSpeed(rate!!.toFloat());
             }
         }
+	open var _cache = true
+	override var cache = true
+		set(cach) {
+			this._cache = cach
+			if(!this.player.isPlaying && !this.isPausedByUser && !this.player.isLoading) {
+                if(!TextUtils.isEmpty(this._src)) {
+                    this.changeSRC(this._src)
+                }
+            }
+		}
     open var player: ExoPlayer;
     open var callbacks = HashMap<String, UTSArray<EventCallback>>();
     private var errorCallBack: ((result: ICreateInnerAudioContextFail) -> Unit)? = null
@@ -296,7 +306,7 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
             this.isPausedByUser = false;
             this.player.playWhenReady = true;
 //            this.registerAudioManager();
-
+			AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).requestAudioFocus()
         } catch (e: Exception) {
             var fail = CreateInnerAudioContextFailImpl(1107601)
             e.message?.let {
@@ -310,11 +320,6 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
         this.isPausedByUser = true;
         this.player.playWhenReady = false;
         this.player.pause();
-        console.log(
-            "pause",
-            this.player.playbackState,
-            this.player.playbackState == Player.STATE_IDLE
-        );
 //        this.unregisterAudioManager();
         invokeCallBack("pause")
     }
@@ -366,13 +371,6 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
 //    open fun unregisterAudioManager() {
 //        this.audioManager.abandonAudioFocus(this);
 //    }
-
-    override fun onAudioFocusChange(focusChange: Int) {
-        if (focusChange == AudioManager.AUDIOFOCUS_LOSS || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-            this.pause();
-        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-        }
-    }
 
     open fun addEvent(action: String, callback: EventCallback) {
         var playArray = this.callbacks.get(action);
@@ -522,14 +520,16 @@ open class AudioPlayer : InnerAudioContext, Player.Listener,
                         fail.errMsg = it
                     }
                 } else {
-                    val message = sourceException.message as String;
-                    if (message.includes("None of the available extractors")) {
-                        fail = CreateInnerAudioContextFailImpl(1107604)
-                        fail.errMsg = message
-                    } else {
-                        fail = CreateInnerAudioContextFailImpl(1107603)
-                        fail.errMsg = message
-                    }
+                    sourceException.message?.let {
+						if (it.includes("None of the available extractors")) {
+						    fail = CreateInnerAudioContextFailImpl(1107604)
+						    fail.errMsg = it
+						} else {
+						    fail = CreateInnerAudioContextFailImpl(1107603)
+						    fail.errMsg = it
+						}
+					}
+                    
                 }
             }
         }

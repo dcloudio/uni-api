@@ -473,8 +473,46 @@ export function getDirectoryNotEmpty(errMsg?: string): IFileSystemManagerFail {
   return getApiError(1300066, errMsg) as IFileSystemManagerFail
 }
 
+const SAVE_FILE_DIR = 'uni-store'
+export const UNI_FILE_SCHEME = 'unifile://'
+export const USER_DATA_PATH = `${UNI_FILE_SCHEME}usr/`
+export const TEMP_PATH = `${UNI_FILE_SCHEME}temp/`
+export const CACHE_PATH = `${UNI_FILE_SCHEME}cache/`
+export const SANDBOX_PATH = `${UNI_FILE_SCHEME}sandbox/`
+
+function getUserDataPath() {
+  return getEnv().USER_DATA_PATH + '/'
+}
+function getTempPath() {
+  return getEnv().TEMP_PATH + '/'
+}
+function getSandboxPath() {
+  return getEnv().SANDBOX_PATH + '/'
+}
+function getCachePath() {
+  return getEnv().CACHE_PATH + '/'
+}
+
 export function getSavedDir() {
-  return getEnv().USER_DATA_PATH + '/saved'
+  return `${getCachePath()}${SAVE_FILE_DIR}`
+}
+
+export const normalizeFilePath = (filePath: string): string => {
+  // #ifdef UNI-APP-X
+  if (filePath.startsWith(getUserDataPath())) {
+    return filePath.replace(getUserDataPath(), USER_DATA_PATH)
+  }
+  if (filePath.startsWith(getTempPath())) {
+    return filePath.replace(getTempPath(), TEMP_PATH)
+  }
+  if (filePath.startsWith(getCachePath())) {
+    return filePath.replace(getCachePath(), CACHE_PATH)
+  }
+  if (filePath.startsWith(getSandboxPath())) {
+    return filePath.replace(getSandboxPath(), SANDBOX_PATH)
+  }
+  // #endif
+  return filePath
 }
 
 export const savedFileList = new Map<string, string>()
@@ -484,7 +522,7 @@ function getSavedFileName(fileName: string, index: number = 0): string {
   }
   return fileName
 }
-export function getSavedFilePath(tempFilePath: string, savedPath: string) {
+export function getSavedFilePath(tempFilePath: string, savedPath: string, appendFileName: boolean): string {
   const uriInstance = new uri.URI(tempFilePath)
   const fileInfo = uriInstance.clearQuery().getLastSegment().split('.')
   const ext = fileInfo.length > 1 ? fileInfo.pop() : ''
@@ -492,8 +530,10 @@ export function getSavedFilePath(tempFilePath: string, savedPath: string) {
   if (ext) {
     fileName += '.' + ext
   }
-  const savedFilePath = `${savedPath}${savedPath.endsWith('/') ? '' : '/'}${fileName}`
-  savedFileList.set(fileName, savedFilePath)
+  const savedFilePath = appendFileName ?  `${savedPath}${savedPath.endsWith('/') ? '' : '/'}${fileName}` : savedPath
+  if (!savedFilePath.startsWith(getSavedDir())) {
+    savedFileList.set(fileName, normalizeFilePath(savedFilePath))
+  }
   return savedFilePath
 }
 
@@ -510,10 +550,7 @@ export function getFsPath(filePath: string) {
 }
 
 // 给定一个基础路径和一组路径，计算所有可能的路径
-export function calculateAllPaths(base: string, paths: string[]): string[] {
-  if (!base.endsWith('/')) {
-    base += '/'; // 确保基础路径以斜杠结尾
-  }
+export function calculateAllPaths(paths: string[]): string[] {
   const allPaths = new Set<string>(); // 使用Set来避免重复的路径
 
   paths.forEach(path => {
@@ -522,18 +559,17 @@ export function calculateAllPaths(base: string, paths: string[]): string[] {
     // 将路径分割成数组
     const uriInstance = new uri.URI(path)
     const segments = uriInstance.getSegment();
-    let currentPath = base;
 
     // 生成子路径
     segments.forEach((segment, index) => {
       // 如果是最后一个元素，说明是文件，直接添加
       if (index === segments.length - 1) {
-        currentPath += segment;
+        allPaths.add(`/${path}`);
       } else {
         // 否则是文件夹，添加到路径中，并添加斜杠
-        currentPath += segment + '/';
+        // currentPath += segment + '/';
+        allPaths.add(`/${segments.slice(0, index + 1).join('/')}`);
       }
-      allPaths.add(currentPath);
     });
   });
 

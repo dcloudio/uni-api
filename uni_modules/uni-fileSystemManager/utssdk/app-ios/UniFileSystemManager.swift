@@ -139,6 +139,7 @@ public class UniFileSystemManager: NSObject {
         path: String,
         flag: String
     ) -> (Int32?, UniFileSystemManagerError?) {
+        let path = UTSiOS.convert2AbsFullPath(path)
         
         var permission: UniFilePermission = .readWrite
         var options: UniFileOpenOptions?
@@ -169,7 +170,7 @@ public class UniFileSystemManager: NSObject {
             options = UniFileOpenOptions.combine(options: [.append, .create, .sync])
         } else if flag == UniFileSystemManagerFlag.r.toString() {
             // r: 打开文件用于读取。 如果文件不存在，则会发生异常   O_RDONLY
-            permission = .writeOnly
+            permission = .readOnly
         } else if flag == UniFileSystemManagerFlag.rplus.toString() {
             // r+: 打开文件用于读取和写入。 如果文件不存在，则会发生异常  O_RDWR
             permission = .readWrite
@@ -194,6 +195,10 @@ public class UniFileSystemManager: NSObject {
         var combinedFlags = permission.permissionFlag
         if let options = options {
             combinedFlags = combinedFlags | options.rawValue
+        }
+        
+        if isDirectory(path) {
+            combinedFlags = combinedFlags | O_DIRECTORY
         }
         
         // 使用darwin底层open函数
@@ -225,6 +230,7 @@ public class UniFileSystemManager: NSObject {
         permission: UniFilePermission = .readWrite,
         options: UniFileOpenOptions
     ) -> Int32 {
+        let path = UTSiOS.convert2AbsFullPath(path)
         let combinedFlags = permission.permissionFlag | options.rawValue
         
         // 使用darwin底层open函数
@@ -242,59 +248,36 @@ public class UniFileSystemManager: NSObject {
         return fd
     }
     
-        /// 高性能文件读取
-        /// - Parameters:
-        ///   - fileDescriptor: 文件描述符
-        ///   - bufferSize: 读取缓冲区大小
-        /// - Returns: 读取的数据
-        private static func readFile(
-            fileDescriptor: Int32,
-            bufferSize: Int = 1024 * 256
-        ) -> Data? {
-            let buffer = UnsafeMutableRawPointer.allocate(byteCount: bufferSize, alignment: 1)
-            defer {
-                buffer.deallocate()
-            }
-                
-            var readData = Data()
-    
-            while true {
-                let bytesRead = Darwin.read(fileDescriptor, buffer, bufferSize)
-    
-                guard bytesRead > 0 else {
-                    if bytesRead == 0 { break }  // 文件读取完毕
-                    UNILogDebug("读取错误: \(String(cString: strerror(errno)))")
-                    return nil
-                }
-    
-                readData.append(buffer.assumingMemoryBound(to: UInt8.self), count: bytesRead)
-            }
-    
-            return readData
+    /// 高性能文件读取
+    /// - Parameters:
+    ///   - fileDescriptor: 文件描述符
+    ///   - bufferSize: 读取缓冲区大小
+    /// - Returns: 读取的数据
+    private static func readFile(
+        fileDescriptor: Int32,
+        bufferSize: Int = 1024 * 256
+    ) -> Data? {
+        let buffer = UnsafeMutableRawPointer.allocate(byteCount: bufferSize, alignment: 1)
+        defer {
+            buffer.deallocate()
         }
-    //
-    //    /// 高性能文件写入
-    //    /// - Parameters:
-    //    ///   - fileDescriptor: 文件描述符
-    //    ///   - data: 待写入数据
-    //    /// - Returns: 是否写入成功
-    //    private static func writeFile(
-    //        fileDescriptor: Int32,
-    //        data: Data
-    //    ) -> Bool {
-    //        return data.withUnsafeBytes { rawBufferPointer in
-    //            guard let baseAddress = rawBufferPointer.baseAddress else { return false }
-    //
-    //            let bytesWritten = Darwin.write(fileDescriptor, baseAddress, data.count)
-    //
-    //            if bytesWritten == -1 {
-    //                UNILogDebug("写入失败: \(String(cString: strerror(errno)))")
-    //                return false
-    //            }
-    //
-    //            return bytesWritten == data.count
-    //        }
-    //    }
+        
+        var readData = Data()
+        
+        while true {
+            let bytesRead = Darwin.read(fileDescriptor, buffer, bufferSize)
+            
+            guard bytesRead > 0 else {
+                if bytesRead == 0 { break }  // 文件读取完毕
+                UNILogDebug("读取错误: \(String(cString: strerror(errno)))")
+                return nil
+            }
+            
+            readData.append(buffer.assumingMemoryBound(to: UInt8.self), count: bytesRead)
+        }
+        
+        return readData
+    }
     
     /// 关闭文件描述符
     /// - Parameter fileDescriptor: 文件描述符
@@ -326,6 +309,7 @@ public class UniFileSystemManager: NSObject {
     private static func getFileAttributes(
         path: String
     ) -> (Darwin.stat?, UniFileSystemManagerError?) {
+        let path = UTSiOS.convert2AbsFullPath(path)
         var fileStat = Darwin.stat()
         
         guard stat(path, &fileStat) == 0 else {
@@ -371,6 +355,7 @@ public class UniFileSystemManager: NSObject {
         path: String,
         mode: mode_t = S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH
     ) -> (Bool, UniFileSystemManagerError?) {
+        let path = UTSiOS.convert2AbsFullPath(path)
         let result = Darwin.mkdir(path, mode)
         guard result == 0 else {
             UNILogDebug("创建目录失败: \(String(cString: strerror(errno)))")
@@ -389,6 +374,7 @@ public class UniFileSystemManager: NSObject {
     private static func unlink(
         path: String
     ) -> (Bool, UniFileSystemManagerError?) {
+        let path = UTSiOS.convert2AbsFullPath(path)
         let result = Darwin.unlink(path)
         
         guard result == 0 else {
@@ -733,13 +719,8 @@ extension UniFileSystemManager {
                 var result: Any?
                 
                 if encoding == UniFileEncoding.base64.rawValue {
-                    var base64Result = ""
-                    while true {
-                        let chunkData = fileHandle.readData(ofLength: chunkSize)
-                        if chunkData.isEmpty { break }
-                        base64Result += chunkData.base64EncodedString()
-                    }
-                    result = base64Result
+                    let data = fileHandle.readDataToEndOfFile()
+                    result = data.base64EncodedString()
                 } else {
                     var aggregatedData = Data()
                     while true {
@@ -761,7 +742,7 @@ extension UniFileSystemManager {
                             }
                             return ""
                         }
-
+                        
                         result = safeUTF8String(from: aggregatedData)
                     } else if encoding == UniFileEncoding.ascii.rawValue {
                         result = String(data: aggregatedData, encoding: .ascii)
@@ -788,7 +769,7 @@ extension UniFileSystemManager {
         let semaphore = DispatchSemaphore(value: 0)
         
         var result: (data: Any?, error: UniFileSystemManagerError?) = (nil, nil)
-
+        
         UniFileSystemManager.readFile(encoding: encoding, path: filePath) { data, error in
             result = (data, error)
             semaphore.signal()
@@ -876,7 +857,7 @@ extension UniFileSystemManager {
                 func writeChunks(_ chunkData: Data) {
                     var offsetTemp = 0
                     let totalSize = chunkData.count
-        
+                    
                     while offsetTemp < totalSize {
                         let length = min(chunkSize, totalSize - offsetTemp)
                         let chunk = chunkData.subdata(in: offsetTemp..<(offsetTemp + length))
@@ -1044,6 +1025,8 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDeletable == false {
                 completionHandler?(false, .permissionDenied)
+            } else if status.isDirectory == false {
+                completionHandler?(false, .notDirectory)
             } else {
                 fileGlobalQueue.async {
                     //非递归删除
@@ -1062,7 +1045,13 @@ extension UniFileSystemManager {
                         try fileManager.removeItem(atPath: filePath)
                         completionHandler?(true, nil)
                     } catch {
-                        completionHandler?(false, .systemError)
+                        readDirectoryList(filePath) { list, error in
+                            if let list = list, list.count == 0 {
+                                completionHandler?(true, nil)
+                            } else {
+                                completionHandler?(false, .systemError)
+                            }
+                        }
                     }
                 }
             }
@@ -1092,7 +1081,7 @@ extension UniFileSystemManager {
     /// 读取目录内文件列表
     /// - Parameter path: 目录路径
     /// - Returns: 读取结果
-    public static func readDirectoryList(_ path: String) -> ([String]?, UniFileSystemManagerError?) {
+    public static func readDirectoryListSync(_ path: String) -> ([String]?, UniFileSystemManagerError?) {
         let filePath = UTSiOS.convert2AbsFullPath(path)
         switch validatePath(atPath: filePath) {
         case .invalid(let status):
@@ -1186,7 +1175,7 @@ extension UniFileSystemManager {
                 completionHandler?(false, status.toError())
                 return
             }
-
+            
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
@@ -1225,7 +1214,10 @@ extension UniFileSystemManager {
         completionHandler: boolCallback? = nil
     ) {
         let srcPath = UTSiOS.convert2AbsFullPath(srcPath)
-        let destPath = UTSiOS.convert2AbsFullPath(destPath)
+        var destPath = UTSiOS.convert2AbsFullPath(destPath)
+        if destPath.hasSuffix("/") {
+            destPath = String(destPath.dropLast())
+        }
         
         switch validatePath(atPath: srcPath) {
         case .invalid(let status):
@@ -1250,6 +1242,7 @@ extension UniFileSystemManager {
                 if !isExist(dir) {
                     createDirectorySync(dir, true)
                 }
+                
             } else {
                 completionHandler?(false, status.toError())
                 return
@@ -1311,9 +1304,9 @@ extension UniFileSystemManager {
                 } else if digestAlgorithm.lowercased() == UniFileDigest.DigestType.sha1.rawValue {
                     digest = UniFileDigest.toDigest(forFileAtPath: filePath, type: .sha1) ?? ""
                 }
-//                else if digestAlgorithm.lowercased() == UniFileDigest.DigestType.sha256.rawValue {
-//                    digest = UniFileDigest.toDigest(forFileAtPath: filePath, type: .sha256) ?? ""
-//                }
+                //                else if digestAlgorithm.lowercased() == UniFileDigest.DigestType.sha256.rawValue {
+                //                    digest = UniFileDigest.toDigest(forFileAtPath: filePath, type: .sha256) ?? ""
+                //                }
                 else {
                     completionHandler?(nil, .argumentInvalid)
                     return
@@ -1356,11 +1349,11 @@ extension UniFileSystemManager {
         func get() {
             fileGlobalQueue.async {
                 var list = [FileStats]()
-                if recursive == false {
+                if recursive == false || isDirectory(absolutePath) == false {
                     let fileStats = FileStats()
                     let (stat, error) = getFileAttributes(path: absolutePath)
                     if let stat = stat {
-                        fileStats.path = absolutePath
+                        fileStats.path = isDirectory(absolutePath) == false ? "" : "/"
                         fileStats.stats = stat.toStat()
                         list.append(fileStats)
                         completionHandler?(list, nil)
@@ -1375,7 +1368,7 @@ extension UniFileSystemManager {
                     let fileStats = FileStats()
                     let (stat, error) = getFileAttributes(path: absolutePath)
                     if let stat = stat {
-                        fileStats.path = absolutePath
+                        fileStats.path = "/"
                         fileStats.stats = stat.toStat()
                         list.append(fileStats)
                     }
@@ -1383,10 +1376,11 @@ extension UniFileSystemManager {
                     if let enumerator = fileManager.enumerator(atPath: absolutePath) {
                         for case let path as String in enumerator {
                             let fullPath = (absolutePath as NSString).appendingPathComponent(path)
+                            let relativePath = "/\(path)"
                             let fileStats = FileStats()
                             let (stat, error) = getFileAttributes(path: fullPath)
                             if let stat = stat {
-                                fileStats.path = fullPath
+                                fileStats.path = relativePath
                                 fileStats.stats = stat.toStat()
                                 list.append(fileStats)
                             }
@@ -1501,47 +1495,24 @@ extension UniFileSystemManager {
         filePath: String?,
         completionHandler: stringCallback? = nil
     ) {
-        let tempFilePath = UTSiOS.convert2AbsFullPath(tempFilePath)
-        switch validatePath(atPath: tempFilePath) {
-        case .invalid(let status):
-            completionHandler?(nil, status.toError())
-            return
-        case .valid(let status):
-            if status.isDirectory {
-                completionHandler?(nil, .isDirectory)
-                return
+        let defaultPath = UniResource.CACHE_PATH + "uni-store/"
+        var destPath = ""
+        if let filePath = filePath {
+            destPath = filePath
+            if destPath.hasSuffix("/") {
+                destPath = String(filePath.dropLast())
             }
-        }
-        
-        var filePath = UTSiOS.convert2AbsFullPath(filePath ?? UniResource.USER_DATA_PATH)
-        switch validatePath(atPath: filePath) {
-        case .invalid(let status):
-            if status.toError() == UniFileSystemManagerError.fileNotFound {
-                let dir = (filePath as NSString).deletingLastPathComponent
-                if !isExist(dir) {
-                    createDirectorySync(dir, true)
-                }
-            } else {
-                completionHandler?(nil, status.toError())
-                return
-            }
-        case .valid(_):
-            break
-        }
-        
-        if isDirectory(filePath) {
+        } else {
             let fileName = URL(fileURLWithPath: tempFilePath).lastPathComponent
-            filePath += fileName
+            destPath = defaultPath + fileName
         }
         
-        fileGlobalQueue.async {
-            do {
-                try fileManager.copyItem(atPath: tempFilePath, toPath: filePath)
-                // 删除临时文件
+        copyFile(srcPath: tempFilePath, destPath: destPath) { success, error in
+            if let error = error, !success {
+                completionHandler?(nil, error)
+            } else {
                 unlink(path: tempFilePath)
-                completionHandler?(filePath, nil)
-            } catch let error as NSError {
-                completionHandler?(nil, UniFileSystemManagerError.from(originalError: error))
+                completionHandler?(destPath, nil)
             }
         }
     }
@@ -1632,10 +1603,14 @@ extension UniFileSystemManager {
     public static func getSavedFileList(
         completionHandler: stringArrayCallback? = nil
     ) {
-        let filePath = UTSiOS.convert2AbsFullPath(UniResource.USER_DATA_PATH)
+        let storePath = UniResource.CACHE_PATH + "uni-store/"
+        let filePath = UTSiOS.convert2AbsFullPath(storePath)
         
         readDirectoryList(filePath) { list, error in
-            completionHandler?(list, error)
+            let dict = list?.map {
+                return storePath + $0
+            }
+            completionHandler?(dict, error)
         }
     }
     
@@ -1843,7 +1818,7 @@ extension UniFileSystemManager {
                             totalSize = chunkData.count
                         }
                     }
-
+                    
                     while offsetTemp < totalSize {
                         let length = min(chunkSize, totalSize - offsetTemp)
                         let chunk = chunkData.subdata(in: offsetTemp..<(offsetTemp + length))
@@ -1913,7 +1888,7 @@ extension UniFileSystemManager {
             completionHandler?(nil, .badFileDescriptor)
             return
         }
-
+        
         safeRead()
         
         func safeRead() {
@@ -1941,7 +1916,7 @@ extension UniFileSystemManager {
                 if let position = position {
                     fileHandle.seek(toFileOffset: position.toUInt64())
                 }
-                                
+                
                 var aggregatedData = Data()
                 while true {
                     let chunkData = fileHandle.readData(ofLength: chunkSize)
@@ -1960,17 +1935,17 @@ extension UniFileSystemManager {
                     
                     //截取读取文件中需要被写入arrayBuffer的数据
                     let sourceData = aggregatedData.subdata(in: 0..<writeLength)
-
-//                    aggregatedData.withUnsafeBytes { buffer in
-//                        let floatArray = buffer.bindMemory(to: Double.self)
-//                        for (index, value) in floatArray.enumerated() {
-//                            print("第 \(index + 1) 个 Float: \(value)")
-//                        }
-//                    }
-//                    let temp = sourceData.withUnsafeBytes { $0.load(fromByteOffset: 0, as: Double.self) }
-//                    let dataView = DataView(arrayBuffer, _offset, _length)
-//                    dataView.setFloat64(0, temp)
-
+                    
+                    //                    aggregatedData.withUnsafeBytes { buffer in
+                    //                        let floatArray = buffer.bindMemory(to: Double.self)
+                    //                        for (index, value) in floatArray.enumerated() {
+                    //                            print("第 \(index + 1) 个 Float: \(value)")
+                    //                        }
+                    //                    }
+                    //                    let temp = sourceData.withUnsafeBytes { $0.load(fromByteOffset: 0, as: Double.self) }
+                    //                    let dataView = DataView(arrayBuffer, _offset, _length)
+                    //                    dataView.setFloat64(0, temp)
+                    
                     // 将数据写入当前arrayBuffer实例对应的内存地址中
                     sourceData.withUnsafeBytes { (sourceBytes: UnsafeRawBufferPointer) in
                         let  targetPointer = bufferPointer.advanced(by: Int(truncating: _offset))
@@ -1981,7 +1956,7 @@ extension UniFileSystemManager {
                     }
                     
                     completionHandler?(Int32(truncating: _length), nil)
-
+                    
                     print("写入完成，arrayBuffer 内容已更新")
                 } else {
                     completionHandler?(nil, .systemError)
@@ -2069,10 +2044,10 @@ extension UniFileSystemManager {
             } else {
                 createDirectorySync(targetPath, true)
             }
-        
+            
             
             var dict: [String: ZipFileItem] = [:]
-        
+            
             unzip(zipFilePath: filePath, targetPath: targetPath) { success, error in
                 if let error = error, !success {
                     completionHandler?(nil, error)
@@ -2156,9 +2131,25 @@ extension UniFileSystemManager {
     /// 判断是否为目录
     public static func isDirectory(_ path: String) -> Bool {
         let path = UTSiOS.convert2AbsFullPath(path)
+        // 如果路径为空，直接返回 false
+        if path.isEmpty {
+            return false
+        }
+        // 先检查路径是否以 "/" 结尾，如果是，认为它是一个目录
+        if path.hasSuffix("/") {
+            return true
+        }
+        
+        // 使用 FileManager 判断实际存在的文件/目录
+        let fileManager = FileManager.default
         var isDirectory: ObjCBool = false
-        let exists = fileManager.fileExists(atPath: path, isDirectory: &isDirectory)
-        return exists ? isDirectory.boolValue : false
+        
+        // 如果文件存在，判断是文件还是目录
+        if fileManager.fileExists(atPath: path, isDirectory: &isDirectory) {
+            return isDirectory.boolValue
+        }
+        
+        return false
     }
     
     /// 是否为沙盒路径

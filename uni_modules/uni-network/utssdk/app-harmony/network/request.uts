@@ -8,7 +8,11 @@ import {
     RequestTask as UniRequestTask,
     RequestOptions as UniRequestOptions,
     RequestSuccess as UniRequestSuccess,
-    Request
+    Request,
+    RequestTaskOnChunkReceivedCallback,
+    RequestTaskOnChunkReceivedListenerResult,
+    RequestTaskOnHeadersReceivedCallback,
+    RequestTaskOnHeadersReceivedListenerResult,
 } from '../../interface.uts'
 import {
     API_REQUEST,
@@ -31,42 +35,84 @@ interface IUniRequestEmitter {
     emit: (eventName: string, ...args: (Object | undefined | null)[]) => void
 }
 
-// copy from uni-app-plus/src/service/api/network/request.ts
-const cookiesParse = (header: Record<string, string>) => {
-    let cookiesArr: string[] = []
-    const handleCookiesArr = (header['Set-Cookie'] || header['set-cookie'] || []) as string[]
-    for (let i = 0; i < handleCookiesArr.length; i++) {
-        if (
-            handleCookiesArr[i].indexOf('Expires=') !== -1 ||
-            handleCookiesArr[i].indexOf('expires=') !== -1
-        ) {
-            cookiesArr.push(handleCookiesArr[i].replace(',', ''))
-        } else {
-            cookiesArr.push(handleCookiesArr[i])
-        }
-    }
-    return cookiesArr
-}
-
 interface IRequestTask {
     abort: Function
-    onHeadersReceived: Function
-    offHeadersReceived: Function
+    onChunkReceived: (listener: RequestTaskOnChunkReceivedCallback) => void
+    offChunkReceived: (listener?: RequestTaskOnChunkReceivedCallback | null) => void
+    onHeadersReceived: (listener: RequestTaskOnHeadersReceivedCallback) => void
+    offHeadersReceived: (listener?: RequestTaskOnHeadersReceivedCallback | null) => void
 }
 
 class RequestTask implements UniRequestTask {
     __v_skip: boolean = true
     private _requestTask: IRequestTask
+    private _requestOnChunkReceiveCallbackId: number = 0
+    private _requestOnChunkReceiveCallbacks: Map<number, RequestTaskOnChunkReceivedCallback> = new Map()
+    private _requestOnHeadersReceiveCallbackId: number = 0
+    private _requestOnHeadersReceiveCallbacks: Map<number, RequestTaskOnHeadersReceivedCallback> = new Map()
+
     constructor(requestTask: IRequestTask) {
         this._requestTask = requestTask
     }
     abort() {
         this._requestTask.abort()
     }
-    onHeadersReceived(callback: Function) {
-        this._requestTask.onHeadersReceived(callback)
+    onChunkReceived(callback: RequestTaskOnChunkReceivedCallback) {
+        this._requestTask.onChunkReceived(callback)
+        this._requestOnChunkReceiveCallbackId++
+        this._requestOnChunkReceiveCallbacks.set(this._requestOnChunkReceiveCallbackId, callback)
+        return this._requestOnChunkReceiveCallbackId
     }
-    offHeadersReceived(callback?: Function) {
+    offChunkReceived(callbackId?: RequestTaskOnChunkReceivedCallback | number | null) {
+        if (callbackId === undefined || callbackId === null) {
+            this._requestTask.offChunkReceived()
+            this._requestOnChunkReceiveCallbacks.clear()
+            return
+        }
+        if (typeof callbackId === 'function') {
+            this._requestOnChunkReceiveCallbacks.forEach((callback, id) => {
+                if (callback === callbackId) {
+                    this._requestOnChunkReceiveCallbacks.delete(id)
+                    this._requestTask.offChunkReceived(callback)
+                    return
+                }
+            })
+            return
+        }
+        const callback = this._requestOnChunkReceiveCallbacks.get(callbackId)
+        if (!callback) {
+            return
+        }
+        this._requestOnChunkReceiveCallbacks.delete(callbackId)
+        this._requestTask.offChunkReceived(callback)
+    }
+    onHeadersReceived(callback: RequestTaskOnHeadersReceivedCallback) {
+        this._requestTask.onHeadersReceived(callback)
+        this._requestOnHeadersReceiveCallbackId++
+        this._requestOnHeadersReceiveCallbacks.set(this._requestOnHeadersReceiveCallbackId, callback)
+        return this._requestOnHeadersReceiveCallbackId
+    }
+    offHeadersReceived(callbackId?: RequestTaskOnHeadersReceivedCallback | number | null) {
+        if (callbackId === undefined || callbackId === null) {
+            this._requestTask.offHeadersReceived()
+            this._requestOnHeadersReceiveCallbacks.clear()
+            return
+        }
+        if (typeof callbackId === 'function') {
+            this._requestOnHeadersReceiveCallbacks.forEach((callback, id) => {
+                if (callback === callbackId) {
+                    this._requestOnHeadersReceiveCallbacks.delete(id)
+                    this._requestTask.offHeadersReceived(callback)
+                    return
+                }
+            })
+            return
+        }
+        const callback = this._requestOnHeadersReceiveCallbacks.get(callbackId)
+        if (!callback) {
+            return
+        }
+        this._requestOnHeadersReceiveCallbacks.delete(callbackId)
         this._requestTask.offHeadersReceived(callback)
     }
 }
@@ -161,13 +207,20 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                 emitter.off('headersReceive')
                 httpRequest.destroy()
             },
-            onHeadersReceived(callback: Function) {
+            onHeadersReceived(callback: RequestTaskOnHeadersReceivedCallback) {
                 emitter.on('headersReceive', callback)
             },
-            offHeadersReceived(callback?: Function) {
-                emitter.off('headersReceive', callback)
-            }
+            offHeadersReceived(callback?: RequestTaskOnHeadersReceivedCallback | null) {
+                emitter.off('headersReceive', callback || undefined)
+            },
+            onChunkReceived(callback: RequestTaskOnChunkReceivedCallback) {
+                emitter.on('dataReceive', callback)
+            },
+            offChunkReceived(callback?: RequestTaskOnChunkReceivedCallback | null) {
+                emitter.off('dataReceive', callback || undefined)
+            },
         }
+        const realRequestTask = new RequestTask(requestTask)
 
         function destroy() {
             emitter.off('headersReceive')
@@ -188,13 +241,53 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
             if (location) {
                 lastUrl = location as string
             }
-            // TODO headersReceive存在bug，暂不支持回调给用户。注意重定向时会多次触发，但是只需要给用户回调最后一次
+            // TODO headersReceive存在bug，暂不支持回调给用户。
             // emitter.emit('headersReceive', headers);
         })
 
+        let headersReceiveTriggered = false
         const bufs = [] as buffer.Buffer[]
         httpRequest.on('dataReceive', (data) => {
+            if (!headersReceiveTriggered) {
+                headersReceiveTriggered = true
+                // 注意重定向时会多次触发，但是只需要给用户回调最后一次headers
+                const headers = {} as UTSJSONObject
+                const realHeaders = latestHeaders as Record<string, string | string[]>
+                let cookies = [] as string[]
+                // 有用户反馈部分情况下headers会为null，无法复现，增加判断逻辑容错
+                if (realHeaders) {
+                    const keys = Object.keys(realHeaders)
+                    for (let i = 0; i < keys.length; i++) {
+                        const key = keys[i]
+                        if (key === 'set-cookie' || key === 'Set-Cookie') {
+                            const setCookieHeader = realHeaders[key] as string[];
+                            // TODO 待确认为什么鸿蒙会返回重复的Set-Cookie，不合常理。使用 https://httpbin.org/cookies/set/nnn/123 这个接口测试
+                            for (let i = setCookieHeader.length - 1; i >= 0; i--) {
+                                const cookie = setCookieHeader[i]
+                                if (setCookieHeader.indexOf(cookie) !== i) {
+                                    setCookieHeader.splice(i, 1)
+                                }
+                            }
+                            cookies = setCookieHeader as string[];
+                            headers[key] = Array.isArray(setCookieHeader) ? setCookieHeader.join(',') : setCookieHeader;
+                        } else {
+                            headers[key] = realHeaders[key];
+                        }
+                    }
+                }
+                emitter.emit('headersReceive', {
+                    header: headers,
+                    // 鸿蒙不支持在headersReceive时机获取到状态码
+                    statusCode: NaN,
+                    cookies: cookies,
+                } as RequestTaskOnHeadersReceivedListenerResult);
+            }
             bufs.push(buffer.from(data))
+            if (args.enableChunked) {
+                emitter.emit('dataReceive', {
+                    data: data
+                } as RequestTaskOnChunkReceivedListenerResult)
+            }
         })
 
         httpRequest.requestInStream(
@@ -229,7 +322,7 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                                 data = globalThis.UTS.JSON.parse(data) || data;
                                 // #endif
                                 // #ifndef UNI-APP-X
-                                data = JSON.parse(data);
+                                data = JSON.parse(data as string);
                                 // #endif
                             } catch (e) {
                                 // 与微信保持一致，不抛出异常
@@ -237,8 +330,8 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                         }
                     }
                     const headers = latestHeaders as Record<string, string | string[]>
+                    // 有用户反馈部分情况下headers会为null，无法复现，增加判断逻辑容错
                     const oldCookies = headers ? (headers['Set-Cookie'] || headers['set-cookie'] || []) as string[] : [] as string[]
-                    const cookies = latestHeaders ? cookiesParse(latestHeaders as Record<string, string>) : []
                     let newCookies = oldCookies.join(',')
                     if (newCookies) {
                         if (headers['Set-Cookie']) {
@@ -251,15 +344,16 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                         data,
                         statusCode,
                         header: latestHeaders!,
-                        cookies: cookies,
+                        cookies: oldCookies,
                     } as UniRequestSuccess<Object>)
                 }
-                requestTask.offHeadersReceived()
+                realRequestTask.offChunkReceived()
+                realRequestTask.offHeadersReceived()
                 httpRequest.destroy() // 调用完毕后必须调用destroy方法
                 mp.off('beforeClose', destroy)
             }
         )
-        return new RequestTask(requestTask)
+        return realRequestTask
     },
     RequestApiProtocol,
     RequestApiOptions

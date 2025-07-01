@@ -4,6 +4,7 @@ import {
     getCurrentPage,
     Page,
     isSystemDialogPage,
+    isTabPage,
 } from '@dcloudio/uni-runtime'
 import {
     DEFAULT_ANIMATION_DURATION,
@@ -54,7 +55,8 @@ export const closeDialogPage = (options: CloseDialogPageOptions | null) => {
             return
         }
         if ((dialogPage.$vm as Page).$dialogOptions === null ||
-            currentPages.indexOf(parentPage) === -1 ||
+            parentPage == null ||
+            (!isTabPage(parentPage!.vm!) && currentPages.indexOf(parentPage) === -1) ||
             parentPage!.getDialogPages().indexOf(dialogPage) === -1) {
             if (options !== null) {
                 const errRes = new CloseDialogPageFailImpl('dialogPage is not a valid page')

@@ -66,6 +66,9 @@ export interface Uni {
 
   /**
    * 退出当前应用
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/exit.html
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/exit.html
+   *
    * @uniPlatform
     {
       "app": {
@@ -73,8 +76,7 @@ export interface Uni {
           "osVer": "5.0",
           "uniVer": "3.8.15",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -86,7 +88,7 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "x"
+          "unixVer": "4.71"
         }
       },
       "mp": {

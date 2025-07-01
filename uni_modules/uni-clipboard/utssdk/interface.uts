@@ -9,12 +9,12 @@ export interface Uni {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.71"
      *    },
      *    "ios": {
      *      "osVer": "12.0",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.71"
      *    },
      *    "harmony": {
      *      "osVer": "3.0",
@@ -81,12 +81,12 @@ export interface Uni {
      *    "android": {
      *      "osVer": "5.0",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.71"
      *    },
      *    "ios": {
      *      "osVer": "12.0",
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "4.71"
      *    },
      *    "harmony": {
      *      "osVer": "3.0",
@@ -145,10 +145,20 @@ export interface Uni {
   getClipboardData(options: GetClipboardDataOptions): void;
 }
 
+export type ClipBoardErrorCode = 
+/**
+ * 没有权限或权限被拒
+ */
+102
+
+
+export interface IClipBoardError extends IUniError {
+	errCode: ClipBoardErrorCode
+}
 export type SetClipboardData = (options: SetClipboardDataOptions) => void;
 export type SetClipboardDataSuccess = {};
 export type SetClipboardDataSuccessCallback = (result: SetClipboardDataSuccess) => void;
-export type SetClipboardDataFail = UniError;
+export type SetClipboardDataFail = IClipBoardError;
 export type SetClipboardDataFailCallback = (result: SetClipboardDataFail) => void;
 export type SetClipboardDataComplete = any;
 export type SetClipboardDataCompleteCallback = (result: SetClipboardDataComplete) => void;
@@ -183,7 +193,7 @@ export type GetClipboardDataSuccess = {
   data: string
 };
 export type GetClipboardDataSuccessCallback = (result: GetClipboardDataSuccess) => void;
-export type GetClipboardDataFail = UniError;
+export type GetClipboardDataFail = IClipBoardError;
 export type GetClipboardDataFailCallback = (result: GetClipboardDataFail) => void;
 export type GetClipboardDataComplete = any;
 export type GetClipboardDataCompleteCallback = (result: GetClipboardDataComplete) => void;

@@ -15,6 +15,7 @@ import Class from 'java.lang.Class';
 import Type from 'java.lang.reflect.Type';
 import Gson from "io.dcloud.uts.gson.Gson";
 import ByteBuffer from 'java.nio.ByteBuffer';
+import { NetworkUtil } from './network/utils/NetworkUtil.uts';
 
 let charsetPattern = Pattern.compile('charset=([a-z0-9-]+)')
 
@@ -95,8 +96,12 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 					result['header'] = this.headers;
 				}
 				let exception = option['cause']! as Exception;
+				const originalErrMsg = option['errorMsg']! as string;
 				let cause = exception.cause.toString();
-				let errMsg = option['errorMsg']! as string;
+				if(exception.cause == null) {
+					cause = originalErrMsg
+				}
+				let errMsg = originalErrMsg
 				let errCode = (option['errorCode']! as string).toInt();
 				if (errMsg.indexOf("timeout") != -1) {
 					errCode = 5;
@@ -108,6 +113,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				} else if (cause.contains("invalid URL")) {
 					errCode = 600009;
 				}
+				
 
 				let failResult = new RequestFailImpl(getErrcode(errCode));
 				failResult.cause = new SourceError(cause);
@@ -227,7 +233,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 					data: result['data'] as T,
 					statusCode: (result['statusCode'] as string).toInt(),
 					header: result['header']!,
-					cookies: this.parseCookie(this.headers)
+					cookies: NetworkUtil.parseCookie(this.headers)
 				};
 				new RunnableTask(this.looper, () => {
 					if (kParam != null) {

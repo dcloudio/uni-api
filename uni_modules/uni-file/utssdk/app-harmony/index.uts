@@ -60,8 +60,15 @@ export {
     LegacyGetFileInfoFail
 }
 
+const SAVE_FILE_DIR = 'uni-store'
+export const CACHE_PATH = `unifile://cache/`
+
+export function getSavedDirEnv() {
+    return `${CACHE_PATH}${SAVE_FILE_DIR}`
+}
+
 function getSavedDir() {
-    return getEnv().USER_DATA_PATH + '/saved'
+    return `${getEnv().CACHE_PATH}/${SAVE_FILE_DIR}`
 }
 
 let savedIndex: [string, number] = ['0', 0]
@@ -110,14 +117,21 @@ export const saveFile: SaveFile = defineAsyncApi<LegacySaveFileOptions, LegacySa
             exec.reject((error as Error).message)
             return
         }
-        const savedFilePath = savedPath + '/' + getSavedFileName(tempFilePath);
+        const savedFileName = getSavedFileName(tempFilePath)
+        const savedFilePath = `${savedPath}/${savedFileName}`
         fs.copyFile(srcFile.fd, savedFilePath, (err) => {
             fs.closeSync(srcFile)
             if (err) {
                 exec.reject(err.message)
             } else {
                 exec.resolve({
-                    savedFilePath
+                    // #ifdef UNI-APP-X
+                    savedFilePath: `${getSavedDirEnv()}/${savedFileName}`,
+                    // #endif
+                    // #ifndef UNI-APP-X
+                    // @ts-expect-error
+                    savedFilePath,
+                    // #endif
                 } as LegacySaveFileSuccess)
             }
         })
@@ -139,13 +153,19 @@ export const getSavedFileList: GetSavedFileList = defineAsyncApi<LegacyGetSavedF
             } else {
                 exec.resolve({
                     fileList: fileList.map((filePath: string) => {
-                        const fullPath = savedPath + '/' + filePath
+                        const fullPath = `${savedPath}/${filePath}`
                         const stat = fs.statSync(fullPath)
                         if (!stat.isFile()) {
                             return null
                         }
                         return {
+                            // #ifdef UNI-APP-X
+                            filePath: `${getSavedDirEnv()}/${filePath}`,
+                            // #endif
+                            // #ifndef UNI-APP-X
+                            // @ts-expect-error
                             filePath: fullPath,
+                            // #endif
                             size: stat.size,
                             createTime: stat.ctime
                         } as LegacySavedFileListItem

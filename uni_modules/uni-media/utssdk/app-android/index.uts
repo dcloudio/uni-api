@@ -380,16 +380,7 @@ function loadFile(options : SaveImageToPhotosAlbumOptions, saveToAlbum : boolean
 			options.complete?.(error)
 			return
 		}
-		var fileName = getFileName(originalPath)
-		
-		var lastPointIndex = fileName.lastIndexOf(".")
-		var tempFileName = ""
-		if (lastPointIndex != -1) {
-			tempFileName = fileName.substring(0, lastPointIndex) + (System.currentTimeMillis()) + fileName.substring(lastPointIndex)
-		}
-		if(!TextUtils.isEmpty(tempFileName)) {
-			fileName = tempFileName
-		}
+		var fileName = getFileName(originalPath,true)
 		let path = DCIM_PATH + fileName
 		if (copyFileToPublicPath(originalPath, path, false)) {
 			if (saveToAlbum) {
@@ -616,7 +607,7 @@ function loadFile(options : SaveVideoToPhotosAlbumOptions) {
 	if (!file.exists()) {
 		originalPath = UTSAndroid.convert2AbsFullPath(options.filePath)
 	}
-	let path = DCIM_PATH + getFileName(originalPath)
+	let path = DCIM_PATH + getFileName(originalPath,true)
 	if (copyFileToPublicPath(originalPath, path, true)) {
 		sendSaveToAlbumBroad(path)
 		let success : SaveVideoToPhotosAlbumSuccess = {

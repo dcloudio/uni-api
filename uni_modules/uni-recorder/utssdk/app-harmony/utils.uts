@@ -1,15 +1,17 @@
 import { getEnv } from '@dcloudio/uni-runtime';
 import { fileIo } from '@kit.CoreFileKit';
-import { RecorderManagerOnStopResult } from '../interface.uts';
+import { RecorderManagerOnStopResult, RecorderManagerErrorCode, IRecorderManagerFail } from '../interface.uts';
 
 export type RecorderState = 'pause' | 'resume' | 'start' | 'stop' | 'error' | 'frameRecorded' | 'interruptionBegin' | 'interruptionEnd'
 
+type ErrorCb = (result: IRecorderManagerFail) => void
+export
 interface Callbacks {
   pause?: Function
   resume?: Function
   start?: Function
   stop?: Function
-  error?: Function
+  error?: ErrorCb
   frameRecorded?: Function
   interruptionBegin?: Function
   interruptionEnd?: Function
@@ -26,7 +28,7 @@ const callbacks: Callbacks = {
   interruptionEnd: undefined
 }
 
-export function setRecordStateCallback(state: RecorderState, cb: Function) {
+export function setRecordStateCallback(state: RecorderState, cb: Function | ErrorCb) {
   switch (state) {
     case 'pause':
       callbacks.pause = cb
@@ -41,7 +43,7 @@ export function setRecordStateCallback(state: RecorderState, cb: Function) {
       callbacks.stop = cb
       break
     case 'error':
-      callbacks.error = cb
+      callbacks.error = cb as ErrorCb
       break
     case 'frameRecorded':
       callbacks.frameRecorded = cb
@@ -62,7 +64,7 @@ export interface StateChangeRes extends RecorderManagerOnStopResult {
   doNotAskAgain?: boolean
 }
 
-export function onRecorderStateChange(state: RecorderState, res?: StateChangeRes): void {
+export function onRecorderStateChange(state: RecorderState, res?: StateChangeRes | IRecorderManagerFail): void {
   switch (state) {
     case 'pause':
       return callbacks.pause?.(res)
@@ -73,7 +75,7 @@ export function onRecorderStateChange(state: RecorderState, res?: StateChangeRes
     case 'stop':
       return callbacks.stop?.(res)
     case 'error':
-      return callbacks.error?.(res)
+      return callbacks.error?.(res as IRecorderManagerFail)
     case 'frameRecorded':
       return callbacks.frameRecorded?.(res)
     case 'interruptionBegin':
@@ -92,4 +94,18 @@ export function createFile(supportFormats: string[], format: string, defaultExt:
   const fileName = `${Date.now()}.${supportFormats.includes(format ?? '') ? format?.toLocaleLowerCase() : defaultExt}`
   const file: fileIo.File = fileIo.openSync(`${filePath}${fileName}`, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
   return file
+}
+
+export function transformErrorCode(errCode: number): RecorderManagerErrorCode {
+  switch (errCode) {
+    case 201:
+      return 1107601
+    case 401:
+      return 1107606
+    case 5400106:
+      return 1107605
+    case 5400107:
+      return 1107607
+  }
+  return errCode as RecorderManagerErrorCode
 }

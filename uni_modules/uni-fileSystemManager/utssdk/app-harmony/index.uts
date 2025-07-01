@@ -4,13 +4,13 @@ import { BusinessError } from '@ohos.base';
 import Hash from '@ohos.file.hash';
 import { getEnv, getRealPath as runtimeGetRealPath, } from '@dcloudio/uni-runtime'
 import { GET_FILE_SYSTEM_MANAGER } from '../protocol.uts';
-import { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem } from '../interface.uts';
+import { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, IFileSystemManagerFail, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem } from '../interface.uts';
 import { CallBack, FileCallback } from './callback.uts';
-import { CheckFdErr, CustomValidReturn, DataType, ModeReflect, checkDataType, checkEncoding, checkFd, checkPath, checkPathExistence, checkPathExistenceSync, checkPathSync, getApiError, getFileTypeMode, getFsPath, getNoSuchFileOrDirectoryError, getOpenMode, getParameterError, getSavedDir, getSavedFilePath, isFileUri, isString, modeReflect, obtainFileName, obtainUpperPath, ohosReadText, transformErrorCode, getAlreadyExistsError, getIsDirectoryError, getDirectoryNotEmpty, savedFileList, calculateAllPaths } from './utils.uts';
+import { CheckFdErr, CustomValidReturn, DataType, ModeReflect, checkDataType, checkEncoding, checkFd, checkPath, checkPathExistence, checkPathExistenceSync, checkPathSync, getApiError, getFileTypeMode, getFsPath, getNoSuchFileOrDirectoryError, getOpenMode, getParameterError, getSavedDir, getSavedFilePath, isFileUri, isString, modeReflect, obtainUpperPath, ohosReadText, transformErrorCode, getAlreadyExistsError, getIsDirectoryError, getDirectoryNotEmpty, savedFileList, calculateAllPaths, CACHE_PATH, USER_DATA_PATH, TEMP_PATH, SANDBOX_PATH, normalizeFilePath } from './utils.uts';
 import { FileSystemManagerFailImpl } from "../unierror.uts"
 import buffer from '@ohos.buffer';
 
-export { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem, FileSystemManagerFail } from '../interface.uts';
+export { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem, FileSystemManagerFail, IFileSystemManagerFail } from '../interface.uts';
 
 const DEFAULT_ENCODING = 'utf-8'
 const ENCODING_SUPPORT = ["ascii", "base64", "utf-8"]
@@ -562,6 +562,14 @@ class FileSystemManagerImpl implements FileSystemManager {
       recursive = Boolean(recursive)
     }
 
+    let deleteDir = true
+    if (!dirPath.endsWith('/')) {
+      dirPath = dirPath + '/'
+    }
+    if ([CACHE_PATH, USER_DATA_PATH, TEMP_PATH, SANDBOX_PATH].includes(dirPath)) {
+      deleteDir = false
+    }
+
     dirPath = useGetRealPath(dirPath)
     const res = checkPathExistence('rmdir', 'dirPath', dirPath)
     if (!res.isValid) {
@@ -582,8 +590,10 @@ class FileSystemManagerImpl implements FileSystemManager {
         return
       }
     }
-
     fs.rmdir(dirPath).then(() => {
+      if (!deleteDir) {
+        fs.mkdirSync(dirPath, true)
+      }
       cb.success({ errMsg: 'rmdir:ok' } as FileManagerSuccessResult)
     }).catch((err: BusinessError) => {
       cb.fail(getApiError((err as BusinessError).code, errMsg))
@@ -594,6 +604,14 @@ class FileSystemManagerImpl implements FileSystemManager {
     // 将非boolean类型的入参转换为boolean类型
     if (!checkDataType(recursive, false, 'boolean')) {
       recursive = Boolean(recursive)
+    }
+
+    let deleteDir = true
+    if (!dirPath.endsWith('/')) {
+      dirPath = dirPath + '/'
+    }
+    if ([CACHE_PATH, USER_DATA_PATH, TEMP_PATH, SANDBOX_PATH].includes(dirPath)) {
+      deleteDir = false
     }
 
     dirPath = useGetRealPath(dirPath)
@@ -614,6 +632,9 @@ class FileSystemManagerImpl implements FileSystemManager {
 
     try {
       fs.rmdirSync(dirPath)
+      if (!deleteDir) {
+        fs.mkdirSync(dirPath, true)
+      }
     } catch (err) {
       throw new Error(getApiError((err as BusinessError).code, errMsg).errMsg)
     }
@@ -791,20 +812,31 @@ class FileSystemManagerImpl implements FileSystemManager {
       return
     }
 
+    if (destPath.endsWith('/')) {
+      destPath = destPath.slice(0, -1)
+    }
+
+    let canAccessDestPath = false
+    // 如果访问不到 accessSync会抛出异常
+    try { canAccessDestPath = fs.accessSync(destPath) } catch (error) { }
+
     // 判断destPath路径是否存在
-    if (!fs.accessSync(destPath)) {
+    if (!canAccessDestPath) {
       const getUpperPath = obtainUpperPath(destPath)
 
-      // copyFile不支持创建目录 upperPath不存在直接报错
-      if (!fs.accessSync(getUpperPath.upperPath)) {
-        cb.fail(getNoSuchFileOrDirectoryError(errMsg))
-        return
+      let canAccess = false
+      // 如果访问不到 accessSync会抛出异常
+      try { canAccess = fs.accessSync(getUpperPath.upperPath) } catch (error) { }
+      if (!canAccess) {
+        fs.mkdirSync(getUpperPath.upperPath, true)
       }
     } else {
       const destPathStat = fs.statSync(destPath)
-      // 路径存在且为目录，则拼接srcPath的文件名作为destPath
+      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
       if (destPathStat.isDirectory()) {
-        destPath = destPath + obtainFileName(srcPath).fileName
+        // 如果是目录，且已存在，则报错
+        cb.fail(getApiError(1301003, errMsg) as IFileSystemManagerFail)
+        return
       } else {
         // 路径存在且为文件，源路径必须与目标路径相同
         if (destPathStat.isFile() && (srcPath !== destPath)) {
@@ -837,32 +869,37 @@ class FileSystemManagerImpl implements FileSystemManager {
     }
 
     if (fs.statSync(srcPath).isDirectory()) {
-      throw new Error(`${errMsg} illegal operation on a directory: ${srcPath}`)
+      throw new Error((getApiError(1301003, errMsg) as IFileSystemManagerFail).errMsg)
     }
 
-    if (!fs.accessSync(destPath)) {
+    if (destPath.endsWith('/')) {
+      destPath = destPath.slice(0, -1)
+    }
+
+    let canAccessDestPath = false
+    // 如果访问不到 accessSync会抛出异常
+    try { canAccessDestPath = fs.accessSync(destPath) } catch (error) { }
+
+    // 判断destPath路径是否存在
+    if (!canAccessDestPath) {
       const getUpperPath = obtainUpperPath(destPath)
-      if (!fs.accessSync(getUpperPath.upperPath)) {
-        throw new Error(`${errMsg} No such file or directory: ${destPath}`)
+      let canAccess = false
+      // 如果访问不到 accessSync会抛出异常
+      try { canAccess = fs.accessSync(getUpperPath.upperPath) } catch (error) { }
+      if (!canAccess) {
+        fs.mkdirSync(getUpperPath.upperPath, true)
       }
     } else {
       // 判断存在的路径是目录还是文件
       const destPathStat = fs.statSync(destPath)
-      // 判断存在的路径是目录还是文件
+      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
       if (destPathStat.isDirectory()) {
-        const index = destPath.lastIndexOf('/')
-        let namePath = destPath.substring(index)
-
-        // 处理' ../test.txt/ '的情况
-        if (destPath.endsWith('/')) {
-          namePath = destPath.substring(destPath.lastIndexOf('/', destPath.length - 2) + 1, destPath.length - 1)
-        }
-
-        destPath = destPath + namePath
+        // 如果是目录，且已存在，则报错
+        throw new Error((getApiError(1301003, errMsg) as IFileSystemManagerFail).errMsg)
       } else {
         // 判断destPath是否等于srcPath, 若不等，则报错
         if (destPathStat.isFile() && (srcPath !== destPath)) {
-          throw new Error(`${errMsg} copyFile failed`)
+          throw new Error(getAlreadyExistsError(errMsg).errMsg)
         }
       }
     }
@@ -870,7 +907,7 @@ class FileSystemManagerImpl implements FileSystemManager {
     try {
       fs.copyFileSync(srcPath, destPath)
     } catch (err) {
-      throw new Error(`copyFileSync: ${(err as BusinessError).message}`)
+      throw new Error(`${errMsg} ${(err as BusinessError).message}`)
     }
   }
   getFileInfo(options: GetFileInfoOptions): void {
@@ -923,17 +960,22 @@ class FileSystemManagerImpl implements FileSystemManager {
     if (!checkDataType(recursive, false, 'boolean')) {
       recursive = Boolean(recursive)
     }
-    fs.stat(path).then((stat) => {
+
+    try {
+      const stat = fs.statSync(path)
+      const isFile = stat.isFile()
+      if (isFile) recursive = false
+
       const combinationMode = getFileTypeMode(stat) | stat.mode
 
       const fileStats = {
-        path,
+        path: isFile ? '' : '/',
         stats: new StatsImpl(stat, combinationMode),
       } as FileStats
 
       if (recursive) {
         fs.listFile(path, { recursion: true } as ListFileOptions).then((filePaths): Promise<FileStats>[] => {
-          return calculateAllPaths(path, filePaths).map(filePath => fs.stat(filePath).then((stat): FileStats => {
+          return calculateAllPaths(filePaths).map(filePath => fs.stat(`${path}${filePath}`).then((stat): FileStats => {
             const combinationMode = getFileTypeMode(stat) | stat.mode
             return {
               path: filePath,
@@ -957,9 +999,9 @@ class FileSystemManagerImpl implements FileSystemManager {
         stats: [fileStats] as FileStats[],
         errMsg: 'stat:ok'
       } as StatSuccessResult)
-    }).catch((err: BusinessError) => {
-      cb.fail({ errCode: 1300201, errMsg: `${errMsg} with error message: ${err.message}, error code: ${err.code}` } as ApiError)
-    })
+    } catch (err) {
+      cb.fail({ errCode: 1300201, errMsg: `${errMsg} with error message: ${(err as BusinessError).message}, error code: ${(err as BusinessError).code}` } as ApiError)
+    }
   }
   // @ts-ignore
   statSync(path: string, recursive: boolean): FileStats[] {
@@ -978,17 +1020,19 @@ class FileSystemManagerImpl implements FileSystemManager {
 
     try {
       const stat = fs.statSync(path)
+      const isFile = stat.isFile()
+      if (isFile) recursive = false
       const combinationMode = getFileTypeMode(stat) | stat.mode
 
       const fileStats = {
-        path,
+        path: isFile ? '' : '/',
         stats: new StatsImpl(stat, combinationMode),
       } as FileStats
 
       if (recursive) {
         const filePaths = fs.listFileSync(path, { recursion: true } as ListFileOptions)
-        const _fileStats = calculateAllPaths(path, filePaths).map(filePath => {
-          const stat = fs.statSync(filePath)
+        const _fileStats = calculateAllPaths(filePaths).map(filePath => {
+          const stat = fs.statSync(`${path}${filePath}`)
           const combinationMode = getFileTypeMode(stat) | stat.mode
           return {
             path: filePath,
@@ -1070,28 +1114,44 @@ class FileSystemManagerImpl implements FileSystemManager {
       return
     }
 
+    if (filePath != null && filePath.endsWith('/')) {
+      filePath = filePath.slice(0, -1)
+    }
     const savedPath = filePath ? useGetRealPath(filePath) : getSavedDir()
-    try {
-      if (!fs.accessSync(savedPath)) {
-        fs.mkdirSync(savedPath, true)
+    const savedFilePath = getSavedFilePath(tempFilePath, savedPath, !filePath)
+
+    let canAccessDestPath = false
+    // 如果访问不到 accessSync会抛出异常
+    try { canAccessDestPath = fs.accessSync(savedFilePath) } catch (error) { }
+    // 判断destPath路径是否存在
+    if (!canAccessDestPath) {
+      const getUpperPath = obtainUpperPath(savedFilePath)
+      let canAccess = false
+      // 如果访问不到 accessSync会抛出异常
+      try { canAccess = fs.accessSync(getUpperPath.upperPath) } catch (error) { }
+      if (!canAccess) {
+        fs.mkdirSync(getUpperPath.upperPath, true)
       }
-    } catch (error) {
-      cb.fail({ errCode: 1300201, errMsg: (error as Error).message } as ApiError)
-      return
+    } else {
+      const destPathStat = fs.statSync(savedFilePath)
+      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
+      if (destPathStat.isDirectory()) {
+        // 如果是目录，且已存在，则报错
+        cb.fail(getApiError(1301003, errMsg) as IFileSystemManagerFail)
+        return
+      }
     }
 
-    /* let srcFile: fs.File
-    try {
-      srcFile = fs.openSync(tempFilePath, fs.OpenMode.READ_ONLY)
-    } catch (error) {
-      cb.fail({errCode:1300201, errMsg: (error as Error).message } as ApiError)
-      return
-    } */
-    const savedFilePath = getSavedFilePath(tempFilePath, savedPath)
     fs.rename(tempFilePath, savedFilePath)
       .then(() => {
         cb.success({
-          savedFilePath
+          // #ifdef UNI-APP-X
+          savedFilePath: normalizeFilePath(savedFilePath),
+          // #endif
+          // #ifndef UNI-APP-X
+          // @ts-expect-error
+          savedFilePath,
+          // #endif
         } as SaveFileSuccessResult)
       })
       .catch((err: Error) => {
@@ -1105,20 +1165,41 @@ class FileSystemManagerImpl implements FileSystemManager {
     if (!fs.accessSync(tempFilePath)) {
       throw new Error(`${errMsg} No such file or directory. tempFilePath: ${tempFilePath}`)
     }
-
+    if (filePath != null && filePath.endsWith('/')) {
+      filePath = filePath.slice(0, -1)
+    }
     const savedPath = filePath ? useGetRealPath(filePath) : getSavedDir()
-    try {
-      if (!fs.accessSync(savedPath)) {
-        fs.mkdirSync(savedPath, true)
+    const savedFilePath = getSavedFilePath(tempFilePath, savedPath, !filePath)
+
+    let canAccessDestPath = false
+    // 如果访问不到 accessSync会抛出异常
+    try { canAccessDestPath = fs.accessSync(savedFilePath) } catch (error) { }
+    // 判断destPath路径是否存在
+    if (!canAccessDestPath) {
+      const getUpperPath = obtainUpperPath(savedFilePath)
+      let canAccess = false
+      // 如果访问不到 accessSync会抛出异常
+      try { canAccess = fs.accessSync(getUpperPath.upperPath) } catch (error) { }
+      if (!canAccess) {
+        fs.mkdirSync(getUpperPath.upperPath, true)
       }
-    } catch (error) {
-      throw new Error((error as Error).message)
+    } else {
+      const destPathStat = fs.statSync(savedFilePath)
+      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
+      if (destPathStat.isDirectory()) {
+        // 如果是目录，且已存在，则报错
+        throw new Error(getApiError(1301003, errMsg).errMsg)
+      }
     }
 
-    const savedFilePath = getSavedFilePath(tempFilePath, savedPath)
     try {
       fs.renameSync(tempFilePath, savedFilePath)
+      // #ifdef UNI-APP-X
+      return normalizeFilePath(savedFilePath)
+      // #endif
+      // #ifndef UNI-APP-X
       return savedFilePath
+      // #endif
     } catch (error) {
       throw new Error((error as Error).message)
     }
@@ -1162,7 +1243,12 @@ class FileSystemManagerImpl implements FileSystemManager {
             if (!stat.isFile()) {
               return null
             }
+            // #ifdef UNI-APP-X
+            return normalizeFilePath(fullPath)
+            // #endif
+            // #ifndef UNI-APP-X
             return fullPath
+            // #endif
           })
             .concat(Array.from(savedFileList.values()))
             .filter((item) => !!item)

@@ -2,6 +2,8 @@
 	"dependencies": [
 		"com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.5.4.8"
 	],
-	"minSdkVersion": "19"
+	"minSdkVersion": "19",
+	"thirdSDKs": [
+		"tencent-location"
+	]
 }
-

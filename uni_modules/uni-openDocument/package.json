@@ -31,15 +31,17 @@
         "npmurl": ""
     },
     "uni_modules": {
-        "dependencies": [],
+        "dependencies": [
+			"uni-fileSystemManager"
+		],
         "uni-ext-api": {
             "uni": {
                 "openDocument": {
                     "name": "openDocument",
                     "app": {
                         "js": false,
-                        "kotlin": false,
-                        "swift": false,
+                        "kotlin": true,
+                        "swift": true,
                         "arkts": true
                     }
                 }

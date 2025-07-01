@@ -45,7 +45,7 @@ export interface LoadFontFaceFail extends IUniError {
 }
 export type LoadFontFaceOptions = {
     /**
-     * 是否全局生效。微信小程序 '2.10.0'起支持全局生效，需在 app.vue 中调用。
+     * 是否全局生效微信小程序 '2.10.0'起支持全局生效。需在 app.uvue 中调用。
      * @uniPlatform {
      *  "app": {
      *    "android": {
@@ -57,7 +57,12 @@ export type LoadFontFaceOptions = {
      *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -121,7 +126,12 @@ export type LoadFontFaceOptions = {
      *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "4.10"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -185,7 +195,12 @@ export type LoadFontFaceOptions = {
      *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "4.10"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "3.0",
+     *      "uniVer": "4.23",
+     *      "unixVer": "4.61"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -249,7 +264,12 @@ export type LoadFontFaceOptions = {
      *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "4.10"
-     *      }
+     *      },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
      *  },
      *  "mp": {
      *    "weixin": {

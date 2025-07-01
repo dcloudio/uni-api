@@ -1,0 +1,44 @@
+import { GetClipboardData, GetClipboardDataOptions, GetClipboardDataSuccess, SetClipboardData, SetClipboardDataOptions } from "../interface.uts"
+import { ClipBoardErrorImpl } from "../unierror.uts"
+import ClipData from "android.content.ClipData"
+import ClipboardManager from "android.content.ClipboardManager"
+import Context from "android.content.Context"
+
+let clipboardManager : ClipboardManager | null = null
+export const setClipboardData : SetClipboardData = (options : SetClipboardDataOptions) => {
+	if (clipboardManager == null) {
+		clipboardManager = UTSAndroid.getUniActivity()?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager | null
+	}
+	if (clipboardManager != null) {
+		let clipData = ClipData.newPlainText(options.data, options.data)
+		clipboardManager!.setPrimaryClip(clipData)
+		options?.success?.({})
+		options.complete?.({})
+	} else {
+		var fail = ClipBoardErrorImpl(102)
+		options?.fail?.(fail)
+		options?.complete?.(fail)
+	}
+
+}
+
+export const getClipboardData : GetClipboardData = (options : GetClipboardDataOptions) => {
+	if (clipboardManager == null) {
+		clipboardManager = UTSAndroid.getUniActivity()?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager | null
+	}
+	if (clipboardManager != null) {
+		var text = ""
+		if (clipboardManager!.hasPrimaryClip()) {
+			text = clipboardManager!.getPrimaryClip()!.getItemAt(0).text.toString();
+		}
+		var success : GetClipboardDataSuccess = {
+			data: text
+		}
+		options?.success?.(success)
+		options?.complete?.(success)
+	} else {
+		var fail = ClipBoardErrorImpl(102)
+		options?.fail?.(fail)
+		options?.complete?.(fail)
+	}
+}

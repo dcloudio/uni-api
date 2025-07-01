@@ -1,4 +1,5 @@
-import { CreateWebviewContext, WebviewContext } from '../interface.uts';
+import { CreateWebviewContext, WebviewContext, UniWebviewContextLoadDataOptions } from '../interface.uts';
+import { UniWebViewElementLoadDataOptions } from 'DCloudUniappRuntime'
 
 export const createWebviewContext : CreateWebviewContext = function (webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null) : WebviewContext | null {
 	let webviewElement: UniWebViewElement | null = null;
@@ -44,5 +45,14 @@ class WebviewContextImpl implements WebviewContext {
 
 	evalJS(js : string) {
 		this.webviewElement?.evalJS(js);
+	}
+	
+	loadData(options: UniWebviewContextLoadDataOptions) {
+		let option: UniWebViewElementLoadDataOptions = {
+			data: options.data,
+			baseURL: options.baseURL,  
+			encoding: options.encoding
+		}
+		this.webviewElement?.loadData(option)
 	}
 }
