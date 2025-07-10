@@ -149,13 +149,13 @@ export interface Uni {
 	    }
 	  }
 	 */
-	setInnerAudioOption():SetInnerAudioOption;
+	setInnerAudioOption(option:SetInnerAudioOptionOptions):void
 }
 
 export type CreateInnerAudioContext = () => InnerAudioContext;
 export type SetInnerAudioOptionSuccess = {};
 export type SetInnerAudioOptionSuccessCallback = (result: SetInnerAudioOptionSuccess) => void;
-export type SetInnerAudioOptionFail = CreateInnerAudioContextErrorCode;
+export type SetInnerAudioOptionFail = ICreateInnerAudioContextFail;
 export type SetInnerAudioOptionFailCallback = (result: SetInnerAudioOptionFail) => void;
 export type SetInnerAudioOptionComplete = any;
 export type SetInnerAudioOptionCompleteCallback = (result: SetInnerAudioOptionComplete) => void;

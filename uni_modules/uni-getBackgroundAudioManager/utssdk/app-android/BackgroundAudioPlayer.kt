@@ -452,8 +452,8 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener, Audi
                 invokeCallBack("seeked")
             } else {
                 invokeCallBack("canplay")
-                AudioService.audioService?.canPlay()
                 if (this.player.playWhenReady) {
+					AudioService.audioService?.canPlay()
                     invokeCallBack("play")
                 }
             }
