@@ -30,6 +30,7 @@ import {
     getCookieSync,
     setCookieSync
 } from './cookie.uts'
+import { BusinessError } from '@ohos.base'
 
 interface IUniDownloadFileEmitter {
     on: (eventName: string, callback: Function) => void
@@ -104,7 +105,7 @@ function getDownloadFilePath(options: GetDownloadFilePathOptions): string {
     if (!fileExists(realDirName)) {
         fs.mkdirSync(realDirName, true)
     }
-    return realFilePath
+    return decodeURIComponent(realFilePath) 
 }
 
 /**
@@ -249,7 +250,11 @@ export const downloadFile = defineTaskApi<UniDownloadFileOptions, UniDownloadFil
                     url,
                     downloadPath
                 } as GetDownloadFilePathOptions)
-                stream = fs.createStreamSync(tempFilePath, 'w+');
+                try {
+                  stream = fs.createStreamSync(tempFilePath, 'w+');
+                } catch (error) {
+                  exec.reject((error as BusinessError).message)
+                }
             }
             queueWrite(data)
         })

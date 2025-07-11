@@ -530,6 +530,12 @@ export type MkDirOptions = {
 export type RmDirOptions = {
     /**
      * 要删除的目录路径 (本地路径)
+	 * 删除特殊目录，只删除子，保留本身
+	 * - uni.env.SANDBOX_PATH
+	 * - uni.env.CACHE_PATH
+	 * - uni.env.USER_DATA_PATH
+	 * - uni.env.ANDROID_INTERNAL_SANDBOX_PATH
+	 * 其他创建的目录可以删除子和本身
      */
     dirPath: string.URIString,
     /**
@@ -637,9 +643,13 @@ export type CopyFileOptions = {
     srcPath: string.URIString,
     /**
      * 新文件路径，支持本地路径
+	 * - 传入错误路径：比如无权限的路径，返回 error
+	 * - 传入文件路径：如果上一级目录存在，保存到传入的路径，如存在则覆盖；如果上一级目录不存在，上上级目录也不存在，则先递归创建再保存
+	 * -传入destPath是目录路径且已存在，则返回错误码1300021
+	 * -传入destPath是文件路径且已存在，则覆盖写入
+	 * - 判断传入路径尾部是否带斜线，如xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path是目录
      */
     destPath: string.URIString,
-
     /**
      * 接口调用的回调函数
      */
@@ -660,7 +670,12 @@ export type SaveFileOptions = {
      */
     tempFilePath: string.URIString,
     /**
-     * 要存储的文件路径 (本地路径)
+     * - 传入nil：默认保存到 uni.env.CACHE_PATH/uni-store/ 目录
+     * - 传入错误路径：比如无权限的路径，返回 error
+     * - 传入文件路径：如果上一级目录存在，保存到传入的路径，如存在则覆盖；如果上一级目录不存在，上上级目录也不存在，则先递归创建再保存
+     * - 传入filePath是目录路径且已存在，则返回错误码1300021
+     * - 传入filePath是文件路径且已存在，则覆盖写入
+     * - 判断传入路径尾部是否带斜线，如xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path是目录
      */
     filePath?: string.URIString | null,
 
@@ -669,7 +684,7 @@ export type SaveFileOptions = {
      */
     success?: SaveFileSuccessCallback | null,
     /**
-     * 接口调用失败的回调函数
+     * 接口调用失败的回调函数，成功保存后删除临时文件
      */
     fail?: FileManagerFailCallback | null,
     /**
@@ -683,7 +698,9 @@ export type SaveFileSuccessCallback = (res: SaveFileSuccessResult) => void
 
 export type SaveFileSuccessResult = {
     /**
-     * 存储后的文件路径 (本地路径)
+     * 存储后的文件路径 (本地路径)。自 `4.71` 起，返回 `unifile://` 协议的路径
+	 * 参数filePath=nil, savedFilePath= unifile://cache/uni-store/xxx
+	 * 否则savedFilePath= unifile://cache/xxx/unifile://usr/xxx/unifile://sandbox/xxx
      */
     savedFilePath: string,
 }
@@ -1073,7 +1090,7 @@ export interface Stats {
 
 export type FileStats = {
 	/**
-	 * 文件/目录路径
+	 * 文件/目录路径（相对于传入路径）
 	 */
     path: string,
 	/**
@@ -1088,9 +1105,13 @@ export type StatSuccessResult = {
 	 * @internal
 	 */
     errMsg: string,
-	/*
-	* 当 recursive 为 false 时，res.stats 是一个 Stats 对象。当 recursive 为 true 且 path 是一个目录的路径时，res.stats 是一个 Array，数组的每一项是一个对象，每个对象包含 path 和 stats
-	*/
+   /**
+    * 微信小程序规则：当 recursive 为 false 时，res.stats 是一个 Stats 对象。当 recursive 为 true 且 path 是一个目录的路径时，res.stats 是一个 Array，数组的每一项是一个对象，每个对象包含 path 和 stats
+	* uniapp-x规则为避免返回值是联合类型，均返回数组，具体优化如下：
+	* -—— 当 path = 文件路径，返回数组，仅包含本身stats，返回 stats.path= ""
+	* -—— 当 path = 目录路径 && recursive = false，返回数组，仅包含本身stats，返回 stats.path= "/"
+	* -—— 当 path = 目录路径 && recursive = true，返回数组，包含本身stats和其递归子文件stats和目录文件stats
+    */
     stats: FileStats[]
 }
 
@@ -1147,7 +1168,8 @@ export type UnzipFileOptions = {
 
 export type GetSavedFileListResult = {
 	/**
-	 * 文件数组
+	 * 文件数组。自 `4.71` 起，返回 `unifile://` 协议的路径
+	 * 返回 `unifile://cache/uni-store/` (uni.env.CACHE_PATH/uni-store/) 目录中的文件列表
 	 */
     fileList: string[]
 }
@@ -4732,9 +4754,13 @@ export interface FileSystemManager {
      */
     saveFile(options: SaveFileOptions): void;
     /**
-     * FileSystemManager.saveFile 的同步版本
+     * FileSystemManager.saveFile 的同步版本。自 `4.71` 起，返回 `unifile://` 协议的路径
      * @param tempFilePath 临时存储文件路径 (本地路径)
-     * @param filePath 要存储的文件路径 (本地路径)
+     * @param filePath 要存储的文件路径 (本地路径)，文件已经存在时会直接覆盖
+     *
+     * 传入不存在的路径\
+     * - App 端自动创建并保存
+     * - 微信小程序会报错
      * @uniPlatform {
      *    "app": {
      *        "android": {

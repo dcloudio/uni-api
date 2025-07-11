@@ -13,14 +13,10 @@ import {
 
 import { LoadFontFaceFailImpl } from '../unierror.uts'
 
-export const loadFontFace = defineAsyncApi<
-    LoadFontFaceOptions,
-    LoadFontFaceSuccess
->('loadFontFace', (options: LoadFontFaceOptions, res: ApiExecutor) => {
+export const loadFontFace = defineAsyncApi<LoadFontFaceOptions, LoadFontFaceSuccess>('loadFontFace', (options: LoadFontFaceOptions, res: ApiExecutor) => {
+    options.source = removeUrlWrap(options.source)
     if (options.global == true) {
-        if (checkOptionSource(options, res)) {
-            appLoadFontFace(getLoadFontFaceOptions(options, res))
-        }
+        appLoadFontFace(getLoadFontFaceOptions(options, res))
     } else {
         const page = getCurrentPage()
         if (page === null) {
@@ -30,30 +26,10 @@ export const loadFontFace = defineAsyncApi<
         if (page.$fontFamilySet.has(options.family)) {
             return
         }
-        if (checkOptionSource(options, res)) {
-            page.$fontFamilySet.add(options.family)
-            appLoadFontFace(getLoadFontFaceOptions(options, res))
-        }
+        page.$fontFamilySet.add(options.family)
+        appLoadFontFace(getLoadFontFaceOptions(options, res))
     }
 })
-
-const SOURCE_REG = /(.+\.((ttf)|(otf)|(woff2?))$)|(^(http|https):\/\/.+)|(^(data:font).+)/
-function checkOptionSource(
-    options: LoadFontFaceOptions,
-    res: ApiExecutor,
-): boolean {
-    options.source = removeUrlWrap(options.source)
-    if (!SOURCE_REG.test(options.source)) {
-        res.reject(
-            new LoadFontFaceFailImpl(
-                'loadFontFace:fail, source is invalid.',
-                101,
-            ),
-        )
-        return false
-    }
-    return true
-}
 
 function removeUrlWrap(source: string): string {
     if (source.startsWith('url(')) {

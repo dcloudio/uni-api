@@ -310,15 +310,24 @@ export function getMediaInfo(path : string) : Long {
 	return 0
 }
 
-export function getFileName(path : string) : string {
+export function getFileName(path : string, rename : boolean = false) : string {
 	var fileName = path.substring(path.lastIndexOf("/") + 1)
 	if (path.startsWith("content://")) {
 		var type : string | null = UTSAndroid.getUniActivity()!.getContentResolver().getType(Uri.parse(path))
 		if (!TextUtils.isEmpty(type)) {
 			var ext = type!.split("/")
 			if (ext != null && ext.length > 1) {
-				fileName = fileName + "." + ext[1]
+				fileName = fileName +"_"+ (rename ? System.currentTimeMillis().toString() : "") + "." + ext[1]
+				return fileName
 			}
+		}
+	}
+	if (rename) {
+		var lastPointIndex = fileName.lastIndexOf(".")
+		if (lastPointIndex != -1) {
+			fileName = fileName.substring(0, lastPointIndex) +"_"+ System.currentTimeMillis().toString() + fileName.substring(lastPointIndex, fileName.length)
+		} else {
+			fileName = fileName +"_"+ System.currentTimeMillis().toString()
 		}
 	}
 	return fileName

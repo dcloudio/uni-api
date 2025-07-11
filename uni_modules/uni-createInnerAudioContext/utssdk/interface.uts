@@ -13,8 +13,7 @@ export interface Uni {
                 "osVer": "5.0",
                 "uniVer": "√",
                 "uniUtsPlugin": "x",
-                "unixVer": "4.33",
-                "unixUtsPlugin": "4.33"
+                "unixVer": "4.33"
             },
             "ios": {
                 "osVer": "12.0",
@@ -78,9 +77,97 @@ export interface Uni {
       }
      */
     createInnerAudioContext(): InnerAudioContext;
+	/**
+	 * 设置 InnerAudioContext 的播放选项
+	 * @uniPlatform
+	  {
+	    "app": {
+	        "android": {
+	            "osVer": "5.0",
+	            "uniVer": "√",
+	            "uniUtsPlugin": "x",
+	            "unixVer": "4.73"
+	        },
+	        "ios": {
+	            "osVer": "12.0",
+	            "uniVer": "x",
+	            "uniUtsPlugin": "x",
+	            "unixVer": "x",
+	            "unixUtsPlugin": "x"
+	        },
+	        "harmony": {
+	            "osVer": "5.0.0",
+	            "uniVer": "x",
+	            "unixVer": "x",
+	        }
+	    },
+	    "mp": {
+	        "weixin": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "4.41"
+	        },
+	        "alipay": {
+	            "hostVer": "1.23.4",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "baidu": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "toutiao": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "lark": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "qq": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "kuaishou": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "jd": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        }
+	    },
+	    "web": {
+	        "uniVer": "√",
+	        "unixVer": "4.0"
+	    }
+	  }
+	 */
+	setInnerAudioOption(option:SetInnerAudioOptionOptions):void
 }
 
 export type CreateInnerAudioContext = () => InnerAudioContext;
+export type SetInnerAudioOptionSuccess = {};
+export type SetInnerAudioOptionSuccessCallback = (result: SetInnerAudioOptionSuccess) => void;
+export type SetInnerAudioOptionFail = ICreateInnerAudioContextFail;
+export type SetInnerAudioOptionFailCallback = (result: SetInnerAudioOptionFail) => void;
+export type SetInnerAudioOptionComplete = any;
+export type SetInnerAudioOptionCompleteCallback = (result: SetInnerAudioOptionComplete) => void;
+
+export type SetInnerAudioOptionOptions = {
+	mixWithOther?:boolean|null,
+	success?:SetInnerAudioOptionSuccessCallback|null,
+	fail?:SetInnerAudioOptionFailCallback|null,
+	complete?:SetInnerAudioOptionCompleteCallback|null
+}
+
+export type SetInnerAudioOption = (option:SetInnerAudioOptionOptions)=>void;
 
 export interface InnerAudioContext {
     /**
@@ -92,8 +179,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -166,8 +252,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -240,8 +325,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -303,7 +387,6 @@ export interface InnerAudioContext {
               "unixVer": "4.0"
           }
       }
-     * @type boolean
      */
     paused: boolean;
     /**
@@ -315,8 +398,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -389,8 +471,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -463,8 +544,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -538,8 +618,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -601,7 +680,6 @@ export interface InnerAudioContext {
               "unixVer": "4.0"
           }
       }
-     * @type boolean
      */
     autoplay: boolean;
     /**
@@ -614,8 +692,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -677,12 +754,10 @@ export interface InnerAudioContext {
               "unixVer": "4.0"
           }
       }
-     * @type boolean
      */
     loop: boolean;
     /**
      * 是否遵循系统静音开关，当此参数为 false 时，即使用户打开了静音开关，也能继续发出声音，默认值 true
-     * @type boolean
      * @uniPlatform
       {
           "app": {
@@ -690,8 +765,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "x"
               },
               "ios": {
                   "osVer": "12.0",
@@ -764,8 +838,7 @@ export interface InnerAudioContext {
                  "osVer": "5.0",
                  "uniVer": "√",
                  "uniUtsPlugin": "x",
-                 "unixVer": "4.33",
-                 "unixUtsPlugin": "4.33"
+                 "unixVer": "4.33"
              },
              "ios": {
                  "osVer": "12.0",
@@ -839,8 +912,7 @@ export interface InnerAudioContext {
                  "osVer": "5.0",
                  "uniVer": "√",
                  "uniUtsPlugin": "x",
-                 "unixVer": "4.33",
-                 "unixUtsPlugin": "4.33"
+                 "unixVer": "4.33"
              },
              "ios": {
                  "osVer": "12.0",
@@ -904,6 +976,81 @@ export interface InnerAudioContext {
      }
      */
     playbackRate?: number;
+	/**
+	 * 是否缓存线上音频资源，默认值为true，当设置false时，不会缓存资源到本地，直播地址需要主动设置为false
+	 * @uniPlatform
+	  {
+	      "app": {
+	          "android": {
+	              "osVer": "5.0",
+	              "uniVer": "x",
+	              "uniUtsPlugin": "x",
+	              "unixVer": "4.71"
+	          },
+	          "ios": {
+	              "osVer": "12.0",
+	              "uniVer": "x",
+	              "uniUtsPlugin": "x",
+	              "unixVer": "4.71",
+	              "unixUtsPlugin": "4.71"
+	          },
+	        "harmony": {
+	            "osVer": "5.0.0",
+	            "uniVer": "x",
+	            "unixVer": "x",
+	        }
+	      },
+	    "mp": {
+	        "weixin": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "4.41"
+	        },
+	        "alipay": {
+	            "hostVer": "1.23.4",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "baidu": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "toutiao": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "lark": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "qq": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "kuaishou": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "jd": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        }
+	    },
+	      "web": {
+	          "uniVer": "√",
+	          "unixVer": "4.0"
+	      }
+	  }
+	 */
+	// #ifdef APP-IOS || APP-ANDROID
+	cache: boolean;
+	// #endif
     /**
      * 暂停
      * @uniPlatform
@@ -913,8 +1060,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -987,8 +1133,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1061,8 +1206,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1135,8 +1279,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1209,8 +1352,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1241,8 +1383,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1315,8 +1456,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1348,8 +1488,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1423,8 +1562,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1497,8 +1635,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1571,8 +1708,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1645,8 +1781,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1719,8 +1854,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1793,8 +1927,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1867,8 +2000,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -1941,8 +2073,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2015,8 +2146,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2089,8 +2219,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2163,8 +2292,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2237,8 +2365,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2311,8 +2438,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2385,8 +2511,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2459,8 +2584,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2491,8 +2615,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2565,8 +2688,7 @@ export interface InnerAudioContext {
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2644,8 +2766,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2675,8 +2796,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2706,8 +2826,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2737,8 +2856,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2768,8 +2886,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",
@@ -2799,8 +2916,7 @@ export type CreateInnerAudioContextErrorCode =
                   "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "4.33",
-                  "unixUtsPlugin": "4.33"
+                  "unixVer": "4.33"
               },
               "ios": {
                   "osVer": "12.0",

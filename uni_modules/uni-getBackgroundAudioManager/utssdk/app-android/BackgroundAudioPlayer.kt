@@ -4,12 +4,10 @@
     "INAPPLICABLE_JVM_NAME",
     "UNUSED_ANONYMOUS_PARAMETER"
 )
-
-package uts.sdk.modules.uniGetBackgroundAudioManager;
-
+package uts.sdk.modules.uniGetBackgroundAudioManager
 import android.content.Intent
+import android.media.AudioManager
 import android.net.Uri
-import android.util.Log
 import android.webkit.CookieManager
 import com.google.android.exoplayer2.DeviceInfo
 import com.google.android.exoplayer2.ExoPlaybackException
@@ -22,7 +20,6 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.Tracks
 import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.text.Cue
 import com.google.android.exoplayer2.text.CueGroup
 import com.google.android.exoplayer2.trackselection.TrackSelectionParameters
@@ -35,7 +32,6 @@ import com.google.android.exoplayer2.video.VideoSize
 import io.dcloud.uts.UTSAndroid
 import io.dcloud.uts.UTSJSONObject
 import io.dcloud.uts.compareTo
-import io.dcloud.uts.console
 import io.dcloud.uts.includes
 import io.dcloud.uts.setInterval
 import io.dcloud.uts.times
@@ -43,7 +39,15 @@ import io.dcloud.uts.utsArrayOf
 import java.io.File
 import java.io.IOException
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
-import com.google.android.exoplayer2.metadata.Metadata;
+import android.text.TextUtils;
+import android.util.Log
+import io.dcloud.uts.clearInterval
+import io.dcloud.uts.console
+import uts.sdk.modules.uniGetBackgroundAudioManager.BackgroundAudioManager;
+import uts.sdk.modules.DCloudUniGetBackgroundAudioManager.AudioService;
+import uts.sdk.modules.uniGetBackgroundAudioManager.ICreateBackgroundAudioFail;
+import uts.sdk.modules.uniGetBackgroundAudioManager.AudioFocusHelper;
+import uts.sdk.modules.uniGetBackgroundAudioManager.CreateBackgroundAudioFailImpl;
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -68,7 +72,7 @@ object CacheManager {
     }
 }
 
-open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
+open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener, AudioManager.OnAudioFocusChangeListener{
     open var _src: String = "";
     private var cacheDataSourceFactory: CacheDataSource.Factory? = null
     private var TAG = "BackgroundAudioPlayer"
@@ -129,11 +133,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
             cacheDataSourceFactory?.setUpstreamDataSourceFactory(httpDataSourceFactory)
                 ?.setCache(CacheManager.getSimpleCache())
                 ?.setFlags(CacheDataSource.FLAG_BLOCK_ON_CACHE) // 等待直到缓存加载完
-			val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
-			cacheDataSourceFactory?.let {
-				defaultMediaSource.setDataSourceFactory(it)
-			}
-			this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
+            val defaultMediaSource = DefaultMediaSourceFactory(UTSAndroid.getAppContext()!!)
+            if(cacheDataSourceFactory != null && this._cache == true) {
+                cacheDataSourceFactory?.let {
+                    defaultMediaSource.setDataSourceFactory(it)
+                }
+            }
+            this.player.setMediaSource(defaultMediaSource.createMediaSource(mediaItem))
         } else {
             this.player.setMediaItem(mediaItem);
         }
@@ -198,6 +204,16 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
                 this.player.setPlaybackSpeed(rate!!.toFloat());
             }
         }
+    open var _cache = true
+    override var cache = true
+        set(cach) {
+            this._cache = cach
+            if(!this.player.isPlaying && !this.isPausedByUser && !this.player.isLoading) {
+                if(!TextUtils.isEmpty(this._src)) {
+                    this.changeSRC(this._src)
+                }
+            }
+        }
     override var title = "";
     override var epname = "";
     override var singer = "";
@@ -211,15 +227,26 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     open var isPausedByUser: Boolean = false;
     open var isSeeking: Boolean = false;
     private var audioFocusHelper: AudioFocusHelper? = null
-
+    private var isServiceStartSuccess = false
+    private var isStopped = false
+    private var activityDestroyCallback: (() -> Unit)? = null
 
     constructor() {
+        startAudioService()
         // 创建 CacheDataSourceFactory
         cacheDataSourceFactory = CacheDataSource.Factory()
         audioFocusHelper = AudioFocusHelper(UTSAndroid.getAppContext()!!,this)
-        audioFocusHelper?.requestAudioFocus()
         this.player = ExoPlayer.Builder(UTSAndroid.getAppContext()!!).build();
         this.player.addListener(this);
+        // 退出应用的话，如果播放器没有在播放，则停止服务
+        activityDestroyCallback = {
+            if(!this.player.isPlaying && this.isStopped) {
+                stopPlayService()
+                this.isServiceStartSuccess = false
+                UTSAndroid.offAppActivityDestroy(activityDestroyCallback)
+            }
+        }
+        UTSAndroid.onAppActivityDestroy(activityDestroyCallback!!)
     }
 
     private fun stopPlayService() {
@@ -241,11 +268,10 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
 
                 Player.STATE_READY -> {//暂停或者准备好
                     if (this.isSeeking) {
-                        console.log("1");
                         this.isSeeking = false;
                         invokeCallBack("seeked")
                     }
-                    invokeCallBack("play")
+                    // invokeCallBack("play")
                 }
             }
             this.isPausedByUser = false;
@@ -260,18 +286,52 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
         }
     }
 
+    var intervalId: Number= -1
     override fun play() {
-        startAudioService()
+        audioFocusHelper?.requestAudioFocus()
+        this.isStopped = false
+        if(this.isServiceStartSuccess) {
+            if(AudioService.audioService == null) {
+                intervalId = setInterval(fun(){
+                    if(AudioService.audioService != null) {
+                        AudioService.audioService?.handlerInitNotification()
+                        AudioService.audioService?.playInStart()
+                        clearInterval(intervalId)
+                    }
+                },100,1000)
+            } else {
+                AudioService.audioService?.handlerInitNotification()
+                AudioService.audioService?.playInStart()
+            }
+        } else {
+            startAudioService()
+            if (!isServiceStartSuccess)
+                errorCallBack?.invoke(CreateBackgroundAudioFailImpl(1107609))
+            else {
+                intervalId = setInterval(fun(){
+                    if(AudioService.audioService != null) {
+                        AudioService.audioService?.handlerInitNotification()
+                        AudioService.audioService?.playInStart()
+                        clearInterval(intervalId)
+                    }
+                },100,3000)
+            }
+        }
     }
 
     private fun startAudioService() {
-        UTSAndroid.getAppContext()
-            ?.startService(
-                Intent(
-                    UTSAndroid.getAppContext(),
-                    AudioService::class.java
+        try {
+            UTSAndroid.getAppContext()
+                ?.startService(
+                    Intent(
+                        UTSAndroid.getAppContext(),
+                        AudioService::class.java
+                    )
                 )
-            )
+            isServiceStartSuccess = true
+        } catch (_: Exception) {
+            isServiceStartSuccess = false
+        }
     }
 
     override fun pause() {
@@ -293,12 +353,13 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     }
 
     override fun stop() {
+        this.isStopped = true
         this.isPausedByUser = true;
         this.player.playWhenReady = false;
         this.player.stop();
         audioFocusHelper?.abandonAudioFocus()
         invokeCallBack("stop")
-        stopPlayService()
+        // stopPlayService()
     }
 
     override fun seek(position: Number) {
@@ -381,18 +442,18 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     }
 
     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-        Log.d(TAG, "onPlayerStateChanged $playWhenReady $playbackState $isPausedByUser")
         if (playbackState == Player.STATE_BUFFERING) {
             invokeCallBack("waiting")
         } else if (playbackState == Player.STATE_READY) {
+            Log.e("AudioService", "onPlayerStateChanged: ${playbackState},${playWhenReady}")
             if (!this.isPausedByUser && this.isSeeking) {
                 this.isSeeking = false;
                 AudioService.audioService?.notifyChange()
                 invokeCallBack("seeked")
             } else {
                 invokeCallBack("canplay")
-                AudioService.audioService?.canPlay()
                 if (this.player.playWhenReady) {
+					AudioService.audioService?.canPlay()
                     invokeCallBack("play")
                 }
             }
@@ -423,14 +484,16 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
                         fail.errMsg = it
                     }
                 } else {
-                    val message = sourceException.message as String;
-                    if (message.includes("None of the available extractors")) {
-                        fail = CreateBackgroundAudioFailImpl(1107604)
-                        fail.errMsg = message
-                    } else {
-                        fail = CreateBackgroundAudioFailImpl(1107603)
-                        fail.errMsg = message
+                    sourceException.message?.let {
+                        if (it.includes("None of the available extractors")) {
+                            fail = CreateBackgroundAudioFailImpl(1107604)
+                            fail.errMsg = it
+                        } else {
+                            fail = CreateBackgroundAudioFailImpl(1107603)
+                            fail.errMsg = it
+                        }
                     }
+
                 }
             }
         }
@@ -455,7 +518,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {}
     override fun onPlayerErrorChanged(error: PlaybackException?) {}
     override fun onPositionDiscontinuity(reason: Int) {}
-	override fun onMetadata(metadata:Metadata) {}
+    // override fun onMetadata(metadata:Metadata) {}
     override fun onPositionDiscontinuity(
         oldPosition: Player.PositionInfo,
         newPosition: Player.PositionInfo,
@@ -479,4 +542,22 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener{
     override fun onRenderedFirstFrame() {}
     override fun onCues(cues: MutableList<Cue>) {}
     override fun onCues(cueGroup: CueGroup) {}
+    override fun onAudioFocusChange(focusChange: Int) {
+        when(focusChange) {
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                if(!this.isPausedByUser && !this.player.isPlaying) {
+                    play()
+                }
+            }
+            AudioManager.AUDIOFOCUS_LOSS ->{
+                pause()
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->{
+                this.player.playWhenReady = false;
+                this.player.pause()
+                invokeCallBack("pause")
+                AudioService.audioService?.pause()
+            }
+        }
+    }
 }

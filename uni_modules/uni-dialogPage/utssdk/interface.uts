@@ -29,8 +29,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -105,8 +104,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -215,8 +213,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -282,6 +279,7 @@ export type OpenDialogPageOptions = {
   animationDuration ?: number | null
   /**
    * 是否禁用按键盘 ESC 时关闭
+   * @defaultValue false
    * @uniPlatform 
     {
       "app": {
@@ -289,8 +287,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -364,8 +361,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -432,6 +428,7 @@ export type OpenDialogPageOptions = {
 
   /**
    * 是否触发父页面的 onHide 生命周期
+   * @defaultValue false
    * @uniPlatform 
     {
       "app": {
@@ -439,8 +436,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.41",
-          "unixUtsPlugin": "4.41"
+          "unixVer": "4.41"
         },
         "ios": {
           "osVer": "12.0",
@@ -514,8 +510,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -588,8 +583,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -662,8 +656,7 @@ export type OpenDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -747,8 +740,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -823,8 +815,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -933,8 +924,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -1008,8 +998,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -1082,8 +1071,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -1156,8 +1144,7 @@ export type CloseDialogPageOptions = {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -1235,8 +1222,7 @@ export interface Uni {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",
@@ -1312,8 +1298,7 @@ export interface Uni {
           "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
+          "unixVer": "4.31"
         },
         "ios": {
           "osVer": "12.0",

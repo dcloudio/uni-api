@@ -4,7 +4,7 @@ import { CreateBackgroundAudioErrorCode, ICreateBackgroundAudioFail } from "./in
  * 错误主题
  */
 
-export const CreateBackgroundAudioUniErrorSubject = 'uni-CreateBackgroundAudio';
+export const CreateBackgroundAudioUniErrorSubject = 'uni-getBackgroundAudioManager';
 
 /**
  * 错误码

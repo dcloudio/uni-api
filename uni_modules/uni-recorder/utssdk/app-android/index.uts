@@ -1,6 +1,7 @@
 import { API_GET_RECORDER_MANAGER } from '../protocol.uts';
-import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions } from '../interface.uts';
+import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
 import { createFile, onRecorderStateChange, setRecordStateCallback, StateChangeRes } from './utils.uts';
+export { RecorderManagerFailImpl } from "../unierror.uts"
 import RecordOption from 'uts.sdk.modules.uniRecorder.recorder.RecordOption';
 import AudioRecorderMgr from 'uts.sdk.modules.uniRecorder.AudioRecorderMgr'
 
@@ -10,11 +11,11 @@ const MAX_DURATION = DEFAULT_DURATION * 10
 const DEFAULT_FORMAT = 'aac'
 let RECORDER_MANAGER : AudioRecorderMgr | null = null
 class RecorderManagerImpl implements RecorderManager {
+	timeoutId:number = -1
 	constructor() {
 		RECORDER_MANAGER = new AudioRecorderMgr()
 	}
 	override start(options : RecorderManagerStartOptions) : void {
-		console.log('start')
 		if (options == null) options = {} as RecorderManagerStartOptions
 		if (options.format == null) options.format = DEFAULT_FORMAT
 
@@ -25,20 +26,21 @@ class RecorderManagerImpl implements RecorderManager {
 			options.duration = MAX_DURATION
 		}
 		let recordOption = new RecordOption(options, createFile(options.format! as string))
-		console.log(recordOption.mFormat)
 		RECORDER_MANAGER!.startRecorder(recordOption)
-		setTimeout(() => {
-		    this.stop()
+		this.timeoutId = setTimeout(() => {
+			this.timeoutId = -1
+			this.stop()
 		}, options.duration!)
 	}
 	override pause() : void {
-		if (RECORDER_MANAGER != null) {RECORDER_MANAGER!.pause()}
+		if (RECORDER_MANAGER != null) { RECORDER_MANAGER!.pause() }
 	}
 	override resume() : void {
-		if (RECORDER_MANAGER != null){ RECORDER_MANAGER!.resume()}
+		if (RECORDER_MANAGER != null) { RECORDER_MANAGER!.resume() }
 	}
 	override stop() {
 		if (RECORDER_MANAGER != null) {
+			clearTimeout(this.timeoutId)
 			try {
 				RECORDER_MANAGER!.stopRecorder()
 			} catch (error) {
@@ -64,7 +66,7 @@ class RecorderManagerImpl implements RecorderManager {
 	override onFrameRecorded(options : (result : any) => void) : void {
 		setRecordStateCallback('frameRecorded', options)
 	}
-	override onError(options : (result : any) => void) : void {
+	override onError(options : (result : IRecorderManagerFail) => void) : void {
 		if (RECORDER_MANAGER != null) {
 			RECORDER_MANAGER!.setErrorCB(options)
 		}

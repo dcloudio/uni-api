@@ -51,6 +51,8 @@ private class CallbackWrapper: Equatable {
 typealias UniBackgroundAudioEventCallback = (_ result: Any) -> Void
 typealias UniBackgroundAudioErrorEventCallback = (_ result: ICreateBackgroundAudioFail) -> Void
 
+@objc(UniBackgroundAudioManager)
+@objcMembers
 public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     public static var shared = UniBackgroundAudioManager()
     
@@ -101,6 +103,24 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         }
     }
     private var _loop: Bool = false
+    private var _cache: Bool = true {
+        didSet {
+            if _isActuallyPlaying == false {
+                initCacheConfig()
+                player?.replaceCurrentItem(with: nil)
+                updatePlayerItem()
+            }
+        }
+    }
+    
+    private var _isActuallyPlaying: Bool {
+        guard let currentItem = player?.currentItem else { return false }
+        return  player?.rate != 0 &&
+        player?.error == nil &&
+        currentItem.status == .readyToPlay &&
+        currentItem.isPlaybackLikelyToKeepUp
+    }
+    
     private var _volume: NSNumber = 1.0 {
         didSet {
             player?.volume = _volume.toFloatA()
@@ -130,10 +150,11 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     private var _currentFailImpl: CreateBackgroundAudioFailImpl? = nil //当前播放出错error对象
     private var _isSeeking = false //是否是正在seeking状态
     private var _isAppActive = false //app是否正在前台状态
-    private var _hasConfigAudioSession = false //是否配置好了后台播放会话通道
     private var _readyToPlay = false //是否canPlay状态
     private var _cacheSize: Int64 = 100*1024*1024 //默认缓存大小100M
-    
+    private var _hasAddObservers = false //是否添加了观察者
+    private var _isPlayingBeforeInterruption = false //电话、闹铃等系统行为打断前是否正在播放
+
     private var eventCallbacks: [String: [CallbackWrapper]] = [:]
     private var errorEventCallBacks: [UniBackgroundAudioErrorEventCallback] = []
     private var timeObserverToken: Any?
@@ -141,7 +162,11 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     
     public var duration: NSNumber {
         get {
-            return NSNumber(floatLiteral: playerItem?.asset.duration.seconds.round(3) ?? 0.0)
+            var tmp = playerItem?.asset.duration.seconds.round(3) ?? 0.0
+            if tmp.isNaN || tmp.isInfinite {
+                tmp = 0.0
+            }
+            return NSNumber(floatLiteral: tmp)
         }
         set {}
     }
@@ -235,11 +260,16 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     public var playbackRate: NSNumber? {
         get { return _playbackRate }
         set {
-            if _playbackRate != newValue {
+            if _playbackRate != newValue && !isHLSLiveOrEvent() {
                 _isNeedSetRate = true
                 _playbackRate = newValue ?? 1.0
             }
         }
+    }
+    
+    public var cache: Bool {
+        get { return _cache }
+        set { _cache = newValue }
     }
     
     public func seek(_ position: NSNumber) {
@@ -249,7 +279,6 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
     public override init() {
         super.init()
         _isAppActive = true
-        configureAudioSession()
         configureRemoteCommandCenter()
         configurePlayer()
     }
@@ -386,12 +415,14 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
 
 extension UniBackgroundAudioManager {
     private func initCacheConfig() {
+        if self._cache == false { return }
+        
         //设置是否显示KTVHTTPCache的log日志
         KTVHTTPCache.logSetConsoleLogEnable(false)
         try? KTVHTTPCache.proxyStart()
         KTVHTTPCache.cacheSetMaxCacheLength(_cacheSize)
         KTVHTTPCache.cacheSetRootPath("Caches/uni-audio")
-
+        
         //配置MIME类型集
         let contentTypes: [String] = [
             "audio/wav",
@@ -436,7 +467,28 @@ extension UniBackgroundAudioManager {
                 innerSeek(self.startTime)
             }
             if !_hasPlayError {
-                player.play()
+                // 恢复播放前，判断当前位置是否还在 seekable 范围内
+                if let range = player.currentItem?.seekableTimeRanges.last?.timeRangeValue {
+                    let rangeStart = CMTimeGetSeconds(range.start)
+                    let rangeEnd = CMTimeGetSeconds(CMTimeRangeGetEnd(range))
+                    let current = CMTimeGetSeconds(player.currentTime())
+                    
+                    /// 如果rangeStart == rangeEnd 或者 duration过小，就是直播源的server没有配置Event模式（服务器没有提供 DVR 缓存窗口），只能seek到当前播放点，没有快退能力，
+                    let duration = CMTimeGetSeconds(range.duration)
+                    let isSupportDVR = duration > 10
+                    
+                    if (current < rangeStart || current > rangeEnd) && !isSupportDVR {
+                        // 已经不在可播放范围，回到直播点
+                        player.seek(to: CMTime(seconds: rangeEnd, preferredTimescale: 600)) {
+                            _ in player.play()
+                        }
+                    } else {
+                        // 在范围内，继续播放
+                        player.play()
+                    }
+                } else {
+                    player.play()
+                }
                 configPlayingCenterInfo()
             } else {
                 if let errCode = _currentFailImpl?.errCode {
@@ -450,15 +502,27 @@ extension UniBackgroundAudioManager {
     }
     
     private func innerSeek(_ position: NSNumber, needDispathEvent: Bool? = false, completionHandler: ((Bool) -> Void)? = nil) {
+        guard let player = player, let currentItem = player.currentItem else { return }
+        // 检查 AVPlayerItem 状态
+        if currentItem.status != .readyToPlay {
+            UNILogDebug("======audio======, Player item is not ready to play, skipping seek.")
+            return
+        }
+        
         if (position.toDoubleA() >= 0) {
-            let timeScale = player?.currentItem?.asset.duration.timescale ?? CMTimeScale(NSEC_PER_SEC)
+            let timeScale = player.currentItem?.asset.duration.timescale ?? CMTimeScale(NSEC_PER_SEC)
             let seekTime = CMTime(seconds: position.toDoubleA(), preferredTimescale: timeScale)
+            if !seekTime.isValid || seekTime.isIndefinite {
+                UNILogDebug("======audio======, Invalid seek time, skipping seek.")
+                return
+            }
             if let needDispathEvent = needDispathEvent, needDispathEvent {
                 UNILogDebug("======audio======, Seeking started，调用seek方法后调用")
                 dispatchEvent(event: .seeking)
             }
             _isSeeking = true
-            player?.seek(to: seekTime, completionHandler: { [weak self] finished in
+            
+            player.seek(to: seekTime, completionHandler: { [weak self] finished in
                 
                 if let needDispathEvent = needDispathEvent, needDispathEvent {
                     self?.dispatchEvent(event: .seeked)
@@ -515,7 +579,7 @@ extension UniBackgroundAudioManager {
         }
         var tempCacheUrl: URL?
         let isM3u8 = url?.path.lowercased().contains("m3u8") ?? false
-        if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
+        if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8, self._cache {
             tempCacheUrl = cacheUrl
         }
         if let asset = player.currentItem?.asset as? AVURLAsset, (asset.url == url || asset.url == tempCacheUrl) {
@@ -533,7 +597,7 @@ extension UniBackgroundAudioManager {
         playerItem = nil
         if let url = url {
             _readyToPlay = false
-            if let scheme = url.scheme, scheme.startsWith("http") {
+            if let scheme = url.scheme, scheme.startsWith("http"), self._cache {
                 var _cacheUrl: URL
                 if let cacheUrl = KTVHTTPCache.cacheCompleteFileURL(with: url), !isM3u8 {
                     _cacheUrl = cacheUrl
@@ -560,6 +624,19 @@ extension UniBackgroundAudioManager {
         if autoplay {
             innerPlay()
         }
+    }
+    
+    /// 判断是不是HLS 流是不是 live / event
+    private func isHLSLiveOrEvent() -> Bool {
+        guard let playerItem = player?.currentItem, playerItem.status == .readyToPlay else {
+            return false
+        }
+        
+        if playerItem.duration.isIndefinite {
+            return true
+        }
+        
+        return false
     }
     
     //释放资源
@@ -640,9 +717,39 @@ extension UniBackgroundAudioManager {
     }
     
     private func addPlayerObservers() {
-        if let player = player, let currentItem = player.currentItem {
+        guard let player = player else { return }
+        if !_hasAddObservers {
             player.addObserver(self, forKeyPath: UniBackgroundAudioObserveKeypath.timeControlStatus.rawValue, options: .new, context: nil)
             player.addObserver(self, forKeyPath: UniBackgroundAudioObserveKeypath.rate.rawValue, options: .new, context: nil)
+            
+            addPeriodicTimeObserver()
+            listenerInterruption()
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleEnterBackground),
+                name: UIApplication.didEnterBackgroundNotification,
+                object: nil
+            )
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleAppStateChange),
+                name: UIApplication.willResignActiveNotification,
+                object: nil
+            )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleAppStateChange),
+                name: UIApplication.didBecomeActiveNotification,
+                object: nil
+            )
+            
+            _hasAddObservers = true
+        }
+        
+        
+        if let currentItem = player.currentItem {
             currentItem.addObserver(self, forKeyPath: UniBackgroundAudioObserveKeypath.status.rawValue, options: .new, context: nil)
             currentItem.addObserver(self, forKeyPath: UniBackgroundAudioObserveKeypath.loadedTimeRanges.rawValue, options: .new, context: nil)
             currentItem.addObserver(self, forKeyPath: UniBackgroundAudioObserveKeypath.playbackBufferEmpty.rawValue, options: .new, context: nil)
@@ -662,36 +769,7 @@ extension UniBackgroundAudioManager {
             name: AVPlayerItem.playbackStalledNotification,
             object: playerItem
         )
-        addPeriodicTimeObserver()
-        listenerInterruption()
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleEnterBackground),
-            name: UIApplication.didEnterBackgroundNotification,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleAppStateChange),
-            name: UIApplication.willResignActiveNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleAppStateChange),
-            name: UIApplication.didBecomeActiveNotification,
-            object: nil
-        )
-        
-        //        //监听开始seek
-        //        NotificationCenter.default.addObserver(
-        //            self,
-        //            selector: #selector(seekingStarted(_:)),
-        //            name: AVPlayerItem.timeJumpedNotification,
-        //            object: playerItem
-        //        )
     }
     
     @objc private func handleAppStateChange(notification: Notification) {
@@ -752,6 +830,7 @@ extension UniBackgroundAudioManager {
         removePeriodicTimeObserver()
         
         player?.replaceCurrentItem(with: nil)
+        _hasAddObservers = false
     }
     
     // 添加播放进度监听
@@ -765,8 +844,8 @@ extension UniBackgroundAudioManager {
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             let currentTime = CMTimeGetSeconds(time)
             
-            if let duration = self?.player?.currentItem?.duration, duration.isNumeric {
-                if let isSeeking = self?._isSeeking, !isSeeking {
+            if let duration = self?.player?.currentItem?.duration {
+                if let isSeeking = self?._isSeeking, !isSeeking, let iaPaused = self?.paused, !iaPaused {
                     UNILogDebug("======audio======, 当前时间: \(currentTime), 总时长: \(CMTimeGetSeconds(duration))")
                     self?.dispatchEvent(event: .timeUpdate)
                     self?.updateNowPlayingInfoElapsedTime(time: currentTime)
@@ -821,8 +900,6 @@ extension UniBackgroundAudioManager {
     
     // 配置音频会话，支持后台播放
     private func configureAudioSession() {
-        if _hasConfigAudioSession { return }
-        _hasConfigAudioSession = true
         do {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.playback, mode: .default, options: [])
@@ -990,7 +1067,6 @@ extension UniBackgroundAudioManager {
     private func clearPlayingCenterInfo() {
         UIApplication.shared.endReceivingRemoteControlEvents()
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
-        _hasConfigAudioSession = false
         try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: [])
     }
     
@@ -1028,10 +1104,15 @@ extension UniBackgroundAudioManager {
         switch interruptionType {
         case .began:
             UNILogDebug("======audio======, 音频中断开始")
-            pause()
+            _isPlayingBeforeInterruption = !paused
+            if _isPlayingBeforeInterruption {
+                pause()
+            }
         case .ended:
             UNILogDebug("======audio======, 音频中断结束时的处理逻辑")
-            play()
+            if _isPlayingBeforeInterruption {
+                play()
+            }
         @unknown default:
             break
         }
@@ -1068,5 +1149,6 @@ extension NSNumber {
         return Float(truncating: self)
     }
 }
+
 
 

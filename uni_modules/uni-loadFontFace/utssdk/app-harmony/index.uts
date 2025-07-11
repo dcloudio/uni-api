@@ -17,29 +17,20 @@ export const loadFontFace: LoadFontFace = defineAsyncApi<LoadFontFaceOptions, Lo
   API_LOAD_FONT_FACE,
   (options: LoadFontFaceOptions, exec: ApiExecutor<LoadFontFaceSuccess>) => {
     const src = getFontSrc(options.source)
-    const pages = globalThis.getCurrentPages() as UniPageImpl[]
-    const page = (pages[pages.length - 1])
 
-    if (!page) {
-      exec.reject('page is not ready', { errCode: 99 } as ApiError)
-      return
-    }
-
-    if (page!.$fontFamilySet.has(options.family)) {
-      return
-    }
-
-    page!.$fontFamilySet.add(options.family)
-    page.getNativePage().loadFontFace({
+    const loadFontFaceOptions: ESObject = {
       family: options.family,
       source: src,
       success: () => {
-        exec.resolve()
+        exec.resolve();
       },
       fail: (err: ApiError) => {
-        exec.reject('', err)
+        exec.reject('', err);
       }
-    } as ESObject)
+    }
+
+    const app = globalThis.getUniApp() as UniNativeAppImpl
+    app.loadFontFace(loadFontFaceOptions)
   },
   ApiLoadFontFaceProtocol
 ) as LoadFontFace

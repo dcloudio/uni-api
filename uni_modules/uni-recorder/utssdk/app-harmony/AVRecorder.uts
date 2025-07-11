@@ -1,8 +1,9 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import media from '@ohos.multimedia.media'
 import { fileIo } from '@kit.CoreFileKit';
-import { RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions } from '../interface.uts';
-import { createFile, onRecorderStateChange, setRecordStateCallback, StateChangeRes } from './utils.uts';
+import { RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
+import { createFile, onRecorderStateChange, setRecordStateCallback, StateChangeRes, transformErrorCode } from './utils.uts';
+import { RecorderManagerFailImpl } from '../unierror.uts'
 
 export type SupportFormat = 'aac' | 'mp3' | 'm4a' | 'wav'
 
@@ -82,9 +83,8 @@ export default class AVRecorder implements RecorderManager {
             })
 
             this.avRecorder.on('error', (err: BusinessError) => {
-                onRecorderStateChange('error', { errMsg: `${err.message} ${err.code}` } as StateChangeRes)
+                onRecorderStateChange('error', new RecorderManagerFailImpl(transformErrorCode(err.code), err.message) as IRecorderManagerFail)
             })
-
         }
     }
     private async release() {
@@ -108,10 +108,10 @@ export default class AVRecorder implements RecorderManager {
         this.onStateChange(file);
 
         const audioProfile: media.AVRecorderProfile = {
-            audioBitrate:  format === 'wav' ? 64000 : encodeBitRate!,
+            audioBitrate: format === 'wav' ? 64000 : encodeBitRate!,
             audioChannels: format === 'wav' ? 1 : numberOfChannels!,
             audioCodec: getAudioCodec(format! as SupportFormat),
-            audioSampleRate:  format === 'wav' ? 8000 : sampleRate!,
+            audioSampleRate: format === 'wav' ? 8000 : sampleRate!,
             fileFormat: getFileFormat(format! as SupportFormat),
         }
 
@@ -133,11 +133,11 @@ export default class AVRecorder implements RecorderManager {
                     }
                     resolve()
                 } else {
-                    onRecorderStateChange('error', { errMsg: `recorderManager:fail start. Permission ohos.permission.MICROPHONE denied`, doNotAskAgain: false } as StateChangeRes)
+                    onRecorderStateChange('error', new RecorderManagerFailImpl(1107601) as IRecorderManagerFail)
                     reject()
                 }
             }, (doNotAskAgain: boolean) => {
-                onRecorderStateChange('error', { errMsg: `recorderManager:fail start. Permission ohos.permission.MICROPHONE denied`, doNotAskAgain } as StateChangeRes)
+                onRecorderStateChange('error', new RecorderManagerFailImpl(1107601) as IRecorderManagerFail)
                 reject()
             })
         })
@@ -172,7 +172,7 @@ export default class AVRecorder implements RecorderManager {
     onFrameRecorded(options: (result: any) => void): void {
         setRecordStateCallback('frameRecorded', options)
     }
-    onError(options: (result: any) => void): void {
+    onError(options: (result: IRecorderManagerFail) => void): void {
         setRecordStateCallback('error', options)
     }
     onResume(options: (result: any) => void): void {

@@ -223,6 +223,7 @@ class SimpleDownloadCallback implements Callback {
 					tempSink?.close()
 					targetSink?.close()
 					tempSource?.close()
+					source?.close()
 					tempFile.delete()
 				}
 			}

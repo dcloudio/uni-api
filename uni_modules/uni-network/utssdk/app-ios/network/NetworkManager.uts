@@ -1,8 +1,26 @@
-import { RequestOptions, RequestTask, UploadTask, UploadFileOptions, OnProgressUpdateResult, UploadFileProgressUpdateCallback, OnProgressDownloadResult, DownloadTask, DownloadFileOptions, DownloadFileProgressUpdateCallback } from '../../interface.uts';
+import {
+	RequestOptions,
+	RequestTask,
+	UploadTask,
+	UploadFileOptions,
+	OnProgressUpdateResult,
+	UploadFileProgressUpdateCallback,
+	OnProgressDownloadResult,
+	DownloadTask,
+	DownloadFileOptions,
+	DownloadFileProgressUpdateCallback,
+	RequestTaskOnHeadersReceivedCallback,
+	RequestTaskOnHeadersReceivedListenerResult,
+	RequestTaskOnChunkReceivedCallback,
+	RequestTaskOnChunkReceivedListenerResult
+}
+	from '../../interface.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
-import { URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
+import { NSNumber, URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
 import { UploadController } from './upload/UploadController.uts';
 import { DownloadController } from './download/DownloadController.uts';
+import { Int } from 'Swift';
+import { NetworkUtil } from './utils/NetworkUtil.uts';
 
 class NetworkRequestListener {
 	@UTSiOS.keyword("weak")
@@ -41,6 +59,13 @@ class NetworkDownloadFileListener {
 
 
 class NetworkRequestTaskImpl implements RequestTask {
+	public headersReceivedListeners = new Map<number, RequestTaskOnHeadersReceivedCallback>()
+	public chunkReceivedListeners = new Map<number, RequestTaskOnChunkReceivedCallback>()
+	
+	private requestTaskOnHeadersReceivedCallbackCount: number = 0
+	private requestTaskOnChunkReceivedCallbackCount: number = 0
+	private semaphore = DispatchSemaphore(value = 1)
+	
 	private task : URLSessionDataTask | null = null;
 	constructor(task : URLSessionDataTask | null) {
 		this.task = task;
@@ -51,11 +76,45 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.task?.cancel()
 		UTSiOS.destroyInstance(this)
 	}
+	
+	public onHeadersReceived(listener: RequestTaskOnHeadersReceivedCallback): number {
+		this.semaphore.wait()
+		this.requestTaskOnHeadersReceivedCallbackCount += 1
+		this.semaphore.signal()
+		this.headersReceivedListeners.set(this.requestTaskOnHeadersReceivedCallbackCount, listener)
+		return this.requestTaskOnHeadersReceivedCallbackCount
+	}
+	
+	public offHeadersReceived(listener ?: number | RequestTaskOnHeadersReceivedCallback | null): void {
+		if (listener != null && typeof listener! == "number") {
+			const id  = listener as number
+			this.headersReceivedListeners.delete(id)
+		} else {
+			this.headersReceivedListeners.clear()
+		}
+	}
+	
+	public onChunkReceived(listener: RequestTaskOnChunkReceivedCallback): number {
+		this.semaphore.wait()
+		this.requestTaskOnChunkReceivedCallbackCount += 1
+		this.semaphore.signal()
+		this.chunkReceivedListeners.set(this.requestTaskOnChunkReceivedCallbackCount, listener)
+		return this.requestTaskOnChunkReceivedCallbackCount
+	}
+	
+	public offChunkReceived(listener ?: number | RequestTaskOnChunkReceivedCallback | null): void {
+		if (listener != null && typeof listener! == "number") {
+			const id  = listener as number
+			this.chunkReceivedListeners.delete(id)
+		} else {
+			this.chunkReceivedListeners.clear()
+		}
+	}
 }
 
 class NetworkManager implements URLSessionDataDelegate {
 	private static instance : NetworkManager | null = null;
-
+	private enableChunked: boolean = false;
 	private session : URLSession | null = null;
 
 	private taskMap : Map<URLSessionTask, NetworkRequestListener> = new Map<URLSessionDataTask, NetworkRequestListener>();
@@ -70,6 +129,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 	public request<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : RequestTask {
 		let request = this.createRequest(param);
+		this.enableChunked = param.enableChunked ?? false
 		if (request == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
 			listener.onFail(error);
@@ -295,14 +355,36 @@ class NetworkManager implements URLSessionDataDelegate {
 			let httpResponse : HTTPURLResponse = response as HTTPURLResponse;
 			let statusCode = new NSNumber(value = httpResponse.statusCode);
 			listener?.onHeadersReceived(statusCode, httpResponse.allHeaderFields as Map<string, any>);
-		}
 
+			const headers = NetworkUtil.convertHeaders(httpResponse.allHeaderFields as Map<string, any>))
+			if (listener!.task != null && listener!.task instanceof NetworkRequestTaskImpl) {
+				const task = listener!.task! as NetworkRequestTaskImpl
+				task.headersReceivedListeners.forEach((value : RequestTaskOnHeadersReceivedCallback, key : number) => {
+					const result: RequestTaskOnHeadersReceivedListenerResult = {
+						cookies: NetworkUtil.parseCookie(headers),
+						header: headers,
+						statusCode: statusCode
+					}
+					value(result)
+				})
+			}
+		}
+				
 		completionHandler(URLSession.ResponseDisposition.allow);
 	}
 
 	urlSession(session : URLSession, @argumentLabel("") dataTask : URLSessionDataTask, @argumentLabel("didReceive") data : Data) {
 		let listener = this.taskMap.get(dataTask);
 		listener?.onDataReceived(data);
+		if (this.enableChunked && listener != null) {
+			const task = listener!.task! as NetworkRequestTaskImpl
+			task.chunkReceivedListeners.forEach((value : RequestTaskOnChunkReceivedCallback, key : number) => {
+				const result : RequestTaskOnChunkReceivedListenerResult = {
+					data: ArrayBuffer.fromData(data)
+				}
+				value(result)
+			})
+		}
 	}
 
 	urlSession(session : URLSession, @argumentLabel("") task : URLSessionTask, @argumentLabel("didCompleteWithError") error : NSError | null) {

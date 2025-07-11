@@ -5,7 +5,7 @@
   "description": "uni-getAppAuthorizeSetting",
   "keywords": [
     "uni-getAppAuthorizeSetting"
-],
+  ],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.6.8"
@@ -32,19 +32,19 @@
   },
   "uni_modules": {
     "dependencies": [],
-	"uni-ext-api": {
-		"uni": {
-			"getAppAuthorizeSetting": {
-				"name": "getAppAuthorizeSetting",
-				"app": {
-					"js": false,
-					"kotlin": true,
-					"swift": true,
-          "arkts": true
-				}
-			}
-		}
-	},
+    "uni-ext-api": {
+      "uni": {
+        "getAppAuthorizeSetting": {
+          "name": "getAppAuthorizeSetting",
+          "app": {
+            "js": false,
+            "kotlin": true,
+            "swift": true,
+            "arkts": true
+          }
+        }
+      }
+    },
     "encrypt": [],
     "platforms": {
       "cloud": {
@@ -89,6 +89,7 @@
           "联盟": "u"
         }
       }
-    }
+    },
+    "treeShaking": false
   }
 }

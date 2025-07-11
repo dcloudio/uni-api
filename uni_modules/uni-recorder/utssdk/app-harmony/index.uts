@@ -1,9 +1,10 @@
 import { API_GET_RECORDER_MANAGER } from '../protocol.uts';
-import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions } from '../interface.uts';
+import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
 import AVRecorder, { supportFormats as avRecorderSupportFormats, SupportFormat } from './AVRecorder.uts';
-import { onRecorderStateChange, setRecordStateCallback, StateChangeRes } from './utils.uts';
+import { onRecorderStateChange, setRecordStateCallback } from './utils.uts';
+import { RecorderManagerFailImpl } from '../unierror.uts'
 
-  // NOTE 避免被 vue Proxy 污染
+// NOTE 避免被 vue Proxy 污染
 let RECORDER_MANAGER: AVRecorder | null = null
 const DEFAULT_FORMAT = 'aac'
 
@@ -19,7 +20,7 @@ class RecorderManagerImpl implements RecorderManager {
     if (RECORDER_MANAGER) {
       RECORDER_MANAGER.start(options)
     } else {
-      onRecorderStateChange('error', { errMsg: `format not supported. Only supported ${avRecorderSupportFormats.join(',')}` } as StateChangeRes)
+      onRecorderStateChange('error', new RecorderManagerFailImpl(1107605))
     }
   }
   pause(): void {
@@ -48,7 +49,7 @@ class RecorderManagerImpl implements RecorderManager {
   onFrameRecorded(options: (result: any) => void): void {
     setRecordStateCallback('frameRecorded', options)
   }
-  onError(options: (result: any) => void): void {
+  onError(options: (result: IRecorderManagerFail) => void): void {
     setRecordStateCallback('error', options)
   }
   onResume(options: (result: any) => void): void {

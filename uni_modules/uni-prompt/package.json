@@ -133,6 +133,7 @@
 					"联盟": "u"
 				}
 			}
-		}
+		},
+    "treeShaking": false
 	}
 }

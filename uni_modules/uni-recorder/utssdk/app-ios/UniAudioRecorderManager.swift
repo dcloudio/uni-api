@@ -1,3 +1,4 @@
+
 //
 //  UniAudioRecorderManager.swift
 //  TestFra
@@ -20,7 +21,7 @@ public class StateChangeRes : NSObject, RecorderManagerOnStopResult {
     public var isLastFrame: Bool = false
 }
 
-public enum UniAudioRecorderFormat: String {
+public enum UniAudioRecorderFormat: String, CaseIterable {
     case aac
     case mp3
     case pcm
@@ -40,7 +41,7 @@ public enum UniAudioRecorderEvent {
     case frameRecorded
     case interruptionBegin
     case interruptionEnd
-    case error
+    case error(String?)
     
     public var rawValue: String {
         switch self {
@@ -51,17 +52,20 @@ public enum UniAudioRecorderEvent {
         case .frameRecorded: return "frameRecorded"
         case .interruptionBegin: return "interruptionBegin"
         case .interruptionEnd: return "interruptionEnd"
-        case .error: return "error"
+        case .error(_): return "error"
         }
     }
 }
 
 typealias UniAudioRecorderEventCallback = (_ result: Any) -> Void
 typealias UniAudioRecorderStopEventCallback = (_ result: RecorderManagerOnStopResult) -> Void
+typealias UniAudioRecorderErrorEventCallback = (_ result: IRecorderManagerFail) -> Void
+
 
 public class UniAudioRecorderManager: NSObject, RecorderManager {
     
     public static var shared = UniAudioRecorderManager()
+    
     
     private var audioRecorder: AVAudioRecorder?
     
@@ -86,7 +90,8 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
     
     private var eventCallbacks: [String: UniAudioRecorderEventCallback] = [:]
     private var stopEventCallback: UniAudioRecorderStopEventCallback?
-    
+    private var errorEventCallBack: UniAudioRecorderErrorEventCallback?
+
     private var audioFormat: UniAudioRecorderFormat = .aac
     
     public override init() {
@@ -99,7 +104,7 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
             guard let self = self else { return }
             
             if granted == false {
-                dispatchEvent(event: .error, result: "没有麦克风权限")
+                failedAction(1107601)
                 return
             }
             
@@ -108,7 +113,7 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
             let duration = TimeInterval(truncating: options.duration ?? 60000) / 1000
             let sampleRate = options.sampleRate ?? 44100
             guard sampleRates.contains(sampleRate.int32Value) else {
-                dispatchEvent(event: .error, result: "不支持该采样率")
+                failedAction(1107602)
                 return
             }
             let channels = options.numberOfChannels ?? 1
@@ -116,22 +121,21 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
             
             let (valid, error) = isValidEncodeBitRate(bitRate.int32Value, compare: sampleRate.int32Value)
             guard valid else {
-                dispatchEvent(event: .error, result: error)
+                failedAction(1107603, errMsg: error)
                 return
             }
             
-            if let format = options.format?.lowercased() {
+            if let format = options.format {
                 if format == UniAudioRecorderFormat.aac.rawValue {
                     self.audioFormat = .aac
                 } else if format == UniAudioRecorderFormat.mp3.rawValue {
-                    dispatchEvent(event: .error, result:"不支持\(format)音频格式")
-                    return
+                    self.audioFormat = .mp3
                 } else if format == UniAudioRecorderFormat.pcm.rawValue {
                     self.audioFormat = .pcm
                 } else if format == UniAudioRecorderFormat.wav.rawValue {
                     self.audioFormat = .wav
                 } else {
-                    dispatchEvent(event: .error, result:"不支持\(format)音频格式")
+                    failedAction(1107605)
                     return
                 }
             }
@@ -148,6 +152,8 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
             let result = StateChangeRes()
             result.tempFilePath = audioRecorder?.url.absoluteString ?? ""
             dispatchStopEvent(event:.stop , result: result)
+            
+            print("录音已完成，文件保存在: \(audioRecorder?.url.absoluteString ?? "未知路径")")
             audioRecorder = nil
         }
     }
@@ -187,9 +193,9 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
     public func onFrameRecorded(_ options: @escaping (Any) -> Void) {
         addEvent(event: .frameRecorded, eventCallback: options)
     }
-    
-    public func onError(_ options: @escaping (Any) -> Void) {
-        addEvent(event: .error, eventCallback: options)
+
+    public func onError(_ options: @escaping (_ result: IRecorderManagerFail) -> Void) {
+        errorEventCallBack = options
     }
     
     public func onInterruptionBegin(_ options: @escaping (Any) -> Void) {
@@ -203,7 +209,7 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
 
 extension UniAudioRecorderManager {
     
-    func requestRecordPermission(completion: @escaping (Bool) -> Void) {
+    private func requestRecordPermission(completion: @escaping (Bool) -> Void) {
         AVAudioSession.sharedInstance().requestRecordPermission { granted in
             DispatchQueue.main.async {
                 if granted {
@@ -215,7 +221,7 @@ extension UniAudioRecorderManager {
         }
     }
     
-    func innerStart(duration: TimeInterval, sampleRate: Double, channels: Int, bitRate: Int, frameSize: Int64? = nil) {
+    private func innerStart(duration: TimeInterval, sampleRate: Double, channels: Int, bitRate: Int, frameSize: Int64? = nil) {
         
         var format : AudioFormatID = kAudioFormatMPEG4AAC
         
@@ -229,7 +235,6 @@ extension UniAudioRecorderManager {
         case .wav:
             format = kAudioFormatLinearPCM
         }
-        
         
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -247,7 +252,6 @@ extension UniAudioRecorderManager {
                 AVLinearPCMIsFloatKey: false                  // 整数采样（非浮点）
             ]
             
-            
             let fileURL = getAudioRecorderFileURL()
             audioRecorder = try AVAudioRecorder(url: fileURL, settings: settings)
             audioRecorder?.delegate = self
@@ -256,6 +260,9 @@ extension UniAudioRecorderManager {
             let prepareToRecord = audioRecorder?.prepareToRecord() ?? false
             let record = audioRecorder?.record() ?? false
             if prepareToRecord && record {
+                if let frameSize = frameSize {
+                    // TODO: 设置帧大小
+                }
                 //录音计时逻辑
                 starTime = CACurrentMediaTime()
                 maxDuration = duration
@@ -264,11 +271,12 @@ extension UniAudioRecorderManager {
                 
                 dispatchEvent(event: .start)
             } else {
-                dispatchEvent(event: .error, result: "录音启动失败，请对比采样率与编码码率是否匹配")
+                failedAction(1107604, errMsg: "录音启动失败，请对比采样率与编码码率是否匹配")
             }
             
         } catch {
-            dispatchEvent(event: .error, result: error.localizedDescription)
+            failedAction(1107604, errMsg: error.localizedDescription)
+            print("录音启动失败: \(error.localizedDescription)")
         }
     }
     
@@ -296,7 +304,7 @@ extension UniAudioRecorderManager {
         cachePath = UTSiOS.convert2AbsFullPath(cachePath)
         ensureDirExist(cachePath)
         var suffixName = audioFormat.rawValue
-        if audioFormat.rawValue == UniAudioRecorderFormat.pcm.rawValue {
+        if audioFormat.rawValue == UniAudioRecorderFormat.pcm.rawValue || audioFormat.rawValue == UniAudioRecorderFormat.mp3.rawValue {
             suffixName = "caf"
         }
         let fileName = Date().timeIntervalSince1970.toString() + "." + suffixName
@@ -343,22 +351,40 @@ extension UniAudioRecorderManager {
         
         return (true, nil)
     }
+    
+    private func failedAction(_ errorCode: NSNumber, errMsg: String? = nil) {
+        let failImpl = RecorderManagerFailImpl(errorCode)
+        if let errMsg = errMsg {
+            failImpl.errMsg = errMsg
+        }
+        errorEventCallBack?(failImpl)
+    }
 }
 
 extension UniAudioRecorderManager: AVAudioRecorderDelegate {
     public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        
+        print("audioRecorderDidFinishRecording: \(flag)")
     }
     
     public func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: (any Error)?) {
-        dispatchEvent(event: .error, result: error?.localizedDescription)
+        failedAction(1107606, errMsg: error?.localizedDescription)
     }
     
     public func audioRecorderBeginInterruption(_ recorder: AVAudioRecorder) {
+        stop()
         dispatchEvent(event: .interruptionBegin)
     }
     
     public func audioRecorderEndInterruption(_ recorder: AVAudioRecorder, withOptions flags: Int) {
+//        do {
+//            try AVAudioSession.sharedInstance().setActive(true)
+//            if flags == AVAudioSession.InterruptionOptions.shouldResume.rawValue {
+//                recorder.record()
+//                dispatchEvent(event: .interruptionEnd, result: "录音已恢复")
+//            }
+//        } catch {
+//            dispatchEvent(event: .interruptionEnd, result: "录音恢复失败\(error.localizedDescription)")
+//        }
         dispatchEvent(event: .interruptionEnd)
     }
 }
@@ -385,12 +411,16 @@ extension UniAudioRecorderManager {
         guard let _ = audioRecorder else { return }
         if event.rawValue == UniAudioRecorderEvent.stop.rawValue {
             stopEventCallback?(result)
+            if let path = audioRecorder?.url.absoluteString {
+                //                fileSizeMonitor?.stopMonitoring(filePath: path)
+            }
         }
     }
     
     private func dispatchEvent(event: UniAudioRecorderEvent, result: Any? = nil) {
-        if event.rawValue == UniAudioRecorderEvent.error.rawValue || audioRecorder != nil {
+        if event.rawValue == UniAudioRecorderEvent.error(nil).rawValue || audioRecorder != nil {
             eventCallbacks.get(event.rawValue)?(result ?? UTSJSONObject())
         }
     }
 }
+

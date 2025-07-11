@@ -1625,7 +1625,7 @@ export type GetSystemInfoResult = {
    */
   appVersion: string,
   /**
-   * `manifest.json` 中应用版本名号。
+   * `manifest.json` 中应用版本号。
    *
    * @uniPlatform
    * {

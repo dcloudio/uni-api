@@ -11,8 +11,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -100,8 +99,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -185,8 +183,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -270,8 +267,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -355,8 +351,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -440,8 +435,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -523,8 +517,7 @@ export interface Uni {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -627,8 +620,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -699,8 +691,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -766,8 +757,7 @@ export type ConnectSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -884,8 +874,7 @@ export type SendSocketMessageOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -976,8 +965,7 @@ export type CloseSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1048,8 +1036,7 @@ export type CloseSocketOptions = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1139,8 +1126,7 @@ export type OnSocketOpenCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1213,8 +1199,7 @@ export type OnSocketMessageCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1289,8 +1274,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1371,8 +1355,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1453,8 +1436,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1535,8 +1517,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1620,8 +1601,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1703,8 +1683,7 @@ export interface SocketTask {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1803,8 +1782,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
@@ -1874,8 +1852,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
-          "unixVer": "3.91",
-          "unixUtsPlugin": "3.91"
+          "unixVer": "3.91"
         },
         "ios": {
           "osVer": "12.0",
