@@ -462,7 +462,7 @@ export type ShowToastPosition =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
+          "osVer": "11.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -535,7 +535,7 @@ export type ShowToastPosition =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
+          "osVer": "11.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
