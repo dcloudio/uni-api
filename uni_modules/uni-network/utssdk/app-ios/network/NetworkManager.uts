@@ -61,11 +61,11 @@ class NetworkDownloadFileListener {
 class NetworkRequestTaskImpl implements RequestTask {
 	public headersReceivedListeners = new Map<number, RequestTaskOnHeadersReceivedCallback>()
 	public chunkReceivedListeners = new Map<number, RequestTaskOnChunkReceivedCallback>()
-	
+
 	private requestTaskOnHeadersReceivedCallbackCount: number = 0
 	private requestTaskOnChunkReceivedCallbackCount: number = 0
 	private semaphore = DispatchSemaphore(value = 1)
-	
+
 	private task : URLSessionDataTask | null = null;
 	constructor(task : URLSessionDataTask | null) {
 		this.task = task;
@@ -76,7 +76,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.task?.cancel()
 		UTSiOS.destroyInstance(this)
 	}
-	
+
 	public onHeadersReceived(listener: RequestTaskOnHeadersReceivedCallback): number {
 		this.semaphore.wait()
 		this.requestTaskOnHeadersReceivedCallbackCount += 1
@@ -84,7 +84,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.headersReceivedListeners.set(this.requestTaskOnHeadersReceivedCallbackCount, listener)
 		return this.requestTaskOnHeadersReceivedCallbackCount
 	}
-	
+
 	public offHeadersReceived(listener ?: number | RequestTaskOnHeadersReceivedCallback | null): void {
 		if (listener != null && typeof listener! == "number") {
 			const id  = listener as number
@@ -93,7 +93,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 			this.headersReceivedListeners.clear()
 		}
 	}
-	
+
 	public onChunkReceived(listener: RequestTaskOnChunkReceivedCallback): number {
 		this.semaphore.wait()
 		this.requestTaskOnChunkReceivedCallbackCount += 1
@@ -101,7 +101,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.chunkReceivedListeners.set(this.requestTaskOnChunkReceivedCallbackCount, listener)
 		return this.requestTaskOnChunkReceivedCallbackCount
 	}
-	
+
 	public offChunkReceived(listener ?: number | RequestTaskOnChunkReceivedCallback | null): void {
 		if (listener != null && typeof listener! == "number") {
 			const id  = listener as number
@@ -247,6 +247,7 @@ class NetworkManager implements URLSessionDataDelegate {
 							bodyArray.push(key + "=" + `${value ?? "null"}`);
 						})
 						body = bodyArray.join("&");
+            url = url.replacingOccurrences(of: "+", with: "%2B");
 					} else {
 						body = JSON.stringify(data);
 					}
@@ -369,7 +370,7 @@ class NetworkManager implements URLSessionDataDelegate {
 				})
 			}
 		}
-				
+
 		completionHandler(URLSession.ResponseDisposition.allow);
 	}
 
