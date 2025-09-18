@@ -136,7 +136,7 @@ export class DownloadController {
 	}
 
 }
-
+//ts-ignore
 class SimpleDownloadCallback implements Callback {
 	private downloadFilePath = "/uni-download/";
 	private listener : NetworkDownloadFileListener | null = null;
@@ -252,6 +252,7 @@ class SimpleDownloadCallback implements Callback {
 		return path + this.downloadFilePath;
 	}
 
+  //@ts-ignore
 	getFile(response : Response) : File {
 		let targetPath = "";
 		if (this.specifyPath != "") {
@@ -283,7 +284,7 @@ class SimpleDownloadCallback implements Callback {
 					path = UTSAndroid.getAppTempPath()!! + "/" + this.specifyPath;
 				}
 
-				var file = new File(path)
+				let file = new File(path)
 				const parentFile = file.getParentFile()
 				if (parentFile != null) {
 					if (!parentFile.exists()) {
@@ -298,7 +299,7 @@ class SimpleDownloadCallback implements Callback {
 					option['cause'] = null;
 					this.listener?.onComplete(option);
 				}
-				
+
 				if (file.exists()) {
 					const index = path.lastIndexOf(".");
 					let tFileName = path;
@@ -307,7 +308,7 @@ class SimpleDownloadCallback implements Callback {
 						tFileName = path.substring(0, index)
 						tFileType = path.substring(index)
 					}
-				
+
 					var number = 1
 					while (new File(path).exists()) {
 						path = tFileName + "(" + number + ")" + tFileType;
@@ -403,7 +404,7 @@ class SimpleDownloadCallback implements Callback {
 			fileName = subFileName + System.currentTimeMillis()
 		}
 
-		
+
 		if (new File(targetPath + fileName).exists()) {
 			const index = fileName.lastIndexOf(".");
 			let tFileName = fileName;
@@ -411,7 +412,7 @@ class SimpleDownloadCallback implements Callback {
 			if (index >= 0) {
 				tFileName = fileName.substring(0, index)
 				tFileType = fileName.substring(index)
-				
+
 				//fileName是 .xxx的情况
 				if(tFileName == ""){
 					tFileName = tFileType
@@ -422,11 +423,11 @@ class SimpleDownloadCallback implements Callback {
 			}
 			var number = 1
 			while (new File(targetPath + fileName).exists()) {
-				fileName = tFileName + "(" + number + ")" + tFileType;	
+				fileName = tFileName + "(" + number + ")" + tFileType;
 				number++
 			}
 		}
-		
+
 		targetPath += fileName
 
 		const file = new File(targetPath)
