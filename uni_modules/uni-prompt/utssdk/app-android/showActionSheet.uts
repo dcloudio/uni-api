@@ -310,10 +310,10 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 	 */
 	ViewHolder = class extends RecyclerView.ViewHolder {
 
-		let itemName:TextView;
+		itemName:TextView;
 		constructor(view:View) {
 			super(view);
-			itemName = view.findViewById(R.id.tvName) as TextView;
+			this.itemName = view.findViewById(R.id.tvName) as TextView;
 		}
 	}
 
