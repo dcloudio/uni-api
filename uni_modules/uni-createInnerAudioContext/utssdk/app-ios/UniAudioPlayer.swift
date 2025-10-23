@@ -54,6 +54,9 @@ typealias UniAudioErrorEventCallback = (_ result: ICreateInnerAudioContextFail) 
 @objcMembers
 public class UniAudioPlayer: NSObject, InnerAudioContext {
     
+    static var mixWithOther = true
+    static var speakerOn = true
+    
     private lazy var playerItem: AVPlayerItem? = {
         if let url = URL(string: src) {
             return AVPlayerItem(url: url)
@@ -466,15 +469,21 @@ extension UniAudioPlayer {
     private func configureAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         let isOtherAppAudioPlaying = audioSession.secondaryAudioShouldBeSilencedHint && audioSession.isOtherAudioPlaying
-
+        
+        var categoryOptions: AVAudioSession.CategoryOptions = []
+        
         do {
-            if isOtherAppAudioPlaying {
-                try audioSession.setCategory(.ambient, mode: .default)
-                // 可考虑不播放或提示用户
+            if UniAudioPlayer.mixWithOther {
+                if isOtherAppAudioPlaying {
+                    try audioSession.setCategory(.ambient, mode: .default, options: categoryOptions)
+                } else {
+                    try audioSession.setCategory(.playback, mode: .default, options: categoryOptions)
+                }
             } else {
-                try audioSession.setCategory(.playback, mode: .default)
-                // 正常播放
+                try audioSession.setCategory(.playback, mode: .default, options: categoryOptions)
+                UniBackgroundAudioManagerBridge.pause()
             }
+            
             try audioSession.setActive(true)
         } catch {
             UNILogDebug("======audio======, Failed to set up audio session: \(error)")
@@ -863,6 +872,53 @@ extension UniAudioPlayer {
             UNILogDebug("======audio======, 音频会话类别发生变化")
         default:
             break
+        }
+    }
+}
+
+
+private class UniBackgroundAudioManagerBridge {
+    
+    private static let className = "UniBackgroundAudioManager"
+    
+    // 获取单例实例
+    static func getInstance() -> NSObject? {
+        guard let cls = NSClassFromString(className) as? NSObject.Type else {
+            return nil
+        }
+        return cls.value(forKey: "shared") as? NSObject
+    }
+    
+    // 判断是否正在播放（paused == false）
+    static func isPlaying() -> Bool? {
+        guard let instance = getInstance() else { return nil }
+        return instance.value(forKey: "paused") as? Bool == false
+    }
+    
+    // 调用 pause()
+    static func pause() {
+        guard let instance = getInstance() else { return }
+        let sel = NSSelectorFromString("pause")
+        if instance.responds(to: sel) {
+            instance.perform(sel)
+        }
+    }
+
+    // 调用 play()
+    static func play() {
+        guard let instance = getInstance() else { return }
+        let sel = NSSelectorFromString("play")
+        if instance.responds(to: sel) {
+            instance.perform(sel)
+        }
+    }
+    
+    // 调用 stop()
+    static func stop() {
+        guard let instance = getInstance() else { return }
+        let sel = NSSelectorFromString("stop")
+        if instance.responds(to: sel) {
+            instance.perform(sel)
         }
     }
 }

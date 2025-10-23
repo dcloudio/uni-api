@@ -8,12 +8,12 @@ export type OnShowOptions = {
      *  "app": {
      *    "android": {
      *      "osVer": "5.0",
-     *      "uniVer": "x",
+     *      "uniVer": "√",
      *      "unixVer": "4.25"
      *    },
      *    "ios": {
      *      "osVer": "12.0",
-     *      "uniVer": "x",
+     *      "uniVer": "√",
      *      "unixVer": "4.25"
      *    },
      *    "harmony": {
@@ -89,9 +89,9 @@ export type OnShowOptions = {
      *      "unixVer": "4.25"
      *    },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.81",
+     *      "unixVer": "4.81"
      *    }
      *  },
      *  "mp": {
@@ -161,9 +161,9 @@ export type OnShowOptions = {
      *      "unixVer": "4.25"
      *    },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.81",
+     *      "unixVer": "4.81"
      *    }
      *  },
      *  "mp": {
@@ -215,6 +215,79 @@ export type OnShowOptions = {
      * }
      */
     appLink: string | null
+    /**
+     * 启动时的 query 参数
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-enter-options-sync.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-enter-options-sync.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/getEnterOptionsSync.html
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "5.0",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "ios": {
+     *      "osVer": "12.0",
+     *      "uniVer": "√",
+     *      "unixVer": "√"
+     *    },
+     *    "harmony": {
+     *      "osVer": "5.0.0",
+     *      "uniVer": "4.81",
+     *      "unixVer": "4.81"
+     *    }
+     *  },
+     *  "mp": {
+     *    "weixin": {
+     *        "hostVer": "√",
+     *        "uniVer": "√",
+     *        "unixVer": "4.41"
+     *    },
+     *    "alipay": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "baidu": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "toutiao": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "lark": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "qq": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "kuaishou": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    },
+     *    "jd": {
+     *        "hostVer": "√",
+     *        "uniVer": "x",
+     *        "unixVer": "x"
+     *    }
+     *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "4.0"
+     *  }
+     * }
+     */
+    query?: UTSJSONObject | null
 }
 
 export type GetEnterOptionsSync = () => OnShowOptions

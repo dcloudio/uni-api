@@ -22,7 +22,7 @@ export const compressVideo: CompressVideo = defineAsyncApi<CompressVideoOptions,
         videoCompressor.compressVideo(UTSHarmony.getUIAbilityContext()!, args.src, getQuality(args.quality!))
             .then((data: CompressorResponse): void => {
                 if (data.code == CompressorResponseCode.SUCCESS) {
-                    _getVideoInfo(data.outputPath).then(res => {
+                    _getVideoInfo(data.outputPath, 'KB').then(res => {
                         executor.resolve({
                             tempFilePath: data.outputPath,
                             size: res.size

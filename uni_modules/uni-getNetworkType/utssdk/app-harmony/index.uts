@@ -1,16 +1,11 @@
-import { Emitter, onNativePageReady } from '@dcloudio/uni-runtime';
+import { onNativePageReady, EventHub } from '@dcloudio/uni-runtime';
 import radio from '@ohos.telephony.radio'
 import { GetNetworkType, GetNetworkTypeOptions, GetNetworkTypeSuccess, OnNetworkStatusChange, OffNetworkStatusChange, OnNetworkStatusChangeCallbackResult } from '../interface.uts';
 import { API_GET_NETWORK_TYPE } from '../protocol.uts';
 import { BusinessError } from '@kit.BasicServicesKit';
 import connection from '@ohos.net.connection'
 
-interface IUniGetNetworkTypeEventEmitter {
-    on: (eventName: string, callback: Function) => void
-    once: (eventName: string, callback: Function) => void
-    off: (eventName: string, callback?: Function) => void
-    emit: (eventName: string, ...args: (Object | undefined | null)[]) => void
-}
+const NetworkStatusChangeEventHub = new EventHub();
 
 const PERMISSIONS = ['ohos.permission.GET_NETWORK_INFO']
 
@@ -128,7 +123,7 @@ function getCurrentType() {
             } else {
                 reject('permission denied')
             }
-        })
+        }, () => reject('permission denied'))
     })
 }
 
@@ -207,7 +202,7 @@ export const getNetworkType: GetNetworkType = defineAsyncApi<GetNetworkTypeOptio
 ) as GetNetworkType
 
 function invokeOnNetworkStatusChange(networkType: string) {
-    UniGetNetworkTypeEventEmitter.emit(
+    NetworkStatusChangeEventHub.emit(
         'networkStatusChange',
         {
             isConnected: networkType !== NetworkinfoType[1],
@@ -216,20 +211,16 @@ function invokeOnNetworkStatusChange(networkType: string) {
     )
 }
 
-const UniGetNetworkTypeEventEmitter = new Emitter() as IUniGetNetworkTypeEventEmitter
+export const onNetworkStatusChange: OnNetworkStatusChange = defineSyncApi<number>(
+    'onNetworkStatusChange',
+    (callback: Function): number => {
+        return NetworkStatusChangeEventHub.on('networkStatusChange', callback)
+    }
+) as OnNetworkStatusChange
 
-export const onNetworkStatusChange: OnNetworkStatusChange = function (callback: Function) {
-    UTSHarmony.requestSystemPermission(PERMISSIONS, (allRight: boolean) => {
-        if (allRight) {
-            UniGetNetworkTypeEventEmitter.on('networkStatusChange', callback)
-        }
-    })
-}
-
-export const offNetworkStatusChange: OffNetworkStatusChange = function (callback: Function) {
-    UTSHarmony.requestSystemPermission(PERMISSIONS, (allRight: boolean) => {
-        if (allRight) {
-            UniGetNetworkTypeEventEmitter.off('networkStatusChange', callback)
-        }
-    })
-}
+export const offNetworkStatusChange: OffNetworkStatusChange = defineSyncApi<void>(
+    'offNetworkStatusChange',
+    (callback: number | Function | null): void => {
+        return NetworkStatusChangeEventHub.off('networkStatusChange', callback)
+    }
+) as OffNetworkStatusChange

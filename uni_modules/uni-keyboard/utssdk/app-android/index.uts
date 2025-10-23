@@ -28,7 +28,7 @@ export const hideKeyboard : HideKeyboard = (options ?: HideKeyboardOptions | nul
 			override run() {
 				let result = inputManager!.hideSoftInputFromWindow(focusView!.getWindowToken(), 0)
 				if (result) {
-					focusView.clearFocus()
+					focusView!.clearFocus()
 				}
 			}
 		}, 16)
@@ -118,6 +118,7 @@ class OnKeyBoardChangedListener extends UniActivityLifeCycleCallback implements 
 	unwatch() {
 		UTSAndroid.offActivityCallback(this)
 		this.decorView?.getViewTreeObserver()?.removeOnGlobalLayoutListener(this)
+		this.activity = null
 	}
 
 	getRootView() : View | null {

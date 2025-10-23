@@ -935,6 +935,10 @@ export type RequestErrorCode =
      * 错误信息json解析失败
      */
     100002 |
+	/**
+	 * json解析类型转换失败
+	 */
+	100003 |
     /**
      * 网络中断
      */

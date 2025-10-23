@@ -181,7 +181,7 @@ export class EmulatorCheckUtil {
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		}
 		let result: Int | null;
-		let tempValue = hardware.toLowerCase(Locale.ENGLISH);
+		let tempValue = hardware.lowercase(Locale.ENGLISH);
 		switch (tempValue) {
 			case "ttvm": //天天模拟器
 			case "nox": //夜神模拟器
@@ -210,7 +210,7 @@ export class EmulatorCheckUtil {
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		}
 		let result: Int | null;
-		let tempValue = flavor.toLowerCase(Locale.ENGLISH);
+		let tempValue = flavor.lowercase(Locale.ENGLISH);
 		if (tempValue.includes("vbox")) {
 			result = EmulatorCheckUtil.RESULT_EMULATOR;
 		} else if (tempValue.includes("sdk_gphone")) {
@@ -260,7 +260,7 @@ export class EmulatorCheckUtil {
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		}
 		let result: Int | null;
-		let tempValue = model.toLowerCase(Locale.ENGLISH);
+		let tempValue = model.lowercase(Locale.ENGLISH);
 		if (tempValue.includes("google_sdk")) {
 			result = EmulatorCheckUtil.RESULT_EMULATOR;
 		} else if (tempValue.includes("emulator")) {
@@ -283,7 +283,7 @@ export class EmulatorCheckUtil {
 		if (null == manufacturer)
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		let result: Int | null;
-		let tempValue = manufacturer.toLowerCase(Locale.ENGLISH);
+		let tempValue = manufacturer.lowercase(Locale.ENGLISH);
 		if (tempValue.includes("genymotion")) {
 			result = EmulatorCheckUtil.RESULT_EMULATOR;
 		} else if (tempValue.includes("netease")) {
@@ -305,7 +305,7 @@ export class EmulatorCheckUtil {
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		}
 		let result: Int | null;
-		let tempValue = board.toLowerCase(Locale.ENGLISH);
+		let tempValue = board.lowercase(Locale.ENGLISH);
 		if (tempValue.includes("android")) {
 			result = EmulatorCheckUtil.RESULT_EMULATOR;
 		} else if (tempValue.includes("goldfish")) {
@@ -326,7 +326,7 @@ export class EmulatorCheckUtil {
 		if (null == platform)
 			return new CheckResult(EmulatorCheckUtil.RESULT_MAYBE_EMULATOR, null);
 		let result: Int | null;
-		let tempValue = platform.toLowerCase(Locale.ENGLISH);
+		let tempValue = platform.lowercase(Locale.ENGLISH);
 		if (tempValue.includes("android")) {
 			result = EmulatorCheckUtil.RESULT_EMULATOR;
 		} else {

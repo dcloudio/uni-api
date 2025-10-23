@@ -1,6 +1,5 @@
 export type CreateWebviewContext = (webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null) => WebviewContext | null;
 
-
 export type UniWebviewContextLoadDataOptions = {
 	/**
 	 * 要加载的内容，编码后的字符串

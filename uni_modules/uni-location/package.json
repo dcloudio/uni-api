@@ -50,8 +50,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"stopLocationUpdate": {
@@ -59,8 +59,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"onLocationChange": {
@@ -68,8 +68,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"offLocationChange": {
@@ -77,8 +77,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"startLocationUpdateBackground": {
@@ -86,8 +86,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"onLocationChangeError": {
@@ -95,8 +95,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				},
 				"offLocationChangeError": {
@@ -104,8 +104,8 @@
 				    "app": {
 				        "js": false,
 				        "kotlin": true,
-				        "swift": false,
-				        "arkts": false
+				        "swift": true,
+				        "arkts": true
 				    }
 				}
             }

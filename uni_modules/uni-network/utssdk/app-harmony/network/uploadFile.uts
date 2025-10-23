@@ -240,6 +240,8 @@ export const uploadFile = defineTaskApi<UniUploadFileOptions, UniUploadFileSucce
                         statusCode,
                     } as UniUploadFileSuccess)
                 }
+                httpRequest.off('headersReceive')
+                httpRequest.off('dataReceive')
                 uploadTask.offHeadersReceived()
                 uploadTask.offProgressUpdate()
                 httpRequest.destroy() // 调用完毕后必须调用destroy方法

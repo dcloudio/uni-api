@@ -1,7 +1,10 @@
-import { BusinessError } from '@ohos.base';
-import { promptAction } from '@kit.ArkUI';
+import { deviceInfo, BusinessError } from '@kit.BasicServicesKit';
+import { promptAction, PromptAction } from '@kit.ArkUI';
 import { ShowToast, ShowToastOptions, ShowToastSuccess, HideToast } from '../interface.uts'
 import { API_SHOW_TOAST, ShowToastProtocol, ShowToastApiOptions, API_HIDE_TOAST } from '../protocol.uts'
+
+let openToastPromiseTimer: number | null = null;
+let openToastPromise: Promise<number> | null = null
 
 export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSuccess>(
     API_SHOW_TOAST,
@@ -9,7 +12,7 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
         try {
             const showToastOptions: promptAction.ShowToastOptions = {
                 message: options.title,
-                duration: options.duration!,
+                duration: options.duration == null ? undefined : options.duration, // 鸿蒙取值范围 [1500, 100000]
                 alignment: Alignment.Center
             }
             if (options.position) {
@@ -23,8 +26,29 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
                 }
             }
             const window = UTSHarmony.getCurrentWindow();
-            window.getUIContext().getPromptAction().showToast(showToastOptions)
-            res.resolve({} as ShowToastSuccess)
+            const promptAction = window.getUIContext().getPromptAction() as PromptAction
+            if (deviceInfo.sdkApiVersion >= 18) {
+                if (openToastPromiseTimer != null) {
+                    clearTimeout(openToastPromiseTimer);
+                    openToastPromiseTimer = null
+                }
+                openToastPromise = promptAction.openToast(showToastOptions)
+                    .then((id) => {
+                        res.resolve({} as ShowToastSuccess)
+                        return id
+                    })
+                    .catch((err: BusinessError) => {
+                        res.reject(err.message)
+                        return 0
+                    })
+                openToastPromiseTimer = setTimeout(() => {
+                    openToastPromiseTimer = null
+                    openToastPromise = null
+                }, showToastOptions.duration ?? 1500)
+            } else {
+                promptAction.showToast(showToastOptions)
+                res.resolve({} as ShowToastSuccess)
+            }
         } catch (error) {
             let message = (error as BusinessError).message
             res.reject(message)
@@ -37,6 +61,19 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
 export const hideToast: HideToast = defineAsyncApi(
     API_HIDE_TOAST,
     function (_, res: ApiExecutor<any>) {
-        // res.reject('hideToast is not supported on HarmonyOS')
+        if (deviceInfo.sdkApiVersion >= 18) {
+            const window = UTSHarmony.getCurrentWindow();
+            const promptAction = window.getUIContext().getPromptAction() as PromptAction
+            if (openToastPromiseTimer != null) {
+                clearTimeout(openToastPromiseTimer)
+                openToastPromiseTimer = null
+            }
+            openToastPromise?.then(id => {
+                promptAction.closeToast(id)
+            }).finally(() => {
+                openToastPromise = null
+            })
+        }
+        res.resolve()
     }
 ) as HideToast

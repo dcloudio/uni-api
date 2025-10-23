@@ -6,117 +6,112 @@
 			</uniPreviewImageItem>
 		</swiper-item>
 	</swiper>
-	<view ref="numberIndicator" v-if="indicator == 'number'" class="uni-preview-image-number-indicator-layout">
+	<view ref="numberIndicatorRef" v-if="indicator == 'number'" class="uni-preview-image-number-indicator-layout">
 		<text class="uni-preview-image-number-indicator">{{numberIndicator}}</text>
 	</view>
-	<view ref="defaultIndicator" class="uni-preview-image-default-indicator-layout" v-if="indicator == 'default'"
+	<view ref="defaultIndicatorRef" class="uni-preview-image-default-indicator-layout" v-if="indicator == 'default'"
 		v-show="urls!=null">
-		<view v-for="i in urls!.length" class="uni-preview-image-default-indicator" :class="((current+1) == i) ?'uni-preview-image-default-indicator-active' : 'uni-preview-image-default-indicator-default'">
+		<view v-for="i in urls!.length" class="uni-preview-image-default-indicator"
+			:class="((current+1) == i) ?'uni-preview-image-default-indicator-active' : 'uni-preview-image-default-indicator-default'">
 		</view>
 	</view>
 </template>
 
-<script>
+<script setup lang="uts">
 	import uniPreviewImageItem from "../../components/uni-previewImageItem/uni-previewImageItem.uvue"
-	export default {
-		components: {
-			uniPreviewImageItem
-		},
-		data() {
-			return {
-				urls: null as Array<string> | null,
-				current: 0,
-				loop: false,
-				// #ifdef APP-IOS
-				disableTouch: false,
-				// #endif
-				// #ifndef APP-IOS
-				disableTouch: false,
-				// #endif
-				numberIndicator: "",
-				indicator: "number",
-				longPressAction: null as LongPressActionsOptions | null,
-				tips: null as UTSJSONObject | null
-			}
-		},
-		onLoad() {
-			// 传参
-			uni.$once("__onPreviewLoadCallback", this.__onPreviewLoadCallback)
-			uni.$emit("__onPreviewLoad", null)
-			uni.$on("__UNIPREVIEWIMAGE", this.setDisableTouch)
-			uni.$on("__UNIPREVIEWIMAGECLOSE", this.closePreviewPage)
-			uni.$on("__CLOSEPREVIEWIMAGE", () => {
-				this.closePreviewPage()
-			})
-		},
-		onReady() {
-			var windowInfo = uni.getWindowInfo();
-			(this.$refs["numberIndicator"] as UniElement | null)?.style.setProperty("top", (windowInfo.statusBarHeight + 8) + "px");
-			(this.$refs["defaultIndicator"] as UniElement | null)?.style.setProperty("bottom", ((windowInfo.screenHeight - windowInfo.safeArea.bottom) + 8) + "px")
-		},
-		onUnload() {
-			uni.$off("__UNIPREVIEWIMAGE")
-			uni.$off("__UNIPREVIEWIMAGECLOSE")
-			uni.$off("__UNIPREVIEWLONGPRESS")
-			uni.$off("__CLOSEPREVIEWIMAGE")
-		},
-		onBackPress(options : OnBackPressOptions) : boolean | null {
-			// #ifdef APP-ANDROID
-			// 解决安卓点击返回键没有动画的问题
-			this.closePreviewPage()
-			return true
-			// #endif
-			// #ifndef APP-ANDROID
-			return false
-			// #endif
-		},
-		methods: {
-			__onPreviewLoadCallback(result : UTSJSONObject) {
-				this.urls = result["urls"] as Array<string> | null
-				if (result["current"] != null) {
-					var c = result["current"]
-					if ((typeof c == "number")) {
-						var d : number = c as number
-						if (d < 0 || d > this.urls!.length)
-							d = 0
-						this.current = d
-					} else if (typeof c == 'string') {
-						var index = this.urls!.indexOf(c as string)
-						if (index < 0) {
-							index = 0
-						}
-						this.current = index
-					}
+	const urls = ref<Array<string> | null>(null)
+	const current = ref(0)
+	const loop = ref(false)
+	// #ifdef APP-IOS
+	const disableTouch = ref(false)
+	// #endif
+	// #ifndef APP-IOS
+	const disableTouch = ref(false)
+	// #endif
+	const numberIndicator = ref("")
+	const indicator = ref("number")
+	const longPressAction = ref<LongPressActionsOptions | null>(null)
+	const tips = ref<UTSJSONObject | null>(null)
+	const numberIndicatorRef = ref<UniElement | null>(null)
+	const defaultIndicatorRef = ref<UniElement | null>(null)
+	
+	const pageInstance = getCurrentInstance()!.proxy!
+	const uniPageInstance = pageInstance.$page
+	onReady(() => {
+		var windowInfo = uni.getWindowInfo();
+		numberIndicatorRef.value?.style.setProperty("top", (windowInfo.statusBarHeight + 8) + "px");
+		defaultIndicatorRef.value?.style.setProperty("bottom", ((windowInfo.screenHeight - windowInfo.safeArea.bottom) + 8) + "px")
+	})
+	onUnload(() => {
+		uni.$off("__UNIPREVIEWIMAGE")
+		uni.$off("__UNIPREVIEWIMAGECLOSE")
+		uni.$off("__UNIPREVIEWLONGPRESS")
+		uni.$off("__CLOSEPREVIEWIMAGE")
+	})
+	const __onPreviewLoadCallback = (result : UTSJSONObject) => {
+		urls.value = result["urls"] as Array<string> | null
+		if (result["current"] != null) {
+			var c = result["current"]
+			if ((typeof c == "number")) {
+				var d : number = c as number
+				if (d < 0 || d > urls.value!.length)
+					d = 0
+				current.value = d
+			} else if (typeof c == 'string') {
+				var index = urls.value!.indexOf(c as string)
+				if (index < 0) {
+					index = 0
 				}
-				if (result["indicator"] != null) {
-					this.indicator = result["indicator"] as string
-				}
-				if (result["longPressActions"] != null) {
-					this.longPressAction = {
-						itemList: (result["longPressActions"] as UTSJSONObject)["itemList"] as string[],
-						itemColor: (result["longPressActions"] as UTSJSONObject)["itemColor"] as string | null,
-					} as LongPressActionsOptions
-				}
-				if (result["loop"] != null) {
-					this.loop = result["loop"]! as boolean
-				}
-				this.numberIndicator = (this.current + 1) + " / " + this.urls!.length
-			},
-			onPreviewImageChanged(e : UniSwiperChangeEvent) {
-				this.numberIndicator = (e.detail.current + 1) + " / " + this.urls?.length
-				this.current = e.detail.current
-			},
-			setDisableTouch(isDisable : any) {
-				// this.disableTouch = isDisable as boolean
-			},
-			closePreviewPage() {
-				uni.closeDialogPage({
-					dialogPage: this.$page,
-					animationType: "fade-out"
-				})
+				current.value = index
 			}
 		}
+		if (result["indicator"] != null) {
+			indicator.value = result["indicator"] as string
+		}
+		if (result["longPressActions"] != null) {
+			longPressAction.value = {
+				itemList: (result["longPressActions"] as UTSJSONObject)["itemList"] as string[],
+				itemColor: (result["longPressActions"] as UTSJSONObject)["itemColor"] as string | null,
+			} as LongPressActionsOptions
+		}
+		if (result["loop"] != null) {
+			loop.value = result["loop"]! as boolean
+		}
+		numberIndicator.value = (current.value + 1) + " / " + urls.value!.length
 	}
+	const onPreviewImageChanged = (e : UniSwiperChangeEvent) => {
+		numberIndicator.value = (e.detail.current + 1) + " / " + urls.value?.length
+		current.value = e.detail.current
+	}
+	const setDisableTouch = (isDisable : any) => {
+		// disableTouch = isDisable as boolean
+	}
+	const closePreviewPage = () => {
+		uni.closeDialogPage({
+			dialogPage: uniPageInstance,
+			animationType: "fade-out"
+		})
+	}
+	onLoad(() => {
+		// 传参
+		uni.$once("__onPreviewLoadCallback", __onPreviewLoadCallback)
+		uni.$emit("__onPreviewLoad", null)
+		uni.$on("__UNIPREVIEWIMAGE", setDisableTouch)
+		uni.$on("__UNIPREVIEWIMAGECLOSE", closePreviewPage)
+		uni.$on("__CLOSEPREVIEWIMAGE", () => {
+			closePreviewPage()
+		})
+	})
+	onBackPress((options : OnBackPressOptions) : boolean | null => {
+		// #ifdef APP-ANDROID
+		// 解决安卓点击返回键没有动画的问题
+		closePreviewPage()
+		return true
+		// #endif
+		// #ifndef APP-ANDROID
+		return false
+		// #endif
+	})
 </script>
 <style>
 	.uni-preview-image-default-indicator {
@@ -128,11 +123,11 @@
 		border-width: .1px;
 		border-color: #AAAAAA;
 	}
-	
+
 	.uni-preview-image-default-indicator-default {
 		background-color: #AAAAAA;
 	}
-	
+
 	.uni-preview-image-default-indicator-active {
 		background-color: #ffffff;
 	}

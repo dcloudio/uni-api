@@ -18,7 +18,7 @@ class AndroidScannerImpl implements AndroidScanner {
 		Scanner.processScanBarCode(context!, imageProxy, scanType, autoZoom, width.toInt(), height.toInt(), new (class implements Scanner.ScannerCallback {
 			override onScanSuccess(barcodeInformation : MutableList<BarcodeInformation>, screenShot : ScreenShot | null) : void {
 				const bridgeBarcodeInformation : BridgeBarcodeInformation[] = []
-				for (let information in barcodeInformation) {
+				for (let information of barcodeInformation) {
 					const area = information.scanArea
 					const scanArea = [] as number[]
 					scanArea.push(area[0] / ratio)
@@ -66,7 +66,7 @@ class AndroidScannerImpl implements AndroidScanner {
 		Scanner.processScanBarCode(context!, filePath, scanType, new (class implements Scanner.ScannerCallback {
 			override onScanSuccess(barcodeInformation : MutableList<BarcodeInformation>, screenShot : ScreenShot | null) : void {
 				const bridgeBarcodeInformation : BridgeBarcodeInformation[] = []
-				for (let information in barcodeInformation) {
+				for (let information of barcodeInformation) {
 					const area = information.scanArea
 					const scanArea = [] as number[]
 					scanArea.push(area[0] / ratio)

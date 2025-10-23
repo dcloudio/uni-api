@@ -784,7 +784,7 @@ export type NavigateToOptions = {
     complete?: NavigateToCompleteCallback | null
 }
 export type RedirectToSuccess = AsyncApiSuccessResult
-type RedirectToSuccessCallback = (result: AsyncApiSuccessResult) => void
+type RedirectToSuccessCallback = (result: RedirectToSuccess) => void
 export interface RedirectToFail extends IUniError {
     errCode: RouteErrorCode
 }

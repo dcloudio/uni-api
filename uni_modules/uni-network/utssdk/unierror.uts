@@ -27,6 +27,10 @@ const NetWorkUniErrors : Map<RequestErrorCode, string> = new Map([
 	 */
 	[100002, 'error message invalid json'],
 	/**
+	 * json解析类型转换失败
+	 */
+	[100003, 'json parsing type conversion failed'],
+	/**
 	 * 网络中断
 	 */
 	[600003, 'network interrupted error'],

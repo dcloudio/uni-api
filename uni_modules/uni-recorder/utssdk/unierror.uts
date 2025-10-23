@@ -37,7 +37,11 @@ export const RecorderManagerUniErrors : Map<RecorderManagerErrorCode, string> = 
 	/**
 	 * 被打断
 	 */
-	[1107607, 'Audio interrupted.']
+	[1107607, 'Audio interrupted.'],
+	/**
+	 * 正在录音中，请稍后再试
+	 */
+	[1107608, 'Audio is recording.']
 ]);
 
 export class RecorderManagerFailImpl extends UniError implements IRecorderManagerFail {

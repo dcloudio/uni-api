@@ -1,3 +1,4 @@
+import { fileUri } from '@kit.CoreFileKit';
 import fs, { ListFileOptions, type WriteOptions as OHWriteOptions, ReadOptions, type ReadTextOptions } from '@ohos.file.fs'
 import zlib from '@ohos.zlib';
 import { BusinessError } from '@ohos.base';
@@ -9,7 +10,6 @@ import { CallBack, FileCallback } from './callback.uts';
 import { CheckFdErr, CustomValidReturn, DataType, ModeReflect, checkDataType, checkEncoding, checkFd, checkPath, checkPathExistence, checkPathExistenceSync, checkPathSync, getApiError, getFileTypeMode, getFsPath, getNoSuchFileOrDirectoryError, getOpenMode, getParameterError, getSavedDir, getSavedFilePath, isFileUri, isString, modeReflect, obtainUpperPath, ohosReadText, transformErrorCode, getAlreadyExistsError, getIsDirectoryError, getDirectoryNotEmpty, savedFileList, calculateAllPaths, CACHE_PATH, USER_DATA_PATH, TEMP_PATH, SANDBOX_PATH, normalizeFilePath } from './utils.uts';
 import { FileSystemManagerFailImpl } from "../unierror.uts"
 import buffer from '@ohos.buffer';
-
 export { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem, FileSystemManagerFail, IFileSystemManagerFail } from '../interface.uts';
 
 const DEFAULT_ENCODING = 'utf-8'
@@ -37,7 +37,11 @@ const FLAG = [
 
 function useGetRealPath(filepath: string): string {
   if (filepath.startsWith('/data/storage/')) return filepath
-  return (runtimeGetRealPath(filepath) as string).replace(/^file:\/\//, '')
+  // 将uri转换成对应的沙箱路径path
+  if (filepath.startsWith('file://') && !filepath.startsWith('file:///')) {
+    return new fileUri.FileUri(filepath).path
+  }
+  return (runtimeGetRealPath(filepath) as string).replace(/^file:\/\/\//, '/')
 }
 
 class StatsImpl implements Stats {
@@ -812,6 +816,7 @@ class FileSystemManagerImpl implements FileSystemManager {
       return
     }
 
+    // destPath 可以是 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
     if (destPath.endsWith('/')) {
       destPath = destPath.slice(0, -1)
     }
@@ -820,7 +825,7 @@ class FileSystemManagerImpl implements FileSystemManager {
     // 如果访问不到 accessSync会抛出异常
     try { canAccessDestPath = fs.accessSync(destPath) } catch (error) { }
 
-    // 判断destPath路径是否存在
+    // 判断 destPath 路径是否存在
     if (!canAccessDestPath) {
       const getUpperPath = obtainUpperPath(destPath)
 
@@ -832,18 +837,20 @@ class FileSystemManagerImpl implements FileSystemManager {
       }
     } else {
       const destPathStat = fs.statSync(destPath)
-      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
+      // 路径存在且为目录。
       if (destPathStat.isDirectory()) {
-        // 如果是目录，且已存在，则报错
-        cb.fail(getApiError(1301003, errMsg) as IFileSystemManagerFail)
+        // 路径存在且为目录，且已存在，报错 1300021
+        cb.fail(getApiError(1300021, errMsg) as IFileSystemManagerFail)
         return
-      } else {
+      }
+      // 如果是文件，则覆盖
+      /* else {
         // 路径存在且为文件，源路径必须与目标路径相同
         if (destPathStat.isFile() && (srcPath !== destPath)) {
           cb.fail(getAlreadyExistsError(errMsg))
           return
         }
-      }
+      } */
     }
 
     fs.copyFile(srcPath, destPath)
@@ -872,6 +879,7 @@ class FileSystemManagerImpl implements FileSystemManager {
       throw new Error((getApiError(1301003, errMsg) as IFileSystemManagerFail).errMsg)
     }
 
+    // destPath 可以是 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
     if (destPath.endsWith('/')) {
       destPath = destPath.slice(0, -1)
     }
@@ -892,16 +900,18 @@ class FileSystemManagerImpl implements FileSystemManager {
     } else {
       // 判断存在的路径是目录还是文件
       const destPathStat = fs.statSync(destPath)
-      // 路径存在且为目录。如 xxx/path、 xxx/path/，直接视为写入到path文件，如xxx/path/sub.txt 具体的是写入到具体的文件，path才是目录
+      // 路径存在且为目录，且已存在，报错 1300021
       if (destPathStat.isDirectory()) {
         // 如果是目录，且已存在，则报错
-        throw new Error((getApiError(1301003, errMsg) as IFileSystemManagerFail).errMsg)
-      } else {
+        throw new Error((getApiError(1300021, errMsg) as IFileSystemManagerFail).errMsg)
+      }
+      // 如果是文件，则覆盖
+      /* else {
         // 判断destPath是否等于srcPath, 若不等，则报错
         if (destPathStat.isFile() && (srcPath !== destPath)) {
           throw new Error(getAlreadyExistsError(errMsg).errMsg)
         }
-      }
+      } */
     }
 
     try {

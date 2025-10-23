@@ -95,16 +95,20 @@ class SocketTask implements UniSocketTask {
                 data
             } as OnSocketMessageCallbackResult
             this._emitter.emit('message', message)
-            const socketTasks = getSocketTasks(mp.appId)
-            if (this === socketTasks[0]) {
-                GlobalWebsocketEmitter.emit('message', message)
+            if(mp && mp.appId){
+              const socketTasks = getSocketTasks(mp.appId)
+              if (this === socketTasks[0]) {
+                  GlobalWebsocketEmitter.emit('message', message)
+              }
             }
         })
         this._ws.on('open', (_, data) => {
             this._emitter.emit('open', data)
-            const socketTasks = getSocketTasks(mp.appId)
-            if (this === socketTasks[0]) {
-                GlobalWebsocketEmitter.emit('open', data)
+            if(mp && mp.appId){
+              const socketTasks = getSocketTasks(mp.appId)
+              if (this === socketTasks[0]) {
+                  GlobalWebsocketEmitter.emit('open', data)
+              }
             }
         })
         this._ws.on('error', (error) => {
@@ -112,20 +116,24 @@ class SocketTask implements UniSocketTask {
                 errMsg: error.message
             } as OnSocketErrorCallbackResult
             this._emitter.emit('error', message)
-            const socketTasks = getSocketTasks(mp.appId)
-            if (this === socketTasks[0]) {
-                GlobalWebsocketEmitter.emit('error', message)
+            if(mp && mp.appId){
+              const socketTasks = getSocketTasks(mp.appId)
+              if (this === socketTasks[0]) {
+                  GlobalWebsocketEmitter.emit('error', message)
+              }
             }
         })
         this._ws.on('close', (_, data) => {
             this._emitter.emit('close', data)
-            const socketTasks = getSocketTasks(mp.appId)
-            if (this === socketTasks[0]) {
-                GlobalWebsocketEmitter.emit('close', data)
-            }
-            const index = socketTasks.indexOf(this)
-            if (index >= 0) {
-                socketTasks.splice(index, 1)
+            if(mp && mp.appId){
+              const socketTasks = getSocketTasks(mp.appId)
+              if (this === socketTasks[0]) {
+                  GlobalWebsocketEmitter.emit('close', data)
+              }
+              const index = socketTasks.indexOf(this)
+              if (index >= 0) {
+                  socketTasks.splice(index, 1)
+              }
             }
         })
         this._destroy = () => {

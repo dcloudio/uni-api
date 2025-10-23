@@ -39,11 +39,15 @@ export function hideToastImpl() {
 }
 
 export function showLoadingImpl(option : ShowLoadingOptions) {
+	// #ifndef UNI-APP-X
 	makeLoading(option, 'loading', 'showLoading')
+	// #endif
 }
 
 export function hideLoadingImpl() {
+	// #ifndef UNI-APP-X
 	closeToast("loading")
+	// #endif
 }
 
 

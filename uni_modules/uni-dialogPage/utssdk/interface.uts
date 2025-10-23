@@ -10,6 +10,78 @@ export type RouteErrorCode = 4
  */
 export type EventChannel = {}
 
+/**
+ * 打开 dialogPage 成功回调参数
+ * @uniPlatform 
+  {
+    "app": {
+      "android": {
+        "osVer": "5.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31"
+      },
+      "ios": {
+        "osVer": "12.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31",
+        "unixUtsPlugin": "4.31"
+      },
+      "harmony": {
+        "osVer": "3.0",
+        "uniVer": "x",
+        "unixVer": "4.61"
+      }
+    },
+    "mp": {
+      "weixin": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "alipay": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "baidu": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "toutiao": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "lark": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "qq": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "kuaishou": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "jd": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    },
+    "web": {
+      "uniVer": "x",
+      "unixVer": "4.31"
+    }
+  }
+ */
 export interface OpenDialogPageSuccess extends AsyncApiSuccessResult {}
 type OpenDialogPageSuccessCallback = (result : OpenDialogPageSuccess) => void
 export interface OpenDialogPageFail extends IUniError {
@@ -19,6 +91,78 @@ type OpenDialogPageFailCallback = (result : OpenDialogPageFail) => void
 export type OpenDialogPageComplete = AsyncApiResult
 type OpenDialogPageCompleteCallback = (result: OpenDialogPageComplete) => void
 
+/**
+ * 打开 dialogPage 参数
+ * @uniPlatform 
+  {
+    "app": {
+      "android": {
+        "osVer": "5.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31"
+      },
+      "ios": {
+        "osVer": "12.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31",
+        "unixUtsPlugin": "4.31"
+      },
+      "harmony": {
+        "osVer": "3.0",
+        "uniVer": "x",
+        "unixVer": "4.61"
+      }
+    },
+    "mp": {
+      "weixin": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "alipay": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "baidu": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "toutiao": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "lark": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "qq": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "kuaishou": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "jd": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    },
+    "web": {
+      "uniVer": "x",
+      "unixVer": "4.31"
+    }
+  }
+ */
 export type OpenDialogPageOptions = {
   /**
    * 需要跳转的应用内非 tabBar 的页面的路径 , 路径后可以带参数
@@ -723,16 +867,87 @@ export type OpenDialogPageOptions = {
 }
 
 export type CloseDialogPageSuccess = AsyncApiSuccessResult
-type CloseDialogPageSuccessCallback = (result : CloseDialogPageSuccess) => void
+type CloseDialogPageSuccessCallback = (result: CloseDialogPageSuccess) => void
+/**
+ * 关闭 dialogPage 失败回调参数
+ * @uniPlatform 
+  {
+    "app": {
+      "android": {
+        "osVer": "5.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31"
+      },
+      "ios": {
+        "osVer": "12.0",
+        "uniVer": "x",
+        "uniUtsPlugin": "x",
+        "unixVer": "4.31",
+        "unixUtsPlugin": "4.31"
+      },
+      "harmony": {
+        "osVer": "3.0",
+        "uniVer": "x",
+        "unixVer": "4.61"
+      }
+    },
+    "mp": {
+      "weixin": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "alipay": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "baidu": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "toutiao": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "lark": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "qq": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "kuaishou": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      },
+      "jd": {
+        "hostVer": "√",
+        "uniVer": "x",
+        "unixVer": "x"
+      }
+    },
+    "web": {
+      "uniVer": "x",
+      "unixVer": "4.31"
+    }
+  }
+ */
 export interface CloseDialogPageFail extends IUniError {
-  errCode : RouteErrorCode
+  errCode: RouteErrorCode
 }
-type CloseDialogPageFailCallback = (result : CloseDialogPageFail) => void
+type CloseDialogPageFailCallback = (result: CloseDialogPageFail) => void
 export type CloseDialogPageComplete = AsyncApiResult
-type CloseDialogPageCompleteCallback = (result : CloseDialogPageComplete) => void
-export type CloseDialogPageOptions = {
-  /**
-   * 要关闭的 dialogPage 实例
+type CloseDialogPageCompleteCallback = (result: CloseDialogPageComplete) => void
+/**
+   * 关闭 dialogPage 参数
    * @uniPlatform 
     {
       "app": {
@@ -802,6 +1017,79 @@ export type CloseDialogPageOptions = {
         "unixVer": "4.31"
       }
     }
+   */
+export type CloseDialogPageOptions = {
+  /**
+   * 要关闭的 dialogPage 实例
+   * @uniPlatform 
+   * {
+   *   "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *       "unixVer": "4.31"
+   *     },
+   *     "ios": {
+   *       "osVer": "12.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *       "unixVer": "4.31",
+   *       "unixUtsPlugin": "4.31"
+   *     },
+   *     "harmony": {
+   *       "osVer": "3.0",
+   *       "uniVer": "x",
+   *       "unixVer": "4.61"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "alipay": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "baidu": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "toutiao": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "lark": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "qq": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "kuaishou": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "jd": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "4.31"
+   *   }
+   * }
    */
   dialogPage?: UniPage | null
   /**
@@ -809,110 +1097,731 @@ export type CloseDialogPageOptions = {
    *
    * @defaultValue auto
    * @uniPlatform 
-    {
-      "app": {
-        "android": {
-          "osVer": "5.0",
-          "uniVer": "x",
-          "uniUtsPlugin": "x",
-          "unixVer": "4.31"
-        },
-        "ios": {
-          "osVer": "12.0",
-          "uniVer": "x",
-          "uniUtsPlugin": "x",
-          "unixVer": "4.31",
-          "unixUtsPlugin": "4.31"
-        },
-        "harmony": {
-          "osVer": "3.0",
-          "uniVer": "x",
-          "unixVer": "4.61"
-        }
-      },
-      "mp": {
-        "weixin": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "alipay": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "baidu": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "toutiao": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "lark": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "qq": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "kuaishou": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        },
-        "jd": {
-          "hostVer": "√",
-          "uniVer": "x",
-          "unixVer": "x"
-        }
-      },
-      "web": {
-        "uniVer": "x",
-        "unixVer": "4.31"
-      }
-    }
+   * {
+   *   "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *       "unixVer": "4.31"
+   *     },
+   *     "ios": {
+   *       "osVer": "12.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *       "unixVer": "4.31",
+   *       "unixUtsPlugin": "4.31"
+   *     },
+   *     "harmony": {
+   *       "osVer": "3.0",
+   *       "uniVer": "x",
+   *       "unixVer": "4.61"
+   *     }
+   *   },
+   *   "mp": {
+   *     "weixin": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "alipay": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "baidu": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "toutiao": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "lark": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "qq": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "kuaishou": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     },
+   *     "jd": {
+   *       "hostVer": "√",
+   *       "uniVer": "x",
+   *       "unixVer": "x"
+   *     }
+   *   },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
    */
   animationType ?:
   /**
    * 自动选择动画效果
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'auto' |
   /**
    * 无动画效果
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'none' |
   /**
    * 横向向右侧滑出屏幕动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'slide-out-right' |
   /**
    * 横向向左侧滑出屏幕动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'slide-out-left' |
   /**
    * 竖向向上侧滑出屏幕动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'slide-out-top' |
   /**
    * 竖向向下侧滑出屏幕动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'slide-out-bottom' |
   /**
    * 从不透明到透明逐渐隐藏动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'fade-out' |
   /**
    * 从大逐渐缩小关闭动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'zoom-in' |
   /**
    * 从大逐渐缩小并且从不透明到透明逐渐隐藏关闭动画
+   * @uniPlatform
+   * {
+   * "app": {
+   *     "android": {
+   *       "osVer": "5.0",
+   *       "uniVer": "x",
+   *       "uniUtsPlugin": "x",
+   *     "unixVer": "4.31"
+   *   },
+   *   "ios": {
+   *     "osVer": "12.0",
+   *     "uniVer": "x",
+   *     "uniUtsPlugin": "x",
+   *     "unixVer": "4.31",
+   *     "unixUtsPlugin": "4.31"
+   *   },
+   *   "harmony": {
+   *     "osVer": "3.0",
+   *     "uniVer": "x",
+   *     "unixVer": "4.61"
+   *   }
+   * },
+   * "mp": {
+   *   "weixin": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "alipay": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "baidu": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "toutiao": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "lark": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "qq": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "kuaishou": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   },
+   *   "jd": {
+   *     "hostVer": "√",
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * },
+   * "web": {
+   *   "uniVer": "x",
+   *   "unixVer": "x"
+   * }
+   * }
    */
   'zoom-fade-in' | null
   /**
@@ -983,7 +1892,7 @@ export type CloseDialogPageOptions = {
       },
       "web": {
         "uniVer": "x",
-        "unixVer": "4.31"
+        "unixVer": "x"
       }
     }
    */

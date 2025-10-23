@@ -1,8 +1,25 @@
-import { GetNetworkTypeOptions, GetNetworkType, GetNetworkTypeSuccess } from "../interface.uts";
-import { CTRadioAccessTechnologyNR, CTRadioAccessTechnologyNRNSA, CTTelephonyNetworkInfo } from 'CoreTelephony';
-import { SCNetworkReachability, SCNetworkReachabilityCreateWithAddress, SCNetworkReachabilityFlags, SCNetworkReachabilityGetFlags } from 'SystemConfiguration';
+import {
+	CTRadioAccessTechnologyNR,
+	CTRadioAccessTechnologyNRNSA,
+	CTTelephonyNetworkInfo
+} from 'CoreTelephony';
+import {
+	SCNetworkReachability,
+	SCNetworkReachabilityCreateWithAddress,
+	SCNetworkReachabilityFlags,
+	SCNetworkReachabilityGetFlags
+} from 'SystemConfiguration';
 
-export { OnNetworkStatusChangeCallback, OnNetworkStatusChangeCallbackResult } from '../interface.uts'
+import {
+	OnNetworkStatusChangeCallback,
+	OnNetworkStatusChangeCallbackResult,
+	OnNetworkStatusChange,
+	OffNetworkStatusChange,
+	GetNetworkTypeOptions,
+	GetNetworkType,
+	GetNetworkTypeSuccess
+} from '../interface.uts'
+
 
 export const getNetworkType : GetNetworkType = function (options : GetNetworkTypeOptions) {
 	const networkType = getInternalNetworkType()
@@ -13,7 +30,75 @@ export const getNetworkType : GetNetworkType = function (options : GetNetworkTyp
 	options.complete?.(result);
 }
 
+const onNetworkStatusChangeCallbacks : Map<number, OnNetworkStatusChangeCallback> = new Map()
+let semaphore = DispatchSemaphore(value = 1)
+let onNetworkStatusChangeIndex : number = 0
 
+export const onNetworkStatusChange : OnNetworkStatusChange = function (listener : OnNetworkStatusChangeCallback) : number {
+	semaphore.wait()
+	onNetworkStatusChangeIndex++
+	semaphore.signal()
+	onNetworkStatusChangeCallbacks[onNetworkStatusChangeIndex] = listener
+
+	getNetworkType({
+		success: (res : GetNetworkTypeSuccess) => {
+			let result : OnNetworkStatusChangeCallbackResult = {
+				isConnected: res.networkType != 'none',
+				networkType: res.networkType
+			}
+			onNetworkStatusChangeCallbacks.forEach((value : OnNetworkStatusChangeCallback, key : number) => {
+				value(result)
+			})
+		},
+		fail: (err : UniError) => {
+			let result : OnNetworkStatusChangeCallbackResult = {
+				isConnected: false,
+				networkType: 'unknown'
+			}
+			onNetworkStatusChangeCallbacks.forEach((value : OnNetworkStatusChangeCallback, key : number) => {
+				value(result)
+			})
+		}
+	})
+
+
+	UniNetWorkManager.shared.startNetworkTypeMonitoring()
+	UniNetWorkManager.shared.startNetworkPermissionMonitoring()
+	UniNetWorkManager.shared.onNetworkPermissionChange((permission : boolean) : void => {
+		let res : OnNetworkStatusChangeCallbackResult = {
+			isConnected: permission && UniNetWorkManager.shared.isNetworkAvailable,
+			networkType: permission ? UniNetWorkManager.shared.currentNetworkType.description() : UniNetConnectionType.unknown.description()
+		}
+		onNetworkStatusChangeCallbacks.forEach((value : OnNetworkStatusChangeCallback, key : number) => {
+			value(res)
+		})
+	})
+
+	UniNetWorkManager.shared.onNetworkTypeChanged = (oldType : UniNetConnectionType, newType : UniNetConnectionType) => {
+		let res : OnNetworkStatusChangeCallbackResult = {
+			isConnected: UniNetWorkManager.shared.isNetworkAvailable,
+			networkType: newType.description()
+		}
+		onNetworkStatusChangeCallbacks.forEach((value : OnNetworkStatusChangeCallback, key : number) => {
+			value(res)
+		})
+	}
+
+	return onNetworkStatusChangeIndex
+}
+
+export const offNetworkStatusChange : OffNetworkStatusChange = function (listener ?: number | OnNetworkStatusChangeCallback | null) {
+	if (listener != null && typeof listener! == "number") {
+		const id = listener as number
+		onNetworkStatusChangeCallbacks.delete(id)
+	} else {
+		onNetworkStatusChangeCallbacks.clear()
+	}
+	UniNetWorkManager.shared.stopNetworkTypeMonitoring()
+	UniNetWorkManager.shared.stopNetworkPermissionMonitoring()
+	UniNetWorkManager.shared.clearNetworkHistory()
+	UniNetWorkManager.shared.clearAllCallbacks()
+}
 
 
 function getInternalNetworkType() : string {

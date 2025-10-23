@@ -1,15 +1,15 @@
 import { ShareOptions, ShareSuccess, ShareProvider, Share, UniShareProvider } from "../interface.uts";
 import { API_SHARE, ShareApiOptions, ShareApiProtocol } from "../protocol.uts";
 
-export { ShareOptions, ShareSuccess, ShareProvider, Share, UniShareProvider } from "../interface.uts";
+export { IShareFail, ShareErrorCode, ShareOptions, ShareSuccess, ShareComplete, ShareFail, ShareMiniProgramShareType, ShareProvider, ShareScene, Share, UniShareProvider } from "../interface.uts";
 
 const SERVICE = 'share'
-const PROVIDER : ShareProvider = 'weixin'
+const DEFAULT_PROVIDER : ShareProvider = 'weixin'
 
 export const share : Share = defineAsyncApi<ShareOptions, ShareSuccess>(
   API_SHARE,
   function (args : ShareOptions, executor : ApiExecutor<ShareSuccess>) {
-    const provider = getUniProvider<UniShareProvider>(SERVICE, args.provider ?? PROVIDER)
+    const provider = getUniProvider<UniShareProvider>(SERVICE, args.provider ?? DEFAULT_PROVIDER)
     if (!provider) {
       executor.reject('Provider not found.')
       return

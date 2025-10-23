@@ -23,6 +23,7 @@ import CookieManager from 'android.webkit.CookieManager';
 import KotlinArray from 'kotlin.Array';
 import Context from 'android.content.Context';
 import Environment from 'android.os.Environment';
+import WeakReference from 'java.lang.ref.WeakReference';
 import { CookieInterceptor } from '../interceptor/CookieInterceptor.uts'
 
 class NetworkDownloadTaskImpl implements DownloadTask {
@@ -115,14 +116,15 @@ export class DownloadController {
 			return null;
 		}
 
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
 		const headers = options.header?.toMap();
+		let hasUAHeader = false;
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
+				if(!hasUAHeader && key.equals("User-Agent", true)){
+					hasUAHeader = true
+				}
 
 				if (value != null) {
 					requestBilder.addHeader(key, "" + value);
@@ -131,18 +133,22 @@ export class DownloadController {
 				}
 			}
 		}
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
+		}
 
 		return requestBilder.build();
 	}
 
 }
-//ts-ignore
+
 class SimpleDownloadCallback implements Callback {
 	private downloadFilePath = "/uni-download/";
-	private listener : NetworkDownloadFileListener | null = null;
+	private listener : WeakReference<NetworkDownloadFileListener> | null = null;
 	private specifyPath = "";
 	constructor(listener : NetworkDownloadFileListener, specifyPath : string) {
-		this.listener = listener;
+		this.listener = new WeakReference(listener);
 		if(specifyPath.startsWith("unifile://")){
 			this.specifyPath = UTSAndroid.convert2AbsFullPath(specifyPath);
 		}else{
@@ -158,7 +164,7 @@ class SimpleDownloadCallback implements Callback {
 		option['errorMsg'] = exception.message;
 		let cause = exception.cause.toString();
 		option['cause'] = new SourceError(cause);
-		this.listener?.onComplete(option);
+		this.listener?.get()?.onComplete(option);
 	}
 	override onResponse(call : Call, response : Response) {
 		if (response.isSuccessful()) {
@@ -191,7 +197,7 @@ class SimpleDownloadCallback implements Callback {
 							totalBytesWritten: totalBytesRead,
 							totalBytesExpectedToWrite: contentLength
 						}
-						this.listener?.onProgress(downloadProgressUpdate);
+						this.listener?.get()?.onProgress(downloadProgressUpdate);
 
 					} while (true)
 
@@ -208,7 +214,7 @@ class SimpleDownloadCallback implements Callback {
 					if (targetFile.exists()) {
 						option['tempFilePath'] = targetFile.getPath();
 					}
-					this.listener?.onComplete(option);
+					this.listener?.get()?.onComplete(option);
 				} catch (e: Exception){
 					let option: UTSJSONObject = {};
 					const code = "-1"
@@ -218,7 +224,7 @@ class SimpleDownloadCallback implements Callback {
 					option['errorMsg'] = errorMsg;
 					const sourceError = new SourceError(errorMsg ?? "");
 					option['cause'] = sourceError;
-					this.listener?.onComplete(option);
+					this.listener?.get()?.onComplete(option);
 				} finally {
 					tempSink?.close()
 					targetSink?.close()
@@ -238,7 +244,7 @@ class SimpleDownloadCallback implements Callback {
 			const sourceError = new SourceError(errorMsg ?? "");
 			sourceError.code = response.code();
 			option['cause'] = sourceError;
-			this.listener?.onComplete(option);
+			this.listener?.get()?.onComplete(option);
 		}
 	}
 
@@ -252,7 +258,6 @@ class SimpleDownloadCallback implements Callback {
 		return path + this.downloadFilePath;
 	}
 
-  //@ts-ignore
 	getFile(response : Response) : File {
 		let targetPath = "";
 		if (this.specifyPath != "") {
@@ -264,7 +269,8 @@ class SimpleDownloadCallback implements Callback {
 				option['errorCode'] = '602001';
 				option['errorMsg'] = "This path is not supported";
 				option['cause'] = null;
-				this.listener?.onComplete(option);
+				this.listener?.get()?.onComplete(option);
+
 				return new File("")
 			}
 
@@ -297,9 +303,9 @@ class SimpleDownloadCallback implements Callback {
 					option['errorCode'] = '602001';
 					option['errorMsg'] = "The target file path is already a directory file, and file creation failed.";
 					option['cause'] = null;
-					this.listener?.onComplete(option);
+					this.listener?.get()?.onComplete(option);
 				}
-
+				
 				if (file.exists()) {
 					const index = path.lastIndexOf(".");
 					let tFileName = path;
@@ -308,7 +314,7 @@ class SimpleDownloadCallback implements Callback {
 						tFileName = path.substring(0, index)
 						tFileType = path.substring(index)
 					}
-
+				
 					var number = 1
 					while (new File(path).exists()) {
 						path = tFileName + "(" + number + ")" + tFileType;
@@ -327,7 +333,7 @@ class SimpleDownloadCallback implements Callback {
 						option['errorMsg'] = exception.message;
 						let cause = exception.cause.toString();
 						option['cause'] = new SourceError(cause);
-						this.listener?.onComplete(option);
+						this.listener?.get()?.onComplete(option);
 					}
 				}
 				return file
@@ -404,7 +410,7 @@ class SimpleDownloadCallback implements Callback {
 			fileName = subFileName + System.currentTimeMillis()
 		}
 
-
+		
 		if (new File(targetPath + fileName).exists()) {
 			const index = fileName.lastIndexOf(".");
 			let tFileName = fileName;
@@ -412,7 +418,7 @@ class SimpleDownloadCallback implements Callback {
 			if (index >= 0) {
 				tFileName = fileName.substring(0, index)
 				tFileType = fileName.substring(index)
-
+				
 				//fileName是 .xxx的情况
 				if(tFileName == ""){
 					tFileName = tFileType
@@ -423,11 +429,11 @@ class SimpleDownloadCallback implements Callback {
 			}
 			var number = 1
 			while (new File(targetPath + fileName).exists()) {
-				fileName = tFileName + "(" + number + ")" + tFileType;
+				fileName = tFileName + "(" + number + ")" + tFileType;	
 				number++
 			}
 		}
-
+		
 		targetPath += fileName
 
 		const file = new File(targetPath)
@@ -447,7 +453,7 @@ class SimpleDownloadCallback implements Callback {
 				option['errorMsg'] = exception.message;
 				let cause = exception.cause.toString();
 				option['cause'] = new SourceError(cause);
-				this.listener?.onComplete(option);
+				this.listener?.get()?.onComplete(option);
 			}
 		}
 		return file

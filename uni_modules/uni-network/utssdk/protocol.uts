@@ -18,13 +18,6 @@ export const RequestApiProtocol = new Map<string, ProtocolOptions>([
         }
     ],
     [
-        'data',
-        {
-            type: 'object',
-            required: false
-        }
-    ],
-    [
         'header',
         {
             type: 'object',

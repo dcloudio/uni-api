@@ -264,12 +264,12 @@ open class AudioPlayer : InnerAudioContext, Player.Listener {
                 }
             }
 		}
-    open var player: ExoPlayer;
+    open lateinit var player: ExoPlayer;
     open var callbacks = HashMap<String, UTSArray<EventCallback>>();
     private var errorCallBack: ((result: ICreateInnerAudioContextFail) -> Unit)? = null
     open var isPausedByUser: Boolean = false;
     open var isSeeking: Boolean = false;
-    open var audioManager: AudioManager;
+    open lateinit var audioManager: AudioManager;
 
     constructor() {
         // 创建 CacheDataSourceFactory

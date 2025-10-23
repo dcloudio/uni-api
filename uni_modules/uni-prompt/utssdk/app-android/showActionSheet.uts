@@ -34,47 +34,47 @@ let uniActionSheet:UniActionSheet|null = null
  * 弹出功能入口
  */
 export function actionSheetImpl(style: ShowActionSheetOptions) {
-
+	
 	/**
 	 * 参数校验，itemList 不能为空
 	 */
 	if(style.itemList == null || style.itemList.length < 1){
 
 		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: parameter.itemList should have at least 1 item");
-
+		
 		style.fail?.(res)
 		style.complete?.(res)
 		return ;
 	}
-
-
+	
+	
 	/**
 	 * 元素个数不能超过6个
 	 */
 	if(style.itemList.size > 6){
 		let res = new PromptErrorImpl(1001, "showActionSheet:fail parameter error: itemList should not be large than 6");
-
+		
 		style.fail?.(res)
 		style.complete?.(res)
 		return ;
 	}
-
-
+	
+	
 	if(uniActionSheet != null){
 		uniActionSheet?.dismiss()
 		uniActionSheet = null
 	}
-
-
+	
+	
 	// #ifndef UNI-APP-X
 		/**
 		 * uni-app
 		 */
 		if(UTSAndroid.getTopPageActivity() == null){
-			return
+			return 
 		}
 		if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-			return
+			return 
 		}
 		uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
 		uniActionSheet?.show()
@@ -82,12 +82,12 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 			uniActionSheet?.dismiss()
 			uniActionSheet = null
 		})
-
+		
 	// #endif
 	// // #ifdef UNI-APP-X
 	// 	/**
 	// 	 * uni-app x
-	// 	 * 需要特殊处理生命周期
+	// 	 * 需要特殊处理生命周期 
 	// 	 */
 	// 	const pages = getCurrentPages();
 	// 	if (pages.length > 0) {
@@ -95,44 +95,44 @@ export function actionSheetImpl(style: ShowActionSheetOptions) {
 	// 		const instance = page.$
 	// 		if (page.$isReady) {
 	// 			if(UTSAndroid.getTopPageActivity() == null){
-	// 				return
+	// 				return 
 	// 			}
 	// 			if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-	// 				return
+	// 				return 
 	// 			}
 	// 			uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
 	// 	        uniActionSheet?.show()
 	// 	    } else {
 	// 	        onReady(() => {
 	// 				if(UTSAndroid.getTopPageActivity() == null){
-	// 					return
+	// 					return 
 	// 				}
 	// 				if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-	// 					return
+	// 					return 
 	// 				}
 	// 				uniActionSheet = new UniActionSheet(UTSAndroid.getTopPageActivity()!, style)
 	// 	            uniActionSheet?.show()
 	// 	        }, instance)
 	// 	    }
-
+		    
 	// 		onUnload(() => {
 	// 			uniActionSheet?.dismiss()
 	// 			uniActionSheet = null
 	// 		}, instance)
-
+			
 	// 	}
 	// // #endif
-
-
+	
+	
 }
 
 
 /**
- * UniActionSheet
+ * UniActionSheet 
  * 功能实现
  */
 export class UniActionSheet extends Dialog{
-
+	
 	/**
 	 * 宿主activity
 	 */
@@ -150,10 +150,10 @@ export class UniActionSheet extends Dialog{
 	 */
 	cancel: AppCompatTextView
 	/**
-	 * 列表 recycler
+	 * 列表 recycler 
 	 */
 	myRecyclerView: RecyclerView
-
+	
 	/**
 	 * title 组件
 	 */
@@ -175,18 +175,18 @@ export class UniActionSheet extends Dialog{
 		// 为了确保complete只调用一次，执行后手动置空
 		this.hostStyle.complete?.(res)
 		this.hostStyle.complete = null
-
+		
 		super.dismiss()
 	}
-
-
+	
+	
 	constructor(activity: Activity, style: ShowActionSheetOptions) {
-
+		
 		super(activity,R.style.uni_app_uni_prompt_ActionsheetDialog);
-
+		
 		this.hostActivity = activity
 		this.hostStyle = style
-
+		
 		/**
 		 * 适配暗黑模式，配置不同的布局文件
 		 */
@@ -195,26 +195,26 @@ export class UniActionSheet extends Dialog{
 		}else{
 			setContentView(R.layout.uni_app_uni_prompt_uts_action_sheet)
 		}
-
-
+		
+		
 		this.title = findViewById(R.id.tvTitle)
 		this.cancel = findViewById(R.id.tvCancelAction)
 		this.lineTitle = findViewById(R.id.line_title)
 		this.lineContent = findViewById(R.id.line_content)
 		this.lineCancel = findViewById(R.id.line_cancel)
 		this.myRecyclerView = findViewById(R.id.myRecyclerview)
-		this.myRecyclerView.layoutManager = new LinearLayoutManager(this.hostActivity)
-
-
+		this.myRecyclerView.layoutManager = LinearLayoutManager(this.hostActivity)
+		
+		
 		this.cancel.setOnClickListener(new CancelClickListener(this,this.hostStyle));
 		let recyclerviewAdapter = new ItemAdapter(this,this.hostStyle)
 		this.myRecyclerView.adapter = recyclerviewAdapter
-
+		
 		if(!style.title.isNullOrBlank()){
 			this.lineTitle.setVisibility(View.VISIBLE)
 			this.title.setText(style.title)
 		}
-
+		
 		if(this.window != null){
 			this.window!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 			this.window!.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
@@ -222,9 +222,9 @@ export class UniActionSheet extends Dialog{
 				this.window!.attributes!.windowAnimations = R.style.uni_app_uni_prompt_DialogAnimations_slideWindow;
 			}
 		}
-
+		
 	}
-
+	
 
 }
 
@@ -232,24 +232,24 @@ export class UniActionSheet extends Dialog{
  * 列表选项点击事件监听
  */
 class ItemClickListener extends View.OnClickListener{
-
+	
 	host:Dialog
 	hostStyle:ShowActionSheetOptions
 	hostIndex:number
-
+	
 	constructor(dialog:Dialog,style: ShowActionSheetOptions,index:number){
 		super()
 		this.host = dialog
 		this.hostStyle = style
 		this.hostIndex = index
 	}
-
+	
     override onClick(v?: View):void{
-
+		
 		const res : ShowActionSheetSuccess = {
 			tapIndex: this.hostIndex
 		}
-
+		
 		this.hostStyle.success?.(res)
 		this.hostStyle.success = null
 		this.hostStyle.complete?.(res)
@@ -257,7 +257,7 @@ class ItemClickListener extends View.OnClickListener{
 		// 点击触发成功后，去掉fail
 		this.hostStyle.fail = null
 		this.host.dismiss()
-
+		
     }
 }
 
@@ -265,16 +265,16 @@ class ItemClickListener extends View.OnClickListener{
  * 取消按钮点击事件
  */
 class CancelClickListener extends View.OnClickListener{
-
+	
 	host:Dialog
 	hostStyle:ShowActionSheetOptions
-
+	
 	constructor(dialog:Dialog,style: ShowActionSheetOptions){
 		super()
 		this.host = dialog
 		this.hostStyle = style
 	}
-
+	
     override onClick(v?: View):void{
 		let res = new PromptErrorImpl(1, "showActionSheet:fail cancel");
 		this.hostStyle.fail?.(res)
@@ -282,7 +282,7 @@ class CancelClickListener extends View.OnClickListener{
 		this.hostStyle.complete?.(res)
 		this.hostStyle.complete = null
 		this.host.dismiss()
-
+		
     }
 }
 
@@ -290,34 +290,33 @@ class CancelClickListener extends View.OnClickListener{
 /**
  * 列表数据适配器
  */
-//@ts-ignore
 class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
-
-
+	
+	
 	mItemList: Array<String>
 	hostStyle:ShowActionSheetOptions
 	hostDialog:Dialog
-
+	
 	constructor(dialog:Dialog ,style: ShowActionSheetOptions){
 		super()
 		this.hostDialog = dialog
 		this.mItemList = style.itemList
 		this.hostStyle = style
 	}
-
+	
 	/**
 	 * view 持有容器
 	 */
 	ViewHolder = class extends RecyclerView.ViewHolder {
-
+		
 		itemName:TextView;
 		constructor(view:View) {
 			super(view);
-			this.itemName = view.findViewById(R.id.tvName) as TextView;
+			itemName = view.findViewById(R.id.tvName) as TextView;
 		}
 	}
-
-
+	
+	
 	override getItemViewType(position: Int): Int {
 		if(hostStyle.title.isNullOrBlank()){
 			// 无标题状态
@@ -336,7 +335,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-
+		
 		let view: View
 		if(viewType == 1002){
 			if(UTSAndroid.getAppDarkMode()){
@@ -355,8 +354,8 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 				    LayoutInflater.from(parent.context).inflate(R.layout.uni_app_uni_prompt_ac_recyclerview_layout_top, parent, false)
 			}
 		}
-
-
+		
+        
         return ViewHolder(view)
     }
 
@@ -372,7 +371,7 @@ class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
     override getItemCount(): Int {
         return mItemList.size
     }
-
+	
 }
 /**
  * 工具方法，判断一个color 字符串是否合法

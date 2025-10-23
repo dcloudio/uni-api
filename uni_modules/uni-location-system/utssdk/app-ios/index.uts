@@ -1,7 +1,20 @@
-import { CLLocationManager, CLAuthorizationStatus, CLLocationManagerDelegate, CLGeocoder, CLPlacemark, kCLLocationAccuracyBest, kCLLocationAccuracyHundredMeters, kCLLocationAccuracyKilometer, CLAccuracyAuthorization, CLLocation } from "CoreLocation"
+import {
+	CLLocationManager,
+	CLAuthorizationStatus,
+	CLLocationManagerDelegate,
+	CLGeocoder,
+	CLPlacemark,
+	kCLLocationAccuracyBest,
+	kCLLocationAccuracyHundredMeters,
+	kCLLocationAccuracyKilometer,
+	CLAccuracyAuthorization,
+	CLLocation,
+	kCLDistanceFilterNone
+} from "CoreLocation"
 import { NSError, Int } from "Foundation"
 import { UTSiOS } from "DCloudUTSFoundation"
 import { UniLocationSystemProvider } from "../interface.uts"
+import { UIApplication } from 'UIKit';
 
 /****************************************内部功能实现****************************************************/
 
@@ -13,8 +26,45 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider 
 
 	isAppExist : boolean
 
+	locationUpdateCallback : OnLocationChangeCallback | null = null
+	locationUpdateErrorCallback : OnLocationChangeErrorCallback | null = null
+
 	getLocation(options : GetLocationOptions) {
 		SystemLocation.share.getLocationImpl(options)
+	}
+
+	startLocationUpdate(options : StartLocationUpdateOptions) {
+		UpdateSystemLocation.share.startUpdatingLocationImpl(options)
+	}
+
+	stopLocationUpdate(options : StopLocationUpdateOptions) {
+		UpdateSystemLocation.share.stopUpdatingLocationImpl(options)
+	}
+
+	onLocationChange(@escaping listener : OnLocationChangeCallback) : number {
+		this.locationUpdateCallback = listener
+		UpdateSystemLocation.share.locationUpdateCallback = listener
+		return 0
+	}
+
+	offLocationChange(listener ?: number | OnLocationChangeCallback | null) {
+		this.locationUpdateCallback = null
+		UpdateSystemLocation.share.locationUpdateCallback = null
+	}
+
+	startLocationUpdateBackground(options : StartLocationUpdateBackgroundOptions) {
+		UpdateSystemLocation.share.startUpdatingLocationBackgroundImpl(options)
+	}
+
+	onLocationChangeError(@escaping listener : OnLocationChangeErrorCallback) : number {
+		this.locationUpdateErrorCallback = listener;
+		UpdateSystemLocation.share.locationUpdateErrorCallback = listener
+		return 0;
+	}
+
+	offLocationChangeError(listener ?: number | OnLocationChangeErrorCallback | null) : void {
+		this.locationUpdateErrorCallback = null;
+		UpdateSystemLocation.share.locationUpdateErrorCallback = null
 	}
 
 	toJSON() : Map<string, any> {
@@ -36,9 +86,10 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider 
  */
 class SystemLocation implements CLLocationManagerDelegate {
 
+	private type : string = "SystemLocation"
 	static share = new SystemLocation()
 	// 定义 locationManager 属性，类型为 CLLocationManager
-	locationManager! : CLLocationManager
+	innerLocationManager! : CLLocationManager
 
 	locationOptions ?: GetLocationOptions
 
@@ -51,9 +102,9 @@ class SystemLocation implements CLLocationManagerDelegate {
 	private hasReverseGeocodeLocation : boolean = false
 
 	configLocationManager() {
-		if (this.locationManager == null) {
-			this.locationManager = new CLLocationManager()
-			this.locationManager.delegate = this
+		if (this.innerLocationManager == null) {
+			this.innerLocationManager = new CLLocationManager()
+			this.innerLocationManager.delegate = this
 		}
 	}
 
@@ -61,7 +112,7 @@ class SystemLocation implements CLLocationManagerDelegate {
 		const status = this.getAuthorizationStatus()
 		// 如果未获取过定位权限，则发起权限请求
 		if (status == CLAuthorizationStatus.notDetermined) {
-			this.locationManager.requestWhenInUseAuthorization()
+			this.innerLocationManager.requestWhenInUseAuthorization()
 		} else if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
 			this.failedAction(1505004)
 		} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
@@ -71,7 +122,7 @@ class SystemLocation implements CLLocationManagerDelegate {
 
 	getAuthorizationStatus() : CLAuthorizationStatus {
 		if (UTSiOS.available("iOS 14.0, *")) {
-			return this.locationManager.authorizationStatus
+			return this.innerLocationManager.authorizationStatus
 		} else {
 			return CLLocationManager.authorizationStatus()
 		}
@@ -114,13 +165,13 @@ class SystemLocation implements CLLocationManagerDelegate {
 			 * 2. altitude = true    ----->   accuracyAuthorization == .fullAccuracy (只有用户打开了高精度定位，才会返回海拔信息)
 			 *   所以说，isHighAccuracy依赖于altitude， isHighAccuracy = true 的时候，一定altitude = true
 			 */
-			if (this.locationOptions?.isHighAccuracy != null && this.locationOptions?.isHighAccuracy == true && this.locationManager.accuracyAuthorization == CLAccuracyAuthorization.reducedAccuracy) {
+			if (this.locationOptions?.isHighAccuracy != null && this.locationOptions?.isHighAccuracy == true && this.innerLocationManager.accuracyAuthorization == CLAccuracyAuthorization.reducedAccuracy) {
 				this.requestTemporaryFullAccuracyAuthorization()
 			} else {
 				if (this.locationOptions?.isHighAccuracy != null && this.locationOptions?.isHighAccuracy == true) {
-					this.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+					this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyBest
 				} else {
-					this.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+					this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 				}
 
 				this.requestLocation()
@@ -141,12 +192,12 @@ class SystemLocation implements CLLocationManagerDelegate {
 			//
 
 			if (this.locationOptions?.isHighAccuracy != null && this.locationOptions?.isHighAccuracy == true) {
-				this.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+				this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyBest
 			} else {
 				if (this.locationOptions?.altitude != null && this.locationOptions?.altitude == true) {
-					this.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+					this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 				} else {
-					this.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+					this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyKilometer
 				}
 			}
 
@@ -157,7 +208,7 @@ class SystemLocation implements CLLocationManagerDelegate {
 	//执行CLLocationManager 中的单次请求方法
 	requestLocation() {
 		this.hasRequestLocationSuccess = false
-		this.locationManager.requestLocation()
+		this.innerLocationManager.requestLocation()
 
 		//如果用户isHighAccuracy = true， 下列逻辑是在highAccuracyExpireTime时间范围内如果没有返回数据，则返回 errorCode：1505600 超时
 		if (this.locationOptions?.isHighAccuracy != null && this.locationOptions?.isHighAccuracy == true) {
@@ -178,8 +229,8 @@ class SystemLocation implements CLLocationManagerDelegate {
 	requestTemporaryFullAccuracyAuthorization() {
 		if (UTSiOS.available("iOS 14.0, *")) {
 			//PurposeKey这个是在plist中自定义的，在NSLocationTemporaryUsageDescriptionDictionary这个字典下自定义添加
-			this.locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey = "PurposeKey", completion = (err ?: NSError) : void => {
-				if (this.locationManager.accuracyAuthorization == CLAccuracyAuthorization.reducedAccuracy) {
+			this.innerLocationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey = "PurposeKey", completion = (err ?: NSError) : void => {
+				if (this.innerLocationManager.accuracyAuthorization == CLAccuracyAuthorization.reducedAccuracy) {
 					//Note：如果用户isHighAccuracy == true，则accuracyAuthorization = fullAccuracy && desiredAccuracy = kCLLocationAccuracyBest， 但是用户点击未授权，
 					//TODO： 这时候返回errCode：1505800 ------> iOS特有的高精度权限缺失 （是否需要添加高精度缺失的不同的errorCode信息，待定？）
 					//               errCode：1505004 ------> 定位权限缺失
@@ -210,7 +261,7 @@ class SystemLocation implements CLLocationManagerDelegate {
 
 	// 清除监听
 	clearWatch() {
-		this.locationManager.stopUpdatingLocation()
+		this.innerLocationManager.stopUpdatingLocation()
 	}
 
 	// 判断两个location是否一致，并加入了容错机制
@@ -253,6 +304,9 @@ class SystemLocation implements CLLocationManagerDelegate {
 	 * iOS14.0+ 系统进入下面delegate方法， iOS14.0以下不进入
 	 */
 	locationManagerDidChangeAuthorization(manager : CLLocationManager) {
+		if (this.type != "SystemLocation") {
+			return
+		}
 		DispatchQueue.main.async(execute = () : void => {
 			if (CLLocationManager.locationServicesEnabled() == false) {
 				this.failedAction(1505003)
@@ -272,28 +326,36 @@ class SystemLocation implements CLLocationManagerDelegate {
 	 * iOS14.0以下系统进入下面delegate方法，如果同时实现了上述api，则iOS14.0+优先使用上述api； 如果未实现上述api，则下列api也会调用
 	 */
 	locationManager(manager : CLLocationManager, @argumentLabel("didChangeAuthorization") status : CLAuthorizationStatus) {
+		if (this.type != "SystemLocation" {
+			return
+		})
 		DispatchQueue.main.async(execute = () : void => {
 			if (CLLocationManager.locationServicesEnabled() == false) {
 				this.failedAction(1505003)
 				return
 			}
 		})
-		const status = this.getAuthorizationStatus()
-		if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+		const inner_status = this.getAuthorizationStatus()
+		if (inner_status == CLAuthorizationStatus.denied || inner_status == CLAuthorizationStatus.restricted) {
 			this.failedAction(1505004)
-		} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
+		} else if (inner_status == CLAuthorizationStatus.authorizedAlways || inner_status == CLAuthorizationStatus.authorizedWhenInUse) {
 			this.getLocation()
 		}
 	}
 
 	// 实现定位出错的 delegate 方法
 	locationManager(manager : CLLocationManager, @argumentLabel("didFailWithError") error : NSError) {
+		if (this.type != "SystemLocation" {
+			return
+		})
 		this.failedAction(1505602)
 	}
 
 	// 实现位置更新的 delegate 方法
 	locationManager(manager : CLLocationManager, @argumentLabel("didUpdateLocations") locations : CLLocation[]) {
-
+		if (this.type != "SystemLocation" {
+			return
+		})
 		if (locations.length == 0) {
 			this.failedAction(1505602)
 			return
@@ -369,5 +431,271 @@ class SystemLocation implements CLLocationManagerDelegate {
 			}
 			this.successAction(response)
 		}
+	}
+}
+
+/**
+ * 定位 SystemLocation 类，封装定位相关方法
+ */
+class UpdateSystemLocation implements CLLocationManagerDelegate {
+
+	private type : string = "UpdateSystemLocation"
+	static share = new UpdateSystemLocation()
+	// 定义 innerLocationManager 属性，类型为 CLLocationManager
+	innerLocationManager! : CLLocationManager
+
+	startLocationUpdateOptions ?: StartLocationUpdateOptions
+	startLocationUpdateBackgroundOptions ?: StartLocationUpdateBackgroundOptions
+
+	locationUpdateCallback ?: OnLocationChangeCallback
+	locationUpdateErrorCallback ?: OnLocationChangeErrorCallback
+
+
+	private isUpdatingLocation : boolean = false
+
+	private isBackgroundUpdating : boolean = false
+
+	private isLocationUpdateErrorAction : boolean = false
+
+	configLocationManager() {
+		if (this.innerLocationManager == null) {
+			this.innerLocationManager = new CLLocationManager()
+			this.innerLocationManager.delegate = this
+		}
+	}
+
+	requestLocationWithAuthorization() {
+		const status = this.getAuthorizationStatus()
+		// 如果未获取过定位权限，则发起权限请求
+		if (status == CLAuthorizationStatus.notDetermined) {
+			this.innerLocationManager.requestWhenInUseAuthorization()
+			if (this.isBackgroundUpdating) {
+				this.innerLocationManager.requestAlwaysAuthorization()
+			}
+		} else if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+			this.failedAction(1505004)
+		} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
+			this.startUpdatingLocation()
+		}
+	}
+
+	startUpdatingLocation() {
+		this.innerLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+		this.innerLocationManager.distanceFilter = kCLDistanceFilterNone
+		this.innerLocationManager.startUpdatingLocation()
+		this.successAction()
+	}
+
+	getAuthorizationStatus() : CLAuthorizationStatus {
+		if (UTSiOS.available("iOS 14.0, *")) {
+			return this.innerLocationManager.authorizationStatus
+		} else {
+			return CLLocationManager.authorizationStatus()
+		}
+	}
+
+
+	startUpdatingLocationImpl(options : StartLocationUpdateOptions) {
+		this.configLocationManager()
+		this.startLocationUpdateOptions = options
+		this.isUpdatingLocation = true
+		
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+		})
+
+		if (options.type != null && options.type != 'wgs84') {
+			// 系统定位只支持wgs84，如果不是则报错
+			this.failedAction(1505601)
+			return
+		}
+
+		this.requestLocationWithAuthorization()
+	}
+
+	startUpdatingLocationBackgroundImpl(options : StartLocationUpdateBackgroundOptions) {
+		this.configLocationManager()
+		this.startLocationUpdateBackgroundOptions = options
+		this.isBackgroundUpdating = true
+
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+		})
+
+		if (options.type != null && options.type != 'wgs84') {
+			// 系统定位只支持wgs84，如果不是则报错
+			this.failedAction(1505601)
+			return
+		}
+
+		if (this.isConfigBackgroundLocationOnInfoPlist() == false) {
+			this.failedAction(1505702)
+			return
+		}
+
+		this.innerLocationManager.allowsBackgroundLocationUpdates = true
+		this.innerLocationManager.pausesLocationUpdatesAutomatically = false
+		this.requestLocationWithAuthorization()
+	}
+
+	private isConfigBackgroundLocationOnInfoPlist() : boolean {
+
+		const infoDictionary = Bundle.main.infoDictionary
+		if (infoDictionary != null) {
+			const backgroundModes = infoDictionary!['UIBackgroundModes'] as Array<string> | null
+			if (backgroundModes != null && backgroundModes!.includes("location")) {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	stopUpdatingLocationImpl(options : StopLocationUpdateOptions) {
+		this.isUpdatingLocation = false
+		this.isBackgroundUpdating = false
+		this.isLocationUpdateErrorAction = false
+		this.innerLocationManager.stopUpdatingLocation()
+		this.innerLocationManager.allowsBackgroundLocationUpdates = false
+	}
+
+	addLocationChangeListener(@escaping listener : OnLocationChangeCallback) {
+		this.locationUpdateCallback = listener
+	}
+
+	// failed action
+	failedAction(errCode : number) {
+		let err = new GetLocationFailImpl(errCode);
+		if (this.isUpdatingLocation) {
+			this.isUpdatingLocation = false
+			this.startLocationUpdateOptions?.fail?.(err)
+			this.startLocationUpdateOptions?.complete?.(err)
+		}
+
+		if (this.isBackgroundUpdating) {
+			this.startLocationUpdateBackgroundOptions?.fail?.(err)
+			this.startLocationUpdateBackgroundOptions?.complete?.(err)
+			this.isBackgroundUpdating = false
+		}
+	}
+
+	// success action
+	successAction() {
+		if (this.isUpdatingLocation) {
+			this.isUpdatingLocation = false
+			this.startLocationUpdateOptions?.success?.({} as StartLocationUpdateSuccess)
+			this.startLocationUpdateOptions?.complete?.({})
+		}
+
+		if (this.isBackgroundUpdating) {
+			this.isBackgroundUpdating = false
+			this.isLocationUpdateErrorAction = false
+			this.startLocationUpdateBackgroundOptions?.success?.({} as StartLocationUpdateSuccess)
+			this.startLocationUpdateBackgroundOptions?.complete?.({})
+		}
+	}
+
+	/****************************************CLLocationManagerDelegate 实现****************************************************/
+
+	/**
+	 * Note：iOS14.0+ 引入的api
+	 * iOS14.0+ 系统进入下面delegate方法， iOS14.0以下不进入
+	 */
+	locationManagerDidChangeAuthorization(manager : CLLocationManager) {
+		if (this.type != "UpdateSystemLocation") {
+			return
+		}
+
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+
+			const status = this.getAuthorizationStatus()
+			if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+				this.failedAction(1505004)
+			} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
+				this.startUpdatingLocation()
+			}
+		})
+	}
+
+	/**
+	 * Note：iOS14.0+ 引入新的api，不建议下列api
+	 * iOS14.0以下系统进入下面delegate方法，如果同时实现了上述api，则iOS14.0+优先使用上述api； 如果未实现上述api，则下列api也会调用
+	 */
+	locationManager(manager : CLLocationManager, @argumentLabel("didChangeAuthorization") status : CLAuthorizationStatus) {
+		if (this.type != "UpdateSystemLocation") {
+			return
+		}
+
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+
+			const inner_status = this.getAuthorizationStatus()
+			if (inner_status == CLAuthorizationStatus.denied || inner_status == CLAuthorizationStatus.restricted) {
+				this.failedAction(1505004)
+			} else if (inner_status == CLAuthorizationStatus.authorizedAlways || inner_status == CLAuthorizationStatus.authorizedWhenInUse) {
+				this.startUpdatingLocation()
+			}
+		})
+	}
+
+	// 实现定位出错的 delegate 方法
+	locationManager(manager : CLLocationManager, @argumentLabel("didFailWithError") error : NSError) {
+		if (this.type != "UpdateSystemLocation") {
+			return
+		}
+
+		if (!this.isLocationUpdateErrorAction && UIApplication.shared.applicationState == UIApplication.State.background) {
+			return
+		}
+
+		let errCode : number = 1505602
+		const status = this.getAuthorizationStatus()
+		if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+			errCode = 1505004
+		}
+		let tempErr = new GetLocationFailImpl(errCode)
+		const err = UniError(tempErr.errSubject, tempErr.errCode, tempErr.errMsg, tempErr.data)
+		this.locationUpdateErrorCallback?.(err)
+	}
+
+	// 实现位置更新的 delegate 方法
+	locationManager(manager : CLLocationManager, @argumentLabel("didUpdateLocations") locations : CLLocation[]) {
+		if (this.type != "UpdateSystemLocation") {
+			return
+		}
+		if (locations.length == 0) {
+			let tempErr = new GetLocationFailImpl(1505602)
+			const err = UniError(tempErr.errSubject, tempErr.errCode, tempErr.errMsg, tempErr.data)
+			this.locationUpdateErrorCallback?.(err)
+			return
+		}
+		const location = locations[0]
+
+		const altitude = Number(location.altitude)
+
+		let response : GetLocationSuccess = {
+			latitude: Number(location.coordinate.latitude),
+			longitude: Number(location.coordinate.longitude),
+			speed: Number(location.speed),
+			altitude: altitude,
+			accuracy: 0, //TODO： iOS api没有返回accuracy相关信息， 和Android有对应api不同 
+			verticalAccuracy: Number(location.verticalAccuracy),
+			horizontalAccuracy: Number(location.horizontalAccuracy),
+			address: null
+		}
+		this.locationUpdateCallback?.(response)
 	}
 }

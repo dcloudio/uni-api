@@ -11,10 +11,47 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 
 	isAppExist : boolean
 
+	locationUpdateCallback : OnLocationChangeCallback | null = null
+	locationUpdateErrorCallback : OnLocationChangeErrorCallback | null = null
+
 	getLocation(options : GetLocationOptions) {
 		LBSLocation.share.getLocationImpl(options)
 	}
-	
+
+	startLocationUpdate(options : StartLocationUpdateOptions) {
+		LBSUpdateLocation.share.startUpdatingLocationImpl(options)
+	}
+
+	stopLocationUpdate(options : StopLocationUpdateOptions) {
+		LBSUpdateLocation.share.stopUpdatingLocationImpl(options)
+	}
+
+	onLocationChange(@escaping listener : OnLocationChangeCallback) : number {
+		this.locationUpdateCallback = listener
+		LBSUpdateLocation.share.locationUpdateCallback = listener
+		return 0
+	}
+
+	offLocationChange(listener ?: number | OnLocationChangeCallback | null) {
+		this.locationUpdateCallback = null
+		LBSUpdateLocation.share.locationUpdateCallback = null
+	}
+
+	startLocationUpdateBackground(options : StartLocationUpdateBackgroundOptions) {
+		LBSUpdateLocation.share.startUpdatingLocationBackgroundImpl(options)
+	}
+
+	onLocationChangeError(@escaping listener : OnLocationChangeErrorCallback) : number {
+		this.locationUpdateErrorCallback = listener;
+		LBSUpdateLocation.share.locationUpdateErrorCallback = listener
+		return 0;
+	}
+
+	offLocationChangeError(listener ?: number | OnLocationChangeErrorCallback | null) : void {
+		this.locationUpdateErrorCallback = null;
+		LBSUpdateLocation.share.locationUpdateErrorCallback = null
+	}
+
 	toJSON() : Map<string, any> {
 		const dict = new Map<string, any>()
 		dict.set('id', this.id)
@@ -28,6 +65,260 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		this.isAppExist = true
 	}
 }
+/**
+ * 定位 LBSLocation 类，封装定位相关方法
+ */
+@UTSiOS.keyword("fileprivate")
+class LBSUpdateLocation implements TencentLBSLocationManagerDelegate {
+
+	private type : string = "LBSUpdateLocation"
+	static share = new LBSUpdateLocation()
+
+	// 定义 locationManager 属性，类型为 TencentLBSLocationManager
+	private locationManager! : TencentLBSLocationManager
+
+	startLocationUpdateOptions ?: StartLocationUpdateOptions
+	startLocationUpdateBackgroundOptions ?: StartLocationUpdateBackgroundOptions
+
+	locationUpdateCallback ?: OnLocationChangeCallback
+	locationUpdateErrorCallback ?: OnLocationChangeErrorCallback
+
+
+	private requestLevel = TencentLBSRequestLevel.geo
+	private isUpdatingLocation : boolean = false
+	private isBackgroundUpdating : boolean = false
+	private isLocationUpdateErrorAction : boolean = false
+
+	// 初始化 locationManager 方法
+	private configLocationManager() {
+
+		if (this.locationManager == null) {
+			// 调用API前需要设置同意用户隐私协议
+			TencentLBSLocationManager.setUserAgreePrivacy(true)
+			// 初始化 locationManager 实例对象
+			this.locationManager = new TencentLBSLocationManager()
+			// 从 info.plist 中读取 apiKey
+			const apiKey = Bundle.main.infoDictionary?.["TencentLBSAPIKey"]
+			// infoDictionary 获取的值类型为 any？
+			if (apiKey != null) {
+				// 如果 apiKey 为 null 返回 false
+				// console.log("apiKey 未配置")
+				// 设置 apiKey （因为 apiKey 是 any？类型，需要转成 string 类型赋值）
+				this.locationManager.apiKey = apiKey! as string;
+			}
+			this.locationManager.delegate = this
+		}
+	}
+
+	// 请求定位权限
+	private requestLocationWithAuthorization() {
+		const status = this.getAuthorizationStatus()
+		// 如果未获取过定位权限，则发起权限请求
+		if (status == CLAuthorizationStatus.notDetermined) {
+			this.locationManager.requestWhenInUseAuthorization()
+			if (this.isBackgroundUpdating) {
+				this.locationManager.requestAlwaysAuthorization()
+			}
+		} else if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+			this.failedAction(1505004)
+		} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
+			this.startUpdatingLocation()
+		}
+	}
+
+	private startUpdatingLocation() {
+		this.locationManager.startUpdatingLocation()
+		this.successAction()
+	}
+
+	private getAuthorizationStatus() : CLAuthorizationStatus {
+		return this.locationManager.authorizationStatus
+	}
+
+	startUpdatingLocationImpl(options : StartLocationUpdateOptions) {
+		this.configLocationManager()
+		this.startLocationUpdateOptions = options
+		this.isUpdatingLocation = true
+
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+		})
+
+		if (options.type != null && options.type != 'gcj02') {
+			// 腾讯定位只支持GCJ-02，如果不是则报错
+			this.failedAction(1505607)
+			return
+		}
+
+		const apiKey = Bundle.main.infoDictionary?.["TencentLBSAPIKey"]
+		// infoDictionary 获取的值类型为 any？
+		if (apiKey == null) {
+			this.failedAction(1505605)
+			return
+		}
+
+		this.requestLocationWithAuthorization()
+	}
+
+	startUpdatingLocationBackgroundImpl(options : StartLocationUpdateBackgroundOptions) {
+		this.configLocationManager()
+		this.startLocationUpdateBackgroundOptions = options
+		this.isBackgroundUpdating = true
+		
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+		})
+
+		if (options.type != null && options.type != 'gcj02') {
+			// 腾讯定位只支持GCJ-02，如果不是则报错
+			this.failedAction(1505607)
+			return
+		}
+
+		const apiKey = Bundle.main.infoDictionary?.["TencentLBSAPIKey"]
+		// infoDictionary 获取的值类型为 any？
+		if (apiKey == null) {
+			this.failedAction(1505605)
+			return
+		}
+
+		if (this.isConfigBackgroundLocationOnInfoPlist() == false) {
+			this.failedAction(1505702)
+			return
+		}
+
+		this.locationManager.allowsBackgroundLocationUpdates = true
+		this.locationManager.pausesLocationUpdatesAutomatically = false
+		this.requestLocationWithAuthorization()
+	}
+
+	private isConfigBackgroundLocationOnInfoPlist() : boolean {
+
+		const infoDictionary = Bundle.main.infoDictionary
+		if (infoDictionary != null) {
+			const backgroundModes = infoDictionary!['UIBackgroundModes'] as Array<string> | null
+			if (backgroundModes != null && backgroundModes!.includes("location")) {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	stopUpdatingLocationImpl(options : StopLocationUpdateOptions) {
+		this.isUpdatingLocation = false
+		this.isBackgroundUpdating = false
+		this.isLocationUpdateErrorAction = false
+		this.locationManager.stopUpdatingLocation()
+		this.locationManager.allowsBackgroundLocationUpdates = false
+	}
+
+	// failed action
+	private failedAction(errCode : number) {
+		let err = new GetLocationFailImpl(errCode);
+		if (this.isUpdatingLocation) {
+			this.isUpdatingLocation = false
+			this.startLocationUpdateOptions?.fail?.(err)
+			this.startLocationUpdateOptions?.complete?.(err)
+		}
+
+		if (this.isBackgroundUpdating) {
+			this.startLocationUpdateBackgroundOptions?.fail?.(err)
+			this.startLocationUpdateBackgroundOptions?.complete?.(err)
+			this.isBackgroundUpdating = false
+		}
+	}
+
+	// success action
+	private successAction() {
+		if (this.isUpdatingLocation) {
+			this.isUpdatingLocation = false
+			this.startLocationUpdateOptions?.success?.({} as StartLocationUpdateSuccess)
+			this.startLocationUpdateOptions?.complete?.({})
+		}
+		
+		if (this.isBackgroundUpdating) {
+			this.isBackgroundUpdating = false
+			this.isLocationUpdateErrorAction = false
+			this.startLocationUpdateBackgroundOptions?.success?.({} as StartLocationUpdateSuccess)
+			this.startLocationUpdateBackgroundOptions?.complete?.({})
+		}
+	}
+
+	tencentLBSDidChangeAuthorization(manager : TencentLBSLocationManager) {
+		if (this.type != "LBSUpdateLocation") {
+			return
+		}
+		DispatchQueue.main.async(execute = () : void => {
+			if (CLLocationManager.locationServicesEnabled() == false) {
+				this.failedAction(1505003)
+				return
+			}
+
+			const status = this.getAuthorizationStatus()
+			if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+				this.failedAction(1505004)
+			} else if (status == CLAuthorizationStatus.authorizedAlways || status == CLAuthorizationStatus.authorizedWhenInUse) {
+				this.startUpdatingLocation()
+			}
+		})
+	}
+
+	// 实现定位出错的 delegate 方法
+
+	tencentLBSLocationManager(manager : TencentLBSLocationManager, @argumentLabel("didFailWithError") error : NSError) {
+		if (this.type != "LBSUpdateLocation") {
+			return
+		}
+		if (!this.isLocationUpdateErrorAction && UIApplication.shared.applicationState == UIApplication.State.background) {
+			return
+		}
+
+		let errCode : number = 1505602
+		const status = this.getAuthorizationStatus()
+		if (status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted) {
+			errCode = 1505004
+		}
+		let tempErr = new GetLocationFailImpl(errCode)
+		const err = UniError(tempErr.errSubject, tempErr.errCode, tempErr.errMsg, tempErr.data)
+		this.locationUpdateErrorCallback?.(err)
+	}
+
+	// 实现位置更新的 delegate 方法
+	tencentLBSLocationManager(manager : TencentLBSLocationManager, @argumentLabel("didUpdate") location : TencentLBSLocation) {
+		if (this.type != "LBSUpdateLocation") {
+			return
+		}
+
+		// 判断 address 是否有值
+		var address : string | null = null
+		if (location.address != null) {
+			address = location.address!
+		}
+
+		const altitude = Number(location.location.altitude)
+
+		let response : GetLocationSuccess = {
+			latitude: Number(location.location.coordinate.latitude),
+			longitude: Number(location.location.coordinate.longitude),
+			speed: Number(location.location.speed),
+			altitude: altitude,
+			accuracy: Number(location.location.horizontalAccuracy),
+			verticalAccuracy: Number(location.location.verticalAccuracy),
+			horizontalAccuracy: Number(location.location.horizontalAccuracy),
+			address: address
+		}
+
+		this.locationUpdateCallback?.(response)
+	}
+
+}
 
 /**
  * 定位 LBSLocation 类，封装定位相关方法
@@ -35,6 +326,7 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 @UTSiOS.keyword("fileprivate")
 class LBSLocation implements TencentLBSLocationManagerDelegate {
 
+	private type : string = "LBSLocation"
 	static share = new LBSLocation()
 
 	// 定义 locationManager 属性，类型为 TencentLBSLocationManager
@@ -110,7 +402,7 @@ class LBSLocation implements TencentLBSLocationManagerDelegate {
 			this.failedAction(1505607)
 			return
 		}
-		
+
 		const apiKey = Bundle.main.infoDictionary?.["TencentLBSAPIKey"]
 		// infoDictionary 获取的值类型为 any？
 		if (apiKey == null) {
@@ -282,6 +574,9 @@ class LBSLocation implements TencentLBSLocationManagerDelegate {
 
 
 	tencentLBSDidChangeAuthorization(manager : TencentLBSLocationManager) {
+		if (this.type != "LBSLocation") {
+			return
+		}
 		DispatchQueue.main.async(execute = () : void => {
 			if (CLLocationManager.locationServicesEnabled() == false) {
 				this.failedAction(1505003)
@@ -299,34 +594,9 @@ class LBSLocation implements TencentLBSLocationManagerDelegate {
 	// 实现定位出错的 delegate 方法
 
 	tencentLBSLocationManager(manager : TencentLBSLocationManager, @argumentLabel("didFailWithError") error : NSError) {
+		if (this.type != "LBSLocation") {
+			return
+		}
 		this.failedAction(1505602)
 	}
-
-	// // 实现位置更新的 delegate 方法
-	// tencentLBSLocationManager(manager : TencentLBSLocationManager, @argumentLabel("didUpdate") location : TencentLBSLocation) {
-	// 	// 判断 address 是否有值
-	// 	var address : string | null = null
-	// 	if (location.address != null) {
-	// 		address = location.address!
-	// 	}
-
-	// 	let altitude = 0.0
-	// 	if (this.locationOptions?.altitude != null && this.locationOptions?.altitude == true) {
-	// 		altitude = Number(location.location.altitude)
-	// 	}
-
-	// 	let response : GetLocationSuccess = {
-	// 		latitude: Number(location.location.coordinate.latitude),
-	// 		longitude: Number(location.location.coordinate.longitude),
-	// 		speed: Number(location.location.speed),
-	// 		altitude: altitude,
-	// 		accuracy: Number(location.location.horizontalAccuracy),
-	// 		verticalAccuracy: Number(location.location.verticalAccuracy),
-	// 		horizontalAccuracy: Number(location.location.horizontalAccuracy),
-	// 		address: address
-	// 	}
-
-	// 	this.successAction(response)
-	// }
-
 }

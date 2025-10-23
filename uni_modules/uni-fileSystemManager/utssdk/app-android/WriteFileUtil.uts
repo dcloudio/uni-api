@@ -10,7 +10,6 @@ import RandomAccessFile from 'java.io.RandomAccessFile'
 import FileChannel from 'java.nio.channels.FileChannel'
 import { isSandyBoxPath } from './FileManagerUtil.uts'
 import ByteBuffer from 'java.nio.ByteBuffer';
-import Base64 from "android.util.Base64"
 import FileOutputStream from 'java.io.FileOutputStream';
 
 

@@ -36,7 +36,7 @@ export type ChooseMediaTempFile = {
 	 */
 	fileType : ChooseMediaFileType
 	/**
-	 * 选定视频的数据量大小
+	 * 选定视频的数据量大小，单位 B
 	 */
 	size : number,
 	/**

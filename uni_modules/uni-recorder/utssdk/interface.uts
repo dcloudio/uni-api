@@ -2296,7 +2296,77 @@ export type RecorderManagerErrorCode =
 	 *  }
 	 * }
 	 */
-	1107607;
+	1107607 |
+	/**
+	 * 正在录音中，请稍后执行此操作
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.81"
+	 * 		},
+	 * 		"ios": {
+	 * 			"osVer": "12.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "x",
+	 * 			"unixUtsPlugin": x""
+	 * 		},
+	 *    "harmony": {
+	 *      "osVer": "5.0.0",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	1107608;
 
 export interface IRecorderManagerFail extends IUniError {
 	errCode : RecorderManagerErrorCode

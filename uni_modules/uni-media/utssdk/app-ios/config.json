@@ -2,6 +2,7 @@
 	"frameworks": [
 		"AssetsLibrary.framework",
 		"Photos.framework",
+		"PhotosUI.framework",
 		"AVFoundation.framework",
 		"CoreServices.framework",
 		"CoreFoundation.framework",

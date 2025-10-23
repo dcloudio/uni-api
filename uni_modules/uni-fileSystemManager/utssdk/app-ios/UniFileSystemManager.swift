@@ -814,10 +814,13 @@ extension UniFileSystemManager {
             } else {
                 completionHandler?(false, status.toError())
             }
-        case .valid(_):
+        case .valid(let status):
             // 目标文件存在，并且是目录路径
             if isDirectory(absolutePath) {
                 completionHandler?(false, .illegalOperation)
+                return
+            } else if status.isWritable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
             
@@ -904,6 +907,9 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
+                return
+            } else if status.isDeletable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
             fileGlobalQueue.async {
@@ -1025,8 +1031,10 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDeletable == false {
                 completionHandler?(false, .permissionDenied)
+                return
             } else if status.isDirectory == false {
                 completionHandler?(false, .notDirectory)
+                return
             } else {
                 fileGlobalQueue.async {
                     //非递归删除
@@ -1089,9 +1097,7 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory == false {
                 return (nil, .notDirectory)
-            }
-            
-            if status.isReadable == false {
+            } else if status.isReadable == false {
                 return (nil, .permissionDenied)
             }
             do {
@@ -1119,9 +1125,7 @@ extension UniFileSystemManager {
             if status.isDirectory == false {
                 completionHandler?(nil, .notDirectory)
                 return
-            }
-            
-            if status.isReadable == false {
+            } else if status.isReadable == false {
                 completionHandler?(nil, .permissionDenied)
                 return
             }
@@ -1158,6 +1162,9 @@ extension UniFileSystemManager {
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
                 return
+            } else if status.isReadable == false {
+                completionHandler?(false, .permissionDenied)
+                return
             }
         }
         
@@ -1179,6 +1186,9 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
+                return
+            } else if status.isWritable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
             //存在的先remove
@@ -1227,6 +1237,9 @@ extension UniFileSystemManager {
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
                 return
+            } else if status.isReadable == false {
+                completionHandler?(false, .permissionDenied)
+                return
             }
         }
         
@@ -1250,6 +1263,9 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
+                return
+            } else if status.isWritable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
             
@@ -1293,6 +1309,9 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(nil, .isDirectory)
+                return
+            } else if status.isReadable == false {
+                completionHandler?(nil, .permissionDenied)
                 return
             }
             
@@ -1342,7 +1361,11 @@ extension UniFileSystemManager {
         switch validatePath(atPath: absolutePath) {
         case .invalid(let status):
             completionHandler?(nil, status.toError())
-        case .valid(_):
+        case .valid(let status):
+            if status.isReadable == false {
+                completionHandler?(nil, .permissionDenied)
+                return
+            }
             get()
         }
         
@@ -1419,10 +1442,13 @@ extension UniFileSystemManager {
         switch validatePath(atPath:  absolutePath) {
         case .invalid(let status):
             completionHandler?(false, status.toError())
-        case .valid(_):
+        case .valid(let status):
             // 目标文件存在，并且是目录路径
             if isDirectory(absolutePath) {
                 completionHandler?(false, .illegalOperation)
+                return
+            } else if status.isWritable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
             
@@ -1549,7 +1575,11 @@ extension UniFileSystemManager {
         case .invalid(let status):
             completionHandler?(false, status.toError())
             return
-        case .valid(_):
+        case .valid(let status):
+            if status.isReadable == false {
+                completionHandler?(false, .permissionDenied)
+                return
+            }
             if !zipFilePath.hasSuffix(".zip") {
                 completionHandler?(false, .argumentInvalid)
                 return
@@ -1570,6 +1600,9 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory == false {
                 completionHandler?(false, .notDirectory)
+                return
+            } else if status.isWritable == false {
+                completionHandler?(false, .permissionDenied)
                 return
             }
         }
@@ -1633,8 +1666,10 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(false, .isDirectory)
+                return
             } else if status.isWritable == false {
                 completionHandler?(false, .permissionDenied)
+                return
             } else {
                 let length = length ?? 0
                 fileGlobalQueue.async {
@@ -1684,6 +1719,7 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isReadable == false || status.isWritable == false {
                 completionHandler?(nil, .permissionDenied)
+                return
             } else {
                 fileGlobalQueue.async {
                     let (fd, error) = openFile(path: absolutePath, flag: flag)
@@ -1991,6 +2027,10 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory{
                 completionHandler?(nil, .isDirectory)
+                return
+            } else if status.isReadable == false {
+                completionHandler?(nil, .permissionDenied)
+                return
             } else {
                 brotli()
             }
@@ -2029,6 +2069,10 @@ extension UniFileSystemManager {
         case .valid(let status):
             if status.isDirectory {
                 completionHandler?(nil, .isDirectory)
+                return
+            } else if status.isReadable == false {
+                completionHandler?(nil, .permissionDenied)
+                return
             } else {
                 readZip()
             }
@@ -2241,7 +2285,11 @@ extension UniFileSystemManager {
         let isExist = fileManager.fileExists(atPath: absolutePath, isDirectory: &isDirectory)
         let isSandbox = absolutePath.starts(with: sandboxPath) // 检查路径是否在沙盒范围内
         
-        if !isSandbox || !isExist {
+        var isPackage = false
+        if  UniSDKEngine.shared.config.ipaType == .package {
+            isPackage = true
+        }
+        if (!isPackage && !isSandbox) || !isExist {
             return .invalid(UniFilePathValidationResult.InvalidElement(
                 isEmpty: false,
                 isExist: isExist,
@@ -2266,3 +2314,4 @@ extension UniFileSystemManager {
         }
     }
 }
+

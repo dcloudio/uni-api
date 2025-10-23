@@ -279,20 +279,21 @@ class NetworkManager {
 			return null;
 		}
 
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
 		if (param.header == null) {
 			param.header = {}
 		}
 
 		let contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 		let hasContentType = false;
+		let hasUAHeader = false;
 		let headers = param.header!.toJSONObject() as JSONObject;
 		for (key in headers.keys) {
 			if (key.equals("Content-Type", true)) {
 				contentType = "" + headers![key]!;
 				hasContentType = true;
+			}
+			if(!hasUAHeader && key.equals("User-Agent", true)){
+				hasUAHeader = true
 			}
 			requestBilder.header(key, "" + headers[key]);
 		}
@@ -302,6 +303,12 @@ class NetworkManager {
 				contentType = "application/json";
 			}
 		}
+		
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
+		}
+		
 
 		if ("POST".equals(param.method) || "PUT".equals(param.method) || "PATCH".equals(param.method) || "DELETE".equals(param.method)) {
 			if (param.data != null && listener != null) {

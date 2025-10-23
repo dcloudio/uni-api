@@ -1,4 +1,8 @@
 重要!
+SDK2.0.5
+1. 支持模块化集成​：XCFramework 头文件引用改为标准化格式 #import <WechatOpenSDK/WXApi.h>，解决路径冲突并支持 Swift/ObjC 混合开发
+2. 修复openWXApp偶现失败的问题
+
 SDK2.0.4
 1.增加privacy manifest文件
 2.修复跳微信时可能卡顿的问题

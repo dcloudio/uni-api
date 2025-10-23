@@ -18,9 +18,22 @@ function getFileName(path: string) {
 
 let id: number = 0
 
+const SUPPORTED_COMPRESSION_EXTENSIONS_JPEG = ['jpg', 'jpe', 'jpeg', 'png'];
+
 export function _compressImage(args: CompressImageOptions): Promise<_CompressImageSuccess> {
     const imageName = getFileName(args.src)
     const imageExt = imageName.split('.').slice(-1)[0];
+
+    if (!SUPPORTED_COMPRESSION_EXTENSIONS_JPEG.concat(['webp', 'heif']).includes(imageExt)) {
+        const fd = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY).fd
+        const size = fileIo.statSync(fd).size
+        fileIo.closeSync(fd)
+        return Promise.resolve({
+            size,
+            tempFilePath: args.src
+        } as _CompressImageSuccess)
+    }
+
     const imagePacker: image.ImagePacker = image.createImagePacker();
     const file2 = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY);
 
@@ -39,24 +52,41 @@ export function _compressImage(args: CompressImageOptions): Promise<_CompressIma
     if (args.rotate != null) {
         decodingOptions.rotate = args.rotate
     }
-    if (args.compressedHeight != null || args.compressedWidth != null) {
+    let compressedWidth = args.compressedWidth
+    let compressedHeight = args.compressedHeight
+    if (compressedHeight != null || compressedWidth != null) {
+        const imageInfo = imageSource.getImageInfoSync()
+        if (typeof compressedWidth === 'number' && compressedHeight == null) {
+            compressedHeight = imageInfo.size.height * (compressedWidth / imageInfo.size.width)
+        }
+        if (typeof compressedHeight === 'number' && compressedWidth == null) {
+            compressedWidth = imageInfo.size.width * (compressedHeight / imageInfo.size.height)
+        }
+
         decodingOptions.desiredSize = {
-            height: (args.compressedHeight ?? args.compressedWidth)!,
-            width: (args.compressedWidth ?? args.compressedHeight)!
+            height: compressedHeight!,
+            width: compressedWidth!
         }
     }
     // const pixelMap = imageSource.createPixelMapSync(decodingOptions);
     return imageSource.createPixelMap(decodingOptions).then((pixelMap): Promise<_CompressImageSuccess> => {
         let format: string = ''
         // 'image/png' 压缩后大小变大，且不会随着 quality 变化而变化
-        if (['jpg', 'jpe', 'jpeg', 'png'].includes(imageExt)) {
+        if (SUPPORTED_COMPRESSION_EXTENSIONS_JPEG.includes(imageExt)) {
             format = 'image/jpeg'
         }
         if (imageExt === 'webp') format = 'image/webp'
         if (imageExt === 'heif') format = 'image/heif'
 
         if (!format.length) {
-            throw new Error('error image format')
+            console.error('error image format')
+            const fd = fileIo.openSync(args.src, fileIo.OpenMode.READ_ONLY).fd
+            const size = fileIo.statSync(fd).size
+            fileIo.closeSync(fd)
+            return Promise.resolve({
+                size,
+                tempFilePath: args.src
+            } as _CompressImageSuccess)
         }
         const packOptions: image.PackingOption = {
             format,

@@ -7,7 +7,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -17,11 +19,13 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import io.dcloud.uniapp.extapi.DownloadFileOptions
-import io.dcloud.uniapp.extapi.DownloadFileSuccess
-import io.dcloud.uniapp.extapi.downloadFile
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import io.dcloud.uts.UTSAndroid
 import uts.sdk.modules.uniGetBackgroundAudioManager.BackgroundAudioPlayer
 import uts.sdk.modules.uniGetBackgroundAudioManager.R
+import kotlin.math.log
 
 class AudioService : Service() {
 	private lateinit var playerHelper: BackgroundAudioPlayer
@@ -142,7 +146,6 @@ class AudioService : Service() {
 		startId: Int,
 	): Int {
 		Log.d(tag, "onStartCommand $lastAudioUrl")
-
 		return START_STICKY
 	}
 
@@ -195,41 +198,47 @@ class AudioService : Service() {
 
 			var metadataNeedsUpdate = true
 			playerHelper.coverImgUrl?.let { url ->
-				if (url.startsWith("http") || url.startsWith("https")) {
-					metadataNeedsUpdate = false // Metadata will be updated in async callback
-					downloadFile(
-						DownloadFileOptions(
-							url = url,
-							success = fun(res: DownloadFileSuccess) {
-								targetPlayerHandler.post {
-									// Ensure execution on the correct handler
-									if (audioService == null || mMediaSession == null) return@post
-									val bitmap = BitmapFactory.decodeFile(res.tempFilePath)
-									metaDtaBuilder.putBitmap(
-										MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
-										bitmap,
-									)
-									mMediaSession!!.setMetadata(metaDtaBuilder.build())
-									updateNotification() // Update notification after metadata change
-								}
-							},
-							fail = fun(_) {
-								targetPlayerHandler.post {
-									// Ensure execution on the correct handler
-									if (audioService == null || mMediaSession == null) return@post
-									// Failed to download, set metadata without album art
-									mMediaSession!!.setMetadata(metaDtaBuilder.build())
-									updateNotification() // Update notification even if image fails
-								}
-							},
-						),
-					)
+				val realUrl = if(url.startsWith("http://") || url.startsWith("https://")) {
+					url
+				} else {
+					UTSAndroid.convert2AbsFullPath(url)
 				}
-			}
+//				if (url.startsWith("http") || url.startsWith("https")) {
+				metadataNeedsUpdate = false // Metadata will be updated in async callback
+				Glide.with(this)
+					.asBitmap()
+					.load(realUrl)
+					.into(object : CustomTarget<Bitmap>() {
+						override fun onResourceReady(
+							resource: Bitmap,
+							transition: Transition<in Bitmap>?
+						) {
+							targetPlayerHandler.post {
+								// Ensure execution on the correct handler
+								if (audioService == null || mMediaSession == null) return@post
+								metaDtaBuilder.putBitmap(
+									MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+									resource,
+								)
+								mMediaSession!!.setMetadata(metaDtaBuilder.build())
+								updateNotification() // Update notification after metadata change
+							}
+						}
 
-			if (metadataNeedsUpdate) { // No async download or not an HTTP URL
-				mMediaSession!!.setMetadata(metaDtaBuilder.build())
-				// updateNotification() // Consider if notification update is needed here for text changes
+						override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
+						}
+
+						override fun onLoadFailed(errorDrawable: Drawable?) {
+							targetPlayerHandler.post {
+								// Ensure execution on the correct handler
+								if (audioService == null || mMediaSession == null) return@post
+								// Failed to download, set metadata without album art
+								mMediaSession!!.setMetadata(metaDtaBuilder.build())
+								updateNotification() // Update notification even if image fails
+							}
+						}
+					})
+//				}
 			}
 		}
 	}
@@ -286,37 +295,36 @@ class AudioService : Service() {
 			mNotificationBuilder?.setSmallIcon(idSmall); // 设置图标
 		}
 
-		playerHelper.coverImgUrl?.let { url ->
-			if (url.startsWith("http") || url.startsWith("https")) {
-				downloadFile(
-					DownloadFileOptions(
-						url = url,
-						success = fun(res: DownloadFileSuccess) {
-							targetPlayerHandler.post {
-								// Ensure execution on the correct handler
-								if (audioService == null || mNotificationBuilder == null) {
-									// Service might have been destroyed or builder reset during async op
-									return@post
-								}
-								val bitmap = BitmapFactory.decodeFile(res.tempFilePath)
-								mNotificationBuilder?.setLargeIcon(bitmap)
-								// After setting the icon, the notification needs to be re-issued.
-								if (mNotificationBuilder != null) { // Check again as it's async
-									val updatedNotification = mNotificationBuilder!!.build()
-									mNotificationManager!!.notify(NOTIFICATION_ID, updatedNotification)
-									// If startForeground was called, an updated notify is usually enough.
-									// If issues persist, you might need to call startForeground again with the updated notification.
-									// startForeground(NOTIFICATION_ID, updatedNotification)
-								}
-							}
-						},
-						fail = fun(_) {
-							// Optional: Log error or handle failure
-						},
-					),
-				)
+        playerHelper.coverImgUrl.let { url ->
+			val realUrl = if(url.startsWith("http://") || url.startsWith("https://")) {
+				url
+			} else {
+				UTSAndroid.convert2AbsFullPath(url)
 			}
-		}
+            Glide.with(this)
+                .asBitmap()
+                .load(realUrl)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        targetPlayerHandler.post {
+                            if (audioService == null || mNotificationBuilder == null) {
+                                return@post
+                            }
+                            mNotificationBuilder?.setLargeIcon(resource)
+                            if (mNotificationBuilder != null) { // Check again as it's async
+                                val updatedNotification = mNotificationBuilder!!.build()
+                                mNotificationManager!!.notify(NOTIFICATION_ID, updatedNotification)
+                            }
+                        }
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        }
 
 		Log.d(tag, "idSmall=$idSmall")
 		// 创建点击通知的意图

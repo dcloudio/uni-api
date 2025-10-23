@@ -129,6 +129,71 @@ export type SetTabBarItemOptions = {
     selectedIconPath?: string
     /**
      * 页面绝对路径
+     * @uniPlatform {
+     *  "app": {
+     *    "android": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "ios": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    },
+     *    "harmony": {
+     *      "osVer": "x",
+     *      "uniVer": "x",
+     *      "unixVer": "x"
+     *    }
+     *  },
+    *  "mp": {
+    *    "weixin": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "alipay": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "baidu": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "toutiao": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "lark": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "qq": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "kuaishou": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    },
+    *    "jd": {
+    *        "hostVer": "x",
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    }
+    *  },
+     *  "web": {
+     *    "uniVer": "√",
+     *    "unixVer": "√"
+     *  }
+     * }
      */
     pagePath?: string
     /**

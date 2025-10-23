@@ -1286,7 +1286,7 @@ export type WriteOptions = {
     fd: string,
     /**
      * 写入的内容，类型为 String 或 ArrayBuffer，以前类型是string，iOS平台4.61、Android平台4.31及以后支持ArrayBuffer
-     * @uniPlatform
+     * @uniPlatform {
      *    "app": {
      *        "android": {
      *            "osVer": "5.0",

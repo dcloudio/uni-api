@@ -2,7 +2,6 @@ import {
 	ChooseMedia, ChooseMediaOptions, ChooseMediaPageOrientation, ChooseMediaSuccess, ChooseMediaTempFile
 } from "../interface.uts"
 import { ChooseMediaErrorImpl, UniError_ChooseMedia } from "../unierror.uts"
-import BitmapFactory from "android.graphics.BitmapFactory";
 import MediaMetadataRetriever from 'android.media.MediaMetadataRetriever';
 import Exception from 'java.lang.Exception';
 import Intent from 'android.content.Intent';
@@ -635,7 +634,7 @@ function getGlobalConfig() : string {
 				var globalStyle = uniConfig.javaClass.getDeclaredField("globalStyle")
 				globalStyle.setAccessible(true)
 				var globalStyleValue = globalStyle.get(uniConfig)
-				if (globalStyleValue != null && globalStyleValue instanceof Map<Stirng, any>) {
+				if (globalStyleValue != null && globalStyleValue instanceof Map<String, any>) {
 					var pageOrientation = (globalStyleValue["pageOrientation"])
 					if (pageOrientation != null) {
 						return pageOrientation as string

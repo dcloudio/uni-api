@@ -37,13 +37,13 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		 * 准备权限
 		 */
 		let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"];
-		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight : boolean, _ : string[]) {
+		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight : boolean, p : string[]) {
 			if (allRight) {
 				// 交给目前的location 引擎，真实执行
 				getLocationImpl(options);
 			}
-		}, function (_ : boolean, _ : string[]) {
-			this.failedAction(1505605);
+		}, function (a : boolean, _ : string[]) {
+			this.failedAction(1505003);
 		});
 	}
 	override startLocationUpdate(locationOptions : StartLocationUpdateOptions) : void {
@@ -55,13 +55,8 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		/**
 		 * 准备权限
 		 */
-		let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"];
-		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight : boolean, _ : string[]) {
-			this.isBackgroundLocation = false
-			this.requestLocation(locationOptions);
-		}, function (_ : boolean, _ : string[]) {
-			this.failedAction(1505605);
-		});
+		this.isBackgroundLocation = false
+		this.requestLocation(locationOptions);
 	}
 	requestLocation(locationOptions : StartLocationUpdateOptions) {
 		if (locationOptions.type != null && locationOptions.type!.toUpperCase() != 'GCJ-02' && locationOptions.type!.toUpperCase() != 'GCJ02') {
@@ -77,12 +72,12 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		let locationRequest = TencentLocationRequest.create();
 		locationRequest.setAllowGPS(true);
 		locationRequest.setInterval(2000);
-		if(this.isBackgroundLocation) {
-		this.mLocationManager?.enableForegroundLocation(1001, this.notif)
+		if (this.isBackgroundLocation) {
+			this.mLocationManager?.enableForegroundLocation(1001, this.notif)
 		}
 		this.mLocationManager!.requestLocationUpdates(locationRequest, this);
-		locationOptions.success?.()
-		locationOptions.complete?.("")
+		locationOptions.success?.({} as StartLocationUpdateSuccess)
+		locationOptions.complete?.({})
 	}
 
 	notif : Notification | null = null
@@ -102,7 +97,7 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 	override offLocationChange(id ?: number | OnLocationChangeCallback | null) : void {
 		this.locationUpdateCallback = null;
 	}
-	
+
 	override onLocationChangeError(result : OnLocationChangeErrorCallback) : number {
 		this.locationUpdateErrorCallback = result;
 		return 0;
@@ -120,29 +115,14 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		/**
 		 * 准备权限
 		 */
-		let permissionNeed = ["android.permission.ACCESS_FINE_LOCATION"];
-		if (Build.VERSION.SDK_INT >= 29) {
-			permissionNeed.push("android.permission.ACCESS_BACKGROUND_LOCATION");
-		}
-		UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, permissionNeed, function (allRight : boolean, _ : string[]) {
-			if (allRight) {
-				this.isBackgroundLocation = true
-				this.requestLocation({
-					provider: options.provider,
-					type: options.type,
-					success: options.success,
-					fail: options.fail,
-					complete: options.complete
-				} as StartLocationUpdateOptions);
-
-			} else {
-				this.failedAction(1505605);
-			}
-		}, function (_ : boolean, grantedList : string[]) {
-			if (grantedList.length == 0) {
-				this.failedAction(1505605);
-			}
-		});
+		this.isBackgroundLocation = true
+		this.requestLocation({
+			provider: options.provider,
+			type: options.type,
+			success: options.success,
+			fail: options.fail,
+			complete: options.complete
+		} as StartLocationUpdateOptions);
 	}
 	override onLocationChanged(location : TencentLocation, error : Int, reason : string) : void {
 		let ret : GetLocationSuccess = {
@@ -158,9 +138,9 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		this.locationUpdateCallback?.(ret);
 	}
 	override onStatusUpdate(name : string, status : Int, desc : string) : void {
-		if(name == "gps") {
-			if(status == 0) {
-				this.locationUpdateErrorCallback?.(new GetLocationFailImpl(1505608))
+		if (name == "gps") {
+			if (status == 0) {
+				this.locationUpdateErrorCallback?.(new GetLocationFailImpl(1505003))
 			}
 		}
 	}
@@ -198,6 +178,7 @@ class LocationOptionsWapper {
 			address: location.address
 		};
 		this.hostOption.success?.(ret);
+		this.hostOption.complete?.(ret);
 		// 包装数据结构返回
 	}
 	onStatusUpdate(_name : string, _status : Int, _desc : string) {

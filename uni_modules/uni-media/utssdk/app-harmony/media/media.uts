@@ -40,7 +40,7 @@ export interface chooseMediaSuccessCallbackResult {
     tempFiles: MediaFile[]
 }
 
-export async function _getVideoInfo(uri: string): Promise<GetVideoInfoSuccess> {
+export async function _getVideoInfo(uri: string, sizeUnit: 'B' | 'KB' = 'B'): Promise<GetVideoInfoSuccess> {
     const file = await fs.open(uri, fs.OpenMode.READ_ONLY)
     const avMetadataExtractor = await media.createAVMetadataExtractor()
     let metadata: media.AVMetadata | null = null
@@ -48,7 +48,7 @@ export async function _getVideoInfo(uri: string): Promise<GetVideoInfoSuccess> {
     try {
         const fileSize = (await fs.stat(file.fd)).size
         // 单位：KB
-        size = fileSize / 1024
+        size = sizeUnit === 'KB' ? fileSize / 1024 : fileSize
         avMetadataExtractor.dataSrc = {
             fileSize,
             callback: (buffer: ArrayBuffer, length: number, pos?: number) => {

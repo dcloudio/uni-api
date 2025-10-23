@@ -1,7 +1,10 @@
 import { __uniConfig } from '@dcloudio/uni-runtime'
 import { GetLaunchOptionsSync, OnLaunchOptions } from './interface.uts'
 
-let launchOptions = { path: __uniConfig.entryPagePath } as OnLaunchOptions
+let launchOptions = {
+    path: __uniConfig.entryPagePath,
+    query: {} as UTSJSONObject,
+} as OnLaunchOptions
 
 export const setLaunchOptionsSync = function (options: OnLaunchOptions) {
     launchOptions = options

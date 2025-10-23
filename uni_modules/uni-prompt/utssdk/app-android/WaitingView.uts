@@ -58,18 +58,18 @@ export class WaitingView{
 	private loadingHeight = 0
 	private LoadingIcon: string = ""
 	private mBitmap: Bitmap | null = null;
-
-
+	
+	
 	private mpopWindow?: PopupWindow = null
-
+	
 	private currentHandler: Handler
-
+	
 		//{"back":"transmit","height":"112px","loading":{"display":"block","height":"55px","icon":"__uniapperror.png","jSONArray":false},"padding":"10px","size":"16px","width":"140px"}
 
 	private hostView:View|null = null
-
+	
 	constructor(context?: Activity, style: UTSJSONObject,view?:View) {
-
+		
 		this.context = context;
 		this.style = style.toJSONObject() as JSONObject
 		this.screenWidth = context?.getResources()?.getDisplayMetrics()!.widthPixels
@@ -94,7 +94,7 @@ export class WaitingView{
 		this.currentHandler = new Handler(Looper.getMainLooper())
 		this.initView()
 		this.makeBitmap()
-
+		
 	}
 
 	handlerArguments() {
@@ -134,7 +134,7 @@ export class WaitingView{
 		this.textView.setGravity(Gravity.CENTER)
 		this.textView.setText(this.title)
 		this.textView.setTextSize(0, (16 * this.density).toFloat())
-
+		
 		if(this.title.length < 1){
 			// 没有文本需要展示
 			this.textView.setVisibility(View.GONE)
@@ -167,8 +167,8 @@ export class WaitingView{
 		}
 		return this.context!.dispatchTouchEvent(ev)
 	}
-
-
+	
+	
 	showWaiting() {
 		if(this.context != null && !this.context!.isFinishing()){
 			if(this.hostView == null){
@@ -208,9 +208,9 @@ export class WaitingView{
 			// let mBitmap: Bitmap | null = null;
 			let imageBytes: ByteArray | null = null
 			if (this.LoadingIcon == "successIcon") {
-				imageBytes = this.inputStreamToArray(this.context!.getResources()!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_success.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_success.png"))
 			} else if (this.LoadingIcon == "errorIcon") {
-				imageBytes = this.inputStreamToArray(this.context!.getResources()!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_error.png"))
+				imageBytes = this.inputStreamToArray(this.context?.getResources()!!.getAssets().open("uni-uts/uni-prompt/uni_app_toast_error.png"))
 			} else if (this.LoadingIcon.length > 0) {
 				let path: string = ""
 				if (this.LoadingIcon.startsWith("file://")) {
@@ -219,7 +219,7 @@ export class WaitingView{
 					path = UTSAndroid.getResourcePath(this.LoadingIcon)
 				}
 				if (path != null && path.length > 0) {
-
+					
 					if(path.startsWith("/android_asset/")){
 						// uni-app x 云打包模式下，返回的资源为asset风格，需要进行特殊处理
 						let assetImagePath = path.slice(15)
@@ -232,7 +232,7 @@ export class WaitingView{
 						} catch (e: Throwable) {
 						}
 					}
-
+					
 				}
 			} else {
 				return
