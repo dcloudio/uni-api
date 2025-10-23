@@ -99,7 +99,7 @@ class UploadController {
 
 		let request = this.createUploadRequest(options, listener);
 		if (request == null) {
-			return new NetworkUploadTaskImpl(null, listener);;
+			return new NetworkUploadTaskImpl(null, listener);
 		}
 		let call : Call = client.newCall(request);
 		call.enqueue(new SimpleUploadCallback(listener));
@@ -161,6 +161,7 @@ class UploadController {
 		}
 
 		const tempFiles = options.files;
+		const filePath = options.filePath;
 		if (tempFiles != null && tempFiles!.length > 0) {
 			const files : UploadFileOptionFiles[] = tempFiles;
 			for (let i = 0; i < files.length; i++) {
@@ -185,20 +186,7 @@ class UploadController {
 					return null;
 				}
 			}
-		} else {
-			const filePath = options.filePath;
-			if (filePath == null) {
-				let option = {};
-				option['statusCode'] = '-1';
-				option['errorCode'] = '-1';
-				option['errorMsg'] = "filePath is null";
-				option['cause'] = null;
-				if (listener != null) {
-					listener.onComplete(option);
-				}
-				return null;
-			}
-
+		} else if (filePath != null) {
 			const fileInformation = this.getFileInformation(filePath);
 			const name = options.name ?? "file";
 
@@ -218,16 +206,28 @@ class UploadController {
 				return null;
 			}
 		}
-
-
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
+		
+		if(formData == null && filePath == null && (tempFiles == null || (tempFiles != null && tempFiles?.length == 0))) {
+			let option = {};
+			option['statusCode'] = '-1';
+			option['errorCode'] = '602001';
+			option['errorMsg'] = "request system error";
+			option['cause'] = new SourceError("At least one of the parameters filePath, files, or formData");
+			if (listener != null) {
+				listener.onComplete(option);
+			}
+			return null;
+		}
 
 		const headers = options.header?.toMap();
+		let hasUAHeader = false;
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
+				if(!hasUAHeader && key.equals("User-Agent", true)){
+					hasUAHeader = true
+				}
 
 				if (value != null) {
 					requestBilder.addHeader(key, "" + value);
@@ -235,6 +235,10 @@ class UploadController {
 					continue;
 				}
 			}
+		}
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
 		}
 
 		requestBilder.post(new ProgressRequestBody(multiPartBody.build(), new NetworkUploadProgressListener(listener)));

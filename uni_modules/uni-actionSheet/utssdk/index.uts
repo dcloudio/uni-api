@@ -1,4 +1,4 @@
-import { ShowActionSheet, ShowActionSheetOptions, ShowActionSheetSuccessImpl, ShowActionSheetFailImpl } from "../interface.uts";
+import { ShowActionSheet, ShowActionSheetOptions, ShowActionSheetSuccessImpl, ShowActionSheetFailImpl } from "./interface.uts";
 
 export const showActionSheet: ShowActionSheet = (options: ShowActionSheetOptions) => {
 	const uuid = `${Date.now()}${Math.floor(Math.random() * 1e7)}`
@@ -22,26 +22,36 @@ export const showActionSheet: ShowActionSheet = (options: ShowActionSheetOptions
 	})
 	uni.openDialogPage({
 		url: `/uni_modules/uni-actionSheet/pages/actionSheet/actionSheet?readyEventName=${readyEventName}&optionsEventName=${optionsEventName}&successEventName=${successEventName}&failEventName=${failEventName}`,
-		fail: function (err) {
+		fail(err) {
+			// #ifndef APP-HARMONY
 			const res = new ShowActionSheetFailImpl(`showActionSheet failed, ${err.errMsg}`)
+			// #endif
+			// #ifdef APP-HARMONY
+			const res = new ShowActionSheetFailImpl(`showActionSheet failed, ${err['errMsg']}`)
+			// #endif
 			options.fail?.(res)
 			options.complete?.(res)
 			uni.$off(readyEventName)
 			uni.$off(successEventName)
 			uni.$off(failEventName)
-		},
-	})
-}
-
-export const hideActionSheet = () => {
-	const pages = getCurrentPages()
-	const currentPage = pages[pages.length - 1]
-	if(currentPage == null) return
-	const systemDialogPages = currentPage.getDialogPages('systemDialog')
-	systemDialogPages.forEach((page) => {
-		if (page.route == 'uni:actionSheet') {
-			page.close(new Map<string, any>())
 		}
 	})
 }
 
+const SYSTEM_DIALOG_ACTION_SHEET_PAGE_PATH = 'uni:actionSheet'
+
+export const hideActionSheet = () => {
+	const pages = getCurrentPages()
+	const currentPage = pages[pages.length - 1]
+	if (currentPage == null) return
+	const systemDialogPages = currentPage.$getSystemDialogPages();
+	systemDialogPages.forEach((page) => {
+		if (page.route.startsWith(SYSTEM_DIALOG_ACTION_SHEET_PAGE_PATH)) {
+			uni.closeDialogPage({
+				dialogPage: page
+			})
+		}
+	})
+}
+
+export * from './interface.uts'

@@ -2,7 +2,7 @@ export interface Uni {
   /**
    * 登录
    *
-	* @tutorial https://uniapp.dcloud.net.cn/api/sign-in.html
+	* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/sign-in.html
 	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/sign-in.html
    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/plugins/login.html#login
    *
@@ -85,7 +85,7 @@ export interface Uni {
   /**
    * 获取用户信息
    *
-	* @tutorial https://uniapp.dcloud.net.cn/api/sign-in.html#getuserinfo
+	* @tutorial https://doc.dcloud.net.cn/uni-app-x/api/sign-in.html#getuserinfo
 	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/sign-in.html#getuserinfo
    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/plugins/login.html#getuserinfo
    *
@@ -362,7 +362,7 @@ export type LoginSuccess = {
   appleInfo?: AppleLoginAppleInfo | null
 };
 export type LoginSuccessCallback = (result: LoginSuccess) => void;
-export type LoginFail = IUniError;
+export type LoginFail = IOauthFail;
 export type LoginFailCallback = (result: LoginFail) => void;
 export type LoginComplete = any;
 export type LoginCompleteCallback = (result: LoginComplete) => void;
@@ -461,9 +461,9 @@ export type LoginOptions = {
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
-   *      "uniVer": "x",
-   *      "unixVer": "x"
+   *      "osVer": "5.0.0",
+   *      "uniVer": "4.76",
+   *      "unixVer": "4.81"
    *    }
    *  }
    * }
@@ -671,9 +671,9 @@ export type LoginOptions = {
    *          "unixVer": "x"
    *      },
    *    "harmony": {
-   *      "osVer": "x",
-   *      "uniVer": "x",
-   *      "unixVer": "x"
+   *      "osVer": "5.0.0",
+   *      "uniVer": "4.76",
+   *      "unixVer": "4.81"
    *    }
    *  },
    * "web": {
@@ -1088,7 +1088,97 @@ export type UserInfo = {
   /**
    * 用户头像
    */
-  avatarUrl: string
+  avatarUrl: string,
+  /**
+   * 用户性别（仅微信登录支持）
+   * @uniPlatform {
+   *  "app": {
+   *    "android": {
+   *        "osVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *      },
+   *      "ios": {
+   *          "osVer": "x",
+   *          "uniVer": "x",
+   *          "unixVer": "x"
+   *      },
+   *    "harmony": {
+   *      "osVer": "5.0.0",
+   *      "uniVer": "4.76",
+   *      "unixVer": "4.81"
+   *    }
+   *  },
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "360": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *  "quickapp": {
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *  },
+   *  "web": {
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *  }
+   * }
+   */
+  gender?:
+  /**
+   * 男
+   */
+  '0' |
+  /**
+   * 女
+   */
+  '1' |
+  /**
+   * 保密
+   */
+  '2' | null;
 };
 export type GetUserInfoSuccess = {
   /**
@@ -1571,7 +1661,10 @@ export type GetUserInfoOptions = {
    */
   provider?:
   /**
-   * 微信登录
+   * 微信登录。
+   * - **推荐**: 使用 uniCloud 提供的云函数登录方式，避免在客户端暴露 appSecret。
+   *   1. [获取微信openid](https://doc.dcloud.net.cn/uniCloud/uni-id/old.html#获取微信openid)
+   *   2. [获取App平台微信登录用户信息](https://doc.dcloud.net.cn/uniCloud/uni-id/old.html#get-weixin-user-info)
    * @uniPlatform {
    *  "app": {
    *   "android": {
@@ -1955,3 +2048,64 @@ export type GetUserInfoOptions = {
    */
   complete?: GetUserInfoCompleteCallback | null
 };
+
+export interface IOauthFail extends IUniError {
+  errCode : OauthErrorCode
+};
+
+/**
+ * 微信登录错误码
+ */
+export type OauthErrorCode =
+  /**
+   * 未找到微信 APPID
+   */
+  1310500 |
+  /**
+   * APPID、appIdentifier、bundleId不匹配
+   */
+  1310501 |
+  /**
+   * 微信可能未安装
+   */
+  1310502 |
+  /**
+   * 未获取到授权凭证
+   */
+  1310503 |
+  /**
+   * 未获取到授权 code
+   */
+  1310504 |
+  /**
+   * 授权凭证无效
+   */
+  1310505 |
+  /**
+   * 获取用户信息失败
+   */
+  1310506 |
+  /**
+   * 微信 API 请求失败
+   */
+  1310507 |
+  /**
+   * 微信登录state验证失败
+   */
+  1310508 |
+  /**
+   * 用户取消登录
+   */
+  1310509 |
+  /**
+   * 超时时间必须为正整数
+   */
+  1310510 |
+  /**
+   * 获取用户信息请求超时
+   */
+  1310511 |
+  /**
+   * 登录请求可能被跨站攻击
+   */
+  1001502040

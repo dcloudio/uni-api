@@ -26,7 +26,7 @@ import { URL, Data, FileAttributeKey } from 'Foundation';
 import { UIImage } from 'UIKit';
 import { AVURLAsset, AVMediaType } from 'AVFoundation';
 import { UniJsSwiftApiWrapper } from 'DCloudUniappRuntime'
-
+import { PHPhotoLibrary } from "Photos";
 let mediaPicker : DCUniMediaPicker = new DCUniMediaPicker();
 
 export const chooseFile : ChooseFile = function (option : ChooseFileOptions) {

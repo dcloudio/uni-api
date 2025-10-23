@@ -935,6 +935,10 @@ export type RequestErrorCode =
      * 错误信息json解析失败
      */
     100002 |
+	/**
+	 * json解析类型转换失败
+	 */
+	100003 |
     /**
      * 网络中断
      */
@@ -1276,8 +1280,8 @@ export type RequestTaskOnHeadersReceivedCallback = (
 export interface RequestTask {
     /**
       * 中断网络请求。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @uniPlatform
       {
@@ -1361,8 +1365,8 @@ export interface RequestTask {
 
     /**
      * 监听 Transfer-Encoding Chunk Received 事件。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
@@ -1440,8 +1444,8 @@ export interface RequestTask {
 
     /**
      * 移除 Transfer-Encoding Chunk Received 事件的监听函数。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
@@ -1518,8 +1522,8 @@ export interface RequestTask {
 	offChunkReceived(listener ?: number | RequestTaskOnChunkReceivedCallback | null): void
     /**
      * 监听 HTTP Response Header 事件。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
@@ -1597,8 +1601,8 @@ export interface RequestTask {
 
     /**
      * 移除 HTTP Response Header 事件的监听函数。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
@@ -2819,8 +2823,8 @@ export type UploadFileProgressUpdateCallback = (result: OnProgressUpdateResult) 
 export interface UploadTask {
     /**
       * 中断上传任务。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
@@ -2903,8 +2907,8 @@ export interface UploadTask {
     abort(): void,
     /**
       * 监听上传进度变化。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
@@ -3681,8 +3685,8 @@ export type DownloadFileProgressUpdateCallback = (result: OnProgressDownloadResu
 export interface DownloadTask {
     /**
       * 中断下载任务
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
         {
@@ -3765,8 +3769,8 @@ export interface DownloadTask {
     abort(): void,
     /**
       * 监听下载进度变化。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
         {
@@ -3960,8 +3964,8 @@ export type ConfigMTLSOptions = {
 export interface Uni {
     /**
       * 发起网络请求。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
     * @inline
     * @reified
@@ -4066,8 +4070,8 @@ export interface Uni {
     request<T>(param: RequestOptions<T>): RequestTask;
     /**
       * 将本地资源上传到开发者服务器。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
@@ -4156,8 +4160,8 @@ export interface Uni {
     uploadFile(options: UploadFileOptions): UploadTask;
     /**
       * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
       {
@@ -4243,7 +4247,7 @@ export interface Uni {
      * 配置自签名证书
      *
      * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
      *
      * @uniPlatform
       {

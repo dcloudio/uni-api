@@ -377,13 +377,15 @@ class NetworkManager implements URLSessionDataDelegate {
 		let listener = this.taskMap.get(dataTask);
 		listener?.onDataReceived(data);
 		if (this.enableChunked && listener != null) {
-			const task = listener!.task! as NetworkRequestTaskImpl
-			task.chunkReceivedListeners.forEach((value : RequestTaskOnChunkReceivedCallback, key : number) => {
-				const result : RequestTaskOnChunkReceivedListenerResult = {
-					data: ArrayBuffer.fromData(data)
-				}
-				value(result)
-			})
+		    if (listener!.task != null && listener!.task instanceof NetworkRequestTaskImpl) {
+				const task = listener!.task! as NetworkRequestTaskImpl
+				task.chunkReceivedListeners.forEach((value : RequestTaskOnChunkReceivedCallback, key : number) => {
+					const result : RequestTaskOnChunkReceivedListenerResult = {
+						data: ArrayBuffer.fromData(data)
+					}
+					value(result)
+				})
+			}
 		}
 	}
 

@@ -54,7 +54,9 @@ export function getImageFormat(imageData: Data) : string{
 	imageData.copyBytes(to = UTSiOS.getPointer(value), count = 1);
 	
 	switch (value[0]) {
-		case 0x4D, 0x49:
+		case 0x4D:
+			return "TIFF";
+		case 0x49:
 			return "TIFF";
 		case 0x89:
 			return "PNG";

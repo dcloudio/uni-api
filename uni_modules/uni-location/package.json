@@ -44,7 +44,70 @@
                         "swift": true,
                         "arkts": true
                     }
-                }
+                },
+				"startLocationUpdate": {
+				    "name": "startLocationUpdate",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"stopLocationUpdate": {
+				    "name": "stopLocationUpdate",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"onLocationChange": {
+				    "name": "onLocationChange",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"offLocationChange": {
+				    "name": "offLocationChange",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"startLocationUpdateBackground": {
+				    "name": "startLocationUpdateBackground",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"onLocationChangeError": {
+				    "name": "onLocationChangeError",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				},
+				"offLocationChangeError": {
+				    "name": "offLocationChangeError",
+				    "app": {
+				        "js": false,
+				        "kotlin": true,
+				        "swift": true,
+				        "arkts": true
+				    }
+				}
             }
         },
         "dependencies": [

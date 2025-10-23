@@ -2,8 +2,9 @@ export interface Uni {
   /**
    * 获取全局唯一的背景音频管理器 backgroundAudioManager
    *
-   * @tutorial https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-background-audio-manager.html#getbackgroundaudiomanager
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-background-audio-manager.html#getbackgroundaudiomanager
    * @uniPlatform {
    * 	"app": {
    * 		"android": {

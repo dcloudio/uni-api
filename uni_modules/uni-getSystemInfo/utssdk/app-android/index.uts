@@ -26,7 +26,7 @@ export const getSystemInfoSync : GetSystemInfoSync = function () : GetSystemInfo
 			}			
 		
 			const appId = UTSAndroid.getAppId();
-			const appLanguage = DeviceUtil.getOsLanguageNormal(activity);
+			const appLanguage = UTSAndroid.getLanguageInfo(activity)["appLanguage"].toString();
 			const appName = UTSAndroid.getAppName();
 			const appVersion = UTSAndroid.getAppVersion()["name"].toString();
 			const appVersionCode = UTSAndroid.getAppVersion()["code"].toString();

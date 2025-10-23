@@ -248,8 +248,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let currentDispatcher = UTSAndroid.getDispatcher("main")
 		UTSAndroid.getDispatcher('io').async(function (_) {
 
-			let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
-
+			let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)	
+			var fis : InputStream | null = null
+			if(filePath.startsWith("content://")) {
+				fis = this.readFileUtil.readContentUriAsInputStream(UTSAndroid.getAppContext()!,Uri.parse(filePath))
+			} else if(filePath.startsWith("/android_asset/")) {
+				fis = this.readFileUtil.readAndroidAssetsAsInputStream(UTSAndroid.getAppContext()!,filePath)
+			} else {
 			let isSandyBox = isSandyBoxPath(filePath, true)
 			if (!isSandyBox) {
 				currentDispatcher.async(function (_) {
@@ -285,7 +290,17 @@ class AndroidFileSystemManager implements FileSystemManager {
 				}, null)
 				return
 			}
-
+			// 使用缓冲区读取文件内容
+			 fis = new FileInputStream(targetFile)
+			}
+			if (fis == null) {
+				currentDispatcher.async(function (_) {
+					let err = new FileSystemManagerFailImpl(1300002);
+					options.fail?.(err)
+					options.complete?.(err)
+				}, null)
+				return
+			}
 			if (options.digestAlgorithm == null) {
 				options.digestAlgorithm = "md5"
 			}
@@ -300,23 +315,17 @@ class AndroidFileSystemManager implements FileSystemManager {
 				}, null)
 				return
 			}
-
-
+			let fileLen =  fis!.available()
 			let md5Digest = MessageDigest.getInstance(options.digestAlgorithm!)
-
-			let fileLen = targetFile.length()
-			// 使用缓冲区读取文件内容
 			let buffer = new ByteArray(8192)
-			let fis = new FileInputStream(targetFile)
-
 			let len = 0
 			while (len != -1) {
-				len = fis.read(buffer)
+				len = fis!.read(buffer)
 				if (len != -1) {
 					md5Digest.update(buffer, 0, len.toInt())
 				}
 			}
-			fis.close();
+			fis!.close();
 			let digestByte = md5Digest.digest();
 			// byte to string
 			let strHexString = new StringBuffer();
@@ -342,7 +351,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 				options.complete?.(success)
 			}, null)
 		}, null)
-
+		
 	}
 
 
@@ -352,14 +361,18 @@ class AndroidFileSystemManager implements FileSystemManager {
 		let filePath = UTSAndroid.convert2AbsFullPath(srcPath)
 		if (filePath.startsWith("/android_asset/")) {
 			// 用户访问的是asset 路径，此时不是释放模式
-			let byteArray : ByteArray
+			// let byteArray : ByteArray
+			let assetStream:InputStream|null = null
 			try {
 				let assetName = filePath.substring("/android_asset/".length)
-				let assetStream = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
-				let byteLen = assetStream.available();
-				byteArray = new ByteArray(byteLen)
-				assetStream.read(byteArray);
+				assetStream = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
+				// let byteLen = assetStream.available();
+				// byteArray = new ByteArray(byteLen)
+				// assetStream.read(byteArray);
 			} catch (e) {
+				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!);
+			}
+			if(assetStream == null) {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!);
 			}
 			// 检查目标文件
@@ -379,7 +392,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 				 */
 				// throw new UniError(FileSystemManagerUniErrorSubject, 1300002, msgPrefix + FileSystemManagerUniErrors.get(1300002)!)
 			}
-			newFile.writeBytes(byteArray)
+			// newFile.writeBytes(byteArray)
+			var ops = newFile.outputStream()
+			assetStream.copyTo(ops)
+			try{
+				assetStream.close()
+				ops.close()
+			}catch(e:Exception) {}
 			if (!newFile.exists()) {
 				// 调用系统api 失败
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
@@ -404,11 +423,16 @@ class AndroidFileSystemManager implements FileSystemManager {
 				newFile.parentFile?.mkdirs()
 			}
 			
-			let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
+			let byteArray = this.readFileUtil.readContentUriAsInputStream(UTSAndroid.getAppContext()!, Uri.parse(filePath))
 			if (byteArray == null) {
 				throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
 			} else {
-				newFile.writeBytes(byteArray)
+				var ops = newFile.outputStream()
+				byteArray.copyTo(ops)
+				try{
+					byteArray.close()
+					ops.close()
+				}catch(e:Exception) {}
 			}
 		} else {
 			let isSandyBox = isSandyBoxPath(filePath, true)
@@ -456,23 +480,22 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 			// 检查来源文件
 			let filePath = UTSAndroid.convert2AbsFullPath(options.srcPath)
-
 			if (filePath.startsWith("/android_asset/")) {
 				// 用户访问的是asset 路径，此时不是释放模式
 
 				let exceptionInfo : Exception | null = null
-				let byteArray = new ByteArray(0)
+				let assetStream : InputStream|null = null
 				try {
 					let assetName = filePath.substring("/android_asset/".length)
-					let assetStream = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
-					let byteLen = assetStream.available();
-					byteArray = new ByteArray(byteLen)
-					assetStream.read(byteArray);
+					assetStream = UTSAndroid.getAppContext()!.getResources().getAssets().open(assetName);
+					// let byteLen = assetStream.available();
+					// byteArray = new ByteArray(byteLen)
+					// assetStream.read(byteArray);
 				} catch (e : Exception) {
 					exceptionInfo = e
 				}
 
-				if (exceptionInfo != null) {
+				if (exceptionInfo != null || assetStream == null) {
 					currentDispatcher.async(function (_) {
 						let err = new FileSystemManagerFailImpl(1300201);
 						options.fail?.(err)
@@ -514,7 +537,13 @@ class AndroidFileSystemManager implements FileSystemManager {
 					// return
 					newFile.parentFile?.mkdirs()
 				}
-				newFile.writeBytes(byteArray)
+				// newFile.writeBytes(byteArray)
+				var ops = newFile.outputStream()
+				assetStream.copyTo(ops)
+				try{
+					assetStream.close()
+					ops.close()
+				}catch(e:Exception) {}
 				if (!newFile.exists()) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
@@ -567,7 +596,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 					newFile.parentFile?.mkdirs()
 				}
 
-				let byteArray = this.readFileUtil.readContentUriAsByteArray(UTSAndroid.getAppContext()!, Uri.parse(filePath))
+				let byteArray = this.readFileUtil.readContentUriAsInputStream(UTSAndroid.getAppContext()!, Uri.parse(filePath))
 				if (byteArray == null) {
 					// 调用系统api 失败
 					currentDispatcher.async(function (_) {
@@ -577,7 +606,12 @@ class AndroidFileSystemManager implements FileSystemManager {
 					})
 					return
 				} else {
-					newFile.writeBytes(byteArray)
+					var ops = newFile.outputStream()
+					byteArray.copyTo(ops)
+					try{
+						byteArray.close()
+						ops.close()
+					}catch(e:Exception) {}
 				}
 				currentDispatcher.async(function (_) {
 					let success : FileManagerSuccessResult = {
@@ -1269,7 +1303,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
 
-		let isSandyBox = isSandyBoxPath(filePath, false)
+		let isSandyBox = isSandyBoxPath(filePath, true)
 		if (!isSandyBox) {
 			let err = new FileSystemManagerFailImpl(1300013);
 			options.fail?.(err)
@@ -1299,7 +1333,7 @@ class AndroidFileSystemManager implements FileSystemManager {
 
 		let filePath = UTSAndroid.convert2AbsFullPath(options.filePath)
 
-		let isSandyBox = isSandyBoxPath(filePath, false)
+		let isSandyBox = isSandyBoxPath(filePath, true)
 		if (!isSandyBox) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300013, msgPrefix + FileSystemManagerUniErrors.get(1300013)!)
 		}

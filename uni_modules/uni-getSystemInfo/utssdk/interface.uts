@@ -5,9 +5,9 @@ export interface Uni {
     * 异步获取系统信息
     * @param {GetSystemInfoOptions}  options
     * @return {void}
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/info.html
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/info.html
     * @uniPlatform
   * {
   * 	"app": {
@@ -94,9 +94,9 @@ export interface Uni {
     * 同步获取系统信息
     * @param {void}
     * @return {GetSystemInfoResult}
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/info.html#getsysteminfosync
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-system-info.html#getsysteminfosync
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/info.html#getsysteminfosync
     * @uniPlatform
   * {
   * 	"app": {
@@ -176,9 +176,9 @@ export interface Uni {
     * 同步获取窗口信息
     * @param {void}
     * @return {GetWindowInfoResult} result
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getWindowInfo.html
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-window-info.html
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/getWindowInfo.html
     * @uniPlatform
   * {
   * 	"app": {
@@ -4723,6 +4723,426 @@ export type GetSystemInfoResult = {
    * }
    */
   appTheme?: 'light' | 'dark' | 'auto' | null,
+  /**
+   * 宿主主题（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  hostTheme?: 'light' | 'dark' | null,
+  /**
+   * 宿主版本（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  hostVersion?: string | null,
+  /**
+   * 宿主语言（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  hostLanguage?: string | null,
+  /**
+   * 宿主名称（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
+   * }
+   */
+  hostName?: string | null,
+  /**
+   * 宿主 SDKVersion（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  hostSDKVersion?: string | null,
+  /**
+   * 宿主字体大小设置（仅 web、微信小程序支持）
+   *
+   * @uniPlatform {
+   * 	"app": {
+   * 		"android": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   * 		"ios": {
+   * 			"osVer": "x",
+   * 			"uniVer": "x",
+   * 			"unixVer": "x"
+   * 		},
+   *    "harmony": {
+   *      "osVer": "x",
+   *      "uniVer": "x",
+   *      "unixVer": "x"
+   *    }
+   * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "√",
+   *        "uniVer": "√",
+   *        "unixVer": "4.41"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "√",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
+   *   "web": {
+   *     "uniVer": "x",
+   *     "unixVer": "x"
+   *   }
+   * }
+   */
+  hostFontSizeSetting?: number | null,
 };
 export type GetSystemInfoSuccessCallback = (result: GetSystemInfoResult) => void;
 type GetSystemInfoFail = UniError;

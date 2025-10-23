@@ -115,14 +115,15 @@ export class DownloadController {
 			return null;
 		}
 
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
 		const headers = options.header?.toMap();
+		let hasUAHeader = false;
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
+				if(!hasUAHeader && key.equals("User-Agent", true)){
+					hasUAHeader = true
+				}
 
 				if (value != null) {
 					requestBilder.addHeader(key, "" + value);
@@ -130,6 +131,10 @@ export class DownloadController {
 					continue;
 				}
 			}
+		}
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
 		}
 
 		return requestBilder.build();
@@ -283,7 +288,7 @@ class SimpleDownloadCallback implements Callback {
 					path = UTSAndroid.getAppTempPath()!! + "/" + this.specifyPath;
 				}
 
-				var file = new File(path)
+				let file = new File(path)
 				const parentFile = file.getParentFile()
 				if (parentFile != null) {
 					if (!parentFile.exists()) {

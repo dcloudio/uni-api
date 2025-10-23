@@ -1,7 +1,7 @@
 import { __uniConfig } from '@dcloudio/uni-runtime'
 import { GetEnterOptionsSync, OnShowOptions } from './interface.uts'
 
-let enterOptions = { path: __uniConfig.entryPagePath } as OnShowOptions
+let enterOptions = { path: __uniConfig.entryPagePath, query: {} as UTSJSONObject } as OnShowOptions
 
 export const setEnterOptionsSync = function (options: OnShowOptions) {
     enterOptions = options

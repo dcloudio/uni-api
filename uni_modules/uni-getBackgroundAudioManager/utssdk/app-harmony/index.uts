@@ -4,6 +4,7 @@ import { avSession } from '@kit.AVSessionKit';
 import { wantAgent } from '@kit.AbilityKit';
 import { uri } from '@kit.ArkTS';
 import { backgroundTaskManager } from '@kit.BackgroundTasksKit';
+import { getRealPath } from '@dcloudio/uni-runtime'
 
 import { BackgroundAudioManager, GetBackgroundAudioManager } from '../interface.uts';
 import { API_GET_BACKGROUND_AUDIO_MANAGER } from '../protocol.uts';
@@ -292,6 +293,10 @@ class BGAManagerImpl implements BackgroundAudioManager {
         if (!BGAManagerImpl.audioPlayer) {
             audioPlayerCallback.error(new AudioPlayerError(`player is not exist`, 10001))
             return;
+        }
+        value = getRealPath(value)
+        if (value.startsWith('/')) {
+            value = `file://${value}`;
         }
         if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
             LOG(`set src: ${value} is invalid`);

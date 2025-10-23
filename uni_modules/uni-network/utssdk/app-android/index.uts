@@ -98,7 +98,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				let exception = option['cause']! as Exception;
 				const originalErrMsg = option['errorMsg']! as string;
 				let cause = exception.cause.toString();
-				if(exception.cause == null) {
+				if (exception.cause == null) {
 					cause = originalErrMsg
 				}
 				let errMsg = originalErrMsg
@@ -113,7 +113,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				} else if (cause.contains("invalid URL")) {
 					errCode = 600009;
 				}
-				
+
 
 				let failResult = new RequestFailImpl(getErrcode(errCode));
 				failResult.cause = new SourceError(cause);
@@ -144,14 +144,14 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 						} else {
 							result['data'] = "error";
 						}
-					} else if("java.lang.String".equals(this.clzName, true)){
+					} else if ("java.lang.String".equals(this.clzName, true)) {
 						result['data'] = option['errorMsg'] ?? "error";
-					} else if("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)){
+					} else if ("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)) {
 						let textDecoder : TextEncoder = new TextEncoder()
-						let error :string= (option['errorMsg'] ?? "error") as string
+						let error : string = (option['errorMsg'] ?? "error") as string
 						let uint8Array = textDecoder.encode(error)
 						result['data'] = uint8Array.buffer
-					}else {
+					} else {
 						let errMsg = option['errorMsg'];
 						if (errMsg != null) {
 							let errMsgJson = JSON.parse<T>(errMsg as string, this.type);
@@ -187,41 +187,44 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 							}
 						}
 					}
-					let data :any | null;
-				   if("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)){
-					  let by= option['originalData'] as ByteArray
-					  data =ArrayBuffer.fromByteBuffer(ByteBuffer.wrap(by))
-				   }else{
-					   let strData = this.readAsString(option['originalData'] as ByteArray, charset);
-					   
-					   let type = kParam.responseType != null ? kParam.responseType : kParam.dataType;
-					   if (type == null) {
-					   	type = charset;
-					   }
-					   if (kParam.method == "HEAD") {
-					   	type = "";
-					   }
-					   
-					   data = this.parseData(strData, type);
-					   if (data == null) {
-					   	let failResult = new RequestFailImpl(getErrcode(100001));
-					   
-					   	new RunnableTask(this.looper, () => {
-					   		if (kParam != null) {
-					   			let fail = kParam.fail;
-					   			if (fail != null) {
-					   				fail(failResult);
-					   			}
-					   			let complete = kParam.complete;
-					   			if (complete != null) {
-					   				complete(failResult);
-					   			}
-					   		}
-					   	}).execute();
-					   	return;
-					   }
-					   
-				   }
+					let data : any | null;
+					if ("io.dcloud.uts.ArrayBuffer".equals(this.clzName, true)) {
+						let by = option['originalData'] as ByteArray
+						data = ArrayBuffer.fromByteBuffer(ByteBuffer.wrap(by))
+					} else {
+						let strData = this.readAsString(option['originalData'] as ByteArray, charset);
+
+						let type = kParam.responseType != null ? kParam.responseType : kParam.dataType;
+						if (type == null) {
+							type = charset;
+						}
+						if (kParam.method == "HEAD") {
+							type = "";
+						}
+
+						data = this.parseData(strData, type);
+						if (data == null) {
+							let failResult = new RequestFailImpl(getErrcode(100001));
+							if (!("java.lang.Object".equals(this.clzName, true) || "java.lang.String".equals(this.clzName, true))) {
+								failResult = new RequestFailImpl(getErrcode(100003));
+							}
+
+							new RunnableTask(this.looper, () => {
+								if (kParam != null) {
+									let fail = kParam.fail;
+									if (fail != null) {
+										fail(failResult);
+									}
+									let complete = kParam.complete;
+									if (complete != null) {
+										complete(failResult);
+									}
+								}
+							}).execute();
+							return;
+						}
+
+					}
 					result['data'] = data;
 				}
 				result['statusText'] = StatusCode.getStatus(option['statusCode'] as string);
@@ -284,15 +287,15 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 				let tmp = data.substring(start, end);
 				return JSON.parse(tmp);
 			} else {
-				let jsonData: any | null = null;
-				try{
+				let jsonData : any | null = null;
+				try {
 					const gson = new Gson();
 					jsonData = gson.fromJson<any>(data, this.type);
-				}catch(e){
+				} catch (e) {
 				}
 				return jsonData ?? data;
 			}
-		} else if ("java.lang.String".equals(this.clzName, true)){
+		} else if ("java.lang.String".equals(this.clzName, true)) {
 			return data;
 		} else {
 			return JSON.parse<T>(data, this.type);

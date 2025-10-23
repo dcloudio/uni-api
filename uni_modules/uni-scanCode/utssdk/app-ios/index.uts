@@ -51,7 +51,7 @@ export function scanCode(options : ScanCodeOptions | null) : void {
 }
 
 
-export function drawImage(element : UniElement, image : UIImage) : void {
+function drawImage(element : UniElement, image : UIImage) : void {
 	const view = element.getIOSView()
 	if (view != null && view instanceof UIImageView) {
 		setTimeout(function () {

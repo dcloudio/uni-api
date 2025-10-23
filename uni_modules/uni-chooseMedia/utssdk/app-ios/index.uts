@@ -392,7 +392,7 @@ class ChooseMediaImagePickerManager implements UIImagePickerControllerDelegate, 
 	}
 }
 @UTSiOS.available("iOS 14.0, *")
-class ChooseMediaPHPickerManager implements PHPickerViewControllerDelegate {
+class ChooseMediaPHPickerManager implements PHPickerViewControllerDelegate,UIAdaptivePresentationControllerDelegate {
 	private options : ChooseMediaOptions;
 	constructor(options : ChooseMediaOptions) {
 		this.options = options;
@@ -411,6 +411,9 @@ class ChooseMediaPHPickerManager implements PHPickerViewControllerDelegate {
 			}
 			const pickerController = new PHPickerViewController(configuration = configuration);
 			pickerController.delegate = this;
+			if(pickerController.presentationController != null){
+				pickerController.presentationController!.delegate = this;
+			}
 			UTSiOS.getCurrentViewController().present(pickerController, animated = true, completion = null);
 		});
 	}
@@ -505,5 +508,13 @@ class ChooseMediaPHPickerManager implements PHPickerViewControllerDelegate {
 	dismiss(picker : PHPickerViewController) {
 		picker.dismiss(animated = true, completion = null);
 		picker.delegate = null;
+	}
+	
+	presentationControllerDidDismiss(presentationController: UIPresentationController){
+		DispatchQueue.main.async(execute = () : void => {
+			const error = new ChooseMediaErrorImpl(1101001, UniError_ChooseMedia);
+			this.options.fail?.(error)
+			this.options.complete?.(error)
+		});
 	}
 }

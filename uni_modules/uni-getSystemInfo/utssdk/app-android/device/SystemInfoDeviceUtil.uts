@@ -185,15 +185,16 @@ export class DeviceUtil {
 	public static getOsLanguageNormal(context : Context) : string {
 		const LOCALE_ZH_HANS = 'zh-Hans'
 		const LOCALE_ZH_HANT = 'zh-Hant'
-		let locale = UTSAndroid.getLanguageInfo(context)["appLanguage"].toString();
-		if (locale.indexOf('zh') === 0) {
-			if (locale.indexOf('-hans') > -1) {
+		let locale = UTSAndroid.getLanguageInfo(context)["osLanguage"].toString();
+		const lowerLocale = locale.toLowerCase()
+		if (lowerLocale.indexOf('zh') === 0) {
+			if (lowerLocale.indexOf('-hans') > -1) {
 				return LOCALE_ZH_HANS;
 			}
-			if (locale.indexOf('-hant') > -1) {
+			if (lowerLocale.indexOf('-hant') > -1) {
 				return LOCALE_ZH_HANT;
 			}
-			if (locale.includes("-tw") || locale.includes("-hk") || locale.includes("-mo") || locale.includes("-cht")) {
+			if (lowerLocale.includes("-tw") || lowerLocale.includes("-hk") || lowerLocale.includes("-mo") || lowerLocale.includes("-cht")) {
 				return LOCALE_ZH_HANT;
 			}
 

@@ -1,7 +1,7 @@
 export interface Uni {
   /**
    * 开启监听系统主题变化
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onosthemechange
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onosthemechange
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onosthemechange
    * @uniPlatform
     {
@@ -83,7 +83,7 @@ export interface Uni {
 
   /**
    * 取消监听系统主题变化
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offosthemechange
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offosthemechange
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offosthemechange
    * @uniPlatform
     {
@@ -163,7 +163,7 @@ export interface Uni {
 
   /**
    * 设置应用主题
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#setapptheme
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#setapptheme
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#setapptheme
    * @uniPlatform
     {
@@ -254,7 +254,7 @@ export interface Uni {
 
   /**
    * 开启监听应用主题变化
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onappthemechange
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onappthemechange
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#onappthemechange
    * @uniPlatform
     {
@@ -336,7 +336,7 @@ export interface Uni {
 
   /**
    * 取消监听应用主题变化
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offappthemechange
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offappthemechange
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/theme.html#offappthemechange
    * @uniPlatform
     {
@@ -1118,4 +1118,4 @@ export type OnThemeChangeCallbackResult = {
   'dark'
 };
 
-export type OnThemeChangeCallback = (result: OnThemeChangeCallbackResult) => void;
+type OnThemeChangeCallback = (result: OnThemeChangeCallbackResult) => void;

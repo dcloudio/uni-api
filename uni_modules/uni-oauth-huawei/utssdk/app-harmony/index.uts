@@ -1,4 +1,5 @@
 import { UniOAuthHuaweiProvider } from '../interface.uts';
+import { OauthHuaweiFailImpl } from '../unierror.uts';
 import { authentication } from '@kit.AccountKit';
 import { util } from '@kit.ArkTS';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -16,19 +17,13 @@ export class UniOAuthHuaweiProviderImpl implements UniOAuthHuaweiProvider {
             let controller = new authentication.AuthenticationController(UTSHarmony.getUIAbilityContext()!);
             controller.executeRequest(loginRequest, (error: BusinessError<Object>, data) => {
                 if (error) {
-                    options?.fail?.({
-                        errCode: error.code,
-                        errMsg: error.message
-                    } as LoginFail)
+                    options?.fail?.(new OauthHuaweiFailImpl(error.code as OauthErrorCode, error.message))
                     return;
                 }
                 let loginWithHuaweiIDResponse = data as authentication.LoginWithHuaweiIDResponse;
                 let state = loginWithHuaweiIDResponse.state;
                 if (state == undefined || loginRequest.state != state) {
-                    options?.fail?.({
-                        errCode: 1001502040,
-                        errMsg: '登录请求可能被跨站攻击'
-                    } as LoginFail)
+                    options?.fail?.(new OauthHuaweiFailImpl(1001502040))
                     return;
                 }
                 let loginWithHuaweiIDCredential = loginWithHuaweiIDResponse.data!;
@@ -49,10 +44,7 @@ export class UniOAuthHuaweiProviderImpl implements UniOAuthHuaweiProvider {
                 )
             });
         } catch (error) {
-            options?.fail?.({
-                errCode: (error as BusinessError).code,
-                errMsg: (error as BusinessError).message
-            } as LoginFail)
+           options?.fail?.(new OauthHuaweiFailImpl((error as BusinessError).code as OauthErrorCode, (error as BusinessError).message))
         }
     }
 
@@ -84,7 +76,7 @@ export class UniOAuthHuaweiProviderImpl implements UniOAuthHuaweiProvider {
                 let nickName = authorizationWithHuaweiIDCredential.nickName; // 元服务不支持该字段
                 let openId = authorizationWithHuaweiIDCredential.openID;
                 options?.success?.({
-                    errMsg: 'getUserInfo: ok',
+                    errMsg: 'getUserInfo:ok',
                     userInfo: {
                         nickName,
                         avatarUrl: avatarUri,

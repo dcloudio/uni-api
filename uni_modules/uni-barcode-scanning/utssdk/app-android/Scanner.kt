@@ -13,6 +13,7 @@ import android.os.Looper
 import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageProxy
+import androidx.core.graphics.scale
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -26,7 +27,6 @@ import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
-import androidx.core.graphics.scale
 
 class Scanner {
     interface ScannerCallback {
@@ -78,8 +78,8 @@ class Scanner {
             scannerCallback?.onLight(analyzeBrightness(imageProxy))
 
             var bitmap = imageProxy.toBitmap()
+            bitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees)
             if (width > 0 && height > 0) {
-                bitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees)
                 //bitmap转为16：9
                 if (bitmap.height / bitmap.width.toFloat() > height / width.toFloat()) {
                     val newHeight = bitmap.width * height / width

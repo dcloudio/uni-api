@@ -1347,8 +1347,8 @@ export type ShowToastOptions = {
  * 弹出toast
  *
  * @param {ShowToastOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
  * @uniPlatform
   {
@@ -1426,8 +1426,8 @@ export type ShowToast = (options: ShowToastOptions) => void
  * uni.hideToast函数定义
  * 隐藏toast
  *
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
- * @tutorial-uni-app https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
+ * @tutorial_uni_app https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
  * @uniPlatform
   {
     "app": {
@@ -1556,8 +1556,8 @@ export type ShowLoadingOptions = {
  * 弹出loading
  *
  * @param {ShowLoadingOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
  * @uniPlatform
   {
@@ -1634,8 +1634,8 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
 /**
  * uni.hideLoading函数定义
  * 隐藏loading
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
  * @uniPlatform
   {
@@ -1806,8 +1806,8 @@ export type ShowModalOptions = {
  * 弹出modal
  *
  * @param {ShowModalOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
  * @uniPlatform
   {
@@ -1974,8 +1974,8 @@ export type ShowActionSheetOptions = {
  * 弹出actionSheet
  *
  * @param {ShowActionSheetOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
  * @uniPlatform
   {
@@ -2064,8 +2064,8 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
    * @uniPlatform
     {
@@ -2145,8 +2145,8 @@ export interface Uni {
     ```typescript
     uni.hideToast();
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
    * @uniPlatform
     {
@@ -2231,8 +2231,8 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
    * @uniPlatform
     {
@@ -2318,8 +2318,8 @@ export interface Uni {
       uni.hideLoading();
     }, 2000);
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
    * @uniPlatform
     {
@@ -2409,8 +2409,8 @@ export interface Uni {
       }
     });
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
    * @uniPlatform
     {
@@ -2499,8 +2499,8 @@ export interface Uni {
       }
     });
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
    * @uniPlatform
     {

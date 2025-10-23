@@ -2,7 +2,6 @@ import {
 	ChooseMedia, ChooseMediaOptions, ChooseMediaPageOrientation, ChooseMediaSuccess, ChooseMediaTempFile
 } from "../interface.uts"
 import { ChooseMediaErrorImpl, UniError_ChooseMedia } from "../unierror.uts"
-import BitmapFactory from "android.graphics.BitmapFactory";
 import MediaMetadataRetriever from 'android.media.MediaMetadataRetriever';
 import Exception from 'java.lang.Exception';
 import Intent from 'android.content.Intent';

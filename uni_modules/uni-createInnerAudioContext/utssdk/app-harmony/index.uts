@@ -136,6 +136,9 @@ class AudioPlayer implements InnerAudioContext {
       return;
     }
     value = getRealPath(value)
+    if (value.startsWith('/')) {
+      value = `file://${value}`;
+    }
     if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
       LOG(`set src: ${value} is invalid`);
       return;

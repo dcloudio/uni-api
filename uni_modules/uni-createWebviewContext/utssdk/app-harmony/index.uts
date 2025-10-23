@@ -13,6 +13,12 @@ export const createWebviewContext: CreateWebviewContext = function (webviewId: s
       }
       // @ts-ignore
       element = ((page.vm as ESObject).$el as UniElement)?.parentNode?.querySelector('#' + webviewId) as UniWebViewElement;
+
+      if (element == null) {
+        const dialogPages = page.getDialogPages() as UniPageImpl[];
+        const topDialogPage = dialogPages[dialogPages.length - 1];
+        element = ((topDialogPage.vm as ESObject).$el as UniElement)?.parentNode?.querySelector('#' + webviewId) as UniWebViewElement;
+      }
     }
   } else {
     element = (component.$el as UniElement)?.parentNode?.querySelector('#' + webviewId) as UniWebViewElement;

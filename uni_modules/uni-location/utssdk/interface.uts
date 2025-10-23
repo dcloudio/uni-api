@@ -41,7 +41,7 @@ export interface Uni {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -97,6 +97,502 @@ export interface Uni {
      */
     getLocation(options: GetLocationOptions): void;
 
+	/**
+	 * @description 开启应用进入前台时接收位置消息。
+	 * @param {StartLocationUpdateOptions} option
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	startLocationUpdate(options:StartLocationUpdateOptions):void
+
+	/**
+	 * @description 关闭监听实时位置变化，前后台都停止消息接收。
+	 * @param {StopLocationUpdateOptions} option
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	stopLocationUpdate(options:StopLocationUpdateOptions):void
+	/**
+	 * @description 监听实时地理位置变化事件
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	onLocationChange(listener:OnLocationChangeCallback):number
+	/**
+	 * @description 移除实时地理位置变化事件。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	offLocationChange(listener?:number|OnLocationChangeCallback|null):void
+
+	/**
+	 * @description 开始监听实时地理位置信息变化事件，应用进入前后台时均接收实时地理位置信息。
+	 * @param {StartLocationUpdateBackgroundOptions}
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	startLocationUpdateBackground(options:StartLocationUpdateBackgroundOptions):void
+	/**
+	 * @description 监听持续定位接口返回失败时触发。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	onLocationChangeError(listener:OnLocationChangeErrorCallback):number
+	/**
+	 * @description 移除监听持续定位接口返回失败事件。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "4.41"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	offLocationChangeError(listener?:number|OnLocationChangeErrorCallback|null):void
+
 }
 
 /**
@@ -119,7 +615,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -147,7 +643,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -175,7 +671,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -202,7 +698,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -230,7 +726,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -258,7 +754,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -286,7 +782,7 @@ export type LocationErrorCode =
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -311,6 +807,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "5.0.0(11)",
+     *            "uniVer": "4.25",
+     *            "unixVer": "4.81"
      *        }
      *    }
      * }
@@ -329,6 +830,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "5.0.0(11)",
+     *            "uniVer": "4.25",
+     *            "unixVer": "4.81"
      *        }
      *    }
      * }
@@ -365,6 +871,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "5.0.0(11)",
+     *            "uniVer": "4.25",
+     *            "unixVer": "4.81"
      *        }
      *    }
      * }
@@ -383,6 +894,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "5.0.0(11)",
+     *            "uniVer": "4.25",
+     *            "unixVer": "4.81"
      *        }
      *    }
      * }
@@ -401,6 +917,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -419,6 +940,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -437,6 +963,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -455,6 +986,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -473,6 +1009,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -491,6 +1032,11 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
@@ -509,11 +1055,63 @@ export type LocationErrorCode =
      *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
+     *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
      *        }
      *    }
      * }
      */
-    1505607;
+    1505607 |
+	/**
+	 * 同一时间只能单个provider开启持续定位
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
+     *        }
+	 *    }
+	 * }
+	 */
+	1505608 |
+	/**
+	 * iOS plist文件中缺少后台定位配置：UIBackgroundModes->location
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+     *        "harmony": {
+     *            "osVer": "x",
+     *            "uniVer": "x",
+     *            "unixVer": "x"
+     *        }
+	 *    }
+	 * }
+	 */
+	1505702
+	;
 
 /**
  * 网络请求失败的错误回调参数
@@ -523,7 +1121,6 @@ export interface IGetLocationFail extends IUniError {
 };
 
 export type GetLocationFail = IGetLocationFail
-
 
 export type GetLocation = (options: GetLocationOptions) => void;
 export type GetLocationSuccess = {
@@ -543,7 +1140,7 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -571,7 +1168,7 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -599,7 +1196,7 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -668,7 +1265,7 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -738,7 +1335,7 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61"
      *    }
@@ -808,9 +1405,9 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0(11)",
+     *      "uniVer": "4.76",
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -863,7 +1460,7 @@ export type GetLocationSuccess = {
      */
     verticalAccuracy: number,
     /**
-     * 水平精度，单位 m
+     * 水平精度，单位 m（Android、HarmonyOS 无法获取，返回 0）
      * @defaultValue 0
      * @uniPlatform {
      *    "app": {
@@ -1001,7 +1598,7 @@ export type GetLocationSuccess = {
      *    }
      * }
      */
-    address: string | null
+    address?: string | null
 };
 type GetLocationSuccessCallback = (result: GetLocationSuccess) => void;
 type GetLocationFailCallback = (result: GetLocationFail) => void;
@@ -1026,9 +1623,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.25"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1096,9 +1693,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1295,9 +1892,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1351,7 +1948,7 @@ export type GetLocationOptions = {
     altitude?: boolean | null,
     /**
      * 传入 true 会解析地址；
-     * 使用系统定位时平台差异：iOS支持逆地理编码，Android不支持；
+     * 使用系统定位时平台差异：iOS支持逆地理编码，Android、HarmonyOS 不支持；
      * @type boolean
      * @defaultValue false
      * @uniPlatform {
@@ -1437,9 +2034,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1508,9 +2105,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1577,9 +2174,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1646,9 +2243,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1715,9 +2312,9 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
+     *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.81"
      *    }
      *    },
          *  "mp": {
@@ -1770,3 +2367,1038 @@ export type GetLocationOptions = {
      */
     complete?: GetLocationCompleteCallback | null
 };
+
+export type StartLocationUpdateSuccess = {}
+type StartLocationUpdateSuccessCallback = (result:StartLocationUpdateSuccess) => void;
+type StartLocationUpdateFailCallback = (result: IGetLocationFail) => void;
+type StartLocationUpdateComplete = any;
+type StartLocationUpdateCompleteCallback = (result: StartLocationUpdateComplete) => void;
+
+export type StartLocationUpdateOptionsType =
+	/**
+	 * @description wgs84坐标系，系统定位默认取值wgs84，系统定位仅支持wgs84坐标系
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	"wgs84" |
+	/**
+	 * @description gcj02坐标系，腾讯定位默认取值gcj02，腾讯定位仅支持gcj02坐标系
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	"gcj02"
+
+export type StartLocationUpdateOptions = {
+	/**
+	 * @description 定位服务提供商，通过 uni.getProvider 获取,目前支持系统定位(system)、腾讯定位(tencent), web端暂不支持provider机制。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	provider?: string | null,
+	/**
+	 * @description 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于uni.openLocation的坐标，web端需配置定位 SDK 信息才可支持 gcj02；
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	type?: StartLocationUpdateOptionsType | null,
+	/**
+	 * @description 接口调用成功的回调函数
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	success?: StartLocationUpdateSuccessCallback | null,
+	/**
+	 * @description 接口调用失败的回调函数
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	fail?: StartLocationUpdateFailCallback | null,
+	/**
+	 * @description 接口调用结束的回调函数（调用成功、失败都会执行）
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	complete?: StartLocationUpdateCompleteCallback | null
+}
+
+export type StartLocationUpdate = (options: StartLocationUpdateOptions) => void;
+
+export type StopLocationUpdateSuccess = {}
+type StopLocationUpdateSuccessCallback = (result:StopLocationUpdateSuccess) => void;
+type StopLocationUpdateFailCallback = (result: IGetLocationFail) => void;
+type StopLocationUpdateComplete = any;
+type StopLocationUpdateCompleteCallback = (result: StopLocationUpdateComplete) => void;
+
+export type StopLocationUpdateOptions = {
+	success?: StopLocationUpdateSuccessCallback | null,
+	fail?: StopLocationUpdateFailCallback | null,
+	complete?: StopLocationUpdateCompleteCallback | null
+}
+
+export type StopLocationUpdate = (options: StopLocationUpdateOptions) => void;
+
+export type OnLocationChangeResult = GetLocationSuccess
+export type OnLocationChangeCallback =(res:OnLocationChangeResult)=>void
+export type OnLocationChange = (listener:OnLocationChangeCallback)=>number
+export type OffLocationChange = (listener?:number|OnLocationChangeCallback|null)=>void
+
+// #ifdef APP-IOS
+export type OnLocationChangeErrorCallback =(res:UniError)=>void
+// #endif
+
+// #ifndef APP-IOS
+export type OnLocationChangeErrorCallback =(listener:IGetLocationFail)=>void
+// #endif
+
+export type OnLocationChangeError = (listener:OnLocationChangeErrorCallback)=>number
+export type OffLocationChangeError = (listener?:number|OnLocationChangeErrorCallback|null)=>void
+
+export type StartLocationUpdateBackgroundSuccess = StartLocationUpdateSuccess
+type StartLocationUpdateBackgroundSuccessCallback = (result:StartLocationUpdateBackgroundSuccess) => void;
+type StartLocationUpdateBackgroundFailCallback = (result: IGetLocationFail) => void;
+type StartLocationUpdateBackgroundComplete = any;
+type StartLocationUpdateBackgroundCompleteCallback = (result: StartLocationUpdateBackgroundComplete) => void;
+
+export type StartLocationUpdateBackgroundOptionsType =
+    /**
+	 * @description wgs84坐标系，系统定位默认取值wgs84，系统定位仅支持wgs84坐标系
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	"wgs84" |
+	/**
+	 * @description gcj02坐标系，腾讯定位默认取值gcj02，腾讯定位仅支持gcj02坐标系
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	"gcj02"
+
+export type StartLocationUpdateBackgroundOptions = {
+	/**
+	 * @description 定位服务提供商，通过 uni.getProvider 获取,目前支持系统定位(system)、腾讯定位(tencent), web端暂不支持provider机制。
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	provider?: string | null,
+	/**
+	 * @description 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于uni.openLocation的坐标，web端需配置定位 SDK 信息才可支持 gcj02；
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	type?: StartLocationUpdateBackgroundOptionsType | null,
+	/**
+	 * @description 接口调用成功的回调函数
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	success?: StartLocationUpdateBackgroundSuccessCallback | null,
+	/**
+	 * @description 接口调用失败的回调函数
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	fail?: StartLocationUpdateBackgroundFailCallback | null,
+	/**
+	 * @description 接口调用结束的回调函数（调用成功、失败都会执行）
+	 * @uniPlatform {
+	 *    "app": {
+	 *        "android": {
+	 *            "osVer": "5.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *        "ios": {
+	 *            "osVer": "12.0",
+	 *            "uniVer": "√",
+	 *            "unixVer": "4.81"
+	 *        },
+	 *    "harmony": {
+     *      "osVer": "5.0.0(11)",
+	 *      "uniVer": "4.25",
+	 *      "unixVer": "4.81"
+	 *    }
+	 *    },
+	     *  "mp": {
+	     *    "weixin": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "alipay": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "baidu": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "toutiao": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "lark": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "qq": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "kuaishou": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    },
+	     *    "jd": {
+	     *        "hostVer": "√",
+	     *        "uniVer": "√",
+	     *        "unixVer": "x"
+	     *    }
+	     *  },
+	 *    "web": {
+	 *        "uniVer": "√",
+	 *        "unixVer": "4.0"
+	 *    }
+	 * }
+	 *
+	 */
+	complete?: StartLocationUpdateBackgroundCompleteCallback | null
+}
+export type StartLocationUpdateBackground = (options:StartLocationUpdateBackgroundOptions)=>void

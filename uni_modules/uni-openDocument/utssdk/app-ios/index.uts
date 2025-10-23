@@ -28,7 +28,7 @@ class DocumentPreviewer implements QLPreviewControllerDataSource, QLPreviewContr
 	static shared = new DocumentPreviewer()
 	private options ?: OpenDocumentOptions
 	private fileUrl ?: URL = null
-	private previewController ?: QLPreviewController
+	private innerPreviewController ?: QLPreviewController
 
 	presentDocument(options : OpenDocumentOptions) {
 		DocumentPreviewer.shared.options = options
@@ -53,13 +53,13 @@ class DocumentPreviewer implements QLPreviewControllerDataSource, QLPreviewContr
 			return
 		}
 
-		this.previewController = new QLPreviewController()
-		this.previewController!.dataSource = this
-		this.previewController!.delegate = this
+		this.innerPreviewController = new QLPreviewController()
+		this.innerPreviewController!.dataSource = this
+		this.innerPreviewController!.delegate = this
 
-		if (this.previewController != null) {
-			UTSiOS.getCurrentViewController().present(this.previewController!, animated = false, completion = () : void => {
-				this.previewController = null
+		if (this.innerPreviewController != null) {
+			UTSiOS.getCurrentViewController().present(this.innerPreviewController!, animated = false, completion = () : void => {
+				this.innerPreviewController = null
 			})
 		}
 
@@ -78,9 +78,9 @@ class DocumentPreviewer implements QLPreviewControllerDataSource, QLPreviewContr
 
 	previewControllerDidDismiss(controller : QLPreviewController) {
 		DispatchQueue.main.asyncAfter(deadline = DispatchTime.now() + 0.01, execute = () : void => {
-			if (this.previewController != null) {
-				UTSiOS.getCurrentViewController().present(this.previewController!, animated = false, completion = () : void => {
-					this.previewController = null
+			if (this.innerPreviewController != null) {
+				UTSiOS.getCurrentViewController().present(this.innerPreviewController!, animated = false, completion = () : void => {
+					this.innerPreviewController = null
 				})
 			}
 		})

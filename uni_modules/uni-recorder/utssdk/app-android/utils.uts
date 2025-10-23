@@ -1,10 +1,6 @@
 import { RecorderManagerOnStopResult } from '../interface.uts';
-import { getEnv } from '@dcloudio/uni-runtime';
 import File from 'java.io.File';
 export type RecorderState = 'pause' | 'resume' | 'start' | 'stop' | 'error' | 'frameRecorded' | 'interruptionBegin' | 'interruptionEnd'
-
-export function setRecordStateCallback(state : RecorderState, cb : Function) {
-}
 
 export interface StateChangeRes extends RecorderManagerOnStopResult {
 	errMsg ?: string

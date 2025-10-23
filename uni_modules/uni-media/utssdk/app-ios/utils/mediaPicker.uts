@@ -1,5 +1,5 @@
 import { UTSiOS } from "DCloudUTSFoundation";
-import { FileManager } from "Foundation";
+import { FileManager, URL } from "Foundation";
 import { DCloudMediaCamera, DCloudMediaAlbum, DCloudMediaImageCompress, DCloudMediaVideoCompress } from "DCloudMediaPicker" assert { type: "implementationOnly" };
 import {
 	ChooseImageOptions, ChooseImageTempFile,

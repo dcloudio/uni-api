@@ -5,13 +5,25 @@ import Location from 'android.location.Location';
 import LocationListener from 'android.location.LocationListener';
 import { UniLocationSystemProvider } from '../interface';
 import Bundle from 'android.os.Bundle';
+import Build from "android.os.Build";
+import IBinder from 'android.os.IBinder';
+import Intent from "android.content.Intent";
+import UniSystemLocationService from "uts.sdk.modules.DcloudUniGetBackgroundLocation.UniSystemLocationService"
+import ServiceConnection from "android.content.ServiceConnection";
 
-
-export class UniLocationSystemProviderImpl implements UniLocationSystemProvider, io.dcloud.uts.json.IJsonStringify {
+import ComponentName from "android.content.ComponentName";
+import Notification from "android.app.Notification"
+export class UniLocationSystemProviderImpl implements UniLocationSystemProvider, io.dcloud.uts.json.IJsonStringify, LocationListener {
 
 	override id : String = 'system'
 
 	override description : String = "系统定位"
+
+	locationUpdateCallback : OnLocationChangeCallback | null = null
+	private locationUpdateErrorCallback : OnLocationChangeErrorCallback | null = null;
+	locationManager : LocationManager | null = null
+
+	connection : CustomSystemLocationServiceConnect = new CustomSystemLocationServiceConnect(this)
 
 	/**
 	 * @deprecated
@@ -29,14 +41,126 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider,
 				getLocationImpl(options)
 			}
 
-		}, function (_ : boolean, _ : string[]) {
+		}, function (_ : boolean, p : string[]) {
 			let err = new GetLocationFailImpl(1505004);
 			options.fail?.(err)
 			options.complete?.(err)
 		})
 	}
 
+	override startLocationUpdate(options : StartLocationUpdateOptions) {
+		this.startSystemLocation(options)
+	}
+
+	override onLocationChange(locationUpdateCallback : OnLocationChangeCallback) : number {
+		this.locationUpdateCallback = locationUpdateCallback
+		return 0
+	}
+
+	notif : Notification | null = null
+
+	setNotification(noti : Notification) {
+		this.notif = noti
+	}
+
+	override offLocationChange(id ?: number | OnLocationChangeCallback | null) : void {
+		this.locationUpdateCallback = null
+	}
+
+	override onLocationChangeError(result : OnLocationChangeErrorCallback) : number {
+		this.locationUpdateErrorCallback = result;
+		return 0;
+	}
+	override offLocationChangeError(id ?: number | OnLocationChangeErrorCallback | null) : void {
+		this.locationUpdateErrorCallback = null;
+	}
+
+	override stopLocationUpdate(options : StopLocationUpdateOptions) : void {
+		this.locationUpdateCallback = null
+		this.locationUpdateErrorCallback = null
+		if (this.connection.isConnect) {
+			UTSAndroid.getUniActivity()!.getApplication()!.unbindService(this.connection)
+		}
+		this.locationManager?.removeUpdates(this)
+		// options.success?.invoke({})
+		// options.complete?.invoke({})
+	}
+
+	override startLocationUpdateBackground(options : StartLocationUpdateBackgroundOptions) {
+		this.connection.option = {
+			provider: options.provider,
+			type: options.type,
+			success: options.success,
+			fail: options.fail,
+			complete: options.complete
+		} as StartLocationUpdateOptions
+		this.connection.notification = this.notif
+		var intent = new Intent()
+		intent.setClassName(UTSAndroid.getUniActivity()!, "uts.sdk.modules.DcloudUniGetBackgroundLocation.UniSystemLocationService")
+		UTSAndroid.getUniActivity()!.getApplication()!.bindService(intent, this.connection, Context.BIND_AUTO_CREATE)
+	}
+
+	startSystemLocation(options1 : any, context : Context = UTSAndroid.getUniActivity()!) {
+		let options = options1 as StartLocationUpdateOptions
+
+		if (options.type == null) {
+			options.type = 'wgs84'
+		}
+		if (options.type != 'wgs84') {
+			// 系统定位只支持wgs84，如果不是则报错
+			let err = new GetLocationFailImpl(1505601);
+			options.fail?.(err)
+			options.complete?.(err)
+			return
+		}
+		this.locationManager = context.getSystemService("location") as LocationManager
+		let criteria = new Criteria()
+		criteria.setPowerRequirement(Criteria.POWER_LOW)
+		criteria.setSpeedRequired(true)
+		/**
+		 * 如果存在gps，那么优先gps，这样才有高度信息
+		 */
+		let providerName : string | null = null
+		if (!this.locationManager!.getProviders(criteria, true).contains("gps")) {
+			providerName = this.locationManager!.getBestProvider(criteria, true)
+		}
+		if (providerName == null) {
+			// 没有找到合法的系统定位能力提供者，错误的逻辑 todo
+			let err = new GetLocationFailImpl(1505701);
+			options.fail?.(err)
+			options.complete?.(err)
+			return;
+		}
+		this.locationManager?.requestLocationUpdates(providerName, 2000, 0.0.toFloat(), this)
+		options.success?.({} as StartLocationUpdateSuccess)
+		options.complete?.({})
+	}
+
 	constructor() {
+	}
+	override onStatusChanged(param0 : string, param1 : Int, param2 : Bundle) : void {
+	}
+	override onProviderEnabled(param0 : string) : void {
+	}
+	override onProviderDisabled(param0 : string) : void {
+		this.locationUpdateErrorCallback?.(new GetLocationFailImpl(1505003))
+	}
+	override onLocationChanged(param0 : List<Location>) : void {
+	}
+	override onLocationChanged(location : Location) : void {
+		let ret = {
+			latitude: location.getLatitude(),
+			longitude: location.getLongitude(),
+			speed: location.getSpeed(),
+			accuracy: location.getAccuracy(),
+			altitude: location.getAltitude(),
+			verticalAccuracy: 0,
+			horizontalAccuracy: location.getAccuracy(),
+			address: null
+		} as OnLocationChangeResult
+		this.locationUpdateCallback?.(ret)
+	}
+	override onFlushComplete(param0 : Int) : void {
 	}
 
 	override toJSON() : any | null {
@@ -48,6 +172,34 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider,
 	}
 }
 
+class CustomSystemLocationServiceConnect implements ServiceConnection {
+
+	provider : UniLocationSystemProviderImpl
+	option : StartLocationUpdateOptions | null = null
+	notification : Notification | null = null
+
+	isConnect : boolean = false;
+	constructor(provider : UniLocationSystemProviderImpl) {
+		this.provider = provider
+	}
+	override onNullBinding(param0 : ComponentName) : void {
+
+	}
+	override onBindingDied(param0 : ComponentName) : void {
+
+	}
+	service : UniSystemLocationService | null = null
+	override onServiceDisconnected(param0 : ComponentName) : void {
+		this.isConnect = false;
+		this.service = null
+	}
+	override onServiceConnected(param0 : ComponentName, param1 : IBinder) : void {
+		var binder = param1 as UniSystemLocationService.MyBinder
+		this.service = binder.service
+		this.service?.startLocation(this.provider, this.option!, this.notification)
+		this.isConnect = true
+	}
+}
 
 /****************************************内部功能实现****************************************************/
 

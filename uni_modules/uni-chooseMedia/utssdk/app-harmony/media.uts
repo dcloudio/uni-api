@@ -412,6 +412,10 @@ async function getVideoThumbnail(videoUri: string, pixelMap: image.PixelMap) {
     const tempFileName = `${uriInstance.getLastSegment().split('.').shift()}_thumbnail_${id++}.jpg`
     const tempDirPath = `${getEnv().CACHE_PATH}/uni-media`
 
+    if (!fs.accessSync(tempDirPath)) {
+        fs.mkdirSync(tempDirPath, true);
+    }
+
     const tempFilePath: string = `${tempDirPath}/${tempFileName}`
     const file = fs.openSync(tempFilePath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
 
@@ -464,7 +468,9 @@ export async function getMediaAssetInfo(uri: string): Promise<AssetInfo> {
 
     if (photoType === photoAccessHelper.PhotoType.VIDEO) {
         const thumbnailPixelMap = await asset.getThumbnail({ width, height } as image.Size);
-        thumbTempFilePath = await getVideoThumbnail(uri, thumbnailPixelMap)
+        try {
+            thumbTempFilePath = await getVideoThumbnail(uri, thumbnailPixelMap)
+        } catch (error) { }
     }
 
     fetchResult.close()

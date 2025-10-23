@@ -70,7 +70,7 @@ class UniLocationTencentProviderImpl {
 				// 交给目前的location 引擎，真实执行
 				getLocationImpl(options)
 			}
-		}, function (_ : boolean, _ : string[]) {
+		}, function (_ : boolean, p : string[]) {
 			console.log("用户拒绝了部分权限:")
 			this.failedAction(1505605)
 		})
@@ -112,6 +112,7 @@ class LocationOptionsWapper {
 		}
 
 		this.hostOption.success?.(ret)
+		this.hostOption.complete?.(ret)
 		// 包装数据结构返回
 	}
 

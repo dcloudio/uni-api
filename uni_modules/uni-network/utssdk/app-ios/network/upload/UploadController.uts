@@ -142,6 +142,7 @@ class UploadController implements URLSessionDataDelegate {
 		}
 
 		const tempFiles = options.files;
+		const filePath = options.filePath;
 		if (tempFiles != null && tempFiles!.length > 0) {
 			const files : UploadFileOptionFiles[] = tempFiles!;
 			for (let i = 0; i < files.length; i++) {
@@ -152,18 +153,19 @@ class UploadController implements URLSessionDataDelegate {
 					return null;
 				}
 			}
-		} else {
-			const filePath = options.filePath;
+		} else if(filePath != null) {
 			const name = options.name ?? "file";
-			if (filePath == null) {
-				let error = new NSError(domain = "filePath is null", code = -1);
-				listener.onFail(error)
-				return null;
-			}
 			if (!this.fillFilePart(body, boundary, name, filePath!, listener)) {
 				return null
 			}
 		}
+		
+		if(formData == null && filePath == null && (tempFiles == null || (tempFiles != null && tempFiles?.length == 0))) {
+			let error = new NSError(domain = "At least one of the parameters filePath, files, or formData", code = 602001);
+			listener.onFail(error);
+			return null;
+		}
+		
 
 		body.append(`--${boundary}--\r\n`.data(using = String.Encoding.utf8)!)
 

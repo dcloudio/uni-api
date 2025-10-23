@@ -15,7 +15,7 @@
     <view
       v-if="isShowAlbum"
       class="uni-scan-code-center"
-      style="position: absolute; bottom: 20px; right: 20px"
+      style="position: absolute; bottom: var(--uni-safe-area-inset-bottom); right: 20px;margin-bottom: 20px;"
     >
       <view
         class="uni-scan-code-album-wrap uni-scan-code-center"
@@ -775,11 +775,11 @@ export default {
 
 .uni-scan-code-close {
   font-family: "uni-icon";
-  font-size: 16px;
   color: white;
   position: absolute;
-  top: 5%;
-  left: 5%;
+  top: var(--uni-safe-area-inset-top);
+  left: 25px;
+  margin-top: 5px;
 }
 
 .uni-scan-code-selection-view {

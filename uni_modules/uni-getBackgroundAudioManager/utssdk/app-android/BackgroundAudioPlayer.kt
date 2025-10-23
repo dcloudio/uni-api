@@ -221,7 +221,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener, Audi
 
     override var webUrl = "";
     override var protocol = "";
-    open var player: ExoPlayer;
+    open lateinit var player: ExoPlayer;
     open var callbacks = HashMap<String, EventCallback>();
     private var errorCallBack: ((result: ICreateBackgroundAudioFail) -> Unit)? = null
     open var isPausedByUser: Boolean = false;

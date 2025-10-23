@@ -804,8 +804,8 @@ extension UniBackgroundAudioManager {
             innerPlay()
         } else {
             UNILogDebug("======audio======, 播放结束")
-            dispatchEvent(event: .ended)
             clearPlayingCenterInfo()
+			dispatchEvent(event: .ended)
         }
     }
     
@@ -1067,7 +1067,6 @@ extension UniBackgroundAudioManager {
     private func clearPlayingCenterInfo() {
         UIApplication.shared.endReceivingRemoteControlEvents()
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
-        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: [])
     }
     
     private func listenerInterruption() {

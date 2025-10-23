@@ -117,6 +117,71 @@ class RequestTask implements UniRequestTask {
     }
 }
 
+
+/**
+  * data拼接到url上
+  */
+const stringifyQuery = (url : string, data : UTSJSONObject) : string => {
+  let newUrl = url;
+  //http:xxx/xxx?a=b&c=d#123
+  let str = url.split('#')
+  let hash = ''
+  if (str.length > 1) {
+    hash = str[1] //123
+  }
+  str = str[0].split('?')
+  let query = ''
+  if (str.length > 1) {
+    query = str[1] //a=b&c=d
+  }
+  newUrl = str[0]   // http:xxx/xxx
+
+  // 使用UTSJSONObject替代Map
+  const queryObj = {} as UTSJSONObject;
+
+  // 解析现有的查询参数
+  if (query.length > 0) {
+    const pairs = query.split('&')
+    pairs.forEach((item, _) => {
+      const temp = item.split('=')
+      if (temp.length > 1) {
+        queryObj[temp[0]] = temp[1]
+      }
+    });
+  }
+
+  // 将data中的数据添加到查询参数中，直接遍历UTSJSONObject的属性
+  const dataKeys = Object.keys(data);
+  dataKeys.forEach((key) => {
+    let value:object = data[key];
+    let encodeKey = encodeURIComponent(key)!
+    if (value instanceof UTSJSONObject || value instanceof Array) {
+      queryObj[encodeKey] = encodeURIComponent(JSON.stringify(value))!
+    } else {
+      queryObj[encodeKey] = encodeURIComponent("" + value)!;
+    }
+  })
+
+  // 构建查询字符串
+  let queryStr = "";
+  const queryKeys = Object.keys(queryObj);
+  queryKeys.forEach((key, index) => {
+    if (index > 0) {
+      queryStr += "&";
+    }
+    queryStr += key + "=" + queryObj[key];
+  });
+
+  // 重新构建URL
+  if (queryStr.length > 0) {
+    newUrl += "?" + queryStr;
+  }
+  if (hash.length > 0) {
+    newUrl += "#" + hash;
+  }
+  return newUrl;
+}
+
 /**
  * http.request有5MB响应体大小限制
  * rcp.Session.fetch无响应体大小限制，但是headers、cookies处理不够完善，另外rcp需要从@hms引用，不是openharmony标准库
@@ -154,19 +219,7 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
 
         // url data
         if (method === 'GET' && data && typeof data === 'object') {
-            const dataRecord = data as Record<string, Object>
-            const query = Object.keys(dataRecord)
-                .map((key) => {
-                    return (
-                        encodeURIComponent(key) +
-                        '=' +
-                        encodeURIComponent(dataRecord[key] as string | number | boolean)
-                    )
-                })
-                .join('&')
-            url += query ?
-                (url.indexOf('?') > -1 ? '&' : '?') + query :
-                ''
+            url = stringifyQuery(url,data)
             data = null
         } else if (
             method !== 'GET' &&
@@ -206,6 +259,7 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
             abort() {
                 emitter.off('headersReceive')
                 httpRequest.destroy()
+                exec.reject('request:fail abort');
             },
             onHeadersReceived(callback: RequestTaskOnHeadersReceivedCallback) {
                 emitter.on('headersReceive', callback)
@@ -231,15 +285,21 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
         let latestHeaders: Object | null = null
         let lastUrl = url
         httpRequest.on('headersReceive', (headers: Object) => {
+            latestHeaders = headers
             const realHeaders = headers as Record<string, string | string[]>
             const setCookieHeader = realHeaders['set-cookie'] || realHeaders['Set-Cookie']
-            if (setCookieHeader) {
-                setCookieSync(lastUrl, setCookieHeader as string[])
-            }
-            latestHeaders = headers
             const location = realHeaders['location'] || realHeaders['Location']
             if (location) {
                 lastUrl = location as string
+            }
+            if (setCookieHeader) {
+                try {
+                    setCookieSync(lastUrl, setCookieHeader as string[])
+                } catch (error) {
+                    console.error('setCookieSync error:', error)
+                    console.log('setCookieSync error url:', lastUrl)
+                    console.log('setCookieSync error setCookieHeader:', JSON.stringify(setCookieHeader))
+                }
             }
             // TODO headersReceive存在bug，暂不支持回调给用户。
             // emitter.emit('headersReceive', headers);
@@ -347,6 +407,8 @@ export const request = defineTaskApi<UniRequestOptions<Object>, UniRequestSucces
                         cookies: oldCookies,
                     } as UniRequestSuccess<Object>)
                 }
+                httpRequest.off('headersReceive')
+                httpRequest.off('dataReceive')
                 realRequestTask.offChunkReceived()
                 realRequestTask.offHeadersReceived()
                 httpRequest.destroy() // 调用完毕后必须调用destroy方法

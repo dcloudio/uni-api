@@ -21,6 +21,7 @@ import ByteArrayOutputStream from 'java.io.ByteArrayOutputStream'
 import InputStreamReader from 'java.io.InputStreamReader'
 import Context from 'android.content.Context'
 import Charset from 'java.nio.charset.Charset'
+import OutputStream from 'java.io.OutputStream';
 
 export class ReadFileUtil {
 	private readContentUriWithEncoding(
@@ -123,6 +124,24 @@ export class ReadFileUtil {
 			}
 		}
 		return null
+	}
+	
+	public readContentUriAsInputStream(context : Context, contentUri : Uri) : InputStream | null {
+		try {
+			return context.contentResolver.openInputStream(contentUri)
+		} catch (e : Exception) {
+			e.printStackTrace()
+		}
+		return null
+	}
+	
+	public readAndroidAssetsAsInputStream(context : Context, assetsPath : String) : InputStream | null {
+		try {
+			assetsPath = assetsPath.substring("/android_asset/".length)
+			return context.getResources().getAssets().open(assetsPath);
+		} catch (e:Exception) {
+		}
+		return null;
 	}
 	
 	public readFile(options : ReadFileOptions) {

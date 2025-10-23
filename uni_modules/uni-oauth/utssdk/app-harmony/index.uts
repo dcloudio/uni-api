@@ -1,7 +1,5 @@
 import {
-  Login, LoginOptions, LoginSuccess, LoginFail,
-  GetUserInfo, GetUserInfoOptions, GetUserInfoSuccess, GetUserInfoFail, UserInfo,
-  UniOAuthProvider
+  Login, LoginOptions, LoginSuccess, GetUserInfo, GetUserInfoOptions, GetUserInfoSuccess, UniOAuthProvider
 } from '../interface.uts';
 import { API_LOGIN, LoginApiProtocol, API_GET_USER_INFO, GetUserInfoApiProtocol } from '../protocol.uts';
 
@@ -15,8 +13,10 @@ export {
   GetUserInfoSuccess,
   GetUserInfoFail,
   UserInfo,
-  UniOAuthProvider
-}
+  UniOAuthProvider,
+  OauthErrorCode,
+  IOauthFail
+} from '../interface.uts';
 
 const SERVICE = 'oauth'
 const PROVIDER = 'huawei'
