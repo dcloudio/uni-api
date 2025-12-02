@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.activity.result.PickVisualMediaRequest
@@ -56,10 +55,7 @@ class ChooseSystemImageActivity : FragmentActivity() {
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
-                    var path = FileUtils.getFilePathByUri(this, uri)
-                    if (TextUtils.isEmpty(path)) {
-                        path = getFilePathFromUri(uri)
-                    }
+                    var path = uri.toString()
                     val mediaT = this.contentResolver.getType(uri)?.lowercase(Locale.ENGLISH)
                     val m = Media(
                         if (mediaT?.startsWith("video/") == true) {
@@ -88,10 +84,7 @@ class ChooseSystemImageActivity : FragmentActivity() {
                         uri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
-                    var path = FileUtils.getFilePathByUri(this, uri)
-                    if (TextUtils.isEmpty(path)) {
-                        path = getFilePathFromUri(uri)
-                    }
+                    var path = uri.toString()
                     val mediaT = this.contentResolver.getType(uri)?.lowercase(Locale.ENGLISH)
                     val m = Media(
                         if (mediaT?.startsWith("video/") == true) {
