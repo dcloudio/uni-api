@@ -3,8 +3,6 @@ import pasteboard from '@ohos.pasteboard'
 import { SetClipboardData, GetClipboardData, SetClipboardDataOptions, SetClipboardDataSuccess, GetClipboardDataOptions, GetClipboardDataSuccess } from '../interface.uts';
 import { API_GET_CLIPBOARD_DATA, API_SET_CLIPBOARD_DATA, SetClipboardDataApiOptions, SetClipboardDataProtocol } from '../protocol.uts';
 
-export { SetClipboardData, GetClipboardData, SetClipboardDataOptions, SetClipboardDataSuccess, GetClipboardDataOptions, GetClipboardDataSuccess }
-
 type ClipboardCallbackOptions = {
     data: string;
     result: 'success' | 'fail';
@@ -81,3 +79,23 @@ export const setClipboardData: SetClipboardData = defineAsyncApi<SetClipboardDat
     SetClipboardDataProtocol,
     SetClipboardDataApiOptions
 ) as SetClipboardData
+export {
+    ClipBoardErrorCode,
+    GetClipboardData,
+    GetClipboardDataComplete,
+    GetClipboardDataCompleteCallback,
+    GetClipboardDataFail,
+    GetClipboardDataFailCallback,
+    GetClipboardDataOptions,
+    GetClipboardDataSuccess,
+    GetClipboardDataSuccessCallback,
+    IClipBoardError,
+    SetClipboardData,
+    SetClipboardDataComplete,
+    SetClipboardDataCompleteCallback,
+    SetClipboardDataFail,
+    SetClipboardDataFailCallback,
+    SetClipboardDataOptions,
+    SetClipboardDataSuccess,
+    SetClipboardDataSuccessCallback
+} from '../interface.uts';

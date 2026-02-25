@@ -71,9 +71,9 @@ export function transcodeImage(options : CompressImageOptions) {
 	var srcBitmap : Bitmap | null = null
 	try {
 		if (compressOption.src.startsWith("content://")) {
-			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bitmapOptions)
+			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bitmapOptions)
 		} else if (compressOption.src.startsWith("/android_asset/")) {
-			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bitmapOptions)
+			srcBitmap = BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bitmapOptions)
 		} else {
 			srcBitmap = BitmapFactory.decodeFile(compressOption.src, bitmapOptions)
 		}
@@ -128,7 +128,7 @@ function saveExif(oldFilePath : string, newFilePath : string) {
 		if (oldFilePath.startsWith("content://")) {
 			oldExif = new ExifInterface((UTSAndroid.getAppContext() as Context).contentResolver.openInputStream(Uri.parse(oldFilePath)))
 		} else if (oldFilePath.startsWith("/android_asset/")) {
-			oldExif = new ExifInterface(UTSAndroid.getUniActivity()!.assets.open(oldFilePath.replace(ASSETS_PATH, ""))))
+			oldExif = new ExifInterface(UTSAndroid.getAppContext()!.assets.open(oldFilePath.replace(ASSETS_PATH, ""))))
 		} else {
 			if (oldFilePath.startsWith("file://")) {
 				oldFilePath = oldFilePath.replace("file://", "")
@@ -164,10 +164,10 @@ function getHeightAndWidth(compressOption : CompressOptions, widthStr : string, 
 	bopt.inJustDecodeBounds = true
 	if (compressOption.src.startsWith("content://")) {
 		try {
-			BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bopt)
+			BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(compressOption.src)), null, bopt)
 		} catch (e) { }
 	} else if (compressOption.src.startsWith("/android_asset/")) {
-		BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bopt)
+		BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.assets.open(compressOption.src.replace(ASSETS_PATH, "")), null, bopt)
 	} else {
 		BitmapFactory.decodeFile(compressOption.src, bopt)
 	}

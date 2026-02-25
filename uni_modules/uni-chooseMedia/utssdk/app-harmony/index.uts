@@ -24,7 +24,7 @@ interface ChooseMediaShowActionSheetOptions {
 type CameraPosition = 'back' | 'front'
 type UNI_MEDIA_TYPE = 'image' | 'video' | 'mix'
 
-function getHMCameraPosition(cameraType: CameraPosition) {
+function getHMCameraPosition(cameraType: CameraPosition): camera.CameraPosition {
   switch (cameraType) {
     case 'back':
       return camera.CameraPosition.CAMERA_POSITION_BACK
@@ -59,7 +59,10 @@ const _takeCamera = async (args: ChooseMediaOptions, executor: ApiExecutor<Choos
     };
     const mediaTypes = getCameraPickerMediaTypes((args.mediaType ?? []) as UNI_MEDIA_TYPE[])
     const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, mediaTypes, pickerProfile)
-    if (res.resultCode === -1) {
+    if (!res) {
+      const err = new ChooseMediaErrorImpl(1101010)
+      executor.reject(err.message, err as ApiError);
+    } else if (res.resultCode === -1) {
       const err = new ChooseMediaErrorImpl(1101001)
       executor.reject(err.message, err as ApiError);
     } else {
@@ -170,3 +173,18 @@ export const chooseMedia: ChooseMedia = defineAsyncApi<ChooseMediaOptions, Choos
   ChooseMediaApiProtocol,
   ChooseMediaApiOptions
 ) as ChooseMedia
+
+export {
+  ChooseMedia,
+  ChooseMediaCompleteCallback,
+  ChooseMediaErrorCode,
+  ChooseMediaFail,
+  ChooseMediaFailCallback,
+  ChooseMediaFileType,
+  ChooseMediaOptions,
+  ChooseMediaPageOrientation,
+  ChooseMediaSuccess,
+  ChooseMediaSuccessCallback,
+  ChooseMediaTempFile,
+  IChooseMediaError
+} from '../interface.uts'

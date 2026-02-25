@@ -128,7 +128,7 @@ export class UniLocationTencentProviderImpl implements UniLocationTencentProvide
 		let ret : GetLocationSuccess = {
 			latitude: location.latitude,
 			longitude: location.longitude,
-			speed: 0,
+			speed: location.speed,
 			accuracy: location.accuracy,
 			altitude: location.altitude,
 			verticalAccuracy: 0,
@@ -170,7 +170,7 @@ class LocationOptionsWapper {
 		let ret : GetLocationSuccess = {
 			latitude: location.latitude,
 			longitude: location.longitude,
-			speed: 0,
+			speed: location.speed,
 			accuracy: location.accuracy,
 			altitude: location.altitude,
 			verticalAccuracy: 0,

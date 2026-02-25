@@ -11,7 +11,7 @@ import { getFdFromUriOrSandBoxPath, isFileUri, isSandboxPath, AudioPlayerCallbac
 const AUDIOS: Record<string, InnerAudioContext | undefined> = {}
 const AUDIO_PLAYERS: Record<string, media.AudioPlayer | undefined> = {}
 
-const LOG = (msg: string) => console.log(`[createInnerAudioContext]: ${msg}`)
+const LOG = (msg: string): void => console.log(`[createInnerAudioContext]: ${msg}`)
 
 class STATE_TYPE {
   // 音频播放空闲
@@ -344,16 +344,21 @@ export const setInnerAudioOption: SetInnerAudioOption =
     API_SET_INNER_AUDIO_OPTION,
     async (options: SetInnerAudioOptionOptions, res: ApiExecutor<SetInnerAudioOptionSuccess>) => {
       try {
-        const { speakerOn = true, mixWithOther = true } = options
+        let { speakerOn = true, mixWithOther = true } = options
         const audioManager = audio.getAudioManager();
         const sessionManager = audioManager.getSessionManager()
-        await sessionManager.activateAudioSession({
-          concurrencyMode: mixWithOther ? audio.AudioConcurrencyMode.CONCURRENCY_MIX_WITH_OTHERS : audio.AudioConcurrencyMode.CONCURRENCY_DEFAULT
-        } as audio.AudioSessionStrategy)
-
-        if (deviceInfo.sdkApiVersion >= 20 && speakerOn) {
-          await (sessionManager as ESObject).setDefaultOutputDevice(audio.DeviceType.SPEAKER)
+        if (deviceInfo.sdkApiVersion >= 20) {
+          if (speakerOn) {
+            await (sessionManager as ESObject).setDefaultOutputDevice(audio.DeviceType.SPEAKER)
+            // speakerOn 为 true 时，客户端会忽略 mixWithOther 参数的内容，强制与其它音频互斥。与微信相同
+            mixWithOther = false
+          } else {
+            await (sessionManager as ESObject).setDefaultOutputDevice(audio.DeviceType.EARPIECE)
+          }
         }
+        await sessionManager.activateAudioSession({
+          concurrencyMode: mixWithOther ? audio.AudioConcurrencyMode.CONCURRENCY_MIX_WITH_OTHERS : audio.AudioConcurrencyMode.CONCURRENCY_PAUSE_OTHERS
+        } as audio.AudioSessionStrategy)
         res.resolve({} as SetInnerAudioOptionSuccess)
       } catch (error) {
         res.reject((error as BusinessError).message, { errCode: (error as BusinessError).code } as ApiError)
@@ -362,3 +367,18 @@ export const setInnerAudioOption: SetInnerAudioOption =
     SetInnerAudioOptionProtocol,
     SetInnerAudioOptionOptionsOptions
   ) as SetInnerAudioOption;
+
+export {
+  CreateInnerAudioContext,
+  CreateInnerAudioContextErrorCode,
+  ICreateInnerAudioContextFail,
+  InnerAudioContext,
+  SetInnerAudioOption,
+  SetInnerAudioOptionComplete,
+  SetInnerAudioOptionCompleteCallback,
+  SetInnerAudioOptionFail,
+  SetInnerAudioOptionFailCallback,
+  SetInnerAudioOptionOptions,
+  SetInnerAudioOptionSuccess,
+  SetInnerAudioOptionSuccessCallback
+} from '../interface.uts';

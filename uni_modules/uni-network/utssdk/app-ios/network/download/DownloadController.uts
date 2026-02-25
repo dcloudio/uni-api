@@ -1,9 +1,10 @@
 import { DownloadFileOptions, DownloadTask, DownloadFileProgressUpdateCallback, OnProgressDownloadResult } from '../../../interface.uts';
 import { NetworkDownloadFileListener } from '../NetworkManager.uts';
-import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionDownloadTask, NSError, URLSessionDownloadDelegate, URLRequest, FileManager, NSString, NSTemporaryDirectory, NSHomeDirectory , CharacterSet , HTTPURLResponse } from 'Foundation';
+import { UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionDownloadTask, NSError, URLSessionDownloadDelegate, URLRequest, FileManager, NSString, NSTemporaryDirectory, NSHomeDirectory, CharacterSet, HTTPURLResponse } from 'Foundation';
 import { } from 'CommonCrypto';
 import { Int, UnsafeBufferPointer, UnsafeRawBufferPointer } from 'Swift';
 import { ObjCBool } from "ObjectiveC";
+import { NetworkUtil } from '../utils/NetworkUtil.uts';
 
 class NetworkDownloadTaskImpl implements DownloadTask {
 	private task : URLSessionDownloadTask | null = null;
@@ -67,9 +68,9 @@ export class DownloadController implements URLSessionDownloadDelegate {
 		listener.task = requestTask
 		return requestTask;
 	}
-	
+
 	private createDownloadRequest(options : DownloadFileOptions, listener : NetworkDownloadFileListener) : URLRequest | null {
-		const encodeUrl = this.percentEscapedString(options.url)
+		const encodeUrl = NetworkUtil.percentEscapedString(options.url)
 		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
@@ -94,9 +95,9 @@ export class DownloadController implements URLSessionDownloadDelegate {
 				let valueStr = "";
 				if (value instanceof UTSJSONObject) {
 					valueStr = JSON.stringify(value) ?? ""
-				}else if(value instanceof Map<string, any>){
+				} else if (value instanceof Map<string, any>) {
 					valueStr = JSON.stringify(new UTSJSONObject(value)) ?? ""
-				}else{
+				} else {
 					valueStr = `${value}`
 				}
 				request.setValue(valueStr, forHTTPHeaderField = key);
@@ -104,11 +105,7 @@ export class DownloadController implements URLSessionDownloadDelegate {
 		}
 		return request;
 	}
-	
-	private percentEscapedString(str: string): string {
-		//如果url已经有部分经过encode，那么需要先decode再encode。
-		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
-	}
+    
 
 	private convertToMD5(param : string) : string {
 		const strData = param.data(using = String.Encoding.utf8)!
@@ -142,7 +139,7 @@ export class DownloadController implements URLSessionDownloadDelegate {
 	private getTargetPath(options : DownloadFileOptions | null, fileName : string, listener : NetworkDownloadFileListener | null) : string | null {
 		let targetPath = ""
 		let specifyPath = options?.filePath ?? ""
-		if(specifyPath.startsWith("unifile://")){
+		if (specifyPath.startsWith("unifile://")) {
 			specifyPath = UTSiOS.getResourceAbsolutePath(specifyPath, null);
 		}
 		let hasFileName = false;
@@ -177,7 +174,7 @@ export class DownloadController implements URLSessionDownloadDelegate {
 		} else {
 			targetPath = this.getRealPath()
 		}
-		if(!hasFileName){
+		if (!hasFileName) {
 			targetPath += fileName
 		}
 		let fileManager = FileManager.default
@@ -253,7 +250,7 @@ export class DownloadController implements URLSessionDownloadDelegate {
 		let listener = this.taskMap.get(downloadTask);
 		let suggestedFilename = downloadTask.response?.suggestedFilename
 		const statusCode = (downloadTask.response as HTTPURLResponse).statusCode
-		if(statusCode - 200 < 100 && statusCode - 200 >= 0) {
+		if (statusCode - 200 < 100 && statusCode - 200 >= 0) {
 			const fileName = this.getFileName(suggestedFilename ?? "", downloadTask.response?.url)
 			let destPath = this.getTargetPath(listener?.options, fileName, listener);
 			if (destPath != null) {
@@ -276,9 +273,9 @@ export class DownloadController implements URLSessionDownloadDelegate {
 		}
 		this.taskMap.delete(downloadTask);
 	}
-	
+
 	urlSession(session : URLSession, @argumentLabel("") task : URLSessionTask, @argumentLabel("didCompleteWithError") error : NSError | null) {
-		if(error != null){
+		if (error != null) {
 			let listener = this.taskMap.get(task);
 			listener?.onFail(error as NSError);
 			this.taskMap.delete(task);

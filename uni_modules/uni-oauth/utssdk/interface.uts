@@ -21,7 +21,8 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -104,7 +105,8 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -216,7 +218,8 @@ export type LoginSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  }
    * }
@@ -239,7 +242,8 @@ export type LoginSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  }
    * }
@@ -385,7 +389,8 @@ export type LoginOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -463,7 +468,8 @@ export type LoginOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
-   *      "unixVer": "4.81"
+   *      "unixVer": "4.81",
+   *      "unixvVer": "5.0"
    *    }
    *  }
    * }
@@ -578,7 +584,8 @@ export type LoginOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  }
    * }
@@ -673,7 +680,8 @@ export type LoginOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
-   *      "unixVer": "4.81"
+   *      "unixVer": "4.81",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    * "web": {
@@ -1024,7 +1032,8 @@ export type UserInfo = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1106,7 +1115,8 @@ export type UserInfo = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
-   *      "unixVer": "4.81"
+   *      "unixVer": "4.81",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1198,7 +1208,8 @@ export type GetUserInfoSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1599,7 +1610,8 @@ export type GetUserInfoOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1795,7 +1807,8 @@ export type GetUserInfoOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  }
    * }

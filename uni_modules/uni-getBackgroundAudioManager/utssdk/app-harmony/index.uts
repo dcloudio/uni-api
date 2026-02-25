@@ -112,7 +112,7 @@ async function STOP_BACKGROUND() {
     await stopBackgroundTask();
 }
 
-const LOG = (msg: string) => console.log(`[getBackgroundAudioManager]: ${msg}`)
+const LOG = (msg: string): void => console.log(`[getBackgroundAudioManager]: ${msg}`)
 
 class STATE_TYPE {
     // 音频播放空闲
@@ -156,6 +156,7 @@ class BGAManagerImpl implements BackgroundAudioManager {
     private _onError: Function = () => { };
     private _onBufferingUpdate: Function = () => { };
     private avSessionDestroyPromise: Promise<void> | null = null;
+    private _cache: boolean = false;
 
     constructor() {
         this.init()
@@ -246,6 +247,12 @@ class BGAManagerImpl implements BackgroundAudioManager {
         });
         _audioPlayer.on('finish', () => {
             this.isPlaying = false;
+            // 先设定 avSessionDestroyPromise 再触发 onEned 事件，用户会在回调里重新设置播放
+            if (BGAManagerImpl.avSession) {
+                this.avSessionDestroyPromise = BGAManagerImpl.avSession.destroy().then(() => {
+                    this.avSessionIsActive = false
+                })
+            }
             this._onEnded()
             STOP_BACKGROUND()
             audioPlayerCallback.ended()
@@ -411,6 +418,12 @@ class BGAManagerImpl implements BackgroundAudioManager {
     get playbackRate() {
         return this._playbackRate
     }
+    set cache(value: boolean) {
+        this._cache = value
+    }
+    get cache() {
+        return this._cache
+    }
     async play() {
         if (!BGAManagerImpl.audioPlayer) {
             return;
@@ -444,7 +457,8 @@ class BGAManagerImpl implements BackgroundAudioManager {
         STOP_BACKGROUND();
         audioPlayerCallback.stop();
         BGAManagerImpl.audioPlayer.reset();
-        BGAManagerImpl.audioPlayer.src = this._src
+        //reset() 置空 src，确保 stop 后还可以继续执行 play #24202
+        BGAManagerImpl.audioPlayer.src = '';
         if (BGAManagerImpl.avSession) {
             BGAManagerImpl.avSession.playbackState.state = avSession.PlaybackState.PLAYBACK_STATE_STOP;
             BGAManagerImpl.avSession.setAVPlaybackState()
@@ -488,30 +502,6 @@ class BGAManagerImpl implements BackgroundAudioManager {
     onWaiting(callback: (result: any) => void): void {
         audioPlayerCallback.onWaiting(callback)
     }
-    offCanplay(callback: (result: any) => void): void {
-        audioPlayerCallback.offCanplay(callback)
-    }
-    offPlay(callback: (result: any) => void): void {
-        audioPlayerCallback.offPlay(callback)
-    }
-    offPause(callback: (result: any) => void): void {
-        audioPlayerCallback.offPause(callback)
-    }
-    offStop(callback: (result: any) => void): void {
-        audioPlayerCallback.offStop(callback)
-    }
-    offEnded(callback: (result: any) => void): void {
-        audioPlayerCallback.offEnded(callback)
-    }
-    offTimeUpdate(callback: (result: any) => void): void {
-        audioPlayerCallback.offTimeUpdate(callback)
-    }
-    offError(callback: (result: ICreateBackgroundAudioFail) => void): void {
-        audioPlayerCallback.offError(callback)
-    }
-    offWaiting(callback: (result: any) => void): void {
-        audioPlayerCallback.offWaiting(callback)
-    }
     onPrev(callback: (result: any) => void): void {
         audioPlayerCallback.onPrev(callback)
     }
@@ -523,6 +513,42 @@ class BGAManagerImpl implements BackgroundAudioManager {
     }
     onSeeked(callback: (result: any) => void): void {
         audioPlayerCallback.onSeeked(callback)
+    }
+    offCanplay(): void {
+        audioPlayerCallback.onCanplayCallbacks = []
+    }
+    offPlay(): void {
+        audioPlayerCallback.onPlayCallbacks = []
+    }
+    offPause(): void {
+        audioPlayerCallback.onPauseCallbacks = []
+    }
+    offStop(): void {
+        audioPlayerCallback.onStopCallbacks = []
+    }
+    offEnded(): void {
+        audioPlayerCallback.onEndedCallbacks = []
+    }
+    offTimeUpdate(): void {
+        audioPlayerCallback.onTimeUpdateCallbacks = []
+    }
+    offError(): void {
+        audioPlayerCallback.onErrorCallbacks = []
+    }
+    offWaiting(): void {
+        audioPlayerCallback.onWaitingCallbacks = []
+    }
+    offPrev(): void {
+        audioPlayerCallback.onPrevCallbacks = []
+    }
+    offNext(): void {
+        audioPlayerCallback.onNextCallbacks = []
+    }
+    offSeeking(): void {
+        audioPlayerCallback.onSeekingCallbacks = []
+    }
+    offSeeked(): void {
+        audioPlayerCallback.onSeekedCallbacks = []
     }
 }
 
@@ -536,3 +562,10 @@ export const getBackgroundAudioManager: GetBackgroundAudioManager =
             return backgroundAudioManager
         }
     ) as GetBackgroundAudioManager
+
+export {
+    BackgroundAudioManager,
+    CreateBackgroundAudioErrorCode,
+    GetBackgroundAudioManager,
+    ICreateBackgroundAudioFail
+} from '../interface.uts';

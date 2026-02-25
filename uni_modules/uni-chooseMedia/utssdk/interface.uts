@@ -17,7 +17,12 @@ export type ChooseMediaErrorCode =
 	/**
 	 * 拍照或录像失败
 	 */
-	1101008;
+	1101008 |
+	/**
+	 * 其他错误
+	 */
+	1101010;
+
 
 /**
  * 图片或视频操作失败的错误回调
@@ -36,11 +41,11 @@ export type ChooseMediaTempFile = {
 	 */
 	fileType : ChooseMediaFileType
 	/**
-	 * 选定视频的数据量大小，单位 B
+	 * 选定视频的数据量大小，单位 kB
 	 */
 	size : number,
 	/**
-	 * 视频文件的字节大小
+	 * 视频文件的字节大小，单位 B
 	 * @uniPlatform {
 	  *	 "app": {
 	  *		"android": {
@@ -56,7 +61,8 @@ export type ChooseMediaTempFile = {
 	*    "harmony": {
 	*      "osVer": "5.0.0",
 	*      "uniVer": "4.61",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixvVer": "5.0"
 	*    }
 	  *	},
 	  *	"web": {
@@ -123,7 +129,8 @@ export type ChooseMediaOptions = {
 	*    "harmony": {
 	*      "osVer": "3.0",
 	*      "uniVer": "4.31",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixvVer": "5.0"
 	*    }
 	  *	},
 	 *  "mp": {
@@ -194,7 +201,8 @@ export type ChooseMediaOptions = {
 		 *    "harmony": {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixvVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -217,7 +225,8 @@ export type ChooseMediaOptions = {
 		 *    "harmony": {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixvVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -240,7 +249,8 @@ export type ChooseMediaOptions = {
 		 *    "harmony": {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixvVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -263,7 +273,8 @@ export type ChooseMediaOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -333,7 +344,8 @@ export type ChooseMediaOptions = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.25",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -431,7 +443,8 @@ export interface Uni {
 	  *    "harmony": {
 	  *      "osVer": "3.0",
 	  *      "uniVer": "4.31",
-	  *      "unixVer": "4.61"
+	  *      "unixVer": "4.61",
+	  *      "unixvVer": "5.0"
 	  *    }
 	  *	},
 	 *  "mp": {

@@ -1,7 +1,7 @@
 import { API_GET_RECORDER_MANAGER } from '../protocol.uts';
 import { GetRecorderManager, RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
 import AVRecorder, { supportFormats as avRecorderSupportFormats, SupportFormat } from './AVRecorder.uts';
-import { onRecorderStateChange, setRecordStateCallback } from './utils.uts';
+import { onRecorderStateChange, setRecordStateCallback, deleteRecordStateCallback } from './utils.uts';
 import { RecorderManagerFailImpl } from '../unierror.uts'
 
 // NOTE 避免被 vue Proxy 污染
@@ -61,6 +61,30 @@ class RecorderManagerImpl implements RecorderManager {
   onInterruptionEnd(options: (result: any) => void): void {
     setRecordStateCallback('interruptionEnd', options)
   }
+  offStart(): void {
+    deleteRecordStateCallback('start')
+  }
+  offPause(): void {
+    deleteRecordStateCallback('pause')
+  }
+  offStop(): void {
+    deleteRecordStateCallback('stop')
+  }
+  offFrameRecorded(): void {
+    deleteRecordStateCallback('frameRecorded')
+  }
+  offError(): void {
+    deleteRecordStateCallback('error')
+  }
+  offResume(): void {
+    deleteRecordStateCallback('resume')
+  }
+  offInterruptionBegin(): void {
+    deleteRecordStateCallback('interruptionBegin')
+  }
+  offInterruptionEnd(): void {
+    deleteRecordStateCallback('interruptionEnd')
+  }
 }
 
 let recorderManager: RecorderManager | null = null
@@ -73,3 +97,12 @@ export const getRecorderManager: GetRecorderManager = defineSyncApi<RecorderMana
     return recorderManager
   }
 ) as GetRecorderManager
+
+export {
+    GetRecorderManager,
+    IRecorderManagerFail,
+    RecorderManager,
+    RecorderManagerErrorCode,
+    RecorderManagerOnStopResult,
+    RecorderManagerStartOptions
+} from '../interface.uts'

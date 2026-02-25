@@ -170,3 +170,8 @@ export const getAppAuthorizeSetting: GetAppAuthorizeSetting = defineSyncApi<GetA
     return appAuthorizeSettingImpl.appAuthorizeSetting as GetAppAuthorizeSettingResult
   }
 ) as GetAppAuthorizeSetting
+
+export {
+  GetAppAuthorizeSetting,
+  GetAppAuthorizeSettingResult
+} from '../interface.uts';

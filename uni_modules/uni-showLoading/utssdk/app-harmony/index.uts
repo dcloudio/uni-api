@@ -2,7 +2,7 @@ import { ShowLoading, ShowLoadingOptions,LoadingPage,ShowLoadingSuccess,ShowLoad
 import { HideLoading, HideLoadingOptions,HideLoadingSuccess,HideLoadingFailImpl} from "../interface.uts";
 
 export const showLoading: ShowLoading = function (
-  options: ShowLoadingOptions
+  options?: ShowLoadingOptions|null
 ):LoadingPage | null {
 
 	const uuid = `${Date.now()}${Math.floor(Math.random() * 1e7)}`
@@ -12,22 +12,27 @@ export const showLoading: ShowLoading = function (
 	const successEventName = `${baseEventName}_success`
 	const failEventName = `${baseEventName}_fail`
 
+	let nextOptions:any|null = {}
+	if(options != null){
+		nextOptions = JSON.parse(JSON.stringify(options))
+	}
+	
 	uni.$on(readyEventName, () => {
-	  uni.$emit(optionsEventName, JSON.parse(JSON.stringify(options)))
+	  uni.$emit(optionsEventName, nextOptions)
 	})
 	uni.$on(successEventName, (inputParamStr: string) => {
 
 		let res = {
 		} as ShowLoadingSuccess
 
-		options.success?.(res)
-		options.complete?.(res)
+		options?.success?.(res)
+		options?.complete?.(res)
 	})
 	uni.$on(failEventName, () => {
 
 	  const res = new ShowLoadingFailImpl()
-	  options.fail?.(res)
-	  options.complete?.(res)
+	  options?.fail?.(res)
+	  options?.complete?.(res)
 
 	})
 
@@ -35,8 +40,8 @@ export const showLoading: ShowLoading = function (
 	  url: `/uni_modules/uni-showLoading/pages/showLoading/showLoading?readyEventName=${readyEventName}&optionsEventName=${optionsEventName}&successEventName=${successEventName}&failEventName=${failEventName}`,
 	  fail(err) {
 	    const res = new ShowLoadingFailImpl(`showLoading failed, ${err}`)
-	    options.fail?.(res)
-	    options.complete?.(res)
+	    options?.fail?.(res)
+	    options?.complete?.(res)
 	    uni.$off(readyEventName, null)
 	    uni.$off(successEventName, null)
 	    uni.$off(failEventName, null)
@@ -50,8 +55,8 @@ export const showLoading: ShowLoading = function (
 		 * 返回null 或者 类型不匹配等不应该存在的情况，返回未知错误码
 		 */
 		const res = new ShowLoadingFailImpl()
-		options.fail?.(res)
-		options.complete?.(res)
+		options?.fail?.(res)
+		options?.complete?.(res)
 		return null
 	}
 
@@ -117,8 +122,6 @@ export const hideLoading: HideLoading = function (
 		}
 
 		if(perPage.options!["successEventName"] != null){
-			uni.$emit(perPage.options["successEventName"]!, JSON.stringify(ret))
-
 			uni.closeDialogPage({
 				dialogPage:perPage
 			})

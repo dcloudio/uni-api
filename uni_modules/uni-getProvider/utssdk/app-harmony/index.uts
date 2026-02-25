@@ -11,15 +11,6 @@ import {
     API_GET_PROVIDER_SYNC
 } from '../protocol.uts'
 
-export {
-    GetProvider,
-    GetProviderOptions,
-    GetProviderSuccess,
-    GetProviderSync,
-    GetProviderSyncOptions,
-    GetProviderSyncSuccess
-}
-
 const SupportedProviderServiceList = ['oauth', 'share', 'payment', 'push', 'location']
 
 function _getProviderSync(options: GetProviderOptions) {
@@ -59,3 +50,20 @@ export const getProviderSync: GetProviderSync = defineSyncApi<GetProviderSyncSuc
         } as GetProviderSyncSuccess
     }
 ) as GetProviderSync
+
+export {
+    GetProvider,
+    GetProviderComplete,
+    GetProviderCompleteCallback,
+    GetProviderFail,
+    GetProviderFailCallback,
+    GetProviderFailImpl,
+    GetProviderOptions,
+    GetProviderSuccess,
+    GetProviderSuccessCallback,
+    GetProviderSync,
+    GetProviderSyncOptions,
+    GetProviderSyncSuccess,
+    IGetProviderFail,
+    ProviderErrorCode
+} from '../interface.uts'

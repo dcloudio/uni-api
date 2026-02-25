@@ -12,11 +12,9 @@ export const makePhoneCall : MakePhoneCall = function (options : MakePhoneCallOp
 		options.complete?.(err)
 		return
 	}
-	console.log(options.phoneNumber)
+	
 	let phoneString = `tel://` + options.phoneNumber
 	let phoneUrl = URL(string = phoneString)
-	console.log(phoneString)
-	console.log(phoneUrl?.path)
 
 	if (phoneUrl == null) {
 		const err = new MakePhoneCallErrorImpl(1500602);

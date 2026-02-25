@@ -12,15 +12,21 @@ import android.os.Build
 import android.os.IBinder
 import uts.sdk.modules.uniLocationSystem.UniLocationSystemProviderImpl
 import android.graphics.Bitmap
+import java.lang.ref.WeakReference
 
 // import io.dcloud.uni.getlocation.system.R;
 
 class UniSystemLocationService : Service() {
-    private val binder: MyBinder = MyBinder()
+    private val binder: MyBinder = MyBinder(this)
 
-    inner class MyBinder : Binder() {
-        val service: UniSystemLocationService
-            get() = this@UniSystemLocationService
+    class MyBinder(service: UniSystemLocationService) : Binder() {
+        private val serviceRef: WeakReference<UniSystemLocationService> = WeakReference(service)
+        val service: UniSystemLocationService?
+            get() = serviceRef.get()
+
+        fun clear() {
+            serviceRef.clear()
+        }
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -39,6 +45,7 @@ class UniSystemLocationService : Service() {
 
     override fun onUnbind(intent: Intent?): Boolean {
         stopForeground(true)
+        // binder.clear()
         return super.onUnbind(intent)
     }
 

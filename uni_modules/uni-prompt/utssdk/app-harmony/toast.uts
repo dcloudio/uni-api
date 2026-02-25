@@ -26,13 +26,13 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
                 }
             }
             const window = UTSHarmony.getCurrentWindow();
-            const promptAction = window.getUIContext().getPromptAction() as PromptAction
+            const promptActionIns = window.getUIContext().getPromptAction() as PromptAction
             if (deviceInfo.sdkApiVersion >= 18) {
                 if (openToastPromiseTimer != null) {
                     clearTimeout(openToastPromiseTimer);
                     openToastPromiseTimer = null
                 }
-                openToastPromise = promptAction.openToast(showToastOptions)
+                openToastPromise = promptActionIns.openToast(showToastOptions)
                     .then((id) => {
                         res.resolve({} as ShowToastSuccess)
                         return id
@@ -46,7 +46,7 @@ export const showToast: ShowToast = defineAsyncApi<ShowToastOptions, ShowToastSu
                     openToastPromise = null
                 }, showToastOptions.duration ?? 1500)
             } else {
-                promptAction.showToast(showToastOptions)
+                promptActionIns.showToast(showToastOptions)
                 res.resolve({} as ShowToastSuccess)
             }
         } catch (error) {
@@ -63,13 +63,13 @@ export const hideToast: HideToast = defineAsyncApi(
     function (_, res: ApiExecutor<any>) {
         if (deviceInfo.sdkApiVersion >= 18) {
             const window = UTSHarmony.getCurrentWindow();
-            const promptAction = window.getUIContext().getPromptAction() as PromptAction
+            const promptActionIns = window.getUIContext().getPromptAction() as PromptAction
             if (openToastPromiseTimer != null) {
                 clearTimeout(openToastPromiseTimer)
                 openToastPromiseTimer = null
             }
             openToastPromise?.then(id => {
-                promptAction.closeToast(id)
+                promptActionIns.closeToast(id)
             }).finally(() => {
                 openToastPromise = null
             })

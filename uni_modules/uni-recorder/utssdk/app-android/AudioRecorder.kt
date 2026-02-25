@@ -660,8 +660,17 @@ class AudioRecorder() {
     }
 
     private fun checkAndAdjustSampleRate(): Int {
+        // 优先检查当前设置的采样率是否支持
+        if (sampleRate > 0) {
+            val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioEncoding)
+            if (bufferSize > 0) {
+                return sampleRate
+            }
+        }
+
         val supportedSampleRates = intArrayOf(44100, 48000, 22050, 16000, 11025, 8000)
         for (rate in supportedSampleRates) {
+            if (rate == sampleRate) continue
             val bufferSize = AudioRecord.getMinBufferSize(rate, channelConfig, audioEncoding)
             if (bufferSize > 0) {
                 return rate

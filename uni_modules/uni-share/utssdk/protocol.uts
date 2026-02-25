@@ -31,56 +31,56 @@ export const ShareApiOptions : ApiOptions<ShareOptions> = {
       }
     ],
     [
-      'scene', function (scene : ShareScene, params : ShareOptions) {
+      'scene', function (scene : ShareScene, params : ShareOptions): string | undefined {
         const { provider, openCustomerServiceChat } = params;
-        if (provider === 'weixin' && openCustomerServiceChat == null && (!scene || !WX_SCENE.includes(scene))) {
+        if (provider === 'weixin' && openCustomerServiceChat !== true && (!scene || !WX_SCENE.includes(scene))) {
           return `分享到微信时，scene必须为以下其中一个：${WX_SCENE.join('、')}`;
         }
         return undefined;
       }
     ],
     [
-      'summary', function (summary : string, params : ShareOptions) {
-        if (params.type === 1 && !summary) {
-          return '分享纯文本时，summary必填';
+        'summary', function (summary: string, params: ShareOptions): string | undefined {
+        if (params.type === 1 && !summary && params.openCustomerServiceChat !== true) {
+          return '分享纯文本时，summary必填且不超过 10KB';
         }
         return undefined;
       }
     ],
     [
-      'href', function (href : string, params : ShareOptions) {
-        if (params.type === 0 && !href) {
-          return '分享图文时，href必填';
+        'href', function (href: string, params: ShareOptions): string | undefined {
+        if (params.type === 0 && !href && params.openCustomerServiceChat !== true) {
+          return '分享图文时，href必填且不超过 10KB';
         }
         return undefined;
       }
     ],
     [
-      'imageUrl', function (imageUrl : string, params : ShareOptions) {
-        if ([0, 2, 5].includes(Number(params.type)) && !imageUrl) {
-          return '分享图文、纯图片、小程序时，imageUrl必填，推荐使用小于20Kb的图片';
+        'imageUrl', function (imageUrl: string, params: ShareOptions): string | undefined {
+        if ([0, 2, 5].includes(Number(params.type)) && !imageUrl && params.openCustomerServiceChat !== true) {
+          return '分享图文、纯图片、小程序时，imageUrl 必填，推荐使用小于 64KB 的图片';
         }
         return undefined;
       }
     ],
     [
-      'mediaUrl', function (mediaUrl : string, params : ShareOptions) {
-        if ([3, 4].includes(Number(params.type)) && !mediaUrl) {
-          return '分享音乐、视频时，mediaUrl必填';
+        'mediaUrl', function (mediaUrl: string, params: ShareOptions): string | undefined {
+        if ([3, 4].includes(Number(params.type)) && !mediaUrl && params.openCustomerServiceChat !== true) {
+          return '分享音乐、视频时，mediaUrl 必填';
         }
         return undefined;
       }
     ],
     [
-      'miniProgram', function (miniProgram : string, params : ShareOptions) {
-        if (params.type === 5 && !miniProgram) {
-          return '分享小程序时，miniProgram必填';
+        'miniProgram', function (miniProgram: string, params: ShareOptions): string | undefined {
+        if (params.type === 5 && !miniProgram && params.openCustomerServiceChat !== true) {
+          return '分享小程序时，miniProgram 必填';
         }
         return undefined;
       }
     ],
     [
-      'corpid', function (corpid : string, params : ShareOptions) {
+        'corpid', function (corpid: string, params: ShareOptions): string | undefined {
         if (params.openCustomerServiceChat && !corpid) {
           return '使用打开客服功能时 corpid 必填';
         }
@@ -88,7 +88,7 @@ export const ShareApiOptions : ApiOptions<ShareOptions> = {
       }
     ],
     [
-      'customerUrl', function (customerUrl : string, params : ShareOptions) {
+        'customerUrl', function (customerUrl: string, params: ShareOptions): string | undefined {
         if (params.openCustomerServiceChat && !customerUrl) {
           return '使用打开客服功能时 customerUrl 必填';
         }

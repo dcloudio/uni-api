@@ -65,3 +65,10 @@ export const $emit: $Emit = defineSyncApi<void>(
         getEmitter().emit(eventName, ...args)
     }
 ) as $Emit
+
+export {
+    $Emit,
+    $Off,
+    $On,
+    $Once
+} from '../interface.uts';

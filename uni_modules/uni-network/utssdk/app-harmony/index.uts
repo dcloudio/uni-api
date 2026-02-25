@@ -10,6 +10,9 @@ import {
 import {
     configMTLS
 } from './network/configMTLS.uts'
+// import {
+//     prefetchDNS
+// } from './network/prefetchDNS.uts'
 
 export {
     RequestTask,
@@ -56,12 +59,18 @@ export {
     RequestTaskOnChunkReceivedCallback,
     RequestTaskOnChunkReceivedListenerResult,
     RequestTaskOnHeadersReceivedCallback,
-    RequestTaskOnHeadersReceivedListenerResult
+    RequestTaskOnHeadersReceivedListenerResult,
+    // PrefetchDNS,
+    // PrefetchDNSOptions,
+    // PrefetchDNSNetAddress,
+    // PrefetchDNSSuccess,
+    // PrefetchDNSFail
 } from '../interface.uts'
 
 export {
     request,
     uploadFile,
     downloadFile,
-    configMTLS
+    configMTLS,
+    // prefetchDNS
 }

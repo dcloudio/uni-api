@@ -389,18 +389,21 @@ class UploadController {
 	private getMimeType(filename : string) : string {
 		let map = MimeTypeMap.getSingleton()
 		var extType = MimeTypeMap.getFileExtensionFromUrl(filename)
-		if (extType == null && filename.lastIndexOf(".") >= 0) {
+		if (TextUtils.isEmpty(extType) && filename.lastIndexOf(".") >= 0) {
 			extType = filename.substring(filename.lastIndexOf(".") + 1)
+		}
+		if (extType != null) {
+			extType = extType.toLowerCase()
 		}
 		let ret = map.getMimeTypeFromExtension(extType);
 		if (TextUtils.isEmpty(ret)) {
 			if (TextUtils.isEmpty(extType)) {
-				ret = "*/*"
+				ret = "application/octet-stream"
 			} else {
 				ret = "application/" + extType
 			}
 		}
-
+	
 		return ret!;
 	}
 }

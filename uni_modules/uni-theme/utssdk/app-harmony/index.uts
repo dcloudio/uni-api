@@ -19,18 +19,6 @@ import {
 import { AppThemeFailImpl } from '../unierror.uts';
 import { SetAppThemeApiProtocol, API_SET_APP_THEME } from '../protocol.uts';
 
-export {
-	OnOsThemeChangeCallback,
-	SetAppThemeOptions,
-	SetAppThemeSuccessResult,
-	OnAppThemeChangeCallback,
-	OsThemeChangeResult,
-	AppThemeChangeResult,
-	OnHostThemeChangeCallback,
-	OnHostThemeChangeCallbackResult,
-	AppThemeFail
-} from '../interface.uts';
-
 export const onOsThemeChange: OnOsThemeChange = function (callback: OnOsThemeChangeCallback): number {
 	return UTSHarmony.onOsThemeChange(function (res: OsThemeChangeResult) {
 		let result = {
@@ -88,3 +76,28 @@ export const onHostThemeChange: OnHostThemeChange = function (callback: OnHostTh
 export const offHostThemeChange: OffHostThemeChange = function (id: number) {
 	UTSHarmony.offOsThemeChange(id)
 }
+
+export {
+    AppThemeChangeResult,
+    AppThemeErrorCode,
+    AppThemeFail,
+    IAppThemeFail,
+    OffAppThemeChange,
+    OffHostThemeChange,
+    OffOsThemeChange,
+    OnAppThemeChange,
+    OnAppThemeChangeCallback,
+    OnHostThemeChange,
+    OnHostThemeChangeCallback,
+    OnHostThemeChangeCallbackResult,
+    OnOsThemeChange,
+    OnOsThemeChangeCallback,
+    OnThemeChangeCallbackResult,
+    OsThemeChangeResult,
+    SetAppTheme,
+    SetAppThemeCompleteCallback,
+    SetAppThemeFailCallback,
+    SetAppThemeOptions,
+    SetAppThemeSuccessCallback,
+    SetAppThemeSuccessResult
+} from '../interface.uts'

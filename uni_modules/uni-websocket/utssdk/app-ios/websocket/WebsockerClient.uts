@@ -111,11 +111,13 @@ export class WebsockerClient {
     if (header != null) {
       let map = header!.toMap();
       if (map != null) {
-        for (key in map.keys) {
+        for (entry in map) {
+		  let key = entry.key;
+		  let value = entry.value;
           if (key.caseInsensitiveCompare("Origin") == ComparisonResult.orderedSame) {
             hasOrigin = true;
           }
-          request?.addValue(`${map[key]}`, forHTTPHeaderField = key)
+          request?.addValue(`${value}`, forHTTPHeaderField = key)
         }
       }
     }

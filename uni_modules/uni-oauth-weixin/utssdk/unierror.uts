@@ -23,9 +23,9 @@ export const OauthWeixinUniErrors : Map<OauthErrorCode, string> = new Map([
    */
   [1310504, '未获取到授权 code，请先登录'],
   /**
-   * 授权凭证无效
+   * 授权凭证或OpenID无效
    */
-  [1310505, '授权凭证无效'],
+  [1310505, '授权凭证或OpenID无效'],
   /**
    * 获取用户信息失败
    */
@@ -64,13 +64,13 @@ export class OauthWeixinFailImpl extends UniError implements IOauthFail {
 	// #ifdef APP-HARMONY
 	override errCode : OauthErrorCode
 	// #endif
-	constructor(errCode : OauthErrorCode, errMsg : string | null) {
+	constructor(errCode : OauthErrorCode, errMsg : string | null = null) {
 		super();
 		this.errSubject = OauthWeixinUniErrorSubject;
 		this.errCode = errCode;
 		const error = OauthWeixinUniErrors.get(errCode) ?? "";
 		if (errMsg != null) {
-			this.errMsg = error + ", the reason: " + errMsg;
+			this.errMsg = `${error.length ? `${error}, the reason: ` : ''}${errMsg}`;
 		} else {
 			this.errMsg = error;
 		}

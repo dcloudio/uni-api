@@ -11,12 +11,21 @@ import NetworkInfo from "android.net.NetworkInfo";
 export { OnNetworkStatusChangeCallback, OnNetworkStatusChangeCallbackResult } from '../interface.uts'
 
 export const getNetworkType : GetNetworkType = function (options : GetNetworkTypeOptions) {
-	const context = UTSAndroid.getUniActivity()!!;
-	const connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager;
+	const appContext = UTSAndroid.getAppContext()!!;
+	const connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager;
 	if (connectivityManager != null) {
 		if (Build.VERSION.SDK_INT >= 23) {
 			const permissions = ["android.permission.ACCESS_NETWORK_STATE"];
-			if (!UTSAndroid.checkSystemPermissionGranted(context, permissions)) {
+			const activityContext = UTSAndroid.getUniActivity();
+			if (activityContext == null) {
+				const result : GetNetworkTypeSuccess = {
+					networkType: "none"
+				}
+				options?.success?.(result);
+				options?.complete?.(result);
+				return
+			}
+			if (!UTSAndroid.checkSystemPermissionGranted(activityContext!!, permissions)) {
 				const result : GetNetworkTypeSuccess = {
 					networkType: "none"
 				}

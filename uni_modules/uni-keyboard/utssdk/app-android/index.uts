@@ -118,6 +118,7 @@ class OnKeyBoardChangedListener extends UniActivityLifeCycleCallback implements 
 	unwatch() {
 		UTSAndroid.offActivityCallback(this)
 		this.decorView?.getViewTreeObserver()?.removeOnGlobalLayoutListener(this)
+		this.decorView = null
 		this.activity = null
 	}
 

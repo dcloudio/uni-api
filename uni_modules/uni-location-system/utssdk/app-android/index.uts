@@ -101,7 +101,7 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider,
 		UTSAndroid.getUniActivity()!.getApplication()!.bindService(intent, this.connection, Context.BIND_AUTO_CREATE)
 	}
 
-	startSystemLocation(options1 : any, context : Context = UTSAndroid.getUniActivity()!) {
+	startSystemLocation(options1 : any, context : Context = UTSAndroid.getAppContext()!) {
 		let options = options1 as StartLocationUpdateOptions
 
 		if (options.type == null) {
@@ -116,12 +116,12 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider,
 		}
 		this.locationManager = context.getSystemService("location") as LocationManager
 		let criteria = new Criteria()
-		criteria.setPowerRequirement(Criteria.POWER_LOW)
+		criteria.setPowerRequirement(Criteria.POWER_HIGH)
 		criteria.setSpeedRequired(true)
 		/**
 		 * 如果存在gps，那么优先gps，这样才有高度信息
 		 */
-		let providerName : string | null = null
+		let providerName : string | null = "gps"
 		if (!this.locationManager!.getProviders(criteria, true).contains("gps")) {
 			providerName = this.locationManager!.getBestProvider(criteria, true)
 		}
@@ -375,7 +375,7 @@ function getLocationImpl(options : GetLocationOptions) {
 		criteria.setAccuracy(Criteria.ACCURACY_COARSE)
 	}
 
-	criteria.setPowerRequirement(Criteria.POWER_LOW)
+	criteria.setPowerRequirement(Criteria.POWER_HIGH)
 	criteria.setSpeedRequired(true)
 
 	/**

@@ -41,7 +41,7 @@ export {
     GetVideoInfoOptions,
     GetVideoInfoSuccess,
     GetVideoInfo,
-    // #ifndef UNI-APP-X
+    // #ifdef !UNI-APP-X && APP-HARMONY
     PreviewImageOptions,
     PreviewImageSuccess,
     PreviewImage,
@@ -117,7 +117,7 @@ export {
     chooseVideo,
     getImageInfo,
     getVideoInfo,
-    // #ifndef UNI-APP-X
+    // #ifdef !UNI-APP-X && APP-HARMONY
     previewImage,
     closePreviewImage,
     // #endif
@@ -127,3 +127,14 @@ export {
     chooseFile,
     compressVideo
 }
+
+export {
+    IMediaError,
+    // #ifdef !UNI-APP-X && APP-HARMONY
+    LongPressActionsFailResult,
+    LongPressActionsOptions,
+    LongPressActionsSuccessResult,
+    // #endif
+    MediaErrorCode,
+    MediaOrientation,
+} from '../interface.uts'

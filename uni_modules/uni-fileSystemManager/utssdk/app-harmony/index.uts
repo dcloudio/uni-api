@@ -10,7 +10,6 @@ import { CallBack, FileCallback } from './callback.uts';
 import { CheckFdErr, CustomValidReturn, DataType, ModeReflect, checkDataType, checkEncoding, checkFd, checkPath, checkPathExistence, checkPathExistenceSync, checkPathSync, getApiError, getFileTypeMode, getFsPath, getNoSuchFileOrDirectoryError, getOpenMode, getParameterError, getSavedDir, getSavedFilePath, isFileUri, isString, modeReflect, obtainUpperPath, ohosReadText, transformErrorCode, getAlreadyExistsError, getIsDirectoryError, getDirectoryNotEmpty, savedFileList, calculateAllPaths, CACHE_PATH, USER_DATA_PATH, TEMP_PATH, SANDBOX_PATH, normalizeFilePath } from './utils.uts';
 import { FileSystemManagerFailImpl } from "../unierror.uts"
 import buffer from '@ohos.buffer';
-export { AccessOptions, AppendFileOptions, CloseOptions, CloseSyncOptions, CopyFileOptions, EntriesResult, FStatOptions, FStatSuccessResult, FStatSyncOptions, FTruncateFileOptions, FTruncateFileSyncOptions, FileManagerSuccessResult, FileStats, FileSystemManager, GetFileInfoOptions, GetFileInfoSuccessResult, GetSavedFileListOptions, GetSavedFileListResult, MkDirOptions, OpenFileOptions, OpenFileSuccessResult, OpenFileSyncOptions, ReadCompressedFileOptions, ReadDirOptions, ReadDirSuccessResult, ReadFileOptions, ReadFileSuccessResult, ReadOption, ReadResult, ReadSuccessCallbackResult, ReadSyncOption, ReadZipEntryOptions, RemoveSavedFileOptions, RenameOptions, RmDirOptions, SaveFileOptions, SaveFileSuccessResult, StatOptions, StatSuccessResult, Stats, TruncateFileOptions, UnLinkOptions, UnzipFileOptions, WriteFileOptions, WriteOptions, WriteResult, WriteSyncOptions, ZipFileItem, FileSystemManagerFail, IFileSystemManagerFail } from '../interface.uts';
 
 const DEFAULT_ENCODING = 'utf-8'
 const ENCODING_SUPPORT = ["ascii", "base64", "utf-8"]
@@ -1152,20 +1151,33 @@ class FileSystemManagerImpl implements FileSystemManager {
       }
     }
 
+    function operateSuccess() {
+      cb.success({
+        // #ifdef UNI-APP-X
+        savedFilePath: normalizeFilePath(savedFilePath),
+        // #endif
+        // #ifndef UNI-APP-X
+        // @ts-expect-error
+        savedFilePath,
+        // #endif
+      } as SaveFileSuccessResult)
+    }
+
     fs.rename(tempFilePath, savedFilePath)
-      .then(() => {
-        cb.success({
-          // #ifdef UNI-APP-X
-          savedFilePath: normalizeFilePath(savedFilePath),
-          // #endif
-          // #ifndef UNI-APP-X
-          // @ts-expect-error
-          savedFilePath,
-          // #endif
-        } as SaveFileSuccessResult)
-      })
+      .then(operateSuccess)
       .catch((err: Error) => {
-        cb.fail(getApiError((err as BusinessError).code, errMsg))
+        // 兼容用户从相册选择图片时，保存图片失败的问题，无法移动文件
+        if ((err as BusinessError).code === 13900016) {
+          this.copyFile({
+            srcPath: tempFilePath,
+            destPath: savedFilePath,
+            success: operateSuccess,
+            fail: cb.fail,
+            complete: null
+          } as CopyFileOptions)
+        } else {
+          cb.fail(getApiError((err as BusinessError).code, errMsg))
+        }
       })
   }
   saveFileSync(inTempFilePath: string, filePath: string | null): string {
@@ -1211,7 +1223,18 @@ class FileSystemManagerImpl implements FileSystemManager {
       return savedFilePath
       // #endif
     } catch (error) {
-      throw new Error((error as Error).message)
+      // 兼容用户从相册选择图片时，保存图片失败的问题，无法移动文件
+      if ((error as BusinessError).code === 13900016) {
+        this.copyFileSync(tempFilePath, savedFilePath)
+        // #ifdef UNI-APP-X
+        return normalizeFilePath(savedFilePath)
+        // #endif
+        // #ifndef UNI-APP-X
+        return savedFilePath
+        // #endif
+      } else {
+        throw new Error((error as Error).message)
+      }
     }
   }
   removeSavedFile(options: RemoveSavedFileOptions): void {
@@ -1837,3 +1860,77 @@ class FileSystemManagerImpl implements FileSystemManager {
 export const getFileSystemManager = defineSyncApi<FileSystemManager>(GET_FILE_SYSTEM_MANAGER, () => {
   return new FileSystemManagerImpl()
 });
+
+export {
+  AccessOptions,
+  AppendFileOptions,
+  CloseOptions,
+  CloseSyncOptions,
+  CopyFileOptions,
+  EntriesResult,
+  EntryItem,
+  FStatOptions,
+  FStatSuccessCallback,
+  FStatSuccessResult,
+  FStatSyncOptions,
+  FTruncateFileOptions,
+  FTruncateFileSyncOptions,
+  FileManagerCompleteCallback,
+  FileManagerFailCallback,
+  FileManagerSuccessCallback,
+  FileManagerSuccessResult,
+  FileStats,
+  FileSystemManager,
+  FileSystemManagerErrorCode,
+  FileSystemManagerFail,
+  GetFileInfoOptions,
+  GetFileInfoSuccessCallback,
+  GetFileInfoSuccessResult,
+  GetFileSystemManager,
+  GetSavedFileListCallback,
+  GetSavedFileListOptions,
+  GetSavedFileListResult,
+  IFileSystemManagerFail,
+  MkDirOptions,
+  MkDirSuccessCallback,
+  OpenFileOptions,
+  OpenFileSuccessCallback,
+  OpenFileSuccessResult,
+  OpenFileSyncOptions,
+  ReadCompressedFileCallback,
+  ReadCompressedFileOptions,
+  ReadCompressedFileResult,
+  ReadDirOptions,
+  ReadDirSuccessCallback,
+  ReadDirSuccessResult,
+  ReadFileOptions,
+  ReadFileSuccessCallback,
+  ReadFileSuccessResult,
+  ReadOption,
+  ReadResult,
+  ReadSuccessCallback,
+  ReadSuccessCallbackResult,
+  ReadSyncOption,
+  ReadZipEntryCallback,
+  ReadZipEntryOptions,
+  RemoveSavedFileOptions,
+  RenameOptions,
+  RmDirOptions,
+  SaveFileOptions,
+  SaveFileSuccessCallback,
+  SaveFileSuccessResult,
+  StatOptions,
+  StatSuccessCallback,
+  StatSuccessResult,
+  Stats,
+  TruncateFileOptions,
+  UnLinkOptions,
+  UnLinkSuccessCallback,
+  UnzipFileOptions,
+  WriteCallback,
+  WriteFileOptions,
+  WriteOptions,
+  WriteResult,
+  WriteSyncOptions,
+  ZipFileItem
+} from '../interface.uts';

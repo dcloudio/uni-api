@@ -24,7 +24,8 @@ export type OpenDocumentErrorCode =
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -94,7 +95,8 @@ export type OpenDocumentErrorCode =
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -164,7 +166,8 @@ export type OpenDocumentErrorCode =
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -234,7 +237,8 @@ export type OpenDocumentErrorCode =
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -306,7 +310,8 @@ export interface IOpenDocumentError extends IUniError {
 	*    "harmony": {
 	*      "osVer": "5.0.0",
 	*      "uniVer": "4.31",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixvVer": "5.0"
 	*    }
 	* 	},
 	*   "web": {
@@ -397,7 +402,8 @@ export type OpenDocumentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -467,7 +473,8 @@ export type OpenDocumentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -537,7 +544,8 @@ export type OpenDocumentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -607,7 +615,8 @@ export type OpenDocumentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -677,7 +686,8 @@ export type OpenDocumentOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -754,7 +764,8 @@ export interface Uni {
 	 *      "harmony": {
 	 *        	"osVer": "5.0.0",
 	 *      	"uniVer": "4.31",
-	 *      	"unixVer": "4.61"
+	 *      	"unixVer": "4.61",
+	 *      	"unixvVer": "5.0"
 	 *    	}
 	 * 	},
 	 *   "web": {

@@ -1,78 +1,75 @@
 import * as wxopensdk from '@tencent/wechat_open_sdk';
-import { AuthResp, UniOAuthWeixinProvider, WeixinAccessTokenResp, WeixinUserInfoResp } from '../interface.uts';
+import { AuthResp, UniOAuthWeixinProvider, WeixinAccessTokenResp, WeixinUserInfoResp, WeixinAccessTokenErrorResp } from '../interface.uts';
 import { bundleManager, AbilityConstant, Want } from "@kit.AbilityKit";
 import { util } from '@kit.ArkTS';
 import { OauthWeixinFailImpl } from '../unierror.uts';
 
 // 定义回调类型
-type OnWXReq = (req : wxopensdk.BaseReq) => void;
-type OnWXResp = (resp : wxopensdk.SendAuthResp) => void;
+type OnWXReq = (req: wxopensdk.BaseReq) => void;
+type OnWXResp = (resp: wxopensdk.SendAuthResp) => void;
 
 // 定义事件处理器类
 class WXApiEventHandlerImpl implements wxopensdk.WXApiEventHandler {
-	private onReqCallbacks : Map<OnWXReq, OnWXReq> = new Map();
-	private onRespCallbacks : Map<OnWXResp, OnWXResp> = new Map();
+	private onReqCallbacks: Map<OnWXReq, OnWXReq> = new Map();
+	private onRespCallbacks: Map<OnWXResp, OnWXResp> = new Map();
 
-	registerOnWXReqCallback(on : OnWXReq) {
+	registerOnWXReqCallback(on: OnWXReq) {
 		this.onReqCallbacks.set(on, on);
 	}
 
-	unregisterOnWXReqCallback(on : OnWXReq) {
+	unregisterOnWXReqCallback(on: OnWXReq) {
 		this.onReqCallbacks.delete(on);
 	}
 
-	registerOnWXRespCallback(on : OnWXResp) {
+	registerOnWXRespCallback(on: OnWXResp) {
 		this.onRespCallbacks.set(on, on);
 	}
 
-	unregisterOnWXRespCallback(on : OnWXResp) {
+	unregisterOnWXRespCallback(on: OnWXResp) {
 		this.onRespCallbacks.delete(on);
 	}
 
-	onReq(req : wxopensdk.BaseReq) : void {
-		wxopensdk.Log.i("onReq", "onReq:%s", JSON.stringify(req));
+	onReq(req: wxopensdk.BaseReq): void {
 		this.onReqCallbacks.forEach((callback) => callback(req));
 	}
 
-	onResp(resp : wxopensdk.SendAuthResp) : void {
-		wxopensdk.Log.i("onResp", "onResp:%s", JSON.stringify(resp));
+	onResp(resp: wxopensdk.SendAuthResp): void {
 		this.onRespCallbacks.forEach((callback) => callback(resp));
 	}
 }
 
-let handleWeChatCallIfNeed = (want: Want) => {}
+let handleWeChatCallIfNeed = (want: Want) => { }
 
-UTSHarmony.onAppAbilityCreate((want : Want, launchParam : AbilityConstant.LaunchParam) => {
-  handleWeChatCallIfNeed(want);
+UTSHarmony.onAppAbilityCreate((want: Want, launchParam: AbilityConstant.LaunchParam) => {
+	handleWeChatCallIfNeed(want);
 });
 
-UTSHarmony.onAppAbilityNewWant((want : Want, launchParam : AbilityConstant.LaunchParam) => {
-  handleWeChatCallIfNeed(want);
+UTSHarmony.onAppAbilityNewWant((want: Want, launchParam: AbilityConstant.LaunchParam) => {
+	handleWeChatCallIfNeed(want);
 });
 
 // 定义微信登录实现类
 export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
-	id : string = "weixin";
-	description : string = "微信登录";
-  isWeChatInstalled: boolean = false;
-	private authResultText : AuthResp = {} as AuthResp; // 用于存储授权结果
-	private APP_ID : string = ""; // 从配置中获取 APP_ID
-	private APP_SECRET : string = ""; // 从配置中获取 APP_SECRET
-  private WXEventHandler = new WXApiEventHandlerImpl();
-  private WeChatCallIfNeedCallback: Function[] = []
-  private WXApi: wxopensdk.WXApi | null = null
+	id: string = "weixin";
+	description: string = "微信登录";
+	isWeChatInstalled: boolean = false;
+	private authResultText: AuthResp = {} as AuthResp; // 用于存储授权结果
+	private APP_ID: string = ""; // 从配置中获取 APP_ID
+	private APP_SECRET: string = ""; // 从配置中获取 APP_SECRET
+	private WXEventHandler = new WXApiEventHandlerImpl();
+	private WXApi: wxopensdk.WXApi | null = null
 
 	constructor() {
 		this.APP_ID = this.getMetadata('WX_APPID');
 		this.APP_SECRET = this.getMetadata('WX_APPSECRET');
-    if (this.APP_ID.length) {
-      this.WXApi = wxopensdk.WXAPIFactory.createWXAPI(this.APP_ID);
-      this.isWeChatInstalled = this.WXApi.isWXAppInstalled()
-    }
+		if (this.APP_ID.length) {
+			this.WXApi = wxopensdk.WXAPIFactory.createWXAPI(this.APP_ID);
+			this.isWeChatInstalled = this.WXApi.isWXAppInstalled()
+		}
 	}
 
 	// 从应用配置中获取 APP_ID或APP_SECRET
-	private getMetadata(data : string) : string {
+	private getMetadata(data: string): string {
 		const bundleInfo = bundleManager.getBundleInfoForSelfSync(
 			bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_METADATA |
 			bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION
@@ -92,75 +89,41 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 		return "";
 	}
 
-	// 新增：state存储与管理方法
-	private saveStateToStorage(state : string) {
-		try {
-			// 使用应用内存储（如本地缓存）保存state
-			uni.setStorageSync('wx_login_state', state);
-		} catch (e) {
-			console.error('保存微信登录state失败', e);
-		}
-	}
-
-	private getStateFromStorage() {
-		try {
-			return uni.getStorageSync('wx_login_state') || '';
-		} catch (e) {
-			console.error('获取微信登录state失败', e);
-			return '';
-		}
-	}
-
-	private clearStateFromStorage() {
-		try {
-			uni.removeStorageSync('wx_login_state');
-		} catch (e) {
-			console.error('清除微信登录state失败', e);
-		}
-	}
-
 	// 登录方法
-	login(options : LoginOptions) : void {
+	login(options: LoginOptions): void {
 		if (!this.APP_ID || !this.WXApi) {
-			options.fail?.(new OauthWeixinFailImpl(1310500, null));
+			options.fail?.(new OauthWeixinFailImpl(1310500));
 			return;
 		}
 
-    handleWeChatCallIfNeed = (want : Want) => {
+		handleWeChatCallIfNeed = (want: Want) => {
 			this.WXApi?.handleWant(want, this.WXEventHandler);
 		}
 
 		const requestState = util.generateRandomUUID() || 'none'; // 随机生成 state
-		this.saveStateToStorage(requestState); // 新增：保存state到存储
 
 		let req = new wxopensdk.SendAuthReq();
 		req.isOption1 = false;
 		req.nonAutomatic = true;
-
-		// 根据微信官方文档，此处scope必须设置为'snsapi_userinfo'
-		req.scope = 'snsapi_userinfo';
-		// 添加兼容性处理
-		if (options.scopes && options.scopes !== 'snsapi_userinfo') {
-			console.log('微信登录: scope参数只能为snsapi_userinfo，已忽略传入的其他值');
-		}
+		req.scope = 'snsapi_userinfo'; // 根据微信官方文档，此处scope必须设置为'snsapi_userinfo'
 		req.state = requestState as string;
 
-		let onWXResp : OnWXResp = (resp : wxopensdk.SendAuthResp) => {
+		if (options.scopes && options.scopes !== 'snsapi_userinfo') {
+			console.log('[uni-login weixin]: scope参数只能为snsapi_userinfo，已忽略传入的其他值');
+		}
 
-			// 处理特殊情况 - 微信拒绝时可能不返回state
-			if (!resp.state) {
-				options.fail?.(new OauthWeixinFailImpl(1310509, '用户拒绝授权'));
-				this.clearStateFromStorage();
+		let onWXResp: OnWXResp = (resp: wxopensdk.SendAuthResp) => {
+			const responseState = resp.state as string;
+			// 微信拒绝时可能不返回state
+			if (!responseState) {
+				options.fail?.(new OauthWeixinFailImpl(1310509));
+				this.WXEventHandler.unregisterOnWXRespCallback(onWXResp);
 				return;
 			}
 
-			// 验证state
-			const storedState = this.getStateFromStorage() as string;
-			const responseState = resp.state as string;
-
-			if (storedState !== responseState) {
-				options.fail?.(new OauthWeixinFailImpl(1310508, 'state验证失败'));
-				this.clearStateFromStorage(); // 清除无效state
+			if (requestState !== responseState) {
+				options.fail?.(new OauthWeixinFailImpl(1310508));
+				this.WXEventHandler.unregisterOnWXRespCallback(onWXResp);
 				return;
 			}
 
@@ -175,38 +138,36 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 				);
 
 			} else {
-				options.fail?.(new OauthWeixinFailImpl(1310501, "APPID、appIdentifier、bundleId 不匹配"));
+				options.fail?.(new OauthWeixinFailImpl(1310501));
 			}
 
 			this.WXEventHandler.unregisterOnWXRespCallback(onWXResp);
-			// 清理：验证完成后清除state
-			this.clearStateFromStorage();
 		};
 
 		this.WXEventHandler.registerOnWXRespCallback(onWXResp);
 
-		let finished = this.WXApi.sendReq(UTSHarmony.getUIAbilityContext(), req);
+		let finished = this.WXApi.sendReq(UTSHarmony.getUIAbilityContext(), req) as Boolean | Promise<Boolean>;
 
-		// 判断finished是否为Promise
-
-		if (finished instanceof Promise) {
-			finished.catch(() => {
-				options.fail?.(new OauthWeixinFailImpl(1310502, '发送请求失败'));
-			});
-		}
+		Promise.resolve(finished).then(finished => {
+			if (!finished) {
+				options.fail?.(new OauthWeixinFailImpl(1310502));
+			}
+		}).catch(() => {
+			options.fail?.(new OauthWeixinFailImpl(1310502));
+		});
 	}
 
 	// 获取用户信息方法
-	getUserInfo(options : GetUserInfoOptions) : void {
+	getUserInfo(options: GetUserInfoOptions): void {
 		if (!this.authResultText) {
-			options.fail?.(new OauthWeixinFailImpl(1310503, null));
+			options.fail?.(new OauthWeixinFailImpl(1310503));
 			return;
 		}
 
-		const code : string = this.authResultText.code;
+		const code: string = this.authResultText.code;
 
 		if (!code) {
-			options.fail?.(new OauthWeixinFailImpl(1310504, null));
+			options.fail?.(new OauthWeixinFailImpl(1310504));
 			return;
 		}
 
@@ -217,12 +178,19 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 			method: 'GET',
 			success: (response) => {
 				if (response.statusCode === 200) {
-					const data : WeixinAccessTokenResp = response.data as WeixinAccessTokenResp;
-					const accessToken : string = data.access_token;
-					const openid : string = data.openid;
+					const successData = response.data as WeixinAccessTokenResp
+					const failData = response.data as WeixinAccessTokenErrorResp
+
+					const accessToken: string = successData.access_token;
+					const openid: string = successData.openid;
+
+					if (failData.errmsg) {
+						options.fail?.(new OauthWeixinFailImpl(failData.errcode as OauthErrorCode, failData.errmsg))
+						return;
+					}
 
 					if (!accessToken || !openid) {
-						options.fail?.(new OauthWeixinFailImpl(1310505, "授权凭证或OpenID无效"));
+						options.fail?.(new OauthWeixinFailImpl(1310505));
 						return;
 					}
 
@@ -232,14 +200,14 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 						method: 'GET',
 						success: (userInfoResponse) => {
 							if (userInfoResponse.statusCode === 200) {
-								const userInfoData : WeixinUserInfoResp = userInfoResponse.data as WeixinUserInfoResp;
+								const userInfoData: WeixinUserInfoResp = userInfoResponse.data as WeixinUserInfoResp;
 								options.success?.({
 									errMsg: 'getUserInfo:ok',
 									userInfo: {
 										nickName: userInfoData.nickname,
 										avatarUrl: userInfoData.headimgurl,
 										openId: openid,
-                    // @ts-ignore 1.0 上是 string 微信小程序是 number。按照 1.0 实现
+										// @ts-ignore 1.0 上是 string 微信小程序是 number。按照 1.0 实现
 										gender: userInfoData.sex.toString()
 									}
 								});
@@ -250,7 +218,7 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 						fail: (error) => {
 							options.fail?.(new OauthWeixinFailImpl(1310507, error.errMsg));
 						}
-					});
+					} as RequestOptions<any>);
 				} else {
 					options.fail?.(new OauthWeixinFailImpl(1310507, `请求失败，状态码: ${response.statusCode}`));
 				}
@@ -258,6 +226,6 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 			fail: (error) => {
 				options.fail?.(new OauthWeixinFailImpl(1310507, error.errMsg));
 			}
-		});
+		} as RequestOptions<any>);
 	}
 }

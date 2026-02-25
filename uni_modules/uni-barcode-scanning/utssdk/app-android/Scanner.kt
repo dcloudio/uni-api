@@ -196,21 +196,10 @@ class Scanner {
                     it.process(image)
                         .addOnSuccessListener { barcodes ->
                             if (!isVideoFrame) {
-                                if (barcodes.size == 0) {
+                                if (barcodes.isEmpty() || barcodes.all { it.rawBytes == null || it.rawBytes!!.isEmpty() }) {
+                                    // 如果没有扫到码，或者扫到的所有码都没有有效数据，则返回失败
                                     scannerCallback?.onScanFailure("no barcode found")
                                     return@addOnSuccessListener
-                                } else {
-                                    var isEmptyOfRawBytes = false
-                                    for (barcode in barcodes) {
-                                        if (barcode.rawBytes != null && barcode.rawBytes?.size == 0) {
-                                            isEmptyOfRawBytes = true
-                                            break
-                                        }
-                                    }
-                                    if (isEmptyOfRawBytes) {
-                                        scannerCallback?.onScanFailure("no barcode found")
-                                        return@addOnSuccessListener
-                                    }
                                 }
                             }
 

@@ -38,29 +38,6 @@ import {
     getCurrentMP
 } from '@dcloudio/uni-runtime'
 
-export {
-    SetStorage,
-    SetStorageSync,
-    SetStorageOptions,
-    SetStorageSuccess,
-    GetStorage,
-    GetStorageSync,
-    GetStorageOptions,
-    GetStorageSuccess,
-    GetStorageInfo,
-    GetStorageInfoSync,
-    GetStorageInfoOptions,
-    GetStorageInfoSuccess,
-    RemoveStorage,
-    RemoveStorageSync,
-    RemoveStorageOptions,
-    RemoveStorageSuccess,
-    ClearStorage,
-    ClearStorageSync,
-    ClearStorageOptions,
-    ClearStorageSuccess,
-} from '../interface.uts'
-
 function parseStorageValue(value: string): any {
     try {
         // #ifdef UNI-APP-X
@@ -68,7 +45,7 @@ function parseStorageValue(value: string): any {
         return valueObj ? valueObj.data : value;
         // #endif
         // #ifndef UNI-APP-X
-        return JSON.parse(value).data;
+        return globalThis.JSON.parse(value).data;
         // #endif
     } catch (e) {
         return value;
@@ -226,3 +203,41 @@ export {
     getStorageInfoSync,
     getStorageInfo,
 }
+
+export {
+    ClearStorage,
+    ClearStorageCompleteCallback,
+    ClearStorageFailCallback,
+    ClearStorageOptions,
+    ClearStorageSuccess,
+    ClearStorageSuccessCallback,
+    ClearStorageSync,
+    GetStorage,
+    GetStorageCompleteCallback,
+    GetStorageFailCallback,
+    GetStorageInfo,
+    GetStorageInfoCompleteCallback,
+    GetStorageInfoFailCallback,
+    GetStorageInfoOptions,
+    GetStorageInfoSuccess,
+    GetStorageInfoSuccessCallback,
+    GetStorageInfoSync,
+    GetStorageOptions,
+    GetStorageSuccess,
+    GetStorageSuccessCallback,
+    GetStorageSync,
+    RemoveStorage,
+    RemoveStorageCompleteCallback,
+    RemoveStorageFailCallback,
+    RemoveStorageOptions,
+    RemoveStorageSuccess,
+    RemoveStorageSuccessCallback,
+    RemoveStorageSync,
+    SetStorage,
+    SetStorageCompleteCallback,
+    SetStorageFailCallback,
+    SetStorageOptions,
+    SetStorageSuccess,
+    SetStorageSuccessCallback,
+    SetStorageSync
+} from '../interface.uts'

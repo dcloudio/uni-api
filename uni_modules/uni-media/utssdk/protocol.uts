@@ -372,7 +372,7 @@ export const ChooseFileApiOptions: ApiOptions<ChooseFileOptions> = {
         ],
         [
             'extension',
-            function (extension: string[], params: ChooseFileOptions) {
+            function (extension: string[], params: ChooseFileOptions): string | undefined {
                 if (extension instanceof Array && extension.length === 0) {
                     return 'param extension should not be empty.'
                 }

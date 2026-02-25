@@ -42,11 +42,148 @@ export type ShowLoadingOptions = {
   /**
    * 提示的内容，长度与 icon 取值有关。
    */
-  title: string,
+  title?: string | null,
   /**
    * 是否显示透明蒙层，防止触摸穿透，默认：false
+ 	 * @uniPlatform {
+			"app": {
+				"android": {
+					"osVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"ios": {
+					"osVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"harmony": {
+					"osVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				}
+			},
+			"mp": {
+				"weixin": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "4.41"
+				},
+				"alipay": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"baidu": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"toutiao": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"lark": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"qq": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"kuaishou": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				},
+				"jd": {
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "x"
+				}
+			},
+			"web": {
+				"uniVer": "√",
+				"unixVer": "4.0"
+			}
+		}
    */
   mask?: boolean | null,
+	/**
+	 * iOS是否采用系统雪花状样式
+	 * @defaultValue true
+	 * @default true
+	 * @internal
+	 * @uniPlatform {
+			"app": {
+				"android": {
+					"osVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"ios": {
+					"osVer": "12.0",
+					"uniVer": "x",
+					"unixVer": "5.0"
+				},
+				"harmony": {
+					"osVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				}
+			},
+			"mp": {
+				"weixin": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"alipay": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"baidu": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"toutiao": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"lark": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"qq": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"kuaishou": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				},
+				"jd": {
+					"hostVer": "x",
+					"uniVer": "x",
+					"unixVer": "x"
+				}
+			},
+			"web": {
+				"uniVer": "x",
+				"unixVer": "x"
+			}
+		}
+	 */
+	iosSpinner?: boolean | null,
   /**
    * 接口调用成功的回调函数
    */
@@ -61,7 +198,7 @@ export type ShowLoadingOptions = {
   complete?: ShowLoadingCompleteCallback | null
 }
 
-export type ShowLoading = (options: ShowLoadingOptions) => LoadingPage | null
+export type ShowLoading = (options?: ShowLoadingOptions|null) => LoadingPage | null
 
 
 /**
@@ -92,15 +229,15 @@ export class HideLoadingFailImpl extends UniError implements HideLoadingFail {
 
 
 /**
- * uni.showLoading成功回调函数定义
+ * uni.hideLoading成功回调函数定义
  */
 export type HideLoadingSuccessCallback = (res: HideLoadingSuccess) => void
 /**
- * uni.showLoading失败回调函数定义
+ * uni.hideLoading失败回调函数定义
  */
 export type HideLoadingFailCallback = (res: HideLoadingFail) => void
 /**
- * uni.showLoading完成回调函数定义
+ * uni.hideLoading完成回调函数定义
  */
 export type HideLoadingCompleteCallback = (res: any) => void
 
@@ -165,7 +302,8 @@ export interface Uni {
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {
@@ -216,7 +354,7 @@ export interface Uni {
 	    }
 	  }
 	 */
-	showLoading(options: ShowLoadingOptions): void,
+	showLoading(options?: ShowLoadingOptions|null): void,
 
 	/**
 	 * @description 隐藏 loading 提示框。
@@ -252,7 +390,8 @@ export interface Uni {
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {

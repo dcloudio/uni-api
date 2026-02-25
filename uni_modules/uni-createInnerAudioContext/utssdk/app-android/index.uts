@@ -15,7 +15,14 @@ export const setInnerAudioOption : SetInnerAudioOption = function (options : Set
 	} else {
 		mixWithOther = options.mixWithOther!
 	}
+	var speakerOn = true
+	if(options.speakerOn == null) {
+		speakerOn = true
+	} else {
+		speakerOn = options.speakerOn!
+	}
 	AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!).mixWithOther = mixWithOther
+	AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!).speakerOn = speakerOn
 	options?.success?.({})
 	options?.complete?.({})
 }

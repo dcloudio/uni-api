@@ -43,6 +43,9 @@ import SocketTimeoutException from "java.net.SocketTimeoutException";
 import ReentrantLock from 'java.util.concurrent.locks.ReentrantLock';
 import Looper from "android.os.Looper";
 import Handler from 'android.os.Handler';
+// #ifdef UNI-APP-X
+import {CronetHelper} from 'io.dcloud.uniapp.common.network';
+// #endif
 
 class NetworkRequestListener {
 	public onStart() : void { }
@@ -258,6 +261,14 @@ class NetworkManager {
 		}
 
 		clientBuilder.dispatcher(new Dispatcher(this.requestExecutorService));
+		
+		
+		const enableQuic = param.enableQuic ?? false
+		if(enableQuic) {
+			// #ifdef UNI-APP-X
+			CronetHelper.supportCronet(clientBuilder)
+			// #endif
+		}
 
 		return clientBuilder.build();
 	}
@@ -288,6 +299,12 @@ class NetworkManager {
 		let hasUAHeader = false;
 		let headers = param.header!.toJSONObject() as JSONObject;
 		for (key in headers.keys) {
+			if (key.equals("Accept-Encoding", true)) {
+			    let value = "" + headers[key];
+			    if (value.toLowerCase().includes("gzip")) {
+			        continue;
+			    }
+			}
 			if (key.equals("Content-Type", true)) {
 				contentType = "" + headers![key]!;
 				hasContentType = true;

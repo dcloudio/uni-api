@@ -13,6 +13,10 @@ function getFontSrc(source: string): string {
   return source
 }
 
+interface MockUniNativeAppImpl {
+    loadFontFace: (options: ESObject) => void;
+}
+
 export const loadFontFace: LoadFontFace = defineAsyncApi<LoadFontFaceOptions, LoadFontFaceSuccess>(
   API_LOAD_FONT_FACE,
   (options: LoadFontFaceOptions, exec: ApiExecutor<LoadFontFaceSuccess>) => {
@@ -29,8 +33,21 @@ export const loadFontFace: LoadFontFace = defineAsyncApi<LoadFontFaceOptions, Lo
       }
     }
 
-    const app = globalThis.getUniApp() as UniNativeAppImpl
+    const app = globalThis.getUniApp() as MockUniNativeAppImpl
     app.loadFontFace(loadFontFaceOptions)
   },
   ApiLoadFontFaceProtocol
 ) as LoadFontFace
+
+export {
+    LoadFontFace,
+    LoadFontFaceComplete,
+    LoadFontFaceCompleteCallback,
+    LoadFontFaceErrCode,
+    LoadFontFaceFail,
+    LoadFontFaceFailCallback,
+    LoadFontFaceOptionDesc,
+    LoadFontFaceOptions,
+    LoadFontFaceSuccess,
+    LoadFontFaceSuccessCallback
+} from '../interface.uts';

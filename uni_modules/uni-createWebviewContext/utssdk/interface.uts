@@ -37,7 +37,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -62,7 +63,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -87,7 +89,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -112,7 +115,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -137,7 +141,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -162,7 +167,8 @@ export interface WebviewContext {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 *  }
 	 * }
@@ -192,7 +198,8 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  },
      *  "web": {

@@ -35,6 +35,15 @@ class RecorderManagerImpl implements RecorderManager, AudioRecorder.RecordingLis
 		} else if (options.duration! < 0) {
 			options.duration = DEFAULT_DURATION
 		}
+		if(options.sampleRate == null) {
+			options.sampleRate = 8000
+		}
+		if(options.numberOfChannels == null) {
+			options.numberOfChannels = 2
+		}
+		if(options.encodeBitRate == null) {
+			options.encodeBitRate = 48000
+		}
 		this.manager.setAudioParams(options.sampleRate!.toInt(), options.numberOfChannels!.toInt(), options.encodeBitRate!.toInt())
 		this.manager.setSaveToFile(true)
 		var format = AudioRecorder.RecordingFormat.AAC
@@ -78,32 +87,63 @@ class RecorderManagerImpl implements RecorderManager, AudioRecorder.RecordingLis
 	override onStart(options : (result : any) => void) : void {
 		this.startCallback = options
 	}
+	override offStart() : void {
+		this.startCallback == null
+	}
+	
 	pauseCallback : ((result : any) => void) | null = null
 	override onPause(options : (result : any) => void) : void {
 		this.pauseCallback = options
+	}
+	
+	override offPause() : void {
+		this.pauseCallback = null
 	}
 	stopCallback : ((result : RecorderManagerOnStopResult) => void) | null = null
 	override onStop(options : (result : RecorderManagerOnStopResult) => void) : void {
 		this.stopCallback = options
 	}
+	
+	override offStop() : void {
+		this.stopCallback = null
+	}
+	
 	override onFrameRecorded(options : (result : any) => void) : void {
+		// setRecordStateCallback('frameRecorded', options)
+	}
+	
+	override offFrameRecorded() : void {
 		// setRecordStateCallback('frameRecorded', options)
 	}
 	errorCallback : ((result : IRecorderManagerFail) => void) | null = null
 	override onError(options : (result : IRecorderManagerFail) => void) : void {
 		this.errorCallback = options
 	}
+	override offError() : void {
+		this.errorCallback = null
+	}
 	resumeCallback : ((result : any) => void) | null = null
 	override  onResume(options : (result : any) => void) : void {
 		this.resumeCallback = options
+	}
+	override  offResume() : void {
+		this.resumeCallback = null
 	}
 	beginCallback : ((result : any) => void) | null = null
 	override onInterruptionBegin(options : (result : any) => void) : void {
 		this.beginCallback = options
 	}
+	
+	override offInterruptionBegin() : void {
+		this.beginCallback = null
+	}
 	endCallback : ((result : any) => void) | null = null
 	override onInterruptionEnd(options : (result : any) => void) : void {
 		this.endCallback = options
+	}
+	
+	override offInterruptionEnd() : void {
+		this.endCallback = null
 	}
 
 	override onRecordingStarted() {
@@ -121,9 +161,9 @@ class RecorderManagerImpl implements RecorderManager, AudioRecorder.RecordingLis
 	override onRecordingError(errorCode : Int, errorMessage : String) {
 		var error : IRecorderManagerFail
 		if ([1107601, 1107602, 1107603, 1107604, 1107605, 1107606, 1107607, 1107608].indexOf(errorCode) >= 0) {
-			error = RecorderManagerFailImpl(errorCode, RecorderManagerUniErrors[errorCode]!)
+			error = new RecorderManagerFailImpl(errorCode, RecorderManagerUniErrors[errorCode]!)
 		} else {
-			error = RecorderManagerFailImpl(1107606, RecorderManagerUniErrors[1107606]!)
+			error = new RecorderManagerFailImpl(1107606, RecorderManagerUniErrors[1107606]!)
 		}
 		this.errorCallback?.(error)
 	}
@@ -137,13 +177,13 @@ class RecorderManagerOnStopResultCallback implements RecorderManagerOnStopResult
 	}
 
 	override  toJSON() : Any {
-		var result : UTSJSONObject = UTSJSONObject()
+		var result : UTSJSONObject = new UTSJSONObject()
 		result.set("tempFilePath", this.tempFilePath)
 		return result
 	}
 
 	override  toLogMap() : Map<String, Any> {
-		var map : Map<String, Any> = Map<String, Any>()
+		var map : Map<String, Any> = new Map<String, Any>()
 		map.set("tempFilePath", this.tempFilePath)
 		return map
 	}

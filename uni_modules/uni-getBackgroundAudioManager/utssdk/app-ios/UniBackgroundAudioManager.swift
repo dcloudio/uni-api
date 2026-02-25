@@ -54,7 +54,7 @@ typealias UniBackgroundAudioErrorEventCallback = (_ result: ICreateBackgroundAud
 @objc(UniBackgroundAudioManager)
 @objcMembers
 public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
-    public static var shared = UniBackgroundAudioManager()
+    @objc public static let shared = UniBackgroundAudioManager()
     
     private lazy var playerItem: AVPlayerItem? = {
         if let url = URL(string: src) {
@@ -296,48 +296,48 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         addEvent(event: .canplay, eventCallback: callback)
     }
     
-    public func offCanplay(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .canplay, eventCallback: callback)
+    public func offCanplay() {
+        removeEvent(event: .canplay, eventCallback: nil)
     }
     
     public func onPlay(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .play, eventCallback: callback)
     }
     
-    public func offPlay(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .play, eventCallback: callback)
+    public func offPlay() {
+        removeEvent(event: .play, eventCallback: nil)
     }
     
     public func onPause(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .pause, eventCallback: callback)
     }
     
-    public func offPause(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .pause, eventCallback: callback)
+    public func offPause() {
+        removeEvent(event: .pause, eventCallback: nil)
     }
     
     public func onStop(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .stop, eventCallback: callback)
     }
     
-    public func offStop(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .stop, eventCallback: callback)
+    public func offStop() {
+        removeEvent(event: .stop, eventCallback: nil)
     }
     
     public func onEnded(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .ended, eventCallback: callback)
     }
     
-    public func offEnded(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .ended, eventCallback: callback)
+    public func offEnded() {
+        removeEvent(event: .ended, eventCallback: nil)
     }
     
     public func onTimeUpdate(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .timeUpdate, eventCallback: callback)
     }
     
-    public func offTimeUpdate(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .timeUpdate, eventCallback: callback)
+    public func offTimeUpdate() {
+        removeEvent(event: .timeUpdate, eventCallback: nil)
         removePeriodicTimeObserver()
     }
     
@@ -346,7 +346,7 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         errorEventCallBacks.append(callback)
     }
     
-    public func offError(_ callback: @escaping (any ICreateBackgroundAudioFail) -> Void) {
+    public func offError() {
         errorEventCallBacks.removeAll()
     }
     
@@ -354,40 +354,40 @@ public class UniBackgroundAudioManager: NSObject, BackgroundAudioManager {
         addEvent(event: .waiting, eventCallback: callback)
     }
     
-    public func offWaiting(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .waiting, eventCallback: callback)
+    public func offWaiting() {
+        removeEvent(event: .waiting, eventCallback: nil)
     }
     
     public func onSeeking(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .seeking, eventCallback: callback)
     }
     
-    public func offSeeking(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .seeking, eventCallback: callback)
+    public func offSeeking() {
+        removeEvent(event: .seeking, eventCallback: nil)
     }
     
     public func onSeeked(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .seeked, eventCallback: callback)
     }
     
-    public func offSeeked(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .seeked, eventCallback: callback)
+    public func offSeeked() {
+        removeEvent(event: .seeked, eventCallback: nil)
     }
     
     public func onPrev(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .prev, eventCallback: callback)
     }
     
-    public func offPrev(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .prev, eventCallback: callback)
+    public func offPrev() {
+        removeEvent(event: .prev, eventCallback: nil)
     }
     
     public func onNext(_ callback: @escaping (Any) -> Void) {
         addEvent(event: .next, eventCallback: callback)
     }
     
-    public func offNext(_ callback: @escaping (Any) -> Void) {
-        removeEvent(event: .prev, eventCallback: callback)
+    public func offNext() {
+        removeEvent(event: .next, eventCallback: nil)
     }
     
     public func play() {
@@ -659,7 +659,7 @@ extension UniBackgroundAudioManager {
         eventCallbacks.set(event.rawValue, callbacks)
     }
     
-    private func removeEvent(event: UniBackgroundAudioEvent,  eventCallback: @escaping UniBackgroundAudioEventCallback) {
+    private func removeEvent(event: UniBackgroundAudioEvent,  eventCallback: UniBackgroundAudioEventCallback?) {
         guard let _ = player else { return }
         if var callbacks = eventCallbacks.get(event.rawValue) {
             callbacks.removeAll()
@@ -805,7 +805,7 @@ extension UniBackgroundAudioManager {
         } else {
             UNILogDebug("======audio======, 播放结束")
             clearPlayingCenterInfo()
-			dispatchEvent(event: .ended)
+            dispatchEvent(event: .ended)
         }
     }
     

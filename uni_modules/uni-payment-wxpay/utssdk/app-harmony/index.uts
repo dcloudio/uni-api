@@ -75,7 +75,12 @@ class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
     }
 
     requestPayment(options: RequestPaymentOptions) {
-        let params = JSON.parse(options.orderInfo) as object;
+        let params = options.orderInfo;
+        if (typeof params === 'string') {
+            try {
+                params = JSON.parse(params) ?? '';
+            } catch (error) {}
+        }
         let req = new PayReq();
         req.appId = params['appid'];
         req.partnerId = params['partnerid'];

@@ -21,6 +21,18 @@ export const setInnerAudioOption : SetInnerAudioOption = function (options : Set
 		UniAudioPlayer.mixWithOther = options.mixWithOther
 	}
 	
+	if (options.speakerOn == null) {
+		UniAudioPlayer.speakerOn = true
+	} else {
+		UniAudioPlayer.speakerOn = options.speakerOn
+	}
+	
+	if (options.obeyMuteSwitch == null) {
+		UniAudioPlayer.obeyMuteSwitch = true
+	} else {
+		UniAudioPlayer.obeyMuteSwitch = options.obeyMuteSwitch
+	}
+	
 	options.success?.({})
 	options.complete?.({})
 }

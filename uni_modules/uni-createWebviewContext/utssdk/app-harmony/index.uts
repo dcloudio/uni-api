@@ -64,3 +64,9 @@ class WebviewContextImpl implements WebviewContext {
   }
 
 }
+
+export {
+  CreateWebviewContext,
+  UniWebviewContextLoadDataOptions,
+  WebviewContext
+} from '../interface.uts';

@@ -3,6 +3,22 @@ import Application from 'android.app.Application';
 import { Scanner } from "uts.sdk.modules.uniBarcodeScanning"
 import { ScreenShot, BarcodeInformation } from "uts.sdk.modules.uniBarcodeScanning.Scanner"
 
+let cachedPixelRatio : number = 0.0;
+
+function getPixelRatio() : number {
+	if (cachedPixelRatio > 0) {
+		return cachedPixelRatio;
+	}
+
+	const context = UTSAndroid.getAppContext();
+	if (context != null) {
+		cachedPixelRatio = context.getResources().getDisplayMetrics().density as number;
+		return cachedPixelRatio;
+	}
+
+	return 1.0;
+}
+
 class AndroidScannerImpl implements AndroidScanner {
 	override processScanBarCode(options : AndroidFrameScannerOptions) {
 		const imageProxy = options.imageProxy
@@ -13,7 +29,7 @@ class AndroidScannerImpl implements AndroidScanner {
 		const listener = options.androidScannerListenner
 
 		const context = UTSAndroid.getAppContext();
-		const ratio = uni.getWindowInfo().pixelRatio;
+		const ratio = getPixelRatio();
 
 		Scanner.processScanBarCode(context!, imageProxy, scanType, autoZoom, width.toInt(), height.toInt(), new (class implements Scanner.ScannerCallback {
 			override onScanSuccess(barcodeInformation : MutableList<BarcodeInformation>, screenShot : ScreenShot | null) : void {
@@ -62,7 +78,7 @@ class AndroidScannerImpl implements AndroidScanner {
 		const filePath = options.filePath
 		const listener = options.androidScannerListenner
 		const context = UTSAndroid.getAppContext();
-		const ratio = uni.getWindowInfo().pixelRatio;
+		const ratio = getPixelRatio();
 		Scanner.processScanBarCode(context!, filePath, scanType, new (class implements Scanner.ScannerCallback {
 			override onScanSuccess(barcodeInformation : MutableList<BarcodeInformation>, screenShot : ScreenShot | null) : void {
 				const bridgeBarcodeInformation : BridgeBarcodeInformation[] = []

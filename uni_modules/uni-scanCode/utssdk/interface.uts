@@ -20,9 +20,9 @@ export type ScanCodeFailCallback = (res: ScanCodeFail) => void
  */
 export type ScanCodeCompleteCallback = (res: any) => void
 
-export type ScanCodeSupportedTypes = 
+export type ScanCodeSupportedTypes =
 	/**
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
@@ -41,7 +41,8 @@ export type ScanCodeSupportedTypes =
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {
@@ -93,9 +94,9 @@ export type ScanCodeSupportedTypes =
 	  }
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 */
-	'barCode' | 
+	'barCode' |
 	/**
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
@@ -114,7 +115,8 @@ export type ScanCodeSupportedTypes =
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {
@@ -166,9 +168,9 @@ export type ScanCodeSupportedTypes =
 	  }
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 */
-	'qrCode' | 
+	'qrCode' |
 	/**
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
@@ -187,7 +189,8 @@ export type ScanCodeSupportedTypes =
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {
@@ -239,9 +242,9 @@ export type ScanCodeSupportedTypes =
 	  }
 	 * @uniVueVersion 2,3  //支持的vue版本
 	 */
-	'datamatrix' | 
+	'datamatrix' |
 	/**
-	 * @uniPlatform 
+	 * @uniPlatform
 	  {
 	    "app": {
 	      "android": {
@@ -260,7 +263,8 @@ export type ScanCodeSupportedTypes =
 	      "harmony": {
 	        "osVer": "3.0",
 	        "uniVer": "4.23",
-	        "unixVer": "4.61"
+	        "unixVer": "4.61",
+	        "unixvVer": "5.0"
 	      }
 	    },
 	    "mp": {
@@ -366,7 +370,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {

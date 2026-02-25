@@ -182,8 +182,8 @@ export type SetInnerAudioOptionOptions = {
 	        },
 	        "harmony": {
 	            "osVer": "5.0.0(12)",
-	            "uniVer": "4.84",
-	            "unixVer": "4.84",
+	            "uniVer": "4.85",
+	            "unixVer": "4.85",
 	        }
 	    },
 	    "mp": {
@@ -242,19 +242,22 @@ export type SetInnerAudioOptionOptions = {
 	  {
 	    "app": {
 	        "android": {
-	            "osVer": "x",
-	            "uniVer": "x",
-	            "unixVer": "x"
+	            "osVer": "5.0",
+	            "uniVer": "√",
+	            "uniUtsPlugin": "5.0",
+	            "unixVer": "5.0"
 	        },
 	        "ios": {
-	            "osVer": "x",
+	            "osVer": "12.0",
 	            "uniVer": "x",
-	            "unixVer": "x"
+	            "uniUtsPlugin": "x",
+	            "unixVer": "5.0",
+	            "unixUtsPlugin": "5.0"
 	        },
 	        "harmony": {
-	            "osVer": "6.0.0(20)",
-	            "uniVer": "4.84",
-	            "unixVer": "4.84",
+	            "osVer": "5.0.0(12)",
+	            "uniVer": "5.0",
+	            "unixVer": "5.0",
 	        }
 	    },
 	    "mp": {
@@ -264,48 +267,122 @@ export type SetInnerAudioOptionOptions = {
 	            "unixVer": "4.41"
 	        },
 	        "alipay": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "1.23.4",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "baidu": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "toutiao": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "lark": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "qq": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "kuaishou": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        },
 	        "jd": {
-	            "hostVer": "x",
-	            "uniVer": "x",
+	            "hostVer": "√",
+	            "uniVer": "√",
 	            "unixVer": "x"
 	        }
 	    },
 	    "web": {
-	        "uniVer": "x",
-	        "unixVer": "x"
+	        "uniVer": "√",
+	        "unixVer": "4.0"
 	    }
 	  }
      */
     speakerOn?: boolean | null,
+	/**
+	 *（仅在 iOS 生效）是否遵循静音开关，设置为 false 之后，即使是在静音模式下，也能播放声音
+	 * @defaultValue true
+	 * @uniPlatform
+	  {
+	    "app": {
+	        "android": {
+	            "osVer": "5.0",
+	            "uniVer": "x",
+	            "uniUtsPlugin": "x",
+	            "unixVer": "x"
+	        },
+	        "ios": {
+	            "osVer": "12.0",
+	            "uniVer": "x",
+	            "uniUtsPlugin": "x",
+	            "unixVer": "5.0",
+	            "unixUtsPlugin": "5.0"
+	        },
+	        "harmony": {
+	            "osVer": "5.0.0(12)",
+	            "uniVer": "x",
+	            "unixVer": "x",
+	        }
+	    },
+	    "mp": {
+	        "weixin": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "4.41"
+	        },
+	        "alipay": {
+	            "hostVer": "1.23.4",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "baidu": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "toutiao": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "lark": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "qq": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "kuaishou": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        },
+	        "jd": {
+	            "hostVer": "√",
+	            "uniVer": "√",
+	            "unixVer": "x"
+	        }
+	    },
+	    "web": {
+	        "uniVer": "√",
+	        "unixVer": "4.0"
+	    }
+	  }
+	 */
+	obeyMuteSwitch?: boolean | null,
 	/**
 	 * 接口调用成功的回调函数
 	 * @uniPlatform
@@ -1131,8 +1208,8 @@ export interface InnerAudioContext {
                   "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
-                  "unixVer": "x",
-                  "unixUtsPlugin": "x"
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
               },
             "harmony": {
                 "osVer": "5.0.0",

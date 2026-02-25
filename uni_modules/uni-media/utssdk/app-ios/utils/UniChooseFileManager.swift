@@ -108,26 +108,27 @@ public class UniChooseFileManager: NSObject, UIDocumentPickerDelegate {
                         group.leave()
                     }
                     
-                    let srcPath = value.path.removingPercentEncoding ?? value.absoluteString
-                    let targetPath = UTSiOS.getMediaCacheDir() + "/" + value.lastPathComponent
+                    let fileName = value.lastPathComponent
+                    let targetURL = URL(fileURLWithPath: UTSiOS.getMediaCacheDir()).appendingPathComponent(fileName)
+                    let targetPath = targetURL.path
                     
                     if fileManager.fileExists(atPath: targetPath) {
                         let chooseFileTempFile = ChooseFileTempFile()
-                        chooseFileTempFile.name = value.lastPathComponent
+                        chooseFileTempFile.name = fileName
                         chooseFileTempFile.path = targetPath
                         chooseFileTempFile.size = NSNumber(value: self.getFileSizeWithStat(fileURL: targetPath) ?? 0)
                         chooseFileTempFile.type = self.getType(targetPath)
-                        
+
                         DispatchQueue.main.async {
                             tempFilePaths.append(targetPath)
                             tempFiles.append(chooseFileTempFile)
                         }
                     } else {
                         do {
-                            try fileManager.copyItem(atPath: srcPath, toPath: targetPath)
+                            try fileManager.copyItem(at: value, to: targetURL)
                             if fileManager.fileExists(atPath: targetPath) {
                                 let chooseFileTempFile = ChooseFileTempFile()
-                                chooseFileTempFile.name = value.lastPathComponent
+                                chooseFileTempFile.name = fileName
                                 chooseFileTempFile.path = targetPath
                                 chooseFileTempFile.size = NSNumber(value: self.getFileSizeWithStat(fileURL: targetPath) ?? 0)
                                 chooseFileTempFile.type = self.getType(targetPath)

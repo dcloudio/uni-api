@@ -205,6 +205,39 @@ public class UniAudioRecorderManager: NSObject, RecorderManager {
     public func onInterruptionEnd(_ options: @escaping (Any) -> Void) {
         addEvent(event: .interruptionEnd, eventCallback: options)
     }
+    
+    public func offStart() {
+        removeEvent(event: .start)
+    }
+    
+    public func offPause() {
+        removeEvent(event: .pause)
+    }
+    
+    public func offStop() {
+        removeEvent(event: .stop)
+    }
+    
+    public func offFrameRecorded() {
+        removeEvent(event: .frameRecorded)
+    }
+    
+    public func offError() {
+        removeEvent(event: .error(nil))
+    }
+    
+    public func offResume() {
+        removeEvent(event: .resume)
+    }
+    
+    public func offInterruptionBegin() {
+        removeEvent(event: .interruptionBegin)
+    }
+    
+    public func offInterruptionEnd() {
+        removeEvent(event: .interruptionEnd)
+    }
+    
 }
 
 extension UniAudioRecorderManager {
@@ -401,10 +434,11 @@ extension UniAudioRecorderManager {
         }
     }
     
-    private func removeEvent(event: UniAudioRecorderEvent,  eventCallback: @escaping UniAudioRecorderEventCallback) {
+    private func removeEvent(event: UniAudioRecorderEvent) {
         guard let _ = audioRecorder else { return }
-        eventCallbacks.set(event.rawValue, eventCallback)
-        
+        if let _ = eventCallbacks.get(event.rawValue) {
+            eventCallbacks.removeValue(forKey: event.rawValue)
+        }
     }
     
     private func dispatchStopEvent(event: UniAudioRecorderEvent, result: RecorderManagerOnStopResult) {

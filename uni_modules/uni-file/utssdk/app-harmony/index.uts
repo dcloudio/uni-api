@@ -38,30 +38,6 @@ import Hash from '@ohos.file.hash';
 import fileUri from '@ohos.file.fileuri'
 import buffer from '@ohos.buffer'
 
-export {
-    SaveFile,
-    LegacySaveFileOptions,
-    LegacySaveFileSuccess,
-    LegacySaveFileFail,
-    GetSavedFileList,
-    LegacySavedFileListItem,
-    LegacyGetSavedFileListOptions,
-    LegacyGetSavedFileListSuccess,
-    LegacyGetSavedFileListFail,
-    GetSavedFileInfo,
-    LegacyGetSavedFileInfoOptions,
-    LegacyGetSavedFileInfoSuccess,
-    LegacyGetSavedFileInfoFail,
-    RemoveSavedFile,
-    LegacyRemoveSavedFileOptions,
-    LegacyRemoveSavedFileSuccess,
-    LegacyRemoveSavedFileFail,
-    GetFileInfo,
-    LegacyGetFileInfoOptions,
-    LegacyGetFileInfoSuccess,
-    LegacyGetFileInfoFail
-}
-
 const SAVE_FILE_DIR = 'uni-store'
 export const CACHE_PATH = `unifile://cache/`
 
@@ -282,3 +258,42 @@ export const getFileInfo: GetFileInfo = defineAsyncApi<LegacyGetFileInfoOptions,
         }
     }
 ) as GetFileInfo
+
+export {
+  GetFileInfo,
+  GetSavedFileInfo,
+  GetSavedFileList,
+  LegacyGetFileInfoCompleteCallback,
+  LegacyGetFileInfoFail,
+  LegacyGetFileInfoFailCallback,
+  LegacyGetFileInfoOptions,
+  LegacyGetFileInfoSuccess,
+  LegacyGetFileInfoSuccessCallback,
+  LegacyGetSavedFileInfoCompleteCallback,
+  LegacyGetSavedFileInfoFail,
+  LegacyGetSavedFileInfoFailCallback,
+  LegacyGetSavedFileInfoOptions,
+  LegacyGetSavedFileInfoSuccess,
+  LegacyGetSavedFileInfoSuccessCallback,
+  LegacyGetSavedFileListCompleteCallback,
+  LegacyGetSavedFileListFail,
+  LegacyGetSavedFileListFailCallback,
+  LegacyGetSavedFileListOptions,
+  LegacyGetSavedFileListSuccess,
+  LegacyGetSavedFileListSuccessCallback,
+  LegacyRemoveSavedFileCompleteCallback,
+  LegacyRemoveSavedFileFail,
+  LegacyRemoveSavedFileFailCallback,
+  LegacyRemoveSavedFileOptions,
+  LegacyRemoveSavedFileSuccess,
+  LegacyRemoveSavedFileSuccessCallback,
+  LegacySaveFileCompleteCallback,
+  LegacySaveFileFail,
+  LegacySaveFileFailCallback,
+  LegacySaveFileOptions,
+  LegacySaveFileSuccess,
+  LegacySaveFileSuccessCallback,
+  LegacySavedFileListItem,
+  RemoveSavedFile,
+  SaveFile
+} from '../interface.uts';
