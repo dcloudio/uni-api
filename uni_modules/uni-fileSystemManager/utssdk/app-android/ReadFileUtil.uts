@@ -16,7 +16,6 @@ import FileInputStream from 'java.io.FileInputStream';
 import ArrayList from 'java.util.ArrayList';
 import InputStream from 'java.io.InputStream';
 import Uri from 'android.net.Uri'
-import Base64OutputStream from 'android.util.Base64OutputStream'
 import ByteArrayOutputStream from 'java.io.ByteArrayOutputStream'
 import InputStreamReader from 'java.io.InputStreamReader'
 import Context from 'android.content.Context'
@@ -58,24 +57,20 @@ export class ReadFileUtil {
 
 	private readContentUriAsBase64(context : Context, contentUri : Uri) : string {
 		var inputStream : InputStream | null = null
-		var base64OutputStream : Base64OutputStream | null = null
-		var outputStream : ByteArrayOutputStream | null
+		var outputStream : ByteArrayOutputStream | null = null
 
 		try {
 			inputStream = context.contentResolver.openInputStream(contentUri)
 			if (inputStream != null) {
 				outputStream = new ByteArrayOutputStream()
-				base64OutputStream = new Base64OutputStream(outputStream, Base64.DEFAULT)
 
 				var buffer = new ByteArray(1024) // 每次读取 1KB
 				var bytesRead : Int
 				while (true) {
 					bytesRead = inputStream.read(buffer)
 					if (bytesRead == -1) break
-					base64OutputStream.write(buffer, 0, bytesRead)
+					outputStream.write(buffer,0 ,bytesRead)
 				}
-
-				base64OutputStream.close() // 关闭流并完成编码
 				return Base64.encodeToString(outputStream.toByteArray(), Base64.NO_WRAP)
 			}
 		} catch (e : Exception) {
@@ -83,7 +78,7 @@ export class ReadFileUtil {
 		} finally {
 			// 关闭资源
 			try {
-				base64OutputStream?.close()
+				outputStream?.close()
 			} catch (e : Exception) {
 				e.printStackTrace()
 			}

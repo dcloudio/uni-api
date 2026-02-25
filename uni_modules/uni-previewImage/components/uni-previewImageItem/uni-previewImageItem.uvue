@@ -344,18 +344,6 @@
 		imageView.value?.style.setProperty("transform-origin", (transformOrigin.value[0]) + "px " + (transformOrigin.value[1]) + "px")
 		imageView.value?.style.setProperty("transform", "translate(" + (imageLeft.value) + "px," + (imageTop.value) + "px) scale(" + scaleSize.value + ")")
 	}
-	
-	watch(() : boolean => props.reset, (newValue : boolean, oldValue : boolean) => {
-		if (newValue != oldValue) {
-			if(imageView.value != null && scaleSize.value != 1) {
-			scaleSize.value = 1
-			imageLeft.value = 0
-			imageTop.value = 0
-			withAnimation.value = false
-			updateStyle(null, NaN, NaN)
-			}
-		}
-	}, { immediate: true })
 
 	watch(() : boolean => props.reset, (newValue : boolean, oldValue : boolean) => {
 		if (newValue != oldValue) {

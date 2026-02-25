@@ -70,7 +70,7 @@ export class OauthWeixinFailImpl extends UniError implements IOauthFail {
 		this.errCode = errCode;
 		const error = OauthWeixinUniErrors.get(errCode) ?? "";
 		if (errMsg != null) {
-			this.errMsg = `${error.length ? `${error}, the reason: ` : ''}${errMsg}`;
+			this.errMsg = `${error.length > 0 ? `${error}, the reason: ` : ''}${errMsg}`;
 		} else {
 			this.errMsg = error;
 		}

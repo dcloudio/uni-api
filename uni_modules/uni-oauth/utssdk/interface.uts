@@ -200,7 +200,7 @@ export type LoginSuccess = {
   /**
    * 描述信息
    */
-  errMsg: string,
+  errMsg?: string | null,
   /**
    * 登录服务商提供的登录信息，服务商不同返回的结果不完全相同
    * @uniPlatform {
@@ -705,6 +705,7 @@ export type LoginOptions = {
   complete?: LoginCompleteCallback | null
 };
 
+// #ifdef APP-HARMONY
 export type UniverifyIconStyles = {
   /**
    * 图标地址
@@ -1009,6 +1010,7 @@ export type UniverifyStyle = {
    */
   buttons?: UniVerifyButtonsStyles | null
 };
+// #endif
 export type GetUserInfo = (options: GetUserInfoOptions) => void;
 export type UserInfo = {
   /**
@@ -2121,4 +2123,8 @@ export type OauthErrorCode =
   /**
    * 登录请求可能被跨站攻击
    */
-  1001502040
+  1001502040 |
+  /**
+   * 服务供应商获取失败
+   */
+  1310600

@@ -64,6 +64,7 @@ class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
     id: string = "wxpay";
     description: string = "微信支付";
     isWeChatInstalled: boolean = false;
+    isAppExist: boolean = false;
     onWXResp: OnWXResp = (resp: wxopensdk.BaseResp) => {
 
     }
@@ -71,6 +72,7 @@ class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
     constructor() {
       try{
         this.isWeChatInstalled = WXApi.isWXAppInstalled()
+        this.isAppExist = this.isWeChatInstalled
       } catch{ }
     }
 

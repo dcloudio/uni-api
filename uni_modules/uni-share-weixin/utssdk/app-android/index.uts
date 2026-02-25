@@ -1,0 +1,277 @@
+import { UniShareWeixinProvider } from '../interface.uts';
+import { ShareWeixinErrorCode, ShareWeixinError, SHARE_WEIXIN_UNI_ERROR_CODES } from '../unierror.uts';
+
+// 微信SDK相关导入
+import WXTextObject from 'com.tencent.mm.opensdk.modelmsg.WXTextObject';
+import WXImageObject from 'com.tencent.mm.opensdk.modelmsg.WXImageObject';
+import WXMediaMessage from 'com.tencent.mm.opensdk.modelmsg.WXMediaMessage';
+import SendMessageToWX from 'com.tencent.mm.opensdk.modelmsg.SendMessageToWX';
+import IWXAPI from 'com.tencent.mm.opensdk.openapi.IWXAPI';
+import WXAPIFactory from 'com.tencent.mm.opensdk.openapi.WXAPIFactory';
+import Bitmap from 'android.graphics.Bitmap';
+import BitmapFactory from 'android.graphics.BitmapFactory';
+import ByteArrayOutputStream from 'java.io.ByteArrayOutputStream';
+import File from 'java.io.File';
+import Intent from 'android.content.Intent';
+
+const WX_APPID = 'WX_OPEN_APPID'
+const DEFAULT_SCENE = 'WXSceneSession';
+const TITLE_MAX_BYTES = 512;
+const SUMMARY_MAX_BYTES = 1024;
+const WX_MIN_VERSION_FOR_FILE_PROVIDER = 0x27000D00;
+
+// 场景映射
+const SCENES: Map<string, Int> = new Map([
+  ["WXSceneSession", 0],  // 聊天界面
+  ["WXSceneTimeline", 1]  // 朋友圈
+])
+
+type ShareTextOptions = {
+  scene: Int
+  text: string
+  title: string | null
+  description: string | null
+}
+
+type ShareImageOptions = {
+  scene: Int
+  imagePath: string
+  title: string | null
+  description: string | null
+}
+
+export class UniShareWeixinProviderImpl implements UniShareWeixinProvider {
+
+  override id: string = "weixin";
+  override description: string = "微信分享";
+  isWeChatInstalled: boolean = false;
+  override isAppExist: boolean | null = null;  // 实现UniProvider接口要求的属性
+  private APP_ID: string | null = null;
+  private WXApi: IWXAPI | null = null;
+
+  constructor() {
+    // 获取微信APPID
+    this.APP_ID = this.getMetadata(WX_APPID);
+    if (this.APP_ID != null) {
+      // 初始化微信API
+      const context = UTSAndroid.getAppContext()!;
+      this.WXApi = WXAPIFactory.createWXAPI(context, this.APP_ID, true);
+      this.isWeChatInstalled = this.WXApi!.isWXAppInstalled();
+			this.isAppExist = this.isWeChatInstalled;
+    }
+  }
+
+  // 获取Metadata配置
+  private getMetadata(key: string): string | null {
+    try {
+      const context = UTSAndroid.getAppContext()!;
+      const packageManager = context.getPackageManager();
+      const applicationInfo = packageManager.getApplicationInfo(
+        context.getPackageName(),
+        128 // PackageManager.GET_META_DATA
+      );
+      const metaData = applicationInfo.metaData;
+      if (metaData != null) {
+        return metaData.getString(key);
+      }
+    } catch (e: Exception) {
+      console.log("获取Metadata失败: " + e.message);
+    }
+    return null;
+  }
+
+  // 计算字符串字节长度
+  private getByteLength(str: string): Int {
+    return str.toByteArray(charset("UTF-8")).size;
+  }
+
+  // 文本分享
+  shareText(options: ShareTextOptions): void {
+    const textObj = WXTextObject();
+    textObj.text = options.text;
+
+    const msg = WXMediaMessage();
+    msg.mediaObject = textObj;
+    msg.description = options.text;
+		msg.title = options.title
+
+		this.sendShareRequest(options.scene,msg)
+  }
+
+  // 图片分享
+  shareImage(options: ShareImageOptions): void {
+    // 检查文件是否存在
+    const file = new File(options.imagePath);
+    if (!file.exists()) {
+      throw this.getError(ShareWeixinErrorCode.PARAMETERS_INVALID, "图片文件不存在");
+    }
+
+    const imgObj = WXImageObject();
+		let imagePath = options.imagePath;
+		if(this.checkVersionValid() && this.checkAndroidNotBelowN()){
+			const contentUri = UTSAndroid.getFileProviderUri(file);
+			UTSAndroid.getAppContext()?.grantUriPermission("com.tencent.mm",contentUri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			imagePath = contentUri.toString();
+		}
+    imgObj.setImagePath(imagePath);
+
+    const msg = WXMediaMessage();
+    msg.mediaObject = imgObj;
+    msg.title = options.title;
+    msg.description = options.description;
+
+    // 生成缩略图
+		const opts = new BitmapFactory.Options();
+		opts.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(options.imagePath, opts);
+		let sampleSize: Int = 1;
+		while ((opts.outWidth / sampleSize) > 150 * 2 || (opts.outHeight / sampleSize) > 150 * 2) {
+		    sampleSize *= 2;
+		}
+		const decodeOpts = new BitmapFactory.Options();
+		decodeOpts.inSampleSize = sampleSize;
+    const bitmap = BitmapFactory.decodeFile(options.imagePath,decodeOpts);
+    if (bitmap != null) {
+      const thumbBmp = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+			if(bitmap !== thumbBmp){
+				bitmap.recycle();
+			}
+      msg.thumbData = this.bmpToByteArray(thumbBmp, true);
+    }
+
+    this.sendShareRequest(options.scene, msg);
+  }
+
+  private bmpToByteArray(bmp: Bitmap, needRecycle: boolean): ByteArray {
+    const output = new ByteArrayOutputStream();
+    bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+    if (needRecycle) {
+      bmp.recycle();
+    }
+    const result = output.toByteArray();
+    try {
+      output.close();
+    } catch (e: Exception) {
+      console.log(e.message);
+    }
+    return result;
+  }
+
+	private sendShareRequest(scene: Int, msg: WXMediaMessage) : void{
+		const req = SendMessageToWX.Req();
+		req.transaction = "text" + System.currentTimeMillis().toString();
+		req.message = msg;
+		req.scene = scene;
+
+		const result = this.WXApi!.sendReq(req);
+		console.log("sendShareRequest:result->" + result)
+		if (!result) {
+		  throw this.getError(ShareWeixinErrorCode.SEND_REQUEST_FAILED);
+		}
+	}
+
+  // 主分享方法
+  override share(options: ShareOptions): void {
+    try {
+      // 检查APPID
+      if (this.APP_ID == null) {
+        throw this.getError(ShareWeixinErrorCode.APP_ID_NOT_FOUND);
+      }
+
+      // 检查微信是否安装
+      if (!this.isWeChatInstalled) {
+        throw this.getError(ShareWeixinErrorCode.SEND_REQUEST_FAILED, "微信未安装");
+      }
+
+      // 检查场景
+      if (options.scene != null && !SCENES.has(options.scene!)) {
+        throw this.getError(ShareWeixinErrorCode.SCENE_NOT_SUPPORT);
+      }
+
+      // 检查标题长度
+      if (options.title != null && this.getByteLength(options.title!) > TITLE_MAX_BYTES) {
+        throw this.getError(ShareWeixinErrorCode.PARAMETERS_INVALID, `title字段不能超过 ${TITLE_MAX_BYTES} 个字节`);
+      }
+
+      // 检查摘要长度
+      if (options.summary != null && this.getByteLength(options.summary!) > SUMMARY_MAX_BYTES) {
+        throw this.getError(ShareWeixinErrorCode.PARAMETERS_INVALID, `summary字段不能超过 ${SUMMARY_MAX_BYTES} 个字节`);
+      }
+
+      // 默认分享到聊天
+      options.scene = options.scene ?? DEFAULT_SCENE;
+
+      // 根据类型处理分享，将Number类型转换为Int进行比较
+      switch (options.type) {
+        case 1:  // TEXT类型
+          this.handleTextShare(options);
+          break;
+        case 2: // IMAGE类型
+          this.handleImageShare(options);
+          break;
+        default:
+          throw this.getError(ShareWeixinErrorCode.TYPE_NOT_FOUND);
+      }
+
+      options.success?.({} as ShareSuccess);
+      options.complete?.({} as any);
+    } catch (e: Exception) {
+      // 捕获ShareWeixinError类型的错误
+      const err = this.getError(ShareWeixinErrorCode.TYPE_SHARE_FAIL,e.message);
+      options.fail?.(err);
+      options.complete?.(err);
+    }
+  }
+
+  // 处理文本分享
+  private handleTextShare(options: ShareOptions): void {
+    if (options.summary == null || options.summary!.length == 0) {
+      throw this.getError(ShareWeixinErrorCode.PARAMETERS_INVALID, "分享的内容不能为空");
+    }
+
+    this.shareText({
+      scene: SCENES.get(options.scene!)!,
+      text: options.summary!,
+      title: options.title,
+      description: options.summary
+    } as ShareTextOptions);
+  }
+
+  // 处理图片分享
+  private handleImageShare(options: ShareOptions): void {
+    if (options.imageUrl == null) {
+      throw this.getError(ShareWeixinErrorCode.PARAMETERS_INVALID, "图片地址不能为空");
+    }
+
+    const realPath = UTSAndroid.convert2AbsFullPath(options.imageUrl!);
+
+    this.shareImage({
+      scene: SCENES.get(options.scene!)!,
+      imagePath: realPath,
+      title: options.title,
+      description: options.summary
+    } as ShareImageOptions);
+  }
+
+  // 获取错误对象，返回ShareWeixinError
+  private getError(code: ShareWeixinErrorCode, message: string | null = null): ShareWeixinError {
+    let errMsg = SHARE_WEIXIN_UNI_ERROR_CODES.get(code as any as ShareErrorCode) ?? "未知错误";
+    if (message != null) {
+      errMsg = errMsg + ', ' + message;
+    }
+
+    // 将枚举值转换为Number类型
+    return new ShareWeixinError(code as any as ShareErrorCode, errMsg);
+  }
+
+	private checkVersionValid() : boolean{
+		return this.WXApi!!.getWXAppSupportAPI() >= WX_MIN_VERSION_FOR_FILE_PROVIDER;
+	}
+
+	private checkAndroidNotBelowN() : boolean{
+		return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N;
+	}
+}
+
+// 导出实例
+export default new UniShareWeixinProviderImpl();

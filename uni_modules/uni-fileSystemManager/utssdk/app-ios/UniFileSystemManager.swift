@@ -1159,10 +1159,7 @@ extension UniFileSystemManager {
             completionHandler?(false, status.toError())
             return
         case .valid(let status):
-            if status.isDirectory {
-                completionHandler?(false, .isDirectory)
-                return
-            } else if status.isReadable == false {
+            if status.isReadable == false {
                 completionHandler?(false, .permissionDenied)
                 return
             }
@@ -1184,18 +1181,20 @@ extension UniFileSystemManager {
             }
             
         case .valid(let status):
-            if status.isDirectory {
-                completionHandler?(false, .isDirectory)
-                return
-            } else if status.isWritable == false {
+            if status.isWritable == false {
                 completionHandler?(false, .permissionDenied)
                 return
             }
             //存在的先remove
-            let (success, _) = unlink(path: newPath)
-            
-            if !success {
+            var result: (Bool, Error?)
+            if status.isDirectory {
+                result = removeDirectorySync(newPath, true)
+            } else {
+                result = unlink(path: newPath)
+            }
+            if !result.0 {
                 completionHandler?(false, .systemError)
+                return
             }
         }
         
@@ -2314,4 +2313,5 @@ extension UniFileSystemManager {
         }
     }
 }
+
 

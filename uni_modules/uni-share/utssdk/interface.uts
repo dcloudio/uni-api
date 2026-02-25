@@ -348,7 +348,34 @@ export type ShareErrorCode =
     *    }
     * }
    */
-  4000510;
+  4000510 |
+  /**
+   * 分享失败
+   * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "x",
+    *            "uniVer": "x",
+    *            "unixVer": "x"
+    *        },
+    *        "ios": {
+    *            "osVer": "x",
+    *            "uniVer": "x",
+    *            "unixVer": "x"
+    *        },
+    *        "harmony": {
+    *            "osVer": "x",
+    *            "uniVer": "x",
+    *            "unixVer": "x"
+    *        }
+    *    },
+    *    "web": {
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    }
+    * }
+   */
+  4000511;
 
 export type Share = (options: ShareOptions) => void;
 export type ShareMiniProgramShareType =

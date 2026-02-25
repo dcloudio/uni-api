@@ -1,0 +1,95 @@
+import { UniOAuthWeixinProvider } from '../interface.uts';
+import { OauthWeixinFailImpl } from '../unierror.uts';
+import WXAPIFactory from 'com.tencent.mm.opensdk.openapi.WXAPIFactory';
+import IWXAPI from 'com.tencent.mm.opensdk.openapi.IWXAPI';
+import SendAuth from 'com.tencent.mm.opensdk.modelmsg.SendAuth';
+import BaseResp from 'com.tencent.mm.opensdk.modelbase.BaseResp';
+import PackageManager from 'android.content.pm.PackageManager';
+
+export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
+
+    private appId : string = '';
+    private api : IWXAPI | null = null;
+    private static options : LoginOptions | null = null;
+
+    override id : string = "weixin";
+    override description : string = "微信登录";
+    override isWeChatInstalled : boolean = false;
+    override isAppExist : boolean | null = false;
+
+    static onLoginResult(res : BaseResp) {
+        const options = UniOAuthWeixinProviderImpl.options;
+        if (options == null) return;
+        switch (res.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+                if (res instanceof SendAuth.Resp) {
+                    let authResult : any | null = null;
+                    if (!(options?.onlyAuthorize ?? false)) {
+                        authResult = res;
+                    }
+                    const success = {
+                        code: res.code,
+                        authResult: authResult ?? {}
+                    } as LoginSuccess;
+                    options.success?.(success);
+                    options.complete?.(success);
+                }
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                const fail1 = new OauthWeixinFailImpl(1310509);
+                options.fail?.(fail1);
+                options.complete?.(fail1);
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                const fail2 = new OauthWeixinFailImpl(1310503);
+                options.fail?.(fail2);
+                options.complete?.(fail2);
+                break;
+            default:
+                break;
+        }
+        UniOAuthWeixinProviderImpl.options = null;
+    }
+
+    constructor() {
+        this.appId = this.getMetaData('WX_APPID');
+        this.isWeChatInstalled = this.isInstalled();
+        this.isAppExist = this.isWeChatInstalled;
+        this.api = WXAPIFactory.createWXAPI(UTSAndroid.getAppContext(), this.appId);
+        this.api?.registerApp(this.appId);
+    }
+
+    override login(options : LoginOptions) {
+        UniOAuthWeixinProviderImpl.options = options;
+        if (this.appId.length == 0) {
+            const err = new OauthWeixinFailImpl(1310500);
+            options.fail?.(err);
+            options.complete?.(err);
+            return;
+        }
+        if (!this.isWeChatInstalled) {
+            const err = new OauthWeixinFailImpl(1310502);
+            options.fail?.(err);
+            options.complete?.(err);
+            return;
+        }
+        const req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat_sdk_dcloud_weixin_oauth";
+        this.api?.sendReq(req);
+    }
+
+    override getUserInfo(options : GetUserInfoOptions) {
+    }
+
+    private getMetaData(key : string) : string {
+        const ctx = UTSAndroid.getAppContext();
+        if (ctx == null) return '';
+        const metaData = ctx.getPackageManager().getApplicationInfo(ctx.packageName, PackageManager.GET_META_DATA).metaData;
+        return metaData.getString(key, '');
+    }
+
+    private isInstalled() : boolean {
+        return WXAPIFactory.createWXAPI(UTSAndroid.getAppContext(), this.appId).isWXAppInstalled();
+    }
+}

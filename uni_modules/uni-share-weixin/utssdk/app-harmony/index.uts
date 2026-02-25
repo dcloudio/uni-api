@@ -73,10 +73,10 @@ enum ShareType {
 }
 
 class UniShareWeixinProviderImpl implements UniShareWeixinProvider {
-
   id: string = "weixin";
   description: string = "微信分享";
   isWeChatInstalled: boolean = false;
+  isAppExist: boolean = false;
   private APP_ID: string | undefined;
   private WXApi: wxopensdk.WXApi | undefined;
 
@@ -85,6 +85,7 @@ class UniShareWeixinProviderImpl implements UniShareWeixinProvider {
     if (this.APP_ID) {
       this.WXApi = wxopensdk.WXAPIFactory.createWXAPI(this.APP_ID);
       this.isWeChatInstalled = this.WXApi.isWXAppInstalled()
+      this.isAppExist = this.isWeChatInstalled
     }
   }
 

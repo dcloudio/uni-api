@@ -32,7 +32,8 @@
     },
     "uni_modules": {
 		"pages":{
-			"app-harmony":false
+			"app-harmony":false,
+            "app-ios": "dom1"
 		},
         "dependencies": [
             "uni-framework",
