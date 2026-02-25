@@ -15,14 +15,6 @@ import {
     OnSocketOpen,
     OnSocketClose,
     OnSocketError,
-    OnSocketOpenCallback,
-    OnSocketOpenCallbackResult,
-    OnSocketCloseCallback,
-    OnSocketCloseCallbackResult,
-    OnSocketErrorCallback,
-    OnSocketMessageCallback,
-    SendSocketMessageErrorCode,
-    SendSocketMessageFail,
 } from '../interface.uts'
 import {
     API_CONNECT_SOCKET,
@@ -35,26 +27,6 @@ import {
     Emitter,
     getCurrentMP,
 } from '@dcloudio/uni-runtime'
-
-export {
-    ConnectSocket,
-    ConnectSocketOptions,
-    UniSocketTask as SocketTask,
-    SendSocketMessageOptions,
-    CloseSocketOptions,
-    OnSocketMessageCallbackResult,
-    ConnectSocketSuccess,
-    OnSocketErrorCallbackResult,
-    OnSocketOpenCallback,
-    OnSocketOpenCallbackResult,
-    OnSocketCloseCallback,
-    OnSocketCloseCallbackResult,
-    OnSocketErrorCallback,
-    OnSocketMessageCallback,
-    SendSocketMessageErrorCode,
-    SendSocketMessageFail,
-}
-
 interface IUniWebsocketEmitter {
     on: (eventName: string, callback: Function) => void
     once: (eventName: string, callback: Function) => void
@@ -296,3 +268,31 @@ export const closeSocket = defineAsyncApi<CloseSocketOptions, GeneralCallbackRes
         }
     }
 ) as CloseSocket
+
+export {
+    CloseSocket,
+    CloseSocketOptions,
+    ConnectSocket,
+    ConnectSocketErrorCode,
+    ConnectSocketFail,
+    ConnectSocketOptions,
+    ConnectSocketSuccess,
+    GeneralCallbackResult,
+    OnSocketClose,
+    OnSocketCloseCallback,
+    OnSocketCloseCallbackResult,
+    OnSocketError,
+    OnSocketErrorCallback,
+    OnSocketErrorCallbackResult,
+    OnSocketMessage,
+    OnSocketMessageCallback,
+    OnSocketMessageCallbackResult,
+    OnSocketOpen,
+    OnSocketOpenCallback,
+    OnSocketOpenCallbackResult,
+    SendSocketMessage,
+    SendSocketMessageErrorCode,
+    SendSocketMessageFail,
+    SendSocketMessageOptions,
+    SocketTask
+} from '../interface.uts'

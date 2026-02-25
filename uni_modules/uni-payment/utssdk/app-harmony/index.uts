@@ -4,11 +4,6 @@ import {
     RequestPaymentOptions,
     RequestPaymentFail,
     RequestPaymentSuccess,
-    RequestPaymentComplete,
-    RequestPaymentCompleteCallback,
-    RequestPaymentErrorCode,
-    RequestPaymentFailCallback,
-    RequestPaymentSuccessCallback,
 } from '../interface.uts'
 import {
     RequestPaymentUniErrors
@@ -16,19 +11,6 @@ import {
 import {
     API_REQUEST_PAYMENT
 } from '../protocol.uts'
-
-export {
-    RequestPayment,
-    RequestPaymentOptions,
-    RequestPaymentFail,
-    RequestPaymentSuccess,
-    UniPaymentProvider,
-    RequestPaymentComplete,
-    RequestPaymentCompleteCallback,
-    RequestPaymentErrorCode,
-    RequestPaymentFailCallback,
-    RequestPaymentSuccessCallback,
-}
 
 export const requestPayment: RequestPayment = defineAsyncApi<RequestPaymentOptions, RequestPaymentSuccess>(
     API_REQUEST_PAYMENT,
@@ -52,3 +34,18 @@ export const requestPayment: RequestPayment = defineAsyncApi<RequestPaymentOptio
         } as RequestPaymentOptions)
     }
 ) as RequestPayment
+
+export {
+    IRequestPaymentFail,
+    RequestPayment,
+    RequestPaymentComplete,
+    RequestPaymentCompleteCallback,
+    RequestPaymentErrorCode,
+    RequestPaymentFail,
+    RequestPaymentFailCallback,
+    RequestPaymentFailImpl,
+    RequestPaymentOptions,
+    RequestPaymentSuccess,
+    RequestPaymentSuccessCallback,
+    UniPaymentProvider
+} from '../interface.uts'

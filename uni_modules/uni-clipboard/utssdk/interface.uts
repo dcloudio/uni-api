@@ -20,7 +20,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -93,7 +94,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -147,7 +149,7 @@ export interface Uni {
   getClipboardData(options: GetClipboardDataOptions): void;
 }
 
-export type ClipBoardErrorCode = 
+export type ClipBoardErrorCode =
 /**
  * 没有权限或权限被拒
  */

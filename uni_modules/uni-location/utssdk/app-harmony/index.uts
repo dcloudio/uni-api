@@ -43,29 +43,6 @@ import {
     API_STOP_LOCATION_UPDATE
 } from '../protocol.uts'
 
-export {
-    UniLocationProvider,
-    GetLocation,
-    GetLocationOptions,
-    GetLocationSuccess,
-    IGetLocationFail,
-    GetLocationFail,
-    OnLocationChangeCallback,
-    OnLocationChangeErrorCallback,
-    StartLocationUpdateOptions,
-    StartLocationUpdateSuccess,
-    StartLocationUpdateBackgroundOptions,
-    StartLocationUpdateBackgroundSuccess,
-    StartLocationUpdate,
-    StartLocationUpdateBackground,
-    StopLocationUpdate,
-    StopLocationUpdateOptions,
-    StopLocationUpdateSuccess,
-    OnLocationChangeResult,
-    LocationErrorCode,
-    StartLocationUpdateOptionsType,
-}
-
 // region Emitter
 interface ILocationEventEmitter<T = Object> {
     on: (eventName: string, callback: Function) => void
@@ -260,3 +237,35 @@ export const stopLocationUpdate: StopLocationUpdate = defineAsyncApi<StopLocatio
         } as StopLocationUpdateOptions)
     }
 ) as StopLocationUpdate
+
+export {
+    UniLocationProvider
+}
+
+export {
+    GetLocation,
+    GetLocationFail,
+    GetLocationFailImpl,
+    GetLocationOptions,
+    GetLocationSuccess,
+    IGetLocationFail,
+    LocationErrorCode,
+    OffLocationChange,
+    OffLocationChangeError,
+    OnLocationChange,
+    OnLocationChangeCallback,
+    OnLocationChangeError,
+    OnLocationChangeErrorCallback,
+    OnLocationChangeResult,
+    StartLocationUpdate,
+    StartLocationUpdateBackground,
+    StartLocationUpdateBackgroundOptions,
+    StartLocationUpdateBackgroundOptionsType,
+    StartLocationUpdateBackgroundSuccess,
+    StartLocationUpdateOptions,
+    StartLocationUpdateOptionsType,
+    StartLocationUpdateSuccess,
+    StopLocationUpdate,
+    StopLocationUpdateOptions,
+    StopLocationUpdateSuccess,
+} from '../interface.uts'

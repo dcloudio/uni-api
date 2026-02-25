@@ -61,7 +61,7 @@ export function getVideoMetadata(src : string, filePath : string | null) : any {
 	try {
 		let retriever = new MediaMetadataRetriever()
 		if (path.startsWith("content://")) {
-			retriever.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(path))
+			retriever.setDataSource(UTSAndroid.getAppContext()!, Uri.parse(path))
 		} else {
 			retriever.setDataSource(path)
 		}
@@ -119,7 +119,7 @@ export function getVideoMetadata(src : string, filePath : string | null) : any {
 		let fps : string | null = retriever.extractMetadata(32);
 		if (TextUtils.isEmpty(fps)) {
 			let extractor = new MediaExtractor()
-			extractor.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(path), null)
+			extractor.setDataSource(UTSAndroid.getAppContext()!, Uri.parse(path), null)
 			let trackCount = extractor.getTrackCount();
 			for (var i = 0; i < trackCount; i++) {
 				let mediaFormat = extractor.getTrackFormat(i.toInt());
@@ -171,9 +171,9 @@ export function copyFile(fromFilePath : string, toFilePath : string) : boolean {
 	var fis : InputStream | null = null
 	try {
 		if (fromFilePath.startsWith(ASSETS_PATH)) {
-			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+			fis = UTSAndroid.getAppContext()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
 		} else if (fromFilePath.startsWith("content://")) {
-			fis = UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
+			fis = UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
 		} else {
 			let fromFile = new File(fromFilePath)
 			if (!fromFile.exists()) {
@@ -287,7 +287,7 @@ export function getMediaInfo(path : string) : Long {
 		return length
 	} else if (path.startsWith(ASSETS_PATH)) {
 		try {
-			var stream = UTSAndroid.getUniActivity()!.assets.open(path.replace(ASSETS_PATH, ""))
+			var stream = UTSAndroid.getAppContext()!.assets.open(path.replace(ASSETS_PATH, ""))
 			var size = stream?.available()
 			stream?.close()
 			return size!.toLong()
@@ -313,7 +313,7 @@ export function getMediaInfo(path : string) : Long {
 export function getFileName(path : string, rename : boolean = false) : string {
 	var fileName = path.substring(path.lastIndexOf("/") + 1)
 	if (path.startsWith("content://")) {
-		var type : string | null = UTSAndroid.getUniActivity()!.getContentResolver().getType(Uri.parse(path))
+		var type : string | null = UTSAndroid.getAppContext()!.getContentResolver().getType(Uri.parse(path))
 		if (!TextUtils.isEmpty(type)) {
 			var ext = type!.split("/")
 			if (ext != null && ext.length > 1) {

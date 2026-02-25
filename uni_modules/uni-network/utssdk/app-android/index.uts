@@ -258,7 +258,7 @@ class RequestNetworkListener<T> extends NetworkRequestListener {
 		let charsetType = "utf-8";
 
 		if (type != null) {
-			let matcher = charsetPattern.matcher(type.toLowerCase(Locale.ENGLISH));
+			let matcher = charsetPattern.matcher(type.lowercase(Locale.ENGLISH));
 			if (matcher.find()) {
 				charsetType = matcher.group(1);
 			}

@@ -9,12 +9,6 @@ import {
 } from '../interface.uts'
 import inputMethod from '@ohos.inputMethod';
 
-export {
-    HideKeyboardOptions,
-    HideKeyboardSuccess,
-    HideKeyboardFail,
-}
-
 export const hideKeyboard: HideKeyboard = defineAsyncApi<HideKeyboardOptions, HideKeyboardSuccess>(
     API_HIDE_KEYBOARD,
     function (options: HideKeyboardOptions, exec: ApiExecutor<HideKeyboardSuccess>) {
@@ -25,3 +19,17 @@ export const hideKeyboard: HideKeyboard = defineAsyncApi<HideKeyboardOptions, Hi
         })
     }
 ) as HideKeyboard
+
+export {
+    HideKeyboard,
+    HideKeyboardCompleteCallback,
+    HideKeyboardFail,
+    HideKeyboardFailCallback,
+    HideKeyboardOptions,
+    HideKeyboardSuccess,
+    HideKeyboardSuccessCallback,
+    OffKeyboardHeightChange,
+    OnKeyboardHeightChange,
+    OnKeyboardHeightChangeCallback,
+    OnKeyboardHeightChangeCallbackResult
+} from '../interface.uts';

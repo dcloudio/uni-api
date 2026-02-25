@@ -17,7 +17,8 @@ export type ReadFileSuccessResult = {
          "harmony": {
            "osVer": "3.0",
            "uniVer": "4.51",
-           "unixVer": "4.61"
+           "unixVer": "4.61",
+           "unixvVer": "5.0"
          }
          },
        "mp": {
@@ -187,7 +188,8 @@ export type WriteFileOptions = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -293,7 +295,8 @@ export type AppendFileOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.51",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -797,7 +800,8 @@ export interface Stats extends JSExport {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -866,7 +870,8 @@ export interface Stats extends JSExport {
 	 *        "harmony": {
 	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixvVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -964,7 +969,8 @@ export interface Stats {
 	 *        "harmony": {
 	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixvVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -1033,7 +1039,8 @@ export interface Stats {
 	 *        "harmony": {
 	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixvVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -1301,7 +1308,8 @@ export type WriteOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1371,7 +1379,8 @@ export type WriteOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1440,7 +1449,8 @@ export type WriteOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1509,7 +1519,8 @@ export type WriteOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1613,7 +1624,8 @@ export type WriteSyncOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1698,7 +1710,8 @@ export type WriteSyncOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1766,7 +1779,8 @@ export type WriteSyncOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1834,7 +1848,8 @@ export type WriteSyncOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -2092,7 +2107,8 @@ export type ReadSuccessCallbackResult = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.41",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 *    },
 	 *  "mp": {
@@ -2160,7 +2176,8 @@ export type ReadSuccessCallbackResult = {
 	*    "harmony": {
 	*      "osVer": "5.0.0",
 	*      "uniVer": "4.41",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixvVer": "5.0"
 	*    }
 	*    },
 	*  "mp": {
@@ -2257,7 +2274,8 @@ export type ReadSyncOption = {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2336,7 +2354,8 @@ export type ReadResult = {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2404,7 +2423,8 @@ export type ReadResult = {
 	*        "harmony": {
 	*          "osVer": "3.0",
 	*          "uniVer": "4.51",
-	*          "unixVer": "4.61"
+	*          "unixVer": "4.61",
+	*          "unixvVer": "5.0"
 	*        }
 	*    },
 	*  "mp": {
@@ -2475,7 +2495,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2545,7 +2566,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2614,7 +2636,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2686,7 +2709,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2755,7 +2779,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2824,7 +2849,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2893,7 +2919,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2964,7 +2991,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3033,7 +3061,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3102,7 +3131,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3171,7 +3201,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3240,7 +3271,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3309,7 +3341,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3378,7 +3411,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3447,7 +3481,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -3518,7 +3553,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -3587,7 +3623,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3656,7 +3693,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3725,7 +3763,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3797,7 +3836,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3866,7 +3906,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3935,7 +3976,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4004,7 +4046,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4074,7 +4117,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4143,7 +4187,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4212,7 +4257,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4283,7 +4329,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4352,7 +4399,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4423,7 +4471,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4492,7 +4541,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4561,7 +4611,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4632,7 +4683,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *            "osVer": "x",
      *            "uniVer": "4.51",
-     *            "unixVer": "4.61"
+     *            "unixVer": "4.61",
+     *            "unixvVer": "5.0"
      *   	  }
      *    },
      *  "mp": {
@@ -4701,7 +4753,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4776,7 +4829,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4845,7 +4899,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4916,7 +4971,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4990,7 +5046,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5061,7 +5118,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5130,7 +5188,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5200,7 +5259,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5269,7 +5329,8 @@ export interface FileSystemManager {
      *        "harmony": {
      *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixvVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5338,7 +5399,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5410,7 +5472,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.51"
+     *      "unixVer": "4.51",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5479,7 +5542,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5548,7 +5612,8 @@ export interface FileSystemManager {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5627,7 +5692,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.45",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5703,7 +5769,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5737,7 +5804,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5771,7 +5839,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5805,7 +5874,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5839,7 +5909,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5873,7 +5944,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5907,7 +5979,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5941,7 +6014,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5975,7 +6049,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6009,7 +6084,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6043,7 +6119,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6077,7 +6154,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6111,7 +6189,8 @@ export type FileSystemManagerErrorCode =
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.41",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 *  },
 	 *  "web": {
@@ -6145,7 +6224,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6179,7 +6259,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6213,7 +6294,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6247,7 +6329,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6281,7 +6364,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6315,7 +6399,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6349,7 +6434,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6383,7 +6469,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6417,7 +6504,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6451,7 +6539,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6485,7 +6574,8 @@ export type FileSystemManagerErrorCode =
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "web": {

@@ -359,6 +359,7 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener, Audi
         this.player.stop();
         audioFocusHelper?.abandonAudioFocus()
         invokeCallBack("stop")
+		AudioService.audioService?.pause()
         // stopPlayService()
     }
 
@@ -373,59 +374,108 @@ open class BackgroundAudioPlayer : BackgroundAudioManager, Player.Listener, Audi
         this.callbacks[action] = callback
     }
 
-    open fun removeEvent(action: String, callback: EventCallback) {
+    open fun removeEvent(action: String) {
         this.callbacks.remove(action)
     }
 
     override fun onCanplay(callback: EventCallback) {
         this.addEvent("canplay", callback);
     }
+	
+	override fun offCanplay() {
+	    this.removeEvent("canplay");
+	}
 
     override fun onPlay(callback: EventCallback) {
         this.addEvent("play", callback);
     }
+	
+	override fun offPlay() {
+	    this.removeEvent("play");
+	}
 
     override fun onPause(callback: EventCallback) {
         this.addEvent("pause", callback);
     }
+	
+	override fun offPause() {
+	    this.removeEvent("pause");
+	}
 
     override fun onStop(callback: EventCallback) {
         this.addEvent("stop", callback);
     }
+	
+	override fun offStop() {
+	    this.removeEvent("stop");
+	}
 
     override fun onEnded(callback: EventCallback) {
         this.addEvent("ended", callback);
     }
+	
+	override fun offEnded() {
+	    this.removeEvent("ended");
+	}
 
     override fun onSeeking(callback: (result: Any) -> Unit) {
         this.addEvent("seeking", callback);
     }
+	
+	override fun offSeeking() {
+	    this.removeEvent("seeking");
+	}
 
     override fun onSeeked(callback: (result: Any) -> Unit) {
         this.addEvent("seeked", callback);
     }
+	
+	override fun offSeeked() {
+	    this.removeEvent("seeked");
+	}
 
     override fun onTimeUpdate(callback: EventCallback) {
         this.addEvent("timeUpdate", callback);
         this.startTimeUpdate();
     }
+	
+	override fun offTimeUpdate() {
+	    this.removeEvent("timeUpdate");
+	    clearInterval(this.timeUpdateInterval)
+	}
 
     override fun onPrev(callback: EventCallback) {
         this.addEvent("prev", callback);
     }
+	
+	override fun offPrev() {
+	    this.removeEvent("prev");
+	}
 
     override fun onNext(callback: EventCallback) {
         this.addEvent("next", callback);
     }
+	
+	override fun offNext() {
+	    this.removeEvent("next");
+	}
 
     override fun onError(callback: (result: ICreateBackgroundAudioFail) -> Unit) {
         this.errorCallBack = callback
     }
+	
+	override fun offError() {
+	    this.errorCallBack = null
+	}
 
 
     override fun onWaiting(callback: EventCallback) {
         this.addEvent("waiting", callback);
     }
+	
+	override fun offWaiting() {
+	    this.removeEvent("waiting");
+	}
 
     open var isTriggerTimeUpdate = false;
     open var timeUpdateInterval: Number = 0;

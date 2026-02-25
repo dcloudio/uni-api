@@ -24,7 +24,8 @@ export interface Uni {
   *    "harmony": {
   *      "osVer": "3.0",
   *      "uniVer": "4.23",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixvVer": "5.0"
   *    }
   * 	},
      *  "mp": {
@@ -113,7 +114,8 @@ export interface Uni {
   *     "harmony": {
   * 			"osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
   * 		}
   * 	},
      *  "mp": {
@@ -195,7 +197,8 @@ export interface Uni {
   *     "harmony": {
   * 			"osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
   * 		}
   * 	},
      *  "mp": {
@@ -276,7 +279,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
     *
 },
@@ -357,7 +361,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -428,7 +433,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -499,7 +505,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -570,7 +577,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -641,7 +649,8 @@ export type SafeArea = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -714,7 +723,8 @@ export type SafeAreaInsets = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -785,7 +795,8 @@ export type SafeAreaInsets = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -856,7 +867,8 @@ export type SafeAreaInsets = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -927,7 +939,8 @@ export type SafeAreaInsets = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
      *  "mp": {
@@ -1359,7 +1372,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1430,7 +1444,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1501,7 +1516,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1572,7 +1588,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1643,7 +1660,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1714,7 +1732,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1786,7 +1805,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -1999,7 +2019,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2070,7 +2091,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2141,7 +2163,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2212,7 +2235,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2283,7 +2307,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2354,7 +2379,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2577,7 +2603,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2648,7 +2675,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2719,7 +2747,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *   "web": {
@@ -2748,7 +2777,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -2963,7 +2993,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
    * 	},
    *  "mp": {
@@ -3034,7 +3065,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3105,7 +3137,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3177,7 +3210,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3248,7 +3282,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3319,7 +3354,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3533,7 +3569,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3604,7 +3641,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3675,7 +3713,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3818,7 +3857,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -3889,7 +3929,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4032,7 +4073,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4103,7 +4145,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4174,7 +4217,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4245,7 +4289,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4316,7 +4361,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4387,7 +4433,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -4529,7 +4576,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "√",
    *      "uniVer": "4.61",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -4600,7 +4648,8 @@ export type GetSystemInfoResult = {
      *    "harmony": {
      *      "osVer": "√",
      *      "uniVer": "4.61",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -4671,7 +4720,8 @@ export type GetSystemInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5187,7 +5237,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5258,7 +5309,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5329,7 +5381,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5400,7 +5453,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5468,6 +5522,13 @@ export type GetWindowInfoResult = {
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
+   *    "harmony": {
+   *      "osVer": "3.0",
+   *      "uniVer": "4.23",
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
+   *    }
+   * 	},
    *  "mp": {
    *    "weixin": {
    *        "hostVer": "√",
@@ -5510,12 +5571,10 @@ export type GetWindowInfoResult = {
    *        "unixVer": "x"
    *    }
    *  },
-   *    "harmony": {
-   *      "osVer": "3.0",
-   *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
-   *    }
-   * 	}
+   *   "web": {
+   *     "uniVer": "√",
+   *     "unixVer": "4.0"
+   *   }
    * }
    */
   windowHeight: number,
@@ -5538,7 +5597,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5609,9 +5669,52 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
+   *  "mp": {
+   *    "weixin": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "alipay": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "baidu": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "toutiao": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "lark": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "qq": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "kuaishou": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    },
+   *    "jd": {
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
+   *    }
+   *  },
    *   "web": {
    *     "uniVer": "√",
    *     "unixVer": "4.0"
@@ -5638,48 +5741,49 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
    *    "weixin": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
-   *        "unixVer": "4.41"
+   *        "hostVer": "x",
+   *        "uniVer": "x",
+   *        "unixVer": "x"
    *    },
    *    "alipay": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "baidu": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "toutiao": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "lark": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "qq": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "kuaishou": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    },
    *    "jd": {
-   *        "hostVer": "√",
-   *        "uniVer": "√",
+   *        "hostVer": "x",
+   *        "uniVer": "x",
    *        "unixVer": "x"
    *    }
    *  },
@@ -5709,7 +5813,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5780,7 +5885,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {
@@ -5851,7 +5957,8 @@ export type GetWindowInfoResult = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
    * 	},
    *  "mp": {

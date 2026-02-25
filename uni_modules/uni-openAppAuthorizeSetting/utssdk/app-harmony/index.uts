@@ -10,12 +10,6 @@ import Want from '@ohos.app.ability.Want'
 import bundleManager from '@ohos.bundle.bundleManager';
 import common from '@ohos.app.ability.common';
 
-export {
-    OpenAppAuthorizeSetting,
-    OpenAppAuthorizeSettingOptions,
-    OpenAppAuthorizeSettingSuccess
-}
-
 export const openAppAuthorizeSetting: OpenAppAuthorizeSetting = defineAsyncApi<OpenAppAuthorizeSettingOptions, OpenAppAuthorizeSettingSuccess>(
     API_OPEN_APP_AUTHORIZE_SETTING,
     function openAppAuthorizeSetting(options: OpenAppAuthorizeSettingOptions, exec: ApiExecutor<OpenAppAuthorizeSettingSuccess>) {
@@ -37,3 +31,14 @@ export const openAppAuthorizeSetting: OpenAppAuthorizeSetting = defineAsyncApi<O
         })
     }
 ) as OpenAppAuthorizeSetting
+
+export {
+    OpenAppAuthorizeSetting,
+    OpenAppAuthorizeSettingComplete,
+    OpenAppAuthorizeSettingCompleteCallback,
+    OpenAppAuthorizeSettingFail,
+    OpenAppAuthorizeSettingFailCallback,
+    OpenAppAuthorizeSettingOptions,
+    OpenAppAuthorizeSettingSuccess,
+    OpenAppAuthorizeSettingSuccessCallback
+} from '../interface.uts'

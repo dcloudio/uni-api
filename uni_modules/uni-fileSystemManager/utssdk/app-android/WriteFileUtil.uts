@@ -234,7 +234,6 @@ export class WriteFileUtil {
 			options.complete?.(err)
 			return
 		}
-
 		let that = this
 		let currentDispatcher = UTSAndroid.getDispatcher()
 		UTSAndroid.getDispatcher('io').async(function (_) {
@@ -254,8 +253,7 @@ export class WriteFileUtil {
 				let buffer = options.data as ArrayBuffer
 				byteLength = that.writeBufferByCondition(buffer, options.offset, options.position, options.length, fileChannel)
 			} else {
-				let buffer = ByteBuffer.allocate(64)
-				buffer.clear()
+				let buffer:ByteBuffer;
 				// 写入文本，根据不同的编码内容写入不同的数据
 				if (options.encoding?.toLowerCase() == 'ascii') {
 					// 与微信保持一致，以UTF-16 BE首字节为ascii
@@ -267,16 +265,16 @@ export class WriteFileUtil {
 						let perByte = charArray[index.toInt()].toChar().code.toByte()
 						byteArray.set(index.toInt(), perByte)
 					}
-					buffer.put(byteArray)
+					buffer = ByteBuffer.wrap(byteArray)
 				} else if (options.encoding?.toLowerCase() == 'base64') {
 					// base64
-					buffer.put(Base64.decode(options.data.toString(), Base64.NO_WRAP))
+					buffer = ByteBuffer.wrap(Base64.decode(options.data.toString(), Base64.NO_WRAP))
 				} else {
 					// utf-8 兜底
-					buffer.put(options.data.toString().toByteArray())
+					buffer = ByteBuffer.wrap(options.data.toString().toByteArray())
 				}
 
-				buffer.flip()
+				// buffer.flip()
 				while (buffer.hasRemaining()) {
 					byteLength+=fileChannel.write(buffer, 0)
 				}
@@ -317,8 +315,7 @@ export class WriteFileUtil {
 				let buffer = options.data as ArrayBuffer
 				byteLength = this.writeBufferByCondition(buffer, options.offset, options.position, options.length, fileChannel)
 			} else {
-				let buffer = ByteBuffer.allocate(64)
-				buffer.clear()
+				let buffer:ByteBuffer;
 				// 写入文本，根据不同的编码内容写入不同的数据
 				if (options.encoding.toString().toLowerCase() == 'ascii') {
 					// 与微信保持一致，以UTF-16 BE首字节为ascii
@@ -330,15 +327,15 @@ export class WriteFileUtil {
 						let perByte = charArray[index.toInt()].toChar().code.toByte()
 						byteArray.set(index.toInt(), perByte)
 					}
-					buffer.put(byteArray)
+					buffer = ByteBuffer.wrap(byteArray)
 				} else if (options.encoding.toString().toLowerCase() == 'base64') {
 					// base64
-					buffer.put(Base64.decode(options.data.toString(), Base64.NO_WRAP))
+					buffer = ByteBuffer.wrap(Base64.decode(options.data.toString(), Base64.NO_WRAP))
 				} else {
 					// utf-8 兜底
-					buffer.put(options.data.toString().toByteArray())
+					buffer = ByteBuffer.wrap(options.data.toString().toByteArray())
 				}
-				buffer.flip()
+				// buffer.flip()
 				while (buffer.hasRemaining()) {
 					byteLength+=fileChannel.write(buffer, 0)
 				}

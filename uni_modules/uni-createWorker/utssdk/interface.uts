@@ -60,7 +60,8 @@ export type WorkerPostMessageOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.81"
+   *      "unixVer": "4.81",
+   *      "unixvVer": "5.0"
    *    }
 	 *  },
    * "web": {
@@ -89,7 +90,8 @@ export type WorkerPostMessageOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "x",
-   *      "unixVer": "4.81"
+   *      "unixVer": "4.81",
+   *      "unixvVer": "5.0"
    *    }
 	 *  },
    * "web": {

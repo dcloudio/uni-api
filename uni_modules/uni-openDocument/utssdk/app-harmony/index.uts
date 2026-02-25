@@ -2,7 +2,6 @@ import {
     API_OPEN_DOCUMENT
 } from '../protocol.uts'
 import {
-    OpenDocumentFail,
     OpenDocumentSuccess,
     OpenDocumentOptions,
     OpenDocument
@@ -16,12 +15,6 @@ import fs from '@ohos.file.fs';
 import {
     getEnv,
 } from '@dcloudio/uni-runtime'
-
-export {
-    OpenDocumentFail,
-    OpenDocumentSuccess,
-    OpenDocumentOptions,
-}
 
 function getContentType(filePath: string, fileType?: string | null): string | void {
     const extension = fileType || filePath.split('.').pop();
@@ -108,3 +101,16 @@ export const openDocument: OpenDocument = defineAsyncApi<OpenDocumentOptions, Op
         })
     }
 ) as OpenDocument
+
+export {
+    IOpenDocumentError,
+    OpenDocument,
+    OpenDocumentCompleteCallback,
+    OpenDocumentErrorCode,
+    OpenDocumentFail,
+    OpenDocumentFailCallback,
+    OpenDocumentOptions,
+    OpenDocumentSuccess,
+    OpenDocumentSuccessCallback,
+    OpenDocumentSupportedTypes
+} from '../interface.uts'

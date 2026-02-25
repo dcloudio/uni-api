@@ -195,6 +195,7 @@ function openCameraForMediaVideo(option : ChooseMediaOptions, compressed : boole
 					option.fail?.(error)
 					option.complete?.(error)
 				}
+				takeVideoFunction = null
 			}
 		}
 		UTSAndroid.onAppActivityResult(takeVideoFunction!)
@@ -255,6 +256,7 @@ function openCameraForMediaImage(option : ChooseMediaOptions, compressed : boole
 					option.fail?.(error)
 					option.complete?.(error)
 				}
+				takeCameraFunction = null
 			}
 		}
 		UTSAndroid.onAppActivityResult(takeCameraFunction!)
@@ -312,6 +314,7 @@ function openAlbumForMedia(option : ChooseMediaOptions, count : number, type : n
 				option.success?.(success)
 				option.complete?.(success)
 			}
+			openMediaFunction = null
 		}
 	}
 	UTSAndroid.onAppActivityResult(openMediaFunction!)
@@ -634,7 +637,7 @@ function getGlobalConfig() : string {
 				var globalStyle = uniConfig.javaClass.getDeclaredField("globalStyle")
 				globalStyle.setAccessible(true)
 				var globalStyleValue = globalStyle.get(uniConfig)
-				if (globalStyleValue != null && globalStyleValue instanceof Map<Stirng, any>) {
+				if (globalStyleValue != null && globalStyleValue instanceof Map<String, any>) {
 					var pageOrientation = (globalStyleValue["pageOrientation"])
 					if (pageOrientation != null) {
 						return pageOrientation as string

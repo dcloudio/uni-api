@@ -1,19 +1,17 @@
-import { getCurrentPage } from '@dcloudio/uni-runtime'
 import { GetElementById } from '../interface.uts'
 
 export const getElementById = defineSyncApi<GetElementById>(
     'getElementById',
     (id: string.IDString | string): UniElement | null => {
-        const page = getCurrentPage()
+        const pages = getCurrentPages();
+        if (pages.length == 0) {
+            return null;
+        }
+        const page = pages[pages.length - 1];
         if (page == null) {
-            return null
+            console.warn('page is null');
+            return null;
         }
-
-        const bodyNode = page.$el?.parentNode
-        if (bodyNode == null) {
-            console.warn('bodyNode is null')
-            return null
-        }
-        return bodyNode.querySelector(`#${id}`)
+        return page.getElementById(id)
     },
 )

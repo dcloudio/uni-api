@@ -269,6 +269,7 @@ class SimpleDownloadCallback implements Callback {
 				option['errorMsg'] = "This path is not supported";
 				option['cause'] = null;
 				this.listener?.onComplete(option);
+
 				return new File("")
 			}
 

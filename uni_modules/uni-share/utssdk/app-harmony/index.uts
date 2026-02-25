@@ -1,8 +1,6 @@
 import { ShareOptions, ShareSuccess, ShareProvider, Share, UniShareProvider } from "../interface.uts";
 import { API_SHARE, ShareApiOptions, ShareApiProtocol } from "../protocol.uts";
 
-export { IShareFail, ShareErrorCode, ShareOptions, ShareSuccess, ShareComplete, ShareFail, ShareMiniProgramShareType, ShareProvider, ShareScene, Share, UniShareProvider } from "../interface.uts";
-
 const SERVICE = 'share'
 const DEFAULT_PROVIDER : ShareProvider = 'weixin'
 
@@ -37,3 +35,22 @@ export const share : Share = defineAsyncApi<ShareOptions, ShareSuccess>(
   ShareApiProtocol,
   ShareApiOptions
 ) as Share
+
+export {
+    IShareFail,
+    Share,
+    ShareComplete,
+    ShareCompleteCallback,
+    ShareErrorCode,
+    ShareFail,
+    ShareFailCallback,
+    ShareMiniProgramShareOptions,
+    ShareMiniProgramShareType,
+    ShareOptions,
+    ShareProvider,
+    ShareScene,
+    ShareSuccess,
+    ShareSuccessCallback,
+    ShareType,
+    UniShareProvider
+} from '../interface.uts'

@@ -47,6 +47,7 @@ import java.io.IOException
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.metadata.Metadata;
 import android.text.TextUtils
+import com.google.android.exoplayer2.C
 
 typealias EventCallback = (result: Any) -> Unit;
 
@@ -303,6 +304,13 @@ open class AudioPlayer : InnerAudioContext, Player.Listener {
                     invokeCallBack("play")
                 }
             }
+			val attribute = AudioAttributes.Builder().setUsage(if(AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).speakerOn) {C.USAGE_MEDIA} else {C.USAGE_VOICE_COMMUNICATION}).setContentType(C.AUDIO_CONTENT_TYPE_MUSIC).build()
+			
+			if(!AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).speakerOn && AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).mixWithOther) {
+				// 如果是听筒播放并且是混播的情况下，主动获取焦点，暂停其他音频
+				AudioFocusHelper.getInstance(UTSAndroid.getAppContext()!!).requestAudioFocusSingle()
+			}
+			player.setAudioAttributes(attribute,false)
             this.isPausedByUser = false;
             this.player.playWhenReady = true;
 //            this.registerAudioManager();

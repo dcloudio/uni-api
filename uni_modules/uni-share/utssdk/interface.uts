@@ -20,7 +20,8 @@ export interface Uni {
 	 *        "harmony": {
 	 *            "osVer": "5.0.0",
 	 *            "uniVer": "√",
-	 *            "unixVer": "4.81"
+	 *            "unixVer": "4.81",
+	 *            "unixvVer": "5.0"
 	 *        }
 	 *    },
 	 *    "web": {
@@ -57,7 +58,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -84,7 +86,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -111,7 +114,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -138,7 +142,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -165,7 +170,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -192,7 +198,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -219,7 +226,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -246,7 +254,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -273,7 +282,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -300,7 +310,8 @@ export type ShareErrorCode =
     *        "harmony": {
     *            "osVer": "5.0.0",
     *            "uniVer": "4.76",
-    *            "unixVer": "4.81"
+    *            "unixVer": "4.81",
+    *            "unixvVer": "5.0"
     *        }
     *    },
     *    "web": {
@@ -309,7 +320,35 @@ export type ShareErrorCode =
     *    }
     * }
    */
-  4000509;
+  4000509 |
+  /**
+   * 微信可能未安装
+   * @uniPlatform {
+    *    "app": {
+    *        "android": {
+    *            "osVer": "x",
+    *            "uniVer": "x",
+    *            "unixVer": "x"
+    *        },
+    *        "ios": {
+    *            "osVer": "x",
+    *            "uniVer": "x",
+    *            "unixVer": "x"
+    *        },
+    *        "harmony": {
+    *            "osVer": "5.0.0",
+    *            "uniVer": "4.87",
+    *            "unixVer": "4.87",
+    *            "unixvVer": "5.0"
+    *        }
+    *    },
+    *    "web": {
+    *        "uniVer": "x",
+    *        "unixVer": "x"
+    *    }
+    * }
+   */
+  4000510;
 
 export type Share = (options: ShareOptions) => void;
 export type ShareMiniProgramShareType =
@@ -365,7 +404,7 @@ export type ShareType =
  */
 2 |
 /**
- * 音乐
+ * 音乐（HarmonyOS 暂不支持）
  */
 3 |
 /**
@@ -391,7 +430,8 @@ export type ShareScene =
 'WXSceneFavorite';
 export type ShareOptions = {
     /**
-     * 分享服务提供商，通过uni.getProvider获取，如果不设置则弹出分享列表选择界面
+     * 分享服务提供商，通过uni.getProvider获取，如果不设置则默认 weixin
+     * @defaultValue weixin
      */
     provider?: ShareProvider | null,
     /**
@@ -428,8 +468,8 @@ export type ShareOptions = {
      */
     miniProgram?: ShareMiniProgramShareOptions | null,
     /**
-     * 是否启用拉起客服功能
-     *
+     * 是否启用拉起客服功能，为 true 时除 `corpid`、`customerUrl` 外其他参数无效
+     * @defaultValue false
      * @uniPlatform {
      *  "app": {
      *   "android": {
@@ -443,16 +483,16 @@ export type ShareOptions = {
      *       "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0 (12)",
+     *      "uniVer": "5.0",
+     *      "unixVer": "5.0"
      *    }
      *  }
      * }
      */
     openCustomerServiceChat?: boolean | null,
     /**
-     * 客服ID
+     * 客服ID，`openCustomerServiceChat` 为 true 时必填
      *
      * @uniPlatform {
      *  "app": {
@@ -467,16 +507,16 @@ export type ShareOptions = {
      *       "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0 (12)",
+     *      "uniVer": "5.0",
+     *      "unixVer": "5.0"
      *    }
      *  }
      * }
      */
     corpid?: string | null,
     /**
-     * 客服的页面路径
+     * 客服的页面路径，`openCustomerServiceChat` 为 true 时必填
      *
      * @uniPlatform {
      *  "app": {
@@ -491,9 +531,9 @@ export type ShareOptions = {
      *       "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "x",
-     *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "osVer": "5.0.0 (12)",
+     *      "uniVer": "5.0",
+     *      "unixVer": "5.0"
      *    }
      *  }
      * }

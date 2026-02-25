@@ -13,11 +13,6 @@ import {
     API_STOP_PULL_DOWN_REFRESH
 } from '../protocol.uts'
 
-export {
-    StartPullDownRefreshOptions,
-    StartPullDownRefreshSuccess,
-}
-
 export const startPullDownRefresh = defineAsyncApi<
     StartPullDownRefreshOptions,
     StartPullDownRefreshSuccess
@@ -32,3 +27,16 @@ export const stopPullDownRefresh = defineSyncApi<void>(
         internalStopPullDownRefresh()
     },
 ) as StopPullDownRefresh
+
+export {
+    PullDownRefreshErrorCode,
+    StartPullDownRefresh,
+    StartPullDownRefreshComplete,
+    StartPullDownRefreshCompleteCallback,
+    StartPullDownRefreshFail,
+    StartPullDownRefreshFailCallback,
+    StartPullDownRefreshOptions,
+    StartPullDownRefreshSuccess,
+    StartPullDownRefreshSuccessCallback,
+    StopPullDownRefresh
+} from '../interface.uts'

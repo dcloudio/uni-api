@@ -326,9 +326,9 @@ class SystemLocation implements CLLocationManagerDelegate {
 	 * iOS14.0以下系统进入下面delegate方法，如果同时实现了上述api，则iOS14.0+优先使用上述api； 如果未实现上述api，则下列api也会调用
 	 */
 	locationManager(manager : CLLocationManager, @argumentLabel("didChangeAuthorization") status : CLAuthorizationStatus) {
-		if (this.type != "SystemLocation" {
+		if (this.type != "SystemLocation") {
 			return
-		})
+		}
 		DispatchQueue.main.async(execute = () : void => {
 			if (CLLocationManager.locationServicesEnabled() == false) {
 				this.failedAction(1505003)
@@ -345,17 +345,17 @@ class SystemLocation implements CLLocationManagerDelegate {
 
 	// 实现定位出错的 delegate 方法
 	locationManager(manager : CLLocationManager, @argumentLabel("didFailWithError") error : NSError) {
-		if (this.type != "SystemLocation" {
+		if (this.type != "SystemLocation") {
 			return
-		})
+		}
 		this.failedAction(1505602)
 	}
 
 	// 实现位置更新的 delegate 方法
 	locationManager(manager : CLLocationManager, @argumentLabel("didUpdateLocations") locations : CLLocation[]) {
-		if (this.type != "SystemLocation" {
+		if (this.type != "SystemLocation") {
 			return
-		})
+		}
 		if (locations.length == 0) {
 			this.failedAction(1505602)
 			return

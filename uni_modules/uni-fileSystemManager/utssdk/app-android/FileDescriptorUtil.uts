@@ -313,7 +313,6 @@ export class FileDescriptorUtil {
 	}
 	open_a(file : File) : string {
 		try {
-			console.log(file.getPath())
 			let mode = ParcelFileDescriptor.MODE_CREATE | ParcelFileDescriptor.MODE_WRITE_ONLY | ParcelFileDescriptor.MODE_APPEND
 			let pfd = ParcelFileDescriptor.open(file, mode);
 			return pfd.getFd().toString()
@@ -323,7 +322,7 @@ export class FileDescriptorUtil {
 		return ""
 	}
 	open_ax(file : File) : string {
-		let mode = ParcelFileDescriptor.MODE_CREATE | ParcelFileDescriptor.MODE_APPEND | ParcelFileDescriptor.MODE_READ_ONLY
+		let mode = ParcelFileDescriptor.MODE_CREATE | ParcelFileDescriptor.MODE_APPEND | ParcelFileDescriptor.MODE_READ_WRITE
 		let pfd = ParcelFileDescriptor.open(file, mode);
 		return pfd.getFd().toString()
 	}

@@ -8,11 +8,14 @@ export const getElementById: GetElementById = defineSyncApi<UniElement | null>(
             return null;
         }
         const page = pages[pages.length - 1];
-        const bodyNode = ((page.vm as object)['$el'] as UniElement | null)?.parentNode
-        if (!bodyNode) {
-            console.warn('bodyNode is null');
+        if (!page) {
+            console.warn('page is null');
             return null;
         }
-        return bodyNode.querySelector(`#${id}`);
+        return page.getElementById(id);
     },
 )
+
+export {
+    GetElementById
+} from '../interface.uts';

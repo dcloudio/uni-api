@@ -1,4 +1,3 @@
-import { getCurrentPage } from '@dcloudio/uni-runtime'
 import {
     SetNavigationBarColorOptions,
     SetNavigationBarColorSuccess,
@@ -16,12 +15,29 @@ export const setNavigationBarColor = defineAsyncApi<
 >(
     'setNavigationBarColor',
     (options: SetNavigationBarColorOptions, res: ApiExecutor) => {
-        const page = getCurrentPage()
-        if (page == null) {
+        const pages = getCurrentPages()
+        const currentPage = pages[pages.length - 1]
+        if (currentPage == null) {
             res.reject(new SetNavigationBarColorFailImpl('page is not ready'))
             return
         }
-        const appPage = page.$nativePage
+        let appPage = currentPage.vm!.$nativePage
+        const dialogPages = currentPage.getDialogPages();
+        const systemDialogPages = currentPage.$getSystemDialogPages();
+        if (dialogPages.length > 0 && systemDialogPages.length > 0) {
+            const lastDialogPage = dialogPages[dialogPages.length - 1]
+            const lastSystemDialogPage = systemDialogPages[systemDialogPages.length - 1]
+            if (parseInt(lastDialogPage.vm!.$nativePage!.pageId) > parseInt(lastSystemDialogPage.vm!.$nativePage!.pageId)) {
+                appPage = lastDialogPage.vm!.$nativePage
+            } else {
+                appPage = lastSystemDialogPage.vm!.$nativePage
+            }
+        } else if (dialogPages.length > 0) {
+            appPage = dialogPages[dialogPages.length - 1].vm!.$nativePage
+        } else if (systemDialogPages.length > 0) {
+            appPage = systemDialogPages[systemDialogPages.length - 1].vm!.$nativePage
+        }
+
         appPage!.updateStyle(
             new Map<string, any | null>([
                 [
@@ -44,12 +60,13 @@ export const setNavigationBarTitle = defineAsyncApi<
 >(
     'setNavigationBarTitle',
     (options: SetNavigationBarTitleOptions, res: ApiExecutor) => {
-        const page = getCurrentPage()
-        if (page == null) {
+        const pages = getCurrentPages()
+        const currentPage = pages[pages.length - 1]
+        if (currentPage == null) {
             res.reject(new SetNavigationBarTitleFailImpl('page is not ready'))
             return
         }
-        const appPage = page.$nativePage
+        const appPage = currentPage.vm!.$nativePage
         appPage!.updateStyle(
             new Map<string, any | null>([
                 ['navigationBarTitleText', options.title],

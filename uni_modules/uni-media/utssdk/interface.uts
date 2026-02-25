@@ -491,7 +491,8 @@ export type ChooseImageOptions = {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      * },
     *  "mp": {
@@ -716,7 +717,7 @@ export type ChooseImageOptions = {
 
 export type ChooseImage = (options: ChooseImageOptions) => void
 
-// #ifndef UNI-APP-X && !APP-HARMONY
+// #ifdef !UNI-APP-X && APP-HARMONY
 
 export type PreviewImageSuccess = {
     /**
@@ -788,7 +789,8 @@ export type PreviewImageOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -815,7 +817,8 @@ export type PreviewImageOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -843,7 +846,8 @@ export type PreviewImageOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -1050,7 +1054,8 @@ export type PreviewImageOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1062,7 +1067,7 @@ export type PreviewImageOptions = {
     success?: (PreviewImageSuccessCallback) | null,
     /**
      * 接口调用失败的回调函数
-	 * 
+	 *
 	 * @uniPlatform {
 	   *	 "app": {
 	   *		"android": {
@@ -1078,7 +1083,8 @@ export type PreviewImageOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1090,7 +1096,7 @@ export type PreviewImageOptions = {
     fail?: (PreviewImageFailCallback) | null,
     /**
      * 接口调用结束的回调函数（调用成功、失败都会执行）
-	 * 
+	 *
 	 * @uniPlatform {
 	   *	 "app": {
 	   *		"android": {
@@ -1106,7 +1112,8 @@ export type PreviewImageOptions = {
 	 *    "harmony": {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixvVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1547,7 +1554,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	   *	}
 	   * }
@@ -1570,7 +1578,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1593,7 +1602,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1626,7 +1636,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	   *	}
 	   * }
@@ -1649,7 +1660,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1672,7 +1684,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1695,7 +1708,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1718,7 +1732,8 @@ export type CompressImageOptions = {
      *    "harmony":{
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -2030,7 +2045,8 @@ export type ChooseVideoOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.25",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -2100,7 +2116,8 @@ export type ChooseVideoOptions = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.25",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -2301,7 +2318,8 @@ export type GetVideoInfoSuccess = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      * },
      *  "web": {
@@ -2328,7 +2346,8 @@ export type GetVideoInfoSuccess = {
    *    "harmony": {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      * },
     *  "mp": {
@@ -4726,7 +4745,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
      *  "web": {
@@ -4813,7 +4833,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
      *  "web": {
@@ -4899,14 +4920,15 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.41"
+    *        "unixVer": "x"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -4985,7 +5007,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5076,7 +5099,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5167,7 +5191,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5259,7 +5284,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5342,7 +5368,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5426,7 +5453,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5510,7 +5538,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "3,0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5598,7 +5627,8 @@ export interface Uni {
      *    "harmony": {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixvVer": "5.0"
      *    }
      *	},
     *  "mp": {

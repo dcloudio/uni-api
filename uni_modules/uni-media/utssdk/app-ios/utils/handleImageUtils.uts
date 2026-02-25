@@ -1,5 +1,5 @@
 import { UIImage } from 'UIKit';
-import { URL , Data , FileManager } from 'Foundation';
+import { URL , Data , FileManager, Date } from 'Foundation';
 import { UInt8 , Range } from 'Swift';
 import { UTSiOS } from "DCloudUTSFoundation";
 

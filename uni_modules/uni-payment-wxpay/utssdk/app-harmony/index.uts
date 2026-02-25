@@ -63,16 +63,24 @@ UTSHarmony.onAppAbilityNewWant((want: Want, _launchParam: AbilityConstant.Launch
 class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
     id: string = "wxpay";
     description: string = "微信支付";
-    isWeChatInstalled: boolean = true;
+    isWeChatInstalled: boolean = false;
     onWXResp: OnWXResp = (resp: wxopensdk.BaseResp) => {
 
     }
 
     constructor() {
+      try{
+        this.isWeChatInstalled = WXApi.isWXAppInstalled()
+      } catch{ }
     }
 
     requestPayment(options: RequestPaymentOptions) {
-        let params = JSON.parse(options.orderInfo) as object;
+        let params = options.orderInfo;
+        if (typeof params === 'string') {
+            try {
+                params = JSON.parse(params) ?? '';
+            } catch (error) {}
+        }
         let req = new PayReq();
         req.appId = params['appid'];
         req.partnerId = params['partnerid'];

@@ -1,4 +1,6 @@
-export interface UniOAuthWeixinProvider extends UniOAuthProvider { }
+export interface UniOAuthWeixinProvider extends UniOAuthProvider {
+	isWeChatInstalled : boolean
+}
 
 export type OauthWeixinFail = IOauthWeixinFail;
 
@@ -24,6 +26,12 @@ export interface WeixinAccessTokenResp {
 	refresh_token : string;
 	openid : string;
 	scope : string;
+}
+
+// access_token 返回的错误
+export interface WeixinAccessTokenErrorResp {
+  errmsg: string;
+  errcode: number
 }
 
 // 定义 userinfo 接口返回的数据类型

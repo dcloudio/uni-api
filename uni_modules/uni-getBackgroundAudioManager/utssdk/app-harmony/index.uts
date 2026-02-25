@@ -98,7 +98,7 @@ function startBackgroundTask() {
 }
 async function stopBackgroundTask() {
     return backgroundTaskManager.stopBackgroundRunning(UTSHarmony.getUIAbilityContext()!).then(() => {
-        console.debug('[getBackgroundAudioManager]  stop operation succeeded');
+        // console.debug('[getBackgroundAudioManager]  stop operation succeeded');
     }).catch((err: BusinessError) => {
         // audioPlayerCallback.error(new AudioPlayerError(err.message, err.code));
     });
@@ -112,7 +112,7 @@ async function STOP_BACKGROUND() {
     await stopBackgroundTask();
 }
 
-const LOG = (msg: string) => console.log(`[getBackgroundAudioManager]: ${msg}`)
+const LOG = (msg: string): void => console.log(`[getBackgroundAudioManager]: ${msg}`)
 
 class STATE_TYPE {
     // 音频播放空闲
@@ -142,6 +142,7 @@ class BGAManagerImpl implements BackgroundAudioManager {
     private _webUrl: string = ''
     private _protocol: string = ''
     private _playbackRate: number = 1
+    private _dataloaded: boolean = false;
     private isPlaying: boolean = false
     private avSessionIsActive: boolean = false
 
@@ -155,6 +156,7 @@ class BGAManagerImpl implements BackgroundAudioManager {
     private _onError: Function = () => { };
     private _onBufferingUpdate: Function = () => { };
     private avSessionDestroyPromise: Promise<void> | null = null;
+    private _cache: boolean = false;
 
     constructor() {
         this.init()
@@ -225,20 +227,32 @@ class BGAManagerImpl implements BackgroundAudioManager {
         BGAManagerImpl.audioPlayer = media.createAudioPlayer();
 
         const _audioPlayer = BGAManagerImpl.audioPlayer
-
         _audioPlayer.on('dataLoad', () => {
+            this._dataloaded = true
             this._onDataLoad()
             audioPlayerCallback.canPlay()
         });
         _audioPlayer.on('play', () => {
+            this.isPlaying = true;
             this._onPlay()
             audioPlayerCallback.play()
         });
         _audioPlayer.on('pause', () => {
+            this.isPlaying = false;
             this._onPause()
             audioPlayerCallback.pause()
         });
+        _audioPlayer.on('stop', () => {
+            this.isPlaying = false;
+        });
         _audioPlayer.on('finish', () => {
+            this.isPlaying = false;
+            // 先设定 avSessionDestroyPromise 再触发 onEned 事件，用户会在回调里重新设置播放
+            if (BGAManagerImpl.avSession) {
+                this.avSessionDestroyPromise = BGAManagerImpl.avSession.destroy().then(() => {
+                    this.avSessionIsActive = false
+                })
+            }
             this._onEnded()
             STOP_BACKGROUND()
             audioPlayerCallback.ended()
@@ -248,23 +262,41 @@ class BGAManagerImpl implements BackgroundAudioManager {
             audioPlayerCallback.timeUpdate(res / 1000)
         });
         _audioPlayer.on('error', (err) => {
+            this.isPlaying = false;
             this._onError()
             audioPlayerCallback.error(new AudioPlayerError(err.message, err.code))
         });
         _audioPlayer.on('bufferingUpdate', (infoType, value) => {
-            if (infoType === media.BufferingInfoType.BUFFERING_PERCENT && value !== 0 && _audioPlayer) {
-                this._onBufferingUpdate()
-                this._buffered = value;
-                if ((_audioPlayer.currentTime / 1000) >= (_audioPlayer.duration * value / 100000)) {
+            switch (infoType) {
+                // 开始缓冲，播放器会暂停播放
+                case media.BufferingInfoType.BUFFERING_START:
+                    this._onBufferingUpdate()
                     audioPlayerCallback.waiting()
-                }
+                    break;
+                // 缓冲结束，播放器会恢复播放
+                case media.BufferingInfoType.BUFFERING_END:
+                    // 确保 dataLoad 前不重复触发
+                    if (this._dataloaded) {
+                        this._onPlay()
+                        audioPlayerCallback.canPlay()
+                    }
+                    break;
+                // 表示缓冲百分比。可参考该事件感知缓冲进度
+                case media.BufferingInfoType.BUFFERING_PERCENT:
+                    break;
+                // 表示已缓冲数据预估可播放时长，单位为毫秒（ms）。缓冲区中的数据变化量大于500ms，上报一次。可参考该事件做进度条
+                case media.BufferingInfoType.CACHED_DURATION:
+                    this._buffered = value;
+                    break;
             }
         });
         _audioPlayer.on('audioInterrupt', (InterruptEvent) => {
             if (_audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE) {
+                this.isPlaying = false;
                 _audioPlayer.pause();
             }
             if (_audioPlayer && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_RESUME) {
+                this.isPlaying = true;
                 _audioPlayer.play();
             }
         });
@@ -274,8 +306,7 @@ class BGAManagerImpl implements BackgroundAudioManager {
         return BGAManagerImpl.audioPlayer.duration / 1000;
     }
     get currentTime() {
-        if (!BGAManagerImpl.audioPlayer) { return 0 }
-        return BGAManagerImpl.audioPlayer.currentTime / 1000;
+        return (BGAManagerImpl.audioPlayer?.currentTime ?? 0) / 1000;
     }
     get paused() {
         if (!BGAManagerImpl.audioPlayer) { return false }
@@ -346,7 +377,7 @@ class BGAManagerImpl implements BackgroundAudioManager {
     get buffered() {
         if (!BGAManagerImpl.audioPlayer) return 0
         media.PlaybackInfoKey.BUFFER_DURATION
-        return BGAManagerImpl.audioPlayer.duration * this._buffered / 100000;
+        return this._buffered / 1000;
     }
     get epname() {
         return this._epname;
@@ -387,6 +418,12 @@ class BGAManagerImpl implements BackgroundAudioManager {
     get playbackRate() {
         return this._playbackRate
     }
+    set cache(value: boolean) {
+        this._cache = value
+    }
+    get cache() {
+        return this._cache
+    }
     async play() {
         if (!BGAManagerImpl.audioPlayer) {
             return;
@@ -420,7 +457,8 @@ class BGAManagerImpl implements BackgroundAudioManager {
         STOP_BACKGROUND();
         audioPlayerCallback.stop();
         BGAManagerImpl.audioPlayer.reset();
-        BGAManagerImpl.audioPlayer.src = this._src
+        //reset() 置空 src，确保 stop 后还可以继续执行 play #24202
+        BGAManagerImpl.audioPlayer.src = '';
         if (BGAManagerImpl.avSession) {
             BGAManagerImpl.avSession.playbackState.state = avSession.PlaybackState.PLAYBACK_STATE_STOP;
             BGAManagerImpl.avSession.setAVPlaybackState()
@@ -464,30 +502,6 @@ class BGAManagerImpl implements BackgroundAudioManager {
     onWaiting(callback: (result: any) => void): void {
         audioPlayerCallback.onWaiting(callback)
     }
-    offCanplay(callback: (result: any) => void): void {
-        audioPlayerCallback.offCanplay(callback)
-    }
-    offPlay(callback: (result: any) => void): void {
-        audioPlayerCallback.offPlay(callback)
-    }
-    offPause(callback: (result: any) => void): void {
-        audioPlayerCallback.offPause(callback)
-    }
-    offStop(callback: (result: any) => void): void {
-        audioPlayerCallback.offStop(callback)
-    }
-    offEnded(callback: (result: any) => void): void {
-        audioPlayerCallback.offEnded(callback)
-    }
-    offTimeUpdate(callback: (result: any) => void): void {
-        audioPlayerCallback.offTimeUpdate(callback)
-    }
-    offError(callback: (result: ICreateBackgroundAudioFail) => void): void {
-        audioPlayerCallback.offError(callback)
-    }
-    offWaiting(callback: (result: any) => void): void {
-        audioPlayerCallback.offWaiting(callback)
-    }
     onPrev(callback: (result: any) => void): void {
         audioPlayerCallback.onPrev(callback)
     }
@@ -499,6 +513,42 @@ class BGAManagerImpl implements BackgroundAudioManager {
     }
     onSeeked(callback: (result: any) => void): void {
         audioPlayerCallback.onSeeked(callback)
+    }
+    offCanplay(): void {
+        audioPlayerCallback.onCanplayCallbacks = []
+    }
+    offPlay(): void {
+        audioPlayerCallback.onPlayCallbacks = []
+    }
+    offPause(): void {
+        audioPlayerCallback.onPauseCallbacks = []
+    }
+    offStop(): void {
+        audioPlayerCallback.onStopCallbacks = []
+    }
+    offEnded(): void {
+        audioPlayerCallback.onEndedCallbacks = []
+    }
+    offTimeUpdate(): void {
+        audioPlayerCallback.onTimeUpdateCallbacks = []
+    }
+    offError(): void {
+        audioPlayerCallback.onErrorCallbacks = []
+    }
+    offWaiting(): void {
+        audioPlayerCallback.onWaitingCallbacks = []
+    }
+    offPrev(): void {
+        audioPlayerCallback.onPrevCallbacks = []
+    }
+    offNext(): void {
+        audioPlayerCallback.onNextCallbacks = []
+    }
+    offSeeking(): void {
+        audioPlayerCallback.onSeekingCallbacks = []
+    }
+    offSeeked(): void {
+        audioPlayerCallback.onSeekedCallbacks = []
     }
 }
 
@@ -512,3 +562,10 @@ export const getBackgroundAudioManager: GetBackgroundAudioManager =
             return backgroundAudioManager
         }
     ) as GetBackgroundAudioManager
+
+export {
+    BackgroundAudioManager,
+    CreateBackgroundAudioErrorCode,
+    GetBackgroundAudioManager,
+    ICreateBackgroundAudioFail
+} from '../interface.uts';

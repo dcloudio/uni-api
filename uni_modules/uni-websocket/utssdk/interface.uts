@@ -23,7 +23,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -111,7 +112,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -195,7 +197,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -279,7 +282,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -363,7 +367,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -447,7 +452,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -529,7 +535,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -632,7 +639,8 @@ export type ConnectSocketOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -886,7 +894,8 @@ export type SendSocketMessageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -977,7 +986,8 @@ export type CloseSocketOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1048,7 +1058,8 @@ export type CloseSocketOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1138,7 +1149,8 @@ export type OnSocketOpenCallbackResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1211,7 +1223,8 @@ export type OnSocketMessageCallbackResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1286,7 +1299,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1367,7 +1381,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1448,7 +1463,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1529,7 +1545,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1613,7 +1630,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1695,7 +1713,8 @@ export interface SocketTask {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1794,7 +1813,8 @@ export type OnSocketCloseCallbackResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1864,7 +1884,8 @@ export type OnSocketCloseCallbackResult = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {

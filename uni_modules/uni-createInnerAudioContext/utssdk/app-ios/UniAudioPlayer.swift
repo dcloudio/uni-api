@@ -54,9 +54,23 @@ typealias UniAudioErrorEventCallback = (_ result: ICreateInnerAudioContextFail) 
 @objcMembers
 public class UniAudioPlayer: NSObject, InnerAudioContext {
     
-    static var mixWithOther = true
-    static var speakerOn = true
+    static var mixWithOther = true 
+    static var speakerOn = true {
+        didSet {
+            guard oldValue != speakerOn else { return }
+            notifyAllInstancesToReconfigure()
+        }
+    }
+    static var obeyMuteSwitch = true {
+        didSet {
+            guard oldValue != obeyMuteSwitch else { return }
+            notifyAllInstancesToReconfigure()
+        }
+    }
     
+    // 维护存活实例，便于全局策略变更时同步生效
+    private static let livePlayers = NSHashTable<UniAudioPlayer>.weakObjects()
+     
     private lazy var playerItem: AVPlayerItem? = {
         if let url = URL(string: src) {
             return AVPlayerItem(url: url)
@@ -196,8 +210,8 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     }
     
     public var obeyMuteSwitch: Bool {
-        get { return false }
-        set {}
+        get { return UniAudioPlayer.obeyMuteSwitch }
+        set { UniAudioPlayer.obeyMuteSwitch = newValue }
     }
     
     public var volume: NSNumber {
@@ -226,6 +240,7 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
     
     public override init() {
         super.init()
+        UniAudioPlayer.livePlayers.add(self)
         configurePlayer()
     }
     
@@ -347,6 +362,16 @@ public class UniAudioPlayer: NSObject, InnerAudioContext {
 }
 
 extension UniAudioPlayer {
+    fileprivate static func notifyAllInstancesToReconfigure() {
+        UNILogDebug("======audio======, 全局音频策略变更，通知所有存活实例重新配置...")
+        DispatchQueue.main.async {
+            let instances = livePlayers.allObjects
+            UNILogDebug("======audio======, 当前存活播放器实例数: \(instances.count)")
+            for instance in instances {
+                instance.reconfigureAudioSessionIfNeeded()
+            }
+        }
+    }
     private func initCacheConfig() {
         if self._cache == false { return }
         
@@ -465,26 +490,58 @@ extension UniAudioPlayer {
         player?.rate = playbackRate?.toFloat() ?? 1.0
     }
     
-    // 配置音频会话，支持混音播放
+    // 配置音频会话，支持混音播放、扬声器/听筒切换、静音键遵循
     private func configureAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         let isOtherAppAudioPlaying = audioSession.secondaryAudioShouldBeSilencedHint && audioSession.isOtherAudioPlaying
         
         var categoryOptions: AVAudioSession.CategoryOptions = []
+        var category: AVAudioSession.Category = .playback
         
         do {
-            if UniAudioPlayer.mixWithOther {
-                if isOtherAppAudioPlaying {
-                    try audioSession.setCategory(.ambient, mode: .default, options: categoryOptions)
+            // speakerOn = true 时，强制独占音频（mixWithOther 无效）
+            if UniAudioPlayer.speakerOn {
+                // 扬声器播放：独占模式
+                // 只有 speakerOn=true && obeyMuteSwitch=true 时才遵循静音键
+                if UniAudioPlayer.obeyMuteSwitch {
+                    category = .soloAmbient
+                    UNILogDebug("======audio======, 配置: 扬声器独占 + 遵循静音键 (.soloAmbient)")
                 } else {
-                    try audioSession.setCategory(.playback, mode: .default, options: categoryOptions)
+                    category = .playback
+                    UNILogDebug("======audio======, 配置: 扬声器独占 + 不遵循静音键 (.playback)")
                 }
+                
+                if !UniAudioPlayer.mixWithOther {
+                    UniBackgroundAudioManagerBridge.pause()
+                }
+                
+                try audioSession.setCategory(category, mode: .default, options: categoryOptions)
+                // 强制使用扬声器输出
+                try audioSession.overrideOutputAudioPort(.speaker)
+                UNILogDebug("======audio======, 已设置音频路由: 扬声器")
             } else {
-                try audioSession.setCategory(.playback, mode: .default, options: categoryOptions)
-                UniBackgroundAudioManagerBridge.pause()
+                // speakerOn = false：听筒播放，统一不遵循静音键
+                // 使用 .playAndRecord（不受静音键影响，类似 .playback）
+                category = .playAndRecord
+                categoryOptions.insert(.allowBluetoothA2DP)
+                
+                // 听筒模式支持混音
+                if UniAudioPlayer.mixWithOther {
+                    categoryOptions.insert(.mixWithOthers)
+                    UNILogDebug("======audio======, 配置: 听筒 + 混音 + 不遵循静音键 (.playAndRecord + mixWithOthers)")
+                } else {
+                    UniBackgroundAudioManagerBridge.pause()
+                    UNILogDebug("======audio======, 配置: 听筒独占 + 不遵循静音键 (.playAndRecord)")
+                }
+                
+                try audioSession.setCategory(category, mode: .default, options: categoryOptions)
+                // 使用听筒（默认音频路由）
+                try audioSession.overrideOutputAudioPort(.none)
+                UNILogDebug("======audio======, 已设置音频路由: 听筒/默认")
             }
             
             try audioSession.setActive(true)
+            UNILogDebug("======audio======, 音频会话激活成功，当前配置: speakerOn=\(UniAudioPlayer.speakerOn), obeyMuteSwitch=\(UniAudioPlayer.obeyMuteSwitch)")
         } catch {
             UNILogDebug("======audio======, Failed to set up audio session: \(error)")
         }
@@ -746,6 +803,13 @@ extension UniAudioPlayer {
         removeListenerInterruption()
         _hasAddObservers = false
     }
+
+    // 当全局策略改动时，实例级重新配置音频会话（不中断当前播放）
+    fileprivate func reconfigureAudioSessionIfNeeded() {
+        UNILogDebug("======audio======, 检测到全局音频策略变更，重新配置会话...")
+        UNILogDebug("======audio======, 当前策略: speakerOn=\(UniAudioPlayer.speakerOn), obeyMuteSwitch=\(UniAudioPlayer.obeyMuteSwitch), mixWithOther=\(UniAudioPlayer.mixWithOther)")
+        configureAudioSession()
+    }
     
     // 添加播放进度监听
     private func addPeriodicTimeObserver() {
@@ -814,7 +878,7 @@ extension UniAudioPlayer {
             name: AVAudioSession.interruptionNotification,
             object: nil
         )
-            
+        
         // 监听耳机或其他音频设备插拔
         NotificationCenter.default.addObserver(
             self,
@@ -903,7 +967,7 @@ private class UniBackgroundAudioManagerBridge {
             instance.perform(sel)
         }
     }
-
+    
     // 调用 play()
     static func play() {
         guard let instance = getInstance() else { return }
@@ -939,4 +1003,5 @@ extension NSNumber {
         return formatter.number(from: formatter.string(from: self) ?? self.stringValue) ?? self
     }
 }
+
 

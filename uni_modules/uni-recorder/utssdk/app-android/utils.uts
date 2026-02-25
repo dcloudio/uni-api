@@ -11,7 +11,7 @@ export interface StateChangeRes extends RecorderManagerOnStopResult {
 export function onRecorderStateChange(state : RecorderState, res ?: StateChangeRes) : void {
 }
 export function createFile( format : string) : string {
-	let cacheDir = File(UTSAndroid.getAppCachePath(), "uni-recorder/")
+	let cacheDir = new File(UTSAndroid.getAppCachePath(), "uni-recorder/")
 	if (!cacheDir.exists()) {
 	    cacheDir.mkdirs()
 	}

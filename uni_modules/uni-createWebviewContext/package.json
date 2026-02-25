@@ -37,8 +37,8 @@
 		  "name": "createWebviewContext",
 		  "app": {
 		    "js": false,
-		    "kotlin": true,
-		    "swift": true
+		    "kotlin": false,
+		    "swift": false
 		  }
 	    }
 	  }

@@ -34,7 +34,8 @@ type _GetVideoInfoSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      * },
      *  "web": {
@@ -61,7 +62,8 @@ type _GetVideoInfoSuccess = {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.23",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
      * },
     *  "mp": {
@@ -461,11 +463,27 @@ export async function getMediaAssetInfo(uri: string): Promise<AssetInfo> {
 
     const photoType = asset.photoType
     const byteSize = asset.get(photoAccessHelper.PhotoKeys.SIZE) as number
-    const width = asset.get(photoAccessHelper.PhotoKeys.WIDTH) as number
-    const height = asset.get(photoAccessHelper.PhotoKeys.HEIGHT) as number
-    const duration = asset.get(photoAccessHelper.PhotoKeys.DURATION) as number
+    let width = asset.get(photoAccessHelper.PhotoKeys.WIDTH) as number
+    let height = asset.get(photoAccessHelper.PhotoKeys.HEIGHT) as number
+    const durationMs = asset.get(photoAccessHelper.PhotoKeys.DURATION) as number
+    const orientation = asset.get(photoAccessHelper.PhotoKeys.ORIENTATION) as number | null
     let thumbTempFilePath = ''
 
+    // 根据 orientation 调整 width 和 height（竖屏情况：90 或 270 度时需要交换）
+    if (orientation != null && (orientation === 90 || orientation === 270)) {
+        const temp = width
+        width = height
+        height = temp
+    }
+
+    const maximumFractionDigits = 3
+    const multiplier = Math.pow(10, maximumFractionDigits) // 10^3 = 1000
+
+    // duration 从毫秒转换为秒，保留最多 3 位小数（与 iOS 平台保持一致）
+    const duration = durationMs != null ? Math.round((durationMs / 1000) * multiplier) / multiplier : undefined
+
+    // size 保留最多 3 位小数（与 iOS 和 Android 平台保持一致）
+    const size = Math.round((byteSize / 1024) * multiplier) / multiplier
     if (photoType === photoAccessHelper.PhotoType.VIDEO) {
         const thumbnailPixelMap = await asset.getThumbnail({ width, height } as image.Size);
         try {
@@ -477,7 +495,7 @@ export async function getMediaAssetInfo(uri: string): Promise<AssetInfo> {
     await accessHelper.release()
     return {
         fileType: photoType === photoAccessHelper.PhotoType.VIDEO ? 'video' : 'image',
-        size: byteSize / 1024,
+        size,
         byteSize,
         width,
         height,

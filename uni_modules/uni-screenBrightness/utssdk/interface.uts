@@ -20,7 +20,8 @@ export interface Uni {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
-	 *      "unixVer": "4.81"
+	 *      "unixVer": "4.81",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -93,7 +94,8 @@ export interface Uni {
 	*    "harmony": {
 	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
-	*      "unixVer": "4.81"
+	*      "unixVer": "4.81",
+	*      "unixvVer": "5.0"
 	*    }
 	* 	},
 	*   "web": {
@@ -166,7 +168,8 @@ export interface Uni {
 	*    "harmony": {
 	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
-	*      "unixVer": "4.81"
+	*      "unixVer": "4.81",
+	*      "unixvVer": "5.0"
 	*    }
 	* 	},
 	*   "web": {

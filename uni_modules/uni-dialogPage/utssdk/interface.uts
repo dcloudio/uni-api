@@ -12,7 +12,7 @@ export type EventChannel = {}
 
 /**
  * 打开 dialogPage 成功回调参数
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -31,7 +31,8 @@ export type EventChannel = {}
       "harmony": {
         "osVer": "3.0",
         "uniVer": "x",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixvVer": "5.0"
       }
     },
     "mp": {
@@ -93,7 +94,7 @@ type OpenDialogPageCompleteCallback = (result: OpenDialogPageComplete) => void
 
 /**
  * 打开 dialogPage 参数
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -112,7 +113,8 @@ type OpenDialogPageCompleteCallback = (result: OpenDialogPageComplete) => void
       "harmony": {
         "osVer": "3.0",
         "uniVer": "x",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixvVer": "5.0"
       }
     },
     "mp": {
@@ -166,7 +168,7 @@ type OpenDialogPageCompleteCallback = (result: OpenDialogPageComplete) => void
 export type OpenDialogPageOptions = {
   /**
    * 需要跳转的应用内非 tabBar 的页面的路径 , 路径后可以带参数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -185,7 +187,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -241,7 +244,7 @@ export type OpenDialogPageOptions = {
    * 窗口显示的动画类型
    *
    * @defaultValue none
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -260,7 +263,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -350,7 +354,7 @@ export type OpenDialogPageOptions = {
   'zoom-fade-out' | null
   /**
    * 窗口关闭动画的持续时间，单位为 ms
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -369,7 +373,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -424,7 +429,7 @@ export type OpenDialogPageOptions = {
   /**
    * 是否禁用按键盘 ESC 时关闭
    * @defaultValue false
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -443,7 +448,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -498,7 +504,7 @@ export type OpenDialogPageOptions = {
 
   /**
    * 要绑定的父级页面实例
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -517,7 +523,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -573,7 +580,7 @@ export type OpenDialogPageOptions = {
   /**
    * 是否触发父页面的 onHide 生命周期
    * @defaultValue false
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -592,7 +599,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -647,7 +655,7 @@ export type OpenDialogPageOptions = {
 
   /**
    * 接口调用成功的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -666,7 +674,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -720,7 +729,7 @@ export type OpenDialogPageOptions = {
   success ?: OpenDialogPageSuccessCallback | null
   /**
    * 接口调用失败的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -739,7 +748,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -793,7 +803,7 @@ export type OpenDialogPageOptions = {
   fail ?: OpenDialogPageFailCallback | null
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -812,7 +822,8 @@ export type OpenDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -870,7 +881,7 @@ export type CloseDialogPageSuccess = AsyncApiSuccessResult
 type CloseDialogPageSuccessCallback = (result: CloseDialogPageSuccess) => void
 /**
  * 关闭 dialogPage 失败回调参数
- * @uniPlatform 
+ * @uniPlatform
   {
     "app": {
       "android": {
@@ -889,7 +900,8 @@ type CloseDialogPageSuccessCallback = (result: CloseDialogPageSuccess) => void
       "harmony": {
         "osVer": "3.0",
         "uniVer": "x",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixvVer": "5.0"
       }
     },
     "mp": {
@@ -948,7 +960,7 @@ export type CloseDialogPageComplete = AsyncApiResult
 type CloseDialogPageCompleteCallback = (result: CloseDialogPageComplete) => void
 /**
    * 关闭 dialogPage 参数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -967,7 +979,8 @@ type CloseDialogPageCompleteCallback = (result: CloseDialogPageComplete) => void
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1021,7 +1034,7 @@ type CloseDialogPageCompleteCallback = (result: CloseDialogPageComplete) => void
 export type CloseDialogPageOptions = {
   /**
    * 要关闭的 dialogPage 实例
-   * @uniPlatform 
+   * @uniPlatform
    * {
    *   "app": {
    *     "android": {
@@ -1040,7 +1053,8 @@ export type CloseDialogPageOptions = {
    *     "harmony": {
    *       "osVer": "3.0",
    *       "uniVer": "x",
-   *       "unixVer": "4.61"
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.0"
    *     }
    *   },
    *   "mp": {
@@ -1096,7 +1110,7 @@ export type CloseDialogPageOptions = {
    * 窗口关闭的动画类型
    *
    * @defaultValue auto
-   * @uniPlatform 
+   * @uniPlatform
    * {
    *   "app": {
    *     "android": {
@@ -1115,7 +1129,8 @@ export type CloseDialogPageOptions = {
    *     "harmony": {
    *       "osVer": "3.0",
    *       "uniVer": "x",
-   *       "unixVer": "4.61"
+   *       "unixVer": "4.61",
+   *       "unixvVer": "5.0"
    *     }
    *   },
    *   "mp": {
@@ -1188,7 +1203,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1261,7 +1277,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1334,7 +1351,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1407,7 +1425,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1480,7 +1499,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1553,7 +1573,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1626,7 +1647,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1699,7 +1721,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1772,7 +1795,8 @@ export type CloseDialogPageOptions = {
    *   "harmony": {
    *     "osVer": "3.0",
    *     "uniVer": "x",
-   *     "unixVer": "4.61"
+   *     "unixVer": "4.61",
+   *     "unixvVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1826,7 +1850,7 @@ export type CloseDialogPageOptions = {
   'zoom-fade-in' | null
   /**
    * 窗口关闭动画的持续时间，单位为 ms
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1845,7 +1869,8 @@ export type CloseDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1900,7 +1925,7 @@ export type CloseDialogPageOptions = {
 
   /**
    * 接口调用成功的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1919,7 +1944,8 @@ export type CloseDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -1973,7 +1999,7 @@ export type CloseDialogPageOptions = {
   success ?: CloseDialogPageSuccessCallback | null
   /**
    * 接口调用失败的回调函数
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -1992,7 +2018,8 @@ export type CloseDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -2046,7 +2073,7 @@ export type CloseDialogPageOptions = {
   fail ?: CloseDialogPageFailCallback | null
   /**
    * 接口调用结束的回调函数（调用成功、失败都会执行）
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2065,7 +2092,8 @@ export type CloseDialogPageOptions = {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -2124,7 +2152,7 @@ export interface Uni {
    * 打开模态弹窗页面
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2143,7 +2171,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -2200,7 +2229,7 @@ export interface Uni {
    *
    * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/dialog-page.html
-   * @uniPlatform 
+   * @uniPlatform
     {
       "app": {
         "android": {
@@ -2219,7 +2248,8 @@ export interface Uni {
         "harmony": {
           "osVer": "3.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {

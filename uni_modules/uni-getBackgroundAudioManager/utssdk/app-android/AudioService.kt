@@ -84,6 +84,7 @@ class AudioService : Service() {
 	fun pause() {
 		targetPlayerHandler.post {
 			updatePlaybackState(PlaybackStateCompat.STATE_PAUSED)
+			updateNotification()
 		}
 	}
 
@@ -309,16 +310,12 @@ class AudioService : Service() {
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                        targetPlayerHandler.post {
+                        // targetPlayerHandler.post {
                             if (audioService == null || mNotificationBuilder == null) {
-                                return@post
+                                return
                             }
-                            mNotificationBuilder?.setLargeIcon(resource)
-                            if (mNotificationBuilder != null) { // Check again as it's async
-                                val updatedNotification = mNotificationBuilder!!.build()
-                                mNotificationManager!!.notify(NOTIFICATION_ID, updatedNotification)
-                            }
-                        }
+							mNotificationBuilder?.setLargeIcon(resource)
+                        // }
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {

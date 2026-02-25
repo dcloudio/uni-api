@@ -62,4 +62,11 @@ class WebviewContextImpl implements WebviewContext {
   loadData(options: UniWebviewContextLoadDataOptions) {
     this.webviewElement?.loadData(options);
   }
+
 }
+
+export {
+  CreateWebviewContext,
+  UniWebviewContextLoadDataOptions,
+  WebviewContext
+} from '../interface.uts';

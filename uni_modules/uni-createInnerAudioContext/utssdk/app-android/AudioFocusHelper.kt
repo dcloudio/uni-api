@@ -6,6 +6,7 @@ import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.AudioManager.OnAudioFocusChangeListener
 import android.os.Build
+import io.dcloud.uts.console
 
 class AudioFocusHelper(
 	context: Context,
@@ -21,11 +22,13 @@ class AudioFocusHelper(
 			return instance!!
 		}
 	}
-	private val listener = object :OnAudioFocusChangeListener {
-		override fun onAudioFocusChange(focusChange: Int) {
-			// 不实现任何操作，完全由系统行为决定，与微信一致
+
+	private val listener =
+		object : OnAudioFocusChangeListener {
+			override fun onAudioFocusChange(focusChange: Int) {
+				// 不实现任何操作，完全由系统行为决定，与微信一致
+			}
 		}
-	}
 
 	private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
@@ -35,12 +38,19 @@ class AudioFocusHelper(
 
 	var mixWithOther = true
 
+	var speakerOn = true
+
 	// 请求音频焦点
 	fun requestAudioFocus() {
 		if (mixWithOther) {
 			// 如果允许与其他音频混合，则不请求音频焦点
 			return
 		}
+		requestAudioFocusSingle()
+	}
+	
+	fun requestAudioFocusSingle() {
+		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			val audioAttributes =
 				AudioAttributes
@@ -48,14 +58,14 @@ class AudioFocusHelper(
 					.setUsage(AudioAttributes.USAGE_MEDIA)
 					.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
 					.build()
-
+		
 			audioFocusRequest =
 				AudioFocusRequest
 					.Builder(AudioManager.AUDIOFOCUS_GAIN)
 					.setAudioAttributes(audioAttributes)
 					.setOnAudioFocusChangeListener(listener)
 					.build()
-
+		
 			audioManager.requestAudioFocus(audioFocusRequest!!)
 		} else {
 			@Suppress("DEPRECATION")

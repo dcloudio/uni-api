@@ -95,3 +95,11 @@ export const scanCode: ScanCode = defineAsyncApi<ScanCodeOptions, ScanCodeSucces
         })
     }
 ) as ScanCode
+
+export {
+    ScanCode,
+    ScanCodeCompleteCallback,
+    ScanCodeFailCallback,
+    ScanCodeSuccessCallback,
+    ScanCodeSupportedTypes
+} from '../interface.uts'

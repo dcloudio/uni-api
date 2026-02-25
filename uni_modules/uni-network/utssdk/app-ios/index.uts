@@ -183,6 +183,9 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				if (currentStr == null) {
 					currentStr = new String(data = data!, encoding = String.Encoding.ascii);
 				}
+				if (currentStr == null) {
+					return null;
+				}
 				return this.tryParseJson(data!, currentStr!) ?? currentStr;
 			}
 		} else {

@@ -9,3 +9,6 @@ export const base64ToArrayBuffer: Base64ToArrayBuffer = defineSyncApi<ArrayBuffe
   },
   Base64ToArrayBufferProtocol
 ) as Base64ToArrayBuffer
+export {
+  Base64ToArrayBuffer
+} from '../interface.uts';

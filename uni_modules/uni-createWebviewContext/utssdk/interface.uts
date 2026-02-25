@@ -1,6 +1,5 @@
 export type CreateWebviewContext = (webviewId : string.WebviewIdString, component ?: ComponentPublicInstance | null) => WebviewContext | null;
 
-
 export type UniWebviewContextLoadDataOptions = {
 	/**
 	 * 要加载的内容，编码后的字符串
@@ -38,7 +37,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -63,7 +63,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -88,7 +89,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -113,7 +115,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -138,7 +141,8 @@ export interface WebviewContext {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  }
 	 * }
@@ -163,7 +167,8 @@ export interface WebviewContext {
 	 *    "harmony": {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.71",
-	 *      "unixVer": "4.71"
+	 *      "unixVer": "4.71",
+	 *      "unixvVer": "5.0"
 	 *    }
 	 *  }
 	 * }
@@ -193,7 +198,8 @@ export interface Uni {
    *    "harmony": {
    *      "osVer": "3.0",
    *      "uniVer": "4.28",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixvVer": "5.0"
    *    }
 	 *  },
      *  "web": {

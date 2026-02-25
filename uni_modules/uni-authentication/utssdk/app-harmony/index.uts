@@ -187,7 +187,7 @@ export const checkIsSupportSoterAuthentication: CheckIsSupportSoterAuthenticatio
                     const supportMode: SoterAuthMode[] = []
                     if (fingerPrintAvailable()) supportMode.push('fingerPrint')
                     if (faceAvailable()) supportMode.push('facial')
-                    return executor.resolve({ supportMode, errMsg: '' } as CheckIsSupportSoterAuthenticationSuccess)
+                    executor.resolve({ supportMode, errMsg: '' } as CheckIsSupportSoterAuthenticationSuccess)
                 } catch (error) {
                     const code = (error as BusinessError).code
                     executor.reject(getErrorMessage(code), { errCode: getUniErrMsg(code) } as ApiError);
@@ -246,3 +246,30 @@ export const checkIsSoterEnrolledInDevice: CheckIsSoterEnrolledInDevice = define
     CheckIsSoterEnrolledInDeviceProtocols,
     CheckIsSoterEnrolledInDeviceApiOptions
 ) as CheckIsSoterEnrolledInDevice
+export {
+    CheckIsSoterEnrolledInDevice,
+    CheckIsSoterEnrolledInDeviceComplete,
+    CheckIsSoterEnrolledInDeviceCompleteCallback,
+    CheckIsSoterEnrolledInDeviceFail,
+    CheckIsSoterEnrolledInDeviceFailCallback,
+    CheckIsSoterEnrolledInDeviceOptions,
+    CheckIsSoterEnrolledInDeviceSuccess,
+    CheckIsSoterEnrolledInDeviceSuccessCallback,
+    CheckIsSupportSoterAuthentication,
+    CheckIsSupportSoterAuthenticationComplete,
+    CheckIsSupportSoterAuthenticationCompleteCallback,
+    CheckIsSupportSoterAuthenticationFail,
+    CheckIsSupportSoterAuthenticationFailCallback,
+    CheckIsSupportSoterAuthenticationOptions,
+    CheckIsSupportSoterAuthenticationSuccess,
+    CheckIsSupportSoterAuthenticationSuccessCallback,
+    SoterAuthMode,
+    StartSoterAuthentication,
+    StartSoterAuthenticationComplete,
+    StartSoterAuthenticationCompleteCallback,
+    StartSoterAuthenticationFail,
+    StartSoterAuthenticationFailCallback,
+    StartSoterAuthenticationOptions,
+    StartSoterAuthenticationSuccess,
+    StartSoterAuthenticationSuccessCallback
+} from '../interface.uts';

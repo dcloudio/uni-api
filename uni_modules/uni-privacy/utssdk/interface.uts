@@ -23,7 +23,8 @@ export interface Uni {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "web": {
@@ -64,7 +65,8 @@ export interface Uni {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "web": {
@@ -102,7 +104,8 @@ export interface Uni {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -192,7 +195,8 @@ export interface Uni {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "web": {
@@ -236,7 +240,8 @@ export type PrivacyChangeResult = {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "web": {
@@ -277,7 +282,8 @@ export type GetPrivacySettingSuccessResult = {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -354,7 +360,8 @@ export type GetPrivacySettingOptions = {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -429,7 +436,8 @@ export type GetPrivacySettingOptions = {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {
@@ -504,7 +512,8 @@ export type GetPrivacySettingOptions = {
         "harmony": {
           "osVer": "5.0",
           "uniVer": "x",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixvVer": "5.0"
         }
       },
       "mp": {

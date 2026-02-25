@@ -23,7 +23,7 @@ class Helper {
       fileIo.closeSync(file)
       return array
     } catch (err) {
-      throw Helper.getError(ShareWeixinErrorCode.LOAD_LOCAL_FILEPATH_ERROR, err.message)
+      throw Helper.getError(ShareWeixinErrorCode.LOAD_LOCAL_FILEPATH_ERROR, (err as BusinessError).message)
     }
   }
 
@@ -34,7 +34,7 @@ class Helper {
         let data = await httpRequest.request(url, { method: http.RequestMethod.GET } as http.HttpRequestOptions)
         resolve(data.result as ArrayBuffer);
       } catch (err) {
-        reject(Helper.getError(ShareWeixinErrorCode.DOWNLOAD_IMAGE_ERROR, err.message))
+        reject(Helper.getError(ShareWeixinErrorCode.DOWNLOAD_IMAGE_ERROR, (err as BusinessError).message))
       }
     })
   }
@@ -67,7 +67,7 @@ class Helper {
         const imageBuffer = await image.createImagePacker().packToData(thumbPixel, { format: "image/png", quality: 100 } as image.PackingOption)
         resolve(imageBuffer);
       } catch (err) {
-        reject(Helper.getError(ShareWeixinErrorCode.GET_THUMB_IMAGE_ERROR, err.message))
+        reject(Helper.getError(ShareWeixinErrorCode.GET_THUMB_IMAGE_ERROR, (err as BusinessError).message))
       }
     })
   }

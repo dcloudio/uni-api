@@ -90,3 +90,30 @@ export const setKeepScreenOn : SetKeepScreenOn = defineAsyncApi<SetKeepScreenOnO
 		});
 	}
 ) as SetKeepScreenOn
+
+export {
+    GetScreenBrightness,
+    GetScreenBrightnessComplete,
+    GetScreenBrightnessCompleteCallback,
+    GetScreenBrightnessFail,
+    GetScreenBrightnessFailCallback,
+    GetScreenBrightnessOptions,
+    GetScreenBrightnessSuccess,
+    GetScreenBrightnessSuccessCallback,
+    SetKeepScreenOn,
+    SetKeepScreenOnComplete,
+    SetKeepScreenOnCompleteCallback,
+    SetKeepScreenOnFail,
+    SetKeepScreenOnFailCallback,
+    SetKeepScreenOnOptions,
+    SetKeepScreenOnSuccess,
+    SetKeepScreenOnSuccessCallback,
+    SetScreenBrightness,
+    SetScreenBrightnessComplete,
+    SetScreenBrightnessCompleteCallback,
+    SetScreenBrightnessFail,
+    SetScreenBrightnessFailCallback,
+    SetScreenBrightnessOptions,
+    SetScreenBrightnessSuccess,
+    SetScreenBrightnessSuccessCallback
+} from "../interface.uts"

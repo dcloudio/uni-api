@@ -6,7 +6,7 @@ import { BusinessError } from '@ohos.base';
 import { EventHub } from '@dcloudio/uni-runtime';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
-export { Worker, WorkerOnMessageCallback, WorkerOnErrorCallback, WorkerPostMessageOptions, WorkerOnErrorCallbackResult, WorkerOnErrorCallbackResultErrorCode }
+export { CreateWorker, Worker, WorkerOnMessageCallback, WorkerOnErrorCallback, WorkerPostMessageOptions, WorkerOnErrorCallbackResult, WorkerOnErrorCallbackResultErrorCode }
 
 function transformErrorCode(code: number): number {
     switch (code) {
@@ -73,7 +73,7 @@ export const createWorker: CreateWorker = defineSyncApi<Worker>(CREATE_WORKER, (
             }
             postMessage(message: Object, options: WorkerPostMessageOptions | null = null): void {
                 if (message instanceof UTSJSONObject) {
-                    message = JSON.parse(JSON.stringify(message))
+                    message = globalThis.JSON.parse(globalThis.JSON.stringify(message))
                 }
                 if (options?.harmonySendable) {
                     if (options?.transfer && options.transfer.length > 0) {
@@ -129,7 +129,7 @@ export class WorkerTaskImpl {
 
     postMessage(message: Object, options: WorkerPostMessageOptions | null = null): void {
         if (message instanceof UTSJSONObject) {
-            message = JSON.parse(JSON.stringify(message))
+            message = globalThis.JSON.parse(globalThis.JSON.stringify(message))
         }
         if (!this.threadWorkerAlready) {
             this.messageQueue.push([message, options]);

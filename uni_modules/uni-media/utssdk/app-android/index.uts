@@ -266,12 +266,12 @@ function getExif(src : string, options : GetImageInfoOptions, bitmapOption : Bit
 		bitmapOption.inJustDecodeBounds = true;
 	}
 	if (src.startsWith(ASSETS_PATH)) {
-		exifInfo = new ExifInterface(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")));
-		BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getAssets().open(src.replace(ASSETS_PATH, "")), null, bitmapOption)
+		exifInfo = new ExifInterface(UTSAndroid.getAppContext()!.getAssets().open(src.replace(ASSETS_PATH, "")));
+		BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.getAssets().open(src.replace(ASSETS_PATH, "")), null, bitmapOption)
 	} else if (src.startsWith("content://")) {
 		try {
-			exifInfo = new ExifInterface(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(src))!)
-			BitmapFactory.decodeStream(UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(src))!, null, bitmapOption)
+			exifInfo = new ExifInterface(UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(src))!)
+			BitmapFactory.decodeStream(UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(src))!, null, bitmapOption)
 		} catch (e) {
 			let imageInfoCallback = new MediaErrorImpl(1101003, UniError_GetImageInfo);
 			options.fail?.(imageInfoCallback)
@@ -403,9 +403,9 @@ function getInputStream(fromFilePath : string) : InputStream | null {
 	var fis : InputStream | null = null
 	try {
 		if (fromFilePath.startsWith(ASSETS_PATH)) {
-			fis = UTSAndroid.getUniActivity()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
+			fis = UTSAndroid.getAppContext()!.getAssets().open(fromFilePath.replace(ASSETS_PATH, ""));
 		} else if (fromFilePath.startsWith("content://")) {
-			fis = UTSAndroid.getUniActivity()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
+			fis = UTSAndroid.getAppContext()!.getContentResolver().openInputStream(Uri.parse(fromFilePath))
 		} else {
 			fis = new FileInputStream(fromFilePath)
 		}
@@ -423,7 +423,7 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 			return false
 		}
 	}
-	if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && UTSAndroid.getUniActivity()!.getApplicationInfo().targetSdkVersion >= 29) || (Build.VERSION.SDK_INT >= 30)) {
+	if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && UTSAndroid.getAppContext()!.getApplicationInfo().targetSdkVersion >= 29) || (Build.VERSION.SDK_INT >= 30)) {
 		try {
 			var fis = getInputStream(fromFilePath)
 			if (fis == null) {
@@ -438,7 +438,7 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 					fromFilePath = mediaCachePath
 				}
 				if (fromFilePath.startsWith("content://")) {
-					retriever.setDataSource(UTSAndroid.getUniActivity()!, Uri.parse(fromFilePath))
+					retriever.setDataSource(UTSAndroid.getAppContext()!, Uri.parse(fromFilePath))
 				} else {
 					retriever.setDataSource(fromFilePath)
 				}
@@ -461,7 +461,7 @@ function copyFileToPublicPath(fromFilePath : string, toFilePath : string, isVide
 			} else if (mimeType!.startsWith("audio/")) {
 				uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 			}
-			var resolver = UTSAndroid.getUniActivity()!.getContentResolver()
+			var resolver = UTSAndroid.getAppContext()!.getContentResolver()
 			var contentValue = new ContentValues()
 			var fileName = getFileName(toFilePath)
 			contentValue.put(MediaStore.Files.FileColumns.DISPLAY_NAME, fileName)
