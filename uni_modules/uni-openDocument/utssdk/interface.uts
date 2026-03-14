@@ -25,7 +25,7 @@ export type OpenDocumentErrorCode =
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -96,7 +96,7 @@ export type OpenDocumentErrorCode =
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -167,7 +167,7 @@ export type OpenDocumentErrorCode =
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -238,7 +238,7 @@ export type OpenDocumentErrorCode =
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -311,7 +311,7 @@ export interface IOpenDocumentError extends IUniError {
 	*      "osVer": "5.0.0",
 	*      "uniVer": "4.31",
 	*      "unixVer": "4.61",
-	*      "unixvVer": "5.0"
+	*      "unixVaporVer": "5.0"
 	*    }
 	* 	},
 	*   "web": {
@@ -403,7 +403,7 @@ export type OpenDocumentOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -474,7 +474,7 @@ export type OpenDocumentOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -545,7 +545,7 @@ export type OpenDocumentOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -616,7 +616,7 @@ export type OpenDocumentOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -687,7 +687,7 @@ export type OpenDocumentOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -765,7 +765,7 @@ export interface Uni {
 	 *        	"osVer": "5.0.0",
 	 *      	"uniVer": "4.31",
 	 *      	"unixVer": "4.61",
-	 *      	"unixvVer": "5.0"
+	 *      	"unixVaporVer": "5.0"
 	 *    	}
 	 * 	},
 	 *   "web": {

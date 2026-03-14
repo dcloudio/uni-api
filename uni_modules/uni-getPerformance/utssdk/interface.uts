@@ -144,7 +144,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "x",
      *      "unixVer": "4.61",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {

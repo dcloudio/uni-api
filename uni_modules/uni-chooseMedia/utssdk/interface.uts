@@ -62,7 +62,7 @@ export type ChooseMediaTempFile = {
 	*      "osVer": "5.0.0",
 	*      "uniVer": "4.61",
 	*      "unixVer": "4.61",
-	*      "unixvVer": "5.0"
+	*      "unixVaporVer": "5.0"
 	*    }
 	  *	},
 	  *	"web": {
@@ -130,7 +130,7 @@ export type ChooseMediaOptions = {
 	*      "osVer": "3.0",
 	*      "uniVer": "4.31",
 	*      "unixVer": "4.61",
-	*      "unixvVer": "5.0"
+	*      "unixVaporVer": "5.0"
 	*    }
 	  *	},
 	 *  "mp": {
@@ -202,7 +202,7 @@ export type ChooseMediaOptions = {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
 		 *      "unixVer": "4.61",
-		 *      "unixvVer": "5.0"
+		 *      "unixVaporVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -226,7 +226,7 @@ export type ChooseMediaOptions = {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
 		 *      "unixVer": "4.61",
-		 *      "unixvVer": "5.0"
+		 *      "unixVaporVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -250,7 +250,7 @@ export type ChooseMediaOptions = {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
 		 *      "unixVer": "4.61",
-		 *      "unixvVer": "5.0"
+		 *      "unixVaporVer": "5.0"
 		 *    }
 	 *	},
 	 */
@@ -274,7 +274,7 @@ export type ChooseMediaOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -345,7 +345,7 @@ export type ChooseMediaOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "4.25",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -444,7 +444,7 @@ export interface Uni {
 	  *      "osVer": "3.0",
 	  *      "uniVer": "4.31",
 	  *      "unixVer": "4.61",
-	  *      "unixvVer": "5.0"
+	  *      "unixVaporVer": "5.0"
 	  *    }
 	  *	},
 	 *  "mp": {

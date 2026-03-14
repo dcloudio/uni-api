@@ -45,7 +45,7 @@ export interface Uni {
 		 *      "osVer": "3.0",
 		 *      "uniVer": "4.26",
 		 *      "unixVer": "4.61",
-		 *      "unixvVer": "5.0"
+		 *      "unixVaporVer": "5.0"
 		 *    }
 	 *    },
 		*  "mp": {
@@ -120,7 +120,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -148,7 +148,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -176,7 +176,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -204,7 +204,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -232,7 +232,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -260,7 +260,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -288,7 +288,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -316,7 +316,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -344,7 +344,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -372,7 +372,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -400,7 +400,7 @@ export type RequestPaymentErrorCode =
 		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
 		*            "unixVer": "4.61",
-		*            "unixvVer": "5.0"
+		*            "unixVaporVer": "5.0"
 		*        }
 		*    },
 		*    "web": {
@@ -486,7 +486,7 @@ export type RequestPaymentSuccess = {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -566,7 +566,7 @@ export type RequestPaymentOptions = {
 	 *      "osVer": "3，0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	 *    "web": {
@@ -594,7 +594,7 @@ export type RequestPaymentOptions = {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -664,7 +664,7 @@ export type RequestPaymentOptions = {
 	 *      "osVer": "3，0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -734,7 +734,7 @@ export type RequestPaymentOptions = {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 		*  "mp": {
@@ -804,7 +804,7 @@ export type RequestPaymentOptions = {
 	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 		*  "mp": {

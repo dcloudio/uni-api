@@ -21,7 +21,7 @@ export type OnLaunchOptions = {
      *      "osVer": "3,0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -95,7 +95,7 @@ export type OnLaunchOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -169,7 +169,7 @@ export type OnLaunchOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -243,7 +243,7 @@ export type OnLaunchOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -322,7 +322,7 @@ export interface Uni {
      *      "osVer": "3,0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "x"
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {

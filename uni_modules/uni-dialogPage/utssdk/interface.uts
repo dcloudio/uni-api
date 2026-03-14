@@ -32,7 +32,7 @@ export type EventChannel = {}
         "osVer": "3.0",
         "uniVer": "x",
         "unixVer": "4.61",
-        "unixvVer": "5.0"
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -114,7 +114,7 @@ type OpenDialogPageCompleteCallback = (result: OpenDialogPageComplete) => void
         "osVer": "3.0",
         "uniVer": "x",
         "unixVer": "4.61",
-        "unixvVer": "5.0"
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -188,7 +188,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -264,7 +264,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -374,7 +374,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -449,7 +449,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -524,7 +524,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -600,7 +600,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -675,7 +675,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -749,7 +749,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -823,7 +823,7 @@ export type OpenDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -901,7 +901,7 @@ type CloseDialogPageSuccessCallback = (result: CloseDialogPageSuccess) => void
         "osVer": "3.0",
         "uniVer": "x",
         "unixVer": "4.61",
-        "unixvVer": "5.0"
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -980,7 +980,7 @@ type CloseDialogPageCompleteCallback = (result: CloseDialogPageComplete) => void
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1054,7 +1054,7 @@ export type CloseDialogPageOptions = {
    *       "osVer": "3.0",
    *       "uniVer": "x",
    *       "unixVer": "4.61",
-   *       "unixvVer": "5.0"
+   *       "unixVaporVer": "5.0"
    *     }
    *   },
    *   "mp": {
@@ -1130,7 +1130,7 @@ export type CloseDialogPageOptions = {
    *       "osVer": "3.0",
    *       "uniVer": "x",
    *       "unixVer": "4.61",
-   *       "unixvVer": "5.0"
+   *       "unixVaporVer": "5.0"
    *     }
    *   },
    *   "mp": {
@@ -1204,7 +1204,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1278,7 +1278,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1352,7 +1352,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1426,7 +1426,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1500,7 +1500,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1574,7 +1574,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1648,7 +1648,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1722,7 +1722,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1796,7 +1796,7 @@ export type CloseDialogPageOptions = {
    *     "osVer": "3.0",
    *     "uniVer": "x",
    *     "unixVer": "4.61",
-   *     "unixvVer": "5.0"
+   *     "unixVaporVer": "5.0"
    *   }
    * },
    * "mp": {
@@ -1870,7 +1870,7 @@ export type CloseDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1945,7 +1945,7 @@ export type CloseDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2019,7 +2019,7 @@ export type CloseDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2093,7 +2093,7 @@ export type CloseDialogPageOptions = {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2172,7 +2172,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2249,7 +2249,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "x",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {

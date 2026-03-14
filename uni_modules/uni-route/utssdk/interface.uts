@@ -36,7 +36,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -107,7 +107,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -206,7 +206,7 @@ export type NavigateToOptions = {
      *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
-     *       "unixvVer": "5.0"
+     *       "unixVaporVer": "5.0"
      *     }
      *   },
      *   "web": {
@@ -431,7 +431,7 @@ export type NavigateToOptions = {
      *       "osVer": "5.0.0",
      *       "uniVer": "x",
      *       "unixVer": "4.61",
-     *       "unixvVer": "5.0"
+     *       "unixVaporVer": "5.0"
      *     }
      *   },
      *   "web": {
@@ -459,7 +459,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "x",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -529,7 +529,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -599,7 +599,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -669,7 +669,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -739,7 +739,7 @@ export type NavigateToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -819,7 +819,7 @@ export type RedirectToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -889,7 +889,7 @@ export type RedirectToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -959,7 +959,7 @@ export type RedirectToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1029,7 +1029,7 @@ export type RedirectToOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1109,7 +1109,7 @@ export type ReLaunchOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1179,7 +1179,7 @@ export type ReLaunchOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1249,7 +1249,7 @@ export type ReLaunchOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1319,7 +1319,7 @@ export type ReLaunchOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1401,7 +1401,7 @@ export type SwitchTabOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1471,7 +1471,7 @@ export type SwitchTabOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1541,7 +1541,7 @@ export type SwitchTabOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1611,7 +1611,7 @@ export type SwitchTabOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1691,7 +1691,7 @@ export type NavigateBackOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1853,7 +1853,7 @@ export type NavigateBackOptions = {
      *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
-     *       "unixvVer": "5.0"
+     *       "unixVaporVer": "5.0"
      *     }
      *   },
      *   "web": {
@@ -2070,7 +2070,7 @@ export type NavigateBackOptions = {
      *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
-     *       "unixvVer": "5.0"
+     *       "unixVaporVer": "5.0"
      *     }
      *   },
      *   "web": {
@@ -2231,7 +2231,7 @@ export type NavigateBackOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2301,7 +2301,7 @@ export type NavigateBackOptions = {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2378,7 +2378,7 @@ export interface Uni {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2452,7 +2452,7 @@ export interface Uni {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2526,7 +2526,7 @@ export interface Uni {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2600,7 +2600,7 @@ export interface Uni {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -2674,7 +2674,7 @@ export interface Uni {
      *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {

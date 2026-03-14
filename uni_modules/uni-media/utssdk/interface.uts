@@ -492,7 +492,7 @@ export type ChooseImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      * },
     *  "mp": {
@@ -790,7 +790,7 @@ export type PreviewImageOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -818,7 +818,7 @@ export type PreviewImageOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -847,7 +847,7 @@ export type PreviewImageOptions = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -1055,7 +1055,7 @@ export type PreviewImageOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1084,7 +1084,7 @@ export type PreviewImageOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1113,7 +1113,7 @@ export type PreviewImageOptions = {
 	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.23",
 	 *      "unixVer": "4.61",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	   *	},
      *	"web": {
@@ -1555,7 +1555,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	   *	}
 	   * }
@@ -1579,7 +1579,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1603,7 +1603,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1637,7 +1637,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	   *	}
 	   * }
@@ -1661,7 +1661,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1685,7 +1685,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1709,7 +1709,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -1733,7 +1733,7 @@ export type CompressImageOptions = {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
 	 *	}
 	 * }
@@ -2046,7 +2046,7 @@ export type ChooseVideoOptions = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.25",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -2117,7 +2117,7 @@ export type ChooseVideoOptions = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.25",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
      *	},
     *  "mp": {
@@ -2319,7 +2319,7 @@ export type GetVideoInfoSuccess = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
      * },
      *  "web": {
@@ -2347,7 +2347,7 @@ export type GetVideoInfoSuccess = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.23",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
      * },
     *  "mp": {
@@ -4746,7 +4746,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
      *  "web": {
@@ -4834,7 +4834,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
      *  "web": {
@@ -4921,7 +4921,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5008,7 +5008,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5100,7 +5100,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5192,7 +5192,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5285,7 +5285,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5369,7 +5369,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5454,7 +5454,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5539,7 +5539,7 @@ export interface Uni {
      *      "osVer": "3,0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {
@@ -5628,7 +5628,7 @@ export interface Uni {
      *      "osVer": "5.0.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *	},
     *  "mp": {

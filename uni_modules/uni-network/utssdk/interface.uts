@@ -27,7 +27,7 @@ export type RequestOptions<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -103,7 +103,7 @@ export type RequestOptions<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -178,7 +178,7 @@ export type RequestOptions<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -253,7 +253,7 @@ export type RequestOptions<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -395,7 +395,7 @@ export type RequestOptions<T> = {
             "uniVer": "x",
             "uniUtsPlugin": "5.0",
             "unixVer": "5.0",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
          },
       *  "mp": {
@@ -733,7 +733,7 @@ export type RequestSuccess<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -807,7 +807,7 @@ export type RequestSuccess<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -881,7 +881,7 @@ export type RequestSuccess<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -955,7 +955,7 @@ export type RequestSuccess<T> = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
         "web": {
@@ -1388,7 +1388,7 @@ export interface RequestTask {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1793,7 +1793,7 @@ export type UploadFileOptionFiles = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1867,7 +1867,7 @@ export type UploadFileOptionFiles = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2016,7 +2016,7 @@ export type UploadFileSuccess = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2090,7 +2090,7 @@ export type UploadFileSuccess = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2176,7 +2176,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2251,7 +2251,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2326,7 +2326,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2401,7 +2401,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2476,7 +2476,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2551,7 +2551,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2626,7 +2626,7 @@ export type UploadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2717,7 +2717,7 @@ export type OnProgressUpdateResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2791,7 +2791,7 @@ export type OnProgressUpdateResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2865,7 +2865,7 @@ export type OnProgressUpdateResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2946,7 +2946,7 @@ export interface UploadTask {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3031,7 +3031,7 @@ export interface UploadTask {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3119,7 +3119,7 @@ export type DownloadFileSuccess = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3193,7 +3193,7 @@ export type DownloadFileSuccess = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3279,7 +3279,7 @@ export type DownloadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3424,7 +3424,7 @@ export type DownloadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3499,7 +3499,7 @@ export type DownloadFileOptions = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3590,7 +3590,7 @@ export type OnProgressDownloadResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3664,7 +3664,7 @@ export type OnProgressDownloadResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3738,7 +3738,7 @@ export type OnProgressDownloadResult = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3818,7 +3818,7 @@ export interface DownloadTask {
               "osVer": "3.0",
               "uniVer": "4.23",
               "unixVer": "4.61",
-              "unixvVer": "5.0"
+              "unixVaporVer": "5.0"
             }
           },
       *  "mp": {
@@ -3903,7 +3903,7 @@ export interface DownloadTask {
               "osVer": "3.0",
               "uniVer": "4.23",
               "unixVer": "4.61",
-              "unixvVer": "5.0"
+              "unixVaporVer": "5.0"
             }
           },
       *  "mp": {
@@ -3999,7 +3999,7 @@ export type Certificate = {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
         "web": {
@@ -4133,7 +4133,7 @@ export interface Uni {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4238,7 +4238,7 @@ export interface Uni {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4329,7 +4329,7 @@ export interface Uni {
             "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4416,7 +4416,7 @@ export interface Uni {
             "osVer": "3.0",
             "uniVer": "4.31",
             "unixVer": "4.61",
-            "unixvVer": "5.0"
+            "unixVaporVer": "5.0"
           }
         },
         "web": {

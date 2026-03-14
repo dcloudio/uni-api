@@ -29,7 +29,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -69,7 +69,7 @@ export type OpenAppAuthorizeSettingSuccess = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -104,7 +104,7 @@ export type OpenAppAuthorizeSettingFail = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -139,7 +139,7 @@ export type OpenAppAuthorizeSettingComplete = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -175,7 +175,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -209,7 +209,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {
@@ -243,7 +243,7 @@ export type OpenAppAuthorizeSettingOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "web": {

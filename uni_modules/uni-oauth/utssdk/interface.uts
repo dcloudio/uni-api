@@ -22,7 +22,7 @@ export interface Uni {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -106,7 +106,7 @@ export interface Uni {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -219,7 +219,7 @@ export type LoginSuccess = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  }
    * }
@@ -243,7 +243,7 @@ export type LoginSuccess = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  }
    * }
@@ -390,7 +390,7 @@ export type LoginOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -469,7 +469,7 @@ export type LoginOptions = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
    *      "unixVer": "4.81",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  }
    * }
@@ -585,7 +585,7 @@ export type LoginOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "x",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  }
    * }
@@ -681,7 +681,7 @@ export type LoginOptions = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
    *      "unixVer": "4.81",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    * "web": {
@@ -1035,7 +1035,7 @@ export type UserInfo = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1118,7 +1118,7 @@ export type UserInfo = {
    *      "osVer": "5.0.0",
    *      "uniVer": "4.76",
    *      "unixVer": "4.81",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1211,7 +1211,7 @@ export type GetUserInfoSuccess = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1613,7 +1613,7 @@ export type GetUserInfoOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  },
    *  "mp": {
@@ -1810,7 +1810,7 @@ export type GetUserInfoOptions = {
    *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
-   *      "unixvVer": "5.0"
+   *      "unixVaporVer": "5.0"
    *    }
    *  }
    * }

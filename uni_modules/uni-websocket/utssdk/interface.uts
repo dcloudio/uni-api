@@ -24,7 +24,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -113,7 +113,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -198,7 +198,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -283,7 +283,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -368,7 +368,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -453,7 +453,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -536,7 +536,7 @@ export interface Uni {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -640,7 +640,7 @@ export type ConnectSocketOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -895,7 +895,7 @@ export type SendSocketMessageOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -987,7 +987,7 @@ export type CloseSocketOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1059,7 +1059,7 @@ export type CloseSocketOptions = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1150,7 +1150,7 @@ export type OnSocketOpenCallbackResult = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1224,7 +1224,7 @@ export type OnSocketMessageCallbackResult = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1300,7 +1300,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1382,7 +1382,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1464,7 +1464,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1546,7 +1546,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1631,7 +1631,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1714,7 +1714,7 @@ export interface SocketTask {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1814,7 +1814,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1885,7 +1885,7 @@ export type OnSocketCloseCallbackResult = {
           "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
-          "unixvVer": "5.0"
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {

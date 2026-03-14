@@ -42,7 +42,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -115,7 +115,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -188,7 +188,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -259,7 +259,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -330,7 +330,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -403,7 +403,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -474,7 +474,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -545,7 +545,7 @@ export interface Uni {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -624,7 +624,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -653,7 +653,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -682,7 +682,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -710,7 +710,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -739,7 +739,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -768,7 +768,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -797,7 +797,7 @@ export type LocationErrorCode =
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -825,7 +825,7 @@ export type LocationErrorCode =
      *            "osVer": "5.0.0(11)",
      *            "uniVer": "4.25",
      *            "unixVer": "4.81",
-     *            "unixvVer": "5.0"
+     *            "unixVaporVer": "5.0"
      *        }
      *    }
      * }
@@ -849,7 +849,7 @@ export type LocationErrorCode =
      *            "osVer": "5.0.0(11)",
      *            "uniVer": "4.25",
      *            "unixVer": "4.81",
-     *            "unixvVer": "5.0"
+     *            "unixVaporVer": "5.0"
      *        }
      *    }
      * }
@@ -891,7 +891,7 @@ export type LocationErrorCode =
      *            "osVer": "5.0.0(11)",
      *            "uniVer": "4.25",
      *            "unixVer": "4.81",
-     *            "unixvVer": "5.0"
+     *            "unixVaporVer": "5.0"
      *        }
      *    }
      * }
@@ -915,7 +915,7 @@ export type LocationErrorCode =
      *            "osVer": "5.0.0(11)",
      *            "uniVer": "4.25",
      *            "unixVer": "4.81",
-     *            "unixvVer": "5.0"
+     *            "unixVaporVer": "5.0"
      *        }
      *    }
      * }
@@ -1160,7 +1160,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -1189,7 +1189,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *    "web": {
@@ -1218,7 +1218,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1288,7 +1288,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1359,7 +1359,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.61",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1430,7 +1430,7 @@ export type GetLocationSuccess = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.76",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1649,7 +1649,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1720,7 +1720,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -1920,7 +1920,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2063,7 +2063,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2135,7 +2135,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2205,7 +2205,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2275,7 +2275,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2345,7 +2345,7 @@ export type GetLocationOptions = {
      *      "osVer": "5.0.0(11)",
      *      "uniVer": "4.25",
      *      "unixVer": "4.81",
-     *      "unixvVer": "5.0"
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
          *  "mp": {
@@ -2424,7 +2424,7 @@ export type StartLocationUpdateOptionsType =
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2495,7 +2495,7 @@ export type StartLocationUpdateOptionsType =
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2568,7 +2568,7 @@ export type StartLocationUpdateOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2639,7 +2639,7 @@ export type StartLocationUpdateOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2710,7 +2710,7 @@ export type StartLocationUpdateOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2781,7 +2781,7 @@ export type StartLocationUpdateOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2852,7 +2852,7 @@ export type StartLocationUpdateOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -2964,7 +2964,7 @@ export type StartLocationUpdateBackgroundOptionsType =
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3035,7 +3035,7 @@ export type StartLocationUpdateBackgroundOptionsType =
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3108,7 +3108,7 @@ export type StartLocationUpdateBackgroundOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3179,7 +3179,7 @@ export type StartLocationUpdateBackgroundOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3250,7 +3250,7 @@ export type StartLocationUpdateBackgroundOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3321,7 +3321,7 @@ export type StartLocationUpdateBackgroundOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
@@ -3392,7 +3392,7 @@ export type StartLocationUpdateBackgroundOptions = {
      *      "osVer": "5.0.0(11)",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.81",
-	 *      "unixvVer": "5.0"
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	     *  "mp": {
