@@ -48,6 +48,9 @@ class WXApiEventHandlerImpl implements wxopensdk.WXApiEventHandler {
     }
 
     onResp(resp: wxopensdk.BaseResp): void {
+        if (!(resp instanceof wxopensdk.PayResp)) {
+          return;
+        }
         this.onRespCallbacks.forEach((on) => {
             on(resp);
         });
