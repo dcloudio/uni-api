@@ -6,7 +6,6 @@ export type ConnectEventSourceOptions = {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -37,7 +36,6 @@ export type ConnectEventSourceOptions = {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.61"
@@ -76,7 +74,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.51"
@@ -111,7 +108,6 @@ export interface UniEventSource {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -143,7 +139,6 @@ export interface UniEventSource {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -175,7 +170,6 @@ export interface UniEventSource {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -206,7 +200,6 @@ export interface UniEventSource {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -239,7 +232,6 @@ export class UniMessageEvent {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -271,7 +263,6 @@ export class UniMessageEvent {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"
@@ -302,7 +293,6 @@ export class UniMessageEvent {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.51"

@@ -53,7 +53,6 @@ declare interface Uni {
     * @uniPlatform {
     *    "app": {
     *        "android": {
-    *            "osVer": "5.0",
     *  		  	 "uniVer": "3.94+",
     * 			 "unixVer": "3.94+"
     *        },

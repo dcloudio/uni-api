@@ -73,7 +73,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "3.8.15",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -86,7 +85,6 @@ export interface Uni {
           "unixUtsPlugin": "4.33"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.71",
           "unixVaporVer": "5.0"

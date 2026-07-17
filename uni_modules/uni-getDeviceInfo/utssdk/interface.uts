@@ -5,7 +5,6 @@ export type GetDeviceInfoOptions = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -29,7 +28,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -100,7 +98,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -110,7 +107,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -172,7 +168,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -182,7 +177,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -245,7 +239,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -316,7 +309,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -326,7 +318,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -388,7 +379,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -398,7 +388,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -460,7 +449,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -470,7 +458,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -532,7 +519,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -542,7 +528,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -604,7 +589,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -614,7 +598,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -676,7 +659,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "√",
      * 			"unixVer": "3.9+"
      * 		},
@@ -686,7 +668,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -748,7 +729,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "3.9+"
      * 		},
@@ -820,7 +800,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "3.9+"
      * 		},
@@ -891,7 +870,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "√"
      * 		},
@@ -962,7 +940,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -972,7 +949,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1034,7 +1010,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -1044,7 +1019,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1106,7 +1080,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
        * 	},
@@ -1116,7 +1089,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1178,7 +1150,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -1188,7 +1159,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1250,7 +1220,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -1321,7 +1290,6 @@ export type GetDeviceInfoResult = {
      * {
      *    "app": {
      *      "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "√"
      *    },
@@ -1393,7 +1361,6 @@ export type GetDeviceInfoResult = {
      * {
      *    "app": {
      *      "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "√"
      *    },
@@ -1465,7 +1432,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -1475,7 +1441,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1537,7 +1502,6 @@ export type GetDeviceInfoResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "5.0",
      * 			"uniVer": "x",
      * 			"unixVer": "4.18"
      * 		},
@@ -1547,7 +1511,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1625,7 +1588,6 @@ export interface Uni {
       * {
       * 	"app": {
       * 		"android": {
-      * 			"osVer": "5.0",
       * 			"uniVer": "√",
       * 			"unixVer": "3.9+"
       * 		},
@@ -1635,7 +1597,6 @@ export interface Uni {
       * 			"unixVer": "4.11"
       * 		},
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1706,7 +1667,6 @@ export interface Uni {
 	 * {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.51"
 	 * 		},

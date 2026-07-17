@@ -11,7 +11,6 @@ export type OpenDocumentErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -22,7 +21,6 @@ export type OpenDocumentErrorCode =
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
 	 *      "unixVaporVer": "5.0"
@@ -82,7 +80,6 @@ export type OpenDocumentErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -93,7 +90,6 @@ export type OpenDocumentErrorCode =
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
 	 *      "unixVaporVer": "5.0"
@@ -153,7 +149,6 @@ export type OpenDocumentErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -164,7 +159,6 @@ export type OpenDocumentErrorCode =
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
 	 *      "unixVaporVer": "5.0"
@@ -224,7 +218,6 @@ export type OpenDocumentErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -235,7 +228,6 @@ export type OpenDocumentErrorCode =
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.71",
 	 *      "unixVer": "4.71",
 	 *      "unixVaporVer": "5.0"
@@ -297,7 +289,6 @@ export interface IOpenDocumentError extends IUniError {
 	* @uniPlatform {
 	* 	"app": {
 	* 		"android": {
-	* 			"osVer": "5.0",
 	* 			"uniVer": "x",
 	* 			"unixVer": "4.71"
 	* 		},
@@ -308,7 +299,6 @@ export interface IOpenDocumentError extends IUniError {
 	* 			"unixUtsPlugin": "4.71"
 	* 		},
 	*    "harmony": {
-	*      "osVer": "5.0.0",
 	*      "uniVer": "4.31",
 	*      "unixVer": "4.61",
 	*      "unixVaporVer": "5.0"
@@ -389,7 +379,6 @@ export type OpenDocumentOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -400,7 +389,6 @@ export type OpenDocumentOptions = {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -460,7 +448,6 @@ export type OpenDocumentOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -471,7 +458,6 @@ export type OpenDocumentOptions = {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -531,7 +517,6 @@ export type OpenDocumentOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -542,7 +527,6 @@ export type OpenDocumentOptions = {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -602,7 +586,6 @@ export type OpenDocumentOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -613,7 +596,6 @@ export type OpenDocumentOptions = {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -673,7 +655,6 @@ export type OpenDocumentOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -684,7 +665,6 @@ export type OpenDocumentOptions = {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -751,7 +731,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.71"
 	 * 		},
@@ -762,7 +741,6 @@ export interface Uni {
 	 * 			"unixUtsPlugin": "4.71"
 	 * 		},
 	 *      "harmony": {
-	 *        	"osVer": "5.0.0",
 	 *      	"uniVer": "4.31",
 	 *      	"unixVer": "4.61",
 	 *      	"unixVaporVer": "5.0"

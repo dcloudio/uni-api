@@ -29,7 +29,6 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -102,7 +101,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -175,7 +173,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -246,7 +243,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -317,7 +313,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -390,7 +385,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -461,7 +455,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -532,7 +525,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -611,7 +603,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -640,7 +631,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -669,7 +659,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -697,7 +686,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -726,7 +714,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -755,7 +742,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -784,7 +770,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -812,7 +797,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -836,7 +820,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -860,7 +843,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -878,7 +860,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -902,7 +883,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -926,7 +906,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -949,7 +928,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -972,7 +950,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -995,7 +972,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1018,7 +994,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1041,7 +1016,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1064,7 +1038,6 @@ export type LocationErrorCode =
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1087,7 +1060,6 @@ export type LocationErrorCode =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -1110,7 +1082,6 @@ export type LocationErrorCode =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -1147,7 +1118,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1176,7 +1146,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1205,7 +1174,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1275,7 +1243,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1346,7 +1313,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1417,7 +1383,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1488,7 +1453,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1558,7 +1522,6 @@ export type GetLocationSuccess = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1636,7 +1599,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1707,7 +1669,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1777,7 +1738,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "3.9.0"
      *    },
@@ -1841,7 +1801,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "3.9.0"
      *    },
@@ -1907,7 +1866,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -1980,7 +1938,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2050,7 +2007,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2122,7 +2078,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2192,7 +2147,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2262,7 +2216,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2332,7 +2285,6 @@ export type GetLocationOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "3.9.0"
      *        },
@@ -2411,7 +2363,6 @@ export type StartLocationUpdateOptionsType =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2482,7 +2433,6 @@ export type StartLocationUpdateOptionsType =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2555,7 +2505,6 @@ export type StartLocationUpdateOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2626,7 +2575,6 @@ export type StartLocationUpdateOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2697,7 +2645,6 @@ export type StartLocationUpdateOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2768,7 +2715,6 @@ export type StartLocationUpdateOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2839,7 +2785,6 @@ export type StartLocationUpdateOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2951,7 +2896,6 @@ export type StartLocationUpdateBackgroundOptionsType =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3022,7 +2966,6 @@ export type StartLocationUpdateBackgroundOptionsType =
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3095,7 +3038,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3166,7 +3108,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3237,7 +3178,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3308,7 +3248,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3379,7 +3318,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },

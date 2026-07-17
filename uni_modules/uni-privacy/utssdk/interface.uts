@@ -8,7 +8,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -21,7 +20,6 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -50,7 +48,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -63,7 +60,6 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -89,7 +85,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -102,7 +97,6 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -180,7 +174,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -193,7 +186,6 @@ export interface Uni {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -225,7 +217,6 @@ export type PrivacyChangeResult = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -238,7 +229,6 @@ export type PrivacyChangeResult = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -267,7 +257,6 @@ export type GetPrivacySettingSuccessResult = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -280,7 +269,6 @@ export type GetPrivacySettingSuccessResult = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -345,7 +333,6 @@ export type GetPrivacySettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -358,7 +345,6 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -421,7 +407,6 @@ export type GetPrivacySettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -434,7 +419,6 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -497,7 +481,6 @@ export type GetPrivacySettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "4.31",
           "uniUtsPlugin": "4.31",
           "unixVer": "4.31"
@@ -510,7 +493,6 @@ export type GetPrivacySettingOptions = {
           "unixUtsPlugin": "4.31"
         },
         "harmony": {
-          "osVer": "5.0",
           "uniVer": "x",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"

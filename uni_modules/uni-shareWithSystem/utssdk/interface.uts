@@ -20,7 +20,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "x",
 	*            "unixVer": "4.33"
 	*        },
@@ -30,7 +29,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -47,7 +45,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -57,7 +54,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -74,7 +70,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -84,7 +79,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -101,7 +95,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -111,7 +104,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -128,7 +120,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -138,7 +129,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -155,7 +145,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -165,7 +154,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -182,7 +170,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -192,7 +179,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -209,7 +195,6 @@ export type ShareWithSystemErrorCode =
  * @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -219,7 +204,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "harmony": {
-	*            "osVer": "3.0",
 	*            "uniVer": "x",
 	*            "unixVer": "x"
 	*        }
@@ -253,7 +237,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -263,7 +246,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "x"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -280,7 +262,6 @@ export type ShareWithSystemOptions = {
 	 * @uniPlatform {
 	 *     "app": {
 	 *         "android": {
-	 *             "osVer": "5.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -290,7 +271,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "x"
 	 *         },
 	 *         "harmony": {
-	 *             "osVer": "3.0",
 	 *             "uniVer": "x",
 	 *             "unixVer": "x"
 	 *         }
@@ -307,7 +287,6 @@ export type ShareWithSystemOptions = {
 	  * @uniPlatform {
 	  *     "app": {
 	  *         "android": {
-	  *             "osVer": "5.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "4.33"
 	  *         },
@@ -317,7 +296,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "x"
 	  *         },
 	  *         "harmony": {
-	  *             "osVer": "3.0",
 	  *             "uniVer": "x",
 	  *             "unixVer": "x"
 	  *         }
@@ -334,7 +312,6 @@ export type ShareWithSystemOptions = {
 	  * @uniPlatform {
 	  *     "app": {
 	  *         "android": {
-	  *             "osVer": "5.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "4.33"
 	  *         },
@@ -344,7 +321,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "x"
 	  *         },
 	  *         "harmony": {
-	  *             "osVer": "3.0",
 	  *             "uniVer": "x",
 	  *             "unixVer": "x"
 	  *         }
@@ -361,7 +337,6 @@ export type ShareWithSystemOptions = {
 	  * @uniPlatform {
 	  *     "app": {
 	  *         "android": {
-	  *             "osVer": "5.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "4.33"
 	  *         },
@@ -371,7 +346,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "x"
 	  *         },
 	  *         "harmony": {
-	  *             "osVer": "3.0",
 	  *             "uniVer": "x",
 	  *             "unixVer": "x"
 	  *         }
@@ -388,7 +362,6 @@ export type ShareWithSystemOptions = {
 	  * @uniPlatform {
 	  *     "app": {
 	  *         "android": {
-	  *             "osVer": "5.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "4.33"
 	  *         },
@@ -398,7 +371,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "x"
 	  *         },
 	  *         "harmony": {
-	  *             "osVer": "3.0",
 	  *             "uniVer": "x",
 	  *             "unixVer": "x"
 	  *         }
@@ -415,7 +387,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -425,7 +396,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -442,7 +412,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -452,7 +421,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -469,7 +437,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -479,7 +446,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -496,7 +462,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -506,7 +471,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -523,7 +487,6 @@ export type ShareWithSystemOptions = {
 	 * @uniPlatform {
 	 *     "app": {
 	 *         "android": {
-	 *             "osVer": "5.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -533,7 +496,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "harmony": {
-	 *             "osVer": "3.0",
 	 *             "uniVer": "x",
 	 *             "unixVer": "x"
 	 *         }
@@ -551,7 +513,6 @@ export type ShareWithSystemOptions = {
 	 * @uniPlatform {
 	 *     "app": {
 	 *         "android": {
-	 *             "osVer": "5.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -561,7 +522,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "harmony": {
-	 *             "osVer": "3.0",
 	 *             "uniVer": "x",
 	 *             "unixVer": "x"
 	 *         }
@@ -578,7 +538,6 @@ export type ShareWithSystemOptions = {
 	 * @uniPlatform {
 	 *     "app": {
 	 *         "android": {
-	 *             "osVer": "5.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -588,7 +547,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "harmony": {
-	 *             "osVer": "3.0",
 	 *             "uniVer": "x",
 	 *             "unixVer": "x"
 	 *         }
@@ -606,7 +564,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -616,7 +573,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -633,7 +589,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -643,7 +598,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -660,7 +614,6 @@ export type ShareWithSystemOptions = {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -670,7 +623,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "x",
      *             "unixVer": "x"
      *         }
@@ -696,7 +648,6 @@ export interface Uni {
      * @uniPlatform {
      *     "app": {
      *         "android": {
-     *             "osVer": "5.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -706,7 +657,6 @@ export interface Uni {
      *             "unixVer": "4.33"
      *         },
      *         "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "4.31",
      *             "unixVer": "4.61",
      *             "unixVaporVer": "5.0"

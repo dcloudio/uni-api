@@ -58,7 +58,6 @@ export type WorkerPostMessageOptions = {
    *      "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "5.0.0",
    *      "uniVer": "x",
    *      "unixVer": "4.81",
    *      "unixVaporVer": "5.0"
@@ -88,7 +87,6 @@ export type WorkerPostMessageOptions = {
    *      "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "5.0.0",
    *      "uniVer": "x",
    *      "unixVer": "4.81",
    *      "unixVaporVer": "5.0"
@@ -130,7 +128,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *  "app": {
 	 *    "android": {
-	 *      "osVer": "5.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.81",
 	 * 		"unixUtsPlugin": "4.81"
@@ -142,7 +139,6 @@ export interface Uni {
    * 	  "unixUtsPlugin": "4.81"
    *    },
    *    "harmony": {
-   *      "osVer": "5.0.0",
    *      "uniVer": "x",
    *      "unixVer": "4.81",
    *      "unixUtsPlugin": "4.81"

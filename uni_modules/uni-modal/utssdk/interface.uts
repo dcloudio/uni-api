@@ -177,7 +177,6 @@ export interface Uni {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "√",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "3.91"
@@ -190,7 +189,6 @@ export interface Uni {
 	        "unixUtsPlugin": "4.11"
 	      },
 	      "harmony": {
-	        "osVer": "3.0",
 	        "uniVer": "4.23",
 	        "unixVer": "4.61",
 	        "unixVaporVer": "5.0"
@@ -263,7 +261,6 @@ export interface Uni {
 	  {
 	    "app": {
 	      "android": {
-	        "osVer": "5.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.61"

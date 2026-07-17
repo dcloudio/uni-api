@@ -7,7 +7,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -18,7 +17,6 @@ export interface Uni {
 	 *  		"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -81,7 +79,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -92,7 +89,6 @@ export type RecorderManagerStartOptions = {
 	 *  		"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -152,7 +148,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -163,7 +158,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -224,7 +218,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -235,7 +228,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -296,7 +288,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -307,7 +298,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -368,7 +358,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -379,7 +368,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -439,7 +427,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -450,7 +437,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -510,7 +496,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -521,7 +506,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -581,7 +565,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -592,7 +575,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -652,7 +634,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -663,7 +644,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -723,7 +703,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
@@ -734,7 +713,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -794,7 +772,6 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
@@ -805,7 +782,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -867,7 +843,6 @@ export interface RecorderManagerOnStopResult {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -878,7 +853,6 @@ export interface RecorderManagerOnStopResult {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -944,7 +918,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -955,7 +928,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1029,7 +1001,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1103,7 +1074,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1166,7 +1136,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -1177,7 +1146,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1240,7 +1208,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -1251,7 +1218,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1315,7 +1281,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0"
 	 * 		},
@@ -1326,7 +1291,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -1399,7 +1363,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1474,7 +1437,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -1537,7 +1499,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -1548,7 +1509,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1612,7 +1572,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0"
 	 * 		},
@@ -1623,7 +1582,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -1685,7 +1643,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
@@ -1696,7 +1653,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -1759,7 +1715,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
@@ -1770,7 +1725,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -1833,7 +1787,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -1844,7 +1797,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -1908,7 +1860,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0"
 	 * 		},
@@ -1919,7 +1870,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -1993,7 +1943,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2068,7 +2017,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -2131,7 +2079,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2142,7 +2089,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2206,7 +2152,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "5.0"
 	 * 		},
@@ -2217,7 +2162,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -2279,7 +2223,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2290,7 +2233,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2354,7 +2296,6 @@ export interface RecorderManager {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "5.0"
 	 * 		},
@@ -2365,7 +2306,6 @@ export interface RecorderManager {
 	 * 			"unixUtsPlugin": "5.0"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "5.0"
 	 *    }
@@ -2431,7 +2371,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2442,7 +2381,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2502,7 +2440,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2513,7 +2450,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2573,7 +2509,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2584,7 +2519,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2644,7 +2578,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2655,7 +2588,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2715,7 +2647,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2726,7 +2657,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2786,7 +2716,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2797,7 +2726,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2857,7 +2785,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
@@ -2868,7 +2795,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -2928,7 +2854,6 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.81"
 	 * 		},
@@ -2939,7 +2864,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixUtsPlugin": x""
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }

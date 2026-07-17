@@ -14,7 +14,6 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -24,7 +23,6 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -93,7 +91,6 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -103,7 +100,6 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -163,7 +159,6 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -173,7 +168,6 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -233,7 +227,6 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -243,7 +236,6 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -303,7 +295,6 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -313,7 +304,6 @@ export type SetNavigationBarColorOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -403,7 +393,6 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -413,7 +402,6 @@ export type SetNavigationBarTitleOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -482,7 +470,6 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -492,7 +479,6 @@ export type SetNavigationBarTitleOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -552,7 +538,6 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -562,7 +547,6 @@ export type SetNavigationBarTitleOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -622,7 +606,6 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -632,7 +615,6 @@ export type SetNavigationBarTitleOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -750,7 +732,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -760,7 +741,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -827,7 +807,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -837,7 +816,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -904,7 +882,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -914,7 +891,6 @@ export interface Uni {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "x"
@@ -979,7 +955,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -989,7 +964,6 @@ export interface Uni {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "x"

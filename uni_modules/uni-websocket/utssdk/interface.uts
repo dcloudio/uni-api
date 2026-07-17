@@ -8,7 +8,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -21,7 +20,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -97,7 +95,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -110,7 +107,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -182,7 +178,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -195,7 +190,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -267,7 +261,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -280,7 +273,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -352,7 +344,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -365,7 +356,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -437,7 +427,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -450,7 +439,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -520,7 +508,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -533,7 +520,6 @@ export interface Uni {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -624,7 +610,6 @@ export type ConnectSocketOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -637,7 +622,6 @@ export type ConnectSocketOptions = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -696,7 +680,6 @@ export type ConnectSocketOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -762,7 +745,6 @@ export type ConnectSocketOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -879,7 +861,6 @@ export type SendSocketMessageOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -892,7 +873,6 @@ export type SendSocketMessageOptions = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -971,7 +951,6 @@ export type CloseSocketOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -984,7 +963,6 @@ export type CloseSocketOptions = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1043,7 +1021,6 @@ export type CloseSocketOptions = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1056,7 +1033,6 @@ export type CloseSocketOptions = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1134,7 +1110,6 @@ export type OnSocketOpenCallbackResult = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1147,7 +1122,6 @@ export type OnSocketOpenCallbackResult = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1208,7 +1182,6 @@ export type OnSocketMessageCallbackResult = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1221,7 +1194,6 @@ export type OnSocketMessageCallbackResult = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1284,7 +1256,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1297,7 +1268,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1366,7 +1336,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1379,7 +1348,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1448,7 +1416,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1461,7 +1428,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1530,7 +1496,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1543,7 +1508,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1615,7 +1579,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1628,7 +1591,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1698,7 +1660,6 @@ export interface SocketTask {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1711,7 +1672,6 @@ export interface SocketTask {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1798,7 +1758,6 @@ export type OnSocketCloseCallbackResult = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1811,7 +1770,6 @@ export type OnSocketCloseCallbackResult = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -1869,7 +1827,6 @@ export type OnSocketCloseCallbackResult = {
     {
       "app": {
         "android": {
-          "osVer": "4.4",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
@@ -1882,7 +1839,6 @@ export type OnSocketCloseCallbackResult = {
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"

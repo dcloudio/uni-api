@@ -13,7 +13,6 @@ export interface Uni {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -26,7 +25,6 @@ export interface Uni {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -53,7 +51,6 @@ export type OpenAppAuthorizeSettingSuccess = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -66,7 +63,6 @@ export type OpenAppAuthorizeSettingSuccess = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -88,7 +84,6 @@ export type OpenAppAuthorizeSettingFail = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -101,7 +96,6 @@ export type OpenAppAuthorizeSettingFail = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -123,7 +117,6 @@ export type OpenAppAuthorizeSettingComplete = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -136,7 +129,6 @@ export type OpenAppAuthorizeSettingComplete = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -159,7 +151,6 @@ export type OpenAppAuthorizeSettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -172,7 +163,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -193,7 +183,6 @@ export type OpenAppAuthorizeSettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -206,7 +195,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"
@@ -227,7 +215,6 @@ export type OpenAppAuthorizeSettingOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51"
@@ -240,7 +227,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixUtsPlugin": "4.51"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
           "unixVer": "4.61",
           "unixVaporVer": "5.0"

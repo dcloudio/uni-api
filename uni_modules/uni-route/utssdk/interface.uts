@@ -23,7 +23,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -33,7 +32,6 @@ export type NavigateToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -94,7 +92,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "4.18"
      *      },
@@ -104,7 +101,6 @@ export type NavigateToOptions = {
      *          "unixVer": "4.25"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -165,7 +161,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -175,7 +170,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.61",
      *       "unixVer": "5.0"
      *     }
@@ -193,7 +187,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -203,7 +196,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
      *       "unixVaporVer": "5.0"
@@ -222,7 +214,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -232,7 +223,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -250,7 +240,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -260,7 +249,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -278,7 +266,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -288,7 +275,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -306,7 +292,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -316,7 +301,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -334,7 +318,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -344,7 +327,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -362,7 +344,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -372,7 +353,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -390,7 +370,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -400,7 +379,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -418,7 +396,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -428,7 +405,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "5.0.0",
      *       "uniVer": "x",
      *       "unixVer": "4.61",
      *       "unixVaporVer": "5.0"
@@ -446,7 +422,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -456,7 +431,6 @@ export type NavigateToOptions = {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "x",
      *      "unixVaporVer": "5.0"
@@ -516,7 +490,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -526,7 +499,6 @@ export type NavigateToOptions = {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -586,7 +558,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -596,7 +567,6 @@ export type NavigateToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -656,7 +626,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -666,7 +635,6 @@ export type NavigateToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -726,7 +694,6 @@ export type NavigateToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -736,7 +703,6 @@ export type NavigateToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -806,7 +772,6 @@ export type RedirectToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -816,7 +781,6 @@ export type RedirectToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -876,7 +840,6 @@ export type RedirectToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -886,7 +849,6 @@ export type RedirectToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -946,7 +908,6 @@ export type RedirectToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -956,7 +917,6 @@ export type RedirectToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1016,7 +976,6 @@ export type RedirectToOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1026,7 +985,6 @@ export type RedirectToOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1096,7 +1054,6 @@ export type ReLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1106,7 +1063,6 @@ export type ReLaunchOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1166,7 +1122,6 @@ export type ReLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1176,7 +1131,6 @@ export type ReLaunchOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1236,7 +1190,6 @@ export type ReLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1246,7 +1199,6 @@ export type ReLaunchOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1306,7 +1258,6 @@ export type ReLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1316,7 +1267,6 @@ export type ReLaunchOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1388,7 +1338,6 @@ export type SwitchTabOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1398,7 +1347,6 @@ export type SwitchTabOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1458,7 +1406,6 @@ export type SwitchTabOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1468,7 +1415,6 @@ export type SwitchTabOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1528,7 +1474,6 @@ export type SwitchTabOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1538,7 +1483,6 @@ export type SwitchTabOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1598,7 +1542,6 @@ export type SwitchTabOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1608,7 +1551,6 @@ export type SwitchTabOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1678,7 +1620,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -1688,7 +1629,6 @@ export type NavigateBackOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -1749,7 +1689,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "4.18"
      *      },
@@ -1813,7 +1752,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1823,7 +1761,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.61",
      *       "unixVer": "5.0"
      *     }
@@ -1840,7 +1777,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1850,7 +1786,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
      *       "unixVaporVer": "5.0"
@@ -1868,7 +1803,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1878,7 +1812,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -1895,7 +1828,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1905,7 +1837,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -1922,7 +1853,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1932,7 +1862,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -1949,7 +1878,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1959,7 +1887,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -1976,7 +1903,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -1986,7 +1912,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -2003,7 +1928,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -2013,7 +1937,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -2030,7 +1953,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -2040,7 +1962,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "x",
      *       "unixVer": "5.0"
      *     }
@@ -2057,7 +1978,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "unixVer": "4.18"
      *     },
@@ -2067,7 +1987,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.25"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.23",
      *       "unixVer": "4.61",
      *       "unixVaporVer": "5.0"
@@ -2085,7 +2004,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -2095,7 +2013,6 @@ export type NavigateBackOptions = {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "x"
      *    }
@@ -2154,7 +2071,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2218,7 +2134,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2228,7 +2143,6 @@ export type NavigateBackOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2288,7 +2202,6 @@ export type NavigateBackOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2298,7 +2211,6 @@ export type NavigateBackOptions = {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2365,7 +2277,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2375,7 +2286,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2439,7 +2349,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2449,7 +2358,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2513,7 +2421,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2523,7 +2430,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2587,7 +2493,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2597,7 +2502,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -2661,7 +2565,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -2671,7 +2574,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"

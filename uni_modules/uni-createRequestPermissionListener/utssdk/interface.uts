@@ -36,7 +36,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *  "app": {
 	 *		"android": {
-	 *			"osVer": "5.0",
 	 *			"uniVer": "4.0+",
 	 *			"unixVer": "4.0+"
 	 *		},

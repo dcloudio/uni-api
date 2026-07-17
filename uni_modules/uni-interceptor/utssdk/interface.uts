@@ -25,7 +25,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -35,7 +34,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -100,7 +98,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
@@ -110,7 +107,6 @@ export interface Uni {
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"

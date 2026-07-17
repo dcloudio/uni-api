@@ -8,7 +8,6 @@ export interface Uni {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.41"
    * 		},
@@ -18,7 +17,6 @@ export interface Uni {
    * 			"unixVer": "4.41"
    * 		},
    *    "harmony": {
-   *      "osVer": "3.0",
    *      "uniVer": "4.31",
    *      "unixVer": "4.61",
    *      "unixVaporVer": "5.0"
@@ -84,7 +82,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -106,7 +103,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -128,7 +124,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -150,7 +145,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -172,7 +166,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -194,7 +187,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -221,7 +213,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -234,7 +225,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -249,7 +239,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -262,7 +251,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -277,7 +265,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -290,7 +277,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -305,7 +291,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -318,7 +303,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -333,7 +317,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x"
@@ -360,7 +343,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x"
@@ -387,7 +369,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -414,7 +395,6 @@ export interface BackgroundAudioManager {
     {
         "app": {
             "android": {
-                "osVer": "5.0",
                 "uniVer": "x",
                 "uniUtsPlugin": "x",
                 "unixVer": "4.71"
@@ -487,7 +467,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -500,7 +479,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -515,7 +493,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -528,7 +505,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -543,7 +519,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -556,7 +531,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -571,7 +545,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -584,7 +557,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -599,7 +571,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -612,7 +583,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -627,7 +597,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -640,7 +609,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -655,7 +623,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -668,7 +635,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -683,7 +649,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -696,7 +661,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -711,7 +675,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -724,7 +687,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -739,7 +701,6 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41"
@@ -752,7 +713,6 @@ export interface BackgroundAudioManager {
   			  "unixUtsPlugin": "4.41"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -771,7 +731,6 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41"
@@ -784,7 +743,6 @@ export interface BackgroundAudioManager {
   			  "unixUtsPlugin": "4.41"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -803,7 +761,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -816,7 +773,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -831,7 +787,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -844,7 +799,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -859,7 +813,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -872,7 +825,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -887,7 +839,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -900,7 +851,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
                   "unixVer": "4.61",
                   "unixVaporVer": "5.0"
@@ -915,7 +865,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
@@ -943,7 +892,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -956,7 +904,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -970,7 +917,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -983,7 +929,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -997,7 +942,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1010,7 +954,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1024,7 +967,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1037,7 +979,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1051,7 +992,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1064,7 +1004,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1078,7 +1017,6 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "5.0"
@@ -1091,7 +1029,6 @@ export interface BackgroundAudioManager {
   			  "unixUtsPlugin": "5.0"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1109,7 +1046,6 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "5.0"
@@ -1122,7 +1058,6 @@ export interface BackgroundAudioManager {
   			  "unixUtsPlugin": "5.0"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1140,7 +1075,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1153,7 +1087,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1167,7 +1100,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1180,7 +1112,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1194,7 +1125,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1207,7 +1137,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1221,7 +1150,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1234,7 +1162,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "x",
                   "unixVer": "5.0"
               }
@@ -1248,7 +1175,6 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "5.0"
@@ -1279,7 +1205,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
@@ -1300,7 +1225,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
@@ -1321,7 +1245,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
@@ -1342,7 +1265,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
@@ -1363,7 +1285,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
@@ -1384,7 +1305,6 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"

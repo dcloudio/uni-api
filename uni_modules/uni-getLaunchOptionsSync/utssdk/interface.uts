@@ -8,7 +8,6 @@ export type OnLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "3.91"
      *    },
@@ -82,7 +81,6 @@ export type OnLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "4.25"
      *    },
@@ -92,7 +90,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "4.25"
      *    },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
      *      "unixVaporVer": "x"
@@ -156,7 +153,6 @@ export type OnLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -166,7 +162,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "4.25"
      *    },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
      *      "unixVaporVer": "x"
@@ -230,7 +225,6 @@ export type OnLaunchOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "√"
      *    },
@@ -240,7 +234,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "√"
      *    },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.81",
      *      "unixVer": "4.81",
      *      "unixVaporVer": "x"
@@ -309,7 +302,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "√",
      *      "unixVer": "3.91"
      *    },

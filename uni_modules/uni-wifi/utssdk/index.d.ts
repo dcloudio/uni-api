@@ -75,7 +75,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -100,7 +99,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -163,7 +161,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -187,7 +184,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -227,7 +223,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -251,7 +246,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -275,7 +269,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -299,7 +292,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },
@@ -323,7 +315,6 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "4.4.4",
    *            "uniVer": "3.7.0",
    *            "unixVer": "3.9.0"
    *        },

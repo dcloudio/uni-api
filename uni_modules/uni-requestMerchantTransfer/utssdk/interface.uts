@@ -7,7 +7,6 @@ export interface Uni {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -17,7 +16,6 @@ export interface Uni {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -80,7 +78,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -90,7 +87,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -149,7 +145,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -159,7 +154,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -218,7 +212,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -228,7 +221,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -287,7 +279,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -356,7 +347,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -425,7 +415,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -494,7 +483,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -504,7 +492,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -563,7 +550,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -573,7 +559,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}
@@ -632,7 +617,6 @@ export type RequestMerchantTransferOptions = {
 		@uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "5.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -642,7 +626,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "5.0",
 					"uniVer": "5.14",
 					"unixVer": "5.14"
 				}

@@ -49,7 +49,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -59,7 +58,6 @@ export type LoadFontFaceOptions = {
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "x"
      *    }
@@ -118,7 +116,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -128,7 +125,6 @@ export type LoadFontFaceOptions = {
      *          "unixVer": "4.10"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -188,7 +184,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -198,7 +193,6 @@ export type LoadFontFaceOptions = {
      *          "unixVer": "4.10"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"
@@ -258,7 +252,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
@@ -327,7 +320,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -391,7 +383,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -455,7 +446,6 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -535,7 +525,6 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
@@ -545,7 +534,6 @@ export interface Uni {
      *          "unixVer": "4.10"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"

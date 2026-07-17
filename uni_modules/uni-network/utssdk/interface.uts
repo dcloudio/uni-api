@@ -11,7 +11,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -24,7 +23,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -87,7 +85,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -100,7 +97,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -162,7 +158,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -175,7 +170,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -237,7 +231,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -250,7 +243,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -312,7 +304,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -378,7 +369,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "6.0",
             "uniVer": "x",
             "uniUtsPlugin": "5.0",
             "unixVer": "5.0"
@@ -391,7 +381,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "5.0"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "x",
             "uniUtsPlugin": "5.0",
             "unixVer": "5.0",
@@ -475,7 +464,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x"
@@ -549,7 +537,6 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x"
@@ -623,7 +610,6 @@ export type RequestOptions<T> = {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -636,7 +622,6 @@ export type RequestOptions<T> = {
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -717,7 +702,6 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -730,7 +714,6 @@ export type RequestSuccess<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -791,7 +774,6 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -804,7 +786,6 @@ export type RequestSuccess<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -865,7 +846,6 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -878,7 +858,6 @@ export type RequestSuccess<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -939,7 +918,6 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -952,7 +930,6 @@ export type RequestSuccess<T> = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -1057,7 +1034,6 @@ export type RequestTaskOnChunkReceivedListenerResult = {
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1070,7 +1046,6 @@ export type RequestTaskOnChunkReceivedListenerResult = {
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1139,7 +1114,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1152,7 +1126,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1213,7 +1186,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1226,7 +1198,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1287,7 +1258,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1300,7 +1270,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
@@ -1372,7 +1341,6 @@ export interface RequestTask {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -1385,7 +1353,6 @@ export interface RequestTask {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -1458,7 +1425,6 @@ export interface RequestTask {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1471,7 +1437,6 @@ export interface RequestTask {
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1537,7 +1502,6 @@ export interface RequestTask {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1550,7 +1514,6 @@ export interface RequestTask {
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1615,7 +1578,6 @@ export interface RequestTask {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1628,7 +1590,6 @@ export interface RequestTask {
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1694,7 +1655,6 @@ export interface RequestTask {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1707,7 +1667,6 @@ export interface RequestTask {
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
@@ -1777,7 +1736,6 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -1790,7 +1748,6 @@ export type UploadFileOptionFiles = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -1851,7 +1808,6 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -1864,7 +1820,6 @@ export type UploadFileOptionFiles = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -1925,7 +1880,6 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2000,7 +1954,6 @@ export type UploadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2013,7 +1966,6 @@ export type UploadFileSuccess = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2074,7 +2026,6 @@ export type UploadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2087,7 +2038,6 @@ export type UploadFileSuccess = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2160,7 +2110,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2173,7 +2122,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2235,7 +2183,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2248,7 +2195,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2310,7 +2256,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2323,7 +2268,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2385,7 +2329,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2398,7 +2341,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2460,7 +2402,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2473,7 +2414,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2535,7 +2475,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2548,7 +2487,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2610,7 +2548,6 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2623,7 +2560,6 @@ export type UploadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2701,7 +2637,6 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2714,7 +2649,6 @@ export type OnProgressUpdateResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2775,7 +2709,6 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2788,7 +2721,6 @@ export type OnProgressUpdateResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2849,7 +2781,6 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2862,7 +2793,6 @@ export type OnProgressUpdateResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -2930,7 +2860,6 @@ export interface UploadTask {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -2943,7 +2872,6 @@ export interface UploadTask {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3015,7 +2943,6 @@ export interface UploadTask {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3028,7 +2955,6 @@ export interface UploadTask {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3103,7 +3029,6 @@ export type DownloadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3116,7 +3041,6 @@ export type DownloadFileSuccess = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3177,7 +3101,6 @@ export type DownloadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3190,7 +3113,6 @@ export type DownloadFileSuccess = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3263,7 +3185,6 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3276,7 +3197,6 @@ export type DownloadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3338,7 +3258,6 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3408,7 +3327,6 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3421,7 +3339,6 @@ export type DownloadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3483,7 +3400,6 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3496,7 +3412,6 @@ export type DownloadFileOptions = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3574,7 +3489,6 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3587,7 +3501,6 @@ export type OnProgressDownloadResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3648,7 +3561,6 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3661,7 +3573,6 @@ export type OnProgressDownloadResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3722,7 +3633,6 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -3735,7 +3645,6 @@ export type OnProgressDownloadResult = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -3802,7 +3711,6 @@ export interface DownloadTask {
         {
           "app": {
             "android": {
-              "osVer": "5.0",
               "uniVer": "√",
               "uniUtsPlugin": "3.91",
               "unixVer": "3.91"
@@ -3815,7 +3723,6 @@ export interface DownloadTask {
               "unixUtsPlugin": "4.11"
             },
             "harmony": {
-              "osVer": "3.0",
               "uniVer": "4.23",
               "unixVer": "4.61",
               "unixVaporVer": "5.0"
@@ -3887,7 +3794,6 @@ export interface DownloadTask {
         {
           "app": {
             "android": {
-              "osVer": "5.0",
               "uniVer": "√",
               "uniUtsPlugin": "3.91",
               "unixVer": "3.91"
@@ -3900,7 +3806,6 @@ export interface DownloadTask {
               "unixUtsPlugin": "4.11"
             },
             "harmony": {
-              "osVer": "3.0",
               "uniVer": "4.23",
               "unixVer": "4.61",
               "unixVaporVer": "5.0"
@@ -3996,7 +3901,6 @@ export type Certificate = {
             "unixVer": "x"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -4016,7 +3920,6 @@ export type Certificate = {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "3.2.7",
             "unixVer": "x"
           },
@@ -4117,7 +4020,6 @@ export interface Uni {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -4130,7 +4032,6 @@ export interface Uni {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -4222,7 +4123,6 @@ export interface Uni {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -4235,7 +4135,6 @@ export interface Uni {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -4313,7 +4212,6 @@ export interface Uni {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
@@ -4326,7 +4224,6 @@ export interface Uni {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -4400,7 +4297,6 @@ export interface Uni {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "3.2.7",
             "uniUtsPlugin": "x",
             "unixVer": "x"
@@ -4413,7 +4309,6 @@ export interface Uni {
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.31",
             "unixVer": "4.61",
             "unixVaporVer": "5.0"
@@ -4434,7 +4329,6 @@ export interface Uni {
      *       {
      *         "app": {
      *           "android": {
-     *             "osVer": "4.4",
      *             "uniVer": "3.2.7",
      *             "uniUtsPlugin": "x",
      *             "unixVer": "x"
@@ -4447,7 +4341,6 @@ export interface Uni {
      *             "unixUtsPlugin": "x"
      *           },
      *           "harmony": {
-     *             "osVer": "3.0",
      *             "uniVer": "5.0",
      *             "unixVer": "5.0"
      *           }

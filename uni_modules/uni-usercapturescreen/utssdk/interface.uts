@@ -89,7 +89,6 @@
 		 * @uniPlatform {
 		 *    "app": {
 		 *        "android": {
-		 *            "osVer": "4.4.4",
 		 *            "uniVer": "3.7.7",
 		 *            "unixVer": "3.9.0"
 		 *        },
@@ -99,7 +98,6 @@
 		 *            "unixVer": "4.11"
 		 *   	  },
 		 *      "harmony": {
-		 *        "osVer": "3.0",
 		 *        "uniVer": "4.25",
 		 *        "unixVer": "4.61",
      *        "unixVaporVer": "5.0"
@@ -165,7 +163,6 @@
 		 * @uniPlatform {
 		 *    "app": {
 		 *        "android": {
-		 *            "osVer": "4.4.4",
 		 *            "uniVer": "3.7.7",
 		 *            "unixVer": "3.9.0"
 		 *        },
@@ -175,7 +172,6 @@
 		 *            "unixVer": "4.11"
 		 *   	  },
 		 *      "harmony": {
-		 *        "osVer": "3.0",
 		 *        "uniVer": "4.25",
 		 *        "unixVer": "4.61",
      *        "unixVaporVer": "5.0"
@@ -241,7 +237,6 @@
 		 * @uniPlatform {
 		 *    "app": {
 		 *        "android": {
-		 *            "osVer": "4.4.4",
 		 *            "uniVer": "3.7.7",
 		 *            "unixVer": "3.9.0"
 		 *        },
@@ -251,7 +246,6 @@
 		 *            "unixVer": "4.11"
 		 *   	  },
 		 *      "harmony": {
-		 *        "osVer": "3.0",
 		 *        "uniVer": "4.25",
 		 *        "unixVer": "4.61",
      *        "unixVaporVer": "5.0"

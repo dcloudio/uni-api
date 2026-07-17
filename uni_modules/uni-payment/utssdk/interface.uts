@@ -32,7 +32,6 @@ export interface Uni {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -42,7 +41,6 @@ export interface Uni {
 	 *            "unixVer": "4.18"
 	 *        },
 		 *    "harmony": {
-		 *      "osVer": "3.0",
 		 *      "uniVer": "4.26",
 		 *      "unixVer": "4.61",
 		 *      "unixVaporVer": "5.0"
@@ -107,7 +105,6 @@ export type RequestPaymentErrorCode =
 	 * @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -117,7 +114,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -135,7 +131,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -145,7 +140,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -163,7 +157,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -173,7 +166,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -191,7 +183,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -201,7 +192,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -219,7 +209,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -229,7 +218,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -247,7 +235,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -257,7 +244,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -275,7 +261,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -285,7 +270,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -303,7 +287,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -313,7 +296,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -331,7 +313,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.02"
 		*        },
@@ -341,7 +322,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.18"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.27",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -359,7 +339,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "x",
 		*            "unixVer": "4.31"
 		*        },
@@ -369,7 +348,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.31"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -387,7 +365,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "x",
 		*            "unixVer": "4.31"
 		*        },
@@ -397,7 +374,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.31"
 		*        },
 		*        "harmony": {
-		*            "osVer": "3.0",
 		*            "uniVer": "4.31",
 		*            "unixVer": "4.61",
 		*            "unixVaporVer": "5.0"
@@ -415,7 +391,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "x",
 		*            "unixVer": "x"
 		*        },
@@ -442,7 +417,6 @@ export type RequestPaymentErrorCode =
 		*  @uniPlatform {
 		*    "app": {
 		*        "android": {
-		*            "osVer": "5.0",
 		*            "uniVer": "x",
 		*            "unixVer": "x"
 		*        },
@@ -473,7 +447,6 @@ export type RequestPaymentSuccess = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -483,7 +456,6 @@ export type RequestPaymentSuccess = {
 	 *            "unixVer": "4.18"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -553,7 +525,6 @@ export type RequestPaymentOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -581,7 +552,6 @@ export type RequestPaymentOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -591,7 +561,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.18"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -651,7 +620,6 @@ export type RequestPaymentOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -721,7 +689,6 @@ export type RequestPaymentOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -731,7 +698,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.18"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
@@ -791,7 +757,6 @@ export type RequestPaymentOptions = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.02"
 	 *        },
@@ -801,7 +766,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.18"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "3.0",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61",
 	 *      "unixVaporVer": "5.0"
