@@ -894,7 +894,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -915,7 +914,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -936,7 +934,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -957,7 +954,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -978,7 +974,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -999,7 +994,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -1020,7 +1014,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -1041,7 +1034,6 @@ export type LocationErrorCode =
 	 *            "unixVer": "4.81"
 	 *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -1062,7 +1054,6 @@ export type LocationErrorCode =
 	 *            "unixVer": "4.81"
 	 *        },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        }
@@ -1426,7 +1417,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1494,7 +1484,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1904,7 +1893,6 @@ export type GetLocationOptions = {
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }

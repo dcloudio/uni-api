@@ -138,7 +138,6 @@ type _GetVideoInfoSuccess = {
          *			"unixVer": "4.11"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -205,7 +204,6 @@ type _GetVideoInfoSuccess = {
          *			"unixVer": "4.11"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }

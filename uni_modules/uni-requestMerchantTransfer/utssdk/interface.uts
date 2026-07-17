@@ -283,7 +283,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				}
@@ -350,7 +349,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				}
@@ -417,7 +415,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				}

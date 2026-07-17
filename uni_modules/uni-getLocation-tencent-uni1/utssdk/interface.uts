@@ -225,7 +225,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -251,7 +250,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -277,7 +275,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -302,7 +299,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -328,7 +324,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -354,7 +349,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -380,7 +374,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -406,7 +399,6 @@ export type GetLocationSuccess = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -438,7 +430,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -505,7 +496,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -533,7 +523,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -559,7 +548,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -586,7 +574,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -611,7 +598,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -636,7 +622,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }
@@ -661,7 +646,6 @@ export type GetLocationOptions = {
 	 *            "unixVer": "4.11"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "4.25",
 	 *      "unixVer": "4.61"
 	 *    }

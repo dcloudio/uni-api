@@ -271,7 +271,6 @@ export interface Uni {
 	        "unixUtsPlugin": "4.61"
 	      },
 	      "harmony": {
-	        "osVer": "x",
 	        "uniVer": "x",
 	        "unixVer": "x"
 	      }

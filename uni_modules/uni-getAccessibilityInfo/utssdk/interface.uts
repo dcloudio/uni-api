@@ -15,12 +15,10 @@ export interface Uni {
 	 * 			"unixVer": "4.51"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "x",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }

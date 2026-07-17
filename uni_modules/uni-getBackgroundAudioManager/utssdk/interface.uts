@@ -192,7 +192,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -317,7 +316,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "x"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -342,7 +340,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "x"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -367,7 +364,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -392,7 +388,6 @@ export interface BackgroundAudioManager {
                 "unixUtsPlugin": "4.71"
             },
           "harmony": {
-              "osVer": "x",
               "uniVer": "x",
               "unixVer": "x",
           }
@@ -846,7 +841,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -1144,7 +1138,6 @@ export interface BackgroundAudioManager {
                   "unixUtsPlugin": "5.0"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }

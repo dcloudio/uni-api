@@ -252,7 +252,6 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -339,7 +338,6 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -374,7 +372,6 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -409,7 +406,6 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -444,17 +440,14 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
        *    "harmony": {
-       *      "osVer": "x",
        *      "uniVer": "x",
        *      "unixVer": "x"
        *    }
@@ -485,12 +478,10 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -526,12 +517,10 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
@@ -563,12 +552,10 @@ export type GetAppAuthorizeSettingResult = {
      * {
      * 	"app": {
      * 		"android": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},

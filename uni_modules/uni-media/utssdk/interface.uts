@@ -539,7 +539,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "x"
      *		},
      *   "harmony": {
-     *        "osVer": "x",
      *        "uniVer": "x",
      *        "unixVer": "x"
      *      }
@@ -606,7 +605,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "4.11"
      *		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -857,7 +855,6 @@ export type PreviewImageOptions = {
          *			"unixVer": "4.11"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -895,7 +892,6 @@ export type PreviewImageOptions = {
                  *			"unixVer": "4.11"
                  *		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -920,13 +916,11 @@ export type PreviewImageOptions = {
      *			"unixVer": "4.71"
      *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
      *	},
      *    "web": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -1831,7 +1825,6 @@ export type ChooseVideoOptions = {
          *			"unixVer": "4.18"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -2041,7 +2034,6 @@ export type ChooseVideoOptions = {
      *			"unixVer": "x"
      *		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -2313,7 +2305,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.25"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -2380,7 +2371,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.25"
          *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -5303,7 +5293,6 @@ export interface Uni {
      * @uniPlatform {
      *	 "app": {
      *		"android": {
-     *			"osVer": "x",
      *			"uniVer": "x",
      *			"unixVer": "4.51"
      *		},

@@ -9,7 +9,6 @@ export type GetDeviceInfoOptions = {
      * 			"unixVer": "3.9+"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -36,7 +35,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -244,7 +242,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -727,7 +724,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -797,7 +793,6 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.11"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -862,12 +857,10 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "√"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
      * 			"uniVer": "x",
      * 			"unixVer": "x"
      * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1208,12 +1201,10 @@ export type GetDeviceInfoResult = {
      * 			"unixVer": "4.18"
      * 		},
      * 		"ios": {
-     * 			"osVer": "x",
        *     "uniVer": "x",
        *     "unixVer": "x"
        *   },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1278,7 +1269,6 @@ export type GetDeviceInfoResult = {
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -1349,7 +1339,6 @@ export type GetDeviceInfoResult = {
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -1652,12 +1641,10 @@ export interface Uni {
 	 * 			"unixVer": "4.51"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "x",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.51"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }

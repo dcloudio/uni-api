@@ -1250,7 +1250,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1803,7 +1802,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -1872,7 +1870,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -2364,7 +2361,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -2434,7 +2430,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -2738,7 +2733,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -2808,7 +2802,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -3292,7 +3285,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -3362,7 +3354,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -3639,7 +3630,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -3847,7 +3837,6 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "4.11"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -4326,12 +4315,10 @@ export type GetSystemInfoResult = {
    * 			"unixVer": "√"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }
@@ -4396,7 +4383,6 @@ export type GetSystemInfoResult = {
    *      "unixVer": "√"
    *    },
    *    "ios": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
@@ -4467,7 +4453,6 @@ export type GetSystemInfoResult = {
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -4602,17 +4587,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -4672,17 +4654,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -4742,17 +4721,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -4812,17 +4788,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -4882,17 +4855,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -4952,17 +4922,14 @@ export type GetSystemInfoResult = {
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }

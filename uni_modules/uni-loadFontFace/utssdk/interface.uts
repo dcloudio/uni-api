@@ -257,7 +257,6 @@ export type LoadFontFaceOptions = {
      *          "unixVer": "4.10"
      *      },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    }

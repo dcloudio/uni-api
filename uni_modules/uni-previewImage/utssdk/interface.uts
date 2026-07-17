@@ -171,7 +171,6 @@ export type PreviewImageOptions = {
 		 *			"unixVer": "4.11"
 		 *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -210,7 +209,6 @@ export type PreviewImageOptions = {
 				 *			"unixVer": "4.11"
 				 *		},
 	 *    "harmony": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -235,13 +233,11 @@ export type PreviewImageOptions = {
 	 *			"unixVer": "4.71"
 	 *		},
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
 	 *	},
 	 *    "web": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    },

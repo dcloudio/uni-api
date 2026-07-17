@@ -242,17 +242,14 @@ export type LoginSuccess = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -265,17 +262,14 @@ export type LoginSuccess = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -288,17 +282,14 @@ export type LoginSuccess = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -311,17 +302,14 @@ export type LoginSuccess = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -334,17 +322,14 @@ export type LoginSuccess = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -441,12 +426,10 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
@@ -464,17 +447,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -487,17 +467,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -510,17 +487,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -533,17 +507,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -556,12 +527,10 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
@@ -580,17 +549,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -610,17 +576,14 @@ export type LoginOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1082,12 +1045,10 @@ export type UserInfo = {
    * @uniPlatform {
    *  "app": {
    *    "android": {
-   *        "osVer": "x",
    *        "uniVer": "x",
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "x",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
@@ -1640,17 +1601,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1663,17 +1621,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1686,17 +1641,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1709,17 +1661,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1732,17 +1681,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
    *    "harmony": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1755,12 +1701,10 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *   "android": {
-   *      "osVer": "x",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "x",
    *       "uniVer": "x",
    *       "unixVer": "x"
    *    },
@@ -1778,17 +1722,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *    "android": {
-   *        "osVer": "x",
    *        "uniVer": "x",
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
    *    "harmony": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1856,17 +1797,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *    "android": {
-   *        "osVer": "x",
    *        "uniVer": "x",
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
    *    "harmony": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *      "unixVer": "x"
    *    }
@@ -1934,17 +1872,14 @@ export type GetUserInfoOptions = {
    * @uniPlatform {
    *  "app": {
    *    "android": {
-   *        "osVer": "x",
    *        "uniVer": "x",
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
    *    "harmony": {
-   *        "osVer": "x",
    *          "uniVer": "x",
    *      "unixVer": "x"
    *    }

@@ -57,7 +57,6 @@ declare interface Uni {
     * 			 "unixVer": "3.94+"
     *        },
     *        "ios": {
-    *            "osVer": "x",
     *  		  	 "uniVer": "x",
     * 			 "unixVer": "x"
     *        }

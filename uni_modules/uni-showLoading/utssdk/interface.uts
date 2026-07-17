@@ -48,17 +48,14 @@ export type ShowLoadingOptions = {
  	 * @uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				},
 				"ios": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				},
 				"harmony": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				}
@@ -120,7 +117,6 @@ export type ShowLoadingOptions = {
 	 * @uniPlatform {
 			"app": {
 				"android": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				},
@@ -129,7 +125,6 @@ export type ShowLoadingOptions = {
 					"unixVer": "5.0"
 				},
 				"harmony": {
-					"osVer": "x",
 					"uniVer": "x",
 					"unixVer": "x"
 				}

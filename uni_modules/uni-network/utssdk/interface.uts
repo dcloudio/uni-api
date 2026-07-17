@@ -369,7 +369,6 @@ export type RequestOptions<T> = {
             "unixVer": "5.0"
           },
           "ios": {
-            "osVer": "x",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "5.0",
@@ -470,7 +469,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -542,7 +540,6 @@ export type RequestOptions<T> = {
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -1868,7 +1865,6 @@ export type UploadFileOptionFiles = {
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -3842,12 +3838,10 @@ export type Certificate = {
       {
         "app": {
           "android": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           },
@@ -3879,7 +3873,6 @@ export type Certificate = {
             "unixVer": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }

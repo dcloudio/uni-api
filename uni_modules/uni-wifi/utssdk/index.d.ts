@@ -329,12 +329,10 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "x",
    *            "uniVer": "x",
    *            "unixVer": "x"
    *        },
    *        "ios": {
-   *            "osVer": "x",
    *            "uniVer": "x",
    *            "unixVer": "x"
    *   	  }
@@ -351,12 +349,10 @@ declare interface Uni {
    * @uniPlatform {
    *    "app": {
    *        "android": {
-   *            "osVer": "x",
    *            "uniVer": "x",
    *            "unixVer": "x"
    *        },
    *        "ios": {
-   *            "osVer": "x",
    *            "uniVer": "x",
    *            "unixVer": "x"
    *   	  }

@@ -4526,7 +4526,6 @@ export interface FileSystemManager {
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "4.51",
      *            "unixVer": "4.61",
      *            "unixVaporVer": "5.0"
@@ -5564,7 +5563,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -5597,7 +5595,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5630,7 +5627,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5663,7 +5659,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -5696,7 +5691,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5729,7 +5723,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5762,7 +5755,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -5795,7 +5787,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5828,7 +5819,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
@@ -5861,7 +5851,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -5894,7 +5883,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "4.13"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -5927,7 +5915,6 @@ export type FileSystemManagerErrorCode =
      *      "unixVer": "4.13"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -5960,7 +5947,6 @@ export type FileSystemManagerErrorCode =
 	 *      "unixVer": "4.13"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.61"
 	 *    },
@@ -5989,12 +5975,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -6023,12 +6007,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6057,12 +6039,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -6091,12 +6071,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6125,12 +6103,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
@@ -6159,12 +6135,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6193,12 +6167,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6227,12 +6199,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6261,12 +6231,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6295,12 +6263,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
@@ -6329,12 +6295,10 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },

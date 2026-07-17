@@ -272,7 +272,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
