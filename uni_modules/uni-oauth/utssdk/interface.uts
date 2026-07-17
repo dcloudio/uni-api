@@ -13,7 +13,6 @@ export interface Uni {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },
@@ -95,7 +94,6 @@ export interface Uni {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },
@@ -206,7 +204,6 @@ export type LoginSuccess = {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "12.0",
    *       "uniVer": "√",
    *       "unixVer": "x"
    *    },
@@ -228,7 +225,6 @@ export type LoginSuccess = {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *       "osVer": "12.0",
    *       "uniVer": "√",
    *       "unixVer": "x"
    *    },
@@ -373,7 +369,6 @@ export type LoginOptions = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },
@@ -660,7 +655,6 @@ export type LoginOptions = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "3.2.6",
    *          "unixVer": "x"
    *      },
@@ -1012,7 +1006,6 @@ export type UserInfo = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },
@@ -1185,7 +1178,6 @@ export type GetUserInfoSuccess = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },
@@ -1262,7 +1254,6 @@ export type GetUserInfoSuccess = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
@@ -1338,7 +1329,6 @@ export type GetUserInfoSuccess = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
@@ -1414,7 +1404,6 @@ export type GetUserInfoSuccess = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
@@ -1490,7 +1479,6 @@ export type GetUserInfoSuccess = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "x",
    *          "unixVer": "x"
    *      },
@@ -1577,7 +1565,6 @@ export type GetUserInfoOptions = {
    *        "unixVer": "x"
    *      },
    *      "ios": {
-   *          "osVer": "12.0",
    *          "uniVer": "√",
    *          "unixVer": "x"
    *      },

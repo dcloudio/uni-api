@@ -24,7 +24,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -49,7 +48,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -74,7 +72,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -99,7 +96,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -124,7 +120,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -149,7 +144,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -174,7 +168,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -199,7 +192,6 @@ export type ShareWithSystemErrorCode =
 	*            "unixVer": "4.33"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.33"
 	*        },
@@ -241,7 +233,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "x"
      *         },
@@ -266,7 +257,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "ios": {
-	 *             "osVer": "12.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "x"
 	 *         },
@@ -291,7 +281,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "4.33"
 	  *         },
 	  *         "ios": {
-	  *             "osVer": "12.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "x"
 	  *         },
@@ -316,7 +305,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "4.33"
 	  *         },
 	  *         "ios": {
-	  *             "osVer": "12.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "x"
 	  *         },
@@ -341,7 +329,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "4.33"
 	  *         },
 	  *         "ios": {
-	  *             "osVer": "12.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "x"
 	  *         },
@@ -366,7 +353,6 @@ export type ShareWithSystemOptions = {
 	  *             "unixVer": "4.33"
 	  *         },
 	  *         "ios": {
-	  *             "osVer": "12.0",
 	  *             "uniVer": "√",
 	  *             "unixVer": "x"
 	  *         },
@@ -391,7 +377,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -416,7 +401,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -441,7 +425,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -466,7 +449,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -491,7 +473,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "ios": {
-	 *             "osVer": "12.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -517,7 +498,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "ios": {
-	 *             "osVer": "12.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -542,7 +522,6 @@ export type ShareWithSystemOptions = {
 	 *             "unixVer": "4.33"
 	 *         },
 	 *         "ios": {
-	 *             "osVer": "12.0",
 	 *             "uniVer": "√",
 	 *             "unixVer": "4.33"
 	 *         },
@@ -568,7 +547,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -593,7 +571,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -618,7 +595,6 @@ export type ShareWithSystemOptions = {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },
@@ -652,7 +628,6 @@ export interface Uni {
      *             "unixVer": "4.33"
      *         },
      *         "ios": {
-     *             "osVer": "12.0",
      *             "uniVer": "√",
      *             "unixVer": "4.33"
      *         },

@@ -18,7 +18,6 @@ export interface Uni {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -56,7 +55,6 @@ export type OpenAppAuthorizeSettingSuccess = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -89,7 +87,6 @@ export type OpenAppAuthorizeSettingFail = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -122,7 +119,6 @@ export type OpenAppAuthorizeSettingComplete = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -156,7 +152,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -188,7 +183,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",
@@ -220,7 +214,6 @@ export type OpenAppAuthorizeSettingOptions = {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.51",
           "unixVer": "4.51",

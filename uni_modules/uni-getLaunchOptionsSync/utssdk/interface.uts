@@ -12,7 +12,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "3.91"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
      *    },
@@ -85,7 +84,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "4.25"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "x",
      *      "unixVer": "4.25"
      *    },
@@ -157,7 +155,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "x",
      *      "unixVer": "4.25"
      *    },
@@ -229,7 +226,6 @@ export type OnLaunchOptions = {
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "√"
      *    },
@@ -306,7 +302,6 @@ export interface Uni {
      *      "unixVer": "3.91"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
      *    },

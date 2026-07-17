@@ -53,7 +53,6 @@ export type ChooseMediaTempFile = {
 	  *			"unixVer": "4.61"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.61"
 	  *		},
@@ -119,7 +118,6 @@ export type ChooseMediaOptions = {
 	  *			"unixVer": "4.51"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "x"
 	  *		},
@@ -189,7 +187,6 @@ export type ChooseMediaOptions = {
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
@@ -211,7 +208,6 @@ export type ChooseMediaOptions = {
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
@@ -233,7 +229,6 @@ export type ChooseMediaOptions = {
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
@@ -255,7 +250,6 @@ export type ChooseMediaOptions = {
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
@@ -324,7 +318,6 @@ export type ChooseMediaOptions = {
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
@@ -421,7 +414,6 @@ export interface Uni {
 	  *			"unixVer": "4.51"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.51"
 	  *		},

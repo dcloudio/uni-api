@@ -27,7 +27,6 @@ export type NavigateToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -96,7 +95,6 @@ export type NavigateToOptions = {
      *        "unixVer": "4.18"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.25"
      *      },
@@ -165,7 +163,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -191,7 +188,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -218,7 +214,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -244,7 +239,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -270,7 +264,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -296,7 +289,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -322,7 +314,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -348,7 +339,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -374,7 +364,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -400,7 +389,6 @@ export type NavigateToOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -426,7 +414,6 @@ export type NavigateToOptions = {
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      },
@@ -494,7 +481,6 @@ export type NavigateToOptions = {
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      },
@@ -562,7 +548,6 @@ export type NavigateToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -630,7 +615,6 @@ export type NavigateToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -698,7 +682,6 @@ export type NavigateToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -776,7 +759,6 @@ export type RedirectToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -844,7 +826,6 @@ export type RedirectToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -912,7 +893,6 @@ export type RedirectToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -980,7 +960,6 @@ export type RedirectToOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1058,7 +1037,6 @@ export type ReLaunchOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1126,7 +1104,6 @@ export type ReLaunchOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1194,7 +1171,6 @@ export type ReLaunchOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1262,7 +1238,6 @@ export type ReLaunchOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1342,7 +1317,6 @@ export type SwitchTabOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1410,7 +1384,6 @@ export type SwitchTabOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1478,7 +1451,6 @@ export type SwitchTabOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1546,7 +1518,6 @@ export type SwitchTabOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1624,7 +1595,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -1693,7 +1663,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "4.18"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.25"
      *      }
@@ -1756,7 +1725,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1781,7 +1749,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1807,7 +1774,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1832,7 +1798,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1857,7 +1822,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1882,7 +1846,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1907,7 +1870,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1932,7 +1894,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1957,7 +1918,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -1982,7 +1942,6 @@ export type NavigateBackOptions = {
      *       "unixVer": "4.18"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "unixVer": "4.25"
      *     },
@@ -2008,7 +1967,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      },
@@ -2075,7 +2033,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      }
@@ -2138,7 +2095,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2206,7 +2162,6 @@ export type NavigateBackOptions = {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2281,7 +2236,6 @@ export interface Uni {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2353,7 +2307,6 @@ export interface Uni {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2425,7 +2378,6 @@ export interface Uni {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2497,7 +2449,6 @@ export interface Uni {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
@@ -2569,7 +2520,6 @@ export interface Uni {
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },

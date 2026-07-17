@@ -12,7 +12,6 @@ export interface Uni {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -93,7 +92,6 @@ export interface Uni {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -172,7 +170,6 @@ export interface Uni {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -262,7 +259,6 @@ export interface Uni {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -343,7 +339,6 @@ export interface Uni {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -379,7 +374,6 @@ export interface Uni {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *      "osVer": "9.0",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
@@ -451,7 +445,6 @@ export interface Uni {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *      "osVer": "9.0",
    *      "uniVer": "x",
    *      "unixVer": "x"
    *    },
@@ -524,7 +517,6 @@ export interface Uni {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *      "osVer": "9.0",
    *      "uniVer": "2.6.5",
    *      "unixVer": "x"
    *    },
@@ -597,7 +589,6 @@ export interface Uni {
    *      "unixVer": "x"
    *    },
    *    "ios": {
-   *      "osVer": "9.0",
    *      "uniVer": "2.6.5",
    *      "unixVer": "x"
    *    },
@@ -668,7 +659,6 @@ export interface Uni {
         "unixVer": "4.18"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "x",
         "uniUtsPlugin": "x",
         "unixVer": "4.18",
@@ -698,7 +688,6 @@ export type OsThemeChangeResult = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -738,7 +727,6 @@ export type OsThemeChangeResult = {
         "unixVer": "4.18"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "x",
         "uniUtsPlugin": "x",
         "unixVer": "4.18",
@@ -768,7 +756,6 @@ export type AppThemeChangeResult = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -831,7 +818,6 @@ export type SetAppThemeCompleteCallback = (result: any) => void;
         "unixVer": "4.18"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "x",
         "uniUtsPlugin": "x",
         "unixVer": "4.18",
@@ -861,7 +847,6 @@ export type SetAppThemeOptions = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -905,7 +890,6 @@ export type SetAppThemeOptions = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -937,7 +921,6 @@ export type SetAppThemeOptions = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -969,7 +952,6 @@ export type SetAppThemeOptions = {
           "unixVer": "4.18"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.18",
@@ -1003,7 +985,6 @@ export type SetAppThemeOptions = {
         "unixVer": "4.18"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "x",
         "uniUtsPlugin": "x",
         "unixVer": "4.18",
@@ -1043,7 +1024,6 @@ export type AppThemeFail = IAppThemeFail;
         "unixVer": "4.18"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "x",
         "uniUtsPlugin": "x",
         "unixVer": "4.18",

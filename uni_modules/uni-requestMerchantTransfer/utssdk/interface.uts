@@ -11,7 +11,6 @@ export interface Uni {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -82,7 +81,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -149,7 +147,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -216,7 +213,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -283,7 +279,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -351,7 +346,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -419,7 +413,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -487,7 +480,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -554,7 +546,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},
@@ -621,7 +612,6 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "4.61",
 					"unixVer": "4.61"
 				},

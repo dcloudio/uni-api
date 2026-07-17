@@ -11,7 +11,6 @@ export type ChooseLocationErrorCode =
      *        "unixVer": "4.34"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.34"
      *      },
@@ -37,7 +36,6 @@ export type ChooseLocationErrorCode =
      *        "unixVer": "4.34"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.34"
      *      },
@@ -85,7 +83,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -111,7 +108,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -137,7 +133,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -163,7 +158,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.35"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.35"
      *      },
@@ -189,7 +183,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -215,7 +208,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -241,7 +233,6 @@ export type ChooseLocationOptions = {
      *        "unixVer": "4.33"
      *      },
      *      "ios": {
-     *        "osVer": "12.0",
      *        "uniVer": "√",
      *        "unixVer": "4.33"
      *      },
@@ -272,7 +263,6 @@ export type ChooseLocationOptions = {
  *            "unixVer": "4.33"
  *        },
  *        "ios": {
- *            "osVer": "12.0",
  *            "uniVer": "√",
  *            "unixVer": "4.33"
  *        },
@@ -317,7 +307,6 @@ export interface Uni {
      *      "unixVer": "4.33"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.33"
      *    },

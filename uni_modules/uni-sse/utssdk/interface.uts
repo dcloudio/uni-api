@@ -11,7 +11,6 @@ export type ConnectEventSourceOptions = {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -41,7 +40,6 @@ export type ConnectEventSourceOptions = {
 	        "unixVer": "4.61"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -79,7 +77,6 @@ export interface Uni {
           "unixVer": "4.51"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "4.63",
@@ -113,7 +110,6 @@ export interface UniEventSource {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -144,7 +140,6 @@ export interface UniEventSource {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -175,7 +170,6 @@ export interface UniEventSource {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -205,7 +199,6 @@ export interface UniEventSource {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -237,7 +230,6 @@ export class UniMessageEvent {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -268,7 +260,6 @@ export class UniMessageEvent {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",
@@ -298,7 +289,6 @@ export class UniMessageEvent {
 	        "unixVer": "4.51"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "x",
 	        "uniUtsPlugin": "x",
 	        "unixVer": "4.63",

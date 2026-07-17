@@ -70,7 +70,6 @@ export type ChooseImageTempFile = {
 	 *			"unixVer": "3.9"
 	 *		},
      *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -87,7 +86,6 @@ export type ChooseImageTempFile = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -104,7 +102,6 @@ export type ChooseImageTempFile = {
 	 *			"unixVer": "x"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "x",
 	 *			"unixVer": "x"
 	 *		}
@@ -121,7 +118,6 @@ export type ChooseImageTempFile = {
 	 *			"unixVer": "x"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "x",
 	 *			"unixVer": "x"
 	 *		}
@@ -140,7 +136,6 @@ export type ChooseImageSuccess = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -157,7 +152,6 @@ export type ChooseImageSuccess = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -174,7 +168,6 @@ export type ChooseImageSuccess = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -191,7 +184,6 @@ export type ChooseImageSuccess = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -216,7 +208,6 @@ export type ChooseImageCropOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -233,7 +224,6 @@ export type ChooseImageCropOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -251,7 +241,6 @@ export type ChooseImageCropOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -268,7 +257,6 @@ export type ChooseImageCropOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -312,7 +300,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "4.33"
      *		},
      *		"ios": {
-     *			"osVer": "10.0",
      *			"uniVer": "4.33",
      *			"unixVer": "4.33"
      *		},
@@ -380,7 +367,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "4.33"
      *		},
      *		"ios": {
-     *			"osVer": "10.0",
      *			"uniVer": "x",
      *			"unixVer": "x"
      *		},
@@ -448,7 +434,6 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -466,7 +451,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "3.9"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -535,7 +519,6 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -552,7 +535,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "x"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "x",
      *			"unixVer": "x"
      *		},
@@ -620,7 +602,6 @@ export type ChooseImageOptions = {
      *			"unixVer": "3.9"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -646,7 +627,6 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -663,7 +643,6 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -680,7 +659,6 @@ export type ChooseImageOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -756,7 +734,6 @@ export type PreviewImageOptions = {
 	   *			"unixVer": "3.9"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "10.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.11"
 	   *		},
@@ -782,7 +759,6 @@ export type PreviewImageOptions = {
 	   *			"unixVer": "3.9"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "10.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.11"
 	   *		},
@@ -809,7 +785,6 @@ export type PreviewImageOptions = {
      *			"unixVer": "x"
      *		},
      *		"ios": {
-     *			"osVer": "10.0",
      *			"uniVer": "√",
      *			"unixVer": "x"
      *		},
@@ -878,7 +853,6 @@ export type PreviewImageOptions = {
          *			"unixVer": "3.9"
          *		},
          *		"ios": {
-         *			"osVer": "10.0",
          *			"uniVer": "√",
          *			"unixVer": "4.11"
          *		},
@@ -917,7 +891,6 @@ export type PreviewImageOptions = {
                  *			"unixVer": "3.9"
                  *		},
                  *		"ios": {
-                 *			"osVer": "10.0",
                  *			"uniVer": "√",
                  *			"unixVer": "4.11"
                  *		},
@@ -1011,7 +984,6 @@ export type PreviewImageOptions = {
 	   *			"unixVer": "3.9"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "10.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.11"
 	   *		},
@@ -1038,7 +1010,6 @@ export type PreviewImageOptions = {
 	   *			"unixVer": "3.9"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "10.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.11"
 	   *		},
@@ -1065,7 +1036,6 @@ export type PreviewImageOptions = {
 	   *			"unixVer": "3.9"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "10.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.11"
 	   *		},
@@ -1125,7 +1095,6 @@ export type GetImageInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1142,7 +1111,6 @@ export type GetImageInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1159,7 +1127,6 @@ export type GetImageInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1176,7 +1143,6 @@ export type GetImageInfoSuccess = {
 	*			"unixVer": "4.18"
 	*		},
 	*		"ios": {
-	*			"osVer": "12.0",
 	*			"uniVer": "√",
 	*			"unixVer": "4.25"
 	*		}
@@ -1239,7 +1205,6 @@ export type GetImageInfoSuccess = {
 	*			"unixVer": "4.18"
 	*		},
 	*		"ios": {
-	*			"osVer": "12.0",
 	*			"uniVer": "√",
 	*			"unixVer": "4.25"
 	*		}
@@ -1310,7 +1275,6 @@ export type GetImageInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1327,7 +1291,6 @@ export type GetImageInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1344,7 +1307,6 @@ export type GetImageInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1361,7 +1323,6 @@ export type GetImageInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -1383,7 +1344,6 @@ export type SaveImageToPhotosAlbumSuccess = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -1408,7 +1368,6 @@ export type SaveImageToPhotosAlbumOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -1425,7 +1384,6 @@ export type SaveImageToPhotosAlbumOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -1442,7 +1400,6 @@ export type SaveImageToPhotosAlbumOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -1459,7 +1416,6 @@ export type SaveImageToPhotosAlbumOptions = {
 	 *			"unixVer": "3.9"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.11"
 	 *		}
@@ -1491,7 +1447,6 @@ export type CompressImageOptions = {
 	   *			"unixVer": "4.18"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "12.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.25"
 	   *		},
@@ -1513,7 +1468,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1535,7 +1489,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1567,7 +1520,6 @@ export type CompressImageOptions = {
 	   *			"unixVer": "4.18"
 	   *		},
 	   *		"ios": {
-	   *			"osVer": "12.0",
 	   *			"uniVer": "√",
 	   *			"unixVer": "4.25"
 	   *		},
@@ -1589,7 +1541,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1611,7 +1562,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1633,7 +1583,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1655,7 +1604,6 @@ export type CompressImageOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		},
@@ -1680,7 +1628,6 @@ export type ChooseVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1697,7 +1644,6 @@ export type ChooseVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1714,7 +1660,6 @@ export type ChooseVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1731,7 +1676,6 @@ export type ChooseVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1748,7 +1692,6 @@ export type ChooseVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1774,7 +1717,6 @@ export type ChooseVideoOptions = {
      *			"unixVer": "4.33"
      *		},
      *		"ios": {
-     *			"osVer": "10.0",
      *			"uniVer": "4.33",
      *			"unixVer": "4.33"
      *		},
@@ -1843,7 +1785,6 @@ export type ChooseVideoOptions = {
          *			"unixVer": "4.33"
          *		},
          *		"ios": {
-         *			"osVer": "10.0",
          *			"uniVer": "x",
          *			"unixVer": "x"
          *		},
@@ -1868,7 +1809,6 @@ export type ChooseVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -1887,7 +1827,6 @@ export type ChooseVideoOptions = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "10.0",
          *			"uniVer": "√",
          *			"unixVer": "4.18"
          *		},
@@ -1955,7 +1894,6 @@ export type ChooseVideoOptions = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.18"
          *		},
@@ -2024,7 +1962,6 @@ export type ChooseVideoOptions = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.18"
          *		},
@@ -2100,7 +2037,6 @@ export type ChooseVideoOptions = {
      *			"unixVer": "x"
      *		},
      *		"ios": {
-     *			"osVer": "10.0",
      *			"uniVer": "√",
      *			"unixVer": "x"
      *		},
@@ -2164,7 +2100,6 @@ export type ChooseVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2181,7 +2116,6 @@ export type ChooseVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2198,7 +2132,6 @@ export type ChooseVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2220,7 +2153,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.25"
          *		},
@@ -2246,7 +2178,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.25"
          *		},
@@ -2314,7 +2245,6 @@ export type GetVideoInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2331,7 +2261,6 @@ export type GetVideoInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2348,7 +2277,6 @@ export type GetVideoInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2365,7 +2293,6 @@ export type GetVideoInfoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2382,7 +2309,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.25"
          *		},
@@ -2450,7 +2376,6 @@ export type GetVideoInfoSuccess = {
          *			"unixVer": "4.18"
          *		},
          *		"ios": {
-         *			"osVer": "12.0",
          *			"uniVer": "√",
          *			"unixVer": "4.25"
          *		},
@@ -2518,7 +2443,6 @@ export type GetVideoInfoSuccess = {
 	  *			"unixVer": "4.61"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.61"
 	  *		},
@@ -2586,7 +2510,6 @@ export type GetVideoInfoSuccess = {
 		  *			"unixVer": "4.61"
 		  *		},
 		  *		"ios": {
-		  *			"osVer": "12.0",
 		  *			"uniVer": "x",
 		  *			"unixVer": "4.61"
 		  *		},
@@ -2661,7 +2584,6 @@ export type GetVideoInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2678,7 +2600,6 @@ export type GetVideoInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2695,7 +2616,6 @@ export type GetVideoInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2712,7 +2632,6 @@ export type GetVideoInfoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2741,7 +2660,6 @@ export type SaveVideoToPhotosAlbumOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2758,7 +2676,6 @@ export type SaveVideoToPhotosAlbumOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2775,7 +2692,6 @@ export type SaveVideoToPhotosAlbumOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2792,7 +2708,6 @@ export type SaveVideoToPhotosAlbumOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.18"
 	 *		}
@@ -2814,7 +2729,6 @@ export type CompressVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2831,7 +2745,6 @@ export type CompressVideoSuccess = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2849,7 +2762,6 @@ export type CompressVideoSuccess = {
 	  *			"unixVer": "4.61"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.61"
 	  *		},
@@ -2924,7 +2836,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2942,7 +2853,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -2959,7 +2869,6 @@ export type CompressVideoOptions = {
      *			"unixVer": "x"
      *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3018,7 +2927,6 @@ export type CompressVideoOptions = {
      *			"unixVer": "x"
      *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3077,7 +2985,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3094,7 +3001,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3111,7 +3017,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3128,7 +3033,6 @@ export type CompressVideoOptions = {
 	 *			"unixVer": "4.18"
 	 *		},
 	 *		"ios": {
-	 *			"osVer": "12.0",
 	 *			"uniVer": "√",
 	 *			"unixVer": "4.25"
 	 *		}
@@ -3151,7 +3055,6 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "x"
 		 				},
 		 				"ios": {
-		 					"osVer": "12.0",
 		 					"uniVer": "x",
 		 					"unixVer": "4.61"
 		 				},
@@ -3218,7 +3121,6 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "4.51"
 		 				},
 		 				"ios": {
-		 					"osVer": "12.0",
 		 					"uniVer": "x",
 		 					"unixVer": "4.61"
 		 				},
@@ -3286,7 +3188,6 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3352,7 +3253,6 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3418,7 +3318,6 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3491,7 +3390,6 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3557,7 +3455,6 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3623,7 +3520,6 @@ export type ChooseFileTempFile = {
 						 "unixVer": "4.51"
 					 },
 					 "ios": {
-						 "osVer": "12.0",
 						 "uniVer": "x",
 						 "unixVer": "4.61"
 					 },
@@ -3689,7 +3585,6 @@ export type ChooseFileTempFile = {
 					  "unixVer": "4.51"
 				  },
 				  "ios": {
-					  "osVer": "12.0",
 					  "uniVer": "x",
 					  "unixVer": "4.61"
 				  },
@@ -3763,7 +3658,6 @@ export type ChooseFileOptions = {
 					"unixVer": "4.51"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "4.61"
 				},
@@ -3834,7 +3728,6 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.51"
 		 				},
 		 				"ios": {
-		 					"osVer": "12.0",
 		 					"uniVer": "x",
 		 					"unixVer": "4.61"
 		 				},
@@ -3900,7 +3793,6 @@ export type ChooseFileOptions = {
 							"unixVer": "4.51"
 						},
 						"ios": {
-							"osVer": "12.0",
 							"uniVer": "x",
 							"unixVer": "4.61"
 						},
@@ -3966,7 +3858,6 @@ export type ChooseFileOptions = {
 							 "unixVer": "4.51"
 						 },
 						 "ios": {
-							 "osVer": "12.0",
 							 "uniVer": "x",
 							 "unixVer": "4.61"
 						 },
@@ -4032,7 +3923,6 @@ export type ChooseFileOptions = {
 							"unixVer": "4.51"
 						},
 						"ios": {
-							"osVer": "12.0",
 							"uniVer": "x",
 							"unixVer": "4.61"
 						},
@@ -4098,7 +3988,6 @@ export type ChooseFileOptions = {
 						 "unixVer": "4.51"
 					 },
 					 "ios": {
-						 "osVer": "12.0",
 						 "uniVer": "x",
 						 "unixVer": "4.61"
 					 },
@@ -4165,7 +4054,6 @@ export type ChooseFileOptions = {
 							"unixVer": "x"
 						},
 						"ios": {
-							"osVer": "12.0",
 							"uniVer": "x",
 							"unixVer": "x"
 						},
@@ -4232,7 +4120,6 @@ export type ChooseFileOptions = {
 			 		"unixVer": "x"
 			 	},
 			 	"ios": {
-			 		"osVer": "12.0",
 			 		"uniVer": "x",
 			 		"unixVer": "x"
 			 	},
@@ -4299,7 +4186,6 @@ export type ChooseFileOptions = {
 		 				"unixVer": "x"
 		 			},
 		 			"ios": {
-		 				"osVer": "12.0",
 		 				"uniVer": "x",
 		 				"unixVer": "x"
 		 			},
@@ -4366,7 +4252,6 @@ export type ChooseFileOptions = {
 						"unixVer": "4.51"
 					},
 					"ios": {
-						"osVer": "12.0",
 						"uniVer": "x",
 						"unixVer": "4.61"
 					},
@@ -4433,7 +4318,6 @@ export type ChooseFileOptions = {
 						"unixVer": "4.51"
 					},
 					"ios": {
-						"osVer": "12.0",
 						"uniVer": "x",
 						"unixVer": "4.61"
 					},
@@ -4500,7 +4384,6 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.51"
 		 				},
 		 				"ios": {
-		 					"osVer": "12.0",
 		 					"uniVer": "x",
 		 					"unixVer": "4.61"
 		 				},
@@ -4571,7 +4454,6 @@ export interface Uni {
      *			"unixVer": "3.9+"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -4657,7 +4539,6 @@ export interface Uni {
      *			"unixVer": "3.9+"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -4742,7 +4623,6 @@ export interface Uni {
      *			"unixVer": "3.9+"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -4827,7 +4707,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.25"
      *		},
@@ -4917,7 +4796,6 @@ export interface Uni {
      *			"unixVer": "3.9+"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.11"
      *		},
@@ -5007,7 +4885,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.25"
      *		},
@@ -5098,7 +4975,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.18"
      *		},
@@ -5180,7 +5056,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.25"
      *		},
@@ -5263,7 +5138,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.18"
      *		},
@@ -5346,7 +5220,6 @@ export interface Uni {
      *			"unixVer": "4.18"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "√",
      *			"unixVer": "4.25"
      *		},
@@ -5435,7 +5308,6 @@ export interface Uni {
      *			"unixVer": "4.51"
      *		},
      *		"ios": {
-     *			"osVer": "12.0",
      *			"uniVer": "x",
      *			"unixVer": "4.61"
      *		},

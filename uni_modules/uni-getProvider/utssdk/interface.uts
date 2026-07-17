@@ -12,7 +12,6 @@ export type GetProviderSuccess = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -33,7 +32,6 @@ export type GetProviderSuccess = {
 	 *      "unixVer": "4.11"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    },
@@ -59,7 +57,6 @@ export type GetProviderSuccess = {
 	 *      "unixVer": "x"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "x"
 	 *    },
@@ -113,7 +110,6 @@ export type GetProviderSuccess = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -134,7 +130,6 @@ export type GetProviderSuccess = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -160,7 +155,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.25"
 	 *    }
@@ -181,7 +175,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -207,7 +200,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -233,7 +225,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "x"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "x"
 	 *    },
@@ -260,7 +251,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -286,7 +276,6 @@ export type GetProviderSyncSuccess = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -317,7 +306,6 @@ export type GetProviderSyncOptions = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.25"
 	 *    }
@@ -338,7 +326,6 @@ export type GetProviderSyncOptions = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.25"
 	 *    }
@@ -359,7 +346,6 @@ export type GetProviderSyncOptions = {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.25"
 	 *    }
@@ -380,7 +366,6 @@ export type GetProviderSyncOptions = {
 	 *      "unixVer": "x"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "x"
 	 *    },
@@ -415,7 +400,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -436,7 +420,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "4.11"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -457,7 +440,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "x"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "x"
 	 *    },
@@ -483,7 +465,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -504,7 +485,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -525,7 +505,6 @@ export type GetProviderOptions = {
 	 *      "unixVer": "4.18"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    }
@@ -558,7 +537,6 @@ export interface Uni {
 	 *      "unixVer": "4.11"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.18"
 	 *    },
@@ -630,7 +608,6 @@ export interface Uni {
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.25"
 	 *    },
@@ -704,7 +681,6 @@ export type ProviderErrorCode =
 	 *      "unixVer": "4.25"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.25"
 	 *    }

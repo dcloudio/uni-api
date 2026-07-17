@@ -54,7 +54,6 @@ export type Icon =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -121,7 +120,6 @@ export type Icon =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -188,7 +186,6 @@ export type Icon =
           "unixVer": "x"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "x",
@@ -255,7 +252,6 @@ export type Icon =
           "unixVer": "x"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "x",
           "uniUtsPlugin": "x",
           "unixVer": "x",
@@ -322,7 +318,6 @@ export type Icon =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -389,7 +384,6 @@ export type Icon =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -461,7 +455,6 @@ export type ShowToastPosition =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -533,7 +526,6 @@ export type ShowToastPosition =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -605,7 +597,6 @@ export type ShowToastPosition =
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -682,7 +673,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -755,7 +745,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -826,7 +815,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -899,7 +887,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -972,7 +959,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -1044,7 +1030,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -1116,7 +1101,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -1188,7 +1172,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -1260,7 +1243,6 @@ export type ShowToastOptions = {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -1340,7 +1322,6 @@ export type ShowToastOptions = {
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
@@ -1417,7 +1398,6 @@ export type ShowToast = (options: ShowToastOptions) => void
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
@@ -1547,7 +1527,6 @@ export type ShowLoadingOptions = {
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
@@ -1624,7 +1603,6 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
@@ -1795,7 +1773,6 @@ export type ShowModalOptions = {
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "4.11",
@@ -1962,7 +1939,6 @@ export type ShowActionSheetOptions = {
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "4.11",
@@ -2051,7 +2027,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -2131,7 +2106,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -2216,7 +2190,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -2302,7 +2275,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -2392,7 +2364,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "4.11",
@@ -2481,7 +2452,6 @@ export interface Uni {
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "4.11",

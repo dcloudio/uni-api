@@ -33,7 +33,6 @@ export interface Uni {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -105,7 +104,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -177,7 +175,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -247,7 +244,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -317,7 +313,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -389,7 +384,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -459,7 +453,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -529,7 +522,6 @@ export interface Uni {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -607,7 +599,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -635,7 +626,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -663,7 +653,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -690,7 +679,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -718,7 +706,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -746,7 +733,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -774,7 +760,6 @@ export type LocationErrorCode =
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -801,7 +786,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -824,7 +808,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -847,7 +830,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        }
@@ -864,7 +846,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -887,7 +868,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -910,7 +890,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -932,7 +911,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -954,7 +932,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -976,7 +953,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -998,7 +974,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1020,7 +995,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1042,7 +1016,6 @@ export type LocationErrorCode =
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1064,7 +1037,6 @@ export type LocationErrorCode =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -1086,7 +1058,6 @@ export type LocationErrorCode =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -1122,7 +1093,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1150,7 +1120,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1178,7 +1147,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1247,7 +1215,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1317,7 +1284,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1387,7 +1353,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1457,7 +1422,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1526,7 +1490,6 @@ export type GetLocationSuccess = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1603,7 +1566,6 @@ export type GetLocationOptions = {
      *            "unixVer": "4.25"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.25"
      *        },
@@ -1673,7 +1635,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1742,7 +1703,6 @@ export type GetLocationOptions = {
      *      "unixVer": "3.9.0"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
      *    }
@@ -1805,7 +1765,6 @@ export type GetLocationOptions = {
      *      "unixVer": "3.9.0"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
      *    }
@@ -1870,7 +1829,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -1942,7 +1900,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2011,7 +1968,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2082,7 +2038,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2151,7 +2106,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2220,7 +2174,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2289,7 +2242,6 @@ export type GetLocationOptions = {
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "√",
      *            "unixVer": "4.11"
      *        },
@@ -2367,7 +2319,6 @@ export type StartLocationUpdateOptionsType =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2437,7 +2388,6 @@ export type StartLocationUpdateOptionsType =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2509,7 +2459,6 @@ export type StartLocationUpdateOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2579,7 +2528,6 @@ export type StartLocationUpdateOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2649,7 +2597,6 @@ export type StartLocationUpdateOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2719,7 +2666,6 @@ export type StartLocationUpdateOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2789,7 +2735,6 @@ export type StartLocationUpdateOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2900,7 +2845,6 @@ export type StartLocationUpdateBackgroundOptionsType =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -2970,7 +2914,6 @@ export type StartLocationUpdateBackgroundOptionsType =
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3042,7 +2985,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3112,7 +3054,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3182,7 +3123,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3252,7 +3192,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },
@@ -3322,7 +3261,6 @@ export type StartLocationUpdateBackgroundOptions = {
 	 *            "unixVer": "4.81"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.81"
 	 *        },

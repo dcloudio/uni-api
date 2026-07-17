@@ -133,7 +133,6 @@ export interface Uni {
 	 * 		"unixUtsPlugin": "4.81"
 	 *    },
    *    "ios": {
-   *      "osVer": "12.0",
    *      "uniVer": "x",
    *      "unixVer": "x",
    * 	  "unixUtsPlugin": "4.81"

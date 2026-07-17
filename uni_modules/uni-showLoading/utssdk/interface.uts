@@ -125,7 +125,6 @@ export type ShowLoadingOptions = {
 					"unixVer": "x"
 				},
 				"ios": {
-					"osVer": "12.0",
 					"uniVer": "x",
 					"unixVer": "5.0"
 				},
@@ -292,7 +291,6 @@ export interface Uni {
 	        "unixVer": "3.91"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "√",
 	        "uniUtsPlugin": "4.11",
 	        "unixVer": "4.11",
@@ -378,7 +376,6 @@ export interface Uni {
 	        "unixVer": "3.91"
 	      },
 	      "ios": {
-	        "osVer": "12.0",
 	        "uniVer": "√",
 	        "uniUtsPlugin": "4.11",
 	        "unixVer": "4.11",

@@ -36,7 +36,6 @@ export interface Uni {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -109,7 +108,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -135,7 +133,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -161,7 +158,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -187,7 +183,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -213,7 +208,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -239,7 +233,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -265,7 +258,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -291,7 +283,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -317,7 +308,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.02"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -343,7 +333,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.31"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "x",
 		*            "unixVer": "4.31"
 		*        },
@@ -369,7 +358,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "4.31"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "x",
 		*            "unixVer": "4.31"
 		*        },
@@ -395,7 +383,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "x"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -421,7 +408,6 @@ export type RequestPaymentErrorCode =
 		*            "unixVer": "x"
 		*        },
 		*        "ios": {
-		*            "osVer": "12.0",
 		*            "uniVer": "√",
 		*            "unixVer": "4.18"
 		*        },
@@ -451,7 +437,6 @@ export type RequestPaymentSuccess = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -529,7 +514,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -556,7 +540,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -624,7 +607,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -693,7 +675,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },
@@ -761,7 +742,6 @@ export type RequestPaymentOptions = {
 	 *            "unixVer": "4.02"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.18"
 	 *        },

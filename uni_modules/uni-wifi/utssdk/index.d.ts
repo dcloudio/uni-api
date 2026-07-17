@@ -79,7 +79,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -103,7 +102,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -125,7 +123,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -165,7 +162,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -188,7 +184,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -227,7 +222,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -250,7 +244,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -273,7 +266,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -296,7 +288,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }
@@ -319,7 +310,6 @@ declare interface Uni {
    *            "unixVer": "3.9.0"
    *        },
    *        "ios": {
-   *            "osVer": "9.0",
    *            "uniVer": "3.7.7",
    *            "unixVer": "3.9.0"
    *   	  }

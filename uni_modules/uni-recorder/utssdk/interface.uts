@@ -11,7 +11,6 @@ export interface Uni {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 *  		"unixUtsPlugin": "4.61"
@@ -83,7 +82,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 *  		"unixUtsPlugin": "4.61"
@@ -152,7 +150,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -222,7 +219,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -292,7 +288,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -362,7 +357,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -431,7 +425,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -500,7 +493,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -569,7 +561,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -638,7 +629,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -707,7 +697,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -776,7 +765,6 @@ export type RecorderManagerStartOptions = {
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -847,7 +835,6 @@ export interface RecorderManagerOnStopResult {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -922,7 +909,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -995,7 +981,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1068,7 +1053,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1140,7 +1124,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1212,7 +1195,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1285,7 +1267,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -1357,7 +1338,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1431,7 +1411,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -1503,7 +1482,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1576,7 +1554,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -1647,7 +1624,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -1719,7 +1695,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
@@ -1791,7 +1766,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "v",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -1864,7 +1838,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "v",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -1937,7 +1910,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2011,7 +1983,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -2083,7 +2054,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2156,7 +2126,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -2227,7 +2196,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2300,7 +2268,6 @@ export interface RecorderManager {
 	 * 			"unixVer": "5.0"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "5.0",
 	 * 			"unixUtsPlugin": "5.0"
@@ -2375,7 +2342,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2444,7 +2410,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2513,7 +2478,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2582,7 +2546,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2651,7 +2614,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2720,7 +2682,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2789,7 +2750,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
@@ -2858,7 +2818,6 @@ export type RecorderManagerErrorCode =
 	 * 			"unixVer": "4.81"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": x""

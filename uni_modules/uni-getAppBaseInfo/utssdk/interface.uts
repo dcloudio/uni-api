@@ -18,7 +18,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -92,7 +91,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -166,7 +164,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -240,7 +237,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -313,7 +309,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -385,7 +380,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -459,7 +453,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -533,7 +526,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -607,7 +599,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -681,7 +672,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -753,7 +743,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -825,7 +814,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -898,7 +886,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -971,7 +958,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -1044,7 +1030,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1118,7 +1103,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1191,7 +1175,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "4.0"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
@@ -1265,7 +1248,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1339,7 +1321,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1413,7 +1394,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1487,7 +1467,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "4.0"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
@@ -1561,7 +1540,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1635,7 +1613,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.97"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -1710,7 +1687,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -1784,7 +1760,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1858,7 +1833,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "3.97"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1931,7 +1905,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "4.18"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "4.18",
@@ -2005,7 +1978,6 @@ export type GetAppBaseInfoResult = {
             "unixVer": "4.28"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "x",
             "uniUtsPlugin": "x",
             "unixVer": "4.31",
@@ -2092,7 +2064,6 @@ export interface Uni {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.6",
             "unixVer": "4.11",

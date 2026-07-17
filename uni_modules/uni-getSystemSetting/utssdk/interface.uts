@@ -12,7 +12,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
@@ -78,7 +77,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
@@ -144,7 +142,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
@@ -210,7 +207,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
@@ -342,7 +338,6 @@ export type GetSystemSettingResult = {
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
@@ -428,7 +423,6 @@ export interface Uni {
   * 			"unixVer": "3.9+"
   * 		},
   * 		"ios": {
-  * 			"osVer": "12.0",
   * 			"uniVer": "√",
   * 			"unixVer": "4.11"
   * 		},

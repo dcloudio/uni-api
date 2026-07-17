@@ -16,7 +16,6 @@ export type RequestOptions<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -90,7 +89,6 @@ export type RequestOptions<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -163,7 +161,6 @@ export type RequestOptions<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -236,7 +233,6 @@ export type RequestOptions<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -309,7 +305,6 @@ export type RequestOptions<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -469,7 +464,6 @@ export type RequestOptions<T> = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -542,7 +536,6 @@ export type RequestOptions<T> = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -615,7 +608,6 @@ export type RequestOptions<T> = {
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
@@ -707,7 +699,6 @@ export type RequestSuccess<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -779,7 +770,6 @@ export type RequestSuccess<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -851,7 +841,6 @@ export type RequestSuccess<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -923,7 +912,6 @@ export type RequestSuccess<T> = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1039,7 +1027,6 @@ export type RequestTaskOnChunkReceivedListenerResult = {
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
@@ -1119,7 +1106,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
@@ -1191,7 +1177,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
@@ -1263,7 +1248,6 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
@@ -1346,7 +1330,6 @@ export interface RequestTask {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1430,7 +1413,6 @@ export interface RequestTask {
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
@@ -1507,7 +1489,6 @@ export interface RequestTask {
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
@@ -1583,7 +1564,6 @@ export interface RequestTask {
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
@@ -1660,7 +1640,6 @@ export interface RequestTask {
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
@@ -1741,7 +1720,6 @@ export type UploadFileOptionFiles = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1813,7 +1791,6 @@ export type UploadFileOptionFiles = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1885,7 +1862,6 @@ export type UploadFileOptionFiles = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -1959,7 +1935,6 @@ export type UploadFileSuccess = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2031,7 +2006,6 @@ export type UploadFileSuccess = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2115,7 +2089,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2188,7 +2161,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2261,7 +2233,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2334,7 +2305,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2407,7 +2377,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2480,7 +2449,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2553,7 +2521,6 @@ export type UploadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2642,7 +2609,6 @@ export type OnProgressUpdateResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2714,7 +2680,6 @@ export type OnProgressUpdateResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2786,7 +2751,6 @@ export type OnProgressUpdateResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2865,7 +2829,6 @@ export interface UploadTask {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -2948,7 +2911,6 @@ export interface UploadTask {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3034,7 +2996,6 @@ export type DownloadFileSuccess = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3106,7 +3067,6 @@ export type DownloadFileSuccess = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3190,7 +3150,6 @@ export type DownloadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3263,7 +3222,6 @@ export type DownloadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3332,7 +3290,6 @@ export type DownloadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3405,7 +3362,6 @@ export type DownloadFileOptions = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3494,7 +3450,6 @@ export type OnProgressDownloadResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3566,7 +3521,6 @@ export type OnProgressDownloadResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3638,7 +3592,6 @@ export type OnProgressDownloadResult = {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3716,7 +3669,6 @@ export interface DownloadTask {
               "unixVer": "3.91"
             },
             "ios": {
-              "osVer": "12.0",
               "uniVer": "√",
               "uniUtsPlugin": "4.11",
               "unixVer": "4.11",
@@ -3799,7 +3751,6 @@ export interface DownloadTask {
               "unixVer": "3.91"
             },
             "ios": {
-              "osVer": "12.0",
               "uniVer": "√",
               "uniUtsPlugin": "4.11",
               "unixVer": "4.11",
@@ -3924,7 +3875,6 @@ export type Certificate = {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "10.0",
             "uniVer": "3.2.7",
             "unixVer": "x"
           },
@@ -4025,7 +3975,6 @@ export interface Uni {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -4128,7 +4077,6 @@ export interface Uni {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
@@ -4217,7 +4165,6 @@ export interface Uni {
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
@@ -4302,7 +4249,6 @@ export interface Uni {
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "10.0",
             "uniVer": "3.2.7",
             "uniUtsPlugin": "x",
             "unixVer": "x",
@@ -4334,7 +4280,6 @@ export interface Uni {
      *             "unixVer": "x"
      *           },
      *           "ios": {
-     *             "osVer": "10.0",
      *             "uniVer": "3.2.7",
      *             "uniUtsPlugin": "x",
      *             "unixVer": "x",

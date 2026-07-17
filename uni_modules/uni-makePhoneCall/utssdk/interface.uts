@@ -11,7 +11,6 @@ export interface Uni {
        *      "unixVer": "4.63"
        *    },
        *    "ios": {
-       *      "osVer": "12.0",
        *      "uniVer": "√",
        *      "unixVer": "4.63",
        *      "unixUtsPlugin": "4.63"
@@ -106,7 +105,6 @@ export type MakePhoneCallOptions = {
      *      "unixVer": "4.63"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.63",
      *      "unixUtsPlugin": "4.63"
@@ -175,7 +173,6 @@ export type MakePhoneCallOptions = {
 	 *      "unixVer": "4.63"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.63",
 	 *      "unixUtsPlugin": "4.63"
@@ -244,7 +241,6 @@ export type MakePhoneCallOptions = {
 	 *      "unixVer": "4.63"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.63",
 	 *      "unixUtsPlugin": "4.63"
@@ -313,7 +309,6 @@ export type MakePhoneCallOptions = {
 	 *      "unixVer": "4.63"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "12.0",
 	 *      "uniVer": "√",
 	 *      "unixVer": "4.63",
 	 *      "unixUtsPlugin": "4.63"

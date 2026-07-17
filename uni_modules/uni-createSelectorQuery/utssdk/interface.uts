@@ -65,7 +65,6 @@ export type NodeInfo = {
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      }
@@ -165,7 +164,6 @@ export type NodeField = {
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      }
@@ -249,7 +247,6 @@ export interface NodesRef {
      *      "unixVer": "4.25"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.25"
      *    }
@@ -316,7 +313,6 @@ export interface NodesRef {
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "10.0",
      *      "uniVer": "√",
      *      "unixVer": "x"
      *    }
@@ -381,7 +377,6 @@ export interface NodesRef {
      *      "unixVer": "4.25"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.25"
      *    }
@@ -480,7 +475,6 @@ export interface Uni {
      *      "unixVer": "3.91"
      *    },
      *    "ios": {
-     *      "osVer": "12.0",
      *      "uniVer": "√",
      *      "unixVer": "4.11"
      *    },
