@@ -107,15 +107,18 @@ function reset() {
 	}
 }
 
+
+
 function createPendingIntent(context : Context, action : string) : PendingIntent {
-	const intent = new Intent(action);
-	intent.setComponent(new ComponentName(context.getPackageName(), "uts.sdk.modules.utsProgressNotification.TransparentActivity"));
-	let flags = PendingIntent.FLAG_UPDATE_CURRENT;
+	const i = new Intent(action);
+	i.setComponent(new ComponentName(context.getPackageName(), "uts.sdk.modules.utsProgressNotification.TransparentActivity"));
+	let flags = PendingIntent.FLAG_ONE_SHOT;
 	if (Build.VERSION.SDK_INT >= 23) {
-		flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
+		flags = PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE;
 	}
-	return PendingIntent.getActivity(context, DOWNLOAD_PROGRESS_NOTIFICATION_ID, intent, flags);
+	return PendingIntent.getActivity(context, DOWNLOAD_PROGRESS_NOTIFICATION_ID, i, flags);
 }
+
 
 function createDownloadChannel(notificationManager : NotificationManager) {
 	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -752,8 +752,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {
@@ -823,8 +823,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {
@@ -895,8 +895,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {

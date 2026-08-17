@@ -6,10 +6,6 @@ import {
     ON_SHOW,
     Page,
     REDIRECT_TO,
-    createAppRouteContext,
-    dispatchAppRouteContext,
-    dispatchBeforeAppRoute,
-    getCurrentPage,
     invokeAfterRouteHooks,
     invokeBeforeRouteHooks,
     invokeCurrentAppHook,
@@ -66,20 +62,9 @@ export const _navigateBack = (
     } else if (isTabPage(currentPage.vm!) || pages.length == 1) {
         quit()
     } else {
-        const delta = Math.min(
-            Math.max(options?.delta ?? 1, 1),
-            pages.length - 1,
-        )
-        const routeTargetPage = pages[pages.length - delta - 1]
-        const appRouteContext = createAppRouteContext(
-            routeTargetPage.route,
-            routeTargetPage.options,
-            NAVIGATE_BACK,
-        )
-        dispatchBeforeAppRoute(appRouteContext)
         if (options?.delta !== null && options?.delta! > 1) {
             const length = pages.length
-            options!.delta = delta
+            options!.delta = Math.min(options!.delta!, length - 1)
             // 中间页隐藏
             const deltaPages = pages.splice(
                 length - options!.delta!,
@@ -112,10 +97,6 @@ export const _navigateBack = (
             ]),
         )
         invokeCurrentPageHook(ON_SHOW)
-        const currentTargetPage = getCurrentPage()
-        if (currentTargetPage != null) {
-            dispatchAppRouteContext(appRouteContext)
-        }
         invokeAfterRouteHooks(NAVIGATE_BACK)
     }
     if (res !== null) {

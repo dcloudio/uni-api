@@ -384,7 +384,7 @@ export type LoginSuccess = {
    *  }
    * }
    */
-  authErrorScopes?: any | null,
+  authErrorScope?: any | null,
   /**
    * 支付宝小程序登录成功的授权 scope
    * @uniPlatform {
@@ -404,7 +404,7 @@ export type LoginSuccess = {
    *  }
    * }
    */
-  authSuccessScopes?: (string[]) | null,
+  authSucessScope?: (string[]) | null,
   /**
    * 苹果登录成功返回的信息
    * @uniPlatform {
@@ -433,7 +433,7 @@ export type LoginComplete = any;
 export type LoginCompleteCallback = (result: LoginComplete) => void;
 export type LoginOptions = {
   /**
-   * 授权登录服务提供商，通过 [uni.getProvider](https://doc.dcloud.net.cn/uni-app-x/api/provider.html) 获取,目前支持微信登录(weixin)、苹果登录(apple)
+   * 授权登录服务提供商，通过 [uni.getProvider](https://doc.dcloud.net.cn/uni-app-x/api/provider.html) 获取,目前支持微信登录(weixin)
    *
    * @uniPlatform {
    *  "app": {

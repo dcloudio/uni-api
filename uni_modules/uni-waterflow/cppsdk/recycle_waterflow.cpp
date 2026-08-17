@@ -1,223 +1,23 @@
 #include <chrono>
 #include <cmath>
 #include <tuple>
-#if defined(OS_IOS)
-#include <dispatch/dispatch.h>
-#elif defined(OS_ANDROID)
-#include <android/looper.h>
-#include <sys/timerfd.h>
-#include <unistd.h>
-#elif defined(OS_HARMONY)
-#include <ffrt/timer.h>
-#endif
 #include "recycle_waterflow.h"
 #include "interface/UniCSSProperty.h"
-#include "node_api.h"
+#include "layout/Flex.h"
+#include "layout/UniLayout.h"
+#include "vue/shared/napi/napi_adapter.h"
 #if defined(OS_ANDROID)
-#include "v8/node_api_v8.h"
+#include "vue/shared/napi/node_v8/napi_node_v8.h"
 #endif
 
 using namespace uniappx;
 
 /**
  * - 关于unobserve和removeEventListener的说明
- *   目前Element回收时会自动解绑所有事件监听和ResizeObserver，因此在RecycleList等实例销毁时无需重复做这些工作
- *   removeEventListener在destroyed时执行一次防止RecycleList析构后还触发滚动等事件，比如issue-31946 用户在iOS平台bounce未结束时触发list-view销毁，在RecycleList析构后仍触发了滚动事件
+ *   目前Element回收时会自动解绑所有事件监听和ResizeObserver，因此在RecycleXXX等实例销毁时无需重复做这些工作
  */
 
 namespace recycle_waterflow {
-#if defined(OS_IOS) || defined(OS_ANDROID) || defined(OS_HARMONY)
-    // 该滚动停止检测逻辑从 list-view 复制，修改时需同步两处。
-    class ScrollEndDetectionTimer {
-    public:
-        explicit ScrollEndDetectionTimer(std::weak_ptr<RecycleWaterflow> owner)
-                : context(new Context{std::move(owner)}) {
-#if defined(OS_IOS)
-            this->timer = dispatch_source_create(
-                    DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-            if (!this->timer) {
-                delete this->context;
-                this->context = nullptr;
-                return;
-            }
-            dispatch_set_context(this->timer, this->context);
-            dispatch_source_set_event_handler_f(
-                    this->timer, &ScrollEndDetectionTimer::onTimer);
-            dispatch_source_set_cancel_handler_f(
-                    this->timer, &ScrollEndDetectionTimer::onTimerCanceled);
-            dispatch_resume(this->timer);
-#elif defined(OS_ANDROID)
-            this->looper = ALooper_forThread();
-            this->timerFd = timerfd_create(
-                    CLOCK_MONOTONIC, TFD_NONBLOCK | TFD_CLOEXEC);
-            if (!this->looper || this->timerFd == -1 ||
-                ALooper_addFd(
-                        this->looper,
-                        this->timerFd,
-                        ALOOPER_POLL_CALLBACK,
-                        ALOOPER_EVENT_INPUT,
-                        &ScrollEndDetectionTimer::onTimer,
-                        this->context) != 1) {
-                if (this->timerFd != -1) {
-                    close(this->timerFd);
-                    this->timerFd = -1;
-                }
-                delete this->context;
-                this->context = nullptr;
-                this->looper = nullptr;
-                return;
-            }
-            ALooper_acquire(this->looper);
-#endif
-        }
-
-        ~ScrollEndDetectionTimer() {
-            this->cancel();
-#if defined(OS_IOS)
-            if (this->timer) {
-                auto timer = this->timer;
-                this->timer = nullptr;
-                this->context = nullptr;
-                dispatch_source_cancel(timer);
-                dispatch_release(timer);
-            }
-#elif defined(OS_ANDROID)
-            if (this->timerFd != -1) {
-                if (this->looper) {
-                    ALooper_removeFd(this->looper, this->timerFd);
-                }
-                close(this->timerFd);
-                this->timerFd = -1;
-            }
-            if (this->looper) {
-                ALooper_release(this->looper);
-                this->looper = nullptr;
-            }
-            delete this->context;
-            this->context = nullptr;
-#elif defined(OS_HARMONY)
-            delete this->context;
-            this->context = nullptr;
-#endif
-        }
-
-        bool schedule(uint64_t delayMs) {
-            if (!this->context) {
-                return false;
-            }
-#if defined(OS_IOS)
-            dispatch_source_set_timer(
-                    this->timer,
-                    dispatch_time(DISPATCH_TIME_NOW, delayMs * NSEC_PER_MSEC),
-                    DISPATCH_TIME_FOREVER,
-                    0);
-            return true;
-#elif defined(OS_ANDROID)
-            itimerspec timerSpec{};
-            timerSpec.it_value.tv_sec = delayMs / 1000;
-            timerSpec.it_value.tv_nsec = (delayMs % 1000) * 1000 * 1000;
-            return timerfd_settime(this->timerFd, 0, &timerSpec, nullptr) == 0;
-#elif defined(OS_HARMONY)
-            if (this->timer != -1) {
-                if (ffrt_timer_stop(ffrt_qos_default, this->timer) == 0) {
-                    delete static_cast<Context *>(this->pendingTimerContext);
-                }
-                this->timer = -1;
-                this->pendingTimerContext = nullptr;
-            }
-            auto timerContext = new Context{this->context->owner};
-            this->timer = ffrt_timer_start(
-                    ffrt_qos_default,
-                    delayMs,
-                    timerContext,
-                    &ScrollEndDetectionTimer::onTimer,
-                    false);
-            if (this->timer == -1) {
-                delete timerContext;
-                return false;
-            }
-            this->pendingTimerContext = timerContext;
-            return this->timer != -1;
-#else
-            return false;
-#endif
-        }
-
-        void cancel() {
-#if defined(OS_IOS)
-            if (this->timer) {
-                dispatch_source_set_timer(
-                        this->timer,
-                        DISPATCH_TIME_FOREVER,
-                        DISPATCH_TIME_FOREVER,
-                        0);
-            }
-#elif defined(OS_ANDROID)
-            if (this->timerFd != -1) {
-                const itimerspec timerSpec{};
-                timerfd_settime(this->timerFd, 0, &timerSpec, nullptr);
-            }
-#elif defined(OS_HARMONY)
-            if (this->timer != -1) {
-                if (ffrt_timer_stop(ffrt_qos_default, this->timer) == 0) {
-                    delete static_cast<Context *>(this->pendingTimerContext);
-                }
-                this->timer = -1;
-                this->pendingTimerContext = nullptr;
-            }
-#endif
-        }
-
-    private:
-        struct Context {
-            std::weak_ptr<RecycleWaterflow> owner;
-        };
-
-        static void notifyOnMainQueue(Context *context) {
-            auto weakOwner = context->owner;
-            Instance::GetTaskExecutor().runOnMainQueue([weakOwner]() {
-                auto owner = weakOwner.lock();
-                if (owner) {
-                    owner->handleScrollEndDetectionTimer();
-                }
-            });
-        }
-
-#if defined(OS_IOS)
-        static void onTimer(void *context) {
-            notifyOnMainQueue(static_cast<Context *>(context));
-        }
-
-        static void onTimerCanceled(void *context) {
-            delete static_cast<Context *>(context);
-        }
-
-        dispatch_source_t timer = nullptr;
-#elif defined(OS_ANDROID)
-        static int onTimer(int fd, int events, void *context) {
-            uint64_t expirations = 0;
-            if (events & ALOOPER_EVENT_INPUT) {
-                (void) read(fd, &expirations, sizeof(expirations));
-            }
-            notifyOnMainQueue(static_cast<Context *>(context));
-            return 1;
-        }
-
-        ALooper *looper = nullptr;
-        int timerFd = -1;
-#elif defined(OS_HARMONY)
-        static void onTimer(void *context) {
-            std::unique_ptr<Context> timerContext(
-                    static_cast<Context *>(context));
-            notifyOnMainQueue(timerContext.get());
-        }
-
-        ffrt_timer_t timer = -1;
-        void *pendingTimerContext = nullptr;
-#endif
-        Context *context = nullptr;
-    };
-#endif
     // common start
     auto waterflowInstanceCache = std::unordered_map<double, std::weak_ptr<RecycleWaterflow>>();
 
@@ -248,13 +48,6 @@ namespace recycle_waterflow {
 #else
         return genTransform(offsetX, offsetY);
 #endif
-    }
-
-    inline uint64_t getTimestamp() {
-        return static_cast<uint64_t>(
-                std::chrono::duration_cast<std::chrono::milliseconds>(
-                        std::chrono::steady_clock::now().time_since_epoch())
-                        .count());
     }
 
     enum NativeChannelFnAction : uint32_t {
@@ -289,9 +82,7 @@ namespace recycle_waterflow {
     // common end
     // RecycleWaterflow start
     RecycleWaterflow::RecycleWaterflow() {};
-    RecycleWaterflow::~RecycleWaterflow() {
-        this->destroyScrollEndDetectionTimer();
-    };
+    RecycleWaterflow::~RecycleWaterflow() {};
 
     void RecycleWaterflow::setDestroyed(bool destroyed) {
         if (this->destroyed == destroyed) {
@@ -299,7 +90,6 @@ namespace recycle_waterflow {
         }
         this->destroyed = destroyed;
         if (destroyed) {
-            this->destroyScrollEndDetectionTimer();
             this->removeScrollListener();
             this->stopRootObserve();
             this->itemInstanceMap.clear();
@@ -312,7 +102,7 @@ namespace recycle_waterflow {
         waterflowInstanceCache[waterflowId] = this->shared_from_this();
 #if defined(OS_ANDROID)
         auto weakThis = this->weak_from_this();
-        napi::v8_bridge::RunWithV8ScopeNoLocker(this->_sharedData->_env, [weakThis]() {
+        vue::shared::napi::node_v8::RunWithV8ScopeNoLocker(this->_sharedData->_env, [weakThis]() {
             auto self = weakThis.lock();
             if (!self ||
                 !canCallVueComponentMethod(self.get())) {
@@ -369,61 +159,6 @@ namespace recycle_waterflow {
         this->rebuildItemOffsets();
         this->updateRenderList();
     }
-    
-    /**
-     * 无动画时必然存在跳转不准的情况，不同于list-view，waterflow在跳转到index为200的item时，是可能渲染出来199项的
-     * 199项的尺寸发生变化时可能会影响200所属的列，从而导致200的offsetY发生变化。
-     */
-    void RecycleWaterflow::setScrollIntoViewKey(const std::string key) {
-        if (key.empty()) {
-            return;
-        }
-        auto [_,offset] = this->getItemOffset(key);
-        if (offset < 0.0f) {
-            return;
-        }
-        this->cachedSizeStart = 0.0f;
-        this->scrollingToItem = true;
-        this->scrollingToItemKey = key;
-        this->scrollingToItemOffset = offset;
-        auto scrollWithAnimationAttr = this->scrollElement->getAnyAttribute("scroll-with-animation");
-        if (const auto* b = std::any_cast<bool>(&scrollWithAnimationAttr)) {
-            this->scrollingToItemWithAnimation = *b;
-        }
-        this->scrollingToItemTimestamp = getTimestamp();
-        if (this->scrolling) {
-            this->scrollingToItemIgnoreNextEnd = true;
-        }
-        this->scrollElement->scrollTo(0, offset);
-    }
-
-    void RecycleWaterflow::checkAndUpdateScrollingToItemOffset() {
-        if (!this->scrollingToItem || this->destroyed) {
-            return;
-        }
-        auto [_,offset] = this->getItemOffset(this->scrollingToItemKey);
-        if (offset < 0) {
-            return;
-        }
-        if (this->scrollingToItemOffset != offset) {
-            this->scrollingToItemOffset = offset;
-            // scrollTo会触发scrollEnd
-            if (this->scrolling) {
-                this->scrollingToItemIgnoreNextEnd = true;
-            }
-            uint64_t animationTimeRemain = 0;
-            if (this->scrollingToItemWithAnimation) {
-                auto timestamp = getTimestamp();
-                animationTimeRemain = this->scrollingToItemTimestamp + this->scrollAnimationDuration - timestamp;
-            }
-            // TODO 底层实现scrollTo duration后修改此处逻辑
-            if (animationTimeRemain > 0) {
-                this->scrollElement->scrollTo(0, offset);
-            } else {
-                this->scrollElement->scrollTo(0, offset);
-            }
-        }
-    }
 
     void RecycleWaterflow::setElement(Element *element) {
         // setElement触发在render之后，需要在此时机获取一次高度
@@ -431,12 +166,17 @@ namespace recycle_waterflow {
         this->scrollElement = scrollElement;
         // 调用getBoundingClientRect获取高度略微浪费性能。OffsetHeight返回的又是整形，不符合预期。或许需要暴露NativeView给list-view用
         // auto size = this->scrollElement->getBoundingClientRect().height;
-        auto height = layoutPx2LogicPx(this->scrollElement->GetLayoutHeight());
-        auto width = layoutPx2LogicPx(this->scrollElement->GetLayoutWidth());
-        auto paddingTop = layoutPx2LogicPx(this->scrollElement->GetLayoutPaddingTop());
-        auto paddingBottom = layoutPx2LogicPx(this->scrollElement->GetLayoutPaddingBottom());
-        auto paddingLeft = layoutPx2LogicPx(this->scrollElement->GetLayoutPaddingLeft());
-        auto paddingRight = layoutPx2LogicPx(this->scrollElement->GetLayoutPaddingRight());
+        auto scrollLayoutNode = this->scrollElement->GetLayoutNode();
+        auto height = layoutPx2LogicPx(UniLayoutNodeLayoutGetHeight(scrollLayoutNode));
+        auto width = layoutPx2LogicPx(UniLayoutNodeLayoutGetWidth(scrollLayoutNode));
+        auto paddingTop = layoutPx2LogicPx(UniLayoutNodeLayoutGetPadding(scrollLayoutNode,
+                                                                         CSSDirection::CSSTop));
+        auto paddingBottom = layoutPx2LogicPx(UniLayoutNodeLayoutGetPadding(scrollLayoutNode,
+                                                                            CSSDirection::CSSBottom));
+        auto paddingLeft = layoutPx2LogicPx(UniLayoutNodeLayoutGetPadding(scrollLayoutNode,
+                                                                          CSSDirection::CSSLeft));
+        auto paddingRight = layoutPx2LogicPx(UniLayoutNodeLayoutGetPadding(scrollLayoutNode,
+                                                                           CSSDirection::CSSRight));
         if (height && !std::isnan(height)) {
             if (std::isnan(paddingTop)) {
                 paddingTop = 0;
@@ -516,76 +256,39 @@ namespace recycle_waterflow {
     };
 
     void RecycleWaterflow::removeScrollListener() {
-         if (this->scrollElement && this->scrollListener) {
-             this->scrollElement->removeEventListener(
-                     this->scrollListener->getId());
-             this->scrollListener = nullptr;
-         }
-         if (this->scrollElement && this->scrollEndListener) {
-             this->scrollElement->removeEventListener(
-                     this->scrollEndListener->getId());
-             this->scrollEndListener = nullptr;
-         }
+        // if (this->scrollElement && this->scrollListener) {
+        //     this->scrollElement->removeEventListener(
+        //             this->scrollListener->getId());
+        //     this->scrollListener = nullptr;
+        // }
+        // if (this->scrollElement && this->scrollEndListener) {
+        //     this->scrollElement->removeEventListener(
+        //             this->scrollEndListener->getId());
+        //     this->scrollEndListener = nullptr;
+        // }
     };
 
     void RecycleWaterflow::onScroll(const UniScrollEvent &event) {
+        if (this->ignoreNextScroll) {
+            this->ignoreNextScroll = false;
+            return;
+        }
         if (!this->scrolling) {
             this->onScrollStart();
             this->scrolling = true;
         }
-        float scrollTop = event.detail().scrollTop();
+        float scrollTop = this->scrollElement->getScrollTop();
         this->realScrollOffset = scrollTop;
         scrollTop = this->prepareFastScroll(scrollTop);
         this->updateScrollOffset(scrollTop);
-        this->scheduleScrollEndDetection();
     };
-
-    void RecycleWaterflow::scheduleScrollEndDetection() {
-        this->scrollEndDetectionDeadline =
-                std::chrono::steady_clock::now() + std::chrono::milliseconds(30);
-        if (!this->scrollEndDetectionTimer) {
-            this->scrollEndDetectionTimer =
-                    std::make_unique<ScrollEndDetectionTimer>(this->weak_from_this());
-        }
-        this->scrollEndDetectionArmed = this->scrollEndDetectionTimer->schedule(30);
-        if (!this->scrollEndDetectionArmed) {
-            this->scrollEndDetectionTimer.reset();
-        }
-    }
-
-    void RecycleWaterflow::cancelScrollEndDetection() {
-        this->scrollEndDetectionArmed = false;
-        if (this->scrollEndDetectionTimer) {
-            this->scrollEndDetectionTimer->cancel();
-        }
-    }
-
-    void RecycleWaterflow::destroyScrollEndDetectionTimer() {
-        this->cancelScrollEndDetection();
-        this->scrollEndDetectionTimer.reset();
-    }
-
-    void RecycleWaterflow::handleScrollEndDetectionTimer() {
-        if (!this->scrollEndDetectionArmed || this->destroyed ||
-            std::chrono::steady_clock::now() < this->scrollEndDetectionDeadline) {
-            return;
-        }
-        this->scrollEndDetectionArmed = false;
-        this->onScrollEnd();
-    }
 
     void RecycleWaterflow::onScrollStart() {
         // TODO 不考虑同一页面多个回收列表同时滚动的场景
         this->scrollElement->GetPage()->setRecycling(true);
-        if (this->resetCachedSizeOnNextScroll && !this->scrollingToItem) {
-            this->resetCachedSizeOnNextScroll = false;
-            this->cachedSizeStart = this->originalCachedSize;
-            this->cachedSizeEnd = this->originalCachedSize;
-        }
     };
 
     void RecycleWaterflow::onScrollEnd() {
-        this->cancelScrollEndDetection();
         /**
          * 用户手指碰到scroll-view时如果scroll-view正在滚动会立刻触发scrollEnd
          */
@@ -601,21 +304,15 @@ namespace recycle_waterflow {
         }
         if (this->scrollOffset != this->realScrollOffset || exitFastScrollMode) {
             this->scrollOffset = this->realScrollOffset;
-            this->updateMinMaxRenderOffset();
             this->updateRenderListOnScroll();
-        }
-        if (this->scrollingToItemIgnoreNextEnd) {
-            this->scrollingToItemIgnoreNextEnd = false;
-        } else if (this->scrollingToItem) {
-            this->scrollingToItem = false;
-            this->scrollingToItemKey.clear();
-            // 滚动完成后flow-item重新排版会使用新设置的cachedSize，等下次滚动再重设cachedSize
-            this->resetCachedSizeOnNextScroll = true;
         }
     };
 
     float RecycleWaterflow::prepareFastScroll(float offset) {
-        auto timestamp = getTimestamp();
+        auto timestamp = static_cast<uint64_t>(
+                std::chrono::duration_cast<std::chrono::milliseconds>(
+                        std::chrono::steady_clock::now().time_since_epoch())
+                        .count());
         auto lastOffset = this->lastScrollOffsetForFastScroll;
         auto lastTimestamp = this->lastScrollTimestampForFastScroll;
         this->lastScrollOffsetForFastScroll = offset;
@@ -634,7 +331,7 @@ namespace recycle_waterflow {
         }
 
         bool ignoreFastScrollMode =
-                offset < 1 || offset > this->placeholderSize - this->size - 1 || true;
+                offset < 1 || offset > this->placeholderSize - this->size - 1;
         if (!ignoreFastScrollMode) {
             auto velocity = deltaOffset / deltaTime;
             if (std::abs(velocity) > this->fastScrollVelocity) {
@@ -646,7 +343,7 @@ namespace recycle_waterflow {
                     this->cachedSizeEnd = scrollDirectionCachedSize;
                 } else {
                     // 快速滚动期间减少渲染内容
-                    this->cachedSizeStart = this->scrollingToItem ? 0.0f : scrollDirectionCachedSize;
+                    this->cachedSizeStart = scrollDirectionCachedSize;
                     this->cachedSizeEnd = 0.0f;
                 }
             } else {
@@ -667,6 +364,7 @@ namespace recycle_waterflow {
                                          (deltaOffsetAbs / deltaOffset);
                 offset = this->lastScrollOffsetForFastScrollRender +
                          deltaOffsetRender;
+                auto deltaFastScrollOffset = deltaOffset - deltaOffsetRender;
                 this->fastScrollOffset += deltaOffset - deltaOffsetRender;
             }
         }
@@ -758,10 +456,7 @@ namespace recycle_waterflow {
             return;
 
         itemPtr->size = size;
-        this->rebuildItemOffsetsFrom(itemPtr->index);
-        if (this->scrollingToItem) {
-            this->checkAndUpdateScrollingToItemOffset();
-        }
+        this->rebuildItemOffsets();
         if (this->isAllRenderItemSettled()) {
             this->updateRenderListOnItemSizeChange();
         }
@@ -786,6 +481,8 @@ namespace recycle_waterflow {
     }
 
     void RecycleWaterflow::updateScrollOffset(float offset) {
+        float delta = offset - this->scrollOffset;
+        float deltaAbs = std::abs(delta);
         this->lastScrollOffset = this->scrollOffset;
 
         float maxScroll = std::max(0.0f, this->placeholderSize - this->size);
@@ -804,8 +501,8 @@ namespace recycle_waterflow {
         // cachedSize不用于避免频繁更新渲染列表，每次不可更新大量显示item，简单来说滚动期间的更新就是小步快跑
         auto pureOffset = this->scrollOffset;
         this->minRenderOffset =
-                std::max(0.0f, pureOffset - this->cachedSizeStart + this->calcTolerance);
-        this->maxRenderOffset = pureOffset + this->size + this->cachedSizeEnd - this->calcTolerance;
+                std::max(0.0f, pureOffset - this->cachedSizeStart);
+        this->maxRenderOffset = pureOffset + this->size + this->cachedSizeEnd;
     }
 
     void RecycleWaterflow::preTriggerRenderListUpdate() {
@@ -815,7 +512,7 @@ namespace recycle_waterflow {
         this->triggerRenderListUpdate();
         // 退出快速滚动的下一帧使用重置的cachedSize
         if (this->resetCachedSizeOnNextRender) {
-            this->cachedSizeStart = this->scrollingToItem ? 0.0f : this->originalCachedSize;
+            this->cachedSizeStart = this->originalCachedSize;
             this->cachedSizeEnd = this->originalCachedSize;
             this->resetCachedSizeOnNextRender = false;
         }
@@ -836,6 +533,7 @@ namespace recycle_waterflow {
             auto it = this->keyItemMap.find(key);
             if (it != this->keyItemMap.end()) {
                 ItemInfo *itemPtr = it->second;
+                auto index = itemPtr->index;
                 itemInstance->updateItemOffset(itemPtr->offsetX,
                                                itemPtr->offsetY +
                                                this->fastScrollOffset);
@@ -861,7 +559,7 @@ namespace recycle_waterflow {
             }
 #if defined(OS_ANDROID)
             auto weakThis = this->weak_from_this();
-            napi::v8_bridge::RunWithV8ScopeNoLocker(sharedData->_env, [weakThis, sharedData]() {
+            vue::shared::napi::node_v8::RunWithV8ScopeNoLocker(sharedData->_env, [weakThis, sharedData]() {
                 auto selfHolder = weakThis.lock();
                 auto self = selfHolder
                             ? dynamic_cast<RecycleWaterflow *>(selfHolder.get())
@@ -899,29 +597,26 @@ namespace recycle_waterflow {
     }
 
     void RecycleWaterflow::updateRenderList() {
-        const auto startIt = std::lower_bound(
-            this->list.begin(),
-            this->list.end(),
-            this->minRenderOffset,
-            [this](const auto& item, float offset) {
-                return this->itemEndOffset(&item) < offset;
+        int start = 0;
+        int end = -1;
+        for (size_t i = 0; i < this->list.size(); ++i) {
+            const auto item = &this->list[i];
+            if (this->itemEndOffset(item) < this->minRenderOffset ||
+                item->offsetY > this->maxRenderOffset) {
+                continue;
             }
-        );
-
-        const auto endIt = std::upper_bound(
-            startIt,
-            this->list.end(),
-            this->maxRenderOffset,
-            [](float offset, const auto& item) {
-                return offset < item.offsetY;
+            if (end < 0) {
+                start = static_cast<int>(i);
             }
-        );
-
-        this->renderRangeStart =
-            static_cast<int>(startIt - this->list.begin());
-        this->renderRangeLength =
-            static_cast<int>(endIt - startIt);
-
+            end = static_cast<int>(i);
+        }
+        if (end < 0) {
+            this->renderRangeStart = 0;
+            this->renderRangeLength = 0;
+        } else {
+            this->renderRangeStart = start;
+            this->renderRangeLength = end - start + 1;
+        }
         this->preTriggerRenderListUpdate();
     }
 
@@ -1176,8 +871,10 @@ namespace recycle_waterflow {
         if (!this->viewElement || this->sizeInited) {
             return;
         }
-        auto size = layoutPx2LogicPx(this->viewElement->GetLayoutHeight());
-        auto crossAxisSize = layoutPx2LogicPx(this->viewElement->GetLayoutWidth());
+        auto size = layoutPx2LogicPx(UniLayoutNodeLayoutGetHeight(
+                this->viewElement->GetLayoutNode()));
+        auto crossAxisSize = layoutPx2LogicPx(UniLayoutNodeLayoutGetWidth(
+                this->viewElement->GetLayoutNode()));
         if (!std::isnan(crossAxisSize) && crossAxisSize <= 0.0f) {
             // 等待resizeObserver通知
             return;

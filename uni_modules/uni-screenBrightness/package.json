@@ -53,7 +53,7 @@
 				"setKeepScreenOn": {
 					"name": "setKeepScreenOn",
 					"app": {
-						"js": false,
+						"js": true,
 						"kotlin": true,
 						"swift": true,
 						"arkts": true

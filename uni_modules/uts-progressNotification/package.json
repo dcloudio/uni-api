@@ -1,7 +1,7 @@
 {
   "id": "uts-progressNotification",
   "displayName": "uts-progressNotification",
-  "version": "1.1.2",
+  "version": "1.1.1",
   "description": "uts-progressNotification",
   "keywords": [
     "progressNotification"
@@ -45,11 +45,10 @@
           "vue3": "y"
         },
         "App": {
-            "app-android": {
-                "minVersion": "19"
-            },
-            "app-ios": "n",
-            "app-harmony": "u"
+          "app-android": {
+            "minVersion": "19"
+        },
+          "app-ios": "n"
         },
         "H5-mobile": {
           "Safari": "n",

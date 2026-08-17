@@ -41,8 +41,7 @@
       "uni-camera",
       "uni-barcode-scanning",
       "uni-media",
-	  "uni-getSystemInfo",
-	  "uni-getAppBaseInfo",
+      "uni-getSystemInfo",
       "uni-dialogPage",
       "uni-event"
     ],

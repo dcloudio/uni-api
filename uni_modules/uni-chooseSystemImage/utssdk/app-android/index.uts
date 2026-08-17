@@ -25,7 +25,6 @@ import InputStream from 'java.io.InputStream';
 import Build from 'android.os.Build';
 import Parcelable from 'android.os.Parcelable';
 import Media from 'uts.sdk.modules.uniChooseSystemImage.Media';
-import FileUtils from "uts.sdk.modules.uniChooseSystemImage.FileUtils"
 
 var resultCallback : ((requestCode : Int, resultCode : Int, data ?: Intent) => void) | null = null
 
@@ -84,9 +83,13 @@ function __chooseSystemMedia(option : ChooseSystemMediaOptions) {
 						result.forEach((p : Parcelable) => {
 							if (p instanceof Media)
 								if (UTSAndroid.isUniAppX()) {
-									paths.push((p.path!))
+									paths.push("file://" + (p.path!))
 								} else {
-									paths.push("file://" + copyResource(p.path!))
+									if (p.type == 1) {
+										paths.push("file://" + copyResource(p.path!))
+									} else {
+										paths.push("file://" + (p.path!))
+									}
 								}
 						})
 						var success : ChooseSystemMediaSuccessResult = {
@@ -163,9 +166,13 @@ function __chooseSystemImage(option : ChooseSystemImageOptions) {
 						result.forEach((p : Parcelable) => {
 							if (p instanceof Media)
 								if (UTSAndroid.isUniAppX()) {
-									paths.push((p.path!))
+									paths.push("file://" + (p.path!))
 								} else {
-									paths.push("file://" + copyResource(p.path!))
+									if (p.type == 1) {
+										paths.push("file://" + copyResource(p.path!))
+									} else {
+										paths.push("file://" + (p.path!))
+									}
 								}
 						})
 						var success : ChooseSystemImageSuccessResult = {
@@ -209,11 +216,9 @@ function copyResource(url : string) : string {
 	} else {
 		path = CACHEPATH + "/uni-getSystemMedia/"
 	}
-	console.log(url)
-	var result = FileUtils.copyUriToDir(UTSAndroid.getAppContext()!,path,url)
-	// path = path + new File(url).getName()
-	// copyFile(url, path)
-	return result!
+	path = path + new File(url).getName()
+	copyFile(url, path)
+	return path
 }
 
 function copyFile(fromFilePath : string, toFilePath : string) : boolean {

@@ -8,7 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
-import android.net.Uri
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -18,17 +19,13 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.facebook.common.executors.CallerThreadExecutor
-import com.facebook.common.references.CloseableReference
-import com.facebook.datasource.DataSource
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
-import com.facebook.imagepipeline.image.CloseableImage
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import io.dcloud.uts.UTSAndroid
 import uts.sdk.modules.uniGetBackgroundAudioManager.BackgroundAudioPlayer
 import uts.sdk.modules.uniGetBackgroundAudioManager.R
-import java.io.File
+import kotlin.math.log
 
 class AudioService : Service() {
 	private lateinit var playerHelper: BackgroundAudioPlayer
@@ -60,61 +57,6 @@ class AudioService : Service() {
 		playerHelper = BackgroundAudioPlayer.getInstance()
 		targetPlayerHandler = Handler(playerHelper.player.applicationLooper)
 		mNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-		ensureFrescoInitialized()
-	}
-
-	private fun ensureFrescoInitialized() {
-		if (frescoInitialized) {
-			return
-		}
-		synchronized(AudioService::class.java) {
-			if (!frescoInitialized) {
-				Fresco.initialize(applicationContext)
-				frescoInitialized = true
-			}
-		}
-	}
-
-	private fun resolveArtworkUri(url: String): Uri {
-		if (url.startsWith("http://") || url.startsWith("https://")) {
-			return Uri.parse(url)
-		}
-		val fullPath = UTSAndroid.convert2AbsFullPath(url)
-		return Uri.fromFile(File(fullPath))
-	}
-
-	private fun fetchArtworkBitmap(
-		url: String?,
-		onSuccess: (Bitmap) -> Unit,
-		onFailure: () -> Unit = {},
-	) {
-		if (url.isNullOrEmpty()) {
-			onFailure()
-			return
-		}
-
-		ensureFrescoInitialized()
-		val imageRequest =
-			ImageRequestBuilder
-				.newBuilderWithSource(resolveArtworkUri(url))
-				.build()
-		Fresco.getImagePipeline().fetchDecodedImage(imageRequest, this).subscribe(
-			object : BaseBitmapDataSubscriber() {
-				override fun onNewResultImpl(bitmap: Bitmap?) {
-					if (bitmap == null) {
-						onFailure()
-						return
-					}
-					val safeBitmap = bitmap.copy(bitmap.config ?: Bitmap.Config.ARGB_8888, false)
-					onSuccess(safeBitmap)
-				}
-
-				override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>) {
-					onFailure()
-				}
-			},
-			CallerThreadExecutor.getInstance(),
-		)
 	}
 
 	fun handlerInitNotification() {
@@ -254,32 +196,48 @@ class AudioService : Service() {
 					) // 媒体总时长 单位ms
 
 			var metadataNeedsUpdate = true
-			if (!playerHelper.coverImgUrl.isNullOrEmpty()) {
+			playerHelper.coverImgUrl?.let { url ->
+				val realUrl = if(url.startsWith("http://") || url.startsWith("https://")) {
+					url
+				} else {
+					UTSAndroid.convert2AbsFullPath(url)
+				}
+//				if (url.startsWith("http") || url.startsWith("https")) {
 				metadataNeedsUpdate = false // Metadata will be updated in async callback
-				fetchArtworkBitmap(
-					playerHelper.coverImgUrl,
-					onSuccess = { resource ->
-						targetPlayerHandler.post {
-							if (audioService == null || mMediaSession == null) return@post
-							metaDtaBuilder.putBitmap(
-								MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
-								resource,
-							)
-							mMediaSession!!.setMetadata(metaDtaBuilder.build())
-							updateNotification()
+				Glide.with(this)
+					.asBitmap()
+					.load(realUrl)
+					.into(object : CustomTarget<Bitmap>() {
+						override fun onResourceReady(
+							resource: Bitmap,
+							transition: Transition<in Bitmap>?
+						) {
+							targetPlayerHandler.post {
+								// Ensure execution on the correct handler
+								if (audioService == null || mMediaSession == null) return@post
+								metaDtaBuilder.putBitmap(
+									MediaMetadataCompat.METADATA_KEY_ALBUM_ART,
+									resource,
+								)
+								mMediaSession!!.setMetadata(metaDtaBuilder.build())
+								updateNotification() // Update notification after metadata change
+							}
 						}
-					},
-					onFailure = {
-						targetPlayerHandler.post {
-							if (audioService == null || mMediaSession == null) return@post
-							mMediaSession!!.setMetadata(metaDtaBuilder.build())
-							updateNotification()
+
+						override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
 						}
-					},
-				)
-			}
-			if (metadataNeedsUpdate) {
-				mMediaSession?.setMetadata(metaDtaBuilder.build())
+
+						override fun onLoadFailed(errorDrawable: Drawable?) {
+							targetPlayerHandler.post {
+								// Ensure execution on the correct handler
+								if (audioService == null || mMediaSession == null) return@post
+								// Failed to download, set metadata without album art
+								mMediaSession!!.setMetadata(metaDtaBuilder.build())
+								updateNotification() // Update notification even if image fails
+							}
+						}
+					})
+//				}
 			}
 		}
 	}
@@ -336,20 +294,32 @@ class AudioService : Service() {
 			mNotificationBuilder?.setSmallIcon(idSmall); // 设置图标
 		}
 
-		fetchArtworkBitmap(
-			playerHelper.coverImgUrl,
-			onSuccess = { resource ->
-				targetPlayerHandler.post {
-					if (audioService == null || mNotificationBuilder == null) {
-						return@post
-					}
-					mNotificationBuilder?.setLargeIcon(resource)
-					val updatedNotification = mNotificationBuilder!!.build()
-					startForeground(NOTIFICATION_ID, updatedNotification)
-					mNotificationManager?.notify(NOTIFICATION_ID, updatedNotification)
-				}
-			},
-		)
+        playerHelper.coverImgUrl.let { url ->
+			val realUrl = if(url.startsWith("http://") || url.startsWith("https://")) {
+				url
+			} else {
+				UTSAndroid.convert2AbsFullPath(url)
+			}
+            Glide.with(this)
+                .asBitmap()
+                .load(realUrl)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        // targetPlayerHandler.post {
+                            if (audioService == null || mNotificationBuilder == null) {
+                                return
+                            }
+							mNotificationBuilder?.setLargeIcon(resource)
+                        // }
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        }
 
 		Log.d(tag, "idSmall=$idSmall")
 		// 创建点击通知的意图
@@ -610,7 +580,6 @@ class AudioService : Service() {
 		const val ACTION_NEXT = "ACTION_NEXT"
 
 		const val NOTIFICATION_ID = 0x124
-		private var frescoInitialized = false
 		var audioService: AudioService? = null
 	}
 }

@@ -8,8 +8,7 @@ import {
     invokeCurrentPageHook,
     navigate,
     navigateToPagesBeforeEntryPages,
-    normalizeRouteOptions,
-    resolveAppRoute,
+    normalizeRouteOptions
 } from '@dcloudio/uni-runtime'
 import {
     DEFAULT_ANIMATION_DURATION,
@@ -38,8 +37,6 @@ export const navigateTo = defineAsyncApi<NavigateToOptions, NavigateToSuccess>(
             return
         }
         options.url = normalizeRouteOptionsResult.url
-        const appRoute = resolveAppRoute(options.url as string, NAVIGATE_TO)
-        options.url = appRoute.url
         invokeCurrentPageHook(ON_HIDE)
         setTimeout(() => {
             navigate(
@@ -57,8 +54,6 @@ export const navigateTo = defineAsyncApi<NavigateToOptions, NavigateToSuccess>(
                 NAVIGATE_TO,
                 null,
                 navigationStart,
-                NAVIGATE_TO,
-                appRoute.context,
             )
             res.resolve(null)
         }, 0)
