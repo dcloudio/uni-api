@@ -1,12 +1,10 @@
 #pragma once
 
 #include <chrono>
-#include <condition_variable>
 #include <cstdint>
 #include <functional>
 #include <tuple>
 #include <memory>
-#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -23,6 +21,8 @@
 #include "interface/UniCSSTransform.h"
 
 namespace recycle_waterflow {
+    class ScrollEndDetectionTimer;
+
     using namespace uniappx;
     using uniappx::Element;
     using uniappx::EventListener;
@@ -131,12 +131,9 @@ namespace recycle_waterflow {
         uniappx::UniViewElement *placeholderElement = nullptr;
         std::shared_ptr<EventListener> scrollListener = nullptr;
         std::shared_ptr<EventListener> scrollEndListener = nullptr;
-        std::mutex scrollEndDetectionMutex;
-        std::condition_variable scrollEndDetectionCondition;
         std::chrono::steady_clock::time_point scrollEndDetectionDeadline;
-        uint64_t scrollEndDetectionRevision = 0;
-        bool scrollEndDetectionPending = false;
-        bool scrollEndDetectionRunning = false;
+        std::unique_ptr<ScrollEndDetectionTimer> scrollEndDetectionTimer;
+        bool scrollEndDetectionArmed = false;
         UniResizeObserver *resizeObserver = nullptr;
         // Keys for items
         std::vector<std::string> keyList;
@@ -290,7 +287,11 @@ namespace recycle_waterflow {
 
         void cancelScrollEndDetection();
 
-        void runScrollEndDetection();
+        void destroyScrollEndDetectionTimer();
+
+        void handleScrollEndDetectionTimer();
+
+        friend class ScrollEndDetectionTimer;
 
         inline float realItemSize(float size) const {
             return size < 0 ? defaultItemSize : size;

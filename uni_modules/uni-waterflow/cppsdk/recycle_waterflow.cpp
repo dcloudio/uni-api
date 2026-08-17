@@ -1,7 +1,15 @@
 #include <chrono>
 #include <cmath>
-#include <thread>
 #include <tuple>
+#if defined(OS_IOS)
+#include <dispatch/dispatch.h>
+#elif defined(OS_ANDROID)
+#include <android/looper.h>
+#include <sys/timerfd.h>
+#include <unistd.h>
+#elif defined(OS_HARMONY)
+#include <ffrt/timer.h>
+#endif
 #include "recycle_waterflow.h"
 #include "interface/UniCSSProperty.h"
 #include "node_api.h"
@@ -18,6 +26,198 @@ using namespace uniappx;
  */
 
 namespace recycle_waterflow {
+#if defined(OS_IOS) || defined(OS_ANDROID) || defined(OS_HARMONY)
+    // 该滚动停止检测逻辑从 list-view 复制，修改时需同步两处。
+    class ScrollEndDetectionTimer {
+    public:
+        explicit ScrollEndDetectionTimer(std::weak_ptr<RecycleWaterflow> owner)
+                : context(new Context{std::move(owner)}) {
+#if defined(OS_IOS)
+            this->timer = dispatch_source_create(
+                    DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+            if (!this->timer) {
+                delete this->context;
+                this->context = nullptr;
+                return;
+            }
+            dispatch_set_context(this->timer, this->context);
+            dispatch_source_set_event_handler_f(
+                    this->timer, &ScrollEndDetectionTimer::onTimer);
+            dispatch_source_set_cancel_handler_f(
+                    this->timer, &ScrollEndDetectionTimer::onTimerCanceled);
+            dispatch_resume(this->timer);
+#elif defined(OS_ANDROID)
+            this->looper = ALooper_forThread();
+            this->timerFd = timerfd_create(
+                    CLOCK_MONOTONIC, TFD_NONBLOCK | TFD_CLOEXEC);
+            if (!this->looper || this->timerFd == -1 ||
+                ALooper_addFd(
+                        this->looper,
+                        this->timerFd,
+                        ALOOPER_POLL_CALLBACK,
+                        ALOOPER_EVENT_INPUT,
+                        &ScrollEndDetectionTimer::onTimer,
+                        this->context) != 1) {
+                if (this->timerFd != -1) {
+                    close(this->timerFd);
+                    this->timerFd = -1;
+                }
+                delete this->context;
+                this->context = nullptr;
+                this->looper = nullptr;
+                return;
+            }
+            ALooper_acquire(this->looper);
+#endif
+        }
+
+        ~ScrollEndDetectionTimer() {
+            this->cancel();
+#if defined(OS_IOS)
+            if (this->timer) {
+                auto timer = this->timer;
+                this->timer = nullptr;
+                this->context = nullptr;
+                dispatch_source_cancel(timer);
+                dispatch_release(timer);
+            }
+#elif defined(OS_ANDROID)
+            if (this->timerFd != -1) {
+                if (this->looper) {
+                    ALooper_removeFd(this->looper, this->timerFd);
+                }
+                close(this->timerFd);
+                this->timerFd = -1;
+            }
+            if (this->looper) {
+                ALooper_release(this->looper);
+                this->looper = nullptr;
+            }
+            delete this->context;
+            this->context = nullptr;
+#elif defined(OS_HARMONY)
+            delete this->context;
+            this->context = nullptr;
+#endif
+        }
+
+        bool schedule(uint64_t delayMs) {
+            if (!this->context) {
+                return false;
+            }
+#if defined(OS_IOS)
+            dispatch_source_set_timer(
+                    this->timer,
+                    dispatch_time(DISPATCH_TIME_NOW, delayMs * NSEC_PER_MSEC),
+                    DISPATCH_TIME_FOREVER,
+                    0);
+            return true;
+#elif defined(OS_ANDROID)
+            itimerspec timerSpec{};
+            timerSpec.it_value.tv_sec = delayMs / 1000;
+            timerSpec.it_value.tv_nsec = (delayMs % 1000) * 1000 * 1000;
+            return timerfd_settime(this->timerFd, 0, &timerSpec, nullptr) == 0;
+#elif defined(OS_HARMONY)
+            if (this->timer != -1) {
+                if (ffrt_timer_stop(ffrt_qos_default, this->timer) == 0) {
+                    delete static_cast<Context *>(this->pendingTimerContext);
+                }
+                this->timer = -1;
+                this->pendingTimerContext = nullptr;
+            }
+            auto timerContext = new Context{this->context->owner};
+            this->timer = ffrt_timer_start(
+                    ffrt_qos_default,
+                    delayMs,
+                    timerContext,
+                    &ScrollEndDetectionTimer::onTimer,
+                    false);
+            if (this->timer == -1) {
+                delete timerContext;
+                return false;
+            }
+            this->pendingTimerContext = timerContext;
+            return this->timer != -1;
+#else
+            return false;
+#endif
+        }
+
+        void cancel() {
+#if defined(OS_IOS)
+            if (this->timer) {
+                dispatch_source_set_timer(
+                        this->timer,
+                        DISPATCH_TIME_FOREVER,
+                        DISPATCH_TIME_FOREVER,
+                        0);
+            }
+#elif defined(OS_ANDROID)
+            if (this->timerFd != -1) {
+                const itimerspec timerSpec{};
+                timerfd_settime(this->timerFd, 0, &timerSpec, nullptr);
+            }
+#elif defined(OS_HARMONY)
+            if (this->timer != -1) {
+                if (ffrt_timer_stop(ffrt_qos_default, this->timer) == 0) {
+                    delete static_cast<Context *>(this->pendingTimerContext);
+                }
+                this->timer = -1;
+                this->pendingTimerContext = nullptr;
+            }
+#endif
+        }
+
+    private:
+        struct Context {
+            std::weak_ptr<RecycleWaterflow> owner;
+        };
+
+        static void notifyOnMainQueue(Context *context) {
+            auto weakOwner = context->owner;
+            Instance::GetTaskExecutor().runOnMainQueue([weakOwner]() {
+                auto owner = weakOwner.lock();
+                if (owner) {
+                    owner->handleScrollEndDetectionTimer();
+                }
+            });
+        }
+
+#if defined(OS_IOS)
+        static void onTimer(void *context) {
+            notifyOnMainQueue(static_cast<Context *>(context));
+        }
+
+        static void onTimerCanceled(void *context) {
+            delete static_cast<Context *>(context);
+        }
+
+        dispatch_source_t timer = nullptr;
+#elif defined(OS_ANDROID)
+        static int onTimer(int fd, int events, void *context) {
+            uint64_t expirations = 0;
+            if (events & ALOOPER_EVENT_INPUT) {
+                (void) read(fd, &expirations, sizeof(expirations));
+            }
+            notifyOnMainQueue(static_cast<Context *>(context));
+            return 1;
+        }
+
+        ALooper *looper = nullptr;
+        int timerFd = -1;
+#elif defined(OS_HARMONY)
+        static void onTimer(void *context) {
+            std::unique_ptr<Context> timerContext(
+                    static_cast<Context *>(context));
+            notifyOnMainQueue(timerContext.get());
+        }
+
+        ffrt_timer_t timer = -1;
+        void *pendingTimerContext = nullptr;
+#endif
+        Context *context = nullptr;
+    };
+#endif
     // common start
     auto waterflowInstanceCache = std::unordered_map<double, std::weak_ptr<RecycleWaterflow>>();
 
@@ -90,7 +290,7 @@ namespace recycle_waterflow {
     // RecycleWaterflow start
     RecycleWaterflow::RecycleWaterflow() {};
     RecycleWaterflow::~RecycleWaterflow() {
-        this->cancelScrollEndDetection();
+        this->destroyScrollEndDetectionTimer();
     };
 
     void RecycleWaterflow::setDestroyed(bool destroyed) {
@@ -99,7 +299,7 @@ namespace recycle_waterflow {
         }
         this->destroyed = destroyed;
         if (destroyed) {
-            this->cancelScrollEndDetection();
+            this->destroyScrollEndDetectionTimer();
             this->removeScrollListener();
             this->stopRootObserve();
             this->itemInstanceMap.clear();
@@ -340,78 +540,38 @@ namespace recycle_waterflow {
         this->scheduleScrollEndDetection();
     };
 
-    // 该滚动停止检测逻辑从 list-view 复制，修改时需同步两处。
     void RecycleWaterflow::scheduleScrollEndDetection() {
-        bool startDetection = false;
-        {
-            std::lock_guard<std::mutex> lock(this->scrollEndDetectionMutex);
-            this->scrollEndDetectionDeadline =
-                    std::chrono::steady_clock::now() + std::chrono::milliseconds(30);
-            ++this->scrollEndDetectionRevision;
-            this->scrollEndDetectionPending = true;
-            if (!this->scrollEndDetectionRunning) {
-                this->scrollEndDetectionRunning = true;
-                startDetection = true;
-            }
+        this->scrollEndDetectionDeadline =
+                std::chrono::steady_clock::now() + std::chrono::milliseconds(30);
+        if (!this->scrollEndDetectionTimer) {
+            this->scrollEndDetectionTimer =
+                    std::make_unique<ScrollEndDetectionTimer>(this->weak_from_this());
         }
-        this->scrollEndDetectionCondition.notify_one();
-
-        if (startDetection) {
-            auto weakThis = this->weak_from_this();
-            std::thread([weakThis]() {
-                auto self = weakThis.lock();
-                if (self) {
-                    self->runScrollEndDetection();
-                }
-            }).detach();
+        this->scrollEndDetectionArmed = this->scrollEndDetectionTimer->schedule(30);
+        if (!this->scrollEndDetectionArmed) {
+            this->scrollEndDetectionTimer.reset();
         }
     }
 
     void RecycleWaterflow::cancelScrollEndDetection() {
-        {
-            std::lock_guard<std::mutex> lock(this->scrollEndDetectionMutex);
-            ++this->scrollEndDetectionRevision;
-            this->scrollEndDetectionPending = false;
+        this->scrollEndDetectionArmed = false;
+        if (this->scrollEndDetectionTimer) {
+            this->scrollEndDetectionTimer->cancel();
         }
-        this->scrollEndDetectionCondition.notify_one();
     }
 
-    void RecycleWaterflow::runScrollEndDetection() {
-        std::unique_lock<std::mutex> lock(this->scrollEndDetectionMutex);
-        while (this->scrollEndDetectionPending) {
-            const auto revision = this->scrollEndDetectionRevision;
-            const auto deadline = this->scrollEndDetectionDeadline;
-            const bool reset = this->scrollEndDetectionCondition.wait_until(
-                    lock,
-                    deadline,
-                    [this, revision]() {
-                        return !this->scrollEndDetectionPending ||
-                               this->scrollEndDetectionRevision != revision;
-                    });
-            if (reset) {
-                continue;
-            }
+    void RecycleWaterflow::destroyScrollEndDetectionTimer() {
+        this->cancelScrollEndDetection();
+        this->scrollEndDetectionTimer.reset();
+    }
 
-            this->scrollEndDetectionPending = false;
-            this->scrollEndDetectionRunning = false;
-            auto weakThis = this->weak_from_this();
-            lock.unlock();
-            Instance::GetTaskExecutor().runOnMainQueue([weakThis, revision]() {
-                auto self = weakThis.lock();
-                if (!self || self->destroyed) {
-                    return;
-                }
-                {
-                    std::lock_guard<std::mutex> detectionLock(self->scrollEndDetectionMutex);
-                    if (self->scrollEndDetectionRevision != revision) {
-                        return;
-                    }
-                }
-                self->onScrollEnd();
-            });
+    void RecycleWaterflow::handleScrollEndDetectionTimer() {
+        if (!this->scrollEndDetectionArmed || this->destroyed ||
+            std::chrono::steady_clock::now() < this->scrollEndDetectionDeadline) {
             return;
         }
-        this->scrollEndDetectionRunning = false;
+        this->scrollEndDetectionArmed = false;
+        this->onScrollEnd();
     }
 
     void RecycleWaterflow::onScrollStart() {
