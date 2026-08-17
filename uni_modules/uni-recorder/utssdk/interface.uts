@@ -1,24 +1,24 @@
 export interface Uni {
 	/**
 	 * 录音管理
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#getrecordermanager
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#getrecordermanager
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 *  		"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -78,20 +78,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 *  		"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -148,20 +146,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -219,20 +215,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -290,20 +284,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -361,20 +353,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -431,20 +421,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -501,20 +489,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -571,20 +557,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -641,20 +625,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -711,20 +693,18 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -781,18 +761,15 @@ export type RecorderManagerStartOptions = {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -854,20 +831,18 @@ export interface RecorderManagerOnStopResult {
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -924,25 +899,24 @@ export interface RecorderManagerOnStopResult {
 export interface RecorderManager {
 	/**
 	 * 开始录音
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#start
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#start
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -996,8 +970,9 @@ export interface RecorderManager {
 	start(options : RecorderManagerStartOptions) : void;
 	/**
 	 * 暂停录音,App-Android平台在Android 7.0及以后版本支持
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#pause
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#pause
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
@@ -1006,15 +981,14 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1068,8 +1042,9 @@ export interface RecorderManager {
 	pause() : void;
 	/**
 	 * 继续录音，App-Android平台在Android 7.0及以后版本支持
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#resume
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#resume
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
@@ -1078,15 +1053,14 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1140,25 +1114,24 @@ export interface RecorderManager {
 	resume() : void;
 	/**
 	 * 停止录音
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#stop
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#stop
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1212,25 +1185,24 @@ export interface RecorderManager {
 	stop() : void;
 	/**
 	 * 录音开始事件
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstart
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstart
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1282,10 +1254,82 @@ export interface RecorderManager {
 	 * }
 	 */
 	onStart(options : (result : any) => void) : void;
+
+	/**
+	 * 取消监听录音开始事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstart
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstart
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "√",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offStart() : void;
 	/**
 	 * 录音暂停事件,App-Android平台在Android 7.0及以后版本支持
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onpause
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onpause
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
@@ -1294,15 +1338,14 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1354,27 +1397,99 @@ export interface RecorderManager {
 	 * }
 	 */
 	onPause(options : (result : any) => void) : void;
+
 	/**
-	 * 录音停止事件，会回调文件地址
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * 取消监听录音暂停事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onpause
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onpause
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
+	 * 			"osVer": "7.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "√",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offPause() : void;
+
+	/**
+	 * 录音停止事件，会回调文件地址
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstop
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstop
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1426,25 +1541,94 @@ export interface RecorderManager {
 	 * }
 	 */
 	onStop(options : (result : RecorderManagerOnStopResult) => void) : void;
+
 	/**
-	 * 已录制完指定帧大小的文件，会回调录音分片结果数据。如果设置了 frameSize ，则会回调此事件
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * 取消监听录音停止事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstop
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onstop
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "√",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offStop() : void;
+	/**
+	 * 已录制完指定帧大小的文件，会回调录音分片结果数据。如果设置了 frameSize ，则会回调此事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onframerecorded
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onframerecorded
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "x",
 	 * 			"unixUtsPlugin": "x"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "x"
 	 *    }
@@ -1498,27 +1682,98 @@ export interface RecorderManager {
 	 * }
 	 */
 	onFrameRecorded(options : (result : any) => void) : void;
+
 	/**
-	 * 录音错误事件, 会回调错误信息
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * 取消监听帧回调事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onframerecorded
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onframerecorded
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "x"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "x",
+	 * 			"unixUtsPlugin": "x"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "√",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offFrameRecorded() : void;
+
+	/**
+	 * 录音错误事件, 会回调错误信息
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onerror
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onerror
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "v",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1570,10 +1825,83 @@ export interface RecorderManager {
 	 * }
 	 */
 	onError(options: (result: IRecorderManagerFail) => void): void;
+
+	/**
+	 * 取消监听录音错误事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onerror
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onerror
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"uniVer": "√",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "v",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "√",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offError(): void;
+
 	/**
 	 * 监听录音继续事件,App-Android平台在Android 7.0及以后版本支持
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onresume
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onresume
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
@@ -1582,15 +1910,14 @@ export interface RecorderManager {
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1642,27 +1969,99 @@ export interface RecorderManager {
 	 * }
 	 */
 	onResume(options : (result : any) => void) : void;
+
 	/**
-	 * 监听录音因为受到系统占用而被中断开始事件
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * 取消监听录音继续事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onresume
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#onresume
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
+	 * 			"osVer": "7.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offResume() : void;
+
+	/**
+	 * 监听录音因为受到系统占用而被中断开始事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionbegin
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionbegin
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1714,27 +2113,97 @@ export interface RecorderManager {
 	 * }
 	 */
 	onInterruptionBegin(options : (result : any) => void) : void;
+
 	/**
-	 * 监听录音中断结束事件
-	 * @tutorial https://uniapp.dcloud.net.cn/api/media/record-manager.html
-	 * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * 取消监听录音因为受到系统占用而被中断开始事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionbegin
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionbegin
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offInterruptionBegin() : void;
+	/**
+	 * 监听录音中断结束事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionend
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionend
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.31",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1786,6 +2255,77 @@ export interface RecorderManager {
 	 * }
 	 */
 	onInterruptionEnd(options : (result : any) => void) : void;
+
+	/**
+	 * 取消监听录音中断结束事件
+	 * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionend
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-recorder-manager.html#oninterruptionend
+	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/record-manager.html
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "5.0",
+	 * 			"unixUtsPlugin": "5.0"
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "5.0"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	offInterruptionEnd() : void;
 }
 
 
@@ -1798,20 +2338,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1868,20 +2406,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -1934,24 +2470,22 @@ export type RecorderManagerErrorCode =
 	 */
 	1107602 |
 	/**
-	 * 采样率是和编码码率不匹配
+	 * 采样率和编码码率不匹配
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -2008,20 +2542,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -2078,20 +2610,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -2148,20 +2678,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -2218,20 +2746,18 @@ export type RecorderManagerErrorCode =
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
-	 * 			"osVer": "5.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61"
 	 * 		},
 	 * 		"ios": {
-	 * 			"osVer": "12.0",
 	 * 			"uniVer": "x",
 	 * 			"unixVer": "4.61",
 	 * 			"unixUtsPlugin": "4.61"
 	 * 		},
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.61",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 * 	},
 	 *   "web": {
@@ -2282,7 +2808,74 @@ export type RecorderManagerErrorCode =
 	 *  }
 	 * }
 	 */
-	1107607;
+	1107607 |
+	/**
+	 * 正在录音中，请稍后执行此操作
+	 * @uniPlatform {
+	 * 	"app": {
+	 * 		"android": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "4.81"
+	 * 		},
+	 * 		"ios": {
+	 * 			"uniVer": "x",
+	 * 			"unixVer": "x",
+	 * 			"unixUtsPlugin": x""
+	 * 		},
+	 *    "harmony": {
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 * 	},
+	 *   "web": {
+	 *     "uniVer": "x",
+	 *     "unixVer": "x"
+	 *   },
+	 *  "mp":{
+	 *    "weixin": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "4.41"
+	 *    },
+	 *    "alipay": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "baidu": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "toutiao": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "lark": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "qq": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "kuaishou": {
+	 *      "hostVer": "√",
+	 *      "uniVer": "√",
+	 *      "unixVer": "x"
+	 *    },
+	 *    "jd": {
+	 *      "hostVer": "x",
+	 *      "uniVer": "x",
+	 *      "unixVer": "x"
+	 *    }
+	 *  }
+	 * }
+	 */
+	1107608;
 
 export interface IRecorderManagerFail extends IUniError {
 	errCode : RecorderManagerErrorCode

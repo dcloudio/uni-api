@@ -1,1 +1,12 @@
-export interface UniShareWeixinProvider extends UniShareProvider { }
+// #ifdef APP-IOS
+export interface UniShareWeixinProvider extends UniShareProvider, JSExport {
+	toJSON() : Map<String, Any>
+	isWeChatInstalled : boolean
+}
+// #endif
+
+// #ifndef APP-IOS
+export interface UniShareWeixinProvider extends UniShareProvider {
+	isWeChatInstalled : boolean
+}
+// #endif

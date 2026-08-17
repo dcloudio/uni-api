@@ -1,15 +1,17 @@
 import { media } from '@kit.MediaKit';
-import { audio } from '@kit.AudioKit';
+import { audio, } from '@kit.AudioKit';
+import { BusinessError } from '@ohos.base';
+import deviceInfo from '@ohos.deviceInfo';
 import { getRealPath } from '@dcloudio/uni-runtime'
 
-import { InnerAudioContext, CreateInnerAudioContext, type ICreateInnerAudioContextFail } from '../interface.uts';
-import { API_CREATE_INNER_AUDIO_CONTEXT } from '../protocol.uts';
+import { InnerAudioContext, CreateInnerAudioContext, type ICreateInnerAudioContextFail, SetInnerAudioOption, SetInnerAudioOptionOptions, SetInnerAudioOptionSuccess } from '../interface.uts';
+import { API_CREATE_INNER_AUDIO_CONTEXT, API_SET_INNER_AUDIO_OPTION, SetInnerAudioOptionOptionsOptions, SetInnerAudioOptionProtocol } from '../protocol.uts';
 import { getFdFromUriOrSandBoxPath, isFileUri, isSandboxPath, AudioPlayerCallback, AudioPlayerError } from './utils.uts';
 
 const AUDIOS: Record<string, InnerAudioContext | undefined> = {}
 const AUDIO_PLAYERS: Record<string, media.AudioPlayer | undefined> = {}
 
-const LOG = (msg: string) => console.log(`[createInnerAudioContext]: ${msg}`)
+const LOG = (msg: string): void => console.log(`[createInnerAudioContext]: ${msg}`)
 
 class STATE_TYPE {
   // 音频播放空闲
@@ -36,6 +38,7 @@ class AudioPlayer implements InnerAudioContext {
   private _title: string = ''
   private audioId: string = ''
   private _playbackRate: number = 1;
+  private _dataloaded: boolean = false;
 
   readonly obeyMuteSwitch: boolean = false;
 
@@ -46,6 +49,7 @@ class AudioPlayer implements InnerAudioContext {
 
   init() {
     AUDIO_PLAYERS[this.audioId]?.on('dataLoad', () => {
+      this._dataloaded = true
       this.audioPlayerCallback.canPlay()
     });
 
@@ -69,16 +73,29 @@ class AudioPlayer implements InnerAudioContext {
       this.audioPlayerCallback.error(new AudioPlayerError(err.message, err.code))
     });
     AUDIO_PLAYERS[this.audioId]?.on('bufferingUpdate', (infoType, value) => {
-      console.info(`[AdvancedAPI] audioPlayer bufferingUpdate ${infoType} ${value}`)
-      if (infoType === media.BufferingInfoType.BUFFERING_PERCENT && value !== 0 && AUDIO_PLAYERS[this.audioId]) {
-        this._buffered = value;
-        if ((AUDIO_PLAYERS[this.audioId]!.currentTime / 1000) >= (AUDIO_PLAYERS[this.audioId]!.duration * value / 100000)) {
+      switch (infoType) {
+        // 开始缓冲，播放器会暂停播放
+        case media.BufferingInfoType.BUFFERING_START:
           this.audioPlayerCallback.waiting()
-        }
+          break;
+        // 缓冲结束，播放器会恢复播放
+        case media.BufferingInfoType.BUFFERING_END:
+          // 确保 dataLoad 前不重复触发
+          if (this._dataloaded) {
+            this.audioPlayerCallback.canPlay()
+          }
+          break;
+        // 表示缓冲百分比。可参考该事件感知缓冲进度
+        case media.BufferingInfoType.BUFFERING_PERCENT:
+          break;
+        // 表示已缓冲数据预估可播放时长，单位为毫秒（ms）。缓冲区中的数据变化量大于500ms，上报一次。可参考该事件做进度条
+        case media.BufferingInfoType.CACHED_DURATION:
+          this._buffered = value;
+          break;
       }
     });
     AUDIO_PLAYERS[this.audioId]?.on('audioInterrupt', (InterruptEvent) => {
-      console.info('[AdvancedAPI]  audioInterrupt:' + JSON.stringify(InterruptEvent));
+      // console.info('[AdvancedAPI]  audioInterrupt:' + JSON.stringify(InterruptEvent));
       if (AUDIO_PLAYERS[this.audioId] && InterruptEvent.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE) {
         AUDIO_PLAYERS[this.audioId]!.pause();
       }
@@ -136,6 +153,9 @@ class AudioPlayer implements InnerAudioContext {
       return;
     }
     value = getRealPath(value)
+    if (value.startsWith('/')) {
+      value = `file://${value}`;
+    }
     if (!value || !(value.startsWith('http:') || value.startsWith('https:') || isFileUri(value) || isSandboxPath(value))) {
       LOG(`set src: ${value} is invalid`);
       return;
@@ -180,7 +200,7 @@ class AudioPlayer implements InnerAudioContext {
   get buffered() {
     const audioPlayer = AUDIO_PLAYERS[this.audioId];
     if (!audioPlayer) return 0
-    return audioPlayer.duration * this._buffered / 100000;
+    return this._buffered / 1000
   }
   set playbackRate(rate: number) {
     this.audioPlayerCallback.error(new AudioPlayerError('HarmonyOS Next Audio setting playbackRate is not supported.', -1))
@@ -318,3 +338,47 @@ export const createInnerAudioContext: CreateInnerAudioContext =
       return AUDIOS[audioId]
     }
   ) as CreateInnerAudioContext
+
+export const setInnerAudioOption: SetInnerAudioOption =
+  defineAsyncApi<SetInnerAudioOptionOptions, SetInnerAudioOptionSuccess>(
+    API_SET_INNER_AUDIO_OPTION,
+    async (options: SetInnerAudioOptionOptions, res: ApiExecutor<SetInnerAudioOptionSuccess>) => {
+      try {
+        let { speakerOn = true, mixWithOther = true } = options
+        const audioManager = audio.getAudioManager();
+        const sessionManager = audioManager.getSessionManager()
+        if (deviceInfo.sdkApiVersion >= 20) {
+          if (speakerOn) {
+            await (sessionManager as ESObject).setDefaultOutputDevice(audio.DeviceType.SPEAKER)
+            // speakerOn 为 true 时，客户端会忽略 mixWithOther 参数的内容，强制与其它音频互斥。与微信相同
+            mixWithOther = false
+          } else {
+            await (sessionManager as ESObject).setDefaultOutputDevice(audio.DeviceType.EARPIECE)
+          }
+        }
+        await sessionManager.activateAudioSession({
+          concurrencyMode: mixWithOther ? audio.AudioConcurrencyMode.CONCURRENCY_MIX_WITH_OTHERS : audio.AudioConcurrencyMode.CONCURRENCY_PAUSE_OTHERS
+        } as audio.AudioSessionStrategy)
+        res.resolve({} as SetInnerAudioOptionSuccess)
+      } catch (error) {
+        res.reject((error as BusinessError).message, { errCode: (error as BusinessError).code } as ApiError)
+      }
+    },
+    SetInnerAudioOptionProtocol,
+    SetInnerAudioOptionOptionsOptions
+  ) as SetInnerAudioOption;
+
+export {
+  CreateInnerAudioContext,
+  CreateInnerAudioContextErrorCode,
+  ICreateInnerAudioContextFail,
+  InnerAudioContext,
+  SetInnerAudioOption,
+  SetInnerAudioOptionComplete,
+  SetInnerAudioOptionCompleteCallback,
+  SetInnerAudioOptionFail,
+  SetInnerAudioOptionFailCallback,
+  SetInnerAudioOptionOptions,
+  SetInnerAudioOptionSuccess,
+  SetInnerAudioOptionSuccessCallback
+} from '../interface.uts';

@@ -16,7 +16,7 @@ import {
 }
 	from '../../interface.uts';
 import { UTSiOS } from "DCloudUTSFoundation";
-import { NSNumber, URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult } from 'Foundation';
+import { NSNumber, URLSessionDataDelegate, URL, CharacterSet, URLSession, URLSessionConfiguration, OperationQueue, URLSessionTask, URLResponse, URLSessionDataTask, URLAuthenticationChallengeSender, URLAuthenticationChallenge, URLCredential, URLSessionTaskMetrics, Data, HTTPURLResponse, NSError, URLRequest, ComparisonResult, NSURLRequest } from 'Foundation';
 import { UploadController } from './upload/UploadController.uts';
 import { DownloadController } from './download/DownloadController.uts';
 import { Int } from 'Swift';
@@ -61,11 +61,11 @@ class NetworkDownloadFileListener {
 class NetworkRequestTaskImpl implements RequestTask {
 	public headersReceivedListeners = new Map<number, RequestTaskOnHeadersReceivedCallback>()
 	public chunkReceivedListeners = new Map<number, RequestTaskOnChunkReceivedCallback>()
-	
+
 	private requestTaskOnHeadersReceivedCallbackCount: number = 0
 	private requestTaskOnChunkReceivedCallbackCount: number = 0
 	private semaphore = DispatchSemaphore(value = 1)
-	
+
 	private task : URLSessionDataTask | null = null;
 	constructor(task : URLSessionDataTask | null) {
 		this.task = task;
@@ -76,7 +76,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.task?.cancel()
 		UTSiOS.destroyInstance(this)
 	}
-	
+
 	public onHeadersReceived(listener: RequestTaskOnHeadersReceivedCallback): number {
 		this.semaphore.wait()
 		this.requestTaskOnHeadersReceivedCallbackCount += 1
@@ -84,7 +84,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.headersReceivedListeners.set(this.requestTaskOnHeadersReceivedCallbackCount, listener)
 		return this.requestTaskOnHeadersReceivedCallbackCount
 	}
-	
+
 	public offHeadersReceived(listener ?: number | RequestTaskOnHeadersReceivedCallback | null): void {
 		if (listener != null && typeof listener! == "number") {
 			const id  = listener as number
@@ -93,7 +93,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 			this.headersReceivedListeners.clear()
 		}
 	}
-	
+
 	public onChunkReceived(listener: RequestTaskOnChunkReceivedCallback): number {
 		this.semaphore.wait()
 		this.requestTaskOnChunkReceivedCallbackCount += 1
@@ -101,7 +101,7 @@ class NetworkRequestTaskImpl implements RequestTask {
 		this.chunkReceivedListeners.set(this.requestTaskOnChunkReceivedCallbackCount, listener)
 		return this.requestTaskOnChunkReceivedCallbackCount
 	}
-	
+
 	public offChunkReceived(listener ?: number | RequestTaskOnChunkReceivedCallback | null): void {
 		if (listener != null && typeof listener! == "number") {
 			const id  = listener as number
@@ -115,6 +115,8 @@ class NetworkRequestTaskImpl implements RequestTask {
 class NetworkManager implements URLSessionDataDelegate {
 	private static instance : NetworkManager | null = null;
 	private enableChunked: boolean = false;
+	private enableQuic: boolean = false;
+	private lastQuicState: boolean | null  = null;
 	private session : URLSession | null = null;
 
 	private taskMap : Map<URLSessionTask, NetworkRequestListener> = new Map<URLSessionDataTask, NetworkRequestListener>();
@@ -128,6 +130,10 @@ class NetworkManager implements URLSessionDataDelegate {
 
 
 	public request<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : RequestTask {
+		let currentQuicState = param.enableQuic ?? false
+		this.enableQuic = currentQuicState
+		this.lastQuicState = currentQuicState
+
 		let request = this.createRequest(param);
 		this.enableChunked = param.enableChunked ?? false
 		if (request == null) {
@@ -139,7 +145,13 @@ class NetworkManager implements URLSessionDataDelegate {
 		}
 
 		if (this.session == null) {
+
 			let urlSessionConfig = URLSessionConfiguration.default;
+			if (this.enableQuic) {
+				urlSessionConfig.requestCachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
+				urlSessionConfig.waitsForConnectivity = true
+				urlSessionConfig.httpShouldSetCookies = false
+			}
 
 			this.session = new URLSession(configuration = urlSessionConfig, delegate = this, delegateQueue = OperationQueue.current);
 		}
@@ -163,7 +175,7 @@ class NetworkManager implements URLSessionDataDelegate {
 
 
 	public createRequest<T>(param : RequestOptions<T>) : URLRequest | null {
-		const encodeUrl = this.percentEscapedString(param.url)
+		const encodeUrl = NetworkUtil.percentEscapedString(param.url)
 		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			return null
@@ -280,6 +292,9 @@ class NetworkManager implements URLSessionDataDelegate {
 			request.httpBody = bodyData;
 		}
 
+		if (UTSiOS.available("iOS 15.0, *")) {
+			request.assumesHTTP3Capable = this.enableQuic
+		}
 		return request;
 	}
 
@@ -356,7 +371,7 @@ class NetworkManager implements URLSessionDataDelegate {
 			let statusCode = new NSNumber(value = httpResponse.statusCode);
 			listener?.onHeadersReceived(statusCode, httpResponse.allHeaderFields as Map<string, any>);
 
-			const headers = NetworkUtil.convertHeaders(httpResponse.allHeaderFields as Map<string, any>))
+			const headers = NetworkUtil.convertHeaders(httpResponse.allHeaderFields as Map<string, any>)
 			if (listener!.task != null && listener!.task instanceof NetworkRequestTaskImpl) {
 				const task = listener!.task! as NetworkRequestTaskImpl
 				task.headersReceivedListeners.forEach((value : RequestTaskOnHeadersReceivedCallback, key : number) => {
@@ -369,7 +384,7 @@ class NetworkManager implements URLSessionDataDelegate {
 				})
 			}
 		}
-				
+
 		completionHandler(URLSession.ResponseDisposition.allow);
 	}
 
@@ -377,13 +392,15 @@ class NetworkManager implements URLSessionDataDelegate {
 		let listener = this.taskMap.get(dataTask);
 		listener?.onDataReceived(data);
 		if (this.enableChunked && listener != null) {
-			const task = listener!.task! as NetworkRequestTaskImpl
-			task.chunkReceivedListeners.forEach((value : RequestTaskOnChunkReceivedCallback, key : number) => {
-				const result : RequestTaskOnChunkReceivedListenerResult = {
-					data: ArrayBuffer.fromData(data)
-				}
-				value(result)
-			})
+		    if (listener!.task != null && listener!.task instanceof NetworkRequestTaskImpl) {
+				const task = listener!.task! as NetworkRequestTaskImpl
+				task.chunkReceivedListeners.forEach((value : RequestTaskOnChunkReceivedCallback, key : number) => {
+					const result : RequestTaskOnChunkReceivedListenerResult = {
+						data: ArrayBuffer.fromData(data)
+					}
+					value(result)
+				})
+			}
 		}
 	}
 

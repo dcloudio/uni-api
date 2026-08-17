@@ -84,6 +84,7 @@ class AudioService : Service() {
 	fun pause() {
 		targetPlayerHandler.post {
 			updatePlaybackState(PlaybackStateCompat.STATE_PAUSED)
+			updateNotification()
 		}
 	}
 
@@ -168,10 +169,8 @@ class AudioService : Service() {
 	 */
 	private fun cancelNotification() {
 //		stopForeground(true)
-		mNotificationManager!!.cancel(NOTIFICATION_ID)
-		// mMediaSession!!.setCallback(null)
-		// mMediaSession!!.setActive(false)
-		// mMediaSession!!.release()
+		mNotificationManager?.cancel(NOTIFICATION_ID)
+		releaseMediaSession()
 //		stopSelf()
 	}
 
@@ -309,16 +308,12 @@ class AudioService : Service() {
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                        targetPlayerHandler.post {
+                        // targetPlayerHandler.post {
                             if (audioService == null || mNotificationBuilder == null) {
-                                return@post
+                                return
                             }
-                            mNotificationBuilder?.setLargeIcon(resource)
-                            if (mNotificationBuilder != null) { // Check again as it's async
-                                val updatedNotification = mNotificationBuilder!!.build()
-                                mNotificationManager!!.notify(NOTIFICATION_ID, updatedNotification)
-                            }
-                        }
+							mNotificationBuilder?.setLargeIcon(resource)
+                        // }
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {
@@ -423,9 +418,16 @@ class AudioService : Service() {
 	 */
 	private fun setupMediaSession() {
 		mMediaSession =
-			MediaSessionCompat(this, "PlayerSession")
-		mMediaSession!!.setCallback(callback)
-		mMediaSession!!.setActive(true)
+			MediaSessionCompat(applicationContext, "PlayerSession")
+		mMediaSession?.setCallback(callback)
+		mMediaSession?.isActive = true
+	}
+
+	private fun releaseMediaSession() {
+		mMediaSession?.setCallback(null)
+		mMediaSession?.isActive = false
+		mMediaSession?.release()
+		mMediaSession = null
 	}
 
 	/**
@@ -556,20 +558,20 @@ class AudioService : Service() {
 
 	override fun onDestroy() {
 		Log.d(tag, "onDestroy")
-		super.onDestroy()
 		this.isServiceActive = false
-		unregisterReceiver(broadcastReceiver)
-		targetPlayerHandler.post {
-			mMediaSession?.release()
-			mMediaSession = null
-			// Potentially stop playerHelper and release its resources
-			// playerHelper.release() // If such a method exists
+		audioService = null
+		if (::broadcastReceiver.isInitialized) {
+			unregisterReceiver(broadcastReceiver)
 		}
+		if (::targetPlayerHandler.isInitialized) {
+			targetPlayerHandler.removeCallbacksAndMessages(null)
+		}
+		releaseMediaSession()
 		// Cancel any pending posts to avoid memory leaks or crashes
 		// if (targetPlayerHandler.looper != Looper.getMainLooper()) {
 		// 	targetPlayerHandler.looper.quitSafely()
 		// }
-		audioService = null
+		super.onDestroy()
 	}
 
 	companion object {

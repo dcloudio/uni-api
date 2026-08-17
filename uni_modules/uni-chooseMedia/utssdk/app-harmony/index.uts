@@ -6,25 +6,10 @@ import { cameraPicker, camera } from '@kit.CameraKit'
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 import { uni } from '@dcloudio/uni-runtime'
 
-interface ChooseMediaShowActionSheetOptionsSuccessOptions {
-  tapIndex: number
-}
-
-interface ChooseMediaShowActionSheetOptionsFailOptions {
-  errMsg: string
-}
-
-interface ChooseMediaShowActionSheetOptions {
-  itemList: string[]
-  success?: (e: ChooseMediaShowActionSheetOptionsSuccessOptions) => void | null
-  fail?: (e: ChooseMediaShowActionSheetOptionsFailOptions) => void | null
-};
-
-
 type CameraPosition = 'back' | 'front'
 type UNI_MEDIA_TYPE = 'image' | 'video' | 'mix'
 
-function getHMCameraPosition(cameraType: CameraPosition) {
+function getHMCameraPosition(cameraType: CameraPosition): camera.CameraPosition {
   switch (cameraType) {
     case 'back':
       return camera.CameraPosition.CAMERA_POSITION_BACK
@@ -59,7 +44,10 @@ const _takeCamera = async (args: ChooseMediaOptions, executor: ApiExecutor<Choos
     };
     const mediaTypes = getCameraPickerMediaTypes((args.mediaType ?? []) as UNI_MEDIA_TYPE[])
     const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, mediaTypes, pickerProfile)
-    if (res.resultCode === -1) {
+    if (!res) {
+      const err = new ChooseMediaErrorImpl(1101010)
+      executor.reject(err.message, err as ApiError);
+    } else if (res.resultCode === -1) {
       const err = new ChooseMediaErrorImpl(1101001)
       executor.reject(err.message, err as ApiError);
     } else {
@@ -158,15 +146,30 @@ export const chooseMedia: ChooseMedia = defineAsyncApi<ChooseMediaOptions, Choos
           }
         },
         fail: (e) => {
-          if (e.errMsg.includes('cancel')) {
+          if (e.errMsg!.includes('cancel')) {
             executor.reject('cancel')
           } else {
             executor.reject(e.errMsg)
           }
         }
-      } as ChooseMediaShowActionSheetOptions)
+      })
     }
   },
   ChooseMediaApiProtocol,
   ChooseMediaApiOptions
 ) as ChooseMedia
+
+export {
+  ChooseMedia,
+  ChooseMediaCompleteCallback,
+  ChooseMediaErrorCode,
+  ChooseMediaFail,
+  ChooseMediaFailCallback,
+  ChooseMediaFileType,
+  ChooseMediaOptions,
+  ChooseMediaPageOrientation,
+  ChooseMediaSuccess,
+  ChooseMediaSuccessCallback,
+  ChooseMediaTempFile,
+  IChooseMediaError
+} from '../interface.uts'

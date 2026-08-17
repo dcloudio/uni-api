@@ -99,7 +99,7 @@ class UploadController {
 
 		let request = this.createUploadRequest(options, listener);
 		if (request == null) {
-			return new NetworkUploadTaskImpl(null, listener);;
+			return new NetworkUploadTaskImpl(null, listener);
 		}
 		let call : Call = client.newCall(request);
 		call.enqueue(new SimpleUploadCallback(listener));
@@ -161,6 +161,7 @@ class UploadController {
 		}
 
 		const tempFiles = options.files;
+		const filePath = options.filePath;
 		if (tempFiles != null && tempFiles!.length > 0) {
 			const files : UploadFileOptionFiles[] = tempFiles;
 			for (let i = 0; i < files.length; i++) {
@@ -185,20 +186,7 @@ class UploadController {
 					return null;
 				}
 			}
-		} else {
-			const filePath = options.filePath;
-			if (filePath == null) {
-				let option = {};
-				option['statusCode'] = '-1';
-				option['errorCode'] = '-1';
-				option['errorMsg'] = "filePath is null";
-				option['cause'] = null;
-				if (listener != null) {
-					listener.onComplete(option);
-				}
-				return null;
-			}
-
+		} else if (filePath != null) {
 			const fileInformation = this.getFileInformation(filePath);
 			const name = options.name ?? "file";
 
@@ -218,16 +206,28 @@ class UploadController {
 				return null;
 			}
 		}
-
-
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
+		
+		if(formData == null && filePath == null && (tempFiles == null || (tempFiles != null && tempFiles?.length == 0))) {
+			let option = {};
+			option['statusCode'] = '-1';
+			option['errorCode'] = '602001';
+			option['errorMsg'] = "request system error";
+			option['cause'] = new SourceError("At least one of the parameters filePath, files, or formData");
+			if (listener != null) {
+				listener.onComplete(option);
+			}
+			return null;
+		}
 
 		const headers = options.header?.toMap();
+		let hasUAHeader = false;
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
+				if(!hasUAHeader && key.equals("User-Agent", true)){
+					hasUAHeader = true
+				}
 
 				if (value != null) {
 					requestBilder.addHeader(key, "" + value);
@@ -235,6 +235,10 @@ class UploadController {
 					continue;
 				}
 			}
+		}
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
 		}
 
 		requestBilder.post(new ProgressRequestBody(multiPartBody.build(), new NetworkUploadProgressListener(listener)));
@@ -343,29 +347,50 @@ class UploadController {
 		if (path.startsWith("file://")) {
 			path = path.replace("file://", "");
 		}
+
+		if (this.isAssetFile(path) || Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+			return true;
+		}
+
 		const context = UTSAndroid.getAppContext()!;
 		let cache = context.getExternalCacheDir();
-		let sPrivateExternalDir = ""
+		let privateExternalDir : File | null = null
 		if (cache == null) {
-			sPrivateExternalDir = Environment.getExternalStorageDirectory().getPath() + "/Android/data/" + context.getPackageName();
+			privateExternalDir = new File(Environment.getExternalStorageDirectory().getPath() + "/Android/data/" + context.getPackageName());
 		} else {
-			sPrivateExternalDir = cache.getParent();
+			privateExternalDir = cache.getParentFile();
 		}
-		const sPrivateDir = context.getFilesDir().getParent();
 
-		if (sPrivateExternalDir.startsWith("/") && !path.startsWith("/")) {
+		if (!path.startsWith("/")) {
 			path = "/" + path;
 		}
 
-		if ((path.contains(sPrivateDir) || path.contains(sPrivateExternalDir))//表示应用私有路径
-			|| this.isAssetFile(path) //表示apk的assets路径文件
-			|| Build.VERSION.SDK_INT < Build.VERSION_CODES.Q//表示当前手机属于可正常访问路径系统
-		) {
-			//文件路径在私有路径下或手机系统版符合非分区存储逻辑
+		const targetFile = new File(path);
+		const privateDir = context.getFilesDir().getParentFile();
+		if (privateDir != null && this.isDescendant(privateDir, targetFile)) {
+			return true;
+		}
+
+		if (privateExternalDir != null && this.isDescendant(privateExternalDir, targetFile)) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * 判断两个文件的上下级关系
+	 */
+	private isDescendant(parent : File, child : File) : boolean {
+		if (child.getCanonicalPath() == parent.getCanonicalPath()) {
+			return true;
+		}
+		let parentFile = child.getParentFile();
+
+		if (parentFile == null) {
+			return false;
+		}
+		return this.isDescendant(parent, parentFile);
 	}
 
 	private isAssetFile(filePath : string) : boolean {
@@ -385,18 +410,21 @@ class UploadController {
 	private getMimeType(filename : string) : string {
 		let map = MimeTypeMap.getSingleton()
 		var extType = MimeTypeMap.getFileExtensionFromUrl(filename)
-		if (extType == null && filename.lastIndexOf(".") >= 0) {
+		if (TextUtils.isEmpty(extType) && filename.lastIndexOf(".") >= 0) {
 			extType = filename.substring(filename.lastIndexOf(".") + 1)
+		}
+		if (extType != null) {
+			extType = extType.toLowerCase()
 		}
 		let ret = map.getMimeTypeFromExtension(extType);
 		if (TextUtils.isEmpty(ret)) {
 			if (TextUtils.isEmpty(extType)) {
-				ret = "*/*"
+				ret = "application/octet-stream"
 			} else {
 				ret = "application/" + extType
 			}
 		}
-
+	
 		return ret!;
 	}
 }

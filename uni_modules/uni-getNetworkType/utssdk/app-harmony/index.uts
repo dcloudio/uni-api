@@ -1,16 +1,11 @@
-import { Emitter, onNativePageReady } from '@dcloudio/uni-runtime';
+import { onNativePageReady, EventHub } from '@dcloudio/uni-runtime';
 import radio from '@ohos.telephony.radio'
 import { GetNetworkType, GetNetworkTypeOptions, GetNetworkTypeSuccess, OnNetworkStatusChange, OffNetworkStatusChange, OnNetworkStatusChangeCallbackResult } from '../interface.uts';
 import { API_GET_NETWORK_TYPE } from '../protocol.uts';
 import { BusinessError } from '@kit.BasicServicesKit';
 import connection from '@ohos.net.connection'
 
-interface IUniGetNetworkTypeEventEmitter {
-    on: (eventName: string, callback: Function) => void
-    once: (eventName: string, callback: Function) => void
-    off: (eventName: string, callback?: Function) => void
-    emit: (eventName: string, ...args: (Object | undefined | null)[]) => void
-}
+const NetworkStatusChangeEventHub = new EventHub();
 
 const PERMISSIONS = ['ohos.permission.GET_NETWORK_INFO']
 
@@ -30,7 +25,7 @@ enum NetworkinfoType {
     "5G" = 7,
 }
 
-function signalType(resultObj: radio.NetworkType) {
+function signalType(resultObj: radio.NetworkType): NetworkinfoType {
     switch (resultObj) {
         case radio.NetworkType.NETWORK_TYPE_GSM:
         case radio.NetworkType.NETWORK_TYPE_CDMA:
@@ -68,9 +63,9 @@ function networkGetType() {
                     reject(error as BusinessError)
                 }
             } else {
-                reject('permission denied')
+                reject(new Error('permission denied'))
             }
-        }, () => reject('permission denied'))
+        }, () => reject(new Error('permission denied, possibly not configured or not authorized')))
     })
 }
 
@@ -95,40 +90,44 @@ function getCurrentType() {
             if (allRight) {
                 try {
                     // 调用getDefaultNet方法，获取默认的数据网络(NetHandle)
-                    connection.getDefaultNet().then((data: connection.NetHandle) => {
-                        if (data) {
-                            GlobalContext.getContext().netHandle = data;
-                            // 获取netHandle对应网络的能力信息。能力信息包含了网络类型、网络具体能力等网络信息
-                            connection.getNetCapabilities(GlobalContext.getContext().netHandle!).then((data: connection.NetCapabilities) => {
-                                // 获取网络类型(bearerTypes)
-                                const bearerTypes: Set<number> = new Set(data.bearerTypes);
-                                const bearerTypesNum = Array.from(bearerTypes.values());
-                                for (const item of bearerTypesNum) {
-                                    if (item == connection.NetBearType.BEARER_CELLULAR) {
-                                        // 蜂窝网
-                                        networkGetType().then(resolve).catch(reject)
-                                    } else if (item == connection.NetBearType.BEARER_WIFI) {
-                                        // Wi-Fi网络
-                                        resolve(NetworkinfoType.WIFI)
-                                    } else if (item == connection.NetBearType.BEARER_ETHERNET) {
-                                        // 以太网网络
-                                        resolve(NetworkinfoType.ETHERNET)
-                                    } else {
-                                        resolve(NetworkinfoType.UNKNOW)
+                    connection.getDefaultNet()
+                        .then((data: connection.NetHandle) => {
+                            if (data) {
+                                GlobalContext.getContext().netHandle = data;
+                                // 获取netHandle对应网络的能力信息。能力信息包含了网络类型、网络具体能力等网络信息
+                                connection.getNetCapabilities(GlobalContext.getContext().netHandle!).then((data: connection.NetCapabilities) => {
+                                    // 获取网络类型(bearerTypes)
+                                    const bearerTypes: Set<number> = new Set(data.bearerTypes);
+                                    const bearerTypesNum = Array.from(bearerTypes.values());
+                                    for (const item of bearerTypesNum) {
+                                        if (item == connection.NetBearType.BEARER_CELLULAR) {
+                                            // 蜂窝网
+                                            networkGetType().then(resolve).catch(reject)
+                                        } else if (item == connection.NetBearType.BEARER_WIFI) {
+                                            // Wi-Fi网络
+                                            resolve(NetworkinfoType.WIFI)
+                                        } else if (item == connection.NetBearType.BEARER_ETHERNET) {
+                                            // 以太网网络
+                                            resolve(NetworkinfoType.ETHERNET)
+                                        } else {
+                                            resolve(NetworkinfoType.UNKNOW)
+                                        }
                                     }
-                                }
-                            }).catch((err: BusinessError) => {
-                                reject(err)
-                            })
-                        }
-                    })
+                                }).catch((err: BusinessError) => {
+                                    reject(err)
+                                })
+                            }
+                        })
+                        .catch((err: BusinessError) => {
+                            reject(err);
+                        });
                 } catch (error) {
                     reject(error)
                 }
             } else {
-                reject('permission denied')
+                reject(new Error('permission denied'))
             }
-        })
+        }, () => reject(new Error('permission denied, possibly not configured or not authorized')))
     })
 }
 
@@ -207,7 +206,7 @@ export const getNetworkType: GetNetworkType = defineAsyncApi<GetNetworkTypeOptio
 ) as GetNetworkType
 
 function invokeOnNetworkStatusChange(networkType: string) {
-    UniGetNetworkTypeEventEmitter.emit(
+    NetworkStatusChangeEventHub.emit(
         'networkStatusChange',
         {
             isConnected: networkType !== NetworkinfoType[1],
@@ -216,20 +215,31 @@ function invokeOnNetworkStatusChange(networkType: string) {
     )
 }
 
-const UniGetNetworkTypeEventEmitter = new Emitter() as IUniGetNetworkTypeEventEmitter
+export const onNetworkStatusChange: OnNetworkStatusChange = defineSyncApi<number>(
+    'onNetworkStatusChange',
+    (callback: Function): number => {
+        return NetworkStatusChangeEventHub.on('networkStatusChange', callback)
+    }
+) as OnNetworkStatusChange
 
-export const onNetworkStatusChange: OnNetworkStatusChange = function (callback: Function) {
-    UTSHarmony.requestSystemPermission(PERMISSIONS, (allRight: boolean) => {
-        if (allRight) {
-            UniGetNetworkTypeEventEmitter.on('networkStatusChange', callback)
-        }
-    })
-}
+export const offNetworkStatusChange: OffNetworkStatusChange = defineSyncApi<void>(
+    'offNetworkStatusChange',
+    (callback: number | Function | null): void => {
+        return NetworkStatusChangeEventHub.off('networkStatusChange', callback)
+    }
+) as OffNetworkStatusChange
 
-export const offNetworkStatusChange: OffNetworkStatusChange = function (callback: Function) {
-    UTSHarmony.requestSystemPermission(PERMISSIONS, (allRight: boolean) => {
-        if (allRight) {
-            UniGetNetworkTypeEventEmitter.off('networkStatusChange', callback)
-        }
-    })
-}
+export {
+    GetNetworkType,
+    GetNetworkTypeComplete,
+    GetNetworkTypeCompleteCallback,
+    GetNetworkTypeFail,
+    GetNetworkTypeFailCallback,
+    GetNetworkTypeOptions,
+    GetNetworkTypeSuccess,
+    GetNetworkTypeSuccessCallback,
+    OffNetworkStatusChange,
+    OnNetworkStatusChange,
+    OnNetworkStatusChangeCallback,
+    OnNetworkStatusChangeCallbackResult
+} from '../interface.uts';

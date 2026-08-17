@@ -5,19 +5,17 @@ export type ReadFileSuccessResult = {
       @uniPlatform {
          "app": {
              "android": {
-                 "osVer": "5.0",
                  "uniVer": "√",
                  "unixVer": "4.31"
              },
              "ios": {
-                 "osVer": "12.0",
                  "uniVer": "x",
                  "unixVer": "4.11"
              },
          "harmony": {
-           "osVer": "3.0",
            "uniVer": "4.51",
-           "unixVer": "4.61"
+           "unixVer": "4.61",
+           "unixVaporVer": "5.0"
          }
          },
        "mp": {
@@ -175,19 +173,17 @@ export type WriteFileOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *        },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -281,19 +277,17 @@ export type AppendFileOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
-     *            "unixVer": "x"
+     *            "unixVer": "4.61"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.51",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -785,19 +779,17 @@ export interface Stats extends JSExport {
 	 * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *         },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -854,19 +846,17 @@ export interface Stats extends JSExport {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.31"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.11"
 	 *         },
 	 *        "harmony": {
-	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixVaporVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -952,19 +942,17 @@ export interface Stats {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.31"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.11"
 	 *         },
 	 *        "harmony": {
-	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixVaporVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -1021,19 +1009,17 @@ export interface Stats {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.31"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.11"
 	 *         },
 	 *        "harmony": {
-	 *          "osVer": "3.0",
 	 *          "uniVer": "4.51",
-	 *          "unixVer": "4.61"
+	 *          "unixVer": "4.61",
+	 *          "unixVaporVer": "5.0"
 	 *        }
 	 *    },
 	 *  "mp": {
@@ -1286,22 +1272,20 @@ export type WriteOptions = {
     fd: string,
     /**
      * 写入的内容，类型为 String 或 ArrayBuffer，以前类型是string，iOS平台4.61、Android平台4.31及以后支持ArrayBuffer
-     * @uniPlatform
+     * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "4.61",
      *            "unixVer": "4.61"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1359,19 +1343,17 @@ export type WriteOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1428,19 +1410,17 @@ export type WriteOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "4.61",
      *            "unixVer": "4.61"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1497,19 +1477,17 @@ export type WriteOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1601,19 +1579,17 @@ export type WriteSyncOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1686,19 +1662,17 @@ export type WriteSyncOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1750,23 +1724,21 @@ export type WriteSyncOptions = {
      * }
      */
     length?: number
-    /** 只在 data 类型是 ArrayBuffer 时有效，决定 arrayBuffe 中要被写入的部位，即 arrayBuffer 中的索引，默认0，4.31及以后版本新增
+    /** 只在 data 类型是 ArrayBuffer 时有效，决定 arrayBuffer 中要被写入的部位，即 arrayBuffer 中的索引，默认0，4.31及以后版本新增
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -1822,19 +1794,17 @@ export type WriteSyncOptions = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "√",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "x"
      *        },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -2080,19 +2050,17 @@ export type ReadSuccessCallbackResult = {
 	 * @uniPlatform {
 	 *    "app": {
 	 *        "android": {
-	 *            "osVer": "5.0",
 	 *            "uniVer": "√",
 	 *            "unixVer": "4.31"
 	 *        },
 	 *        "ios": {
-	 *            "osVer": "12.0",
 	 *            "uniVer": "x",
 	 *            "unixVer": "4.61"
 	 *        },
 	 *    "harmony": {
-	 *      "osVer": "5.0.0",
 	 *      "uniVer": "4.41",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *    },
 	 *  "mp": {
@@ -2148,19 +2116,17 @@ export type ReadSuccessCallbackResult = {
 	* @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "√",
 	*            "unixVer": "4.31"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "x",
 	*            "unixVer": "4.61"
 	*        },
 	*    "harmony": {
-	*      "osVer": "5.0.0",
 	*      "uniVer": "4.41",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixVaporVer": "5.0"
 	*    }
 	*    },
 	*  "mp": {
@@ -2245,19 +2211,17 @@ export type ReadSyncOption = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2324,19 +2288,17 @@ export type ReadResult = {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2392,19 +2354,17 @@ export type ReadResult = {
 	* @uniPlatform {
 	*    "app": {
 	*        "android": {
-	*            "osVer": "5.0",
 	*            "uniVer": "x",
 	*            "unixVer": "4.31"
 	*        },
 	*        "ios": {
-	*            "osVer": "12.0",
 	*            "uniVer": "x",
 	*            "unixVer": "4.61"
 	*   	  },
 	*        "harmony": {
-	*          "osVer": "3.0",
 	*          "uniVer": "4.51",
-	*          "unixVer": "4.61"
+	*          "unixVer": "4.61",
+	*          "unixVaporVer": "5.0"
 	*        }
 	*    },
 	*  "mp": {
@@ -2463,19 +2423,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2533,19 +2491,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2602,19 +2558,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2674,19 +2628,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2743,19 +2695,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2812,19 +2762,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2881,19 +2829,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -2952,19 +2898,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3021,19 +2965,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3090,19 +3032,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3159,19 +3099,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3228,19 +3166,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3297,19 +3233,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3366,19 +3300,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3435,19 +3367,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -3506,19 +3436,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -3575,19 +3503,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3644,19 +3570,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3713,19 +3637,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3785,19 +3707,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3854,19 +3774,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3923,19 +3841,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.31"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -3992,19 +3908,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4062,19 +3976,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4131,19 +4043,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4200,19 +4110,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4271,19 +4179,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4340,19 +4246,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4411,19 +4315,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4480,19 +4382,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4549,19 +4449,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4620,19 +4518,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *            "osVer": "x",
      *            "uniVer": "4.51",
-     *            "unixVer": "4.61"
+     *            "unixVer": "4.61",
+     *            "unixVaporVer": "5.0"
      *   	  }
      *    },
      *  "mp": {
@@ -4689,19 +4585,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4764,19 +4658,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4833,19 +4725,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4904,19 +4794,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -4978,19 +4866,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5049,19 +4935,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5118,19 +5002,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5188,19 +5070,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5257,19 +5137,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *        "harmony": {
-     *          "osVer": "3.0",
      *          "uniVer": "4.51",
-     *          "unixVer": "4.61"
+     *          "unixVer": "4.61",
+     *          "unixVaporVer": "5.0"
      *        }
      *    },
      *  "mp": {
@@ -5326,19 +5204,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5398,19 +5274,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.51"
+     *      "unixVer": "4.51",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5467,19 +5341,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5536,19 +5408,17 @@ export interface FileSystemManager {
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "4.13"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.61"
      *   	  },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5609,24 +5479,23 @@ export type GetFileSystemManager = () => FileSystemManager;
 export interface Uni {
     /**
      * 获取文件管理器
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-file-system-manager.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-file-system-manager.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-file-system-manager.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/file/getFileSystemManager.html#getfilesystemmanager
      * @uniPlatform {
      *    "app": {
      *        "android": {
-     *            "osVer": "5.0",
      *            "uniVer": "x",
      *            "unixVer": "3.9.0"
      *        },
      *        "ios": {
-     *            "osVer": "12.0",
      *            "uniVer": "x",
      *            "unixVer": "4.11"
      *   	  },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.45",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *    },
      *  "mp": {
@@ -5690,19 +5559,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5724,19 +5591,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5758,19 +5623,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5792,19 +5655,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5826,19 +5687,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5860,19 +5719,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5894,19 +5751,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5928,19 +5783,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5962,19 +5815,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.11"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -5996,19 +5847,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "√"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6030,19 +5879,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "4.13"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6064,19 +5911,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "5.0",
      *      "uniVer": "x",
      *      "unixVer": "4.13"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6098,19 +5943,17 @@ export type FileSystemManagerErrorCode =
 	 * @uniPlatform {
 	 *  "app": {
 	 *    "android": {
-	 *      "osVer": "5.0",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.13"
 	 *    },
 	 *    "ios": {
-	 *      "osVer": "x",
 	 *      "uniVer": "x",
 	 *      "unixVer": "4.61"
 	 *    },
 	 *    "harmony": {
-	 *      "osVer": "3.0",
 	 *      "uniVer": "4.41",
-	 *      "unixVer": "4.61"
+	 *      "unixVer": "4.61",
+	 *      "unixVaporVer": "5.0"
 	 *    }
 	 *  },
 	 *  "web": {
@@ -6132,19 +5975,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6166,19 +6007,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6200,19 +6039,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6234,19 +6071,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6268,19 +6103,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6302,19 +6135,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6336,19 +6167,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6370,19 +6199,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6404,19 +6231,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6438,19 +6263,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "4.61"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {
@@ -6472,19 +6295,17 @@ export type FileSystemManagerErrorCode =
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "ios": {
-     *      "osVer": "x",
      *      "uniVer": "x",
      *      "unixVer": "x"
      *    },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.41",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "web": {

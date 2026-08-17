@@ -3,6 +3,7 @@ import { NetworkUploadFileListener } from '../NetworkManager.uts'
 import { CharacterSet, HTTPURLResponse, UUID, Data, URL, URLResourceKey, URLSessionDataTask, URLSessionTask, URLSession, URLSessionConfiguration, OperationQueue, URLSessionDataDelegate, URLSessionUploadTask, NSError , NSMutableData , NSMutableSet , URLRequest} from 'Foundation';
 import { UTTypeCreatePreferredIdentifierForTag, UTTypeCopyPreferredTagWithClass, kUTTagClassFilenameExtension, kUTTagClassMIMEType } from 'MobileCoreServices';
 import { CFString } from 'CoreFoundation';
+import { NetworkUtil } from '../utils/NetworkUtil.uts';
 
 class NetworkUploadTaskImpl implements UploadTask {
 	private task : URLSessionDataTask | null = null;
@@ -74,7 +75,7 @@ class UploadController implements URLSessionDataDelegate {
 
 
 	private createRequest(param : UploadFileOptions, listener : NetworkUploadFileListener, boundary : string) : URLRequest | null {
-		const encodeUrl = this.percentEscapedString(param.url)
+		const encodeUrl = NetworkUtil.percentEscapedString(param.url)
 		let url = new URL(string = encodeUrl);
 		if (url == null) {
 			let error = new NSError(domain = "invalid URL", code = 600009);
@@ -142,6 +143,7 @@ class UploadController implements URLSessionDataDelegate {
 		}
 
 		const tempFiles = options.files;
+		const filePath = options.filePath;
 		if (tempFiles != null && tempFiles!.length > 0) {
 			const files : UploadFileOptionFiles[] = tempFiles!;
 			for (let i = 0; i < files.length; i++) {
@@ -152,30 +154,25 @@ class UploadController implements URLSessionDataDelegate {
 					return null;
 				}
 			}
-		} else {
-			const filePath = options.filePath;
+		} else if(filePath != null) {
 			const name = options.name ?? "file";
-			if (filePath == null) {
-				let error = new NSError(domain = "filePath is null", code = -1);
-				listener.onFail(error)
-				return null;
-			}
 			if (!this.fillFilePart(body, boundary, name, filePath!, listener)) {
 				return null
 			}
 		}
+		
+		if(formData == null && filePath == null && (tempFiles == null || (tempFiles != null && tempFiles?.length == 0))) {
+			let error = new NSError(domain = "At least one of the parameters filePath, files, or formData", code = 602001);
+			listener.onFail(error);
+			return null;
+		}
+		
 
 		body.append(`--${boundary}--\r\n`.data(using = String.Encoding.utf8)!)
 
 		return body.copy() as Data;
 	}
 	
-	
-	private percentEscapedString(str: string): string {
-		//如果url已经有部分经过encode，那么需要先decode再encode。
-		return str.removingPercentEncoding?.addingPercentEncoding(withAllowedCharacters= CharacterSet.urlQueryAllowed) ?? str
-	}
-
 
 	private fillTextPart(body : NSMutableData, boundary : string, key : string, value : string) {
 		body.append(`--${boundary}\r\n`.data(using = String.Encoding.utf8)!)

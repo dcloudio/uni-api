@@ -233,26 +233,26 @@ export function showModalImpl(style:ShowModalOptions){
 	
 	
 	
-	// // #ifndef UNI-APP-X
-	// 	/**
-	// 	 * uni-app
-	// 	 */
-	// 	if(UTSAndroid.getTopPageActivity() == null){
-	// 		return 
-	// 	}
-	// 	if(UTSAndroid.getTopPageActivity()!.isFinishing()){
-	// 		return 
-	// 	}
-	// 	utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
-	// 	utsDialog?.initStyle(style)
-	// 	utsDialog?.show();
+	// #ifndef UNI-APP-X
+		/**
+		 * uni-app
+		 */
+		if(UTSAndroid.getTopPageActivity() == null){
+			return 
+		}
+		if(UTSAndroid.getTopPageActivity()!.isFinishing()){
+			return 
+		}
+		utsDialog = new UTSDialog(UTSAndroid.getTopPageActivity()!);
+		utsDialog?.initStyle(style)
+		utsDialog?.show();
 		
-	// 	UTSAndroid.onAppActivityDestroy(function(){
-	// 		utsDialog?.dismiss()
-	// 		utsDialog = null
-	// 	})
-		
-	// // #endif
+		UTSAndroid.onAppActivityDestroy(function(){
+			utsDialog?.dismiss()
+			utsDialog = null
+		})
+	// #endif
+	
 	// // #ifdef UNI-APP-X
 	// 	/**
 	// 	 * uni-app x

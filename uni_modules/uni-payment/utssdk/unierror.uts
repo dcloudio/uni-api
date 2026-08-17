@@ -65,6 +65,9 @@ export const RequestPaymentUniErrors : Map<RequestPaymentErrorCode, string> = ne
 ]);
 
 export class RequestPaymentFailImpl extends UniError implements IRequestPaymentFail {
+    // #ifdef APP-HARMONY
+    override errCode: RequestPaymentErrorCode
+    // #endif
 	constructor(errCode : RequestPaymentErrorCode) {
 		super();
 		this.errSubject = RequestPaymentUniErrorSubject;

@@ -17,13 +17,6 @@ import {
 import fs from '@ohos.file.fs';
 import { ShareWithSystemUniErrors } from '../unierror.uts'
 
-export {
-    ShareWithSystem,
-    ShareWithSystemOptions,
-    ShareWithSystemSuccess,
-    ShareWithSystemFail,
-} from '../interface.uts'
-
 /**
  * resfile下的文件无法分享
  */
@@ -199,5 +192,14 @@ export {
     shareWithSystem
 }
 
-
-
+export {
+    IShareWithSystemFail,
+    ShareWithSystem,
+    ShareWithSystemCallback,
+    ShareWithSystemErrorCode,
+    ShareWithSystemFail,
+    ShareWithSystemFailCallback,
+    ShareWithSystemOptions,
+    ShareWithSystemSuccess,
+    ShareWithSystemSuccessCallback
+} from '../interface.uts'

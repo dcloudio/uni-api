@@ -8,19 +8,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -75,19 +73,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -142,19 +138,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -209,19 +203,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -276,19 +268,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "x",
    * 			"uniVer": "x",
    * 			"unixVer": "x"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -343,19 +333,17 @@ export type GetSystemSettingResult = {
    * {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "3.9+"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.11"
    * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.25",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
    * 	},
    *  "mp": {
@@ -423,26 +411,24 @@ export interface Uni {
     * @description
     * 获取系统设置
     * @return {object}
-    * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
-    * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
+    * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-system-setting.html
+    * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/getsystemsetting.html
     * @uniPlatform
   * {
   * 	"app": {
   * 		"android": {
-  * 			"osVer": "5.0",
   * 			"uniVer": "√",
   * 			"unixVer": "3.9+"
   * 		},
   * 		"ios": {
-  * 			"osVer": "12.0",
   * 			"uniVer": "√",
   * 			"unixVer": "4.11"
   * 		},
   *    "harmony": {
-  *      "osVer": "3.0",
   *      "uniVer": "4.31",
-  *      "unixVer": "4.61"
+  *      "unixVer": "4.61",
+  *      "unixVaporVer": "5.0"
   *    }
   * 	},
    *  "mp": {

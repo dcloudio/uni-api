@@ -11,11 +11,6 @@ import {
 import I18n from '@ohos.i18n'
 import deviceInfo from '@ohos.deviceInfo';
 
-export {
-    GetDeviceInfo,
-    GetDeviceInfoResult,
-}
-
 function parseDeviceType(deviceType: string): 'phone' | 'pad' | 'tv' | 'watch' | 'pc' | 'unknown' | 'car' | 'vr' | 'appliance' {
     switch (deviceType) {
         case 'phone':
@@ -60,3 +55,9 @@ export const getDeviceInfo: GetDeviceInfo = defineSyncApi<GetDeviceInfoResult>(
         } as GetDeviceInfoResult
     }
 ) as GetDeviceInfo
+
+export {
+    GetDeviceInfo,
+    GetDeviceInfoOptions,
+    GetDeviceInfoResult
+} from '../interface.uts';

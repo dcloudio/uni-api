@@ -11,22 +11,20 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -86,22 +84,20 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -160,22 +156,20 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -234,22 +228,20 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -308,13 +300,11 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -367,24 +357,150 @@ export type RequestOptions<T> = {
      */
     timeout?: number | null,
     /**
+     * 是否开启 Quic/h3 协议
+     * `web` 端由服务端和浏览器共同决定是否启用 Quic/h3 协议，无需设置此参数
+	 *  `Android`端从`HBuilderX 5.23`开始，默认开启Brotli
+     * @defaultValue false
+     * @uniPlatform
+      {
+        "app": {
+          "android": {
+            "uniVer": "x",
+            "uniUtsPlugin": "5.0",
+            "unixVer": "5.0"
+          },
+          "ios": {
+            "uniVer": "x",
+            "uniUtsPlugin": "x",
+            "unixVer": "5.0"
+          },
+          "harmony": {
+            "uniVer": "x",
+            "uniUtsPlugin": "5.0",
+            "unixVer": "5.0",
+            "unixVaporVer": "5.0"
+          }
+         },
+      *  "mp": {
+      *    "weixin": {
+      *        "hostVer": "√",
+      *        "uniVer": "√",
+      *        "unixVer": "√"
+      *    },
+      *    "alipay": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "baidu": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "toutiao": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "lark": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "qq": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "kuaishou": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    },
+      *    "jd": {
+      *        "hostVer": "x",
+      *        "uniVer": "x",
+      *        "unixVer": "x"
+      *    }
+      *  },
+      *  "web": {
+      *      "uniVer": "√",
+      *      "unixVer": "√"
+      *  }
+      }
+     */
+    enableQuic?: boolean | null,
+    /**
      * 如果设为 json，会对返回的数据进行一次 JSON.parse，非 json 不会进行 JSON.parse
      * @defaultValue "json"
-     * @deprecated 不支持
-     * @autodoc false
+     * @uniPlatform
+      {
+        "app": {
+          "android": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "ios": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "harmony": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          }
+        }
+      }
      */
     dataType?: string | null,
     /**
      * 设置响应的数据类型。
-     *
-     * @deprecated 不支持
-     * @autodoc false
+     * @uniPlatform
+      {
+        "app": {
+          "android": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "ios": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "harmony": {
+            "uniVer": "√",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          }
+        }
+      }
      */
     responseType?: string | null,
     /**
      * 验证 ssl 证书
-     *
-     * @deprecated 不支持
-     * @autodoc false
+     * @uniPlatform
+      {
+        "app": {
+          "android": {
+            "uniVer": "2.3.3",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "ios": {
+            "uniVer": "x",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          },
+          "harmony": {
+            "uniVer": "x",
+            "unixVer": "x",
+            "unixVaporVer": "x"
+          }
+        }
+      }
      */
     sslVerify?: boolean | null,
     /**
@@ -394,20 +510,17 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -468,20 +581,17 @@ export type RequestOptions<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "x",
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -542,23 +652,20 @@ export type RequestOptions<T> = {
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
-     *       "unixVer": "4.71"
+     *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *   },
@@ -614,16 +721,109 @@ export type RequestOptions<T> = {
     /**
      * 网络请求成功回调。
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "4.11",
+     *       "unixVer": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     success?: RequestSuccessCallback<T> | null,
     /**
      * 网络请求失败回调。
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "4.11",
+     *       "unixVer": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     fail?: RequestFailCallback | null,
     /**
      * 网络请求完成回调，成功或者失败都会调用。
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "4.11",
+     *       "unixVer": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     complete?: RequestCompleteCallback | null
 }
@@ -636,22 +836,20 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -709,22 +907,20 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -782,22 +978,20 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -855,22 +1049,20 @@ export type RequestSuccess<T> = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
         "web": {
@@ -936,6 +1128,10 @@ export type RequestErrorCode =
      */
     100002 |
     /**
+     * json解析类型转换失败
+     */
+    100003 |
+    /**
      * 网络中断
      */
     600003 |
@@ -947,6 +1143,10 @@ export type RequestErrorCode =
      * URL格式不合法
      */
     600009 |
+	/**
+	 * Cronet模块加载失败
+	 */
+	600010 |
     /**
      * request系统错误
      */
@@ -963,28 +1163,25 @@ export type RequestFailCallback = (option: RequestFail) => void;
 export type RequestCompleteCallback = (option: any) => void;
 
 export type RequestTaskOnChunkReceivedListenerResult = {
-    /** 返回的chunk buffer 
+    /** 返回的chunk buffer
     * @uniPlatform
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
-    *       "unixVer": "4.71"
+    *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *   },
@@ -1045,28 +1242,25 @@ export type RequestTaskOnChunkReceivedCallback = (
 
 
 export type RequestTaskOnHeadersReceivedListenerResult = {
-    /** 开发者服务器返回的 cookies，格式为字符串数组 
+    /** 开发者服务器返回的 cookies，格式为字符串数组
     * @uniPlatform
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
-    *       "unixVer": "4.71"
+    *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *   },
@@ -1119,28 +1313,25 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     * }
     */
     cookies: string[]
-    /** 开发者服务器返回的 HTTP Response Header 
+    /** 开发者服务器返回的 HTTP Response Header
     * @uniPlatform
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
-    *       "unixVer": "4.71"
+    *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *   },
@@ -1193,28 +1384,25 @@ export type RequestTaskOnHeadersReceivedListenerResult = {
     * }
     */
     header: UTSJSONObject
-    /** 开发者服务器返回的 HTTP 状态码 （目前开发者工具上不会返回 statusCode 字段，可用真机查看该字段，后续将会支持） 
+    /** 开发者服务器返回的 HTTP 状态码 （目前开发者工具上不会返回 statusCode 字段，可用真机查看该字段，后续将会支持）
     * @uniPlatform
     * {
     *   "app": {
     *     "android": {
-    *       "osVer": "5.0",
     *       "uniVer": "√",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71"
     *     },
     *     "ios": {
-    *       "osVer": "12.0",
     *       "uniVer": "x",
     *       "uniUtsPlugin": "4.71",
     *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *     "harmony": {
-    *       "osVer": "3.0",
     *       "uniVer": "4.71",
     *       "uniUtsPlugin": "4.71",
-    *       "unixVer": "4.71"
+    *       "unixVer": "4.71",
     *       "unixUtsPlugin": "4.71"
     *     },
     *   },
@@ -1276,29 +1464,27 @@ export type RequestTaskOnHeadersReceivedCallback = (
 export interface RequestTask {
     /**
       * 中断网络请求。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1361,30 +1547,27 @@ export interface RequestTask {
 
     /**
      * 监听 Transfer-Encoding Chunk Received 事件。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
-     *       "unixVer": "4.71"
+     *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *   },
@@ -1440,30 +1623,27 @@ export interface RequestTask {
 
     /**
      * 移除 Transfer-Encoding Chunk Received 事件的监听函数。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
-     *       "unixVer": "4.71"
+     *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *   },
@@ -1515,33 +1695,30 @@ export interface RequestTask {
      *   }
      * }
      */
-	offChunkReceived(listener ?: number | RequestTaskOnChunkReceivedCallback | null): void
+    offChunkReceived(listener?: number | RequestTaskOnChunkReceivedCallback | null): void
     /**
      * 监听 HTTP Response Header 事件。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
-     *       "unixVer": "4.71"
+     *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *   },
@@ -1597,30 +1774,27 @@ export interface RequestTask {
 
     /**
      * 移除 HTTP Response Header 事件的监听函数。
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
      * @uniPlatform
      * {
      *   "app": {
      *     "android": {
-     *       "osVer": "5.0",
      *       "uniVer": "√",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71"
      *     },
      *     "ios": {
-     *       "osVer": "12.0",
      *       "uniVer": "x",
      *       "uniUtsPlugin": "4.71",
      *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *     "harmony": {
-     *       "osVer": "3.0",
      *       "uniVer": "4.71",
      *       "uniUtsPlugin": "4.71",
-     *       "unixVer": "4.71"
+     *       "unixVer": "4.71",
      *       "unixUtsPlugin": "4.71"
      *     },
      *   },
@@ -1672,7 +1846,7 @@ export interface RequestTask {
      *   }
      * }
      */
-	offHeadersReceived(listener ?: number | RequestTaskOnHeadersReceivedCallback | null): void
+    offHeadersReceived(listener?: number | RequestTaskOnHeadersReceivedCallback | null): void
 }
 
 //===============================上传==================================
@@ -1687,22 +1861,20 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1760,22 +1932,20 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1833,20 +2003,17 @@ export type UploadFileOptionFiles = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -1908,22 +2075,20 @@ export type UploadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -1981,22 +2146,20 @@ export type UploadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2066,22 +2229,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2140,22 +2301,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2214,22 +2373,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2288,22 +2445,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2362,22 +2517,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2436,22 +2589,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2510,22 +2661,20 @@ export type UploadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2580,16 +2729,112 @@ export type UploadFileOptions = {
     /**
      * 成功返回的回调函数
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     success?: UploadFileSuccessCallback | null,
     /**
      * 失败的回调函数
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     fail?: UploadFileFailCallback | null,
     /**
      * 结束的回调函数（调用成功、失败都会执行）
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     complete?: UploadFileCompleteCallback | null
 };
@@ -2600,22 +2845,20 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2673,22 +2916,20 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2746,22 +2987,20 @@ export type OnProgressUpdateResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2819,29 +3058,27 @@ export type UploadFileProgressUpdateCallback = (result: OnProgressUpdateResult) 
 export interface UploadTask {
     /**
       * 中断上传任务。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2903,29 +3140,27 @@ export interface UploadTask {
     abort(): void,
     /**
       * 监听上传进度变化。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -2997,22 +3232,20 @@ export type DownloadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3070,22 +3303,20 @@ export type DownloadFileSuccess = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3155,22 +3386,20 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3229,13 +3458,11 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
@@ -3299,22 +3526,20 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3373,22 +3598,20 @@ export type DownloadFileOptions = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3443,16 +3666,112 @@ export type DownloadFileOptions = {
     /**
      * 下载成功后以 tempFilePath 的形式传给页面，res = {tempFilePath: '文件的临时路径'}
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     success?: DownloadFileSuccessCallback | null,
     /**
      * 失败的回调函数
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     fail?: DownloadFileFailCallback | null,
     /**
      * 结束的回调函数（调用成功、失败都会执行）
      * @defaultValue null
+     * @uniPlatform
+     * {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "3.91",
+     *       "unixVer": "3.91"
+     *     },
+     *     "ios": {
+     *       "uniVer": "√",
+     *       "uniUtsPlugin": "x",
+     *       "unixVer": "4.11",
+     *       "unixUtsPlugin": "4.11"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "4.61",
+     *       "unixVaporVer": "5.0"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *         "hostVer": "√",
+     *         "uniVer": "√",
+     *         "unixVer": "4.41"
+     *     }
+     *   },
+     *   "web": {
+     *       "uniVer": "√",
+     *       "unixVer": "4.0"
+     *   }
+     * }
      */
     complete?: DownloadFileCompleteCallback | null
 };
@@ -3463,22 +3782,20 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3536,22 +3853,20 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3609,22 +3924,20 @@ export type OnProgressDownloadResult = {
       {
         "app": {
           "android": {
-            "osVer": "5.0",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -3681,29 +3994,27 @@ export type DownloadFileProgressUpdateCallback = (result: OnProgressDownloadResu
 export interface DownloadTask {
     /**
       * 中断下载任务
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
         {
           "app": {
             "android": {
-              "osVer": "5.0",
               "uniVer": "√",
               "uniUtsPlugin": "3.91",
               "unixVer": "3.91"
             },
             "ios": {
-              "osVer": "12.0",
               "uniVer": "√",
               "uniUtsPlugin": "4.11",
               "unixVer": "4.11",
               "unixUtsPlugin": "4.11"
             },
             "harmony": {
-              "osVer": "3.0",
               "uniVer": "4.23",
-              "unixVer": "4.61"
+              "unixVer": "4.61",
+              "unixVaporVer": "5.0"
             }
           },
       *  "mp": {
@@ -3765,29 +4076,27 @@ export interface DownloadTask {
     abort(): void,
     /**
       * 监听下载进度变化。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
         {
           "app": {
             "android": {
-              "osVer": "5.0",
               "uniVer": "√",
               "uniUtsPlugin": "3.91",
               "unixVer": "3.91"
             },
             "ios": {
-              "osVer": "12.0",
               "uniVer": "√",
               "uniUtsPlugin": "4.11",
               "unixVer": "4.11",
               "unixUtsPlugin": "4.11"
             },
             "harmony": {
-              "osVer": "3.0",
               "uniVer": "4.23",
-              "unixVer": "4.61"
+              "unixVer": "4.61",
+              "unixVaporVer": "5.0"
             }
           },
       *  "mp": {
@@ -3870,19 +4179,17 @@ export type Certificate = {
       {
         "app": {
           "android": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
         "web": {
@@ -3899,17 +4206,14 @@ export type Certificate = {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "3.2.7",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "10.0",
             "uniVer": "3.2.7",
             "unixVer": "x"
           },
           "harmony": {
-            "osVer": "x",
             "uniVer": "x",
             "unixVer": "x"
           }
@@ -3956,12 +4260,43 @@ export type ConfigMTLSOptions = {
      */
     complete?: ConfigMTLSCompleteCallback | null
 }
+// export type PrefetchDNSNetAddress = {
+//     /** 地址 */
+//     address: string
+//     /** IP类型 */
+//     family: 'IPv4' | 'IPv6'
+//     /** 端口 */
+//     port: number
+// }
+// export type PrefetchDNSSuccess = PrefetchDNSNetAddress[]
+
+// export type PrefetchDNSFail = {
+//     /** 错误码 */
+//     code: number,
+// }
+// export type PrefetchDNSOptions = {
+//     /** 域名 */
+//     domain: string
+//     /**
+//      * 成功的回调函数
+//      */
+//     success?: (result: PrefetchDNSSuccess) => void
+//     /**
+//      * 失败的回调函数
+//      */
+//     fail?: (result: PrefetchDNSFail) => void
+//     /**
+//      * 结束的回调函数（调用成功、失败都会执行）
+//      */
+//     complete?: (result: any) => void
+// }
+// export type PrefetchDNS = (options: PrefetchDNSOptions) => void;
 
 export interface Uni {
     /**
       * 发起网络请求。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/request.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/request.html
     * @inline
     * @reified
@@ -3969,22 +4304,19 @@ export interface Uni {
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "4.11",
-            "unixVer": "4.11",
-            "unixUtsPlugin": "4.11"
+            "unixVer": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4066,29 +4398,27 @@ export interface Uni {
     request<T>(param: RequestOptions<T>): RequestTask;
     /**
       * 将本地资源上传到开发者服务器。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#uploadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/upload-file.html
       * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4156,29 +4486,27 @@ export interface Uni {
     uploadFile(options: UploadFileOptions): UploadTask;
     /**
       * 下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
-      * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
-      * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
+      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/network-file.html#downloadfile
+      * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/download-file.html
       * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "√",
             "uniUtsPlugin": "3.91",
             "unixVer": "3.91"
           },
           "ios": {
-            "osVer": "12.0",
             "uniVer": "√",
             "uniUtsPlugin": "x",
             "unixVer": "4.11",
             "unixUtsPlugin": "4.11"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.23",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
       *  "mp": {
@@ -4243,28 +4571,26 @@ export interface Uni {
      * 配置自签名证书
      *
      * @tutorial https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/request/request.html#configmtls
      *
      * @uniPlatform
       {
         "app": {
           "android": {
-            "osVer": "4.4",
             "uniVer": "3.2.7",
             "uniUtsPlugin": "x",
             "unixVer": "x"
           },
           "ios": {
-            "osVer": "10.0",
             "uniVer": "3.2.7",
             "uniUtsPlugin": "x",
             "unixVer": "x",
             "unixUtsPlugin": "x"
           },
           "harmony": {
-            "osVer": "3.0",
             "uniVer": "4.31",
-            "unixVer": "4.61"
+            "unixVer": "4.61",
+            "unixVaporVer": "5.0"
           }
         },
         "web": {
@@ -4274,4 +4600,34 @@ export interface Uni {
       }
      */
     configMTLS(options: ConfigMTLSOptions): void;
+
+    /**
+     * DNS 预解析域名
+     * @param options
+     * @uniPlatform
+     *       {
+     *         "app": {
+     *           "android": {
+     *             "uniVer": "3.2.7",
+     *             "uniUtsPlugin": "x",
+     *             "unixVer": "x"
+     *           },
+     *           "ios": {
+     *             "uniVer": "3.2.7",
+     *             "uniUtsPlugin": "x",
+     *             "unixVer": "x",
+     *             "unixUtsPlugin": "x"
+     *           },
+     *           "harmony": {
+     *             "uniVer": "5.0",
+     *             "unixVer": "5.0"
+     *           }
+     *         },
+     *         "web": {
+     *           "uniVer": "x",
+     *           "unixVer": "x"
+     *         }
+     *       }
+     */
+    // prefetchDNS(options: PrefetchDNSOptions): void;
 }

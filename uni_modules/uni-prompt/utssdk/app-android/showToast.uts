@@ -4,8 +4,9 @@ import Toast from "android.widget.Toast";
 import { WaitingView } from "./WaitingView.uts"
 import { ShowToastOptions, ShowLoadingOptions, ShowToastSuccess, ShowLoadingSuccess } from '../interface.uts'
 import { PromptErrorImpl } from "../unierror.uts"
+import WeakReference from 'java.lang.ref.WeakReference';
 
-// #ifdef UNI-APP-X
+// #ifdef UNI-APP-X && !VUE3-VAPOR
 import getCurrentPages from 'io.dcloud.uniapp.framework.getCurrentPages';
 import onReady from 'io.dcloud.uniapp.framework.onReady';
 import onUnload from 'io.dcloud.uniapp.framework.onUnload';
@@ -39,16 +40,20 @@ export function hideToastImpl() {
 }
 
 export function showLoadingImpl(option : ShowLoadingOptions) {
+	// #ifndef UNI-APP-X
 	makeLoading(option, 'loading', 'showLoading')
+	// #endif
 }
 
 export function hideLoadingImpl() {
+	// #ifndef UNI-APP-X
 	closeToast("loading")
+	// #endif
 }
 
 
 // 全局存储
-// #ifdef UNI-APP-X
+// #ifdef UNI-APP-X && !VUE3-VAPOR
 const onReadyToast = new Map<ComponentPublicInstance,UTSJSONObject>()
 // #endif
 
@@ -56,7 +61,7 @@ function closeToast(type : string | null) {
 	if (type != null && type !== toastType) {
 		return
 	}
-	// #ifdef UNI-APP-X
+	// #ifdef UNI-APP-X && !VUE3-VAPOR
 	let pages = getCurrentPages();
 	if (pages.length > 0) {
 		let page = pages[pages.length - 1].vm!;
@@ -75,9 +80,10 @@ function closeToast(type : string | null) {
 		(toast as WaitingView).close()
 		toast = null
 	}
-	if (androidToast != null) {
-		androidToast!.cancel()
-		androidToast = null
+	if (androidToastCache?.get() != null) {
+		let cacheInstance = androidToastCache!.get()
+		cacheInstance!.cancel()
+		cacheInstance = null
 	}
 	toastType = null
 }
@@ -110,7 +116,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 
 		
 		
-		// #ifndef UNI-APP-X
+		// #ifdef !UNI-APP-X || VUE3-VAPOR
 			/**
 			 * uni-app
 			 */
@@ -124,7 +130,7 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 			})
 			
 		// #endif
-		// #ifdef UNI-APP-X
+		// #ifdef UNI-APP-X && !VUE3-VAPOR
 			/**
 			 * uni-app x
 			 * 需要特殊处理生命周期 
@@ -167,8 +173,8 @@ function makeLoading(style : ShowLoadingOptions, type : string, errMsg : string)
 	}
 }
 
-let androidToast:Toast| null = null
 
+let androidToastCache:WeakReference<Toast>| null = null
 
 function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 	closeToast(null)
@@ -181,7 +187,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 		
 		toastType = type
 		if (["top", "center", "bottom"].indexOf(style.position) >= 0) {
-			androidToast = Toast.makeText(UTSAndroid.getAppContext(), style.title, Toast.LENGTH_SHORT);
+			let androidToast = Toast.makeText(UTSAndroid.getAppContext(), style.title, Toast.LENGTH_SHORT);
 			switch (style.position) {
 				case "top": {
 					// 修复bottom/top 与 前端api位置不一致的问题
@@ -198,6 +204,7 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 				}
 			}
 			androidToast!.show()
+			androidToastCache = new WeakReference(androidToast)
 			const res : ShowToastSuccess = {
 			}
 			
@@ -242,21 +249,24 @@ function makeToast(style : ShowToastOptions, type : string, errMsg : string) {
 
 			
 			
-			// #ifndef UNI-APP-X
+			// #ifdef !UNI-APP-X || VUE3-VAPOR
 				/**
 				 * uni-app
 				 */
-				const alert = new WaitingView(UTSAndroid.getTopPageActivity(), options,UTSAndroid.getTopPageView())
-				toast = alert
-				alert?.showWaiting();
-				
-				UTSAndroid.onAppActivityDestroy(function(){
-					toast?.close()
-					toast = null
-				})
-				
+				const context = UTSAndroid.getTopPageActivity();
+				if (context != null) {
+					const alert = new WaitingView(context, options,UTSAndroid.getTopPageView())
+					toast = alert
+					alert?.showWaiting();
+
+					UTSAndroid.onAppActivityDestroy(function(){
+						toast?.close()
+						toast = null
+					})
+				}
+
 			// #endif
-			// #ifdef UNI-APP-X
+			// #ifdef UNI-APP-X && !VUE3-VAPOR
 				/**
 				 * uni-app x
 				 * 需要特殊处理生命周期 

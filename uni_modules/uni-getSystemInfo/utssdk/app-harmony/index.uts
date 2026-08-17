@@ -20,17 +20,6 @@ import {
 import I18n from '@ohos.i18n'
 import deviceInfo from '@ohos.deviceInfo';
 
-export {
-    GetWindowInfo,
-    GetWindowInfoResult,
-    GetSystemInfo,
-    GetSystemInfoOptions,
-    GetSystemInfoSync,
-    GetSystemInfoResult,
-    SafeAreaInsets,
-    SafeArea,
-}
-
 /**
  * TODO 
  * API 12支持融合场景化API可直接获取systemInfo, 参考文档
@@ -168,3 +157,20 @@ export const getSystemInfo: GetSystemInfo = defineAsyncApi<GetSystemInfoOptions,
         }
     }
 ) as GetSystemInfo
+
+export {
+    // #ifdef UNI-APP-X
+    CutoutRect,
+    // #endif
+    GetSystemInfo,
+    GetSystemInfoComplete,
+    GetSystemInfoCompleteCallback,
+    GetSystemInfoOptions,
+    GetSystemInfoResult,
+    GetSystemInfoSuccessCallback,
+    GetSystemInfoSync,
+    GetWindowInfo,
+    GetWindowInfoResult,
+    SafeArea,
+    SafeAreaInsets
+} from '../interface.uts';

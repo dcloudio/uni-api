@@ -1,4 +1,5 @@
 import { UniLocationSystemProvider } from '../interface.uts'
+import { startLocationUpdate, startLocationUpdateBackground, stopLocationUpdate, onLocationChange, onLocationChangeError } from './locationChange.uts'
 import { BusinessError } from '@kit.BasicServicesKit';
 import geoLocationManager from '@ohos.geoLocationManager'
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
@@ -55,6 +56,8 @@ async function _getLocation(options: GetLocationOptions): Promise<string | GetLo
     }
     if (options.highAccuracyExpireTime) {
         currentLocationRequest.timeoutMs = options.highAccuracyExpireTime
+    } else if (options.isHighAccuracy) {
+        currentLocationRequest.timeoutMs = 3000
     }
     const location: geoLocationManager.Location = await geoLocationManager.getCurrentLocation(
         currentLocationRequest,
@@ -111,5 +114,35 @@ export class UniLocationSystemProviderImpl implements UniLocationSystemProvider 
                 errCode: errorCodeMap.get(err.code + '') ?? defaultErrorCode
             } as GetLocationFail)
         }).catch(() => { })
+    }
+    startLocationUpdate(options: StartLocationUpdateOptions) {
+        startLocationUpdate(options)
+            .then(() => {
+                options.success?.({} as StartLocationUpdateSuccess)
+            })
+            .catch((err: GetLocationFail) => {
+                options.fail?.(err)
+            })
+    }
+    startLocationUpdateBackground(options: StartLocationUpdateBackgroundOptions) {
+        startLocationUpdateBackground(options)
+            .then(() => {
+                options.success?.({} as StartLocationUpdateBackgroundSuccess)
+            })
+            .catch((err: GetLocationFail) => {
+                options.fail?.(err)
+            })
+    }
+    stopLocationUpdate(options: StopLocationUpdateOptions) {
+        stopLocationUpdate()
+        options.success?.({} as StopLocationUpdateSuccess)
+    }
+    onLocationChange(callback: OnLocationChangeCallback) {
+        onLocationChange(callback)
+        return -1
+    }
+    onLocationChangeError(callback: OnLocationChangeErrorCallback) {
+        onLocationChangeError(callback)
+        return -1
     }
 }

@@ -7,7 +7,7 @@ import { MediaErrorImpl } from '../../unierror.uts'
 
 export type CameraPosition = 'back' | 'front'
 
-export function getHMCameraPosition(cameraType: CameraPosition) {
+export function getHMCameraPosition(cameraType: CameraPosition): camera.CameraPosition {
     switch (cameraType) {
         case 'back':
             return camera.CameraPosition.CAMERA_POSITION_BACK
@@ -34,6 +34,10 @@ export const takePhoto = async (errSubject: string, cameraType: CameraPosition =
 
     const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, [cameraPicker.PickerMediaType.PHOTO], pickerProfile)
 
+    if (!res) {
+        const err = new MediaErrorImpl(1101010, errSubject)
+        return Promise.reject(err)
+    }
     if (res.resultCode === -1) {
         const err = new MediaErrorImpl(1101001, errSubject)
         return Promise.reject(err)
@@ -72,6 +76,10 @@ export const takeVideo = async (errSubject: string, args?: TakeVideoOptions) => 
 
     const res = await cameraPicker.pick(UTSHarmony.getUIAbilityContext()!, [cameraPicker.PickerMediaType.VIDEO], pickerProfile)
 
+    if (!res) {
+        const err = new MediaErrorImpl(1101010, errSubject)
+        return Promise.reject(err)
+    }
     if (res.resultCode === -1) {
         const err = new MediaErrorImpl(1101001, errSubject)
         return Promise.reject(err)

@@ -119,7 +119,7 @@ public class CloseDialogPageFailImpl : UniError, CloseDialogPageFail {
 open class CloseDialogPageOptions {
     public init() {}
     public init(_ obj: UTSJSONObject) {
-        if let tmp = obj["dialogPage"] as? UniDialogPage {
+        if let tmp = obj["dialogPage"] as? UniPage {
             self.dialogPage = tmp
         }
         if let tmp = obj["animationType"] as? String {
@@ -138,7 +138,7 @@ open class CloseDialogPageOptions {
             self.complete = tmp
         }
     }
-    public var dialogPage : UniDialogPage? = nil
+    public var dialogPage : UniPage? = nil
     public var animationType : String? = nil
     public var animationDuration : NSNumber? = nil
     public var success : CloseDialogPageSuccessCallback? = nil
@@ -146,7 +146,7 @@ open class CloseDialogPageOptions {
     public var complete : CloseDialogPageCompleteCallback? = nil
 }
 
-public func openDialogPage(_ option : OpenDialogPageOptions) -> UniDialogPage? {
+public func openDialogPage(_ option : OpenDialogPageOptions) -> UniPage? {
     let ocOption = UniOpenDialogPageOptions()
     ocOption.url = option.url
     ocOption.parentPage = option.parentPage
@@ -172,7 +172,7 @@ public func openDialogPage(_ option : OpenDialogPageOptions) -> UniDialogPage? {
         }
     }
        
-    let dialogPage = UniUTSJSImpl.openDialogPage(ocOption) as? UniDialogPage
+    let dialogPage = UniUTSJSImpl.openDialogPage(ocOption) as? UniPage
     return dialogPage
 }
    

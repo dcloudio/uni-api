@@ -17,7 +17,12 @@ export type ChooseMediaErrorCode =
 	/**
 	 * 拍照或录像失败
 	 */
-	1101008;
+	1101008 |
+	/**
+	 * 其他错误
+	 */
+	1101010;
+
 
 /**
  * 图片或视频操作失败的错误回调
@@ -36,27 +41,25 @@ export type ChooseMediaTempFile = {
 	 */
 	fileType : ChooseMediaFileType
 	/**
-	 * 选定视频的数据量大小
+	 * 选定视频的数据量大小，单位 kB
 	 */
 	size : number,
 	/**
-	 * 视频文件的字节大小
+	 * 视频文件的字节大小，单位 B
 	 * @uniPlatform {
 	  *	 "app": {
 	  *		"android": {
-	  *			"osVer": "5.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.61"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.61"
 	  *		},
 	*    "harmony": {
-	*      "osVer": "5.0.0",
 	*      "uniVer": "4.61",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixVaporVer": "5.0"
 	*    }
 	  *	},
 	  *	"web": {
@@ -107,23 +110,21 @@ export type ChooseMediaPageOrientation = /**
 
 export type ChooseMediaOptions = {
 	/**
-	  * 屏幕方向。默认为page.json中的pageOrientation。
+	  * 屏幕方向。默认为pages.json中的pageOrientation。
 	  * @uniPlatform {
 	  *	 "app": {
 	  *		"android": {
-	  *			"osVer": "5.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.51"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "x"
 	  *		},
 	*    "harmony": {
-	*      "osVer": "3.0",
 	*      "uniVer": "4.31",
-	*      "unixVer": "4.61"
+	*      "unixVer": "4.61",
+	*      "unixVaporVer": "5.0"
 	*    }
 	  *	},
 	 *  "mp": {
@@ -182,21 +183,20 @@ export type ChooseMediaOptions = {
 	 * @uniPlatform {
 	 * "app": {
 		 *		"android": {
-		 *			"osVer": "5.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *    "harmony": {
-		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	count ?: number | null
 	/**
@@ -205,21 +205,20 @@ export type ChooseMediaOptions = {
 	 * @uniPlatform {
 	 * "app": {
 		 *		"android": {
-		 *			"osVer": "5.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *    "harmony": {
-		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	mediaType ?: (string[]) | null,
 	/**
@@ -228,21 +227,20 @@ export type ChooseMediaOptions = {
 	 * @uniPlatform {
 	 * "app": {
 		 *		"android": {
-		 *			"osVer": "5.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *    "harmony": {
-		 *      "osVer": "3.0",
 		 *      "uniVer": "4.31",
-		 *      "unixVer": "4.61"
+		 *      "unixVer": "4.61",
+		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	sourceType ?: (string[]) | null,
 	/**
@@ -251,19 +249,17 @@ export type ChooseMediaOptions = {
 	 * @uniPlatform {
 	 * "app": {
 		 *		"android": {
-		 *			"osVer": "5.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
    *    "harmony": {
-   *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixVaporVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -321,19 +317,17 @@ export type ChooseMediaOptions = {
 	 * @uniPlatform {
 	 * "app": {
 		 *		"android": {
-		 *			"osVer": "5.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
 		 *		"ios": {
-		 *			"osVer": "12.0",
 		 *			"uniVer": "x",
 		 *			"unixVer": "4.51"
 		 *		},
    *    "harmony": {
-   *      "osVer": "3.0",
    *      "uniVer": "4.25",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixVaporVer": "5.0"
    *    }
 	 *	},
 	*  "mp": {
@@ -413,24 +407,23 @@ export interface Uni {
 	/**
 	  * 拍摄或从手机相册中选择图片或视频。
 	  *
-	  * @tutorial https://uniapp.dcloud.net.cn/api/media/video.html#choosemedia
-	  * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/video.html#choosemedia
+	  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/choose-media.html#choosemedia
+	  * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/choose-media.html#choosemedia
+	  * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/video.html#choosemedia
 	  * @uniPlatform {
 	  *	 "app": {
 	  *		"android": {
-	  *			"osVer": "5.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.51"
 	  *		},
 	  *		"ios": {
-	  *			"osVer": "12.0",
 	  *			"uniVer": "x",
 	  *			"unixVer": "4.51"
 	  *		},
 	  *    "harmony": {
-	  *      "osVer": "3.0",
 	  *      "uniVer": "4.31",
-	  *      "unixVer": "4.61"
+	  *      "unixVer": "4.61",
+	  *      "unixVaporVer": "5.0"
 	  *    }
 	  *	},
 	 *  "mp": {
@@ -481,6 +474,5 @@ export interface Uni {
 	*  }
 	  * }
 	  */
-	chooseMedia(options : ChooseMediaOptions) : void;
-
+	chooseMedia(options: ChooseMediaOptions): void;
 }

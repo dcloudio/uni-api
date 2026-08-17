@@ -1,10 +1,7 @@
 import * as wxopensdk from '@tencent/wechat_open_sdk';
 import { PayReq } from '@tencent/wechat_open_sdk';
 import { AbilityConstant, common, Want } from '@kit.AbilityKit';
-
-interface UniPaymentWxpayProvider extends UniPaymentProvider {
-    isWeChatInstalled: boolean;
-}
+import { UniPaymentWxpayProvider } from '../interface.uts';
 
 type OnWXReq = (req: wxopensdk.BaseReq) => void;
 type OnWXResp = (resp: wxopensdk.BaseResp) => void;
@@ -48,6 +45,9 @@ class WXApiEventHandlerImpl implements wxopensdk.WXApiEventHandler {
     }
 
     onResp(resp: wxopensdk.BaseResp): void {
+        if (!(resp instanceof wxopensdk.PayResp)) {
+          return;
+        }
         this.onRespCallbacks.forEach((on) => {
             on(resp);
         });
@@ -63,16 +63,26 @@ UTSHarmony.onAppAbilityNewWant((want: Want, _launchParam: AbilityConstant.Launch
 class UniPaymentWxpayProviderImpl implements UniPaymentWxpayProvider {
     id: string = "wxpay";
     description: string = "微信支付";
-    isWeChatInstalled: boolean = true;
+    isWeChatInstalled: boolean = false;
+    isAppExist: boolean = false;
     onWXResp: OnWXResp = (resp: wxopensdk.BaseResp) => {
 
     }
 
     constructor() {
+      try{
+        this.isWeChatInstalled = WXApi.isWXAppInstalled()
+        this.isAppExist = this.isWeChatInstalled
+      } catch{ }
     }
 
     requestPayment(options: RequestPaymentOptions) {
-        let params = JSON.parse(options.orderInfo) as object;
+        let params = options.orderInfo;
+        if (typeof params === 'string') {
+            try {
+                params = JSON.parse(params) ?? '';
+            } catch (error) {}
+        }
         let req = new PayReq();
         req.appId = params['appid'];
         req.partnerId = params['partnerid'];

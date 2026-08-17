@@ -115,14 +115,15 @@ export class DownloadController {
 			return null;
 		}
 
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
 		const headers = options.header?.toMap();
+		let hasUAHeader = false;
 		if (headers != null) {
 			for (entry in headers) {
 				const key = entry.key;
 				const value = entry.value;
+				if(!hasUAHeader && key.equals("User-Agent", true)){
+					hasUAHeader = true
+				}
 
 				if (value != null) {
 					requestBilder.addHeader(key, "" + value);
@@ -130,6 +131,10 @@ export class DownloadController {
 					continue;
 				}
 			}
+		}
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
 		}
 
 		return requestBilder.build();
@@ -199,6 +204,9 @@ class SimpleDownloadCallback implements Callback {
 
 					tempSource = Okio.buffer(Okio.source(tempFile));
 					let targetFile = this.getFile(response)
+					if (targetFile == null) {
+						return
+					}
 					targetSink = Okio.buffer(Okio.sink(targetFile));
 					targetSink.writeAll(tempSource);
 					targetSink.flush();
@@ -252,7 +260,7 @@ class SimpleDownloadCallback implements Callback {
 		return path + this.downloadFilePath;
 	}
 
-	getFile(response : Response) : File {
+	getFile(response : Response) : File | null {
 		let targetPath = "";
 		if (this.specifyPath != "") {
 			const sourcePath = UTSAndroid.convert2AbsFullPath("/");
@@ -264,7 +272,8 @@ class SimpleDownloadCallback implements Callback {
 				option['errorMsg'] = "This path is not supported";
 				option['cause'] = null;
 				this.listener?.onComplete(option);
-				return new File("")
+
+				return null
 			}
 
 			const pos = this.specifyPath.lastIndexOf("/")
@@ -283,7 +292,7 @@ class SimpleDownloadCallback implements Callback {
 					path = UTSAndroid.getAppTempPath()!! + "/" + this.specifyPath;
 				}
 
-				var file = new File(path)
+				let file = new File(path)
 				const parentFile = file.getParentFile()
 				if (parentFile != null) {
 					if (!parentFile.exists()) {
@@ -297,6 +306,7 @@ class SimpleDownloadCallback implements Callback {
 					option['errorMsg'] = "The target file path is already a directory file, and file creation failed.";
 					option['cause'] = null;
 					this.listener?.onComplete(option);
+					return null
 				}
 				
 				if (file.exists()) {
@@ -327,6 +337,7 @@ class SimpleDownloadCallback implements Callback {
 						let cause = exception.cause.toString();
 						option['cause'] = new SourceError(cause);
 						this.listener?.onComplete(option);
+						return null
 					}
 				}
 				return file
@@ -447,6 +458,7 @@ class SimpleDownloadCallback implements Callback {
 				let cause = exception.cause.toString();
 				option['cause'] = new SourceError(cause);
 				this.listener?.onComplete(option);
+				return null
 			}
 		}
 		return file
@@ -454,12 +466,18 @@ class SimpleDownloadCallback implements Callback {
 
 	isAbsolute(path : string) : boolean {
 		const context = UTSAndroid.getAppContext()!! as Context;
-		if (path.startsWith(context.getFilesDir().getParent())) {
+		const targetFile = new File(path);
+		if (!targetFile.isAbsolute()) {
+			return false;
+		}
+
+		const internalRoot = context.getFilesDir().getParentFile();
+		if (internalRoot != null && this.isDescendant(internalRoot, targetFile)) {
 			return true;
 		}
 
-		const exPath = context.getExternalFilesDir(null)?.getParent();
-		if (exPath != null && path.startsWith(exPath)) {
+		const externalRoot = context.getExternalFilesDir(null)?.getParentFile();
+		if (externalRoot != null && this.isDescendant(externalRoot, targetFile)) {
 			return true;
 		}
 

@@ -14,19 +14,17 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -92,19 +90,17 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -161,19 +157,17 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -230,19 +224,17 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -299,19 +291,17 @@ export type SetNavigationBarColorOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -398,19 +388,17 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -476,19 +464,17 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -545,19 +531,17 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -614,19 +598,17 @@ export type SetNavigationBarTitleOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -735,25 +717,23 @@ export interface Uni {
     /**
      * 设置导航条、状态栏颜色
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbarcolor
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-color.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbarcolor
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-color.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-color.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "√"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -811,25 +791,23 @@ export interface Uni {
     /**
      * 动态设置当前页面的标题
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbartitle
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-title.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/navigationbar.html#setnavigationbartitle
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-title.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/set-navigation-bar-title.html
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "3.97"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "4.11"
      *      },
      *    "harmony": {
-     *      "osVer": "5.0.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -893,19 +871,17 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -967,19 +943,17 @@ export interface Uni {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
      *        "unixVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "12.0",
      *          "uniVer": "√",
      *          "unixVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.31",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {

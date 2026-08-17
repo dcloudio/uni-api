@@ -25,6 +25,9 @@ export function getProviderErrorCode(errCode : number) : ProviderErrorCode {
 
 
 export class GetProviderFailImpl extends UniError implements IGetProviderFail {
+    // #ifdef APP-HARMONY
+    override errCode: ProviderErrorCode
+    // #endif
 	constructor(errCode : ProviderErrorCode) {
 		super();
 		this.errSubject = ProviderUniErrorSubject;

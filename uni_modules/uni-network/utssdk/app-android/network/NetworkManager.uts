@@ -43,6 +43,9 @@ import SocketTimeoutException from "java.net.SocketTimeoutException";
 import ReentrantLock from 'java.util.concurrent.locks.ReentrantLock';
 import Looper from "android.os.Looper";
 import Handler from 'android.os.Handler';
+// #ifdef UNI-APP-X
+import {CronetHelper} from 'io.dcloud.uniapp.common.network';
+// #endif
 
 class NetworkRequestListener {
 	public onStart() : void { }
@@ -195,12 +198,15 @@ class NetworkManager {
 		if (listener != null) {
 			listener.onStart();
 		}
-		let client = this.createRequestClient(param!);
+		let client = this.createRequestClient(param!, listener!);
+		if (client == null) {
+			return new NetworkRequestTaskImpl(null);
+		}
 		let request = this.createRequest(param!, listener!);
 		if (request == null) {
 			return new NetworkRequestTaskImpl(null);
 		}
-		let call : Call = client.newCall(request);
+		let call : Call = client!.newCall(request);
 
 		let task = new NetworkRequestTaskImpl(call);
 		call.enqueue(new SimpleCallback(listener, task, param.enableChunked ?? false, Looper.myLooper()));
@@ -208,7 +214,7 @@ class NetworkManager {
 		return task;
 	}
 
-	public createRequestClient<T>(param : RequestOptions<T>) : OkHttpClient {
+	public createRequestClient<T>(param : RequestOptions<T>, listener : NetworkRequestListener) : OkHttpClient | null {
 		let clientBuilder = OkHttpClient.Builder();
 		const timeout : Long = param.timeout != null ? param.timeout!.toLong() : 60000;
 		clientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
@@ -258,6 +264,32 @@ class NetworkManager {
 		}
 
 		clientBuilder.dispatcher(new Dispatcher(this.requestExecutorService));
+		
+		
+		const enableQuic = param.enableQuic ?? false
+		if(enableQuic) {
+			// #ifdef UNI-APP-X
+			// #ifdef !VUE3-VAPOR
+			CronetHelper.supportCronet(clientBuilder)
+			// #endif
+			
+			// #ifdef VUE3-VAPOR
+			const loaded = CronetHelper.supportCronet(clientBuilder)
+			if (!loaded) {
+				let option = {};
+				option['statusCode'] = '-1';
+				option['errorCode'] = '600010';
+				option['errorMsg'] = "cronet load fail";
+				option['cause'] = new Exception("cronet load fail");
+				if (listener != null) {
+					listener.onComplete(option);
+				}
+				return null;
+			}
+			// #endif
+			
+			// #endif
+		}
 
 		return clientBuilder.build();
 	}
@@ -279,20 +311,27 @@ class NetworkManager {
 			return null;
 		}
 
-		let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
-		requestBilder.header("User-Agent", ua);
-
 		if (param.header == null) {
 			param.header = {}
 		}
 
 		let contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 		let hasContentType = false;
+		let hasUAHeader = false;
 		let headers = param.header!.toJSONObject() as JSONObject;
 		for (key in headers.keys) {
+			if (key.equals("Accept-Encoding", true)) {
+			    let value = "" + headers[key];
+			    if (value.toLowerCase().includes("gzip")) {
+			        continue;
+			    }
+			}
 			if (key.equals("Content-Type", true)) {
 				contentType = "" + headers![key]!;
 				hasContentType = true;
+			}
+			if(!hasUAHeader && key.equals("User-Agent", true)){
+				hasUAHeader = true
 			}
 			requestBilder.header(key, "" + headers[key]);
 		}
@@ -302,6 +341,12 @@ class NetworkManager {
 				contentType = "application/json";
 			}
 		}
+		
+		if (!hasUAHeader) {
+			let ua = UTSAndroid.getWebViewInfo(UTSAndroid.getAppContext()!)["ua"].toString();
+			requestBilder.header("User-Agent", ua);
+		}
+		
 
 		if ("POST".equals(param.method) || "PUT".equals(param.method) || "PATCH".equals(param.method) || "DELETE".equals(param.method)) {
 			if (param.data != null && listener != null) {

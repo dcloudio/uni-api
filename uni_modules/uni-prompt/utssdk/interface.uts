@@ -49,13 +49,11 @@ export type Icon =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -117,13 +115,11 @@ export type Icon =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -180,18 +176,16 @@ export type Icon =
    */
   "error" |
   /**
-   * 显示错误图标，此时title文本无长度显示
+   * 显示错误图标，此时title文本无长度显示，支付宝、抖音小程序生效
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "x"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "x",
@@ -200,9 +194,9 @@ export type Icon =
       },
       "mp": {
         "weixin": {
-          "hostVer": "√",
-          "uniVer": "√",
-          "unixVer": "4.41"
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         },
         "alipay": {
           "hostVer": "√",
@@ -210,67 +204,65 @@ export type Icon =
           "unixVer": "x"
         },
         "baidu": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "toutiao": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "lark": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "qq": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "kuaishou": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "jd": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         }
       },
       "web": {
-        "uniVer": "√",
+        "uniVer": "x",
         "unixVer": "x"
       }
     }
    */
   "fail" |
   /**
-   * 显示异常图标，此时title文本无长度显示
+   * 显示异常图标，此时title文本无长度显示，支付宝小程序生效
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
-          "uniVer": "√",
-          "uniUtsPlugin": "3.91",
-          "unixVer": "3.91"
+          "uniVer": "x",
+          "uniUtsPlugin": "x",
+          "unixVer": "x"
         },
         "ios": {
-          "osVer": "12.0",
-          "uniVer": "√",
-          "uniUtsPlugin": "4.11",
-          "unixVer": "4.11",
-          "unixUtsPlugin": "4.11"
+          "uniVer": "x",
+          "uniUtsPlugin": "x",
+          "unixVer": "x",
+          "unixUtsPlugin": "x"
         }
       },
       "mp": {
         "weixin": {
-          "hostVer": "√",
-          "uniVer": "√",
-          "unixVer": "4.41"
+          "hostVer": "x",
+          "uniVer": "x",
+          "unixVer": "x"
         },
         "alipay": {
           "hostVer": "√",
@@ -278,38 +270,38 @@ export type Icon =
           "unixVer": "x"
         },
         "baidu": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "toutiao": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "lark": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "qq": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "kuaishou": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         },
         "jd": {
-          "hostVer": "√",
-          "uniVer": "√",
+          "hostVer": "x",
+          "uniVer": "x",
           "unixVer": "x"
         }
       },
       "web": {
-        "uniVer": "√",
+        "uniVer": "x",
         "unixVer": "x"
       }
     }
@@ -321,13 +313,11 @@ export type Icon =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -389,13 +379,11 @@ export type Icon =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
@@ -462,22 +450,20 @@ export type ShowToastPosition =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -535,22 +521,20 @@ export type ShowToastPosition =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -608,22 +592,20 @@ export type ShowToastPosition =
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -686,22 +668,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -760,22 +740,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
-          "uniVer": "4.23",
-          "unixVer": "x"
+          "uniVer": "x",
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {
@@ -833,22 +811,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
-          "uniVer": "4.23",
-          "unixVer": "4.61"
+          "uniVer": "x",
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {
@@ -907,22 +883,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
-          "uniVer": "4.23",
-          "unixVer": "4.61"
+          "uniVer": "x",
+          "unixVer": "x",
+          "unixVaporVer": "x"
         }
       },
       "mp": {
@@ -981,22 +955,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1054,22 +1026,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1127,22 +1097,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1200,22 +1168,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1273,22 +1239,20 @@ export type ShowToastOptions = {
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -1347,29 +1311,27 @@ export type ShowToastOptions = {
  * 弹出toast
  *
  * @param {ShowToastOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "3.91",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -1426,28 +1388,26 @@ export type ShowToast = (options: ShowToastOptions) => void
  * uni.hideToast函数定义
  * 隐藏toast
  *
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
- * @tutorial-uni-app https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
+ * @tutorial_uni_app https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "3.91",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
-        "uniVer": "4.23",
-        "unixVer": "4.61"
+        "uniVer": "4.83",
+        "unixVer": "4.83",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -1500,7 +1460,7 @@ export type ShowToast = (options: ShowToastOptions) => void
  */
 export type HideToast = () => void
 
-
+// #ifdef !UNI-APP-X
 /**
  * uni.showLoading成功回调参数
  */
@@ -1556,29 +1516,27 @@ export type ShowLoadingOptions = {
  * 弹出loading
  *
  * @param {ShowLoadingOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "3.91",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -1634,29 +1592,27 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
 /**
  * uni.hideLoading函数定义
  * 隐藏loading
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "3.91",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "4.11",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -1708,7 +1664,7 @@ export type ShowLoading = (options: ShowLoadingOptions) => void
   }
  */
 export type HideLoading = () => void
-// #ifdef !UNI-APP-X || APP-HARMONY
+
 /**
  * uni.showModal 成功回调参数
  */
@@ -1806,29 +1762,27 @@ export type ShowModalOptions = {
  * 弹出modal
  *
  * @param {ShowModalOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -1974,29 +1928,27 @@ export type ShowActionSheetOptions = {
  * 弹出actionSheet
  *
  * @param {ShowActionSheetOptions} options
- * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
- * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
+ * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
+ * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
  * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
  * @uniPlatform
   {
     "app": {
       "android": {
-        "osVer": "5.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "3.91"
       },
       "ios": {
-        "osVer": "12.0",
         "uniVer": "√",
         "uniUtsPlugin": "x",
         "unixVer": "4.11",
         "unixUtsPlugin": "4.11"
       },
       "harmony": {
-        "osVer": "3.0",
         "uniVer": "4.23",
-        "unixVer": "4.61"
+        "unixVer": "4.61",
+        "unixVaporVer": "5.0"
       }
     },
     "mp": {
@@ -2064,29 +2016,27 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showtoast
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showtoast
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/toast.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/toast.html
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2145,29 +2095,27 @@ export interface Uni {
     ```typescript
     uni.hideToast();
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hidetoast
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hidetoast
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/toast.html#hidetoast
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/toast.html#hidetoast
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2219,7 +2167,7 @@ export interface Uni {
     }
    */
   hideToast(): void,
-
+// #ifndef UNI-APP-X
   /**
    * @description 显示 loading 提示框, 需主动调用 uni.hideLoading 才能关闭提示框。
    * @example
@@ -2231,29 +2179,27 @@ export interface Uni {
    * @remark
    * - showLoading 和 showToast 同时只能显示一个
    * - showToast 应与 hideToast 配对使用
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showloading
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showloading
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/loading.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/loading.html
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2318,29 +2264,27 @@ export interface Uni {
       uni.hideLoading();
     }, 2000);
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#hideloading
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#hideloading
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/loading.html#hideloading
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/loading.html#hideloading
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "3.91",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2392,7 +2336,7 @@ export interface Uni {
     }
    */
   hideLoading(): void,
-	// #ifndef UNI-APP-X
+
   /**
    * @description 显示模态弹窗，可以只有一个确定按钮，也可以同时有确定和取消按钮。类似于一个API整合了 html 中：alert、confirm。
    * @example
@@ -2409,29 +2353,27 @@ export interface Uni {
       }
     });
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showmodal
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showmodal
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/modal.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/modal.html
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {
@@ -2499,29 +2441,27 @@ export interface Uni {
       }
     });
     ```
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
-   * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
-   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/prompt.html#showactionsheet
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/prompt.html#showactionsheet
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/action-sheet.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/action-sheet.html
    * @uniPlatform
     {
       "app": {
         "android": {
-          "osVer": "5.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "3.91"
         },
         "ios": {
-          "osVer": "12.0",
           "uniVer": "√",
           "uniUtsPlugin": "x",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
         },
         "harmony": {
-          "osVer": "3.0",
           "uniVer": "4.23",
-          "unixVer": "4.61"
+          "unixVer": "4.61",
+          "unixVaporVer": "5.0"
         }
       },
       "mp": {

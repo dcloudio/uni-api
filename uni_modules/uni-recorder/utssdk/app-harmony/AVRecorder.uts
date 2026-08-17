@@ -1,8 +1,8 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import media from '@ohos.multimedia.media'
 import { fileIo } from '@kit.CoreFileKit';
-import { RecorderManager, RecorderManagerOnStopResult, RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
-import { createFile, onRecorderStateChange, setRecordStateCallback, StateChangeRes, transformErrorCode } from './utils.uts';
+import { RecorderManagerStartOptions, IRecorderManagerFail } from '../interface.uts';
+import { createFile, onRecorderStateChange, StateChangeRes, transformErrorCode } from './utils.uts';
 import { RecorderManagerFailImpl } from '../unierror.uts'
 
 export type SupportFormat = 'aac' | 'mp3' | 'm4a' | 'wav'
@@ -44,7 +44,7 @@ function getFileFormat(format: SupportFormat): media.ContainerFormatType {
 }
 
 const DEFAULT_DURATION = 1000 * 60
-export default class AVRecorder implements RecorderManager {
+export default class AVRecorder {
     private avRecorder?: media.AVRecorder
     private isFirstStart: boolean = true
 
@@ -159,29 +159,5 @@ export default class AVRecorder implements RecorderManager {
             await this.release();
             this.isFirstStart = true
         }
-    }
-    onStart(options: (result: any) => void): void {
-        setRecordStateCallback('start', options)
-    }
-    onPause(options: (result: any) => void): void {
-        setRecordStateCallback('pause', options)
-    }
-    onStop(options: (result: RecorderManagerOnStopResult) => void): void {
-        setRecordStateCallback('stop', options)
-    }
-    onFrameRecorded(options: (result: any) => void): void {
-        setRecordStateCallback('frameRecorded', options)
-    }
-    onError(options: (result: IRecorderManagerFail) => void): void {
-        setRecordStateCallback('error', options)
-    }
-    onResume(options: (result: any) => void): void {
-        setRecordStateCallback('resume', options)
-    }
-    onInterruptionBegin(options: (result: any) => void): void {
-        setRecordStateCallback('interruptionBegin', options)
-    }
-    onInterruptionEnd(options: (result: any) => void): void {
-        setRecordStateCallback('interruptionEnd', options)
     }
 }

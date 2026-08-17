@@ -2,24 +2,23 @@ export interface Uni {
   /**
    * 获取全局唯一的背景音频管理器 backgroundAudioManager
    *
-   * @tutorial https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
-   * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
+   * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/get-background-audio-manager.html#getbackgroundaudiomanager
+   * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/media/background-audio-manager.html
+   * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/get-background-audio-manager.html#getbackgroundaudiomanager
    * @uniPlatform {
    * 	"app": {
    * 		"android": {
-   * 			"osVer": "5.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.41"
    * 		},
    * 		"ios": {
-   * 			"osVer": "12.0",
    * 			"uniVer": "√",
    * 			"unixVer": "4.41"
    * 		},
    *    "harmony": {
-   *      "osVer": "3.0",
    *      "uniVer": "4.31",
-   *      "unixVer": "4.61"
+   *      "unixVer": "4.61",
+   *      "unixVaporVer": "5.0"
    *    }
    * 	},
    *   "web": {
@@ -82,13 +81,11 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
@@ -104,13 +101,11 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
@@ -121,18 +116,16 @@ export interface BackgroundAudioManager {
    */
   currentTime: number;
   /**
-   * 当前是是否暂停或停止状态，true 表示暂停或停止，false 表示正在播放
+   * 当前是否处于暂停或停止状态，true 表示暂停或停止，false 表示正在播放
    * @uniPlatform
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
@@ -148,13 +141,11 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
@@ -170,13 +161,11 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
@@ -192,20 +181,17 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -219,22 +205,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -246,22 +230,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -273,22 +255,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -300,22 +280,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -327,20 +305,17 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x",
                   "unixUtsPlugin": "x"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -354,20 +329,17 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "x",
                   "unixUtsPlugin": "x"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -381,20 +353,17 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -408,20 +377,17 @@ export interface BackgroundAudioManager {
     {
         "app": {
             "android": {
-                "osVer": "5.0",
                 "uniVer": "x",
                 "uniUtsPlugin": "x",
                 "unixVer": "4.71"
             },
             "ios": {
-                "osVer": "12.0",
                 "uniVer": "x",
                 "uniUtsPlugin": "x",
                 "unixVer": "4.71",
                 "unixUtsPlugin": "4.71"
             },
           "harmony": {
-              "osVer": "5.0.0",
               "uniVer": "x",
               "unixVer": "x",
           }
@@ -474,31 +440,27 @@ export interface BackgroundAudioManager {
         }
     }
    */
-  // #ifdef APP-IOS || APP-ANDROID
   cache: boolean;
-  // #endif
   /**
    * 播放
    * @uniPlatform
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -510,22 +472,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -537,22 +497,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -564,22 +522,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -591,22 +547,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -618,22 +572,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -645,22 +597,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -672,22 +622,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -699,22 +647,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -726,22 +672,20 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41"
   		  },
   		  "ios": {
-  			  "osVer": "12.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41",
   			  "unixUtsPlugin": "4.41"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
   	  },
   	  "web": {
@@ -757,22 +701,20 @@ export interface BackgroundAudioManager {
     {
   	  "app": {
   		  "android": {
-  			  "osVer": "5.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41"
   		  },
   		  "ios": {
-  			  "osVer": "12.0",
   			  "uniVer": "√",
   			  "uniUtsPlugin": "x",
   			  "unixVer": "4.41",
   			  "unixUtsPlugin": "4.41"
   		  },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
   	  },
   	  "web": {
@@ -788,22 +730,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -815,22 +755,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -842,22 +780,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.61",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -869,22 +805,20 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "5.0.0",
                   "uniVer": "4.31",
-                  "unixVer": "4.61"
+                  "unixVer": "4.61",
+                  "unixVaporVer": "5.0"
               }
           }
     }
@@ -896,20 +830,17 @@ export interface BackgroundAudioManager {
     {
           "app": {
               "android": {
-                  "osVer": "5.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41"
               },
               "ios": {
-                  "osVer": "12.0",
                   "uniVer": "√",
                   "uniUtsPlugin": "x",
                   "unixVer": "4.41",
                   "unixUtsPlugin": "4.41"
               },
               "harmony": {
-                  "osVer": "x",
                   "uniVer": "x",
                   "unixVer": "x"
               }
@@ -917,6 +848,303 @@ export interface BackgroundAudioManager {
     }
    */
   onWaiting(callback: (result: any) => void): void;
+
+  /**
+   * 取消监听背景音频可播放事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offCanplay(): void;
+  /**
+   * 取消监听背景音频播放事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offPlay(): void;
+  /**
+   * 取消监听背景音频暂停事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offPause(): void;
+  /**
+   * 取消监听背景音频停止事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offStop(): void;
+  /**
+   * 取消监听背景音频自然播放结束事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offEnded(): void;
+  /**
+   * 取消监听音频进行 seek 操作事件
+   * @uniPlatform
+    {
+  	  "app": {
+  		  "android": {
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "5.0"
+  		  },
+  		  "ios": {
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "5.0",
+  			  "unixUtsPlugin": "5.0"
+  		  },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+  	  },
+  	  "web": {
+  		  "uniVer": "√",
+  		  "unixVer": "4.0"
+  	  }
+    }
+   */
+  offSeeking() : void;
+  /**
+   * 取消监听音频完成 seek 操作事件
+   * @uniPlatform
+    {
+  	  "app": {
+  		  "android": {
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "5.0"
+  		  },
+  		  "ios": {
+  			  "uniVer": "√",
+  			  "uniUtsPlugin": "x",
+  			  "unixVer": "5.0",
+  			  "unixUtsPlugin": "5.0"
+  		  },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+  	  },
+  	  "web": {
+  		  "uniVer": "√",
+  		  "unixVer": "4.0"
+  	  }
+    }
+   */
+  offSeeked() : void;
+  /**
+   * 取消监听背景音频播放进度更新事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offTimeUpdate(): void;
+  /**
+   * 取消监听用户在系统音乐播放面板点击上一曲事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offPrev(): void;
+  /**
+   * 取消监听用户在系统音乐播放面板点击下一曲事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offNext(): void;
+  /**
+   * 背景音频播放错误事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "5.0"
+              }
+          }
+    }
+   */
+  offError() : void;
+  /**
+   * 取消监听音频加载中事件
+   * @uniPlatform
+    {
+          "app": {
+              "android": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0"
+              },
+              "ios": {
+                  "uniVer": "√",
+                  "uniUtsPlugin": "x",
+                  "unixVer": "5.0",
+                  "unixUtsPlugin": "5.0"
+              },
+              "harmony": {
+                  "uniVer": "x",
+                  "unixVer": "x"
+              }
+          }
+    }
+   */
+  offWaiting(): void;
 }
 /**
  * 错误码
@@ -927,13 +1155,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",
@@ -948,13 +1174,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",
@@ -969,13 +1193,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",
@@ -990,13 +1212,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",
@@ -1011,13 +1231,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",
@@ -1032,13 +1250,11 @@ export type CreateBackgroundAudioErrorCode =
 	 * @uniPlatform {
 	      "app": {
 	          "android": {
-	              "osVer": "5.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41"
 	          },
 	          "ios": {
-	              "osVer": "12.0",
 	              "uniVer": "√",
 	              "uniUtsPlugin": "x",
 	              "unixVer": "4.41",

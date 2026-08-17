@@ -12,7 +12,7 @@ class FrameScannerCallback implements ScannerCallback {
 	@UTSiOS.keyword("internal")
 	onScanSuccess(@argumentLabel("_") barcodeInformation : IosBarcodeInformation[], @argumentLabel("_") screenShot : ScreenShot | null) {
 		const bridgeBarcodeInformation : BarcodeInformation[] = []
-		for (let information in barcodeInformation) {
+		for (let information of barcodeInformation) {
 			const area = information.scanArea
 			const scanArea = [] as number[]
 			scanArea.push(Number.from(area[0]))
@@ -64,7 +64,7 @@ class PhotoScannerCallback implements ScannerCallback {
 	@UTSiOS.keyword("internal")
 	onScanSuccess(@argumentLabel("_") barcodeInformation : IosBarcodeInformation[], @argumentLabel("_") screenShot : ScreenShot | null) {
 		const bridgeBarcodeInformation : BarcodeInformation[] = []
-		for (let information in barcodeInformation) {
+		for (let information of barcodeInformation) {
 			const area = information.scanArea
 			const scanArea = [] as number[]
 			scanArea.push(Number.from(area[0]))

@@ -86,6 +86,7 @@ export function toHideToast() {
 	MCToast.mc_remove()
 }
 
+// #ifndef UNI-APP-X
 /* 显示loading + text */
 export function toShowLoading(options : ShowLoadingOptions) {
 
@@ -109,3 +110,5 @@ export function toShowLoading(options : ShowLoadingOptions) {
 export function toHideLoading() {
 	MCToast.mc_remove()
 }
+
+// #endif

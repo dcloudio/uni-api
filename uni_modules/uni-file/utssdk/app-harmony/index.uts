@@ -35,30 +35,8 @@ import {
 import fs from '@ohos.file.fs'
 import { ListFileOptions } from '@ohos.file.fs'
 import Hash from '@ohos.file.hash';
-
-export {
-    SaveFile,
-    LegacySaveFileOptions,
-    LegacySaveFileSuccess,
-    LegacySaveFileFail,
-    GetSavedFileList,
-    LegacySavedFileListItem,
-    LegacyGetSavedFileListOptions,
-    LegacyGetSavedFileListSuccess,
-    LegacyGetSavedFileListFail,
-    GetSavedFileInfo,
-    LegacyGetSavedFileInfoOptions,
-    LegacyGetSavedFileInfoSuccess,
-    LegacyGetSavedFileInfoFail,
-    RemoveSavedFile,
-    LegacyRemoveSavedFileOptions,
-    LegacyRemoveSavedFileSuccess,
-    LegacyRemoveSavedFileFail,
-    GetFileInfo,
-    LegacyGetFileInfoOptions,
-    LegacyGetFileInfoSuccess,
-    LegacyGetFileInfoFail
-}
+import fileUri from '@ohos.file.fileuri'
+import buffer from '@ohos.buffer'
 
 const SAVE_FILE_DIR = 'uni-store'
 export const CACHE_PATH = `unifile://cache/`
@@ -92,7 +70,7 @@ function getSavedFileName(filePath: string) {
 
 function getFsPath(filePath: string) {
     filePath = getRealPath(filePath) as string
-    if (!/^file:/.test(filePath)) {
+    if (!filePath.startsWith('file:')) {
         return filePath
     }
     const rawPath = filePath.replace(/^file:\/\//, '')
@@ -216,26 +194,106 @@ export const removeSavedFile: RemoveSavedFile = defineAsyncApi<LegacyRemoveSaved
 const SupportedHashAlgorithm = ['md5', 'sha1']
 export const getFileInfo: GetFileInfo = defineAsyncApi<LegacyGetFileInfoOptions, LegacyGetFileInfoSuccess>(
     API_GET_FILE_INFO,
-    function (options: LegacyGetFileInfoOptions, exec: ApiExecutor<LegacyGetFileInfoSuccess>) {
+    async function (options: LegacyGetFileInfoOptions, exec: ApiExecutor<LegacyGetFileInfoSuccess>) {
         const filePath = getFsPath(options.filePath);
-        const digestAlgorithm = options.digestAlgorithm && SupportedHashAlgorithm.includes(options.digestAlgorithm) ? options.digestAlgorithm : 'md5'
-        if (!fs.accessSync(filePath)) {
-            exec.reject('file not exist')
+        if (options.digestAlgorithm && !SupportedHashAlgorithm.includes(options.digestAlgorithm)) {
+            exec.reject('digestAlgorithm not support')
             return
         }
-        const stat = fs.statSync(filePath)
-        if (!stat.isFile()) {
-            exec.reject('file not exist')
-        }
-        Hash.hash(filePath, digestAlgorithm, (err, hash) => {
-            if (err) {
-                exec.reject(err.message)
-            } else {
+        const digestAlgorithm = options.digestAlgorithm || 'md5'
+        if (!filePath.startsWith('file:')) {
+            // filePath
+            try {
+                fs.accessSync(filePath)
+            } catch (error) {
+                exec.reject('file not exist or inaccessible')
+                return
+            }
+            const stat = fs.statSync(filePath)
+            if (!stat.isFile()) {
+                exec.reject('file not exist')
+            }
+            Hash.hash(filePath, digestAlgorithm, (err, hash) => {
+                if (err) {
+                    exec.reject(err.message)
+                } else {
+                    exec.resolve({
+                        size: stat.size,
+                        digest: hash
+                    } as LegacyGetFileInfoSuccess)
+                }
+            })
+        } else {
+            // fd
+            let file: fs.File | undefined = undefined
+            try {
+                file = await fs.open(filePath)
+            } catch (e) {
+                exec.reject((e as Error).message)
+                return
+            }
+            const fd = file.fd as number
+            try {
+                const stat = fs.statSync(fd)
+                const hasher = Hash.createHash(digestAlgorithm)
+                const buf = buffer.alloc(1024)
+                while (true) {
+                    const size = await fs.read(fd, buf.buffer)
+                    if (size === 1024) {
+                        hasher.update(buf.buffer)
+                    } else {
+                        hasher.update(buf.subarray(0, size).buffer)
+                        break
+                    }
+                }
                 exec.resolve({
                     size: stat.size,
-                    digest: hash
+                    digest: hasher.digest()
                 } as LegacyGetFileInfoSuccess)
+            } catch (error) {
+                exec.reject((error as Error).message)
+            } finally {
+                fs.closeSync(fd)
             }
-        })
+        }
     }
 ) as GetFileInfo
+
+export {
+  GetFileInfo,
+  GetSavedFileInfo,
+  GetSavedFileList,
+  LegacyGetFileInfoCompleteCallback,
+  LegacyGetFileInfoFail,
+  LegacyGetFileInfoFailCallback,
+  LegacyGetFileInfoOptions,
+  LegacyGetFileInfoSuccess,
+  LegacyGetFileInfoSuccessCallback,
+  LegacyGetSavedFileInfoCompleteCallback,
+  LegacyGetSavedFileInfoFail,
+  LegacyGetSavedFileInfoFailCallback,
+  LegacyGetSavedFileInfoOptions,
+  LegacyGetSavedFileInfoSuccess,
+  LegacyGetSavedFileInfoSuccessCallback,
+  LegacyGetSavedFileListCompleteCallback,
+  LegacyGetSavedFileListFail,
+  LegacyGetSavedFileListFailCallback,
+  LegacyGetSavedFileListOptions,
+  LegacyGetSavedFileListSuccess,
+  LegacyGetSavedFileListSuccessCallback,
+  LegacyRemoveSavedFileCompleteCallback,
+  LegacyRemoveSavedFileFail,
+  LegacyRemoveSavedFileFailCallback,
+  LegacyRemoveSavedFileOptions,
+  LegacyRemoveSavedFileSuccess,
+  LegacyRemoveSavedFileSuccessCallback,
+  LegacySaveFileCompleteCallback,
+  LegacySaveFileFail,
+  LegacySaveFileFailCallback,
+  LegacySaveFileOptions,
+  LegacySaveFileSuccess,
+  LegacySaveFileSuccessCallback,
+  LegacySavedFileListItem,
+  RemoveSavedFile,
+  SaveFile
+} from '../interface.uts';

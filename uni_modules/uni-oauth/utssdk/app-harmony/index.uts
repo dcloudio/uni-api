@@ -1,22 +1,7 @@
 import {
-  Login, LoginOptions, LoginSuccess, LoginFail,
-  GetUserInfo, GetUserInfoOptions, GetUserInfoSuccess, GetUserInfoFail, UserInfo,
-  UniOAuthProvider
+  Login, LoginOptions, LoginSuccess, GetUserInfo, GetUserInfoOptions, GetUserInfoSuccess, UniOAuthProvider
 } from '../interface.uts';
 import { API_LOGIN, LoginApiProtocol, API_GET_USER_INFO, GetUserInfoApiProtocol } from '../protocol.uts';
-
-export {
-  Login,
-  LoginOptions,
-  LoginSuccess,
-  LoginFail,
-  GetUserInfo,
-  GetUserInfoOptions,
-  GetUserInfoSuccess,
-  GetUserInfoFail,
-  UserInfo,
-  UniOAuthProvider
-}
 
 const SERVICE = 'oauth'
 const PROVIDER = 'huawei'
@@ -68,3 +53,37 @@ export const getUserInfo: GetUserInfo = defineAsyncApi<GetUserInfoOptions, GetUs
   },
   GetUserInfoApiProtocol
 ) as GetUserInfo
+
+export {
+    AppleLoginAppleInfo,
+    GetUserInfo,
+    GetUserInfoComplete,
+    GetUserInfoCompleteCallback,
+    GetUserInfoFail,
+    GetUserInfoFailCallback,
+    GetUserInfoOptions,
+    GetUserInfoSuccess,
+    GetUserInfoSuccessCallback,
+    IOauthFail,
+    Login,
+    LoginComplete,
+    LoginCompleteCallback,
+    LoginFail,
+    LoginFailCallback,
+    LoginOptions,
+    LoginSuccess,
+    LoginSuccessCallback,
+    OauthErrorCode,
+    UniOAuthProvider,
+    UniVerifyButtonListItem,
+    UniVerifyButtonsStyles,
+    UniverifyAuthButtonStyles,
+    UniverifyIconStyles,
+    UniverifyOtherButtonStyles,
+    UniverifyPhoneNumStyles,
+    UniverifyPrivacyItemStyles,
+    UniverifyPrivacyTermsStyles,
+    UniverifySloganStyles,
+    UniverifyStyle,
+    UserInfo
+} from '../interface.uts'

@@ -15,7 +15,7 @@ export const getVideoInfo: GetVideoInfo =
     defineAsyncApi<GetVideoInfoOptions, GetVideoInfoSuccess>(
         API_GET_VIDEO_INFO,
         function (options: GetVideoInfoOptions, res: ApiExecutor<GetVideoInfoSuccess>) {
-            _getVideoInfo(options.src)
+            _getVideoInfo(options.src, 'KB')
                 .then((getVideInfoRes) => {
                     res.resolve({
                         size: getVideInfoRes.size,

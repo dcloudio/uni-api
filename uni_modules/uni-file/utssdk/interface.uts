@@ -90,9 +90,9 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
-     *        "osVer": "3.0",
      *        "uniVer": "4.25",
-     *        "unixVer": "4.61"
+     *        "unixVer": "4.61",
+     *        "unixVaporVer": "5.0"
      *      }
      *  },
      *  "mp": {
@@ -151,9 +151,9 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
-     *        "osVer": "3.0",
      *        "uniVer": "4.25",
-     *        "unixVer": "4.61"
+     *        "unixVer": "4.61",
+     *        "unixVaporVer": "5.0"
      *      }
      *  },
      *  "mp": {
@@ -212,9 +212,9 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
-     *        "osVer": "3.0",
      *        "uniVer": "4.25",
-     *        "unixVer": "4.61"
+     *        "unixVer": "4.61",
+     *        "unixVaporVer": "5.0"
      *      }
      *  },
      *  "mp": {
@@ -273,9 +273,9 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
-     *        "osVer": "3.0",
      *        "uniVer": "4.25",
-     *        "unixVer": "4.61"
+     *        "unixVer": "4.61",
+     *        "unixVaporVer": "5.0"
      *      }
      *  },
      *  "mp": {
@@ -334,9 +334,9 @@ export interface Uni {
      * @uniPlatform {
      *    "app": {
      *      "harmony": {
-     *        "osVer": "3.0",
      *        "uniVer": "4.25",
-     *        "unixVer": "4.61"
+     *        "unixVer": "4.61",
+     *        "unixVaporVer": "5.0"
      *      }
      *  },
      *  "mp": {

@@ -5,30 +5,29 @@ import { RecorderManagerOnStopResult, RecorderManagerErrorCode, IRecorderManager
 export type RecorderState = 'pause' | 'resume' | 'start' | 'stop' | 'error' | 'frameRecorded' | 'interruptionBegin' | 'interruptionEnd'
 
 type ErrorCb = (result: IRecorderManagerFail) => void
-export
 interface Callbacks {
-  pause?: Function
-  resume?: Function
-  start?: Function
-  stop?: Function
-  error?: ErrorCb
-  frameRecorded?: Function
-  interruptionBegin?: Function
-  interruptionEnd?: Function
+  pause?: Function | null
+  resume?: Function | null
+  start?: Function | null
+  stop?: Function | null
+  error?: ErrorCb | null
+  frameRecorded?: Function | null
+  interruptionBegin?: Function | null
+  interruptionEnd?: Function | null
 }
 
 const callbacks: Callbacks = {
-  pause: undefined,
-  resume: undefined,
-  start: undefined,
-  stop: undefined,
-  error: undefined,
-  frameRecorded: undefined,
-  interruptionBegin: undefined,
-  interruptionEnd: undefined
+  pause: null,
+  resume: null,
+  start: null,
+  stop: null,
+  error: null,
+  frameRecorded: null,
+  interruptionBegin: null,
+  interruptionEnd: null
 }
 
-export function setRecordStateCallback(state: RecorderState, cb: Function | ErrorCb) {
+export function setRecordStateCallback(state: RecorderState, cb: Function | ErrorCb | null = null) {
   switch (state) {
     case 'pause':
       callbacks.pause = cb
@@ -55,6 +54,9 @@ export function setRecordStateCallback(state: RecorderState, cb: Function | Erro
       callbacks.interruptionEnd = cb
       break
   }
+}
+export function deleteRecordStateCallback(state: RecorderState) {
+  setRecordStateCallback(state)
 }
 
 export interface StateChangeRes extends RecorderManagerOnStopResult {

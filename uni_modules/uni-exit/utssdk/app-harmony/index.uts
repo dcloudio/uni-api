@@ -11,3 +11,14 @@ export const exit: Exit = defineSyncApi<void>(
         UTSHarmony.exit()
     }
 ) as Exit
+export {
+    Exit,
+    ExitCompleteCallback,
+    ExitErrorCode,
+    ExitFail,
+    ExitFailCallback,
+    ExitOptions,
+    ExitSuccess,
+    ExitSuccessCallback,
+    IExitError
+} from '../interface.uts';

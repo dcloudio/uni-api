@@ -13,6 +13,7 @@ import android.os.Looper
 import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageProxy
+import androidx.core.graphics.scale
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -26,7 +27,6 @@ import java.nio.ByteBuffer
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
-import androidx.core.graphics.scale
 
 class Scanner {
     interface ScannerCallback {
@@ -78,8 +78,8 @@ class Scanner {
             scannerCallback?.onLight(analyzeBrightness(imageProxy))
 
             var bitmap = imageProxy.toBitmap()
+            bitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees)
             if (width > 0 && height > 0) {
-                bitmap = rotateBitmap(bitmap, imageProxy.imageInfo.rotationDegrees)
                 //bitmap转为16：9
                 if (bitmap.height / bitmap.width.toFloat() > height / width.toFloat()) {
                     val newHeight = bitmap.width * height / width
@@ -196,21 +196,10 @@ class Scanner {
                     it.process(image)
                         .addOnSuccessListener { barcodes ->
                             if (!isVideoFrame) {
-                                if (barcodes.size == 0) {
+                                if (barcodes.isEmpty() || barcodes.all { it.rawBytes == null || it.rawBytes!!.isEmpty() }) {
+                                    // 如果没有扫到码，或者扫到的所有码都没有有效数据，则返回失败
                                     scannerCallback?.onScanFailure("no barcode found")
                                     return@addOnSuccessListener
-                                } else {
-                                    var isEmptyOfRawBytes = false
-                                    for (barcode in barcodes) {
-                                        if (barcode.rawBytes != null && barcode.rawBytes?.size == 0) {
-                                            isEmptyOfRawBytes = true
-                                            break
-                                        }
-                                    }
-                                    if (isEmptyOfRawBytes) {
-                                        scannerCallback?.onScanFailure("no barcode found")
-                                        return@addOnSuccessListener
-                                    }
                                 }
                             }
 

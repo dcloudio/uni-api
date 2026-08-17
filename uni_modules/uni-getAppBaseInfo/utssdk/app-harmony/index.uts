@@ -7,12 +7,6 @@ import {
 } from '../protocol.uts'
 import I18n from '@ohos.i18n'
 import bundleManager from '@ohos.bundle.bundleManager'
-
-export {
-    GetAppBaseInfo,
-    GetAppBaseInfoResult,
-}
-
 function getBundleInfoOnce() {
     let bundleInfo: bundleManager.BundleInfo | null = null
     return (): bundleManager.BundleInfo => {
@@ -58,3 +52,9 @@ export const getAppBaseInfo: GetAppBaseInfo = defineSyncApi<GetAppBaseInfoResult
         } as GetAppBaseInfoResult
     }
 ) as GetAppBaseInfo
+
+export {
+  GetAppBaseInfo,
+  GetAppBaseInfoOptions,
+  GetAppBaseInfoResult
+} from '../interface.uts';

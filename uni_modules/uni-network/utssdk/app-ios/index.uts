@@ -7,7 +7,6 @@ import { NetworkUtil } from './network/utils/NetworkUtil.uts';
 import { CFString } from 'CoreFoundation';
 class SimpleNetworkListener<T> extends NetworkRequestListener {
 	private param : RequestOptions<T> | null = null;
-	private headers : Map<string, any> | null = null;
 	private received : number = 0;
 	private data : Data = new Data();
 	@UTSiOS.keyword("weak")
@@ -21,9 +20,8 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 	}
 
 	public override onHeadersReceived(statusCode : number, headers : Map<string, any>) : void {
-		this.headers = headers;
-		
 	}
+	
 	public override onDataReceived(data : Data) : void {
 		this.received += Number.from(data.count);
 		this.data.append(data);
@@ -31,7 +29,11 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 
 	public override onFinished(response : HTTPURLResponse) : void {
 		try {
-			let headers = response.allHeaderFields as Map<string, any>;
+			let originalHeaders = response.allHeaderFields as Map<string, any>;
+			let headers = new Map<string, any>();
+			originalHeaders.forEach((value, key) => {
+				headers.set(key.toLowerCase(), value);
+			})
 			let kParam = this.param;
 			let result = {};
 			result['statusCode'] = response.statusCode;
@@ -70,7 +72,7 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				data: result['data']! as T,
 				statusCode: (new NSNumber(value = response.statusCode)),
 				header: result['header'] ?? "",
-				cookies: this.parseCookie(this.headers)
+				cookies: this.parseCookie(headers)
 			})
 			let success = kParam?.success;
 			let complete = kParam?.complete;
@@ -128,7 +130,14 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 	}
 
 	private parseData(data : Data | null, dataStr : string | null, parseType : string | null) : any | null {
-		if (`${type(of = T.self)}` == "Any.Protocol" || `${type(of = T.self)}` == "Optional<Any>.Type") {
+		if (T.self == String.self || T.self == Optional<String>.self) {
+			return dataStr
+		} else if (T.self == ArrayBuffer.self || T.self == Optional<ArrayBuffer>.self) {
+			if (data == null) {
+				return data;
+			}
+			return ArrayBuffer.fromData(data!)
+		} else if (`${type(of = T.self)}` == "Any.Protocol" || `${type(of = T.self)}` == "Optional<Any>.Type") {
 			if (parseType != null && parseType!.contains("json")) {
 				if (dataStr == null || dataStr!.length == 0) {
 					return {};
@@ -147,7 +156,9 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				start += 1;
 				let tmp = dataStr!.slice(start, end);
 				return this.tryParseJson(data!, tmp);
-			} else if (parseType == 'arraybuffer') {
+			} else if (parseType != null && parseType!.toLowerCase() == 'string') {
+				return dataStr
+			} else if (parseType != null && parseType!.toLowerCase() == 'arraybuffer') {
 				if (data == null) {
 					return data;
 				}
@@ -173,6 +184,9 @@ class SimpleNetworkListener<T> extends NetworkRequestListener {
 				// utf8 如果失败了，就用ascii，虽然几率很小。
 				if (currentStr == null) {
 					currentStr = new String(data = data!, encoding = String.Encoding.ascii);
+				}
+				if (currentStr == null) {
+					return null;
 				}
 				return this.tryParseJson(data!, currentStr!) ?? currentStr;
 			}
@@ -406,7 +420,6 @@ class DownloadNetworkListener extends NetworkDownloadFileListener {
 export function request<T>(options : RequestOptions<T>, _t : T.Type) : RequestTask {
 	return NetworkManager.getInstance().request(options, new SimpleNetworkListener<T>(options));
 }
-
 
 export const uploadFile : UploadFile = (options : UploadFileOptions) : UploadTask => {
 	return NetworkManager.getInstance().uploadFile(options, new UploadNetworkListener(options));

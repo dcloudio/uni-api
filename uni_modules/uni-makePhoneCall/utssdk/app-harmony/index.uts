@@ -5,8 +5,6 @@ import { API_MAKE_PHONE_CALL, MakePhoneCallProtocol } from '../protocol.uts';
 import { MakePhoneCallErrorImpl } from '../unierror.uts'
 import { isValidPhoneRules } from '../phoneRuleValidation.uts'
 
-export { MakePhoneCall, MakePhoneCallOptions, MakePhoneCallSuccess, MakePhoneCallErrorCode }
-
 function transformErrorCode(code: number): MakePhoneCallErrorCode {
     switch (code) {
         case 401:
@@ -41,3 +39,16 @@ export const makePhoneCall: MakePhoneCall = defineAsyncApi<MakePhoneCallOptions,
     },
     MakePhoneCallProtocol
 ) as MakePhoneCall
+
+export {
+    IMakePhoneCallError,
+    MakePhoneCall,
+    MakePhoneCallComplete,
+    MakePhoneCallCompleteCallback,
+    MakePhoneCallErrorCode,
+    MakePhoneCallFail,
+    MakePhoneCallFailCallback,
+    MakePhoneCallOptions,
+    MakePhoneCallSuccess,
+    MakePhoneCallSuccessCallback
+} from '../interface.uts'

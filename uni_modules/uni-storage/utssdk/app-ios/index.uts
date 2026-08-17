@@ -58,7 +58,8 @@ class StorageTool {
 		 }
 	}
 	
-	protected static getStorage(): Storage {
+	@UTSiOS.keyword("fileprivate")
+	static getStorage(): Storage {
 		if (this.storage != null) {
 			return this.storage!
 		} 

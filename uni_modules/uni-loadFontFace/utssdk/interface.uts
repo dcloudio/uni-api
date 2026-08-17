@@ -49,19 +49,19 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "x"
+     *          "unixVer": "x",
+     *          "unixVaporVer": "x"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "x",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -118,19 +118,19 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -187,19 +187,19 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -256,19 +256,19 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "x",
+     *        "unixVaporVer": "x"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
-     *      "osVer": "x",
      *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "unixVer": "x",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -325,14 +325,14 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -389,14 +389,14 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -453,14 +453,14 @@ export type LoadFontFaceOptions = {
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -527,25 +527,25 @@ export interface Uni {
     /**
      * 动态加载网络字体
      *
-     * @tutorial-uni-app https://uniapp.dcloud.net.cn/api/ui/font.html#loadfontface
-     * @tutorial-uni-app-x https://doc.dcloud.net.cn/uni-app-x/api/load-font-face.html
      * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/load-font-face.html
+     * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/load-font-face.html
+     * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/ui/font.html#loadfontface
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "osVer": "5.0",
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
-     *          "osVer": "10.0",
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
-     *      "osVer": "3.0",
      *      "uniVer": "4.23",
-     *      "unixVer": "4.61"
+     *      "unixVer": "4.61",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {

@@ -89,6 +89,7 @@ export function chooseFileUtil(options : ChooseFileOptions) {
 					tempFilePaths:[]
 				} as ChooseFileSuccess)
 			}
+			resultCallBack = null
 		}
 	}
 

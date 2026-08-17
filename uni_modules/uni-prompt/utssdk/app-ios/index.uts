@@ -17,6 +17,7 @@ export const hideToast : HideToast = function () {
 	ToastModule.toHideToast()
 }
 
+// #ifndef UNI-APP-X
 export const showLoading : ShowLoading = function (options : ShowLoadingOptions) {
 	ToastModule.toShowLoading(options)
 }
@@ -25,12 +26,10 @@ export const hideLoading : HideLoading = function () {
 	ToastModule.toHideLoading()
 }
 
-// #ifndef UNI-APP-X
 export const showModal : ShowModal = function (options : ShowModalOptions) {
 	ModalModule.toShowModal(options)
 }
-// #endif
-// #ifndef UNI-APP-X
+
 export const showActionSheet : ShowActionSheet = function (options : ShowActionSheetOptions) {
 	ActionSheetModule.actionSheet(options)
 }

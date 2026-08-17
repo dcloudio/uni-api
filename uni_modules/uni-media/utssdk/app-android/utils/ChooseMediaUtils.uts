@@ -38,7 +38,7 @@ const ASSETS_PATH = '/android_asset/'
 export function chooseMediaImage(option : ChooseImageOptions) {
 	uniChooseImage(option, function (count : number, compressed : boolean, index : number) {
 		if (option.albumMode == "system" && index != 0) {
-			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getUniActivity()!.applicationInfo.targetSdkVersion >= 33) {
+			if (Build.VERSION.SDK_INT > 32 || UTSAndroid.getAppContext()!.applicationInfo.targetSdkVersion >= 33) {
 				openAlbumForImage(option, count, 100)
 			} else {
 				UTSAndroid.requestSystemPermission(UTSAndroid.getUniActivity()!, [android.Manifest.permission.READ_EXTERNAL_STORAGE], (a : boolean, b : string[]) => {
@@ -121,6 +121,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 					option.fail?.(error)
 					option.complete?.(error)
 				}
+				cropFunction = null
 			}
 		}
 
@@ -172,6 +173,7 @@ function openCameraForImage(option : ChooseImageOptions, compressed : boolean) {
 					option.fail?.(error)
 					option.complete?.(error)
 				}
+				takeCameraFunction = null
 			}
 		}
 		UTSAndroid.onAppActivityResult(takeCameraFunction!)
@@ -231,6 +233,7 @@ function openAlbumForImage(option : ChooseImageOptions, count : number, type : n
 				option.fail?.(error)
 				option.complete?.(error)
 			}
+			albumFunction = null
 		}
 	}
 	UTSAndroid.onAppActivityResult(albumFunction!)
@@ -341,6 +344,7 @@ function openCameraForVideo(option : ChooseVideoOptions, compressed : boolean) {
 					option.fail?.(error)
 					option.complete?.(error)
 				}
+				takeVideoFunction = null
 			}
 		}
 		UTSAndroid.onAppActivityResult(takeVideoFunction!)
@@ -454,6 +458,7 @@ function openAlbumForVideo(option : ChooseVideoOptions, count : number, type : n
 				option.success?.(success)
 				option.complete?.(success)
 			}
+			openAlbumFunction = null
 		}
 	}
 	UTSAndroid.onAppActivityResult(openAlbumFunction!)
