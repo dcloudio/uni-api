@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@ohos/videocompressor": "./libs/videoCompressor.har"
+	}
+}

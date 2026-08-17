@@ -1,0 +1,52 @@
+{
+    "id": "uni-uasm",
+    "displayName": "uni-uasm",
+    "version": "1.0.0",
+    "description": "uni-app x UASM API",
+    "keywords": [
+        "uni-uasm"
+    ],
+    "repository": "",
+    "engines": {
+        "HBuilderX": "^5.0.0"
+    },
+    "dcloudext": {
+        "type": "uts",
+        "sale": {
+            "regular": {
+                "price": "0.00"
+            },
+            "sourcecode": {
+                "price": "0.00"
+            }
+        },
+        "contact": {
+            "qq": ""
+        },
+        "declaration": {
+            "ads": "",
+            "data": "",
+            "permissions": ""
+        },
+        "npmurl": ""
+    },
+    "uni_modules": {
+        "dependencies": [],
+        "uni-ext-api": {
+            "uni": {
+                "loadUASM": {
+                    "name": "loadUASM",
+                    "app": {
+                        "js": false,
+                        "x-js": false,
+                        "kotlin": "dom2",
+                        "swift": "dom2",
+                        "arkts": false
+                    }
+                }
+            }
+        },
+        "encrypt": [],
+        "treeShaking": false
+    }
+}

@@ -1,9 +1,12 @@
 import {
 	SetScreenBrightness,
+	SetScreenBrightnessFail,
 	SetScreenBrightnessOptions,
 	GetScreenBrightness,
+	GetScreenBrightnessFail,
 	GetScreenBrightnessOptions,
 	SetKeepScreenOn,
+	SetKeepScreenOnFail,
 	SetKeepScreenOnOptions,
 	SetKeepScreenOnSuccess
 } from '../interface.uts'
@@ -23,8 +26,16 @@ type NavigatorWithWakeLock = {
 
 let currentWakeLock : WakeLockSentinel | null = null
 
-function createFailResult(errMsg : string) : UniError {
-	return new UniError('uni-screenBrightness', 1302, errMsg)
+function createSetScreenBrightnessFailResult(errMsg : string) : SetScreenBrightnessFail {
+	return new UniError('uni-screenBrightness', 1302, errMsg) as SetScreenBrightnessFail
+}
+
+function createGetScreenBrightnessFailResult(errMsg : string) : GetScreenBrightnessFail {
+	return new UniError('uni-screenBrightness', 1302, errMsg) as GetScreenBrightnessFail
+}
+
+function createSetKeepScreenOnFailResult(errMsg : string) : SetKeepScreenOnFail {
+	return new UniError('uni-screenBrightness', 1302, errMsg) as SetKeepScreenOnFail
 }
 
 function getWakeLockManager() : WakeLockManager | null {
@@ -36,13 +47,13 @@ function getWakeLockManager() : WakeLockManager | null {
 }
 
 export const setScreenBrightness : SetScreenBrightness = function (options : SetScreenBrightnessOptions) {
-	const error = createFailResult('setScreenBrightness:fail web does not support screen brightness')
+	const error = createSetScreenBrightnessFailResult('setScreenBrightness:fail web does not support screen brightness')
 	options.fail?.(error)
 	options.complete?.(error)
 }
 
 export const getScreenBrightness : GetScreenBrightness = function (options : GetScreenBrightnessOptions) {
-	const error = createFailResult('getScreenBrightness:fail web does not support screen brightness')
+	const error = createGetScreenBrightnessFailResult('getScreenBrightness:fail web does not support screen brightness')
 	options.fail?.(error)
 	options.complete?.(error)
 }
@@ -50,7 +61,7 @@ export const getScreenBrightness : GetScreenBrightness = function (options : Get
 export const setKeepScreenOn : SetKeepScreenOn = function (options : SetKeepScreenOnOptions) {
 	const wakeLockManager = getWakeLockManager()
 	if (wakeLockManager == null) {
-		const error = createFailResult('setKeepScreenOn:fail Screen Wake Lock API is unsupported')
+		const error = createSetKeepScreenOnFailResult('setKeepScreenOn:fail Screen Wake Lock API is unsupported')
 		options.fail?.(error)
 		options.complete?.(error)
 		return
@@ -65,7 +76,7 @@ export const setKeepScreenOn : SetKeepScreenOn = function (options : SetKeepScre
 			options.success?.(result)
 			options.complete?.(result)
 		}, (_err : Error | null) => {
-			const error = createFailResult('setKeepScreenOn:fail wake lock request rejected')
+			const error = createSetKeepScreenOnFailResult('setKeepScreenOn:fail wake lock request rejected')
 			options.fail?.(error)
 			options.complete?.(error)
 		})
@@ -89,7 +100,7 @@ export const setKeepScreenOn : SetKeepScreenOn = function (options : SetKeepScre
 		options.success?.(result)
 		options.complete?.(result)
 	}, (_err : Error | null) => {
-		const error = createFailResult('setKeepScreenOn:fail wake lock release rejected')
+		const error = createSetKeepScreenOnFailResult('setKeepScreenOn:fail wake lock release rejected')
 		options.fail?.(error)
 		options.complete?.(error)
 	})

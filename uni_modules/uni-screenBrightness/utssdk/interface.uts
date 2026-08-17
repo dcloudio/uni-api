@@ -1,21 +1,26 @@
 export interface Uni {
 	/**
 	 * 设置屏幕亮度。
+	 * @param options 设置屏幕亮度的参数
+	 * 
 	 * @tutorial https://uniapp.dcloud.net.cn/api/system/brightness.html
-	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/screen-brightness.html
+	 * @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/brightness.html
 	 * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/brightness.html
 	 *
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -69,24 +74,29 @@ export interface Uni {
 	 *  }
 	 * }
 	 */
-	setScreenBrightness(options : SetScreenBrightnessOptions) : void;
+	setScreenBrightness(options: SetScreenBrightnessOptions): void;
 	/**
 	* 获取屏幕亮度。
+	* @param options 获取屏幕亮度的参数
+	* 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/brightness.html
-	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/screen-brightness.html
+	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/brightness.html
 	* @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/brightness.html
 	*
 	* @uniPlatform {
 	* 	"app": {
 	* 		"android": {
+	* 			"osVer": "5.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	* 		"ios": {
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	*    "harmony": {
+	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
 	*      "unixVer": "4.81",
 	*      "unixVaporVer": "5.0"
@@ -140,24 +150,29 @@ export interface Uni {
 	*  }
 	* }
 	*/
-	getScreenBrightness(options : GetScreenBrightnessOptions) : void;
+	getScreenBrightness(options: GetScreenBrightnessOptions): void;
 	/**
 	* 设置是否保持常亮状态。仅在当前应用生效，离开应用后设置失效。
+	* @param options 设置是否保持常亮状态的参数
+	* 
 	* @tutorial https://uniapp.dcloud.net.cn/api/system/brightness.html
-	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/screen-brightness.html
+	* @tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/brightness.html
 	* @tutorial_uni_app https://uniapp.dcloud.net.cn/api/system/brightness.html
 	*
 	* @uniPlatform {
 	* 	"app": {
 	* 		"android": {
+	* 			"osVer": "5.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	* 		"ios": {
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	*    "harmony": {
+	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
 	*      "unixVer": "4.81",
 	*      "unixVaporVer": "5.0"
@@ -211,16 +226,16 @@ export interface Uni {
 	*  }
 	* }
 	*/
-	setKeepScreenOn(options : SetKeepScreenOnOptions) : void;
+	setKeepScreenOn(options: SetKeepScreenOnOptions): void;
 }
 
-export type SetScreenBrightness = (options : SetScreenBrightnessOptions) => void;
+export type SetScreenBrightness = (options: SetScreenBrightnessOptions) => void;
 export type SetScreenBrightnessSuccess = {};
-export type SetScreenBrightnessSuccessCallback = (result : SetScreenBrightnessSuccess) => void;
-export type SetScreenBrightnessFail = UniError;
-export type SetScreenBrightnessFailCallback = (result : SetScreenBrightnessFail) => void;
+export type SetScreenBrightnessSuccessCallback = (result: SetScreenBrightnessSuccess) => void;
+export interface SetScreenBrightnessFail extends IUniError { }
+export type SetScreenBrightnessFailCallback = (result: SetScreenBrightnessFail) => void;
 export type SetScreenBrightnessComplete = SetScreenBrightnessSuccess | SetScreenBrightnessFail;
-export type SetScreenBrightnessCompleteCallback = (result : SetScreenBrightnessComplete) => void;
+export type SetScreenBrightnessCompleteCallback = (result: SetScreenBrightnessComplete) => void;
 
 export type SetScreenBrightnessOptions = {
 	/**
@@ -228,14 +243,17 @@ export type SetScreenBrightnessOptions = {
 	* @uniPlatform {
 	* 	"app": {
 	* 		"android": {
+	* 			"osVer": "5.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	* 		"ios": {
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	*    "harmony": {
+	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
 	*      "unixVer": "4.81",
 	*      "unixVaporVer": "5.0"
@@ -289,20 +307,23 @@ export type SetScreenBrightnessOptions = {
 	*  }
 	* }
 	*/
-	value : number,
+	value: number,
 	/**
 	 * 接口调用成功的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -356,20 +377,23 @@ export type SetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	success ?: SetScreenBrightnessSuccessCallback | null,
+	success?: SetScreenBrightnessSuccessCallback | null,
 	/**
 	 * 接口调用失败的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -423,20 +447,23 @@ export type SetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	fail ?: SetScreenBrightnessFailCallback | null,
+	fail?: SetScreenBrightnessFailCallback | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -490,26 +517,29 @@ export type SetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	complete ?: SetScreenBrightnessCompleteCallback | null
+	complete?: SetScreenBrightnessCompleteCallback | null
 };
 
 
 
-export type GetScreenBrightness = (options : GetScreenBrightnessOptions) => void;
+export type GetScreenBrightness = (options: GetScreenBrightnessOptions) => void;
 export type GetScreenBrightnessSuccess = {
 	/**
 	 * 屏幕亮度值，范围 0~1，0 最暗，1 最亮。
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -563,27 +593,31 @@ export type GetScreenBrightnessSuccess = {
 	 *  }
 	 * }
 	 */
-	value : number
+	value: number
 };
-export type GetScreenBrightnessSuccessCallback = (result : GetScreenBrightnessSuccess) => void;
-export type GetScreenBrightnessFail = UniError;
-export type GetScreenBrightnessFailCallback = (result : GetScreenBrightnessFail) => void;
+export interface GetScreenBrightnessFail extends IUniError {
+}
+export type GetScreenBrightnessSuccessCallback = (result: GetScreenBrightnessSuccess) => void;
+export type GetScreenBrightnessFailCallback = (result: GetScreenBrightnessFail) => void;
 export type GetScreenBrightnessComplete = GetScreenBrightnessSuccess | GetScreenBrightnessFail;
-export type GetScreenBrightnessCompleteCallback = (result : GetScreenBrightnessComplete) => void;
+export type GetScreenBrightnessCompleteCallback = (result: GetScreenBrightnessComplete) => void;
 export type GetScreenBrightnessOptions = {
 	/**
 	 * 成功返回的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -637,20 +671,23 @@ export type GetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	success ?: GetScreenBrightnessSuccessCallback | null,
+	success?: GetScreenBrightnessSuccessCallback | null,
 	/**
 	 * 失败的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -704,20 +741,23 @@ export type GetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	fail ?: GetScreenBrightnessFailCallback | null,
+	fail?: GetScreenBrightnessFailCallback | null,
 	/**
 	 * 结束的回调函数（调用成功、失败都会执行）
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -771,26 +811,29 @@ export type GetScreenBrightnessOptions = {
 	 *  }
 	 * }
 	 */
-	complete ?: GetScreenBrightnessCompleteCallback | null
+	complete?: GetScreenBrightnessCompleteCallback | null
 };
 
 
 
-export type SetKeepScreenOn = (options : SetKeepScreenOnOptions) => void;
+export type SetKeepScreenOn = (options: SetKeepScreenOnOptions) => void;
 export type SetKeepScreenOnSuccess = {
 	/**
 	 * 调用结果
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -844,13 +887,14 @@ export type SetKeepScreenOnSuccess = {
 	 *  }
 	 * }
 	 */
-	errMsg:string
+	errMsg: string
 };
-export type SetKeepScreenOnSuccessCallback = (result : SetKeepScreenOnSuccess) => void;
-export type SetKeepScreenOnFail = UniError;
-export type SetKeepScreenOnFailCallback = (result : SetKeepScreenOnFail) => void;
+export interface SetKeepScreenOnFail extends IUniError {
+}
+export type SetKeepScreenOnSuccessCallback = (result: SetKeepScreenOnSuccess) => void;
+export type SetKeepScreenOnFailCallback = (result: SetKeepScreenOnFail) => void;
 export type SetKeepScreenOnComplete = SetKeepScreenOnSuccess | SetKeepScreenOnFail;
-export type SetKeepScreenOnCompleteCallback = (result : SetKeepScreenOnComplete) => void;
+export type SetKeepScreenOnCompleteCallback = (result: SetKeepScreenOnComplete) => void;
 
 export type SetKeepScreenOnOptions = {
 	/**
@@ -858,14 +902,17 @@ export type SetKeepScreenOnOptions = {
 	* @uniPlatform {
 	* 	"app": {
 	* 		"android": {
+	* 			"osVer": "5.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	* 		"ios": {
+	* 			"osVer": "12.0",
 	* 			"uniVer": "√",
 	* 			"unixVer": "5.08"
 	* 		},
 	*    "harmony": {
+	*      "osVer": "3.0",
 	*      "uniVer": "4.81",
 	*      "unixVer": "4.81",
 	*      "unixVaporVer": "5.0"
@@ -919,20 +966,23 @@ export type SetKeepScreenOnOptions = {
 	*  }
 	* }
 	*/
-	keepScreenOn : boolean,
+	keepScreenOn: boolean,
 	/**
 	 * 接口调用成功的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -986,20 +1036,23 @@ export type SetKeepScreenOnOptions = {
 	 *  }
 	 * }
 	 */
-	success ?: SetKeepScreenOnSuccessCallback | null,
+	success?: SetKeepScreenOnSuccessCallback | null,
 	/**
 	 * 接口调用失败的回调函数
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -1053,20 +1106,23 @@ export type SetKeepScreenOnOptions = {
 	 *  }
 	 * }
 	 */
-	fail ?: SetKeepScreenOnFailCallback | null,
+	fail?: SetKeepScreenOnFailCallback | null,
 	/**
 	 * 接口调用结束的回调函数（调用成功、失败都会执行）
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {
+	 * 			"osVer": "5.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 * 		"ios": {
+	 * 			"osVer": "12.0",
 	 * 			"uniVer": "√",
 	 * 			"unixVer": "5.08"
 	 * 		},
 	 *    "harmony": {
+	 *      "osVer": "3.0",
 	 *      "uniVer": "4.81",
 	 *      "unixVer": "4.81",
 	 *      "unixVaporVer": "5.0"
@@ -1120,5 +1176,5 @@ export type SetKeepScreenOnOptions = {
 	 *  }
 	 * }
 	 */
-	complete ?: SetKeepScreenOnCompleteCallback | null
+	complete?: SetKeepScreenOnCompleteCallback | null
 };

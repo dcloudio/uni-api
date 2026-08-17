@@ -1,0 +1,42 @@
+/* 此规范为 uni 规范，可以按照自己的需要选择是否实现 */
+import { GoogleLoginErrorCode, GoogleLoginFail } from "./interface.uts"
+/**
+ * 错误主题
+ * 注意：错误主题一般为插件名称，每个组件不同，需要使用时请更改。
+ * [可选实现]
+ */
+export const UniErrorSubject = 'uni-google-login';
+
+
+/**
+ * 错误信息
+ * @UniError
+ * [可选实现]
+ */
+export const GoogleLoginErrors : Map<GoogleLoginErrorCode, string> = new Map([
+  /**
+   * 错误码及对应的错误信息
+   */
+  [9010001, '不具备登录环境，请检查是否已安装并连接GMS服务'],
+  [9010002, 'GMS返回数据错误'],
+  [9010003, '系统环境错误，请检查application/activity状态'],
+  [9010004, 'google服务初始化失败'],
+  [9010005, '请检查登录状态']
+]);
+
+
+/**
+ * 错误对象实现
+ */
+export class GoogleLoginFailImpl extends UniError implements GoogleLoginFail {
+
+  /**
+   * 错误对象构造函数
+   */
+  constructor(errCode : GoogleLoginErrorCode) {
+    super();
+    this.errSubject = UniErrorSubject;
+    this.errCode = errCode;
+    this.errMsg = GoogleLoginErrors.get(errCode) ?? "";
+  }
+}

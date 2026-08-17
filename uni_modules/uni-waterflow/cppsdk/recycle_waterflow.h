@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <functional>
 #include <tuple>
@@ -20,6 +21,8 @@
 #include "interface/UniCSSTransform.h"
 
 namespace recycle_waterflow {
+    class ScrollEndDetectionTimer;
+
     using namespace uniappx;
     using uniappx::Element;
     using uniappx::EventListener;
@@ -128,6 +131,9 @@ namespace recycle_waterflow {
         uniappx::UniViewElement *placeholderElement = nullptr;
         std::shared_ptr<EventListener> scrollListener = nullptr;
         std::shared_ptr<EventListener> scrollEndListener = nullptr;
+        std::chrono::steady_clock::time_point scrollEndDetectionDeadline;
+        std::unique_ptr<ScrollEndDetectionTimer> scrollEndDetectionTimer;
+        bool scrollEndDetectionArmed = false;
         UniResizeObserver *resizeObserver = nullptr;
         // Keys for items
         std::vector<std::string> keyList;
@@ -144,6 +150,9 @@ namespace recycle_waterflow {
         std::vector<ItemInfo> list;
         // Fast lookup: key -> pointer to ItemInfo in `list`
         std::unordered_map<std::string, ItemInfo *> keyItemMap;
+                
+        float calcTolerance = 0.2f;
+        float calcTolerancePrecise = 0.01f;
 
         int crossAxisCount = 2;
         float mainAxisGap = 0.0f;
@@ -170,6 +179,7 @@ namespace recycle_waterflow {
         float cachedSizeEnd = 200.0f;
         float originalCachedSize = 200.0f;
         bool resetCachedSizeOnNextRender = false;
+        bool resetCachedSizeOnNextScroll = false;
         int renderRangeStart = 0;
         int renderRangeLength = 0;
         int lastRenderRangeStart = 0;
@@ -201,6 +211,17 @@ namespace recycle_waterflow {
         bool scrolling = false;
         bool ignoreNextScroll = false;
         bool destroyed = false;
+                
+        /**
+         * 滚动到指定item
+         */
+        bool scrollingToItem = false;
+        uint64_t scrollingToItemTimestamp = 0;
+        bool scrollingToItemWithAnimation = false;
+        uint64_t scrollAnimationDuration = 300;
+        bool scrollingToItemIgnoreNextEnd = false;
+        float scrollingToItemOffset = 0.0f;
+        std::string scrollingToItemKey;
 
     public:
         RecycleWaterflow();
@@ -258,8 +279,20 @@ namespace recycle_waterflow {
 
         void setMaxCrossAxisExtent(double maxCrossAxisExtent);
 
+        void setScrollIntoViewKey(const std::string key);
+
     private:
         // helpers
+        void scheduleScrollEndDetection();
+
+        void cancelScrollEndDetection();
+
+        void destroyScrollEndDetectionTimer();
+
+        void handleScrollEndDetectionTimer();
+
+        friend class ScrollEndDetectionTimer;
+
         inline float realItemSize(float size) const {
             return size < 0 ? defaultItemSize : size;
         }
@@ -320,6 +353,8 @@ namespace recycle_waterflow {
         void leaveFastScrollMode();
 
         float prepareFastScroll(float offset);
+                
+        void checkAndUpdateScrollingToItemOffset();
     };
     // RecycleWaterflow end
 

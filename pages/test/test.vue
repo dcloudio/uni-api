@@ -22,6 +22,8 @@
 		<button @tap="getLocationTest" style="width: 100%;">获取定位</button>
 		<button type="default" @click="handleInstallApk">安装apk</button>
     <button type="default" @click="handleShowNotificationProgress">显示通知栏下载进度</button>
+    <button @tap="loginClick" >google登录</button>
+    <button @tap="logoutClick" >google登出</button>
 
 	</view>
 </template>
@@ -31,6 +33,8 @@
 		installApk
 	} from "@/uni_modules/uni-installApk"
 
+  import { googleLogin } from "@/uni_modules/uni-oauth-google"
+  import { googleLogout } from "@/uni_modules/uni-oauth-google"
 
 	let pre = 0
 	let speed = 1
@@ -51,6 +55,34 @@
 
 		},
 		methods: {
+      loginClick:()=>{
+      	let options = {
+      		success: (res) => {
+      		  console.log("success",res)
+      		},
+      		fail: (res) => {
+      		  console.log("fail",res)
+      		},
+      		complete: (res) => {
+      			console.log("complete",res)
+      		}
+      	}
+      	googleLogin(options);
+      },
+      logoutClick:()=>{
+      	let options = {
+      	  success: () => {
+      	    console.log("success")
+      	  },
+      	  fail: (res) => {
+      	    console.log("fail",res)
+      	  },
+      	  complete: (res) => {
+      	  	console.log("complete",res)
+      	  }
+      	}
+      	googleLogout(options);
+      },
 			onMemoryWarning: function(res) {
 				console.log(res);
 			},

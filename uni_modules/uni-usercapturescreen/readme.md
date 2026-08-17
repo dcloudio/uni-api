@@ -19,3 +19,7 @@
 开启/关闭防截屏。
 
 > 使用文档：[https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen](https://uniapp.dcloud.net.cn/api/system/capture-screen.html#setusercapturescreen)
+
+### 注意
+
+在鸿蒙上使用时需要添加 `ohos.permission.PRIVACY_WINDOW` 权限

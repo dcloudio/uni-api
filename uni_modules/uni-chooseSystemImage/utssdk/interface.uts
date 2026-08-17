@@ -1,7 +1,7 @@
 export type ChooseSystemImageSuccessResult = {
 	filePaths : Array<string>
 }
-export type ImageErrorCode = 2101001 | 2101010 | 2101002
+export type ImageErrorCode = 2101001 | 2101010 | 2101002 | 2101005
 export interface ChooseSystemImageError extends IUniError {
 	errCode : ImageErrorCode
 };

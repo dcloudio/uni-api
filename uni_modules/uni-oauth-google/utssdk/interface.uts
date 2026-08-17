@@ -1,0 +1,57 @@
+/**
+ * 登录参数
+ */
+export type GoogleLoginOptions = {
+  success ?: (res : GoogleLoginResult) => void
+  fail ?: (res : GoogleLoginFail) => void
+  complete ?: (res : any) => void
+}
+/**
+ * 登出参数
+ */
+export type GoogleLogoutOptions = {
+  success ?: (res : any) => void
+  fail ?: (res : GoogleLoginFail) => void
+  complete ?: (res : any) => void
+}
+
+export type GoogleLoginAuthInfo = {
+	openid : string|null,
+	unionid : string|null,
+	access_token : string|null,
+	refresh_token : string|null,
+}
+
+export type GoogleLoginUserInfo = {
+	headimgurl : string|null,
+	nickname : string|null,
+	email : string|null,
+}
+
+export type GoogleLoginResult = {
+  userInfo:GoogleLoginUserInfo,
+  authResult:GoogleLoginAuthInfo,
+}
+
+/**
+ * 错误码
+ * 根据uni错误码规范要求，建议错误码以90开头，以下是错误码示例：
+ * - 9010001 错误信息1
+ * - 9010002 错误信息2
+ */
+export type GoogleLoginErrorCode = 9010001 | 9010002;
+/**
+ * 登录过程中发生错误
+ */
+export interface GoogleLoginFail extends IUniError {
+  errCode : GoogleLoginErrorCode
+};
+
+/**
+ * 实现登录
+ */
+export type GoogleLogin = (options : GoogleLoginOptions) => void
+/**
+ * 取消登录
+ */
+export type GoogleLogout = (options : GoogleLogoutOptions) => void
