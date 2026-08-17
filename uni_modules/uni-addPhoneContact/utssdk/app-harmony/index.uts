@@ -186,3 +186,13 @@ export const addPhoneContact: AddPhoneContact = defineAsyncApi<AddPhoneContactOp
     AddPhoneContactApiProtocol,
     AddPhoneContactApiOptions
 ) as AddPhoneContact
+export {
+    AddPhoneContact,
+    AddPhoneContactComplete,
+    AddPhoneContactCompleteCallback,
+    AddPhoneContactFail,
+    AddPhoneContactFailCallback,
+    AddPhoneContactOptions,
+    AddPhoneContactSuccess,
+    AddPhoneContactSuccessCallback
+} from '../interface.uts';
