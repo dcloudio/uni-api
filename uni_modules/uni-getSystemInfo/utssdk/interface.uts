@@ -2553,7 +2553,7 @@ export type GetSystemInfoResult = {
    */
   osName: 'ios' | 'android' | 'harmonyos' | 'macos' | 'windows' | 'linux',
   /**
-   * 操作系统版本。如 ios 版本，andriod 版本
+   * 操作系统版本。如 ios 版本，android 版本
    *
    * @uniPlatform
    * {

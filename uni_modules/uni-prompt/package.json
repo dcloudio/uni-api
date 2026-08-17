@@ -39,7 +39,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"arkts": true
+						"arkts": "uni1"
 					}
 				},
 				"hideToast": {
@@ -47,7 +47,8 @@
 					"app": {
 						"js": false,
 						"kotlin": true,
-						"swift": true
+						"swift": true,
+						"arkts": "uni1"
 					}
 				},
 				"showLoading": {
@@ -56,7 +57,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"x-arkts": false
+						"arkts": "uni1"
 					}
 				},
 				"hideLoading": {
@@ -65,7 +66,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"x-arkts": false
+						"arkts": "uni1"
 					}
 				},
 				"showModal": {
@@ -74,7 +75,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"x-arkts": false
+						"arkts": "uni1"
 					}
 				},
 				"showActionSheet": {
@@ -83,7 +84,7 @@
 						"js": false,
 						"kotlin": true,
 						"swift": true,
-						"x-arkts": false
+						"arkts": "uni1"
 					}
 				}
 			}

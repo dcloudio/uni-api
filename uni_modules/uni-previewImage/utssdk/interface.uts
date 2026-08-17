@@ -47,7 +47,7 @@ export type PreviewImageCompleteCallback = (callback : any) => void
 
 export type LongPressActionsSuccessResult = {
 	/**
-	 * 接口调用失败的回调函数
+	 * 接口调用成功的回调函数
 	 */
 	tapIndex : number,
 	/**

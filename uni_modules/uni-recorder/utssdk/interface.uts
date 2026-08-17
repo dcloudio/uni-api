@@ -2470,7 +2470,7 @@ export type RecorderManagerErrorCode =
 	 */
 	1107602 |
 	/**
-	 * 采样率是和编码码率不匹配
+	 * 采样率和编码码率不匹配
 	 * @uniPlatform {
 	 * 	"app": {
 	 * 		"android": {

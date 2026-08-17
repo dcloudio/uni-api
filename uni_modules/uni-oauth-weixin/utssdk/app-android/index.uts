@@ -10,49 +10,14 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
 
     private appId : string = '';
     private api : IWXAPI | null = null;
-    private static options : LoginOptions | null = null;
 
     override id : string = "weixin";
     override description : string = "微信登录";
     override isWeChatInstalled : boolean = false;
     override isAppExist : boolean | null = false;
 
-    static onLoginResult(res : BaseResp) {
-        const options = UniOAuthWeixinProviderImpl.options;
-        if (options == null) return;
-        switch (res.errCode) {
-            case BaseResp.ErrCode.ERR_OK:
-                if (res instanceof SendAuth.Resp) {
-                    let authResult : any | null = null;
-                    if (!(options?.onlyAuthorize ?? false)) {
-                        authResult = res;
-                    }
-                    const success = {
-                        code: res.code,
-                        authResult: authResult ?? {}
-                    } as LoginSuccess;
-                    options.success?.(success);
-                    options.complete?.(success);
-                }
-                break;
-            case BaseResp.ErrCode.ERR_USER_CANCEL:
-                const fail1 = new OauthWeixinFailImpl(1310509);
-                options.fail?.(fail1);
-                options.complete?.(fail1);
-                break;
-            case BaseResp.ErrCode.ERR_AUTH_DENIED:
-                const fail2 = new OauthWeixinFailImpl(1310503);
-                options.fail?.(fail2);
-                options.complete?.(fail2);
-                break;
-            default:
-                break;
-        }
-        UniOAuthWeixinProviderImpl.options = null;
-    }
-
     constructor() {
-        this.appId = this.getMetaData('WX_APPID');
+        this.appId = this.getWXAppId();
         this.isWeChatInstalled = this.isInstalled();
         this.isAppExist = this.isWeChatInstalled;
         this.api = WXAPIFactory.createWXAPI(UTSAndroid.getAppContext(), this.appId);
@@ -60,7 +25,6 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
     }
 
     override login(options : LoginOptions) {
-        UniOAuthWeixinProviderImpl.options = options;
         if (this.appId.length == 0) {
             const err = new OauthWeixinFailImpl(1310500);
             options.fail?.(err);
@@ -76,17 +40,58 @@ export class UniOAuthWeixinProviderImpl implements UniOAuthWeixinProvider {
         const req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "wechat_sdk_dcloud_weixin_oauth";
-        this.api?.sendReq(req);
+        const res = this.api?.sendReq(req) ?? false;
+        if (res) {
+            uni.$once('uni-oauth-weixin', (res : UTSJSONObject) => {
+                switch (res.getNumber("errCode")) {
+                    case BaseResp.ErrCode.ERR_OK:
+                        let authResult : any | null = null;
+                        if (!(options?.onlyAuthorize ?? false)) {
+                            authResult = {
+                              authResult: res.getBoolean("authResult", false),
+                              code: res.getString("code", ""),
+                              country: res.getString("country", ""),
+                              lang: res.getString("lang", ""),
+                              state: res.getString("state", ""),
+                              url: res.getString("url", "")
+                          };
+                        }
+                        const success = {
+                            code: res.getString("code", ""),
+                            authResult: authResult ?? {}
+                        } as LoginSuccess;
+                        options.success?.(success);
+                        options.complete?.(success);
+                        break;
+                    case BaseResp.ErrCode.ERR_USER_CANCEL:
+                        const fail1 = new OauthWeixinFailImpl(1310509);
+                        options.fail?.(fail1);
+                        options.complete?.(fail1);
+                        break;
+                    case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                        const fail2 = new OauthWeixinFailImpl(1310503);
+                        options.fail?.(fail2);
+                        options.complete?.(fail2);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        } else {
+            const err = new OauthWeixinFailImpl(1310507);
+            options.fail?.(err);
+            options.complete?.(err);
+        }
     }
 
     override getUserInfo(options : GetUserInfoOptions) {
     }
 
-    private getMetaData(key : string) : string {
+    private getWXAppId() : string {
         const ctx = UTSAndroid.getAppContext();
         if (ctx == null) return '';
         const metaData = ctx.getPackageManager().getApplicationInfo(ctx.packageName, PackageManager.GET_META_DATA).metaData;
-        return metaData.getString(key, '');
+        return metaData.getString('WX_APPID', '');
     }
 
     private isInstalled() : boolean {

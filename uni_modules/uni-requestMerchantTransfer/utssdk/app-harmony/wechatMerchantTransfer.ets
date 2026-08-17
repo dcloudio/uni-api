@@ -21,6 +21,10 @@ let currentWxApi: wxopensdk.WXApi | null = null;
 let pendingResolve: ((result: WechatMerchantTransferNativeResult) => void) | null = null;
 let timeoutId: number = -1;
 
+class MerchantTransferRespPayload {
+  result: string | null = null;
+}
+
 function buildResult(result: string, errMsg: string, extMsg: string): WechatMerchantTransferNativeResult {
   return new WechatMerchantTransferNativeResult(result, errMsg, extMsg);
 }
@@ -56,21 +60,23 @@ function parseMerchantTransferResp(extMsg: string): WechatMerchantTransferNative
     return buildResult('parse_response_error', 'parse response failed', extMsg);
   }
 
-  const compactExtMsg: string = extMsg.split(' ').join('').split('\n').join('').split('\r').join('').split('\t').join('');
-  if (!compactExtMsg.includes('"result"')) {
+  try {
+    const payload = JSON.parse(extMsg) as MerchantTransferRespPayload;
+    const result: string = payload.result ?? '';
+
+    if (result == 'success') {
+      return buildResult('success', '', extMsg);
+    }
+    if (result == 'fail') {
+      return buildResult('fail', 'business failed', extMsg);
+    }
+    if (result == 'cancel') {
+      return buildResult('cancel', 'business canceled', extMsg);
+    }
+    return buildResult('business_failed', 'unknown business result', extMsg);
+  } catch (_error) {
     return buildResult('parse_response_error', 'parse response failed', extMsg);
   }
-
-  if (compactExtMsg.includes('"result":"success"')) {
-    return buildResult('success', '', extMsg);
-  }
-  if (compactExtMsg.includes('"result":"fail"')) {
-    return buildResult('fail', 'business failed', extMsg);
-  }
-  if (compactExtMsg.includes('"result":"cancel"')) {
-    return buildResult('cancel', 'business canceled', extMsg);
-  }
-  return buildResult('business_failed', 'unknown business result', extMsg);
 }
 
 class WechatMerchantTransferEventHandler implements wxopensdk.WXApiEventHandler {
@@ -79,10 +85,6 @@ class WechatMerchantTransferEventHandler implements wxopensdk.WXApiEventHandler 
       if ("requestMerchantTransfer" === resp.businessType) {
         if (resp.errCode == wxopensdk.ErrCode.ERR_UNSUPPORTED) {
           finishPending(buildResult('wechat_version_low', resp.errStr ?? 'wechat version is too low', ''));
-          return;
-        }
-
-        if (!(resp instanceof wxopensdk.OpenBusinessViewResp)) {
           return;
         }
 
@@ -108,10 +110,10 @@ class WechatMerchantTransferEventHandler implements wxopensdk.WXApiEventHandler 
 const wxEventHandler = new WechatMerchantTransferEventHandler();
 
 export async function requestWechatMerchantTransfer(appId: string, query: string): Promise<WechatMerchantTransferNativeResult> {
-  if (appId.length == 0) {
+  if (appId == '') {
     return buildResult('invalid_app_id', 'appId is empty', '');
   }
-  if (query.length == 0) {
+  if (query == '') {
     return buildResult('invalid_query', 'query is empty', '');
   }
 

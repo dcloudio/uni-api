@@ -1,6 +1,15 @@
+// #ifdef APP-IOS
+export interface UniOAuthWeixinProvider extends UniOAuthProvider, JSExport {
+	toJSON() : Map<String, Any>
+	isWeChatInstalled : boolean
+}
+// #endif
+
+// #ifndef APP-IOS
 export interface UniOAuthWeixinProvider extends UniOAuthProvider {
 	isWeChatInstalled : boolean
 }
+// #endif
 
 // #ifdef APP-HARMONY
 export interface AuthResp {

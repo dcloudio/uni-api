@@ -543,16 +543,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -616,16 +618,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -689,16 +693,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -762,15 +768,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "x",
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -834,16 +843,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -907,16 +918,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -980,16 +993,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {
@@ -1053,16 +1068,18 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.22"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "4.11"
+     *      "unixVer": "4.11",
+     *      "unixVaporVer": "5.14"
      *    },
      *    "harmony": {
      *      "uniVer": "4.23",
      *      "unixVer": "4.61",
-     *      "unixVaporVer": "x"
+     *      "unixVaporVer": "5.0"
      *    }
      *  },
      *  "mp": {

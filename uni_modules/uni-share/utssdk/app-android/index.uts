@@ -1,8 +1,13 @@
-import { Share, ShareOptions, UniShareProvider } from "../interface.uts";
+import { Share, ShareOptions, UniShareProvider, ShareProvider } from "../interface.uts";
 import {ShareFailImpl} from "../unierror.uts";
 
+const DEFAULT_PROVIDER : ShareProvider = 'weixin';
+
 export const share : Share = function (options : ShareOptions) {
-	const provider = UTSAndroid.getProvider<UniShareProvider>("share", options.provider ?? '');
+	const resolvedProvider = (options.provider == null || options.provider!.length == 0)
+		? DEFAULT_PROVIDER
+		: options.provider!;
+	const provider = UTSAndroid.getProvider<UniShareProvider>("share", resolvedProvider);
 	if (provider != null) {
 		provider.share(options);
 	} else {

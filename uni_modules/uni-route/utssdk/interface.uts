@@ -9,6 +9,95 @@ export type RouteErrorCode = 4
  * @tutorial http://uniapp.dcloud.io/api/router.html#event-channel
  */
 export type EventChannel = {}
+
+/**
+ * 应用路由类型。
+ */
+export type AppRouteOpenType =
+    /** 应用启动 */
+    | 'appLaunch'
+    /** 打开新页面 */
+    | 'navigateTo'
+    /** 返回上一页面或多级页面 */
+    | 'navigateBack'
+    /** 关闭当前页面并打开新页面 */
+    | 'redirectTo'
+    /** 关闭所有页面并打开新页面 */
+    | 'reLaunch'
+    /** 切换到 tabBar 页面 */
+    | 'switchTab'
+
+/**
+ * 应用路由事件参数。
+ */
+export type AppRouteEvent = {
+    /** 路由页面路径，不包含开头的斜杠 */
+    path: string
+    /** 路由页面参数 */
+    query: UTSJSONObject
+    /** 路由类型 */
+    openType: AppRouteOpenType
+    /** 路由页面是否不存在 */
+    notFound: boolean
+    /** 事件触发时的时间戳 */
+    timeStamp: number
+    /** 路由事件唯一标识 */
+    routeEventId: string
+}
+
+/** 应用路由事件回调 */
+export type AppRouteCallback = (event: AppRouteEvent) => void
+/** 监听应用路由事件 */
+export type OnAppRoute = (callback: AppRouteCallback) => void
+/** 取消监听应用路由事件 */
+export type OffAppRoute = (callback?: AppRouteCallback | null) => void
+
+/**
+ * 应用路由前置事件参数。
+ */
+export type BeforeAppRouteEvent = {
+    /** 路由页面路径，不包含开头的斜杠 */
+    path: string
+    /** 路由页面参数 */
+    query: UTSJSONObject
+    /** 路由类型 */
+    openType: AppRouteOpenType
+    /** 路由页面是否不存在 */
+    notFound: boolean
+    /** 路由事件唯一标识 */
+    routeEventId: string
+}
+
+/** 应用路由前置事件回调 */
+export type BeforeAppRouteCallback = (event: BeforeAppRouteEvent) => void
+/** 监听应用路由前置事件 */
+export type OnBeforeAppRoute = (callback: BeforeAppRouteCallback) => void
+/** 取消监听应用路由前置事件 */
+export type OffBeforeAppRoute = (callback?: BeforeAppRouteCallback | null) => void
+
+export type RewriteRouteSuccess = AsyncApiSuccessResult
+type RewriteRouteSuccessCallback = (result: RewriteRouteSuccess) => void
+export interface RewriteRouteFail extends IUniError {
+    errCode: RouteErrorCode
+}
+type RewriteRouteFailCallback = (result: RewriteRouteFail) => void
+export type RewriteRouteComplete = AsyncApiResult
+type RewriteRouteCompleteCallback = (result: RewriteRouteComplete) => void
+export type RewriteRouteOptions = {
+    /** 重写后的页面路径 */
+    url: string | string.PageURIString
+    /** 是否保留原路由参数，默认 false */
+    preserveQuery?: boolean
+    /** 接口调用成功的回调函数 */
+    success?: RewriteRouteSuccessCallback | null
+    /** 接口调用失败的回调函数 */
+    fail?: RewriteRouteFailCallback | null
+    /** 接口调用结束的回调函数 */
+    complete?: RewriteRouteCompleteCallback | null
+}
+/** 重写当前应用路由 */
+export type RewriteRoute = (options: RewriteRouteOptions) => void
+
 export type NavigateToSuccess = AsyncApiSuccessResult
 type NavigateToSuccessCallback = (result: NavigateToSuccess) => void
 export interface NavigateToFail extends IUniError {
@@ -28,7 +117,8 @@ export type NavigateToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -96,7 +186,8 @@ export type NavigateToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.25"
+     *          "unixVer": "4.25",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -189,7 +280,8 @@ export type NavigateToOptions = {
      *     },
      *     "ios": {
      *       "uniVer": "√",
-     *       "unixVer": "4.25"
+     *       "unixVer": "4.25",
+     *       "unixVaporVer": "5.14"
      *     },
      *     "harmony": {
      *       "uniVer": "4.23",
@@ -390,7 +482,8 @@ export type NavigateToOptions = {
      *     },
      *     "ios": {
      *       "uniVer": "√",
-     *       "unixVer": "4.25"
+     *       "unixVer": "4.25",
+     *       "unixVaporVer": "5.14"
      *     },
      *     "harmony": {
      *       "uniVer": "x",
@@ -549,7 +642,8 @@ export type NavigateToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -616,7 +710,8 @@ export type NavigateToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -683,7 +778,8 @@ export type NavigateToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -760,7 +856,8 @@ export type RedirectToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -827,7 +924,8 @@ export type RedirectToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -894,7 +992,8 @@ export type RedirectToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -961,7 +1060,8 @@ export type RedirectToOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1038,7 +1138,8 @@ export type ReLaunchOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1105,7 +1206,8 @@ export type ReLaunchOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1172,7 +1274,8 @@ export type ReLaunchOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1239,7 +1342,8 @@ export type ReLaunchOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1314,11 +1418,13 @@ export type SwitchTabOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.22"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1381,11 +1487,13 @@ export type SwitchTabOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.22"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1448,11 +1556,13 @@ export type SwitchTabOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.22"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1515,11 +1625,13 @@ export type SwitchTabOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.22"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1596,7 +1708,8 @@ export type NavigateBackOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -1750,7 +1863,8 @@ export type NavigateBackOptions = {
      *     },
      *     "ios": {
      *       "uniVer": "√",
-     *       "unixVer": "4.25"
+     *       "unixVer": "4.25",
+     *       "unixVaporVer": "5.14"
      *     },
      *     "harmony": {
      *       "uniVer": "4.23",
@@ -1943,7 +2057,8 @@ export type NavigateBackOptions = {
      *     },
      *     "ios": {
      *       "uniVer": "√",
-     *       "unixVer": "4.25"
+     *       "unixVer": "4.25",
+     *       "unixVaporVer": "5.14"
      *     },
      *     "harmony": {
      *       "uniVer": "4.23",
@@ -2096,7 +2211,8 @@ export type NavigateBackOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2163,7 +2279,8 @@ export type NavigateBackOptions = {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2224,6 +2341,204 @@ export type NavigateBackOptions = {
 
 export interface Uni {
     /**
+     * 监听应用路由成功后的事件。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/app-route.html#onapproute
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "hostVer": "3.5.5",
+     *       "uniVer": "5.25",
+     *       "unixVer": "5.25"
+     *     },
+     *     "alipay": {
+     *       "hostVer": "2.10.19",
+     *       "uniVer": "x",
+     *       "unixVer": "5.25"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.25"
+     *   }
+     * }
+     */
+    onAppRoute(callback: AppRouteCallback): void
+
+    /**
+     * 取消监听应用路由事件。不传 callback 时移除全部监听器。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/app-route.html#offapproute
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "hostVer": "3.5.5",
+     *       "uniVer": "5.25",
+     *       "unixVer": "5.25"
+     *     },
+     *     "alipay": {
+     *       "hostVer": "2.10.19",
+     *       "uniVer": "x",
+     *       "unixVer": "5.25"
+     *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.25"
+     *   }
+     * }
+     */
+    offAppRoute(callback?: AppRouteCallback | null): void
+
+    /**
+     * 监听应用路由发生前的事件。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/app-route.html#onbeforeapproute
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "hostVer": "3.5.5",
+     *       "uniVer": "5.25",
+     *       "unixVer": "5.25"
+     *     },
+     *     "alipay": {
+     *       "hostVer": "2.10.19",
+     *       "uniVer": "x",
+     *       "unixVer": "5.25"
+     *     }
+     *   }
+     * }
+     */
+    onBeforeAppRoute(callback: BeforeAppRouteCallback): void
+
+    /**
+     * 取消监听应用路由前置事件。不传 callback 时移除全部监听器。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/app-route.html#offbeforeapproute
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "hostVer": "3.5.5",
+     *       "uniVer": "5.25",
+     *       "unixVer": "5.25"
+     *     },
+     *     "alipay": {
+     *       "hostVer": "2.10.19",
+     *       "uniVer": "x",
+     *       "unixVer": "5.25"
+     *     }
+     *   }
+     * }
+     */
+    offBeforeAppRoute(callback?: BeforeAppRouteCallback | null): void
+
+    /**
+     * 在应用路由前置事件回调中重写当前路由。
+     *
+     * @tutorial https://doc.dcloud.net.cn/uni-app-x/api/app-route.html#rewriteroute
+     * @uniPlatform {
+     *   "app": {
+     *     "android": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "ios": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     },
+     *     "harmony": {
+     *       "uniVer": "x",
+     *       "unixVer": "5.25",
+     *       "unixVaporVer": "5.25"
+     *     }
+     *   },
+     *   "mp": {
+     *     "weixin": {
+     *       "hostVer": "3.5.5",
+     *       "uniVer": "5.25",
+     *       "unixVer": "5.25"
+     *     },
+     *     "alipay": {
+     *       "hostVer": "x",
+     *       "uniVer": "x",
+     *       "unixVer": "x"
+     *     }
+     *   }
+     * }
+     */
+    rewriteRoute(options: RewriteRouteOptions): void
+
+    /**
      * 保留当前页面，跳转到应用内的某个页面
      *
      * @tutorial_uni_app https://uniapp.dcloud.net.cn/api/router.html#navigateto
@@ -2237,7 +2552,8 @@ export interface Uni {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2308,7 +2624,8 @@ export interface Uni {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2379,7 +2696,8 @@ export interface Uni {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2446,11 +2764,13 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.22"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -2521,7 +2841,8 @@ export interface Uni {
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.11"
+     *          "unixVer": "4.11",
+     *          "unixVaporVer": "5.14"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",

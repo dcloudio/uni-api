@@ -1,10 +1,7 @@
 import * as wxopensdk from '@tencent/wechat_open_sdk';
 import { PayReq } from '@tencent/wechat_open_sdk';
 import { AbilityConstant, common, Want } from '@kit.AbilityKit';
-
-interface UniPaymentWxpayProvider extends UniPaymentProvider {
-    isWeChatInstalled: boolean;
-}
+import { UniPaymentWxpayProvider } from '../interface.uts';
 
 type OnWXReq = (req: wxopensdk.BaseReq) => void;
 type OnWXResp = (resp: wxopensdk.BaseResp) => void;

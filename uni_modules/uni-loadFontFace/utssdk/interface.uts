@@ -50,15 +50,18 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "x"
+     *          "unixVer": "x",
+     *          "unixVaporVer": "x"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
-     *      "unixVer": "x"
+     *      "unixVer": "x",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -116,11 +119,13 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -183,11 +188,13 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",
@@ -250,15 +257,18 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "x",
+     *        "unixVaporVer": "x"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
      *      "uniVer": "x",
-     *      "unixVer": "x"
+     *      "unixVer": "x",
+     *      "unixVaporVer": "x"
      *    }
      *  },
      *  "mp": {
@@ -316,11 +326,13 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -378,11 +390,13 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -440,11 +454,13 @@ export type LoadFontFaceOptions = {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      }
      *  },
      *  "mp": {
@@ -518,11 +534,13 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *        "uniVer": "√",
-     *        "unixVer": "√"
+     *        "unixVer": "√",
+     *        "unixVaporVer": "5.21"
      *      },
      *      "ios": {
      *          "uniVer": "√",
-     *          "unixVer": "4.10"
+     *          "unixVer": "4.10",
+     *          "unixVaporVer": "5.11"
      *      },
      *    "harmony": {
      *      "uniVer": "4.23",

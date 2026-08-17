@@ -2,6 +2,7 @@
  * 微信登录错误码与错误消息的映射
  */
 export const OauthWeixinUniErrors : Map<OauthErrorCode, string> = new Map([
+	
   /**
    * 未找到微信 APPID
    */
@@ -50,6 +51,14 @@ export const OauthWeixinUniErrors : Map<OauthErrorCode, string> = new Map([
    * 获取用户信息请求超时
    */
   [1310511, '获取用户信息请求超时'],
+	/**
+	 * iOS 没有配置对应的URL Scheme
+	 */
+	[1310512, 'URL Scheme is not configured.'],
+	/**
+	 * iOS 没有配置对应的Universal Link
+	 */
+	[1310513, 'Universal Link is not configured.']
 ]);
 
 /**

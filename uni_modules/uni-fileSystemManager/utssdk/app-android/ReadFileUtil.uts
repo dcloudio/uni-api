@@ -21,8 +21,15 @@ import InputStreamReader from 'java.io.InputStreamReader'
 import Context from 'android.content.Context'
 import Charset from 'java.nio.charset.Charset'
 import OutputStream from 'java.io.OutputStream';
+import { FileDescriptorUtil } from './FileDescriptorUtil'
 
 export class ReadFileUtil {
+	private fileDesUtil : FileDescriptorUtil
+
+	constructor(fileDesUtil : FileDescriptorUtil) {
+		this.fileDesUtil = fileDesUtil
+	}
+
 	private readContentUriWithEncoding(
 		context : Context,
 		contentUri : Uri,
@@ -421,7 +428,7 @@ export class ReadFileUtil {
 		return arrayBuffer
 	}
 
-	private readBufferByCondition(buffer : ArrayBuffer, offset ?: number, position ?: number, length ?: number, fileChannel : FileChannel) : number {
+	private readBufferByCondition(buffer : ArrayBuffer, offset ?: number, position ?: number, length ?: number, fileChannel : FileChannel) : ReadResult {
 		if (position == null) {
 			position = 0
 		}
@@ -439,49 +446,78 @@ export class ReadFileUtil {
 		let bytesRead = fileChannel.read(tempByteBuffer)
 		tempByteBuffer.rewind()
 		byteBuffer.put(tempByteBuffer)
-		return bytesRead
+		var result : ReadResult = {
+			arrayBuffer: ArrayBuffer.fromByteBuffer(byteBuffer),
+			bytesRead: bytesRead
+		}
+		return result
 	}
 
 	public read(option : ReadOption) {
-		let currentDispatcher = UTSAndroid.getDispatcher()
+		let currentDispatcher = UTSAndroid.getDispatcher("main")
 		let that = this
 		UTSAndroid.getDispatcher('io').async(function (_) {
-			let fd = ParcelFileDescriptor.fromFd(option.fd.toInt())
+			let fd = that.fileDesUtil.getDescriptor(option.fd)
+			var operationFd : ParcelFileDescriptor | null = null
+			var intStream : FileInputStream | null = null
+			var fileChannel : FileChannel | null = null
 			if (fd == null) {
-				let err = new FileSystemManagerFailImpl(1300009);
-				option.fail?.(err)
-				option.complete?.(err)
+				currentDispatcher.async(function (_) {
+					let err = new FileSystemManagerFailImpl(1300009);
+					option.fail?.(err)
+					option.complete?.(err)
+				})
 				return
 			}
-			let intStream = new FileInputStream(fd.getFileDescriptor())
-			let fileChannel = intStream.getChannel()
-			//创建ByteBuffer并写入数据
-			let bytesRead = that.readBufferByCondition(option.arrayBuffer, option.offset, option.position, option.length, fileChannel)
-			let ret : ReadSuccessCallbackResult = {
-				arrayBuffer: option.arrayBuffer,
-				bytesRead: bytesRead,
-				errMsg: 'read:ok'
+			try {
+				// 读取同样使用临时副本，防止流的关闭影响 open 持有的原始 descriptor。
+				operationFd = ParcelFileDescriptor.dup(fd.getFileDescriptor())
+				intStream = new FileInputStream(operationFd.getFileDescriptor())
+				fileChannel = intStream.getChannel()
+				let bytesRead = that.readBufferByCondition(option.arrayBuffer, option.offset, option.position, option.length, fileChannel)
+				let ret : ReadSuccessCallbackResult = {
+					arrayBuffer: bytesRead.arrayBuffer,
+					bytesRead: bytesRead.bytesRead,
+					errMsg: 'read:ok'
+				}
+				currentDispatcher.async(function (_) {
+					option.success?.(ret)
+					option.complete?.(ret)
+				})
+			} catch (e) {
+				currentDispatcher.async(function (_) {
+					let err = new FileSystemManagerFailImpl(1300201);
+					option.fail?.(err)
+					option.complete?.(err)
+				})
+			} finally {
+				fileChannel?.close()
+				intStream?.close()
+				operationFd?.close()
 			}
-			currentDispatcher.async(function (_) {
-				option.success?.(ret)
-				option.complete?.(ret)
-			})
 		}, null)
 	}
 	public readSync(option : ReadSyncOption) : ReadResult {
 		let msgPrefix = "readSync:fail "
-		let fd = ParcelFileDescriptor.fromFd(option.fd.toInt())
+		let fd = this.fileDesUtil.getDescriptor(option.fd)
 		if (fd == null) {
 			throw new UniError(FileSystemManagerUniErrorSubject, 1300009, msgPrefix + FileSystemManagerUniErrors.get(1300009)!)
 		}
-		let intStream = new FileInputStream(fd.getFileDescriptor())
-		let fileChannel = intStream.getChannel()
-		//创建ByteBuffer并写入数据
-		let bytesRead = this.readBufferByCondition(option.arrayBuffer, option.offset, option.position, option.length, fileChannel)
-		let ret : ReadResult = {
-			arrayBuffer: option.arrayBuffer,
-			bytesRead: bytesRead
+		var operationFd : ParcelFileDescriptor | null = null
+		var intStream : FileInputStream | null = null
+		var fileChannel : FileChannel | null = null
+		try {
+			operationFd = ParcelFileDescriptor.dup(fd.getFileDescriptor())
+			intStream = new FileInputStream(operationFd.getFileDescriptor())
+			fileChannel = intStream.getChannel()
+			let bytesRead = this.readBufferByCondition(option.arrayBuffer, option.offset, option.position, option.length, fileChannel)
+			return bytesRead
+		} catch (e) {
+			throw new UniError(FileSystemManagerUniErrorSubject, 1300201, msgPrefix + FileSystemManagerUniErrors.get(1300201)!)
+		} finally {
+			fileChannel?.close()
+			intStream?.close()
+			operationFd?.close()
 		}
-		return ret
 	}
 }

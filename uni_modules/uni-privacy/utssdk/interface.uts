@@ -198,6 +198,13 @@ export interface Uni {
     ```
    */
   resetPrivacyAuthorization(): void
+
+  /**
+   * 设置隐私协议状态为同意
+   * @internal
+   *
+   */
+  agreePrivacyAuthorization(): void
 }
 
 export type OnPrivacyAuthorizationChange = (callback: OnPrivacyAuthorizationChangeCallback) => number
@@ -243,7 +250,8 @@ export type GetPrivacySetting = (options: GetPrivacySettingOptions) => void
 export type GetPrivacySettingSuccessCallback = (result: GetPrivacySettingSuccessResult) => void;
 export type GetPrivacySettingFailCallback = (result: any) => void;
 export type GetPrivacySettingCompleteCallback = (result: any) => void;
-export type ResetPrivacyAuthorization = () => void
+export type ResetPrivacyAuthorization = () => void;
+export type AgreePrivacyAuthorization = () => void;
 
 export type GetPrivacySettingSuccessResult = {
   /**

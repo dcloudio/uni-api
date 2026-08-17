@@ -282,7 +282,7 @@ export type AppendFileOptions = {
      *        },
      *        "ios": {
      *            "uniVer": "x",
-     *            "unixVer": "x"
+     *            "unixVer": "4.61"
      *        },
      *    "harmony": {
      *      "uniVer": "4.51",
@@ -1724,7 +1724,7 @@ export type WriteSyncOptions = {
      * }
      */
     length?: number
-    /** 只在 data 类型是 ArrayBuffer 时有效，决定 arrayBuffe 中要被写入的部位，即 arrayBuffer 中的索引，默认0，4.31及以后版本新增
+    /** 只在 data 类型是 ArrayBuffer 时有效，决定 arrayBuffer 中要被写入的部位，即 arrayBuffer 中的索引，默认0，4.31及以后版本新增
      * @uniPlatform {
      *    "app": {
      *        "android": {

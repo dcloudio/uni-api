@@ -4,7 +4,8 @@
 	"version": "1.0.3",
 	"description": "previewImage图片预览",
 	"keywords": [
-		"图片预览,previewImage"
+		"图片预览,previewImage",
+		"关闭图片预览,closePreviewImage"
 	],
 	"repository": [
 		{
@@ -40,6 +41,11 @@
 		"npmurl": ""
 	},
 	"uni_modules": {
+        "pages": {
+            "app-android": true,
+            "app-ios": true,
+            "app-harmony": true
+        },
 		"uni-ext-api": {
 			"uni": {
 				"previewImage": {
@@ -71,8 +77,8 @@
 			"uni-modal",
 			"uni-getDeviceInfo",
 			"uni-actionSheet",
-			"app-ios:uni-dialogPage",
-			"app-ios:uni-event"
+			"uni-dialogPage",
+			"uni-event"
 		],
 		"encrypt": [],
 		"platforms": {

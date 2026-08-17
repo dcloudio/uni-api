@@ -265,7 +265,7 @@ export type OnNetworkStatusChangeCallbackResult = {
    * 	"app": {
    * 		"android": {
    * 			"uniVer": "√",
-   * 			"unixVer": "4.81"
+   * 			"unixVer": "4.81",
    *  			"unixUtsPlugin": "4.81"
    * 		},
    * 		"ios": {
@@ -336,7 +336,7 @@ export type OnNetworkStatusChangeCallbackResult = {
    * 	"app": {
    * 		"android": {
    * 			"uniVer": "√",
-   * 			"unixVer": "4.81"
+   * 			"unixVer": "4.81",
    *  			"unixUtsPlugin": "4.81"
    * 		},
    * 		"ios": {

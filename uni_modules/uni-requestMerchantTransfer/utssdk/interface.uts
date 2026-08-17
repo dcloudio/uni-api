@@ -1,5 +1,5 @@
 export interface Uni {
-  /**
+	/**
 		商家转账用户确认模式下，拉起页面请求用户确认收款
 		@tutorial https://doc.dcloud.net.cn/uni-app-x/api/request-merchant-transfer.html
 		@tutorial_uni_app_x https://doc.dcloud.net.cn/uni-app-x/api/request-merchant-transfer.html
@@ -15,8 +15,8 @@ export interface Uni {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -67,12 +67,12 @@ export interface Uni {
 			}
 		}
 	*/
-  requestMerchantTransfer(options: RequestMerchantTransferOptions): void;
+	requestMerchantTransfer(options : RequestMerchantTransferOptions) : void;
 }
 
-export type RequestMerchantTransfer = (options: RequestMerchantTransferOptions) => void;
+export type RequestMerchantTransfer = (options : RequestMerchantTransferOptions) => void;
 export type RequestMerchantTransferOptions = {
-  /**
+	/**
 		商户号
 		@uniPlatform {
 			"app": {
@@ -85,8 +85,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -137,8 +137,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  mchId: string;
-  /**
+	mchId : string
+	/**
 		商家转账付款单跳转收款页 pkg 信息,商家转账付款单受理成功时返回给商户
 		@uniPlatform {
 			"app": {
@@ -151,8 +151,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -203,8 +203,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  package: string;
-  /**
+	package : string
+	/**
 		商户 appId（微信平台appid），普通模式下必填，服务商模式下，appId 和 subAppId 二选一填写
 		@uniPlatform {
 			"app": {
@@ -217,8 +217,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -269,8 +269,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  appId?: string | null;
-  /**
+	appId ?: string | null
+	/**
 		收款用户 openId， 对应传入的商户 appId 下，某用户的 openId
 		@uniPlatform {
 			"app": {
@@ -335,8 +335,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  openId?: string | null;
-  /**
+	openId ?: string | null
+	/**
 		子商户 appId（微信平台子appid)，服务商模式下，appId 和 subAppId 二选一填写
 		@uniPlatform {
 			"app": {
@@ -401,8 +401,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  subAppId?: string | null;
-  /**
+	subAppId ?: string | null
+	/**
 		子商户号，服务商模式下必填
 		@uniPlatform {
 			"app": {
@@ -467,8 +467,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  subMchId?: string | null;
-  /**
+	subMchId ?: string | null
+	/**
 		接口调用成功的回调函数
 		@uniPlatform {
 			"app": {
@@ -481,8 +481,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -533,8 +533,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  success?: RequestMerchantTransferSuccessCallback | null;
-  /**
+	success ?: RequestMerchantTransferSuccessCallback | null
+	/**
 		接口调用失败的回调函数
 		@uniPlatform {
 			"app": {
@@ -547,8 +547,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -599,8 +599,8 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  fail?: RequestMerchantTransferFailCallback | null;
-  /**
+	fail ?: RequestMerchantTransferFailCallback | null
+	/**
 		接口调用结束的回调函数（调用成功、失败都会执行）
 		@uniPlatform {
 			"app": {
@@ -613,8 +613,8 @@ export type RequestMerchantTransferOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "5.14",
-					"unixVer": "5.14"
+					"uniVer": "5.22",
+					"unixVer": "5.22"
 				}
 			},
 			"web": {
@@ -665,13 +665,19 @@ export type RequestMerchantTransferOptions = {
 			}
 		}
 	*/
-  complete?: RequestMerchantTransferCompleteCallback | null;
-};
-export type RequestMerchantTransferCompleteCallback = (res: RequestMerchantTransferGeneralCallbackResult) => void;
+	complete ?: RequestMerchantTransferCompleteCallback | null
+}
+export type RequestMerchantTransferCompleteCallback = (
+	res : RequestMerchantTransferGeneralCallbackResult
+) => void
 /** 接口调用失败的回调函数 */
-export type RequestMerchantTransferFailCallback = (res: RequestMerchantTransferGeneralCallbackResult) => void;
+export type RequestMerchantTransferFailCallback = (
+	res : RequestMerchantTransferGeneralCallbackResult
+) => void
 /** 接口调用成功的回调函数 */
-export type RequestMerchantTransferSuccessCallback = (res: RequestMerchantTransferGeneralCallbackResult) => void;
+export type RequestMerchantTransferSuccessCallback = (
+	res : RequestMerchantTransferGeneralCallbackResult
+) => void
 export type RequestMerchantTransferGeneralCallbackResult = {
-  errMsg: string;
-};
+	errMsg : string
+}

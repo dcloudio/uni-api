@@ -110,7 +110,7 @@ export type ChooseMediaPageOrientation = /**
 
 export type ChooseMediaOptions = {
 	/**
-	  * 屏幕方向。默认为page.json中的pageOrientation。
+	  * 屏幕方向。默认为pages.json中的pageOrientation。
 	  * @uniPlatform {
 	  *	 "app": {
 	  *		"android": {
@@ -195,11 +195,12 @@ export type ChooseMediaOptions = {
 		 *      "unixVer": "4.61",
 		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	count ?: number | null
 	/**
-	 * album 从相册选视频，camera 使用相机拍摄，合法值：'image'、'video'、'mix'
+	 * image 只能拍摄图片或从相册选择图片，video 只能拍摄视频或从相册选择视频，mix 可同时选择图片和视频，合法值：'image'、'video'、'mix'
 	 * @defaultValue 	['image', 'video']
 	 * @uniPlatform {
 	 * "app": {
@@ -216,11 +217,12 @@ export type ChooseMediaOptions = {
 		 *      "unixVer": "4.61",
 		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	mediaType ?: (string[]) | null,
 	/**
-	 * album 从相册选视频，camera 使用相机拍摄
+	 * album 从相册选择，camera 使用相机拍摄
 	 * @defaultValue ['album', 'camera']
 	 * @uniPlatform {
 	 * "app": {
@@ -237,7 +239,8 @@ export type ChooseMediaOptions = {
 		 *      "unixVer": "4.61",
 		 *      "unixVaporVer": "5.0"
 		 *    }
-	 *	},
+	 *	}
+	 *}
 	 */
 	sourceType ?: (string[]) | null,
 	/**

@@ -116,7 +116,7 @@ export interface BackgroundAudioManager {
    */
   currentTime: number;
   /**
-   * 当前是是否暂停或停止状态，true 表示暂停或停止，false 表示正在播放
+   * 当前是否处于暂停或停止状态，true 表示暂停或停止，false 表示正在播放
    * @uniPlatform
     {
           "app": {

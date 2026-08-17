@@ -1,5 +1,5 @@
 export type MediaOrientation =
-    | 'up'
+    'up'
     | 'down'
     | 'left'
     | 'right'
@@ -292,7 +292,7 @@ export type ChooseImageAlbumMode =
 
 export type ChooseImageOptions = {
     /**
-     * 屏幕方向。默认为page.json中的pageOrientation。
+     * 屏幕方向。默认为pages.json中的pageOrientation。
      * @uniPlatform {
      *	 "app": {
      *		"android": {
@@ -547,7 +547,7 @@ export type ChooseImageOptions = {
     *    "weixin": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "4.41"
+    *        "unixVer": "x"
     *    },
     *    "alipay": {
     *        "hostVer": "√",
@@ -1703,7 +1703,7 @@ export type ChooseVideoPageOrientation = ChooseImagePageOrientation
 export type ChooseVideoAlbumMode = ChooseImageAlbumMode
 export type ChooseVideoOptions = {
     /**
-     * 屏幕方向。默认为page.json中的pageOrientation。
+     * 屏幕方向。默认为pages.json中的pageOrientation。
      * @uniPlatform {
      *	 "app": {
      *		"android": {
@@ -3049,8 +3049,9 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "4.61"
 		 				},
 		 				"harmony": {
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+		 					"uniVer": "4.31",
+		 					"unixVer": "4.61",
+		 					"unixVaporVer": "5.0"
 		 				}
 		 		  },
 		 		  "web": {
@@ -3115,8 +3116,9 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "4.61"
 		 				},
 		 				"harmony": {
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+		 					"uniVer": "4.31",
+		 					"unixVer": "4.61",
+		 					"unixVaporVer": "5.0"
 		 				}
 		 		  },
 		 		  "web": {
@@ -3652,8 +3654,9 @@ export type ChooseFileOptions = {
 					"unixVer": "4.61"
 				},
 				"harmony": {
-					"uniVer": "x",
-					"unixVer": "x"
+                    "uniVer": "4.31",
+                    "unixVer": "4.61",
+                    "unixVaporVer": "5.0"
 				}
 		  },
 		  "web": {
@@ -3722,8 +3725,9 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.61"
 		 				},
 		 				"harmony": {
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+		 					"uniVer": "4.31",
+		 					"unixVer": "4.61",
+		 					"unixVaporVer": "5.0"
 		 				}
 		 		  },
 		 		  "web": {
@@ -3787,8 +3791,9 @@ export type ChooseFileOptions = {
 							"unixVer": "4.61"
 						},
 						"harmony": {
-							"uniVer": "x",
-							"unixVer": "x"
+							"uniVer": "4.31",
+							"unixVer": "4.61",
+							"unixVaporVer": "5.0"
 						}
 				},
 				"web": {
@@ -3852,8 +3857,9 @@ export type ChooseFileOptions = {
 							 "unixVer": "4.61"
 						 },
 						 "harmony": {
-							 "uniVer": "x",
-							 "unixVer": "x"
+						 "uniVer": "4.31",
+						 "unixVer": "4.61",
+						 "unixVaporVer": "5.0"
 						 }
 				 },
 				 "web": {
@@ -3982,8 +3988,9 @@ export type ChooseFileOptions = {
 						 "unixVer": "4.61"
 					 },
 					 "harmony": {
-						 "uniVer": "x",
-						 "unixVer": "x"
+							"uniVer": "4.31",
+							"unixVer": "4.61",
+							"unixVaporVer": "5.0"
 					 }
 				 },
 				 "web": {
@@ -4048,8 +4055,9 @@ export type ChooseFileOptions = {
 							"unixVer": "x"
 						},
 						"harmony": {
-							"uniVer": "x",
-							"unixVer": "x"
+							"uniVer": "4.31",
+							"unixVer": "4.61",
+							"unixVaporVer": "5.0"
 						}
 					},
 					"web": {
@@ -4180,8 +4188,9 @@ export type ChooseFileOptions = {
 		 				"unixVer": "x"
 		 			},
 		 			"harmony": {
-		 				"uniVer": "x",
-		 				"unixVer": "x"
+		 				"uniVer": "4.31",
+		 				"unixVer": "4.61",
+		 				"unixVaporVer": "5.0"
 		 			}
 		 		},
 		 		"web": {
@@ -4246,8 +4255,9 @@ export type ChooseFileOptions = {
 						"unixVer": "4.61"
 					},
 					"harmony": {
-						"uniVer": "x",
-						"unixVer": "x"
+					"uniVer": "4.31",
+					"unixVer": "4.61",
+					"unixVaporVer": "5.0"
 					}
 				},
 				"web": {
@@ -4312,8 +4322,9 @@ export type ChooseFileOptions = {
 						"unixVer": "4.61"
 					},
 					"harmony": {
-						"uniVer": "x",
-						"unixVer": "x"
+					"uniVer": "4.31",
+					"unixVer": "4.61",
+					"unixVaporVer": "5.0"
 					}
 				},
 				"web": {
@@ -4378,8 +4389,9 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.61"
 		 				},
 		 				"harmony": {
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+		 					"uniVer": "4.31",
+		 					"unixVer": "4.61",
+		 					"unixVaporVer": "5.0"
 		 				}
 		 		  },
 		 		  "web": {
@@ -5214,7 +5226,6 @@ export interface Uni {
      *			"unixVer": "4.25"
      *		},
      *    "harmony": {
-     *      "osVer": "3,0",
      *      "uniVer": "4.31",
      *      "unixVer": "4.61",
      *      "unixVaporVer": "5.0"

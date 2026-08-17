@@ -219,7 +219,7 @@ export type ClearStorageFailCallback = (res: UniError) => void
 export type ClearStorageCompleteCallback = (res: any) => void
 
 /**
- * uni.removeStorage参数定义
+ * uni.clearStorage参数定义
  */
 export type ClearStorageOptions = {
     /**

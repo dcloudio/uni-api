@@ -10,7 +10,7 @@ export type NodeInfo = {
     /**
      * 节点的dataset
      */
-    dataset: any | null
+    dataset: UniDOMStringMap | null
     /**
      * 节点的左边界坐标
      */
@@ -56,18 +56,22 @@ export type NodeInfo = {
      */
     node: any | null
     /**
-     * 节点对应的 Context 对象
-     * @type MapContext | CanvasContext | VideoContext | EditorContext
+     * 节点对应的 Context 对象（uni-app x 暂仅支持获取 EditorContext）
      * @uniPlatform {
      *  "app": {
      *    "android": {
-     *        "uniVer": "√",
-     *        "unixVer": "x"
-     *      },
-     *      "ios": {
-     *          "uniVer": "√",
-     *          "unixVer": "x"
-     *      }
+     *      "uniVer": "√",
+     *      "unixVer": "5.04"
+     *    },
+     *    "ios": {
+     *      "uniVer": "√",
+     *      "unixVer": "5.04"
+     *    },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "5.04",
+     *       "unixVaporVer": "5.04"
+     *     }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -305,17 +309,22 @@ export interface NodesRef {
     ): SelectorQuery
 
     /**
-     * 添加节点的 Context 对象查询请求
+     * 添加节点的 Context 对象查询请求（uni-app x 暂仅支持获取 EditorContext）
      * @uniPlatform {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "x"
+     *      "unixVer": "5.04"
      *    },
      *    "ios": {
      *      "uniVer": "√",
-     *      "unixVer": "x"
-     *    }
+     *      "unixVer": "5.04"
+     *    },
+     *     "harmony": {
+     *       "uniVer": "4.23",
+     *       "unixVer": "5.04",
+     *       "unixVaporVer": "5.04"
+     *     }
      *  },
      *  "mp": {
      *    "weixin": {
@@ -472,7 +481,8 @@ export interface Uni {
      *  "app": {
      *    "android": {
      *      "uniVer": "√",
-     *      "unixVer": "3.91"
+     *      "unixVer": "3.91",
+     *      "unixVaporVer": "5.21"
      *    },
      *    "ios": {
      *      "uniVer": "√",
