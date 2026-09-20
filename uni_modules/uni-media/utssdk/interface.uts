@@ -469,7 +469,7 @@ export type ChooseImageOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -801,7 +801,7 @@ export type PreviewImageOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -933,7 +933,7 @@ export type PreviewImageOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1150,7 +1150,7 @@ export type GetImageInfoSuccess = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1212,7 +1212,7 @@ export type GetImageInfoSuccess = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1728,7 +1728,7 @@ export type ChooseVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1838,7 +1838,7 @@ export type ChooseVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1905,7 +1905,7 @@ export type ChooseVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -1973,7 +1973,7 @@ export type ChooseVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2047,7 +2047,7 @@ export type ChooseVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2188,7 +2188,7 @@ export type GetVideoInfoSuccess = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2318,7 +2318,7 @@ export type GetVideoInfoSuccess = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2384,7 +2384,7 @@ export type GetVideoInfoSuccess = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2450,7 +2450,7 @@ export type GetVideoInfoSuccess = {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -2517,7 +2517,7 @@ export type GetVideoInfoSuccess = {
 		 *    "alipay": {
 		 *        "hostVer": "√",
 		 *        "uniVer": "√",
-		 *        "unixVer": "x"
+		 *        "unixVer": "5.25"
 		 *    },
 		 *    "baidu": {
 		 *        "hostVer": "√",
@@ -2769,7 +2769,7 @@ export type CompressVideoSuccess = {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -2872,7 +2872,7 @@ export type CompressVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -2930,7 +2930,7 @@ export type CompressVideoOptions = {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -3065,9 +3065,9 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "4.41"
 		 				},
 		 				"alipay": {
-		 					"hostVer": "x",
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 		 				},
 		 				"baidu": {
 		 					"hostVer": "x",
@@ -3132,9 +3132,9 @@ export type ChooseFileSuccess = {
 		 					"unixVer": "4.41"
 		 				},
 		 				"alipay": {
-		 					"hostVer": "x",
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 		 				},
 		 				"baidu": {
 		 					"hostVer": "x",
@@ -3199,9 +3199,9 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3264,9 +3264,9 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3329,9 +3329,9 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3401,9 +3401,9 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3466,9 +3466,9 @@ export type ChooseFileTempFile = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3531,9 +3531,9 @@ export type ChooseFileTempFile = {
 						 "unixVer": "4.41"
 					 },
 					 "alipay": {
-						 "hostVer": "x",
-						 "uniVer": "x",
-						 "unixVer": "x"
+						 "hostVer": "√",
+						 "uniVer": "√",
+						 "unixVer": "5.25"
 					 },
 					 "baidu": {
 						 "hostVer": "x",
@@ -3596,9 +3596,9 @@ export type ChooseFileTempFile = {
 					  "unixVer": "4.41"
 				  },
 				  "alipay": {
-					  "hostVer": "x",
-					  "uniVer": "x",
-					  "unixVer": "x"
+					  "hostVer": "√",
+					  "uniVer": "√",
+					  "unixVer": "5.25"
 				  },
 				  "baidu": {
 					  "hostVer": "x",
@@ -3670,9 +3670,9 @@ export type ChooseFileOptions = {
 					"unixVer": "4.41"
 				},
 				"alipay": {
-					"hostVer": "x",
-					"uniVer": "x",
-					"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 				},
 				"baidu": {
 					"hostVer": "x",
@@ -3741,9 +3741,9 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.41"
 		 				},
 		 				"alipay": {
-		 					"hostVer": "x",
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 		 				},
 		 				"baidu": {
 		 					"hostVer": "x",
@@ -3807,9 +3807,9 @@ export type ChooseFileOptions = {
 							"unixVer": "4.41"
 						},
 						"alipay": {
-							"hostVer": "x",
-							"uniVer": "x",
-							"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 						},
 						"baidu": {
 							"hostVer": "x",
@@ -3873,9 +3873,9 @@ export type ChooseFileOptions = {
 							 "unixVer": "4.41"
 						 },
 						 "alipay": {
-							 "hostVer": "x",
-							 "uniVer": "x",
-							 "unixVer": "x"
+							 "hostVer": "√",
+							 "uniVer": "√",
+							 "unixVer": "5.25"
 						 },
 						 "baidu": {
 							 "hostVer": "x",
@@ -3938,9 +3938,9 @@ export type ChooseFileOptions = {
 							"unixVer": "4.41"
 						},
 						"alipay": {
-							"hostVer": "x",
-							"uniVer": "x",
-							"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 						},
 						"baidu": {
 							"hostVer": "x",
@@ -4004,9 +4004,9 @@ export type ChooseFileOptions = {
 						 "unixVer": "4.41"
 					 },
 					 "alipay": {
-						 "hostVer": "x",
-						 "uniVer": "x",
-						 "unixVer": "x"
+						 "hostVer": "√",
+						 "uniVer": "√",
+						 "unixVer": "5.25"
 					 },
 					 "baidu": {
 						 "hostVer": "x",
@@ -4071,9 +4071,9 @@ export type ChooseFileOptions = {
 							"unixVer": "4.41"
 						},
 						"alipay": {
-							"hostVer": "x",
-							"uniVer": "x",
-							"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 						},
 						"baidu": {
 							"hostVer": "x",
@@ -4137,9 +4137,9 @@ export type ChooseFileOptions = {
 			 		"unixVer": "4.41"
 			 	},
 			 	"alipay": {
-			 		"hostVer": "x",
-			 		"uniVer": "x",
-			 		"unixVer": "x"
+					"hostVer": "√",
+					"uniVer": "√",
+					"unixVer": "5.25"
 			 	},
 			 	"baidu": {
 			 		"hostVer": "x",
@@ -4204,9 +4204,9 @@ export type ChooseFileOptions = {
 		 				"unixVer": "4.41"
 		 			},
 		 			"alipay": {
-		 				"hostVer": "x",
-		 				"uniVer": "x",
-		 				"unixVer": "x"
+						"hostVer": "√",
+						"uniVer": "√",
+						"unixVer": "5.25"
 		 			},
 		 			"baidu": {
 		 				"hostVer": "x",
@@ -4271,9 +4271,9 @@ export type ChooseFileOptions = {
 						"unixVer": "4.41"
 					},
 					"alipay": {
-						"hostVer": "x",
-						"uniVer": "x",
-						"unixVer": "x"
+						"hostVer": "√",
+						"uniVer": "√",
+						"unixVer": "5.25"
 					},
 					"baidu": {
 						"hostVer": "x",
@@ -4338,9 +4338,9 @@ export type ChooseFileOptions = {
 						"unixVer": "4.41"
 					},
 					"alipay": {
-						"hostVer": "x",
-						"uniVer": "x",
-						"unixVer": "x"
+						"hostVer": "√",
+						"uniVer": "√",
+						"unixVer": "5.25"
 					},
 					"baidu": {
 						"hostVer": "x",
@@ -4405,9 +4405,9 @@ export type ChooseFileOptions = {
 		 					"unixVer": "4.41"
 		 				},
 		 				"alipay": {
-		 					"hostVer": "x",
-		 					"uniVer": "x",
-		 					"unixVer": "x"
+							"hostVer": "√",
+							"uniVer": "√",
+							"unixVer": "5.25"
 		 				},
 		 				"baidu": {
 		 					"hostVer": "x",
@@ -4478,7 +4478,7 @@ export interface Uni {
    *    "alipay": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "5.25"
    *    },
    *    "baidu": {
    *      "hostVer": "√",
@@ -4563,7 +4563,7 @@ export interface Uni {
    *    "alipay": {
    *      "hostVer": "√",
    *      "uniVer": "√",
-   *      "unixVer": "x"
+   *      "unixVer": "5.25"
    *    },
    *    "baidu": {
    *      "hostVer": "√",
@@ -4727,7 +4727,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -4816,7 +4816,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -4905,7 +4905,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -4995,7 +4995,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -5076,7 +5076,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -5158,7 +5158,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -5240,7 +5240,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",
@@ -5326,7 +5326,7 @@ export interface Uni {
     *    "alipay": {
     *        "hostVer": "√",
     *        "uniVer": "√",
-    *        "unixVer": "x"
+    *        "unixVer": "5.25"
     *    },
     *    "baidu": {
     *        "hostVer": "√",

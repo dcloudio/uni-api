@@ -38,6 +38,14 @@ function toPermissionArray(permissions : MutableList<String>) : string[] {
   return result
 }
 
+function toPermissionList(permission:string[]) : MutableList<String> {
+	const result = mutableListOf<String>()
+	permission.forEach((p:string)=>{
+		result.add(p)
+	})
+	return result
+}
+
 function notifySuccess(
   options : RequestSystemPermissionOptions,
   grantedList : string[],
@@ -79,9 +87,20 @@ export const requestSystemPermission : RequestSystemPermission = function (
     ))
     return
   }
+  UTSAndroid.dispatchPermissionRequestEvent("request", androidPermissions)
 
   let grantedList : string[] = []
   try {
+	  var permissionList = toPermissionList(androidPermissions)
+	  var deniedPermissions = XXPermissions.getDenied(activity, permissionList)
+	  permissionList.removeAll(deniedPermissions)
+	  if(permissionList.size > 0) {
+		  UTSAndroid.dispatchPermissionRequestEvent("complete", toPermissionArray(permissionList))
+	  }
+        UTSAndroid.dispatchPermissionRequestEvent(
+            "confirm",
+            toPermissionArray(deniedPermissions)
+        )
     XXPermissions.with(activity)
       .permission(androidPermissions)
       .request(new (class implements OnPermissionCallback {
@@ -90,6 +109,7 @@ export const requestSystemPermission : RequestSystemPermission = function (
           if (allGranted) {
             notifySuccess(options, grantedList, [], [])
           }
+		  UTSAndroid.dispatchPermissionRequestEvent("complete", grantedList)
         }
 
         override onDenied(permissions : MutableList<String>, doNotAskAgain : boolean) : void {
@@ -101,6 +121,7 @@ export const requestSystemPermission : RequestSystemPermission = function (
             deniedList,
             doNotAskAgainList
           )
+		  UTSAndroid.dispatchPermissionRequestEvent("complete", deniedList)
         }
       }))
   } catch (_ : Exception) {

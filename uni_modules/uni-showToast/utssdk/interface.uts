@@ -66,6 +66,11 @@ export type Icon =
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "uniVer": "x",
+          "unixVer": "5.25",
+          "unixUtsPlugin": "5.25"
         }
       },
       "mp": {
@@ -77,7 +82,7 @@ export type Icon =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -132,6 +137,11 @@ export type Icon =
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "uniVer": "x",
+          "unixVer": "5.25",
+          "unixUtsPlugin": "5.25"
         }
       },
       "mp": {
@@ -143,7 +153,7 @@ export type Icon =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -196,6 +206,11 @@ export type Icon =
         "ios": {
           "uniVer": "√",
           "uniUtsPlugin": "x",
+          "unixVer": "x",
+          "unixUtsPlugin": "x"
+        },
+        "harmony": {
+          "uniVer": "x",
           "unixVer": "x",
           "unixUtsPlugin": "x"
         }
@@ -264,6 +279,11 @@ export type Icon =
           "uniUtsPlugin": "x",
           "unixVer": "x",
           "unixUtsPlugin": "x"
+        },
+        "harmony": {
+          "uniVer": "x",
+          "unixVer": "x",
+          "unixUtsPlugin": "x"
         }
       },
       "mp": {
@@ -330,6 +350,11 @@ export type Icon =
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "uniVer": "x",
+          "unixVer": "5.25",
+          "unixUtsPlugin": "5.25"
         }
       },
       "mp": {
@@ -341,7 +366,7 @@ export type Icon =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -396,6 +421,11 @@ export type Icon =
           "uniUtsPlugin": "4.11",
           "unixVer": "4.11",
           "unixUtsPlugin": "4.11"
+        },
+        "harmony": {
+          "uniVer": "x",
+          "unixVer": "5.25",
+          "unixUtsPlugin": "5.25"
         }
       },
       "mp": {
@@ -407,7 +437,7 @@ export type Icon =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -483,7 +513,7 @@ export type ShowToastPosition =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -554,7 +584,7 @@ export type ShowToastPosition =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -625,7 +655,7 @@ export type ShowToastPosition =
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -701,7 +731,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -760,8 +790,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "5.25",
+          "unixVaporVer": "5.25"
         }
       },
       "mp": {
@@ -773,7 +803,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -831,8 +861,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "5.25",
+          "unixVaporVer": "5.25"
         }
       },
       "mp": {
@@ -844,7 +874,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -903,8 +933,8 @@ export type ShowToastOptions = {
         },
         "harmony": {
           "uniVer": "x",
-          "unixVer": "5.26",
-          "unixVaporVer": "5.26"
+          "unixVer": "5.25",
+          "unixVaporVer": "5.25"
         }
       },
       "mp": {
@@ -916,7 +946,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -988,7 +1018,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1059,7 +1089,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1130,7 +1160,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1201,7 +1231,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1272,7 +1302,7 @@ export type ShowToastOptions = {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1351,7 +1381,7 @@ export type ShowToastOptions = {
       "alipay": {
         "hostVer": "√",
         "uniVer": "√",
-        "unixVer": "x"
+        "unixVer": "5.25"
       },
       "baidu": {
         "hostVer": "√",
@@ -1427,7 +1457,7 @@ export type ShowToast = (options: ShowToastOptions) => void
       "alipay": {
         "hostVer": "√",
         "uniVer": "√",
-        "unixVer": "x"
+        "unixVer": "5.25"
       },
       "baidu": {
         "hostVer": "√",
@@ -1513,7 +1543,7 @@ export interface Uni {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",
@@ -1592,7 +1622,7 @@ export interface Uni {
         "alipay": {
           "hostVer": "√",
           "uniVer": "√",
-          "unixVer": "x"
+          "unixVer": "5.25"
         },
         "baidu": {
           "hostVer": "√",

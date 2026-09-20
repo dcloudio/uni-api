@@ -27,7 +27,7 @@ export type ReadFileSuccessResult = {
          "alipay": {
              "hostVer": "√",
              "uniVer": "√",
-             "unixVer": "x"
+             "unixVer": "5.25"
          },
          "baidu": {
              "hostVer": "√",
@@ -195,7 +195,7 @@ export type WriteFileOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -299,7 +299,7 @@ export type AppendFileOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -801,7 +801,7 @@ export interface Stats extends JSExport {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -868,7 +868,7 @@ export interface Stats extends JSExport {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -964,7 +964,7 @@ export interface Stats {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -1031,7 +1031,7 @@ export interface Stats {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -1297,7 +1297,7 @@ export type WriteOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1365,7 +1365,7 @@ export type WriteOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1432,7 +1432,7 @@ export type WriteOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1499,7 +1499,7 @@ export type WriteOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1601,7 +1601,7 @@ export type WriteSyncOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1684,7 +1684,7 @@ export type WriteSyncOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1750,7 +1750,7 @@ export type WriteSyncOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1816,7 +1816,7 @@ export type WriteSyncOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2072,7 +2072,7 @@ export type ReadSuccessCallbackResult = {
 	 *    "alipay": {
 	 *        "hostVer": "√",
 	 *        "uniVer": "√",
-	 *        "unixVer": "x"
+	 *        "unixVer": "5.25"
 	 *    },
 	 *    "baidu": {
 	 *        "hostVer": "√",
@@ -2138,7 +2138,7 @@ export type ReadSuccessCallbackResult = {
 	*    "alipay": {
 	*        "hostVer": "√",
 	*        "uniVer": "√",
-	*        "unixVer": "x"
+	*        "unixVer": "5.25"
 	*    },
 	*    "baidu": {
 	*        "hostVer": "√",
@@ -2233,7 +2233,7 @@ export type ReadSyncOption = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2310,7 +2310,7 @@ export type ReadResult = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2376,7 +2376,7 @@ export type ReadResult = {
 	*    "alipay": {
 	*        "hostVer": "√",
 	*        "uniVer": "√",
-	*        "unixVer": "x"
+	*        "unixVer": "5.25"
 	*    },
 	*    "baidu": {
 	*        "hostVer": "√",
@@ -2445,7 +2445,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2513,7 +2513,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2580,7 +2580,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2650,7 +2650,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2717,7 +2717,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2784,7 +2784,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2851,7 +2851,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2920,7 +2920,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2987,7 +2987,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3054,7 +3054,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3121,7 +3121,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3188,7 +3188,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3255,7 +3255,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3322,7 +3322,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3389,7 +3389,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3458,7 +3458,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3525,7 +3525,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3592,7 +3592,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3659,7 +3659,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3729,7 +3729,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3796,7 +3796,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3863,7 +3863,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3930,7 +3930,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -3998,7 +3998,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4065,7 +4065,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4132,7 +4132,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4201,7 +4201,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4268,7 +4268,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4337,7 +4337,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4404,7 +4404,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4471,7 +4471,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4540,7 +4540,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4607,7 +4607,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4680,7 +4680,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4747,7 +4747,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4816,7 +4816,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4888,7 +4888,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -4957,7 +4957,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5024,7 +5024,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5092,7 +5092,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5159,7 +5159,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5226,7 +5226,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5296,7 +5296,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5363,7 +5363,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5430,7 +5430,7 @@ export interface FileSystemManager {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -5507,7 +5507,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.25"
      *    },
      *    "baidu": {
      *        "hostVer": "√",

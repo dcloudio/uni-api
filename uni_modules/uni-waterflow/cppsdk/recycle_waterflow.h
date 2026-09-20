@@ -144,6 +144,9 @@ namespace recycle_waterflow {
         std::vector<ItemInfo> list;
         // Fast lookup: key -> pointer to ItemInfo in `list`
         std::unordered_map<std::string, ItemInfo *> keyItemMap;
+                
+        float calcTolerance = 0.2f;
+        float calcTolerancePrecise = 0.01f;
 
         int crossAxisCount = 2;
         float mainAxisGap = 0.0f;
@@ -170,6 +173,7 @@ namespace recycle_waterflow {
         float cachedSizeEnd = 200.0f;
         float originalCachedSize = 200.0f;
         bool resetCachedSizeOnNextRender = false;
+        bool resetCachedSizeOnNextScroll = false;
         int renderRangeStart = 0;
         int renderRangeLength = 0;
         int lastRenderRangeStart = 0;
@@ -201,6 +205,17 @@ namespace recycle_waterflow {
         bool scrolling = false;
         bool ignoreNextScroll = false;
         bool destroyed = false;
+                
+        /**
+         * 滚动到指定item
+         */
+        bool scrollingToItem = false;
+        uint64_t scrollingToItemTimestamp = 0;
+        bool scrollingToItemWithAnimation = false;
+        uint64_t scrollAnimationDuration = 300;
+        bool scrollingToItemIgnoreNextEnd = false;
+        float scrollingToItemOffset = 0.0f;
+        std::string scrollingToItemKey;
 
     public:
         RecycleWaterflow();
@@ -258,6 +273,8 @@ namespace recycle_waterflow {
 
         void setMaxCrossAxisExtent(double maxCrossAxisExtent);
 
+        void setScrollIntoViewKey(const std::string key);
+
     private:
         // helpers
         inline float realItemSize(float size) const {
@@ -292,10 +309,6 @@ namespace recycle_waterflow {
 
         void updateRenderListOnScroll();
 
-        void updateRenderListForward();
-
-        void updateRenderListBackward();
-
         bool isAllRenderItemSettled();
 
         ItemInfo *getRenderStartItem() {
@@ -320,6 +333,8 @@ namespace recycle_waterflow {
         void leaveFastScrollMode();
 
         float prepareFastScroll(float offset);
+                
+        void checkAndUpdateScrollingToItemOffset();
     };
     // RecycleWaterflow end
 
