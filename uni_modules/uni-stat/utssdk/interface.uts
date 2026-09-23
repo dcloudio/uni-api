@@ -117,7 +117,11 @@ export type ReportOptions = {
 * @since 4.25
 */
 
-export type Report = (options : ReportOptions) => void
+/**
+ * 统计上报入口同时兼容 uni-app 内置的双参数形式和 uni-stat 对象参数形式。
+ * 实现层统一接收第一个参数，再根据运行时类型分派。
+ */
+export type Report = (eventKeyOrOptions : string | ReportOptions, param ?: any) => void
 
 export interface Uni {
   /**
@@ -155,7 +159,7 @@ export interface Uni {
    * @remark
    * - 该接口需要同步调用
    */
-  report(options : ReportOptions) : void;
+  report(eventKeyOrOptions : string | ReportOptions, param ?: any) : void;
 }
 
 // 统计插件参数类型

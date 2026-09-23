@@ -1,27 +1,52 @@
-import { Report, ReportOptions, ReportSuccess, ReportErrorCode } from './interface.uts'
+import { Report, ReportOptions, ReportSuccess, ReportSuccessCallback, ReportFailCallback, ReportCompleteCallback, ReportErrorCode } from './interface.uts'
 import { ReportFailImpl } from "./unierror.uts"
 import { Stat } from './common/core/stat.uts'
 const stat = Stat.getInstance()
 
 
-export const report : Report = function (options : ReportOptions) {
-	const name = options.name
-	const option = options.options
+export const report : Report = function (eventKeyOrOptions : string | ReportOptions, param ?: any) {
+	if (typeof eventKeyOrOptions == 'string') {
+		// 保持内置 uni.report(eventKey, param) 的双参数语义。
+		stat.appEvent(eventKeyOrOptions, param, (_type : boolean, _code : ReportErrorCode) => {})
+		return
+	}
+
+	let name : string = ''
+	let option : any | null = null
+	let success : ReportSuccessCallback | null = null
+	let fail : ReportFailCallback | null = null
+	let complete : ReportCompleteCallback | null = null
+	// #ifdef WEB
+	const options = eventKeyOrOptions as ReportOptions
+	name = options.name
+	option = options.options
+	success = options.success
+	fail = options.fail
+	complete = options.complete
+	// #endif
+	// #ifndef WEB
+	const rawOptions = (eventKeyOrOptions as any) as UTSJSONObject
+	name = rawOptions.get('name') as string
+	option = rawOptions.get('options')
+	success = rawOptions.get('success') as ReportSuccessCallback | null
+	fail = rawOptions.get('fail') as ReportFailCallback | null
+	complete = rawOptions.get('complete') as ReportCompleteCallback | null
+	// #endif
 	stat.appEvent(name, option, (type : boolean, code : ReportErrorCode) => {
 		if (type) {
 			const res : ReportSuccess = {
 				errMsg: 'report:ok',
 			}
-			options.success?.(res)
-			options.complete?.(res)
+			success?.(res)
+			complete?.(res)
 		} else {
 			let err = new ReportFailImpl(code);
-			options.fail?.(err)
-			options.complete?.(err)
+			fail?.(err)
+			complete?.(err)
 		}
 	})
 }
 
 export { Stat } from './common/core/stat.uts'
 // --- 导出统计类型 ---
-export { UniStatOptions, UniStatCollectItemsOptions, ReportFail } from './interface.uts'
+export { UniStatOptions, UniStatCollectItemsOptions, ReportSuccess, ReportFail } from './interface.uts'
