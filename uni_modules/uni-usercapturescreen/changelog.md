@@ -1,3 +1,5 @@
+## 1.0.7 (2026-09-30)
+修复iOS平台调用 uni.setUserCaptureScreen({ enable: false }) 后，video 组件进入全屏时视频位置或尺寸异常 [详情](https://issues.dcloud.net.cn/pages/issues/detail?id=33209)
 ## 1.0.6（2024-11-22）
 - 修复 HarmonyOS Next 上调用 setUserCaptureScreen 报错的 Bug
 ## 1.0.5（2024-10-14）
