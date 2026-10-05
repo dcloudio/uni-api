@@ -259,6 +259,7 @@ class NetworkManager implements URLSessionDataDelegate {
 							bodyArray.push(key + "=" + `${value ?? "null"}`);
 						})
 						body = bodyArray.join("&");
+            url = url.replacingOccurrences(of: "+", with: "%2B");
 					} else {
 						body = JSON.stringify(data);
 					}
