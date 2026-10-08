@@ -1,7 +1,7 @@
 {
   "id": "uni-usercapturescreen",
   "displayName": "uni-usercapturescreen",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "用户主动截屏事件监听",
   "keywords": [
     "截屏"
