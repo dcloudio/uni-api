@@ -1,3 +1,5 @@
+## 1.0.8 (2026-10-08)
+修复 app-android 平台截屏监听可能不生效的问题
 ## 1.0.7 (2026-09-30)
 修复iOS平台调用 uni.setUserCaptureScreen({ enable: false }) 后，video 组件进入全屏时视频位置或尺寸异常 [详情](https://issues.dcloud.net.cn/pages/issues/detail?id=33209)
 ## 1.0.6（2024-11-22）
