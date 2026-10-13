@@ -98,7 +98,7 @@ class AudioService : Service() {
 			ImageRequestBuilder
 				.newBuilderWithSource(resolveArtworkUri(url))
 				.build()
-		Fresco.getImagePipeline().fetchDecodedImage(imageRequest, this).subscribe(
+		Fresco.getImagePipeline().fetchDecodedImage(imageRequest, applicationContext).subscribe(
 			object : BaseBitmapDataSubscriber() {
 				override fun onNewResultImpl(bitmap: Bitmap?) {
 					if (bitmap == null) {

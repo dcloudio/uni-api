@@ -74,8 +74,8 @@ export interface Uni {
 	 * 	"app": {
 	 * 		"android": {
 	 * 			"uniVer": "x",
-	 * 			"unixVer": "5.26",
-	 * 			"unixVaporVer": "5.26"
+	 * 			"unixVer": "5.25",
+	 * 			"unixVaporVer": "5.25"
 	 * 		},
 	 * 		"ios": {
 	 * 			"uniVer": "x",
@@ -84,8 +84,8 @@ export interface Uni {
 	 * 		},
 	 * 		"harmony": {
 	 * 			"uniVer": "x",
-	 * 			"unixVer": "5.26",
-	 * 			"unixVaporVer": "5.26"
+	 * 			"unixVer": "5.25",
+	 * 			"unixVaporVer": "5.25"
 	 * 		}
 	 * 	},
 	 * 	"web": {

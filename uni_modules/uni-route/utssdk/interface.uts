@@ -31,17 +31,101 @@ export type AppRouteOpenType =
  * 应用路由事件参数。
  */
 export type AppRouteEvent = {
-    /** 路由页面路径，不包含开头的斜杠 */
+    /**
+     * 路由页面路径，不包含开头的斜杠
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     path: string
-    /** 路由页面参数 */
+    /**
+     * 路由页面参数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     query: UTSJSONObject
-    /** 路由类型 */
+    /**
+     * 路由类型
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     openType: AppRouteOpenType
-    /** 路由页面是否不存在 */
+    /**
+     * 路由页面是否不存在。支付宝小程序不提供该信息，固定为 false
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     notFound: boolean
-    /** 事件触发时的时间戳 */
+    /**
+     * 事件触发时的时间戳
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     timeStamp: number
-    /** 路由事件唯一标识 */
+    /**
+     * 路由事件唯一标识
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     routeEventId: string
 }
 
@@ -56,15 +140,85 @@ export type OffAppRoute = (callback?: AppRouteCallback | null) => void
  * 应用路由前置事件参数。
  */
 export type BeforeAppRouteEvent = {
-    /** 路由页面路径，不包含开头的斜杠 */
+    /**
+     * 路由页面路径，不包含开头的斜杠
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     path: string
-    /** 路由页面参数 */
+    /**
+     * 路由页面参数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     query: UTSJSONObject
-    /** 路由类型 */
+    /**
+     * 路由类型
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     openType: AppRouteOpenType
-    /** 路由页面是否不存在 */
+    /**
+     * 路由页面是否不存在。支付宝小程序不提供该信息，固定为 false
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     notFound: boolean
-    /** 路由事件唯一标识 */
+    /**
+     * 路由事件唯一标识
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.5.5", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "2.10.19", "uniVer": "x", "unixVer": "5.31" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     routeEventId: string
 }
 
@@ -78,21 +232,106 @@ export type OffBeforeAppRoute = (callback?: BeforeAppRouteCallback | null) => vo
 export type RewriteRouteSuccess = AsyncApiSuccessResult
 type RewriteRouteSuccessCallback = (result: RewriteRouteSuccess) => void
 export interface RewriteRouteFail extends IUniError {
+    /**
+     * 错误码。微信小程序原生回调不提供此属性
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "x", "uniVer": "x", "unixVer": "x" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     errCode: RouteErrorCode
 }
 type RewriteRouteFailCallback = (result: RewriteRouteFail) => void
 export type RewriteRouteComplete = AsyncApiResult
 type RewriteRouteCompleteCallback = (result: RewriteRouteComplete) => void
 export type RewriteRouteOptions = {
-    /** 重写后的页面路径 */
+    /**
+     * 重写后的页面路径
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.8.0", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     url: string | string.PageURIString
-    /** 是否保留原路由参数，默认 false */
+    /**
+     * 是否保留原路由参数，默认 false
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.8.0", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     preserveQuery?: boolean
-    /** 接口调用成功的回调函数 */
+    /**
+     * 接口调用成功的回调函数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.8.0", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     success?: RewriteRouteSuccessCallback | null
-    /** 接口调用失败的回调函数 */
+    /**
+     * 接口调用失败的回调函数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.8.0", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     fail?: RewriteRouteFailCallback | null
-    /** 接口调用结束的回调函数 */
+    /**
+     * 接口调用结束的回调函数
+     * @uniPlatform {
+     *   "app": {
+     *     "android": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "ios": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" },
+     *     "harmony": { "uniVer": "x", "unixVer": "5.25", "unixVaporVer": "5.25" }
+     *   },
+     *   "mp": {
+     *     "weixin": { "hostVer": "3.8.0", "uniVer": "5.25", "unixVer": "5.25" },
+     *     "alipay": { "hostVer": "x", "uniVer": "x", "unixVer": "x" }
+     *   },
+     *   "web": { "uniVer": "x", "unixVer": "5.25" }
+     * }
+     */
     complete?: RewriteRouteCompleteCallback | null
 }
 /** 重写当前应用路由 */
@@ -135,7 +374,7 @@ export type NavigateToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -592,7 +831,7 @@ export type NavigateToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -660,7 +899,7 @@ export type NavigateToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -728,7 +967,7 @@ export type NavigateToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -796,7 +1035,7 @@ export type NavigateToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -874,7 +1113,7 @@ export type RedirectToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -942,7 +1181,7 @@ export type RedirectToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1010,7 +1249,7 @@ export type RedirectToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1078,7 +1317,7 @@ export type RedirectToOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1156,7 +1395,7 @@ export type ReLaunchOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1224,7 +1463,7 @@ export type ReLaunchOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1292,7 +1531,7 @@ export type ReLaunchOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1360,7 +1599,7 @@ export type ReLaunchOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1441,7 +1680,7 @@ export type SwitchTabOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1510,7 +1749,7 @@ export type SwitchTabOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1579,7 +1818,7 @@ export type SwitchTabOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1648,7 +1887,7 @@ export type SwitchTabOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -1726,7 +1965,7 @@ export type NavigateBackOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2161,7 +2400,7 @@ export type NavigateBackOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2229,7 +2468,7 @@ export type NavigateBackOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2297,7 +2536,7 @@ export type NavigateBackOptions = {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2371,7 +2610,7 @@ export interface Uni {
      *     "alipay": {
      *       "hostVer": "2.10.19",
      *       "uniVer": "x",
-     *       "unixVer": "5.25"
+     *       "unixVer": "5.31"
      *     }
      *   },
      *   "web": {
@@ -2413,7 +2652,7 @@ export interface Uni {
      *     "alipay": {
      *       "hostVer": "2.10.19",
      *       "uniVer": "x",
-     *       "unixVer": "5.25"
+     *       "unixVer": "5.31"
      *     }
      *   },
      *   "web": {
@@ -2455,8 +2694,12 @@ export interface Uni {
      *     "alipay": {
      *       "hostVer": "2.10.19",
      *       "uniVer": "x",
-     *       "unixVer": "5.25"
+     *       "unixVer": "5.31"
      *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.25"
      *   }
      * }
      */
@@ -2493,8 +2736,12 @@ export interface Uni {
      *     "alipay": {
      *       "hostVer": "2.10.19",
      *       "uniVer": "x",
-     *       "unixVer": "5.25"
+     *       "unixVer": "5.31"
      *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.25"
      *   }
      * }
      */
@@ -2524,7 +2771,7 @@ export interface Uni {
      *   },
      *   "mp": {
      *     "weixin": {
-     *       "hostVer": "3.5.5",
+     *       "hostVer": "3.8.0",
      *       "uniVer": "5.25",
      *       "unixVer": "5.25"
      *     },
@@ -2533,6 +2780,10 @@ export interface Uni {
      *       "uniVer": "x",
      *       "unixVer": "x"
      *     }
+     *   },
+     *   "web": {
+     *     "uniVer": "x",
+     *     "unixVer": "5.25"
      *   }
      * }
      */
@@ -2570,7 +2821,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2642,7 +2893,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2714,7 +2965,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2787,7 +3038,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
@@ -2859,7 +3110,7 @@ export interface Uni {
      *    "alipay": {
      *        "hostVer": "√",
      *        "uniVer": "√",
-     *        "unixVer": "x"
+     *        "unixVer": "5.31"
      *    },
      *    "baidu": {
      *        "hostVer": "√",
