@@ -27,44 +27,34 @@ export interface Uni {
      *   },
      *  "mp":{
      *    "weixin": {
-     *      "hostVer": "√",
      *      "uniVer": "√",
      *      "unixVer": "4.41"
      *    },
      *    "alipay": {
-     *      "hostVer": "√",
      *      "uniVer": "√",
      *      "unixVer": "x"
      *    },
      *    "baidu": {
-     *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
      *    },
      *    "toutiao": {
      *      "hostVer": "x",
      *      "uniVer": "x",
-     *      "unixVer": "x"
      *    },
      *    "lark": {
      *      "hostVer": "x",
      *      "uniVer": "x",
-     *      "unixVer": "x"
      *    },
      *    "qq": {
      *      "hostVer": "x",
      *      "uniVer": "x",
-     *      "unixVer": "x"
      *    },
      *    "kuaishou": {
-     *      "hostVer": "√",
      *      "uniVer": "√",
-     *      "unixVer": "x"
      *    },
      *    "jd": {
      *      "hostVer": "x",
      *      "uniVer": "x",
-     *      "unixVer": "x"
      *    }
      *  }
      * }
