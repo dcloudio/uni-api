@@ -1,7 +1,3 @@
 ### uni-api
-
-### 仓库分支与 HBuilder 版本对应关系
-
-- master 对应 [HBuilder](https://www.dcloud.io/hbuilderx.html) 正式版
-- alpha 对应 [HBuilder](https://www.dcloud.io/hbuilderx.html) Alpha 版
-- dev 对应 [HBuilder](https://www.dcloud.io/hbuilderx.html) 内部 dev 版
+此项目已调整为仅保留 uni-app x 项目 VDOM 模式 `uts插件` 开源项目，后续将不再维护。
+uni-app x 项目 蒸汽(vapor)模式 `uts插件` 已迁移到 [uni-app的uni-app-x分支](https://github.com/dcloudio/uni-app/tree/uni-app-x-alpha)。
